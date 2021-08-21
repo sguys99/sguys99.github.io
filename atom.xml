@@ -8,6 +8,24 @@
     
       
       <item>
+        <title>Git, Github 사용법</title>
+        
+          <description>&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;Git, Github 사용법 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;./ml-basics&quot;&gt;ml시작&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./ml1&quot;&gt;ml 강좌(1) - 지도, 비지도 학습&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        
+        <pubDate>Fri, 20 Aug 2021 15:00:00 +0000</pubDate>
+        <link>
+        https://sguys99.github.io//git-tutorial1</link>
+        <guid isPermaLink="true">https://sguys99.github.io//git-tutorial1</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>Starting It Tips post!!</title>
         
           <description>&lt;p&gt;Welcome to it-tips basics!!&lt;/p&gt;
