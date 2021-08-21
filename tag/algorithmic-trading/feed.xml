@@ -2,10 +2,10 @@
 
 <feed xmlns="http://www.w3.org/2005/Atom" >
   <generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator>
-  <link href="https://sguys99.github.io//tag/machine-learning/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="https://sguys99.github.io//tag/algorithmic-trading/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://sguys99.github.io//" rel="alternate" type="text/html" />
   <updated>2021-08-21T11:44:32+00:00</updated>
-  <id>https://sguys99.github.io//tag/machine-learning/feed.xml</id>
+  <id>https://sguys99.github.io//tag/algorithmic-trading/feed.xml</id>
 
   
   
@@ -32,12 +32,12 @@
 
   
     <entry>
-      <title type="html">첫번째 강좌</title>
-      <link href="https://sguys99.github.io//ml1" rel="alternate" type="text/html" title="첫번째 강좌" />
+      <title type="html">Test for algorithmic-trading1</title>
+      <link href="https://sguys99.github.io//trading1" rel="alternate" type="text/html" title="Test for algorithmic-trading1" />
       <published>2020-08-15T13:30:00+00:00</published>
       <updated>2020-08-15T13:30:00+00:00</updated>
-      <id>https://sguys99.github.io//ml1</id>
-      <content type="html" xml:base="https://sguys99.github.io//ml1">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;머신러닝 강좌는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+      <id>https://sguys99.github.io//trading1</id>
+      <content type="html" xml:base="https://sguys99.github.io//trading1">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;머신러닝 강좌는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
 &lt;ul class=&quot;table-of-contents-list&quot;&gt;
     &lt;li&gt;&lt;a href=&quot;./ml-basics&quot;&gt;ml시작&lt;/a&gt;&lt;/li&gt;
     &lt;li&gt;&lt;a href=&quot;./ml1&quot;&gt;ml 강좌(1) - 지도, 비지도 학습&lt;/a&gt;&lt;/li&gt;
@@ -84,7 +84,7 @@
       
 
       
-        <category term="machine-learning" />
+        <category term="algorithmic-trading" />
       
 
       
@@ -96,18 +96,12 @@
     </entry>
   
     <entry>
-      <title type="html">Starting machine learning posts</title>
-      <link href="https://sguys99.github.io//ml-basics" rel="alternate" type="text/html" title="Starting machine learning posts" />
+      <title type="html">Test for algorithmic-trading2</title>
+      <link href="https://sguys99.github.io//trading2" rel="alternate" type="text/html" title="Test for algorithmic-trading2" />
       <published>2020-08-15T10:30:00+00:00</published>
       <updated>2020-08-15T10:30:00+00:00</updated>
-      <id>https://sguys99.github.io//ml-basics</id>
-      <content type="html" xml:base="https://sguys99.github.io//ml-basics">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;머신러닝 강좌는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
-&lt;ul class=&quot;table-of-contents-list&quot;&gt;
-    &lt;li&gt;&lt;a href=&quot;./ml-basics&quot;&gt;ml시작&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;./ml1&quot;&gt;ml 강좌(1) - 지도, 비지도 학습&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Welcome to machine learning basics!!&lt;/p&gt;</content>
+      <id>https://sguys99.github.io//trading2</id>
+      <content type="html" xml:base="https://sguys99.github.io//trading2">&lt;p&gt;Welcome to machine learning basics!!&lt;/p&gt;</content>
 
       
       
@@ -124,11 +118,11 @@
       
 
       
-        <category term="machine-learning" />
+        <category term="algorithmic-trading" />
       
 
       
-        <summary type="html">머신러닝 강좌는 여러 절로 구성되어 있습니다. ml시작 ml 강좌(1) - 지도, 비지도 학습</summary>
+        <summary type="html">Welcome to machine learning basics!!</summary>
       
 
       
