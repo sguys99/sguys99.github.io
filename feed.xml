@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://sguys99.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://sguys99.github.io//" rel="alternate" type="text/html" /><updated>2021-08-22T08:13:31+00:00</updated><id>https://sguys99.github.io//feed.xml</id><title type="html">Happy Plant</title><subtitle>Data science, Machine learning, and Automatic control</subtitle><entry><title type="html">Git, Github 사용법</title><link href="https://sguys99.github.io//git-tutorial1" rel="alternate" type="text/html" title="Git, Github 사용법" /><published>2021-08-20T15:00:00+00:00</published><updated>2021-08-20T15:00:00+00:00</updated><id>https://sguys99.github.io//git-tutorial1</id><content type="html" xml:base="https://sguys99.github.io//git-tutorial1">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;Git, Github 사용법 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://sguys99.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://sguys99.github.io//" rel="alternate" type="text/html" /><updated>2021-08-22T08:27:57+00:00</updated><id>https://sguys99.github.io//feed.xml</id><title type="html">Happy Plant</title><subtitle>Data science, Machine learning, and Automatic control</subtitle><entry><title type="html">Git, Github 사용법</title><link href="https://sguys99.github.io//git-tutorial1" rel="alternate" type="text/html" title="Git, Github 사용법" /><published>2021-08-20T15:00:00+00:00</published><updated>2021-08-20T15:00:00+00:00</updated><id>https://sguys99.github.io//git-tutorial1</id><content type="html" xml:base="https://sguys99.github.io//git-tutorial1">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;Git, Github 사용법 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
 &lt;ul class=&quot;table-of-contents-list&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;./ml-basics&quot;&gt;ml시작&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;./ml1&quot;&gt;ml 강좌(1) - 지도, 비지도 학습&lt;/a&gt;&lt;/li&gt;
@@ -35,28 +35,7 @@
 &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_csv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
-&lt;script&gt;
-  /**
-   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-
-  var disqus_config = function () {
-      this.page.url = `https://sguys99.github.io//ds1`;  // Replace PAGE_URL with your page's canonical URL variable
-      this.page.identifier = `https://sguys99.github.io//ds1`; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-  };
-
-  (function() { // DON'T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement('script');
-    s.src = 'https://sguys99.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-  })();
-&lt;/script&gt;
-
-&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;</content><author><name>Kwang Myung Yu</name></author><category term="data-science" /><summary type="html">머신러닝 강좌는 여러 절로 구성되어 있습니다. ml시작 ml 강좌(1) - 지도, 비지도 학습</summary></entry><entry><title type="html">첫번째 강좌</title><link href="https://sguys99.github.io//ml1" rel="alternate" type="text/html" title="첫번째 강좌" /><published>2020-08-15T13:30:00+00:00</published><updated>2020-08-15T13:30:00+00:00</updated><id>https://sguys99.github.io//ml1</id><content type="html" xml:base="https://sguys99.github.io//ml1">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;머신러닝 강좌는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Kwang Myung Yu</name></author><category term="data-science" /><summary type="html">머신러닝 강좌는 여러 절로 구성되어 있습니다. ml시작 ml 강좌(1) - 지도, 비지도 학습</summary></entry><entry><title type="html">첫번째 강좌</title><link href="https://sguys99.github.io//ml1" rel="alternate" type="text/html" title="첫번째 강좌" /><published>2020-08-15T13:30:00+00:00</published><updated>2020-08-15T13:30:00+00:00</updated><id>https://sguys99.github.io//ml1</id><content type="html" xml:base="https://sguys99.github.io//ml1">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;머신러닝 강좌는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
 &lt;ul class=&quot;table-of-contents-list&quot;&gt;
     &lt;li&gt;&lt;a href=&quot;./ml-basics&quot;&gt;ml시작&lt;/a&gt;&lt;/li&gt;
     &lt;li&gt;&lt;a href=&quot;./ml1&quot;&gt;ml 강좌(1) - 지도, 비지도 학습&lt;/a&gt;&lt;/li&gt;
