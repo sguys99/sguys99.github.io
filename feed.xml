@@ -1,4 +1,378 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://sguys99.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://sguys99.github.io//" rel="alternate" type="text/html" /><updated>2021-12-14T09:21:15+00:00</updated><id>https://sguys99.github.io//feed.xml</id><title type="html">Happy Plant</title><subtitle>Data science, Machine learning, and Automatic control</subtitle><entry><title type="html">(서울, 과천 맛집) 메밀장터</title><link href="https://sguys99.github.io//foody" rel="alternate" type="text/html" title="(서울, 과천 맛집) 메밀장터" /><published>2021-09-01T17:10:00+00:00</published><updated>2021-09-01T17:10:00+00:00</updated><id>https://sguys99.github.io//foody</id><content type="html" xml:base="https://sguys99.github.io//foody">&lt;p&gt;서울, 과천 지역 막국수 맛집 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;메밀장터&lt;/code&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://sguys99.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://sguys99.github.io//" rel="alternate" type="text/html" /><updated>2021-12-20T06:30:13+00:00</updated><id>https://sguys99.github.io//feed.xml</id><title type="html">Happy Plant</title><subtitle>Data science, Machine learning, and Automatic control</subtitle><entry><title type="html">한국 거래소에서 종목코드 가져오기</title><link href="https://sguys99.github.io//trading1" rel="alternate" type="text/html" title="한국 거래소에서 종목코드 가져오기" /><published>2021-12-19T13:30:00+00:00</published><updated>2021-12-19T13:30:00+00:00</updated><id>https://sguys99.github.io//trading1</id><content type="html" xml:base="https://sguys99.github.io//trading1">&lt;h3 id=&quot;1-홈페이지-둘러보기&quot;&gt;1. 홈페이지 둘러보기&lt;/h3&gt;
+
+&lt;p&gt;먼저 KRX 홈페이지(https://kind.krx.co.kr/) 를 방문하여 ‘상장법인상세정보’/ ‘상장법인목록’ 화면으로 이동한다.&lt;br /&gt;
+(또는 &lt;a href=&quot;http://kind.krx.co.kr/corpgeneral/corpList.do?method=loadInitPage&quot;&gt;[다음]&lt;/a&gt; 링크를 클릭한다.)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-20-trading/tr01.01.01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;‘EXECEL’ 버튼을 클릭하면 전체 상장법인 목록을 다운받을 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-20-trading/tr01.01.02.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;다운로드한 파일은 ‘xls’ 확장자를 가지고 있지만 html 포맷이다. &lt;br /&gt;
+&lt;img src=&quot;assets/images/2021-12-20-trading/tr01.01.03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;우리는 파이썬 코드로 위 목록을 가져와 pandas 데이터프레임으로 변환하고자 한다.&lt;/p&gt;
+
+&lt;p&gt;다시 돌아와서 상장법인 목록을 다운로드 하는 방식을 살펴보자.&lt;br /&gt;
+‘시장구분’, ‘검색유형’ 등과 같은 범주를 설정하고 ‘EXCEL’ 버튼을 클릭하면 해당 범주에 해당하는 법인목록이 다운로드 되는 방식이다.&lt;br /&gt;
+설정항목을 수정하지 않고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EXCEL&lt;/code&gt; 버튼을 클릭하면 전체 상장법인 목록이 다운로드 된다.&lt;/p&gt;
+
+&lt;p&gt;크롬에서 해당 페이지를 열고 ‘상장법인목록’ 부분을 마우스 우클릭하고, ‘검사’ 항목을 선택하자.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-20-trading/tr01.01.04.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;검색 항목의 소스를 확인할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-20-trading/tr01.01.05.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;요약하면 ‘searchForm’이라고 하는 양식을 통해서 추출 조건을 지정한다. 그리고 ‘post’를 사용해서 데이터 추출을 요청한다.&lt;br /&gt;
+추출 처리를 담당하는 서버의 주소는 ‘http://kind.krx.co.kr/corpgeneral/corpList.do’ 이다.&lt;/p&gt;
+
+&lt;p&gt;그리고 ‘EXCEL’ 버튼을 클릭했을 때, 동작하는 메커니즘을 살펴보자.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-20-trading/tr01.01.06.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;버튼을 클릭하면 ‘fnDownolad()’ 함수를 호출한다.&lt;br /&gt;
+이 함수는 searchForm에 설정된 조건대로 데이터를 다운로드 하도록 서버 프로그램에 요청하는 함수이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-추출하기&quot;&gt;2. 추출하기&lt;/h3&gt;
+
+&lt;p&gt;다운되는 종목코드 파일이 html 형식이므로 pandas의 read_html 함수를 사용한다.&lt;/p&gt;
+
+&lt;p&gt;read_html의 인자에 다운로드를 요청할 url을 지정하면 된다.&lt;br /&gt;
+서버의 url 뒤에 ‘?’로 url의 끝을 표시하고 데이터(검색조건)를 추가하면 된다.&lt;/p&gt;
+
+&lt;p&gt;주요 조건은 다음과 같다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;method&lt;/strong&gt;: 메서드, 예시) ‘download’&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;orderMode&lt;/strong&gt;:정렬컬럼, 예시) ‘1’,&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;orderStat&lt;/strong&gt;: 정렬 내림차순, 예시) ‘D’&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;searchType&lt;/strong&gt;: 검색유형, 예시) ‘13’(상장법인)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;fiscalYearEnd&lt;/strong&gt;: 결산원, 예시) ‘all’(전체)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;location&lt;/strong&gt;: 지역, 예시) ‘all’(전체)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;여기서는 다음과 같이 설정한다. (나머지는 default 값 적용)&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'http://kind.krx.co.kr/corpgeneral/corpList.do?method=download&amp;amp;searchType=13'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pandas&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;os&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;header&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 주의 : [0]을 반드시 추가. read_html은 table들을 읽어 리스트로 저장함
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div&gt;
+&lt;style scoped=&quot;&quot;&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&quot;text-align: right;&quot;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;회사명&lt;/th&gt;
+      &lt;th&gt;종목코드&lt;/th&gt;
+      &lt;th&gt;업종&lt;/th&gt;
+      &lt;th&gt;주요제품&lt;/th&gt;
+      &lt;th&gt;상장일&lt;/th&gt;
+      &lt;th&gt;결산월&lt;/th&gt;
+      &lt;th&gt;대표자명&lt;/th&gt;
+      &lt;th&gt;홈페이지&lt;/th&gt;
+      &lt;th&gt;지역&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0&lt;/th&gt;
+      &lt;td&gt;DL&lt;/td&gt;
+      &lt;td&gt;210&lt;/td&gt;
+      &lt;td&gt;기타 금융업&lt;/td&gt;
+      &lt;td&gt;지주회사&lt;/td&gt;
+      &lt;td&gt;1976-02-02&lt;/td&gt;
+      &lt;td&gt;12월&lt;/td&gt;
+      &lt;td&gt;전병욱&lt;/td&gt;
+      &lt;td&gt;http://www.dlholdings.co.kr&lt;/td&gt;
+      &lt;td&gt;서울특별시&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt;DRB동일&lt;/td&gt;
+      &lt;td&gt;4840&lt;/td&gt;
+      &lt;td&gt;고무제품 제조업&lt;/td&gt;
+      &lt;td&gt;고무벨트(V벨트,콘베이어벨트,평벨트),프라스틱제품 제조,판매&lt;/td&gt;
+      &lt;td&gt;1976-05-21&lt;/td&gt;
+      &lt;td&gt;12월&lt;/td&gt;
+      &lt;td&gt;류영식&lt;/td&gt;
+      &lt;td&gt;http://drbworld.com&lt;/td&gt;
+      &lt;td&gt;부산광역시&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;td&gt;DSR&lt;/td&gt;
+      &lt;td&gt;155660&lt;/td&gt;
+      &lt;td&gt;1차 비철금속 제조업&lt;/td&gt;
+      &lt;td&gt;합섬섬유로프&lt;/td&gt;
+      &lt;td&gt;2013-05-15&lt;/td&gt;
+      &lt;td&gt;12월&lt;/td&gt;
+      &lt;td&gt;홍석빈&lt;/td&gt;
+      &lt;td&gt;http://www.dsr.com&lt;/td&gt;
+      &lt;td&gt;부산광역시&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;td&gt;GS&lt;/td&gt;
+      &lt;td&gt;78930&lt;/td&gt;
+      &lt;td&gt;기타 금융업&lt;/td&gt;
+      &lt;td&gt;지주회사/부동산 임대&lt;/td&gt;
+      &lt;td&gt;2004-08-05&lt;/td&gt;
+      &lt;td&gt;12월&lt;/td&gt;
+      &lt;td&gt;허태수, 홍순기 (각자 대표이사)&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;서울특별시&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;td&gt;GS글로벌&lt;/td&gt;
+      &lt;td&gt;1250&lt;/td&gt;
+      &lt;td&gt;상품 종합 도매업&lt;/td&gt;
+      &lt;td&gt;수출입업(시멘트,철강금속,전기전자,섬유,기계화학),상품중개,광업,채석업/하수처리 서...&lt;/td&gt;
+      &lt;td&gt;1976-06-26&lt;/td&gt;
+      &lt;td&gt;12월&lt;/td&gt;
+      &lt;td&gt;김태형&lt;/td&gt;
+      &lt;td&gt;http://www.gsgcorp.com&lt;/td&gt;
+      &lt;td&gt;서울특별시&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;국내 주식시장의 종목코드는 6자리 이다. 예를 들어 ‘DL’의 종목코드는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;000210&lt;/code&gt;이다.&lt;br /&gt;
+그런데 저장된 종목코드는 앞자리 0이 생략되어 있다. map함수로 6자리를 완성한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# 종목코드가 6자리이기 때문에 6자리를 맞춰주기 위해 설정해줌
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'종목코드'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'종목코드'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'{:06d}'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div&gt;
+&lt;style scoped=&quot;&quot;&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&quot;text-align: right;&quot;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;회사명&lt;/th&gt;
+      &lt;th&gt;종목코드&lt;/th&gt;
+      &lt;th&gt;업종&lt;/th&gt;
+      &lt;th&gt;주요제품&lt;/th&gt;
+      &lt;th&gt;상장일&lt;/th&gt;
+      &lt;th&gt;결산월&lt;/th&gt;
+      &lt;th&gt;대표자명&lt;/th&gt;
+      &lt;th&gt;홈페이지&lt;/th&gt;
+      &lt;th&gt;지역&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0&lt;/th&gt;
+      &lt;td&gt;DL&lt;/td&gt;
+      &lt;td&gt;000210&lt;/td&gt;
+      &lt;td&gt;기타 금융업&lt;/td&gt;
+      &lt;td&gt;지주회사&lt;/td&gt;
+      &lt;td&gt;1976-02-02&lt;/td&gt;
+      &lt;td&gt;12월&lt;/td&gt;
+      &lt;td&gt;전병욱&lt;/td&gt;
+      &lt;td&gt;http://www.dlholdings.co.kr&lt;/td&gt;
+      &lt;td&gt;서울특별시&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt;DRB동일&lt;/td&gt;
+      &lt;td&gt;004840&lt;/td&gt;
+      &lt;td&gt;고무제품 제조업&lt;/td&gt;
+      &lt;td&gt;고무벨트(V벨트,콘베이어벨트,평벨트),프라스틱제품 제조,판매&lt;/td&gt;
+      &lt;td&gt;1976-05-21&lt;/td&gt;
+      &lt;td&gt;12월&lt;/td&gt;
+      &lt;td&gt;류영식&lt;/td&gt;
+      &lt;td&gt;http://drbworld.com&lt;/td&gt;
+      &lt;td&gt;부산광역시&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;td&gt;DSR&lt;/td&gt;
+      &lt;td&gt;155660&lt;/td&gt;
+      &lt;td&gt;1차 비철금속 제조업&lt;/td&gt;
+      &lt;td&gt;합섬섬유로프&lt;/td&gt;
+      &lt;td&gt;2013-05-15&lt;/td&gt;
+      &lt;td&gt;12월&lt;/td&gt;
+      &lt;td&gt;홍석빈&lt;/td&gt;
+      &lt;td&gt;http://www.dsr.com&lt;/td&gt;
+      &lt;td&gt;부산광역시&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;td&gt;GS&lt;/td&gt;
+      &lt;td&gt;078930&lt;/td&gt;
+      &lt;td&gt;기타 금융업&lt;/td&gt;
+      &lt;td&gt;지주회사/부동산 임대&lt;/td&gt;
+      &lt;td&gt;2004-08-05&lt;/td&gt;
+      &lt;td&gt;12월&lt;/td&gt;
+      &lt;td&gt;허태수, 홍순기 (각자 대표이사)&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;서울특별시&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;td&gt;GS글로벌&lt;/td&gt;
+      &lt;td&gt;001250&lt;/td&gt;
+      &lt;td&gt;상품 종합 도매업&lt;/td&gt;
+      &lt;td&gt;수출입업(시멘트,철강금속,전기전자,섬유,기계화학),상품중개,광업,채석업/하수처리 서...&lt;/td&gt;
+      &lt;td&gt;1976-06-26&lt;/td&gt;
+      &lt;td&gt;12월&lt;/td&gt;
+      &lt;td&gt;김태형&lt;/td&gt;
+      &lt;td&gt;http://www.gsgcorp.com&lt;/td&gt;
+      &lt;td&gt;서울특별시&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;분석에 필요한 컬럼만 추출하고, 컬럼명을 영어로 수정한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'회사명'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'종목코드'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'업종'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'주요제품'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'상장일'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'결산월'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'회사명'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'name'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'종목코드'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'code'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'업종'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'sectors'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'주요제품'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'products'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                         &lt;span class=&quot;s&quot;&gt;'상장일'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'listing_date'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'결산월'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'closing_date'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'listing_date'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'listing_date'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div&gt;
+&lt;style scoped=&quot;&quot;&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&quot;text-align: right;&quot;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;name&lt;/th&gt;
+      &lt;th&gt;code&lt;/th&gt;
+      &lt;th&gt;sectors&lt;/th&gt;
+      &lt;th&gt;products&lt;/th&gt;
+      &lt;th&gt;listing_date&lt;/th&gt;
+      &lt;th&gt;closing_date&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0&lt;/th&gt;
+      &lt;td&gt;DL&lt;/td&gt;
+      &lt;td&gt;000210&lt;/td&gt;
+      &lt;td&gt;기타 금융업&lt;/td&gt;
+      &lt;td&gt;지주회사&lt;/td&gt;
+      &lt;td&gt;1976-02-02&lt;/td&gt;
+      &lt;td&gt;12월&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt;DRB동일&lt;/td&gt;
+      &lt;td&gt;004840&lt;/td&gt;
+      &lt;td&gt;고무제품 제조업&lt;/td&gt;
+      &lt;td&gt;고무벨트(V벨트,콘베이어벨트,평벨트),프라스틱제품 제조,판매&lt;/td&gt;
+      &lt;td&gt;1976-05-21&lt;/td&gt;
+      &lt;td&gt;12월&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;td&gt;DSR&lt;/td&gt;
+      &lt;td&gt;155660&lt;/td&gt;
+      &lt;td&gt;1차 비철금속 제조업&lt;/td&gt;
+      &lt;td&gt;합섬섬유로프&lt;/td&gt;
+      &lt;td&gt;2013-05-15&lt;/td&gt;
+      &lt;td&gt;12월&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;td&gt;GS&lt;/td&gt;
+      &lt;td&gt;078930&lt;/td&gt;
+      &lt;td&gt;기타 금융업&lt;/td&gt;
+      &lt;td&gt;지주회사/부동산 임대&lt;/td&gt;
+      &lt;td&gt;2004-08-05&lt;/td&gt;
+      &lt;td&gt;12월&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;td&gt;GS글로벌&lt;/td&gt;
+      &lt;td&gt;001250&lt;/td&gt;
+      &lt;td&gt;상품 종합 도매업&lt;/td&gt;
+      &lt;td&gt;수출입업(시멘트,철강금속,전기전자,섬유,기계화학),상품중개,광업,채석업/하수처리 서...&lt;/td&gt;
+      &lt;td&gt;1976-06-26&lt;/td&gt;
+      &lt;td&gt;12월&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(2486, 6)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-함수로-정리하기&quot;&gt;3. 함수로 정리하기&lt;/h3&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get_krx_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'http://kind.krx.co.kr/corpgeneral/corpList.do?method=download&amp;amp;searchType=13'&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;header&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'종목코드'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'종목코드'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'{:06d}'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'회사명'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'종목코드'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'업종'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'주요제품'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'상장일'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'결산월'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'회사명'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'name'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'종목코드'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'code'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'업종'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'sectors'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'주요제품'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'products'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                              &lt;span class=&quot;s&quot;&gt;'상장일'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'listing_date'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'결산월'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'closing_date'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'listing_date'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'listing_date'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Kwang Myung Yu</name></author><category term="algorithmic-trading" /><summary type="html">1. 홈페이지 둘러보기</summary></entry><entry><title type="html">(서울, 과천 맛집) 메밀장터</title><link href="https://sguys99.github.io//foody" rel="alternate" type="text/html" title="(서울, 과천 맛집) 메밀장터" /><published>2021-09-01T17:10:00+00:00</published><updated>2021-09-01T17:10:00+00:00</updated><id>https://sguys99.github.io//foody</id><content type="html" xml:base="https://sguys99.github.io//foody">&lt;p&gt;서울, 과천 지역 막국수 맛집 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;메밀장터&lt;/code&gt;&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;주소 : &lt;a href=&quot;https://map.naver.com/v5/search/%EB%A9%94%EB%B0%80%EC%9E%A5%ED%84%B0/place/38247636?placePath=%3Fentry=pll%26from=nx%26fromNxList=true&amp;amp;c=14136710.9348997,4502366.5506309,15,0,0,0,dh&quot;&gt;경기 과천시 뒷골로 5-7 선바위&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -113,4 +487,4 @@
     &lt;li&gt;&lt;a href=&quot;./ml1&quot;&gt;ml 강좌(1) - 지도, 비지도 학습&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Welcome to machine learning basics!!&lt;/p&gt;</content><author><name>Kwang Myung Yu</name></author><category term="machine-learning" /><summary type="html">머신러닝 강좌는 여러 절로 구성되어 있습니다. ml시작 ml 강좌(1) - 지도, 비지도 학습</summary></entry><entry><title type="html">Test for algorithmic-trading2</title><link href="https://sguys99.github.io//trading2" rel="alternate" type="text/html" title="Test for algorithmic-trading2" /><published>2020-08-15T10:30:00+00:00</published><updated>2020-08-15T10:30:00+00:00</updated><id>https://sguys99.github.io//trading2</id><content type="html" xml:base="https://sguys99.github.io//trading2">&lt;p&gt;Welcome to machine learning basics!!&lt;/p&gt;</content><author><name>Kwang Myung Yu</name></author><category term="algorithmic-trading" /><summary type="html">Welcome to machine learning basics!!</summary></entry></feed>
+&lt;p&gt;Welcome to machine learning basics!!&lt;/p&gt;</content><author><name>Kwang Myung Yu</name></author><category term="machine-learning" /><summary type="html">머신러닝 강좌는 여러 절로 구성되어 있습니다. ml시작 ml 강좌(1) - 지도, 비지도 학습</summary></entry></feed>
