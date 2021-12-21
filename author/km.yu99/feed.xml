@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator>
   <link href="https://sguys99.github.io//author/km.yu99/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://sguys99.github.io//" rel="alternate" type="text/html" />
-  <updated>2021-12-21T10:20:55+00:00</updated>
+  <updated>2021-12-21T11:31:24+00:00</updated>
   <id>https://sguys99.github.io//author/km.yu99/feed.xml</id>
 
   
@@ -162,20 +162,6 @@
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
 &lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
@@ -230,7 +216,6 @@
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;/div&gt;
 
 &lt;h3 id=&quot;3-함수로-정리하기&quot;&gt;3. 함수로 정리하기&lt;/h3&gt;
 
@@ -367,20 +352,6 @@
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
 &lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
@@ -459,7 +430,6 @@
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;/div&gt;
 
 &lt;p&gt;국내 주식시장의 종목코드는 6자리 이다. 예를 들어 ‘DL’의 종목코드는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;000210&lt;/code&gt;이다.&lt;br /&gt;
 그런데 저장된 종목코드는 앞자리 0이 생략되어 있다. map함수로 6자리를 완성한다.&lt;/p&gt;
@@ -471,20 +441,6 @@
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
 &lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
@@ -563,7 +519,6 @@
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;/div&gt;
 
 &lt;p&gt;분석에 필요한 컬럼만 추출하고, 컬럼명을 영어로 수정한다.&lt;/p&gt;
 
@@ -576,20 +531,6 @@
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
 &lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
@@ -650,11 +591,9 @@
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;/div&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(2486, 6)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
