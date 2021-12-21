@@ -8,7 +8,23 @@
     
       
       <item>
-        <title>한국 거래소에서 종목코드 가져오기</title>
+        <title>KRX에서 종목코드 가져오기2</title>
+        
+          <description>&lt;p&gt;한국거래소(KRX)에서 증권과 관련된 데이터와 통계정보를 제공하는 정보데이터시스템 웹페이지가 있다.&lt;br /&gt;
+여기서도 상장주식의 종목코드 리스트를 가져올 수 있다.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 20 Dec 2021 13:30:00 +0000</pubDate>
+        <link>
+        https://sguys99.github.io//trading2</link>
+        <guid isPermaLink="true">https://sguys99.github.io//trading2</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>KRX에서 종목코드 가져오기1</title>
         
           <description>&lt;h3 id=&quot;1-홈페이지-둘러보기&quot;&gt;1. 홈페이지 둘러보기&lt;/h3&gt;
 
