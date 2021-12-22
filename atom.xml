@@ -8,6 +8,21 @@
     
       
       <item>
+        <title>custom dataset으로 YOLOv5 학습하기</title>
+        
+          <description>&lt;p&gt;YOLO(You Only Look Once)는 널리 쓰이는 object detection 알고리즘이다. 최근에는 YOLOv5 까지 출시되었다. 여기서는 공식 github 계정에 업로드된 YOLOv5 코드로 custom dataset을 학습하는 방법에 대하여 설명한다. google colab 환경에서 진행되었다.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 21 Dec 2021 13:30:00 +0000</pubDate>
+        <link>
+        https://sguys99.github.io//ds1</link>
+        <guid isPermaLink="true">https://sguys99.github.io//ds1</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>KRX에서 종목코드 가져오기2</title>
         
           <description>&lt;p&gt;한국거래소(KRX)에서 증권과 관련된 데이터와 통계정보를 제공하는 정보데이터시스템 웹페이지가 있다.&lt;br /&gt;
