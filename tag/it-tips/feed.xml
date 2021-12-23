@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator>
   <link href="https://sguys99.github.io//tag/it-tips/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://sguys99.github.io//" rel="alternate" type="text/html" />
-  <updated>2021-12-23T05:34:56+00:00</updated>
+  <updated>2021-12-23T06:58:47+00:00</updated>
   <id>https://sguys99.github.io//tag/it-tips/feed.xml</id>
 
   
@@ -32,15 +32,74 @@
 
   
     <entry>
-      <title type="html">Git, Github 사용법</title>
-      <link href="https://sguys99.github.io//git-tutorial1" rel="alternate" type="text/html" title="Git, Github 사용법" />
-      <published>2021-08-20T15:00:00+00:00</published>
-      <updated>2021-08-20T15:00:00+00:00</updated>
-      <id>https://sguys99.github.io//git-tutorial1</id>
-      <content type="html" xml:base="https://sguys99.github.io//git-tutorial1">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;Git, Github 사용법 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+      <title type="html">git cheat sheet1</title>
+      <link href="https://sguys99.github.io//it01" rel="alternate" type="text/html" title="git cheat sheet1" />
+      <published>2021-12-22T15:00:00+00:00</published>
+      <updated>2021-12-22T15:00:00+00:00</updated>
+      <id>https://sguys99.github.io//it01</id>
+      <content type="html" xml:base="https://sguys99.github.io//it01">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
 &lt;ul class=&quot;table-of-contents-list&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;./ml-basics&quot;&gt;ml시작&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;./ml1&quot;&gt;ml 강좌(1) - 지도, 비지도 학습&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet1 - 기본 명령어&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;git 기본 명령어와 옵션 별 기능을 정리하였다.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-setup&quot;&gt;1. Setup&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git init&lt;/code&gt; : 저장소(repository) 생성&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git clone [원격 저장소 url]&lt;/code&gt; : 해당 주소의 내용을 복제하여 저장소 생성&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git config user.name [작성자 이름]&lt;/code&gt; : 작성자 이름 설정&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git config user.email [이메일 계정]&lt;/code&gt; : 작성자 이메일 설정&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git config --list&lt;/code&gt; : 저장소 설정 전체 출력&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git config --get [설정항목]&lt;/code&gt; : 일부 설정항목만 출력(ex : git config –get user.name)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git help [커맨드 이름]&lt;/code&gt; : 도움말&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;2-stage--commit&quot;&gt;2. Stage &amp;amp; commit&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-22-it01/it01.01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git add [파일이름]&lt;/code&gt; : 수정된 파일을 staging area 올리기&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git add [디렉토리 명]&lt;/code&gt; : 해당 디렉토리 내에 수정된 모든 파일들을 staging area에 올리기&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git add .&lt;/code&gt; : working directory 내에 수정된 모든 파일들을 staging area에 올리기 (untracked 파일 제외)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git commit&lt;/code&gt; : 이력 저장(commit)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git commit -m &quot;[메시지]&quot;&lt;/code&gt; : vim을 사용하지 않고 인라인으로 메시지를 추가하여 commit&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git commit -am &quot;[메시지]&quot;&lt;/code&gt; : add와 commit을 일괄적으로 진행&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;3-inspect&quot;&gt;3. Inspect&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;git status&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git status&lt;/code&gt; : 저장소 파일의 상태정보 출력&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git status -s&lt;/code&gt; : 파일 상태정보를 간략하게 표시&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;git log&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git log&lt;/code&gt; : 저장소의 commit이력을 출력&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git log --pretty=oneline&lt;/code&gt; : 각 commit을 한줄로 출력(–pretty 옵션 사용)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git log --oneline&lt;/code&gt; : 각 commit을 한줄로 출력&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git log --decorate=full&lt;/code&gt; : 브랜치나 태그정보를 상세히 출력&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git log --graph&lt;/code&gt; : 그래프 형태로 출력&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;git show&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git show&lt;/code&gt; : 가장 최근의 commit 정보 출력&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git show [commit hash]&lt;/code&gt; : 해당 commit의 정보 출력&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git show HEAD&lt;/code&gt; : HEAD가 참조하는 commit의 정보 출력&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git show HEAD^^^&lt;/code&gt; : HEAD를 기준으로 3단계 이전의 commit정보 출력&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git show HEAD~[n]&lt;/code&gt; : HEAD를 기준으로 n단계 이전의 commit정보 출력&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;git diff&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git diff&lt;/code&gt; : 최근 commit과 변경사항이 발생한(Unstaged) 파일들의 내용비교&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git diff --staged&lt;/code&gt; : 최근 commit과 Staging area의 파일들 간의 변경사항 출력&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git diff [commit hash1] [commit hash2]&lt;/code&gt; : 두 commit의 파일들 간의 변경사항 출력&lt;/li&gt;
 &lt;/ul&gt;</content>
 
       
@@ -62,44 +121,7 @@
       
 
       
-        <summary type="html">Git, Github 사용법 포스트는 여러 절로 구성되어 있습니다. ml시작 ml 강좌(1) - 지도, 비지도 학습</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">Starting It Tips post!!</title>
-      <link href="https://sguys99.github.io//it-basics" rel="alternate" type="text/html" title="Starting It Tips post!!" />
-      <published>2021-08-15T10:18:00+00:00</published>
-      <updated>2021-08-15T10:18:00+00:00</updated>
-      <id>https://sguys99.github.io//it-basics</id>
-      <content type="html" xml:base="https://sguys99.github.io//it-basics">&lt;p&gt;Welcome to it-tips basics!!&lt;/p&gt;
-
-&lt;noscript&gt;&lt;pre&gt;400: Invalid request&lt;/pre&gt;&lt;/noscript&gt;
-&lt;script src=&quot;https://gist.github.com/30911aa0cd305c0755a9c336bdbb999b.js&quot;&gt; &lt;/script&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name>Kwang Myung Yu</name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="it-tips" />
-      
-
-      
-        <summary type="html">Welcome to it-tips basics!!</summary>
+        <summary type="html">이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어</summary>
       
 
       
