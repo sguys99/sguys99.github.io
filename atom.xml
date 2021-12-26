@@ -8,11 +8,31 @@
     
       
       <item>
+        <title>git cheat sheet2</title>
+        
+          <description>&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet1 - 기본 명령어&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet2 - commit 조작&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        
+        <pubDate>Thu, 23 Dec 2021 15:00:00 +0000</pubDate>
+        <link>
+        https://sguys99.github.io//it02</link>
+        <guid isPermaLink="true">https://sguys99.github.io//it02</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>git cheat sheet1</title>
         
           <description>&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
 &lt;ul class=&quot;table-of-contents-list&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet1 - 기본 명령어&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet2 - commit 조작&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </description>

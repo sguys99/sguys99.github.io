@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator>
   <link href="https://sguys99.github.io//tag/it-tips/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://sguys99.github.io//" rel="alternate" type="text/html" />
-  <updated>2021-12-26T08:22:58+00:00</updated>
+  <updated>2021-12-26T08:43:29+00:00</updated>
   <id>https://sguys99.github.io//tag/it-tips/feed.xml</id>
 
   
@@ -32,6 +32,82 @@
 
   
     <entry>
+      <title type="html">git cheat sheet2</title>
+      <link href="https://sguys99.github.io//it02" rel="alternate" type="text/html" title="git cheat sheet2" />
+      <published>2021-12-23T15:00:00+00:00</published>
+      <updated>2021-12-23T15:00:00+00:00</updated>
+      <id>https://sguys99.github.io//it02</id>
+      <content type="html" xml:base="https://sguys99.github.io//it02">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet1 - 기본 명령어&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet2 - commit 조작&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;commit 조작과 관련된 명령어를 정리하였다.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-checkout&quot;&gt;1. Checkout&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git checkout [commit hash]&lt;/code&gt; : 해당 commit으로 파일상태 변경&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git checkout -&lt;/code&gt; : HEAD가 이전에 참조했던 commit으로 상태변경&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git checkout master&lt;/code&gt; : HEAD가 master를 참조&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git checkout HEAD~n&lt;/code&gt; : HEAD를 기준으로 n단계 이전 commit으로 상태변경&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;2-undoing-checkout&quot;&gt;2. Undoing checkout&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-23-it02/it02.01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git reset&lt;/code&gt; : Staging area의 파일 전체를 unstaged 상태로 되돌리기&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git reset [파일명]&lt;/code&gt; : 해당 파일을 unstaged 상태로 되돌리기&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-23-it02/it02.02.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git commit --amend&lt;/code&gt; : 최근 커밋을 수정하기&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git commit --amend -m &quot;[commit 메시지]&quot;&lt;/code&gt; : 해당 메시지로 commit 수정하기&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-23-it02/it02.03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git reset [commit hash]&lt;/code&gt; : 해당 commit으로 브랜치의 참조를 변경&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git reset –-hard [commit hash]&lt;/code&gt; : working directory, staging area, commit 모두 reset&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git reset –-mixed [commit hash]&lt;/code&gt; : working directory 유지, staging area, commit reset , default option&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git reset –-soft [commit hash]&lt;/code&gt; : working directory, staging area 유지, commit reset&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git reset HEAD^&lt;/code&gt; : HEAD를 기준으로 직전의 commit으로 reset&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git reset HEAD~[정수]&lt;/code&gt; : HEAD를 기준으로 정수 값 단계 전 commit으로 reset&lt;/li&gt;
+&lt;/ul&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Kwang Myung Yu</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="it-tips" />
+      
+
+      
+        <summary type="html">이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
       <title type="html">git cheat sheet1</title>
       <link href="https://sguys99.github.io//it01" rel="alternate" type="text/html" title="git cheat sheet1" />
       <published>2021-12-22T15:00:00+00:00</published>
@@ -40,6 +116,7 @@
       <content type="html" xml:base="https://sguys99.github.io//it01">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
 &lt;ul class=&quot;table-of-contents-list&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet1 - 기본 명령어&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet2 - commit 조작&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;git 기본 명령어와 옵션 별 기능을 정리하였다.&lt;/p&gt;
@@ -121,7 +198,7 @@
       
 
       
-        <summary type="html">이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어</summary>
+        <summary type="html">이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작</summary>
       
 
       
