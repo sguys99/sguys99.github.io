@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://sguys99.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://sguys99.github.io//" rel="alternate" type="text/html" /><updated>2021-12-26T09:30:40+00:00</updated><id>https://sguys99.github.io//feed.xml</id><title type="html">Happy Plant</title><subtitle>Data science, Machine learning, and Automatic control</subtitle><entry><title type="html">git cheat sheet2</title><link href="https://sguys99.github.io//it02" rel="alternate" type="text/html" title="git cheat sheet2" /><published>2021-12-23T15:00:00+00:00</published><updated>2021-12-23T15:00:00+00:00</updated><id>https://sguys99.github.io//it02</id><content type="html" xml:base="https://sguys99.github.io//it02">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://sguys99.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://sguys99.github.io//" rel="alternate" type="text/html" /><updated>2021-12-26T11:48:53+00:00</updated><id>https://sguys99.github.io//feed.xml</id><title type="html">Happy Plant</title><subtitle>Data science, Machine learning, and Automatic control</subtitle><entry><title type="html">git cheat sheet2</title><link href="https://sguys99.github.io//it02" rel="alternate" type="text/html" title="git cheat sheet2" /><published>2021-12-23T15:00:00+00:00</published><updated>2021-12-23T15:00:00+00:00</updated><id>https://sguys99.github.io//it02</id><content type="html" xml:base="https://sguys99.github.io//it02">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
 &lt;ul class=&quot;table-of-contents-list&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet1 - 기본 명령어&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet2 - commit 조작&lt;/a&gt;&lt;/li&gt;
@@ -104,7 +104,13 @@
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git diff&lt;/code&gt; : 최근 commit과 변경사항이 발생한(Unstaged) 파일들의 내용비교&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git diff --staged&lt;/code&gt; : 최근 commit과 Staging area의 파일들 간의 변경사항 출력&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git diff [commit hash1] [commit hash2]&lt;/code&gt; : 두 commit의 파일들 간의 변경사항 출력&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Kwang Myung Yu</name></author><category term="it-tips" /><summary type="html">이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작</summary></entry><entry><title type="html">custom dataset으로 YOLOv5 학습하기</title><link href="https://sguys99.github.io//ds1" rel="alternate" type="text/html" title="custom dataset으로 YOLOv5 학습하기" /><published>2021-12-21T13:30:00+00:00</published><updated>2021-12-21T13:30:00+00:00</updated><id>https://sguys99.github.io//ds1</id><content type="html" xml:base="https://sguys99.github.io//ds1">&lt;p&gt;YOLO(You Only Look Once)는 널리 쓰이는 object detection 알고리즘이다. 최근에는 YOLOv5 까지 출시되었다. 여기서는 공식 github 계정에 업로드된 YOLOv5 코드로 custom dataset을 학습하는 방법에 대하여 설명한다. google colab 환경에서 진행되었다.&lt;/p&gt;
+&lt;/ul&gt;</content><author><name>Kwang Myung Yu</name></author><category term="it-tips" /><summary type="html">이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작</summary></entry><entry><title type="html">custom dataset으로 YOLOv5 학습하기-1</title><link href="https://sguys99.github.io//ds01" rel="alternate" type="text/html" title="custom dataset으로 YOLOv5 학습하기-1" /><published>2021-12-21T13:30:00+00:00</published><updated>2021-12-21T13:30:00+00:00</updated><id>https://sguys99.github.io//ds01</id><content type="html" xml:base="https://sguys99.github.io//ds01">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;./ds01&quot;&gt;YOLO5 #1 - custom dataset으로 학습하기&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;./ds02&quot;&gt;YOLO5 #2 - 학습 파라미터 설정하기&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;YOLO(You Only Look Once)는 널리 쓰이는 object detection 알고리즘이다. 최근에는 YOLOv5 까지 출시되었다. 여기서는 공식 github 계정에 업로드된 YOLOv5 코드로 custom dataset을 학습하는 방법에 대하여 설명한다. google colab 환경에서 진행되었다.&lt;/p&gt;
 
 &lt;h3 id=&quot;1-데이터셋-소개&quot;&gt;1. 데이터셋 소개&lt;/h3&gt;
 
@@ -353,7 +359,215 @@ image 1/5 /content/yolov5/custom_dataset/test/images/chanterelle_02_jpg.rf.f7a48
 
 &lt;p&gt;폴더를 열어보면 class와 bounding box가 표시된 detection 결과 이미지가 저장되어 있다.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-21-ds1/ds01.16.jpg&quot; /&gt;&lt;/p&gt;</content><author><name>Kwang Myung Yu</name></author><category term="data-science" /><summary type="html">YOLO(You Only Look Once)는 널리 쓰이는 object detection 알고리즘이다. 최근에는 YOLOv5 까지 출시되었다. 여기서는 공식 github 계정에 업로드된 YOLOv5 코드로 custom dataset을 학습하는 방법에 대하여 설명한다. google colab 환경에서 진행되었다.</summary></entry><entry><title type="html">KRX에서 종목코드 가져오기2</title><link href="https://sguys99.github.io//trading2" rel="alternate" type="text/html" title="KRX에서 종목코드 가져오기2" /><published>2021-12-20T13:30:00+00:00</published><updated>2021-12-20T13:30:00+00:00</updated><id>https://sguys99.github.io//trading2</id><content type="html" xml:base="https://sguys99.github.io//trading2">&lt;p&gt;한국거래소(KRX)에서 증권과 관련된 데이터와 통계정보를 제공하는 정보데이터시스템 웹페이지가 있다.&lt;br /&gt;
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-21-ds1/ds01.16.jpg&quot; /&gt;&lt;/p&gt;</content><author><name>Kwang Myung Yu</name></author><category term="data-science" /><summary type="html">이 포스트는 여러 절로 구성되어 있습니다. YOLO5 #1 - custom dataset으로 학습하기 YOLO5 #2 - 학습 파라미터 설정하기</summary></entry><entry><title type="html">custom dataset으로 YOLOv5 학습하기-2</title><link href="https://sguys99.github.io//ds02" rel="alternate" type="text/html" title="custom dataset으로 YOLOv5 학습하기-2" /><published>2021-12-21T13:30:00+00:00</published><updated>2021-12-21T13:30:00+00:00</updated><id>https://sguys99.github.io//ds02</id><content type="html" xml:base="https://sguys99.github.io//ds02">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;./ds01&quot;&gt;YOLO5 #1 - custom dataset으로 학습하기&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;./ds02&quot;&gt;YOLO5 #2 - 학습 파라미터 설정하기&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이전 포스트에서 custom dataset으로 YOLOv5 모델을 학습시키는 방법에 대해서 설명하였다. 여기서는 학습과 관련된 파라미터를 조정하는 방법에 대해서 설명한다. 앞에서와 마찬가지로 실습환경은 google colab이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-데이터셋-소개&quot;&gt;1. 데이터셋 소개&lt;/h3&gt;
+
+&lt;p&gt;실습에 사용되는 데이터셋은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;roboflow&lt;/code&gt;에서 제공되는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Mask Wearking Dataset&lt;/code&gt;(raw)이다.&lt;a href=&quot;https://public.roboflow.com/object-detection/mask-wearing/4&quot;&gt;[링크]&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;(raw와 416x416으로 변환된 데이터셋을 선택할 수 있는데, 여기서는 raw 데이터셋을 사용한다.)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-23-ds2/ds02.01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-colab에서-환경구축하기&quot;&gt;2. colab에서 환경구축하기&lt;/h3&gt;
+
+&lt;p&gt;환경구축은 앞과 같기 때문에 간력하게 설명한다. 상세한 내용은 이전 포스트를 참고한다. &lt;a href=&quot;https://sguys99.github.io/ds1&quot;&gt;[링크]&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;google colab에 접속하고 새 노트를 생성&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;런타임&lt;/code&gt;-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;런타임 유형 변경&lt;/code&gt;을 선택후, 가속기를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GPU&lt;/code&gt;로 설정&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;yolov5 파일을 다운로드 및 필수 라이브러리를 설치&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;git&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clone&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;https&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;github&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ultralytics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yolov5&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# yolov5 코드 clone
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yolov5&lt;/span&gt; 										  &lt;span class=&quot;c1&quot;&gt;# clone한 폴더로 진입
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;qr&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requirements&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;txt&lt;/span&gt;                 &lt;span class=&quot;c1&quot;&gt;# 필수 라이브러리 설치
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;custom dataset 업로드 (여기서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mask_dataset.zip&lt;/code&gt; 으로 설명)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;데이터 셋 파일 압축 해제&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unzip&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;custom_dataset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;zip&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;` yolov5/data/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt; 폴더에 &lt;/code&gt;mask_dataset.yaml`파일 작성&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;path: /content/yolov5/mask_dataset
+train: train/images
+val: valid/images
+test: test/images
+
+nc: 2
+names: ['mask', 'no-mask']
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-학습-파라미터-살펴보기&quot;&gt;3. 학습 파라미터 살펴보기&lt;/h3&gt;
+
+&lt;p&gt;이제 학습할 때 파라미터를 조정하는 방법에 대해서 설명한다.&lt;/p&gt;
+
+&lt;p&gt;모델을 학습할 때 다음과 같이 데이터셋 관련 경로만 입력하면 가능하다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;데이터셋.yaml 파일 경로&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;나머지 파라미터들은 디펄트 값으로 대체된다. 그러면 학습과 관련된 파라미터에는 어떤 것들이 있을까? yolov5 폴더 안에 있는 train.py 파일을 열어서 440번째 라인 부근에 있는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;parse_opt&lt;/code&gt; 함수를 살펴보자. 아래와 같이 파라미터들이 정의되어 있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;parse_opt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;known&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argparse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ArgumentParser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--weights'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ROOT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'yolov5s.pt'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'initial weights path'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--cfg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'model.yaml path'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--data'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ROOT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'data/coco128.yaml'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'dataset.yaml path'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--hyp'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ROOT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'data/hyps/hyp.scratch.yaml'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'hyperparameters path'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--epochs'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--batch-size'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'total batch size for all GPUs, -1 for autobatch'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--imgsz'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'--img'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'--img-size'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;640&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'train, val image size (pixels)'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--rect'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'store_true'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'rectangular training'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+    &lt;span class=&quot;o&quot;&gt;---&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;생&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;략&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;학습과 관련된 파라미터가 40여개나 된다. 하지만 모두 알 필요는 없다. 모델 성능이나 하드웨어 자원과 관련된 중요한 파라미터만 살펴보자.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;모델구조 (–weights)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;모델 구조와 관련된 파라미터이다. YOLOv5는 다양한 모델 구조를 제공한다. default 값은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YOLOv5&lt;/code&gt;로 구조가 제일 간단하다. 모델의 구조가 더 복잡한 것으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YOLOv5m&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YOLOv5l&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YOLOv5x&lt;/code&gt; 이 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-23-ds2/ds02.02.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;구조가 복잡할 수록 성능이 높아질 가능성은 높지만 학습할 때 더 많은 시간이 소요되고 많은 리소스가 요구된다. 예를 들어 yolov5m 모델을 학습시키고 싶다면 다음과 같이 입력하면 된다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;yolov5m.pt&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;공식 github에는 이외에 새로운 모델 구조가 지속적으로 업로드되고 있다. &lt;a href=&quot;https://github.com/ultralytics/yolov5/releases&quot;&gt;[링크]&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;배치 사이즈 (–batch-size)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;학습할 때 한번에 처리할 이미지 수(batch-size)를 지정할 수 있다. default는 16이다. batch size를 32로 입력하고 싶다면 다음과 같이 옵션 설정을 하면된다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;batch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;이미지 크기 (–imgsz,  –img, –img-size)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;YOLOv5는 학습할 때 모든 이미지 사이즈를 동일하게 resizing 한다. default 사이즈는 640x640이다. 이미지 사이즈를 크게 설정할수록 모델 성능은 더 좋아실 수 있다. 하지만 학습속도와 리소스 부담은 더 커지게 된다. 이미지 크기를 1280x1280으로 설정하고 싶다면 다음과 같이 입력한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imgsz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ow&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1280&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;검증이나 시험할 때 학습에 사용한 이미지 사이즈와 동일하게 설정해야한다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;에포크 수 (–epochs)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;데이터셋으로 학습을 반복할 횟수를 지정하는 에포크의 default 값은 300이다. 100으로 설정하고 싶다면 다음과 같이 입력한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;epochs&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;하이퍼 파라미터 (–hyp)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;하이퍼 파라미터가 정의되어 있는 경로를 지정한다. default 값은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;data/hyps/hyp.scratch.yaml&lt;/code&gt;이다. 해당 경로의 파일을 열어 확인해보자.&lt;/p&gt;
+
+&lt;h3 id=&quot;4-파라미터를-조정하여-모델-학습하기&quot;&gt;4. 파라미터를 조정하여 모델 학습하기&lt;/h3&gt;
+
+&lt;p&gt;colab에서 제공하는 자원을 최대한 사용하여 학습을 진행해보자. 모델 구조는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yolov5m.pt&lt;/code&gt;, 입력 이미지 크기는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1280&lt;/code&gt;, 배치 사이즈는 8, 에포크 수는 60으로 설정해보자. (모델 구조가 커지고 입력 이미지가 복잡해져서 colab gpu 한계를 맞추기 위해 배치 사이즈와 학습시간을 줄여야만 했다.)&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;data/mask_dataset.yaml&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;batch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1280&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;yolov5m.pt&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;epochs&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;60&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;train: weights=yolov5m.pt, cfg=, data=data/mask_dataset.yaml, hyp=data/hyps/hyp.scratch.yaml, epochs=60, batch_size=8, imgsz=1280, rect=False, 
+
+--(생 략)
+
+hyperparameters: lr0=0.01, lrf=0.1, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=0.05, cls=0.5, 
+--(생 략)
+                 from  n    params  module                                  arguments                     
+  0                -1  1      5280  models.common.Conv                      [3, 48, 6, 2, 2]              
+  1                -1  1     41664  models.common.Conv                      [48, 96, 3, 2]                
+  2                -1  2     65280  models.common.C3                        [96, 96, 2] 
+  
+--(생 략)
+
+Model Summary: 290 layers, 20856975 parameters, 0 gradients, 48.0 GFLOPs
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 2/2 [00:06&amp;lt;00:00,  3.12s/it]
+                 all         29        162       0.81      0.853      0.861      0.531
+                mask         29        142      0.871      0.805      0.888      0.559
+             no-mask         29         20       0.75        0.9      0.835      0.503
+Results saved to runs/train/exp3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;여기서는 학습 결과가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/runs/train/exp3&lt;/code&gt;에 저장되었다. 사용자 마다 저장위치가 다를 것이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;5-검증하기&quot;&gt;5. 검증하기&lt;/h3&gt;
+
+&lt;p&gt;검증과 관련된 파라미터는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;val.py&lt;/code&gt; 파일의 306번째 라인의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;parse_opt&lt;/code&gt; 함수에 정의되어 있다.&lt;/p&gt;
+
+&lt;p&gt;학습할 때 이미지 사이즈는 1280으로 설정하였고, 모델 가중치는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/runs/train/exp3/weights/best.pt&lt;/code&gt; 저장되어 있으므로 다음과 같이 입력하여 검증을 진행하자.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;!python val.py --data &quot;data/mask_dataset.yaml&quot; --img 1280 --weights &quot;/content/yolov5/runs/train/exp3/weights/best.pt&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;val: data=data/mask_dataset.yaml, weights=['/content/yolov5/runs/train/exp3/weights/best.pt'], batch_size=32, imgsz=1280, conf_thres=0.001, iou_thres=0.6, task=val, device=, workers=8, single_cls=False, augment=False, verbose=False, save_txt=False, save_hybrid=False, save_conf=False, save_json=False, project=runs/val, name=exp, exist_ok=False, half=False, dnn=False
+YOLOv5 🚀 v6.0-159-gdb6ec66 torch 1.10.0+cu111 CUDA:0 (Tesla K80, 11441MiB)
+
+Fusing layers... 
+Model Summary: 290 layers, 20856975 parameters, 0 gradients, 48.0 GFLOPs
+val: Scanning '/content/yolov5/mask_dataset/valid/labels.cache' images and labels... 29 found, 0 missing, 0 empty, 0 corrupted: 100% 29/29 [00:00&amp;lt;?, ?it/s]
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 1/1 [00:08&amp;lt;00:00,  8.05s/it]
+                 all         29        162      0.813      0.851      0.862      0.535
+                mask         29        142      0.878       0.81      0.887      0.556
+             no-mask         29         20      0.748      0.892      0.837      0.514
+Speed: 1.5ms pre-process, 166.8ms inference, 4.4ms NMS per image at shape (32, 3, 1280, 1280)
+Results saved to runs/val/exp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;예측결과가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;runs/val/exp&lt;/code&gt;에 저장되었다.&lt;/p&gt;
+
+&lt;h3 id=&quot;6-예측하기&quot;&gt;6. 예측하기&lt;/h3&gt;
+
+&lt;p&gt;예측할 때는 기본적으로 모델의 경로(–weights), 입력 데이터 경로(–source)를 지정해줘야 한다. 여기에 추가로 이미지 사이즈(–img)도 지정해주자.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;detect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1280&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/content/yolov5/runs/train/exp3/weights/best.pt&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/content/yolov5/mask_dataset/test/images&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;detect: weights=['/content/yolov5/runs/train/exp3/weights/best.pt'], source=/content/yolov5/mask_dataset/test/images, imgsz=[1280, 1280], conf_thres=0.25, 
+
+---(생 략)
+
+Results saved to runs/detect/exp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;runs/detect/exp&lt;/code&gt;에 예측 결과가 저장된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-23-ds2/ds02.03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;참 고 :&lt;/strong&gt; 기회가 되면 confidence threshold(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--conf-thres&lt;/code&gt;)와 IoU threshold(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--iou-thres&lt;/code&gt;) 도 변경해가며 예측결과를 비교해보자.&lt;/p&gt;</content><author><name>Kwang Myung Yu</name></author><category term="data-science" /><summary type="html">이 포스트는 여러 절로 구성되어 있습니다. YOLO5 #1 - custom dataset으로 학습하기 YOLO5 #2 - 학습 파라미터 설정하기</summary></entry><entry><title type="html">KRX에서 종목코드 가져오기2</title><link href="https://sguys99.github.io//trading2" rel="alternate" type="text/html" title="KRX에서 종목코드 가져오기2" /><published>2021-12-20T13:30:00+00:00</published><updated>2021-12-20T13:30:00+00:00</updated><id>https://sguys99.github.io//trading2</id><content type="html" xml:base="https://sguys99.github.io//trading2">&lt;p&gt;한국거래소(KRX)에서 증권과 관련된 데이터와 통계정보를 제공하는 정보데이터시스템 웹페이지가 있다.&lt;br /&gt;
 여기서도 상장주식의 종목코드 리스트를 가져올 수 있다.&lt;/p&gt;
 
 &lt;h3 id=&quot;1-홈페이지-둘러보기&quot;&gt;1. 홈페이지 둘러보기&lt;/h3&gt;
@@ -1033,37 +1247,7 @@ image 1/5 /content/yolov5/custom_dataset/test/images/chanterelle_02_jpg.rf.f7a48
   &lt;li&gt;가성비 : &lt;strong&gt;★★★☆☆&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;서비스 : &lt;strong&gt;★★★☆☆&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;접근성 : &lt;strong&gt;★★★★☆&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Kwang Myung Yu</name></author><category term="diary" /><summary type="html">지하철 4호선 선바위역에 위치한 막국수 맛집. 메밀장터</summary></entry><entry><title type="html">Test for data science1</title><link href="https://sguys99.github.io//ds1" rel="alternate" type="text/html" title="Test for data science1" /><published>2020-08-15T13:30:00+00:00</published><updated>2020-08-15T13:30:00+00:00</updated><id>https://sguys99.github.io//ds1</id><content type="html" xml:base="https://sguys99.github.io//ds1">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;머신러닝 강좌는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
-&lt;ul class=&quot;table-of-contents-list&quot;&gt;
-    &lt;li&gt;&lt;a href=&quot;./ml-basics&quot;&gt;ml시작&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;./ml1&quot;&gt;ml 강좌(1) - 지도, 비지도 학습&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;첫번째 강좌를 시작합니다.&lt;/p&gt;
-
-&lt;p&gt;루즈를 사용한 자바스크립트 코드&lt;/p&gt;
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;syntaxHighlight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Hello World&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;루즈를 사용한 파이썬 코드&lt;/p&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pandas&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_csv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pandas&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_csv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Kwang Myung Yu</name></author><category term="data-science" /><summary type="html">머신러닝 강좌는 여러 절로 구성되어 있습니다. ml시작 ml 강좌(1) - 지도, 비지도 학습</summary></entry><entry><title type="html">첫번째 강좌</title><link href="https://sguys99.github.io//ml1" rel="alternate" type="text/html" title="첫번째 강좌" /><published>2020-08-15T13:30:00+00:00</published><updated>2020-08-15T13:30:00+00:00</updated><id>https://sguys99.github.io//ml1</id><content type="html" xml:base="https://sguys99.github.io//ml1">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;머신러닝 강좌는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;/ul&gt;</content><author><name>Kwang Myung Yu</name></author><category term="diary" /><summary type="html">지하철 4호선 선바위역에 위치한 막국수 맛집. 메밀장터</summary></entry><entry><title type="html">첫번째 강좌</title><link href="https://sguys99.github.io//ml1" rel="alternate" type="text/html" title="첫번째 강좌" /><published>2020-08-15T13:30:00+00:00</published><updated>2020-08-15T13:30:00+00:00</updated><id>https://sguys99.github.io//ml1</id><content type="html" xml:base="https://sguys99.github.io//ml1">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;머신러닝 강좌는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
 &lt;ul class=&quot;table-of-contents-list&quot;&gt;
     &lt;li&gt;&lt;a href=&quot;./ml-basics&quot;&gt;ml시작&lt;/a&gt;&lt;/li&gt;
     &lt;li&gt;&lt;a href=&quot;./ml1&quot;&gt;ml 강좌(1) - 지도, 비지도 학습&lt;/a&gt;&lt;/li&gt;

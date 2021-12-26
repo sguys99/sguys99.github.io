@@ -11,7 +11,7 @@
 
 
 
-    <title>custom dataset으로 YOLOv5 학습하기</title>
+    <title>custom dataset으로 YOLOv5 학습하기-2</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -50,15 +50,15 @@
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="Data science, Machine learning, and Automatic control" />
     <link rel="shortcut icon" href="https://sguys99.github.io//assets/images/logo.png" type="image/png" />
-    <link rel="canonical" href="https://sguys99.github.io//ds1" />
+    <link rel="canonical" href="https://sguys99.github.io//ds02" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Happy Plant" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="custom dataset으로 YOLOv5 학습하기" />
-    <meta property="og:description" content="YOLO(You Only Look Once)는 널리 쓰이는 object detection 알고리즘이다. 최근에는 YOLOv5 까지 출시되었다. 여기서는 공식 github 계정에 업로드된 YOLOv5 코드로 custom dataset을 학습하는 방법에 대하여 설명한다. google colab 환경에서 진행되었다. 1. 데이터셋 소개 실습에 사용되는 데이터셋은 roboflow에서 제공되는 North American Mushrooms Dataset이다.[링크] 여기서는 학습시간을 줄이기 위해서 416x416 사이즈의 이미지 51장을" />
-    <meta property="og:url" content="https://sguys99.github.io//ds1" />
+    <meta property="og:title" content="custom dataset으로 YOLOv5 학습하기-2" />
+    <meta property="og:description" content="이 포스트는 여러 절로 구성되어 있습니다. YOLO5 #1 - custom dataset으로 학습하기 YOLO5 #2 - 학습 파라미터 설정하기 이전 포스트에서 custom dataset으로 YOLOv5 모델을 학습시키는 방법에 대해서 설명하였다. 여기서는 학습과 관련된 파라미터를 조정하는 방법에 대해서 설명한다. 앞에서와 마찬가지로 실습환경은 google colab이다. 1. 데이터셋 소개 실습에 사용되는 데이터셋은 roboflow에서 제공되는 Mask" />
+    <meta property="og:url" content="https://sguys99.github.io//ds02" />
     <meta property="og:image" content="https://sguys99.github.io//assets/images/2021-12-21-ds1/ds01.00.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/dbrhkdaud" />
     <meta property="article:author" content="https://www.facebook.com/dbrhkdaud" />
@@ -66,8 +66,8 @@
     <meta property="article:modified_time" content="2021-12-21T13:30:00+00:00" />
     <meta property="article:tag" content="Data-science" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="custom dataset으로 YOLOv5 학습하기" />
-    <meta name="twitter:description" content="YOLO(You Only Look Once)는 널리 쓰이는 object detection 알고리즘이다. 최근에는 YOLOv5 까지 출시되었다. 여기서는 공식 github 계정에 업로드된 YOLOv5 코드로 custom dataset을 학습하는 방법에 대하여 설명한다. google colab 환경에서 진행되었다. 1. 데이터셋 소개 실습에 사용되는 데이터셋은 roboflow에서 제공되는 North American Mushrooms Dataset이다.[링크] 여기서는 학습시간을 줄이기 위해서 416x416 사이즈의 이미지 51장을" />
+    <meta name="twitter:title" content="custom dataset으로 YOLOv5 학습하기-2" />
+    <meta name="twitter:description" content="이 포스트는 여러 절로 구성되어 있습니다. YOLO5 #1 - custom dataset으로 학습하기 YOLO5 #2 - 학습 파라미터 설정하기 이전 포스트에서 custom dataset으로 YOLOv5 모델을 학습시키는 방법에 대해서 설명하였다. 여기서는 학습과 관련된 파라미터를 조정하는 방법에 대해서 설명한다. 앞에서와 마찬가지로 실습환경은 google colab이다. 1. 데이터셋 소개 실습에 사용되는 데이터셋은 roboflow에서 제공되는 Mask" />
     <meta name="twitter:url" content="https://sguys99.github.io//" />
     <meta name="twitter:image" content="https://sguys99.github.io//assets/images/2021-12-21-ds1/ds01.00.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -88,7 +88,7 @@
         "name": "Happy Plant",
         "logo": "https://sguys99.github.io//"
     },
-    "url": "https://sguys99.github.io//ds1",
+    "url": "https://sguys99.github.io//ds02",
     "image": {
         "@type": "ImageObject",
         "url": "https://sguys99.github.io//assets/images/2021-12-21-ds1/ds01.00.jpg",
@@ -97,9 +97,9 @@
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://sguys99.github.io//ds1"
+        "@id": "https://sguys99.github.io//ds02"
     },
-    "description": "YOLO(You Only Look Once)는 널리 쓰이는 object detection 알고리즘이다. 최근에는 YOLOv5 까지 출시되었다. 여기서는 공식 github 계정에 업로드된 YOLOv5 코드로 custom dataset을 학습하는 방법에 대하여 설명한다. google colab 환경에서 진행되었다. 1. 데이터셋 소개 실습에 사용되는 데이터셋은 roboflow에서 제공되는 North American Mushrooms Dataset이다.[링크] 여기서는 학습시간을 줄이기 위해서 416x416 사이즈의 이미지 51장을"
+    "description": "이 포스트는 여러 절로 구성되어 있습니다. YOLO5 #1 - custom dataset으로 학습하기 YOLO5 #2 - 학습 파라미터 설정하기 이전 포스트에서 custom dataset으로 YOLOv5 모델을 학습시키는 방법에 대해서 설명하였다. 여기서는 학습과 관련된 파라미터를 조정하는 방법에 대해서 설명한다. 앞에서와 마찬가지로 실습환경은 google colab이다. 1. 데이터셋 소개 실습에 사용되는 데이터셋은 roboflow에서 제공되는 Mask"
 }
     </script>
 
@@ -112,7 +112,7 @@
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="custom dataset으로 YOLOv5 학습하기" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="custom dataset으로 YOLOv5 학습하기-2" href="/feed.xml" />
 
 
 </head>
@@ -203,7 +203,7 @@ into the {body} of the default.hbs template -->
                         
                     
                 </section>
-                <h1 class="post-full-title">custom dataset으로 YOLOv5 학습하기</h1>
+                <h1 class="post-full-title">custom dataset으로 YOLOv5 학습하기-2</h1>
             </header>
 
             <!-- 포스트 위에 그림나오는 것 생략하기 위해 주석처리
@@ -215,256 +215,216 @@ into the {body} of the default.hbs template -->
 
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <p>YOLO(You Only Look Once)는 널리 쓰이는 object detection 알고리즘이다. 최근에는 YOLOv5 까지 출시되었다. 여기서는 공식 github 계정에 업로드된 YOLOv5 코드로 custom dataset을 학습하는 방법에 대하여 설명한다. google colab 환경에서 진행되었다.</p>
+                    <p><span class="table-of-contents-list">이 포스트는 여러 절로 구성되어 있습니다. </span></p>
+<ul class="table-of-contents-list">
+    <li><a href="./ds01">YOLO5 #1 - custom dataset으로 학습하기</a></li>
+    <li><a href="./ds02">YOLO5 #2 - 학습 파라미터 설정하기</a></li>
+</ul>
+
+<p>이전 포스트에서 custom dataset으로 YOLOv5 모델을 학습시키는 방법에 대해서 설명하였다. 여기서는 학습과 관련된 파라미터를 조정하는 방법에 대해서 설명한다. 앞에서와 마찬가지로 실습환경은 google colab이다.</p>
 
 <h3 id="1-데이터셋-소개">1. 데이터셋 소개</h3>
 
-<p>실습에 사용되는 데이터셋은 <code class="language-plaintext highlighter-rouge">roboflow</code>에서 제공되는 <code class="language-plaintext highlighter-rouge">North American Mushrooms Dataset</code>이다.<a href="https://public.roboflow.com/object-detection">[링크]</a></p>
+<p>실습에 사용되는 데이터셋은 <code class="language-plaintext highlighter-rouge">roboflow</code>에서 제공되는 <code class="language-plaintext highlighter-rouge">Mask Wearking Dataset</code>(raw)이다.<a href="https://public.roboflow.com/object-detection/mask-wearing/4">[링크]</a></p>
 
-<p><img src="assets/images/2021-12-21-ds1/ds01.01.jpg" /></p>
+<p>(raw와 416x416으로 변환된 데이터셋을 선택할 수 있는데, 여기서는 raw 데이터셋을 사용한다.)</p>
 
-<p>여기서는 학습시간을 줄이기 위해서 416x416 사이즈의 이미지 51장을 다운 받았다.</p>
-
-<p><img src="assets/images/2021-12-21-ds1/ds01.02.jpg" /></p>
-
-<p>object detection 알고리즘 라이브러리 구현방식에 따라, 그리고 YOLO 버전 별로도 사용하는 레이블링 파일의 포맷이 다르다. <code class="language-plaintext highlighter-rouge">roboflow</code>에서는 레이블링 파일 포맷을 선택하여 다운도르 할 수 있다. 우리는 PyTorch로 구현된 공식 계정의 코드를 사용할 예정이므로 <code class="language-plaintext highlighter-rouge">YOLO v5 PyTorch</code>를 선택하고 다운로드 한다.</p>
-
-<p><img src="assets/images/2021-12-21-ds1/ds01.03.jpg" /></p>
-
-<p>참고로 YOLOv5 공식계정의 코드는 <code class="language-plaintext highlighter-rouge">txt</code> 포맷의 레이블링 데이터를 사용한다.
-이 파일은 이미지에서 검출된 object에 대한 클래스와 bounding box 정보를 포함하고 있다. 검출 객체정보 배치는 <code class="language-plaintext highlighter-rouge">[class, x_center, y_center, width, height]</code> 형태로 되어있다. bounding box 정보는 이미지 사이즈에 의해 정규화 되어있다. 따라서 0~1 범위의 값을 가진다.</p>
-
-<p><img src="assets/images/2021-12-21-ds1/ds01.04.jpg" /></p>
-
-<p>편의를 위해 다운로드한 데이터 셋 압축파일의 폴더 이름을 <code class="language-plaintext highlighter-rouge">custom_dataset</code>으로 수정한다. 데이터 폴더 구성은 다음과 같다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>custom_dataset
-│
-├── test/
-│   ├── images/                    
-│   └── labels/             
-│
-├── train/
-│   ├── images/                
-│   └── labels/               
-│
-├── valid/
-│   ├── images/                    
-│   └── labels/   
-│
-├── data.yaml
-└── README.dataset.txt
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">data.yaml</code>파일을 메모장으로 열어보자. 데이터 셋 기본정보가 포함되어 있다. <code class="language-plaintext highlighter-rouge">우리는 *.yaml</code> 파일을 새로 만들 것이다. 어떤 식으로 구성되는지 참고만 한다.</p>
-
-<p><img src="assets/images/2021-12-21-ds1/ds01.05.jpg" /></p>
-
-<p><code class="language-plaintext highlighter-rouge">train</code>과 <code class="language-plaintext highlighter-rouge">val</code>은 각 데이터 셋의 경로정보이다. 그리고 nc는 class의 수(number of classes)를, names는 각 클래스의 이름이다.</p>
+<p><img src="assets/images/2021-12-23-ds2/ds02.01.jpg" /></p>
 
 <h3 id="2-colab에서-환경구축하기">2. colab에서 환경구축하기</h3>
 
-<p>google colab에 접속하고 새 노트를 생성한다. <code class="language-plaintext highlighter-rouge">런타임</code>-<code class="language-plaintext highlighter-rouge">런타임 유형 변경</code>을 선택하여, 하드웨어 가속기를 <code class="language-plaintext highlighter-rouge">GPU</code>로 설정한다.</p>
+<p>환경구축은 앞과 같기 때문에 간력하게 설명한다. 상세한 내용은 이전 포스트를 참고한다. <a href="https://sguys99.github.io/ds1">[링크]</a></p>
 
-<p><img src="assets/images/2021-12-21-ds1/ds01.06.jpg" /></p>
-
-<p>이제 colab 노트에 공식 github 계정의 파일을 다운로드하고, 필수 라이브러리를 설치하는 명령을 입력한다.</p>
+<ul>
+  <li>google colab에 접속하고 새 노트를 생성</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">런타임</code>-<code class="language-plaintext highlighter-rouge">런타임 유형 변경</code>을 선택후, 가속기를 <code class="language-plaintext highlighter-rouge">GPU</code>로 설정</p>
+  </li>
+  <li>yolov5 파일을 다운로드 및 필수 라이브러리를 설치</li>
+</ul>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">ultralytics</span><span class="o">/</span><span class="n">yolov5</span>  <span class="c1"># yolov5 코드 clone
 </span><span class="o">%</span><span class="n">cd</span> <span class="n">yolov5</span> 										  <span class="c1"># clone한 폴더로 진입
 </span><span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">qr</span> <span class="n">requirements</span><span class="p">.</span><span class="n">txt</span>                 <span class="c1"># 필수 라이브러리 설치
 </span></code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cloning into 'yolov5'...
-remote: Enumerating objects: 10354, done.
-remote: Total 10354 (delta 0), reused 0 (delta 0), pack-reused 10354
-Receiving objects: 100% (10354/10354), 10.58 MiB | 23.75 MiB/s, done.
-Resolving deltas: 100% (7149/7149), done.
-/content/yolov5
-     |████████████████████████████████| 596 kB 5.4 MB/s 
-</code></pre></div></div>
-
-<p>파일 탐색기에 yolov5 폴더가 생성되었고, 파일들이 다운로드 되어있다.</p>
-
-<p><img src="assets/images/2021-12-21-ds1/ds01.07.jpg" /></p>
-
-<p>이제 앞에서 다운로드한 데이터셋을 업로드 한다. 파일 탐색기의 업로드 아이콘을 클릭하여 <code class="language-plaintext highlighter-rouge">custom_dataset.zip</code> 파일을 업로드 한다.
-업로드가 완료되면 탐색기에 해당 파일이 표시된다.</p>
-
-<p><img src="assets/images/2021-12-21-ds1/ds01.08.jpg" /></p>
-
-<p>unzip 명령으로 데이터 셋 파일의 압축을 해제한다.</p>
+<ul>
+  <li>
+    <p>custom dataset 업로드 (여기서는 <code class="language-plaintext highlighter-rouge">mask_dataset.zip</code> 으로 설명)</p>
+  </li>
+  <li>
+    <p>데이터 셋 파일 압축 해제</p>
+  </li>
+</ul>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">unzip</span> <span class="p">..</span><span class="o">/</span><span class="n">custom_dataset</span><span class="p">.</span><span class="nb">zip</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Archive:  ../custom_dataset.zip
-  inflating: custom_dataset/data.yaml  
-  inflating: custom_dataset/README.dataset.txt  
-  inflating: custom_dataset/README.roboflow.txt  
-   creating: custom_dataset/test/
-   creating: custom_dataset/test/images/
-  inflating: custom_dataset/test/images/chanterelle_02_jpg.rf.f7a48494b7393c532f641585d99a57be.jpg  
-  inflating: custom_dataset/test/images/chanterelle_03_jpg.rf.580f8d787af6a8050c21c065bf016f20.jpg  
-  inflating: custom_dataset/test/images/chanterelle_03_jpg.rf.cd892d2f06d228ba20d194fc360320fc.jpg  
-  --- (생 략)
-</code></pre></div></div>
+<ul>
+  <li>` yolov5/data/<code class="language-plaintext highlighter-rouge"> 폴더에 </code>mask_dataset.yaml`파일 작성</li>
+</ul>
 
-<p>완료되면 <code class="language-plaintext highlighter-rouge">yolov5/custom_dataset/</code> 경로에 데이터 셋이 위치하게 된다. (현 작업 디렉토리가 yolov5이기 때문)</p>
-
-<p><img src="assets/images/2021-12-21-ds1/ds01.09.jpg" /></p>
-
-<p>마지막으로 데이터 셋 설정파일을 작성한다.</p>
-
-<p>` yolov5/data/<code class="language-plaintext highlighter-rouge"> 폴더에 </code>custom_dataset.yaml`이라는 이름의 파일을 생성한다.</p>
-
-<p><img src="assets/images/2021-12-21-ds1/ds01.10.jpg" /></p>
-
-<p>여기에 다음과 같이 설정정보를 입력한다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>path: /content/yolov5/custom_dataset  #root 디렉토리
-train: train/images					  # 학습데이터 경로
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>path: /content/yolov5/mask_dataset
+train: train/images
 val: valid/images
 test: test/images
 
-nc: 2								# 클래스 수
-names: ['CoW', 'chanterelle']		# 클래스 이름
+nc: 2
+names: ['mask', 'no-mask']
 </code></pre></div></div>
 
-<p>자세한 내용은 다음 <a href="https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data">링크</a>의 <code class="language-plaintext highlighter-rouge">**1.1 Create dataset.yaml**</code> 항목을 참고하자.</p>
+<h3 id="3-학습-파라미터-살펴보기">3. 학습 파라미터 살펴보기</h3>
 
-<p>이로써 학습을 위한 모든 준비가 완료 되었다.</p>
+<p>이제 학습할 때 파라미터를 조정하는 방법에 대해서 설명한다.</p>
 
-<h3 id="3-모델-학습하기">3. 모델 학습하기</h3>
+<p>모델을 학습할 때 다음과 같이 데이터셋 관련 경로만 입력하면 가능하다.</p>
 
-<p>모델 학습 순서는 다음과 같다.</p>
-
-<p><img src="assets/images/2021-12-21-ds1/ds01.11.jpg" /></p>
-
-<p>위와 같은 일련의 과정은 <code class="language-plaintext highlighter-rouge">train.py</code>  파일 실행을 통해 가능하다. 인자로 학습 데이터 경로와 epoch 수를 입력하고 학습을 진행하자.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">train</span><span class="p">.</span><span class="n">py</span> <span class="o">--</span><span class="n">data</span> <span class="s">"data/custom_dataset.yaml"</span> <span class="o">--</span><span class="n">epochs</span> <span class="mi">100</span> <span class="c1">#epoch 100회
-</span></code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Downloading https://ultralytics.com/assets/Arial.ttf to /root/.config/Ultralytics/Arial.ttf...
- train: weights=yolov5s.pt, cfg=, data=data/custom_dataset.yaml, hyp=data/hyps/hyp.scratch.yaml, epochs=100, batch_size=16, imgsz=640, '''
- 
- ---(생략)
- 
- Overriding model.yaml nc=80 with nc=2
- 
-                  from  n    params  module                                  arguments                     
-   0                -1  1      3520  models.common.Conv                      [3, 32, 6, 2, 2]              
-   1                -1  1     18560  models.common.Conv                      [32, 64, 3, 2]                
-   2                -1  1     18816  models.common.C3                        [64, 64, 1]
-   
- ---(생략)
- 
- Logging results to runs/train/exp
- Starting training for 100 epochs...
- 
-      Epoch   gpu_mem       box       obj       cls    labels  img_size
-       0/99     3.23G    0.1252   0.03226   0.02699        28       640: 100% 3/3 [00:05&lt;00:00,  1.95s/it]
-                Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 1/1 [00:00&lt;00:00,  2.48it/s]
-                  all          5         14    0.00695      0.311    0.00395     0.0011
-       
- ---(생략)
- 
- Validating runs/train/exp/weights/best.pt...
- Fusing layers... 
- Model Summary: 213 layers, 7015519 parameters, 0 gradients, 15.8 GFLOPs
-                Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 1/1 [00:00&lt;00:00,  4.48it/s]
-                  all          5         14       0.95      0.996      0.973      0.697
-                  CoW          5          5          1      0.991      0.995      0.688
-          chanterelle          5          9      0.899          1      0.951      0.706
- Results saved to runs/train/exp
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">train</span><span class="p">.</span><span class="n">py</span> <span class="o">--</span><span class="n">data</span> <span class="s">"데이터셋.yaml 파일 경로"</span>
 </code></pre></div></div>
 
-<p>학습이 완료되면 <code class="language-plaintext highlighter-rouge">runs/train/exp</code>경로에 학습 결과가 저장된다. 학습을 반복하면 <code class="language-plaintext highlighter-rouge">runs/train</code>경로에 exp1, 2, 3… 같은 형태로 폴더가 생성되면서 학습 결과가 기록된다.</p>
+<p>나머지 파라미터들은 디펄트 값으로 대체된다. 그러면 학습과 관련된 파라미터에는 어떤 것들이 있을까? yolov5 폴더 안에 있는 train.py 파일을 열어서 440번째 라인 부근에 있는 <code class="language-plaintext highlighter-rouge">parse_opt</code> 함수를 살펴보자. 아래와 같이 파라미터들이 정의되어 있다.</p>
 
-<p><img src="assets/images/2021-12-21-ds1/ds01.12.jpg" /></p>
-
-<p>학습 결과를 다운로드 하고 싶다면 zip 명령을 압축한 뒤, 저장한다 . 예를 들어 <code class="language-plaintext highlighter-rouge">train_result.zip</code>이라는 이름으로 압축하고 싶다면 다음과 같이 입력한다.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="nb">zip</span> <span class="o">-</span><span class="n">r</span> <span class="n">train_result</span><span class="p">.</span><span class="nb">zip</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">yolov5</span><span class="o">/</span><span class="n">runs</span><span class="o">/</span><span class="n">train</span><span class="o">/</span><span class="n">exp</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">parse_opt</span><span class="p">(</span><span class="n">known</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="p">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--weights'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">ROOT</span> <span class="o">/</span> <span class="s">'yolov5s.pt'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'initial weights path'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--cfg'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">''</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'model.yaml path'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--data'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">ROOT</span> <span class="o">/</span> <span class="s">'data/coco128.yaml'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'dataset.yaml path'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--hyp'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">ROOT</span> <span class="o">/</span> <span class="s">'data/hyps/hyp.scratch.yaml'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'hyperparameters path'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--epochs'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+    <span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--batch-size'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'total batch size for all GPUs, -1 for autobatch'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--imgsz'</span><span class="p">,</span> <span class="s">'--img'</span><span class="p">,</span> <span class="s">'--img-size'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">640</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'train, val image size (pixels)'</span><span class="p">)</span>
+    <span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--rect'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s">'store_true'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'rectangular training'</span><span class="p">)</span>
+    
+    <span class="o">---</span> <span class="p">(</span><span class="n">생</span> <span class="n">략</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>탐색기에 <code class="language-plaintext highlighter-rouge">train_result.zip</code>가 표시되면 정상으로 압축된 것이다.</p>
+<p>학습과 관련된 파라미터가 40여개나 된다. 하지만 모두 알 필요는 없다. 모델 성능이나 하드웨어 자원과 관련된 중요한 파라미터만 살펴보자.</p>
 
-<p><img src="assets/images/2021-12-21-ds1/ds01.13.jpg" /></p>
+<ul>
+  <li><strong>모델구조 (–weights)</strong></li>
+</ul>
 
-<h3 id="4-학습한-모델-검증하기">4. 학습한 모델 검증하기</h3>
+<p>모델 구조와 관련된 파라미터이다. YOLOv5는 다양한 모델 구조를 제공한다. default 값은 <code class="language-plaintext highlighter-rouge">YOLOv5</code>로 구조가 제일 간단하다. 모델의 구조가 더 복잡한 것으로 <code class="language-plaintext highlighter-rouge">YOLOv5m</code>, <code class="language-plaintext highlighter-rouge">YOLOv5l</code>, <code class="language-plaintext highlighter-rouge">YOLOv5x</code> 이 있다.</p>
 
-<p>이제 학습한 모델로 검증을 진행해보자. 검증순서는 앞의 학습 절차에서 <code class="language-plaintext highlighter-rouge">모델 가중치 업데이트</code> 과정이 생략된 것이다.</p>
+<p><img src="assets/images/2021-12-23-ds2/ds02.02.jpg" /></p>
 
-<p><img src="assets/images/2021-12-21-ds1/ds01.14.jpg" /></p>
+<p>구조가 복잡할 수록 성능이 높아질 가능성은 높지만 학습할 때 더 많은 시간이 소요되고 많은 리소스가 요구된다. 예를 들어 yolov5m 모델을 학습시키고 싶다면 다음과 같이 입력하면 된다.</p>
 
-<p>모델 검증은 <code class="language-plaintext highlighter-rouge">val.py</code>  파일 실행을 통해 진행한다. 다양한 인자가 있지만 데이터 경로(<code class="language-plaintext highlighter-rouge">--data</code>), 모델 가중치(<code class="language-plaintext highlighter-rouge">--weights</code>) 정도만 입력해서 실행해보자. 앞에서 학습한 모델 가중치는 <code class="language-plaintext highlighter-rouge">runs/train/exp/weights/best.pt</code>에 저장되었다.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">val</span><span class="p">.</span><span class="n">py</span> <span class="o">--</span><span class="n">data</span> <span class="s">"data/custom_dataset.yaml"</span> <span class="o">--</span><span class="n">weights</span> <span class="s">"/content/yolov5/runs/train/exp/weights/best.pt"</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">--</span><span class="n">weights</span> <span class="s">"yolov5m.pt"</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val: data=data/custom_dataset.yaml, weights=['/content/yolov5/runs/train/exp/weights/best.pt'], batch_size=32, imgsz=640, conf_thres=0.001, iou_thres=0.6, task=val, device=, workers=8, single_cls=False, augment=False, verbose=False, save_txt=False, save_hybrid=False, save_conf=False, save_json=False, project=runs/val, name=exp, exist_ok=False, half=False, dnn=False
-YOLOv5 🚀 v6.0-155-gdc54ed5 torch 1.10.0+cu111 CUDA:0 (Tesla K80, 11441MiB)
+<p>공식 github에는 이외에 새로운 모델 구조가 지속적으로 업로드되고 있다. <a href="https://github.com/ultralytics/yolov5/releases">[링크]</a></p>
+
+<ul>
+  <li><strong>배치 사이즈 (–batch-size)</strong></li>
+</ul>
+
+<p>학습할 때 한번에 처리할 이미지 수(batch-size)를 지정할 수 있다. default는 16이다. batch size를 32로 입력하고 싶다면 다음과 같이 옵션 설정을 하면된다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">--</span><span class="n">batch</span><span class="o">-</span><span class="n">size</span> <span class="mi">32</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>이미지 크기 (–imgsz,  –img, –img-size)</strong></li>
+</ul>
+
+<p>YOLOv5는 학습할 때 모든 이미지 사이즈를 동일하게 resizing 한다. default 사이즈는 640x640이다. 이미지 사이즈를 크게 설정할수록 모델 성능은 더 좋아실 수 있다. 하지만 학습속도와 리소스 부담은 더 커지게 된다. 이미지 크기를 1280x1280으로 설정하고 싶다면 다음과 같이 입력한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">--</span><span class="n">imgsz</span><span class="p">(</span><span class="ow">or</span> <span class="o">--</span><span class="n">img</span> <span class="ow">or</span> <span class="o">--</span><span class="n">img</span><span class="o">-</span><span class="n">size</span><span class="p">)</span> <span class="mi">1280</span>
+</code></pre></div></div>
+
+<p><strong>검증이나 시험할 때 학습에 사용한 이미지 사이즈와 동일하게 설정해야한다.</strong></p>
+
+<ul>
+  <li><strong>에포크 수 (–epochs)</strong></li>
+</ul>
+
+<p>데이터셋으로 학습을 반복할 횟수를 지정하는 에포크의 default 값은 300이다. 100으로 설정하고 싶다면 다음과 같이 입력한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">--</span><span class="n">epochs</span> <span class="mi">100</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>하이퍼 파라미터 (–hyp)</strong></li>
+</ul>
+
+<p>하이퍼 파라미터가 정의되어 있는 경로를 지정한다. default 값은 <code class="language-plaintext highlighter-rouge">data/hyps/hyp.scratch.yaml</code>이다. 해당 경로의 파일을 열어 확인해보자.</p>
+
+<h3 id="4-파라미터를-조정하여-모델-학습하기">4. 파라미터를 조정하여 모델 학습하기</h3>
+
+<p>colab에서 제공하는 자원을 최대한 사용하여 학습을 진행해보자. 모델 구조는 <code class="language-plaintext highlighter-rouge">yolov5m.pt</code>, 입력 이미지 크기는 <code class="language-plaintext highlighter-rouge">1280</code>, 배치 사이즈는 8, 에포크 수는 60으로 설정해보자. (모델 구조가 커지고 입력 이미지가 복잡해져서 colab gpu 한계를 맞추기 위해 배치 사이즈와 학습시간을 줄여야만 했다.)</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">train</span><span class="p">.</span><span class="n">py</span> <span class="o">--</span><span class="n">data</span> <span class="s">"data/mask_dataset.yaml"</span> <span class="o">--</span><span class="n">batch</span><span class="o">-</span><span class="n">size</span> <span class="mi">8</span> <span class="o">--</span><span class="n">img</span> <span class="mi">1280</span> <span class="o">--</span><span class="n">weights</span> <span class="s">"yolov5m.pt"</span> <span class="o">--</span><span class="n">epochs</span> <span class="mi">60</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>train: weights=yolov5m.pt, cfg=, data=data/mask_dataset.yaml, hyp=data/hyps/hyp.scratch.yaml, epochs=60, batch_size=8, imgsz=1280, rect=False, 
+
+--(생 략)
+
+hyperparameters: lr0=0.01, lrf=0.1, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=0.05, cls=0.5, 
+--(생 략)
+                 from  n    params  module                                  arguments                     
+  0                -1  1      5280  models.common.Conv                      [3, 48, 6, 2, 2]              
+  1                -1  1     41664  models.common.Conv                      [48, 96, 3, 2]                
+  2                -1  2     65280  models.common.C3                        [96, 96, 2] 
+  
+--(생 략)
+
+Model Summary: 290 layers, 20856975 parameters, 0 gradients, 48.0 GFLOPs
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 2/2 [00:06&lt;00:00,  3.12s/it]
+                 all         29        162       0.81      0.853      0.861      0.531
+                mask         29        142      0.871      0.805      0.888      0.559
+             no-mask         29         20       0.75        0.9      0.835      0.503
+Results saved to runs/train/exp3
+</code></pre></div></div>
+
+<p>여기서는 학습 결과가 <code class="language-plaintext highlighter-rouge">/runs/train/exp3</code>에 저장되었다. 사용자 마다 저장위치가 다를 것이다.</p>
+
+<h3 id="5-검증하기">5. 검증하기</h3>
+
+<p>검증과 관련된 파라미터는 <code class="language-plaintext highlighter-rouge">val.py</code> 파일의 306번째 라인의 <code class="language-plaintext highlighter-rouge">parse_opt</code> 함수에 정의되어 있다.</p>
+
+<p>학습할 때 이미지 사이즈는 1280으로 설정하였고, 모델 가중치는 <code class="language-plaintext highlighter-rouge">/runs/train/exp3/weights/best.pt</code> 저장되어 있으므로 다음과 같이 입력하여 검증을 진행하자.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!python val.py --data "data/mask_dataset.yaml" --img 1280 --weights "/content/yolov5/runs/train/exp3/weights/best.pt"
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val: data=data/mask_dataset.yaml, weights=['/content/yolov5/runs/train/exp3/weights/best.pt'], batch_size=32, imgsz=1280, conf_thres=0.001, iou_thres=0.6, task=val, device=, workers=8, single_cls=False, augment=False, verbose=False, save_txt=False, save_hybrid=False, save_conf=False, save_json=False, project=runs/val, name=exp, exist_ok=False, half=False, dnn=False
+YOLOv5 🚀 v6.0-159-gdb6ec66 torch 1.10.0+cu111 CUDA:0 (Tesla K80, 11441MiB)
 
 Fusing layers... 
-Model Summary: 213 layers, 7015519 parameters, 0 gradients, 15.8 GFLOPs
-val: Scanning '/content/yolov5/custom_dataset/valid/labels.cache' images and labels... 5 found, 0 missing, 0 empty, 0 corrupted: 100% 5/5 [00:00&lt;?, ?it/s]
-               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 1/1 [00:00&lt;00:00,  2.58it/s]
-                 all          5         14      0.909      0.982      0.961      0.686
-                 CoW          5          5          1      0.965      0.995      0.672
-         chanterelle          5          9      0.818          1      0.926        0.7
-Speed: 0.6ms pre-process, 29.3ms inference, 3.0ms NMS per image at shape (32, 3, 640, 640)
+Model Summary: 290 layers, 20856975 parameters, 0 gradients, 48.0 GFLOPs
+val: Scanning '/content/yolov5/mask_dataset/valid/labels.cache' images and labels... 29 found, 0 missing, 0 empty, 0 corrupted: 100% 29/29 [00:00&lt;?, ?it/s]
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 1/1 [00:08&lt;00:00,  8.05s/it]
+                 all         29        162      0.813      0.851      0.862      0.535
+                mask         29        142      0.878       0.81      0.887      0.556
+             no-mask         29         20      0.748      0.892      0.837      0.514
+Speed: 1.5ms pre-process, 166.8ms inference, 4.4ms NMS per image at shape (32, 3, 1280, 1280)
 Results saved to runs/val/exp
 </code></pre></div></div>
 
-<p>검증결과는 <code class="language-plaintext highlighter-rouge">runs/val/exp</code>에 저장된다. 앞에서와 마찬가지로 다운로드 받고 싶다면 폴더를 압축하자.</p>
+<p>예측결과가 <code class="language-plaintext highlighter-rouge">runs/val/exp</code>에 저장되었다.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="nb">zip</span> <span class="o">-</span><span class="n">r</span> <span class="n">val_result</span><span class="p">.</span><span class="nb">zip</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">yolov5</span><span class="o">/</span><span class="n">runs</span><span class="o">/</span><span class="n">val</span>
+<h3 id="6-예측하기">6. 예측하기</h3>
+
+<p>예측할 때는 기본적으로 모델의 경로(–weights), 입력 데이터 경로(–source)를 지정해줘야 한다. 여기에 추가로 이미지 사이즈(–img)도 지정해주자.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">detect</span><span class="p">.</span><span class="n">py</span> <span class="o">--</span><span class="n">img</span> <span class="mi">1280</span> <span class="o">--</span><span class="n">weights</span> <span class="s">"/content/yolov5/runs/train/exp3/weights/best.pt"</span> <span class="o">--</span><span class="n">source</span> <span class="s">"/content/yolov5/mask_dataset/test/images"</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">exp</code> 폴더 안에는 confusion matrix, F1 curve 등 성능과 관련된 차트가 저장되어 있다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>detect: weights=['/content/yolov5/runs/train/exp3/weights/best.pt'], source=/content/yolov5/mask_dataset/test/images, imgsz=[1280, 1280], conf_thres=0.25, 
 
-<h3 id="5-학습한-모델로-예측하기">5. 학습한 모델로 예측하기</h3>
+---(생 략)
 
-<p>예측과정은 아래 그림과 같은 절차로 진행된다.</p>
-
-<p><img src="assets/images/2021-12-21-ds1/ds01.15.jpg" /></p>
-
-<p>예측 과정은 <code class="language-plaintext highlighter-rouge">detect.py</code> 파일을 사용한다. 단순 이미지 뿐만 아니라 웹캠, 비디오 파일 등에서도 실행 가능하다. <code class="language-plaintext highlighter-rouge">--source</code>인자에 다음과 같이 설정해주면 된다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!python detect.py --source 0  # webcam
-                            img.jpg  # image
-                            vid.mp4  # video
-                            path/  # directory
-                            path/*.jpg  # glob
-                            'https://youtu.be/Zgi9g1ksQHc'  # YouTube
-                            'rtsp://example.com/media.mp4'  # RTSP, RTMP, HTTP stream
+Results saved to runs/detect/exp
 </code></pre></div></div>
 
-<p>여기서는 <code class="language-plaintext highlighter-rouge">custom_dataset/test/images</code> 경로에 있는 이미지에 대해서 object detection을 실행해본다. 인식 대상 (<code class="language-plaintext highlighter-rouge">--source</code>), 모델 가중치(<code class="language-plaintext highlighter-rouge">--weights</code>)  경로를 입력해서 실행해보자.</p>
+<p><code class="language-plaintext highlighter-rouge">runs/detect/exp</code>에 예측 결과가 저장된다.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">python</span> <span class="n">detect</span><span class="p">.</span><span class="n">py</span> <span class="o">--</span><span class="n">weights</span> <span class="s">"/content/yolov5/runs/train/exp/weights/best.pt"</span> <span class="o">--</span><span class="n">source</span> <span class="s">"/content/yolov5/custom_dataset/test/images"</span>
-</code></pre></div></div>
+<p><img src="assets/images/2021-12-23-ds2/ds02.03.jpg" /></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>detect: weights=['/content/yolov5/runs/train/exp/weights/best.pt'], source=/content/yolov5/custom_dataset/test/images, imgsz=[640, 640], conf_thres=0.25, iou_thres=0.45, max_det=1000, device=, view_img=False, save_txt=False, save_conf=False, 
+<p><strong>참 고 :</strong> 기회가 되면 confidence threshold(<code class="language-plaintext highlighter-rouge">--conf-thres</code>)와 IoU threshold(<code class="language-plaintext highlighter-rouge">--iou-thres</code>) 도 변경해가며 예측결과를 비교해보자.</p>
 
----(생략)
-
-Fusing layers... 
-Model Summary: 213 layers, 7015519 parameters, 0 gradients, 15.8 GFLOPs
-image 1/5 /content/yolov5/custom_dataset/test/images/chanterelle_02_jpg.rf.f7a48494b7393c532f641585d99a57be.jpg: 640x640 3 chanterelles, Done. (0.034s)
---- (생략)
-</code></pre></div></div>
-
-<p>테스트 결과는 <code class="language-plaintext highlighter-rouge">/runs/detect/exp</code> 경로에 저장된다. 결과를 다운로드 하고 싶다면 다음과 같이 압축하여 저장한다.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="nb">zip</span> <span class="o">-</span><span class="n">r</span> <span class="n">test_result</span><span class="p">.</span><span class="nb">zip</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">yolov5</span><span class="o">/</span><span class="n">runs</span><span class="o">/</span><span class="n">detect</span><span class="o">/</span><span class="n">exp</span>
-</code></pre></div></div>
-
-<p>폴더를 열어보면 class와 bounding box가 표시된 detection 결과 이미지가 저장되어 있다.</p>
-
-<p><img src="assets/images/2021-12-21-ds1/ds01.16.jpg" /></p>
 
                 </div>
             </section>
@@ -571,24 +531,10 @@ image 1/5 /content/yolov5/custom_dataset/test/images/chanterelle_02_jpg.rf.f7a48
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
                                     
                                         
                                         
-                                            <li><a href="/ds1">Test for data science1</a></li>
+                                            <li><a href="/ds01">custom dataset으로 YOLOv5 학습하기-1</a></li>
                                         
                                     
                                   
@@ -598,12 +544,17 @@ image 1/5 /content/yolov5/custom_dataset/test/images/chanterelle_02_jpg.rf.f7a48
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                            <li><a href="/ds2">Test for data science2</a></li>
-                                        
-                                    
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
                                   
                                 
                             </ul>
@@ -611,7 +562,7 @@ image 1/5 /content/yolov5/custom_dataset/test/images/chanterelle_02_jpg.rf.f7a48
                         <footer class="read-next-card-footer">
                             <a href="/tag/data-science/">
                                 
-                                    See all 2 posts  →
+                                    See all 1 posts  →
                                 
                             </a>
                         </footer>
@@ -683,27 +634,30 @@ image 1/5 /content/yolov5/custom_dataset/test/images/chanterelle_02_jpg.rf.f7a48
 
     <article class="post-card post-template">
         
-            <a class="post-card-image-link" href="/trading2">
-                <div class="post-card-image" style="background-image: url(/assets/images/2021-12-20-trading/tr01.01.00.jpg)"></div>
+            <a class="post-card-image-link" href="/ds01">
+                <div class="post-card-image" style="background-image: url(/assets/images/2021-12-21-ds1/ds01.00.jpg)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/trading2">
+            <a class="post-card-content-link" href="/ds01">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Algorithmic-trading</span>
+                                <span class="post-card-tags">Data-science</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">KRX에서 종목코드 가져오기2</h2>
+                    <h2 class="post-card-title">custom dataset으로 YOLOv5 학습하기-1</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>한국거래소(KRX)에서 증권과 관련된 데이터와 통계정보를 제공하는 정보데이터시스템 웹페이지가 있다.
-여기서도 상장주식의 종목코드 리스트를 가져올 수 있다.
+                        <p>이 포스트는 여러 절로 구성되어 있습니다. 
+
+    YOLO5 #1 - custom dataset으로 학습하기
+    YOLO5 #2 - 학습 파라미터 설정하기
+
 
 </p>
                     
@@ -723,7 +677,7 @@ image 1/5 /content/yolov5/custom_dataset/test/images/chanterelle_02_jpg.rf.f7a48
                 <span class="reading-time">
                     
                     
-                      2 min read
+                      5 min read
                     
                 </span>
             </footer>
@@ -745,18 +699,18 @@ image 1/5 /content/yolov5/custom_dataset/test/images/chanterelle_02_jpg.rf.f7a48
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">custom dataset으로 YOLOv5 학습하기</div>
+    <div class="floating-header-title">custom dataset으로 YOLOv5 학습하기-2</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=custom+dataset%EC%9C%BC%EB%A1%9C+YOLOv5+%ED%95%99%EC%8A%B5%ED%95%98%EA%B8%B0&amp;url=https://sguys99.github.io/ds1"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=custom+dataset%EC%9C%BC%EB%A1%9C+YOLOv5+%ED%95%99%EC%8A%B5%ED%95%98%EA%B8%B0-2&amp;url=https://sguys99.github.io/ds02"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://sguys99.github.io/ds1"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://sguys99.github.io/ds02"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 
