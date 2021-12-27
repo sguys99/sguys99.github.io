@@ -46,7 +46,7 @@
     
       
       <item>
-        <title>custom dataset으로 YOLOv5 학습하기-2</title>
+        <title>custom dataset으로 YOLOv5 학습하기2</title>
         
           <description>&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
 &lt;ul class=&quot;table-of-contents-list&quot;&gt;
@@ -65,7 +65,7 @@
     
       
       <item>
-        <title>custom dataset으로 YOLOv5 학습하기-1</title>
+        <title>custom dataset으로 YOLOv5 학습하기1</title>
         
           <description>&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
 &lt;ul class=&quot;table-of-contents-list&quot;&gt;
@@ -115,6 +115,21 @@
     
       
       <item>
+        <title>(경기 하남 맛집) 단밥</title>
+        
+          <description>&lt;p&gt;하남 팔당 가정식 백반 전문점 &lt;strong&gt;단밥&lt;/strong&gt;&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 01 Nov 2021 13:10:00 +0000</pubDate>
+        <link>
+        https://sguys99.github.io//foody4</link>
+        <guid isPermaLink="true">https://sguys99.github.io//foody4</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>(서울 송파 맛집) 평이담백뼈칼국수</title>
         
           <description>&lt;p&gt;평이담백뼈칼국수 방이점&lt;/p&gt;
@@ -155,77 +170,6 @@
         <link>
         https://sguys99.github.io//foody1</link>
         <guid isPermaLink="true">https://sguys99.github.io//foody1</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>Test for algorithmic-trading1</title>
-        
-          <description>&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;머신러닝 강좌는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
-&lt;ul class=&quot;table-of-contents-list&quot;&gt;
-    &lt;li&gt;&lt;a href=&quot;./ml-basics&quot;&gt;ml시작&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;./ml1&quot;&gt;ml 강좌(1) - 지도, 비지도 학습&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        
-        <pubDate>Sat, 15 Aug 2020 13:30:00 +0000</pubDate>
-        <link>
-        https://sguys99.github.io//trading1</link>
-        <guid isPermaLink="true">https://sguys99.github.io//trading1</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>첫번째 강좌</title>
-        
-          <description>&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;머신러닝 강좌는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
-&lt;ul class=&quot;table-of-contents-list&quot;&gt;
-    &lt;li&gt;&lt;a href=&quot;./ml-basics&quot;&gt;ml시작&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;./ml1&quot;&gt;ml 강좌(1) - 지도, 비지도 학습&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        
-        <pubDate>Sat, 15 Aug 2020 13:30:00 +0000</pubDate>
-        <link>
-        https://sguys99.github.io//ml1</link>
-        <guid isPermaLink="true">https://sguys99.github.io//ml1</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>Test for algorithmic-trading2</title>
-        
-          <description>&lt;p&gt;Welcome to machine learning basics!!&lt;/p&gt;
-</description>
-        
-        <pubDate>Sat, 15 Aug 2020 10:30:00 +0000</pubDate>
-        <link>
-        https://sguys99.github.io//trading2</link>
-        <guid isPermaLink="true">https://sguys99.github.io//trading2</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>Starting machine learning posts</title>
-        
-          <description>&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;머신러닝 강좌는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
-&lt;ul class=&quot;table-of-contents-list&quot;&gt;
-    &lt;li&gt;&lt;a href=&quot;./ml-basics&quot;&gt;ml시작&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;./ml1&quot;&gt;ml 강좌(1) - 지도, 비지도 학습&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        
-        <pubDate>Sat, 15 Aug 2020 10:30:00 +0000</pubDate>
-        <link>
-        https://sguys99.github.io//ml-basics</link>
-        <guid isPermaLink="true">https://sguys99.github.io//ml-basics</guid>
       </item>
       
     
