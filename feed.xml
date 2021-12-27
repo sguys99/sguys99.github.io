@@ -1,10 +1,78 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://sguys99.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://sguys99.github.io//" rel="alternate" type="text/html" /><updated>2021-12-27T03:04:13+00:00</updated><id>https://sguys99.github.io//feed.xml</id><title type="html">Happy Plant</title><subtitle>Data science, Machine learning, and Automatic control</subtitle><entry><title type="html">git cheat sheet2</title><link href="https://sguys99.github.io//it02" rel="alternate" type="text/html" title="git cheat sheet2" /><published>2021-12-23T15:00:00+00:00</published><updated>2021-12-23T15:00:00+00:00</updated><id>https://sguys99.github.io//it02</id><content type="html" xml:base="https://sguys99.github.io//it02">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://sguys99.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://sguys99.github.io//" rel="alternate" type="text/html" /><updated>2021-12-27T04:10:19+00:00</updated><id>https://sguys99.github.io//feed.xml</id><title type="html">Happy Plant</title><subtitle>Data science, Machine learning, and Automatic control</subtitle><entry><title type="html">git cheat sheet3</title><link href="https://sguys99.github.io//it03" rel="alternate" type="text/html" title="git cheat sheet3" /><published>2021-12-25T15:00:00+00:00</published><updated>2021-12-25T15:00:00+00:00</updated><id>https://sguys99.github.io//it03</id><content type="html" xml:base="https://sguys99.github.io//it03">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
 &lt;ul class=&quot;table-of-contents-list&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet1 - 기본 명령어&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet2 - commit 조작&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it02&quot;&gt;cheat sheet2 - commit 조작&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it03&quot;&gt;cheat sheet3 - branch 조작&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;commit 조작과 관련된 명령어를 정리하였다.&lt;/p&gt;
+&lt;p&gt;git에 대한 자세한 내용은 &lt;a href=&quot;https://wikidocs.net/book/7060&quot;&gt;다음 책&lt;/a&gt;을 참고 자란다.&lt;/p&gt;
+
+&lt;p&gt;본 절에서는 브랜치 작업과 관련된 명령어를 정리하였다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-25-it03/it03.01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;1-setup&quot;&gt;1. Setup&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git branch&lt;/code&gt; : 브랜치 목록 표시&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git branch [브랜치명]&lt;/code&gt; : 해당 브랜치 명으로 브랜치 생성&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git checkout [브랜치명]&lt;/code&gt; : 해당 브랜치로 전환&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git checkout –b [브랜치명]&lt;/code&gt; : 브랜치 생성과 동시에 전환&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git branch -m [브랜치명] [새로운 브랜치명]&lt;/code&gt; : 브랜치명 변경&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git branch –d [브랜치명]&lt;/code&gt; : 해당 브랜치 삭제&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;2-merge-rewrite&quot;&gt;2. Merge, rewrite&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;2.1 merge&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git merge [브랜치명]&lt;/code&gt; : 현 브랜치에 해당 브랜치의 내용 병합&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-25-it03/it03.02.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git merge --ff [브랜치명]&lt;/code&gt; : fast-forward 관계에 있으면 commit을 생성하지 않고 현재 브랜치의 참조 값 만 변경(default)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-25-it03/it03.03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git merge --no-ff [브랜치명]&lt;/code&gt; : fast-forward 관계에 있어도 merged commit 생성&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-25-it03/it03.04.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git merge --squash [브랜치명]&lt;/code&gt; : fast-forward 관계에 있어도 merged commit 생성, merging 브랜치 정보 생략&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;2.2 rebase&lt;/strong&gt;&lt;br /&gt;
+&lt;img src=&quot;assets/images/2021-12-25-it03/it03.05.jpg&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git rebase [브랜치명]&lt;/code&gt; : 현재 브랜치가 해당 브랜치(브랜치명)에부터 분기하도록 재배치&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git rebase --continue&lt;/code&gt; : 충돌 수정 후 재배치 진행(commit 대신)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git rebase --abort&lt;/code&gt; : rebase 취소&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;2.3 cherry-pick&lt;/strong&gt;&lt;br /&gt;
+&lt;img src=&quot;assets/images/2021-12-25-it03/it03.06.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git cherry-pick [commit hash]&lt;/code&gt; : 해당 commit의 내용을 현재 브랜치에 추가. 뒤에 commit hash 를 연속 입력하면 복수 추가 가능&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git cherry-pick [commit hash start].. [commit hash end]&lt;/code&gt; : 해당 구간의 commit을 한번에 추가&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git cherry-pick –-abort&lt;/code&gt; :  충돌과 같은 상황이 발생했을 때 cherry-pick 취소&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git cherry-pick –-continue&lt;/code&gt; : 충돌 상황 해결 후 cherry-pick 진행&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git cherry-pick –m [parent number] [merge commit ID]&lt;/code&gt; : merge commit을 추가. merge commit의 경우 어떤 부분의 merge를 가져올지 알 수 없다. 그래서 parent number를 추가해야 한다.(1부터 시작하며 main line이 1)&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Kwang Myung Yu</name></author><category term="it-tips" /><summary type="html">이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작 cheat sheet3 - branch 조작</summary></entry><entry><title type="html">git cheat sheet2</title><link href="https://sguys99.github.io//it02" rel="alternate" type="text/html" title="git cheat sheet2" /><published>2021-12-23T15:00:00+00:00</published><updated>2021-12-23T15:00:00+00:00</updated><id>https://sguys99.github.io//it02</id><content type="html" xml:base="https://sguys99.github.io//it02">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet1 - 기본 명령어&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it02&quot;&gt;cheat sheet2 - commit 조작&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it03&quot;&gt;cheat sheet3 - branch 조작&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;git에 대한 자세한 내용은 &lt;a href=&quot;https://wikidocs.net/book/7060&quot;&gt;다음 책&lt;/a&gt;을 참고 자란다.&lt;/p&gt;
+
+&lt;p&gt;본 포스트에서는 commit 조작과 관련된 명령어를 정리하였다.&lt;/p&gt;
 
 &lt;h3 id=&quot;1-checkout&quot;&gt;1. Checkout&lt;/h3&gt;
 
@@ -40,13 +108,16 @@
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git reset –-soft [commit hash]&lt;/code&gt; : working directory, staging area 유지, commit reset&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git reset HEAD^&lt;/code&gt; : HEAD를 기준으로 직전의 commit으로 reset&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git reset HEAD~[정수]&lt;/code&gt; : HEAD를 기준으로 정수 값 단계 전 commit으로 reset&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Kwang Myung Yu</name></author><category term="it-tips" /><summary type="html">이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작</summary></entry><entry><title type="html">git cheat sheet1</title><link href="https://sguys99.github.io//it01" rel="alternate" type="text/html" title="git cheat sheet1" /><published>2021-12-22T15:00:00+00:00</published><updated>2021-12-22T15:00:00+00:00</updated><id>https://sguys99.github.io//it01</id><content type="html" xml:base="https://sguys99.github.io//it01">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;/ul&gt;</content><author><name>Kwang Myung Yu</name></author><category term="it-tips" /><summary type="html">이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작 cheat sheet3 - branch 조작</summary></entry><entry><title type="html">git cheat sheet1</title><link href="https://sguys99.github.io//it01" rel="alternate" type="text/html" title="git cheat sheet1" /><published>2021-12-22T15:00:00+00:00</published><updated>2021-12-22T15:00:00+00:00</updated><id>https://sguys99.github.io//it01</id><content type="html" xml:base="https://sguys99.github.io//it01">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
 &lt;ul class=&quot;table-of-contents-list&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet1 - 기본 명령어&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet2 - commit 조작&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it02&quot;&gt;cheat sheet2 - commit 조작&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it03&quot;&gt;cheat sheet3 - branch 조작&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;git 기본 명령어와 옵션 별 기능을 정리하였다.&lt;/p&gt;
+&lt;p&gt;git에 대한 자세한 내용은 &lt;a href=&quot;https://wikidocs.net/book/7060&quot;&gt;다음 책&lt;/a&gt;을 참고 자란다.&lt;/p&gt;
+
+&lt;p&gt;본 포스트에서는 git 기본 명령어와 옵션 별 기능을 정리하였다.&lt;/p&gt;
 
 &lt;h3 id=&quot;1-setup&quot;&gt;1. Setup&lt;/h3&gt;
 
@@ -104,7 +175,7 @@
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git diff&lt;/code&gt; : 최근 commit과 변경사항이 발생한(Unstaged) 파일들의 내용비교&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git diff --staged&lt;/code&gt; : 최근 commit과 Staging area의 파일들 간의 변경사항 출력&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git diff [commit hash1] [commit hash2]&lt;/code&gt; : 두 commit의 파일들 간의 변경사항 출력&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Kwang Myung Yu</name></author><category term="it-tips" /><summary type="html">이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작</summary></entry><entry><title type="html">custom dataset으로 YOLOv5 학습하기1</title><link href="https://sguys99.github.io//ds01" rel="alternate" type="text/html" title="custom dataset으로 YOLOv5 학습하기1" /><published>2021-12-21T13:30:00+00:00</published><updated>2021-12-21T13:30:00+00:00</updated><id>https://sguys99.github.io//ds01</id><content type="html" xml:base="https://sguys99.github.io//ds01">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;/ul&gt;</content><author><name>Kwang Myung Yu</name></author><category term="it-tips" /><summary type="html">이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작 cheat sheet3 - branch 조작</summary></entry><entry><title type="html">custom dataset으로 YOLOv5 학습하기1</title><link href="https://sguys99.github.io//ds01" rel="alternate" type="text/html" title="custom dataset으로 YOLOv5 학습하기1" /><published>2021-12-21T13:30:00+00:00</published><updated>2021-12-21T13:30:00+00:00</updated><id>https://sguys99.github.io//ds01</id><content type="html" xml:base="https://sguys99.github.io//ds01">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
 &lt;ul class=&quot;table-of-contents-list&quot;&gt;
     &lt;li&gt;&lt;a href=&quot;./ds01&quot;&gt;YOLO5 #1 - custom dataset으로 학습하기&lt;/a&gt;&lt;/li&gt;
     &lt;li&gt;&lt;a href=&quot;./ds02&quot;&gt;YOLO5 #2 - 학습 파라미터 설정하기&lt;/a&gt;&lt;/li&gt;
@@ -1269,54 +1340,4 @@ Results saved to runs/detect/exp
   &lt;li&gt;가성비 : &lt;strong&gt;★★★☆☆&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;서비스 : &lt;strong&gt;★★★☆☆&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;접근성 : &lt;strong&gt;★★★★☆&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Kwang Myung Yu</name></author><category term="diary" /><summary type="html">방이동 먹자골목 수제버거 전문점. 차고버거</summary></entry><entry><title type="html">(서울, 과천 맛집) 메밀장터</title><link href="https://sguys99.github.io//foody1" rel="alternate" type="text/html" title="(서울, 과천 맛집) 메밀장터" /><published>2021-09-01T17:10:00+00:00</published><updated>2021-09-01T17:10:00+00:00</updated><id>https://sguys99.github.io//foody1</id><content type="html" xml:base="https://sguys99.github.io//foody1">&lt;p&gt;지하철 4호선 선바위역에 위치한 막국수 맛집. 메밀장터&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;주 소 :&lt;/strong&gt;  &lt;a href=&quot;https://map.naver.com/v5/search/%EB%A9%94%EB%B0%80%EC%9E%A5%ED%84%B0/place/38247636?placePath=%3Fentry=pll%26from=nx%26fromNxList=true&amp;amp;c=14136710.9348997,4502366.5506309,15,0,0,0,dh&quot;&gt;경기 과천시 뒷골로 5-7 선바위&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;영업시간 :&lt;/strong&gt; 10:40 ~ 21:20(매일)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;전화번호 :&lt;/strong&gt; 02-504-0122&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;주요메뉴&lt;/strong&gt; : &lt;strong&gt;들기름 막국수&lt;/strong&gt;(9,000원), 명태회 막국수(9,000원)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p align=&quot;left&quot;&gt;
-&lt;iframe src=&quot;https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12669.415796794536!2d127.0005728!3d37.4523641!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x78304809b8eee4a1!2z66mU67CA7J6l7YSw!5e0!3m2!1sko!2skr!4v1639471457273!5m2!1sko!2skr&quot; width=&quot;400&quot; height=&quot;300&quot; style=&quot;border:0;&quot; allowfullscreen=&quot;&quot; loading=&quot;lazy&quot;&gt;&lt;/iframe&gt;
-&lt;/p&gt;
-
-&lt;p&gt;지하철역 인근에 있어서 도보로 이동가능하다.&lt;br /&gt;
-점심시간을 피해 오후 2시 이후에 방문하면 기다리지 않고 입장할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-08-30-foody1/diary01.01.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;아래 사진의 통로로 들어오면 가게 앞 주차장이 있다. 주차공간은 넓지 않은 편이다.&lt;br /&gt;
-사람들이 몰리는 시간대를 피해서 갔지만 주차할 공간이 없어서 인근에 주차해야 했다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-08-30-foody1/diary01.02.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;식당 안에는 앉아서 식사할 수 있는 방과 테이블이 있다. 테이블은 만석이라 방으로 이동했다.&lt;br /&gt;
-이 곳의 대표 메뉴는 들기름 막국수이다. 개인적으로 비빔국수를 좋아해서 들기름 막국수, 명태회 막국수 하나씩 주문했다.&lt;br /&gt;
-비주얼은 나름 괜찮다. 면 색깔로 보아 메밀이 많이 포함된 것 같아 보이진 않았다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-08-30-foody1/diary01.03.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;들기름 막국수. 계란 반쪽과 들깨 가루 고명, 들기름이 양념의 전부이다. 과연 이것으로 맛을 낼수 있을까?&lt;br /&gt;
-국수를 잘 비벼서 한젓갈 입에 넣어본다. 입안에 들기름의 고소함이 퍼진다. 지금까지 맛본 들기름 중에 단연 고소함이 으뜸이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-08-30-foody1/diary01.04.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;명태회 막국수도 괜찮다. 명태회가 충분이 들어있고 양념장도 간이 잘되어 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-08-30-foody1/diary01.05.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;하지만 역시 이집의 으뜸은 들기름 막국수. 호불호가 갈릴수도 있지만, 두명이서 온다면 들기름, 명태회 막국수 하나씩 시켜서 쉐어하는 것도 괜찮아 보인다. 들기름 국수 면을 90% 정도 건저 먹은 후, 함께 나오는 동치미 국물을 조금 부어서 먹어보자. 이 또한 색다른 맛이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-08-30-foody1/diary01.06.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;물 막국수, 비빔 막국수에 익숙한 나에게 들기름 막국수의 세계로 안내한 가게였다.&lt;/p&gt;
-
-&lt;h3 id=&quot;총-평&quot;&gt;총 평&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;음식맛 : &lt;strong&gt;★★★★☆&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;가성비 : &lt;strong&gt;★★★☆☆&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;서비스 : &lt;strong&gt;★★★☆☆&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;접근성 : &lt;strong&gt;★★★★☆&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Kwang Myung Yu</name></author><category term="diary" /><summary type="html">지하철 4호선 선바위역에 위치한 막국수 맛집. 메밀장터</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Kwang Myung Yu</name></author><category term="diary" /><summary type="html">방이동 먹자골목 수제버거 전문점. 차고버거</summary></entry></feed>

@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator>
   <link href="https://sguys99.github.io//tag/it-tips/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://sguys99.github.io//" rel="alternate" type="text/html" />
-  <updated>2021-12-27T03:04:13+00:00</updated>
+  <updated>2021-12-27T04:10:19+00:00</updated>
   <id>https://sguys99.github.io//tag/it-tips/feed.xml</id>
 
   
@@ -32,6 +32,105 @@
 
   
     <entry>
+      <title type="html">git cheat sheet3</title>
+      <link href="https://sguys99.github.io//it03" rel="alternate" type="text/html" title="git cheat sheet3" />
+      <published>2021-12-25T15:00:00+00:00</published>
+      <updated>2021-12-25T15:00:00+00:00</updated>
+      <id>https://sguys99.github.io//it03</id>
+      <content type="html" xml:base="https://sguys99.github.io//it03">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet1 - 기본 명령어&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it02&quot;&gt;cheat sheet2 - commit 조작&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it03&quot;&gt;cheat sheet3 - branch 조작&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;git에 대한 자세한 내용은 &lt;a href=&quot;https://wikidocs.net/book/7060&quot;&gt;다음 책&lt;/a&gt;을 참고 자란다.&lt;/p&gt;
+
+&lt;p&gt;본 절에서는 브랜치 작업과 관련된 명령어를 정리하였다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-25-it03/it03.01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;1-setup&quot;&gt;1. Setup&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git branch&lt;/code&gt; : 브랜치 목록 표시&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git branch [브랜치명]&lt;/code&gt; : 해당 브랜치 명으로 브랜치 생성&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git checkout [브랜치명]&lt;/code&gt; : 해당 브랜치로 전환&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git checkout –b [브랜치명]&lt;/code&gt; : 브랜치 생성과 동시에 전환&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git branch -m [브랜치명] [새로운 브랜치명]&lt;/code&gt; : 브랜치명 변경&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git branch –d [브랜치명]&lt;/code&gt; : 해당 브랜치 삭제&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;2-merge-rewrite&quot;&gt;2. Merge, rewrite&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;2.1 merge&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git merge [브랜치명]&lt;/code&gt; : 현 브랜치에 해당 브랜치의 내용 병합&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-25-it03/it03.02.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git merge --ff [브랜치명]&lt;/code&gt; : fast-forward 관계에 있으면 commit을 생성하지 않고 현재 브랜치의 참조 값 만 변경(default)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-25-it03/it03.03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git merge --no-ff [브랜치명]&lt;/code&gt; : fast-forward 관계에 있어도 merged commit 생성&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-25-it03/it03.04.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git merge --squash [브랜치명]&lt;/code&gt; : fast-forward 관계에 있어도 merged commit 생성, merging 브랜치 정보 생략&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;2.2 rebase&lt;/strong&gt;&lt;br /&gt;
+&lt;img src=&quot;assets/images/2021-12-25-it03/it03.05.jpg&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git rebase [브랜치명]&lt;/code&gt; : 현재 브랜치가 해당 브랜치(브랜치명)에부터 분기하도록 재배치&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git rebase --continue&lt;/code&gt; : 충돌 수정 후 재배치 진행(commit 대신)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git rebase --abort&lt;/code&gt; : rebase 취소&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;2.3 cherry-pick&lt;/strong&gt;&lt;br /&gt;
+&lt;img src=&quot;assets/images/2021-12-25-it03/it03.06.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git cherry-pick [commit hash]&lt;/code&gt; : 해당 commit의 내용을 현재 브랜치에 추가. 뒤에 commit hash 를 연속 입력하면 복수 추가 가능&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git cherry-pick [commit hash start].. [commit hash end]&lt;/code&gt; : 해당 구간의 commit을 한번에 추가&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git cherry-pick –-abort&lt;/code&gt; :  충돌과 같은 상황이 발생했을 때 cherry-pick 취소&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git cherry-pick –-continue&lt;/code&gt; : 충돌 상황 해결 후 cherry-pick 진행&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git cherry-pick –m [parent number] [merge commit ID]&lt;/code&gt; : merge commit을 추가. merge commit의 경우 어떤 부분의 merge를 가져올지 알 수 없다. 그래서 parent number를 추가해야 한다.(1부터 시작하며 main line이 1)&lt;/li&gt;
+&lt;/ul&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Kwang Myung Yu</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="it-tips" />
+      
+
+      
+        <summary type="html">이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작 cheat sheet3 - branch 조작</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
       <title type="html">git cheat sheet2</title>
       <link href="https://sguys99.github.io//it02" rel="alternate" type="text/html" title="git cheat sheet2" />
       <published>2021-12-23T15:00:00+00:00</published>
@@ -40,10 +139,13 @@
       <content type="html" xml:base="https://sguys99.github.io//it02">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
 &lt;ul class=&quot;table-of-contents-list&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet1 - 기본 명령어&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet2 - commit 조작&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it02&quot;&gt;cheat sheet2 - commit 조작&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it03&quot;&gt;cheat sheet3 - branch 조작&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;commit 조작과 관련된 명령어를 정리하였다.&lt;/p&gt;
+&lt;p&gt;git에 대한 자세한 내용은 &lt;a href=&quot;https://wikidocs.net/book/7060&quot;&gt;다음 책&lt;/a&gt;을 참고 자란다.&lt;/p&gt;
+
+&lt;p&gt;본 포스트에서는 commit 조작과 관련된 명령어를 정리하였다.&lt;/p&gt;
 
 &lt;h3 id=&quot;1-checkout&quot;&gt;1. Checkout&lt;/h3&gt;
 
@@ -100,7 +202,7 @@
       
 
       
-        <summary type="html">이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작</summary>
+        <summary type="html">이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작 cheat sheet3 - branch 조작</summary>
       
 
       
@@ -116,10 +218,13 @@
       <content type="html" xml:base="https://sguys99.github.io//it01">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
 &lt;ul class=&quot;table-of-contents-list&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet1 - 기본 명령어&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet2 - commit 조작&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it02&quot;&gt;cheat sheet2 - commit 조작&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it03&quot;&gt;cheat sheet3 - branch 조작&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;git 기본 명령어와 옵션 별 기능을 정리하였다.&lt;/p&gt;
+&lt;p&gt;git에 대한 자세한 내용은 &lt;a href=&quot;https://wikidocs.net/book/7060&quot;&gt;다음 책&lt;/a&gt;을 참고 자란다.&lt;/p&gt;
+
+&lt;p&gt;본 포스트에서는 git 기본 명령어와 옵션 별 기능을 정리하였다.&lt;/p&gt;
 
 &lt;h3 id=&quot;1-setup&quot;&gt;1. Setup&lt;/h3&gt;
 
@@ -198,7 +303,7 @@
       
 
       
-        <summary type="html">이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작</summary>
+        <summary type="html">이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작 cheat sheet3 - branch 조작</summary>
       
 
       

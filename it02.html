@@ -57,7 +57,7 @@
     <meta property="og:site_name" content="Happy Plant" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="git cheat sheet2" />
-    <meta property="og:description" content="이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작 commit 조작과 관련된 명령어를 정리하였다. 1. Checkout git checkout [commit hash] : 해당 commit으로 파일상태 변경 git checkout - : HEAD가 이전에 참조했던 commit으로 상태변경 git checkout master : HEAD가 master를 참조 git checkout" />
+    <meta property="og:description" content="이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작 cheat sheet3 - branch 조작 git에 대한 자세한 내용은 다음 책을 참고 자란다. 본 포스트에서는 commit 조작과 관련된 명령어를 정리하였다. 1. Checkout git checkout [commit hash] : 해당 commit으로 파일상태 변경 git checkout -" />
     <meta property="og:url" content="https://sguys99.github.io//it02" />
     <meta property="og:image" content="https://sguys99.github.io//assets/images/post-cover-git.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/dbrhkdaud" />
@@ -67,7 +67,7 @@
     <meta property="article:tag" content="It-tips" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="git cheat sheet2" />
-    <meta name="twitter:description" content="이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작 commit 조작과 관련된 명령어를 정리하였다. 1. Checkout git checkout [commit hash] : 해당 commit으로 파일상태 변경 git checkout - : HEAD가 이전에 참조했던 commit으로 상태변경 git checkout master : HEAD가 master를 참조 git checkout" />
+    <meta name="twitter:description" content="이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작 cheat sheet3 - branch 조작 git에 대한 자세한 내용은 다음 책을 참고 자란다. 본 포스트에서는 commit 조작과 관련된 명령어를 정리하였다. 1. Checkout git checkout [commit hash] : 해당 commit으로 파일상태 변경 git checkout -" />
     <meta name="twitter:url" content="https://sguys99.github.io//" />
     <meta name="twitter:image" content="https://sguys99.github.io//assets/images/post-cover-git.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -99,7 +99,7 @@
         "@type": "WebPage",
         "@id": "https://sguys99.github.io//it02"
     },
-    "description": "이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작 commit 조작과 관련된 명령어를 정리하였다. 1. Checkout git checkout [commit hash] : 해당 commit으로 파일상태 변경 git checkout - : HEAD가 이전에 참조했던 commit으로 상태변경 git checkout master : HEAD가 master를 참조 git checkout"
+    "description": "이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작 cheat sheet3 - branch 조작 git에 대한 자세한 내용은 다음 책을 참고 자란다. 본 포스트에서는 commit 조작과 관련된 명령어를 정리하였다. 1. Checkout git checkout [commit hash] : 해당 commit으로 파일상태 변경 git checkout -"
 }
     </script>
 
@@ -218,10 +218,13 @@ into the {body} of the default.hbs template -->
                     <p><span class="table-of-contents-list">이 포스트는 여러 절로 구성되어 있습니다. </span></p>
 <ul class="table-of-contents-list">
   <li><a href="./it01">cheat sheet1 - 기본 명령어</a></li>
-  <li><a href="./it01">cheat sheet2 - commit 조작</a></li>
+  <li><a href="./it02">cheat sheet2 - commit 조작</a></li>
+  <li><a href="./it03">cheat sheet3 - branch 조작</a></li>
 </ul>
 
-<p>commit 조작과 관련된 명령어를 정리하였다.</p>
+<p>git에 대한 자세한 내용은 <a href="https://wikidocs.net/book/7060">다음 책</a>을 참고 자란다.</p>
+
+<p>본 포스트에서는 commit 조작과 관련된 명령어를 정리하였다.</p>
 
 <h3 id="1-checkout">1. Checkout</h3>
 
@@ -358,6 +361,15 @@ into the {body} of the default.hbs template -->
                                 
                                   
                                     
+                                        
+                                        
+                                            <li><a href="/it03">git cheat sheet3</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
                                   
                                 
                                   
@@ -390,7 +402,7 @@ into the {body} of the default.hbs template -->
                         <footer class="read-next-card-footer">
                             <a href="/tag/it-tips/">
                                 
-                                    See all 1 posts  →
+                                    See all 2 posts  →
                                 
                             </a>
                         </footer>
@@ -399,6 +411,62 @@ into the {body} of the default.hbs template -->
             
 
             <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/it03">
+                <div class="post-card-image" style="background-image: url(/assets/images/post-cover-git.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/it03">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">It-tips</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">git cheat sheet3</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>이 포스트는 여러 절로 구성되어 있습니다. 
+
+  cheat sheet1 - 기본 명령어
+  cheat sheet2 - commit 조작
+  cheat sheet3 - branch 조작
+
+
+</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/love-your-data.jpg" alt="Kwang Myung Yu" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/km.yu99/">Kwang Myung Yu</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
             
 
             <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
@@ -430,6 +498,7 @@ into the {body} of the default.hbs template -->
 
   cheat sheet1 - 기본 명령어
   cheat sheet2 - commit 조작
+  cheat sheet3 - branch 조작
 
 
 </p>
