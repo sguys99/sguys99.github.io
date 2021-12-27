@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>네이버에서 일별 시세 가져오기</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+
+    <!--custom.css-->
+    <link rel="stylesheet" type="text/css" href="/assets/built/custom.css" />
+
+    <!-Font Awesome-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--웹폰트 추가-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" />
+
+    <!--syntax.css 추가-->
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+    
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="Data science, Machine learning, and Automatic control" />
+    <link rel="shortcut icon" href="https://sguys99.github.io//assets/images/logo.png" type="image/png" />
+    <link rel="canonical" href="https://sguys99.github.io//trading03" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="Happy Plant" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="네이버에서 일별 시세 가져오기" />
+    <meta property="og:description" content="네이버에서는 국내 주식과 관련된 다양한 정보를 제공한다. 본 포스트에서는 네이버 금융에서 일별 주식 시세를 가져오는 방법을 소개한다. 1. 홈페이지 둘러보기 네이버 금융에 접속한다. https://finance.naver.com/ 여기서는 삼성전자를 예로 설명한다. 종목명에 삼성전자를 입력하고 검색버튼을 클릭한다. 아래에 시세 버튼을 클릭하면 시간별시세와 일별시세를 확인할 수 있다. 우리의 관심항목은 일별시세이다. 삼성전자 시세 항목의 url도 살펴보자." />
+    <meta property="og:url" content="https://sguys99.github.io//trading03" />
+    <meta property="og:image" content="https://sguys99.github.io//assets/images/post-cover-naver.jpg" />
+    <meta property="article:publisher" content="https://www.facebook.com/dbrhkdaud" />
+    <meta property="article:author" content="https://www.facebook.com/dbrhkdaud" />
+    <meta property="article:published_time" content="2021-12-26T13:30:00+00:00" />
+    <meta property="article:modified_time" content="2021-12-26T13:30:00+00:00" />
+    <meta property="article:tag" content="Algorithmic-trading" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="네이버에서 일별 시세 가져오기" />
+    <meta name="twitter:description" content="네이버에서는 국내 주식과 관련된 다양한 정보를 제공한다. 본 포스트에서는 네이버 금융에서 일별 주식 시세를 가져오는 방법을 소개한다. 1. 홈페이지 둘러보기 네이버 금융에 접속한다. https://finance.naver.com/ 여기서는 삼성전자를 예로 설명한다. 종목명에 삼성전자를 입력하고 검색버튼을 클릭한다. 아래에 시세 버튼을 클릭하면 시간별시세와 일별시세를 확인할 수 있다. 우리의 관심항목은 일별시세이다. 삼성전자 시세 항목의 url도 살펴보자." />
+    <meta name="twitter:url" content="https://sguys99.github.io//" />
+    <meta name="twitter:image" content="https://sguys99.github.io//assets/images/post-cover-naver.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Happy Plant" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Algorithmic-trading" />
+    <meta name="twitter:site" content="@sguys99" />
+    <meta name="twitter:creator" content="@sguys99" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Happy Plant",
+        "logo": "https://sguys99.github.io//"
+    },
+    "url": "https://sguys99.github.io//trading03",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://sguys99.github.io//assets/images/post-cover-naver.jpg",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://sguys99.github.io//trading03"
+    },
+    "description": "네이버에서는 국내 주식과 관련된 다양한 정보를 제공한다. 본 포스트에서는 네이버 금융에서 일별 주식 시세를 가져오는 방법을 소개한다. 1. 홈페이지 둘러보기 네이버 금융에 접속한다. https://finance.naver.com/ 여기서는 삼성전자를 예로 설명한다. 종목명에 삼성전자를 입력하고 검색버튼을 클릭한다. 아래에 시세 버튼을 클릭하면 시간별시세와 일별시세를 확인할 수 있다. 우리의 관심항목은 일별시세이다. 삼성전자 시세 항목의 url도 살펴보자."
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="네이버에서 일별 시세 가져오기" href="/feed.xml" />
+
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="https://sguys99.github.io//">Happy Plant</a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">Home</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">About</a></li>
+    <li class="nav-data-science" role="menuitem"><a href="/tag/data-science/">Data Science</a></li>
+    <li class="nav-algorithmic-trading" role="menuitem"><a href="/tag/algorithmic-trading/">Trading</a></li>
+    <li class="nav-python" role="menuitem"><a href="/tag/it-tips/">It Tips</a></li>
+    <li class="nav-diary" role="menuitem"><a href="/tag/diary/">Diary</a></li>
+    <!-- 주석
+    <li class="nav-goto-turtles3040" role="menuitem"><a href="https://github.com/turtles3040">turtles3040</a></li>
+    -->
+    <li class="nav-archive" role="menuitem">
+        <a href="/archive.html">All Posts</a>
+    </li>
+    <li class="nav-archive" role="menuitem">
+        <a href="/author_archive.html">Posts by Tag</a>
+    </li>
+</ul>
+
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+                <a class="social-link social-link-fb" href="https://facebook.com/dbrhkdaud" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+</a>
+            
+            
+            <a class="social-link social-link-tw" href="https://www.github.com/sguys99" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+</svg></a>
+            
+            
+            <a class="social-link social-link-tw" href="https://www.linkedin.com/in/kmyu99" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  width="24" height="24" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M21,21H17V14.25C17,13.19 15.81,12.31 14.75,12.31C13.69,12.31 13,13.19 13,14.25V21H9V9H13V11C13.66,9.93 15.36,9.24 16.5,9.24C19,9.24 21,11.28 21,13.75V21M7,21H3V9H7V21M5,3A2,2 0 0,1 7,5A2,2 0 0,1 5,7A2,2 0 0,1 3,5A2,2 0 0,1 5,3Z" /></svg></a>
+            
+            
+                <a class="social-link social-link-tw" href="https://twitter.com/sguys99" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            
+        </div>
+        
+            <a class="subscribe-button" href="#subscribe">Search</a>
+        
+    </div>
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full  tag-algorithmic-trading post ">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="26 December 2021">26 December 2021</time>
+                    
+                        <span class="date-divider">/</span>
+                        
+                            
+                               <a href='/tag/algorithmic-trading/'>ALGORITHMIC-TRADING</a>
+                            
+                        
+                    
+                </section>
+                <h1 class="post-full-title">네이버에서 일별 시세 가져오기</h1>
+            </header>
+
+            <!-- 포스트 위에 그림나오는 것 생략하기 위해 주석처리
+            
+            <figure class="post-full-image" style="background-image: url(/assets/images/post-cover-naver.jpg)">
+            </figure>
+            
+            포스트 위에 그림나오는 것 생략하기 위해 주석처리 -->
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>네이버에서는 국내 주식과 관련된 다양한 정보를 제공한다. 본 포스트에서는 네이버 금융에서 일별 주식 시세를 가져오는 방법을 소개한다.</p>
+
+<h3 id="1-홈페이지-둘러보기">1. 홈페이지 둘러보기</h3>
+
+<p>네이버 금융에 접속한다.</p>
+<ul>
+  <li>https://finance.naver.com/</li>
+</ul>
+
+<p>여기서는 <code class="language-plaintext highlighter-rouge">삼성전자</code>를 예로 설명한다. 종목명에 <code class="language-plaintext highlighter-rouge">삼성전자</code>를 입력하고 검색버튼을 클릭한다.</p>
+
+<p><img src="assets/images/2021-12-26-trading3/tr03.01.jpg" /></p>
+
+<p>아래에 <code class="language-plaintext highlighter-rouge">시세</code> 버튼을 클릭하면 <code class="language-plaintext highlighter-rouge">시간별시세</code>와 <code class="language-plaintext highlighter-rouge">일별시세</code>를 확인할 수 있다.<br />
+우리의 관심항목은 <code class="language-plaintext highlighter-rouge">일별시세</code>이다.</p>
+
+<p><img src="assets/images/2021-12-26-trading3/tr03.02.jpg" /></p>
+
+<p>삼성전자 시세 항목의 url도 살펴보자.</p>
+<ul>
+  <li>https://finance.naver.com/item/sise.naver?code=005930</li>
+</ul>
+
+<p>get 방식으로 서버에 시세정보를 요청하는 형태이다. 파라미터로 종목코드를 사용한다.(삼성전자의 종목코드는 005930)</p>
+
+<p>크롬에서 <code class="language-plaintext highlighter-rouge">일별시세</code> 부분을 마우스 우클릭하고 <code class="language-plaintext highlighter-rouge">검사</code>를 클릭한다.<br />
+개발자 도구 창이 열리면 <code class="language-plaintext highlighter-rouge">Network</code> 탭을 선택하자.<br />
+일별 시세 아래에 <code class="language-plaintext highlighter-rouge">2</code>번 페이지를 클릭해본다. <code class="language-plaintext highlighter-rouge">sise_day.naver?code=005930&amp;page=2</code>라는 항목이 새로 생성되었다.</p>
+
+<p>이 항목의 헤더를 살펴보면 일별 시세를 가져오고자 하는 서버 url과 파라미터, 그리고 요청 방식을 확인할 수 있다.</p>
+
+<p><img src="assets/images/2021-12-26-trading3/tr03.03.jpg" /></p>
+
+<ul>
+  <li>서버 주소 : https://finance.naver.com/item/sise_day.naver</li>
+  <li>파라미터 : code, page</li>
+  <li>요청방식 : GET</li>
+</ul>
+
+<p>사실 get방식으로 url에 입력하면 일별 시세 항목을 조회할 수 있다.<br />
+예를 들어 삼성전자(005930) 시세의 첫번째 페이지를 조회하고 싶다면 다음과 같이 url을 작성하여 입력하면 된다.</p>
+
+<ul>
+  <li>https://finance.naver.com/item/sise_day.naver?code=005930&amp;page=1</li>
+</ul>
+
+<p><img src="assets/images/2021-12-26-trading3/tr03.04.jpg" /></p>
+
+<p>전체 페이지에 기록된 시세를 가져오려면 마지막 페이지를 번호를 알아야 한다.<br />
+마우스로 <code class="language-plaintext highlighter-rouge">맨뒤</code> 항목을 가리킨 후, 마우스 우클릭-<code class="language-plaintext highlighter-rouge">검사</code>를 선택하자.</p>
+
+<p><img src="assets/images/2021-12-26-trading3/tr03.05.jpg" /></p>
+
+<p>마지막 페이지의 url은 <code class="language-plaintext highlighter-rouge">pgRR</code>라는 클래스의 <code class="language-plaintext highlighter-rouge">td</code> 태그 내에 정의되어 있다.</p>
+<ul>
+  <li>https://finance.naver.com/item/sise_day.naver?code=005930&amp;page=641</li>
+</ul>
+
+<p>즉, 마지막 페이지 번호는 641이다.</p>
+
+<p>이로써 일별 시세를 가져오기 위한 확인과정은 모두 끝났다.</p>
+
+<h3 id="2-일별시세-추출하기">2. 일별시세 추출하기</h3>
+
+<p>여기서는 <code class="language-plaintext highlighter-rouge">requests</code>와 <code class="language-plaintext highlighter-rouge">BeautifulSoup</code>을 사용해서 추출하는 방법을 설명한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+</code></pre></div></div>
+
+<p><strong>2.1 마지막 페이지 번호 찾기</strong></p>
+
+<p>먼저 마지막 페이지를 찾는 방법을 설명한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">code</span> <span class="o">=</span> <span class="s">'005930'</span> <span class="c1"># 삼성전자 종목코드
+</span><span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"http://finance.naver.com/item/sise_day.nhn?code=</span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s">"</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'User-agent'</span><span class="p">:</span> <span class="s">'Mozilla/5.0'</span><span class="p">}</span> <span class="c1"># 웹브라우저 접속처럼 인식시키기 위해 정보 추가
+</span></code></pre></div></div>
+
+<p>서버 주소에 종목 코드를 추가하여 get 양식을 완성하고 요청한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">req</span><span class="p">.</span><span class="n">text</span>
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'\n&lt;html lang="ko"&gt;\n&lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html; 
+charset=euc-kr"&gt;\n&lt;title&gt;네이버 금융&lt;/title&gt;\n\n
+&lt;link rel="stylesheet" type="text/css" href="https://ssl.pstatic.net/imgstock/static.pc/20211216210327/css/newstock.css"&gt;\n
+&lt;link rel="stylesheet" type="text/css" href="https://ssl.pstatic.net/imgstock/static.pc/20211216210327/css/common.css"&gt;\n
+&lt;link 
+----(생 략)
+</code></pre></div></div>
+
+<p>BeautifulSoup으로 추출한 내용을 정리한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bs</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">text</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bs</span>
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;html lang="ko"&gt;
+    &lt;head&gt;
+    &lt;meta content="text/html; charset=utf-8" http-equiv="Content-Type"/&gt;
+    &lt;title&gt;네이버 금융&lt;/title&gt;
+    &lt;link href="https://ssl.pstatic.net/imgstock/static.pc/20211216210327/css/newstock.css" rel="stylesheet" type="text/css"/&gt;
+    
+    --- (생 략)
+</code></pre></div></div>
+
+<p>앞에서 마지막 페이지의 url은 <code class="language-plaintext highlighter-rouge">pgRR</code>라는 클래스의 <code class="language-plaintext highlighter-rouge">td</code>태그 내에 정의되어 있는 것을 확인했다.<br />
+이 정보를 바탕으로 마지막 페이지를 찾을 수 있다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pgrr</span> <span class="o">=</span> <span class="n">bs</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">'td'</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s">'pgRR'</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">pgrr</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;td class="pgRR"&gt;
+    &lt;a href="/item/sise_day.nhn?code=005930&amp;amp;page=641"&gt;맨뒤
+    				&lt;img alt="" border="0" height="5" src="https://ssl.pstatic.net/static/n/cmn/bu_pgarRR.gif" width="8"/&gt;
+    &lt;/a&gt;
+    &lt;/td&gt;
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pgrr</span><span class="p">.</span><span class="n">a</span><span class="p">[</span><span class="s">"href"</span><span class="p">].</span><span class="n">split</span><span class="p">(</span><span class="s">'='</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['/item/sise_day.nhn?code', '005930&amp;page', '641']
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">last_page</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">pgrr</span><span class="p">.</span><span class="n">a</span><span class="p">[</span><span class="s">"href"</span><span class="p">].</span><span class="n">split</span><span class="p">(</span><span class="s">'='</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">last_page</span>
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>641
+</code></pre></div></div>
+
+<p><strong>2.2 일별시세 추출하기</strong></p>
+
+<p>일별 시세는 <code class="language-plaintext highlighter-rouge">http://finance.naver.com/item/sise_day.nhn</code>에 code와 page 정보를 추가하여 get으로 요청하면 된다.<br />
+우선 첫번째 페이지만 추출해보자.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">page_url</span> <span class="o">=</span> <span class="s">'{}&amp;page={}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">page_url</span>
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'http://finance.naver.com/item/sise_day.nhn?code=005930&amp;page=1'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_html</span><span class="p">(</span><span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">page_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'User-agent'</span><span class="p">:</span> <span class="s">'Mozilla/5.0'</span><span class="p">}).</span><span class="n">text</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span>
+</code></pre></div></div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>날짜</th>
+      <th>종가</th>
+      <th>전일비</th>
+      <th>시가</th>
+      <th>고가</th>
+      <th>저가</th>
+      <th>거래량</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2021.12.27</td>
+      <td>80200.0</td>
+      <td>300.0</td>
+      <td>80600.0</td>
+      <td>80600.0</td>
+      <td>79800.0</td>
+      <td>10751648.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2021.12.24</td>
+      <td>80500.0</td>
+      <td>600.0</td>
+      <td>80200.0</td>
+      <td>80800.0</td>
+      <td>80200.0</td>
+      <td>12086380.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021.12.23</td>
+      <td>79900.0</td>
+      <td>500.0</td>
+      <td>79800.0</td>
+      <td>80000.0</td>
+      <td>79300.0</td>
+      <td>13577498.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2021.12.22</td>
+      <td>79400.0</td>
+      <td>1300.0</td>
+      <td>78900.0</td>
+      <td>79400.0</td>
+      <td>78800.0</td>
+      <td>17105892.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2021.12.21</td>
+      <td>78100.0</td>
+      <td>1000.0</td>
+      <td>77900.0</td>
+      <td>78300.0</td>
+      <td>77500.0</td>
+      <td>14245298.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2021.12.20</td>
+      <td>77100.0</td>
+      <td>900.0</td>
+      <td>77600.0</td>
+      <td>77800.0</td>
+      <td>76800.0</td>
+      <td>11264375.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2021.12.17</td>
+      <td>78000.0</td>
+      <td>200.0</td>
+      <td>76800.0</td>
+      <td>78000.0</td>
+      <td>76800.0</td>
+      <td>13108479.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2021.12.16</td>
+      <td>77800.0</td>
+      <td>200.0</td>
+      <td>78500.0</td>
+      <td>78500.0</td>
+      <td>77400.0</td>
+      <td>11996128.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2021.12.15</td>
+      <td>77600.0</td>
+      <td>600.0</td>
+      <td>76400.0</td>
+      <td>77600.0</td>
+      <td>76300.0</td>
+      <td>9584939.0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2021.12.14</td>
+      <td>77000.0</td>
+      <td>200.0</td>
+      <td>76500.0</td>
+      <td>77200.0</td>
+      <td>76200.0</td>
+      <td>10976660.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>주말이나 휴일 같이 장이 열리지 않은 날은 null 값이 들어가있다.</p>
+
+<p>이제 10개 페이지를 추출해보자. 전체 페이지 수와 10을 비교해서 작은 값을 추출할 페이지 수(pages)로 지정한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">page_no</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">pages</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">last_page</span><span class="p">,</span> <span class="n">page_no</span><span class="p">)</span> <span class="c1"># 마지막 페이지와 가져올 페이지 수 중에 작은 값 선택
+</span></code></pre></div></div>
+
+<p>루프를 돌면서 각 페이지의 일별 시세를 추출하여 병합한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">pages</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">page_url</span> <span class="o">=</span> <span class="s">'{}&amp;page={}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="p">.</span><span class="n">read_html</span><span class="p">(</span><span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">page_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'User-agent'</span><span class="p">:</span> <span class="s">'Mozilla/5.0'</span><span class="p">}).</span><span class="n">text</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>추출한 시세의 컬럼명을 수정하고, 데이터 타입 변경, 컬럼 순서를 조정한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s">'날짜'</span><span class="p">:</span><span class="s">'date'</span><span class="p">,</span><span class="s">'종가'</span><span class="p">:</span><span class="s">'close'</span><span class="p">,</span><span class="s">'전일비'</span><span class="p">:</span><span class="s">'diff'</span>
+                <span class="p">,</span><span class="s">'시가'</span><span class="p">:</span><span class="s">'open'</span><span class="p">,</span><span class="s">'고가'</span><span class="p">:</span><span class="s">'high'</span><span class="p">,</span><span class="s">'저가'</span><span class="p">:</span><span class="s">'low'</span><span class="p">,</span><span class="s">'거래량'</span><span class="p">:</span><span class="s">'volume'</span><span class="p">})</span> <span class="c1">#영문으로 컬럼명 변경
+</span><span class="n">df</span><span class="p">[</span><span class="s">'date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'date'</span><span class="p">])</span> 
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">dropna</span><span class="p">()</span> <span class="c1"># 결측치 제거
+</span><span class="n">df</span><span class="p">[[</span><span class="s">'close'</span><span class="p">,</span> <span class="s">'diff'</span><span class="p">,</span> <span class="s">'open'</span><span class="p">,</span> <span class="s">'high'</span><span class="p">,</span> <span class="s">'low'</span><span class="p">,</span> <span class="s">'volume'</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s">'close'</span><span class="p">,</span><span class="s">'diff'</span><span class="p">,</span> <span class="s">'open'</span><span class="p">,</span> <span class="s">'high'</span><span class="p">,</span> <span class="s">'low'</span><span class="p">,</span> <span class="s">'volume'</span><span class="p">]].</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="c1"># BIGINT형으로 지정한 컬럼을 int형으로 변경
+</span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s">'date'</span><span class="p">,</span> <span class="s">'open'</span><span class="p">,</span> <span class="s">'high'</span><span class="p">,</span> <span class="s">'low'</span><span class="p">,</span> <span class="s">'close'</span><span class="p">,</span> <span class="s">'diff'</span><span class="p">,</span> <span class="s">'volume'</span><span class="p">]]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s">'date'</span><span class="p">)</span> <span class="c1"># 날짜순으로 정렬
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date</th>
+      <th>open</th>
+      <th>high</th>
+      <th>low</th>
+      <th>close</th>
+      <th>diff</th>
+      <th>volume</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>13</th>
+      <td>2021-08-02</td>
+      <td>79200</td>
+      <td>79500</td>
+      <td>78700</td>
+      <td>79300</td>
+      <td>800</td>
+      <td>11739124</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2021-08-03</td>
+      <td>79400</td>
+      <td>81400</td>
+      <td>79300</td>
+      <td>81400</td>
+      <td>2100</td>
+      <td>24339360</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2021-08-04</td>
+      <td>82200</td>
+      <td>83100</td>
+      <td>81800</td>
+      <td>82900</td>
+      <td>1500</td>
+      <td>25642368</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2021-08-05</td>
+      <td>83300</td>
+      <td>83300</td>
+      <td>82000</td>
+      <td>82100</td>
+      <td>800</td>
+      <td>18485469</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2021-08-06</td>
+      <td>81900</td>
+      <td>82500</td>
+      <td>81300</td>
+      <td>81500</td>
+      <td>600</td>
+      <td>13342623</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="3-함수로-정리하기">3. 함수로 정리하기</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_krx_code</span><span class="p">(</span><span class="n">market</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">market_type</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="k">if</span> <span class="n">market</span> <span class="o">==</span> <span class="s">'kospi'</span><span class="p">:</span>
+        <span class="n">market_type</span> <span class="o">=</span> <span class="s">'&amp;marketType=stockMkt'</span>
+    <span class="k">elif</span> <span class="n">market</span> <span class="o">==</span> <span class="s">'kosdaq'</span><span class="p">:</span>
+        <span class="n">market_type</span> <span class="o">=</span> <span class="s">'&amp;marketType=kosdaqMkt'</span>
+    <span class="k">elif</span> <span class="n">market</span> <span class="o">==</span> <span class="s">'konex'</span><span class="p">:</span>
+        <span class="n">market_type</span> <span class="o">=</span> <span class="s">'&amp;marketType=konexMkt'</span>
+        
+    <span class="n">url</span> <span class="o">=</span> <span class="s">'http://kind.krx.co.kr/corpgeneral/corpList.do?method=download&amp;searchType=13{0}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">market_type</span><span class="p">)</span>
+    <span class="n">stock_code</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_html</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">stock_code</span><span class="p">[</span><span class="s">'종목코드'</span><span class="p">]</span> <span class="o">=</span> <span class="n">stock_code</span><span class="p">[</span><span class="s">'종목코드'</span><span class="p">].</span><span class="nb">map</span><span class="p">(</span><span class="s">'{:06d}'</span><span class="p">.</span><span class="nb">format</span><span class="p">)</span>
+    <span class="n">stock_code</span> <span class="o">=</span> <span class="n">stock_code</span><span class="p">[[</span><span class="s">'회사명'</span><span class="p">,</span> <span class="s">'종목코드'</span><span class="p">,</span> <span class="s">'업종'</span><span class="p">,</span> <span class="s">'상장일'</span><span class="p">]]</span>
+    <span class="n">stock_code</span> <span class="o">=</span> <span class="n">stock_code</span><span class="p">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s">'회사명'</span><span class="p">:</span> <span class="s">'name'</span><span class="p">,</span> <span class="s">'종목코드'</span><span class="p">:</span> <span class="s">'code'</span><span class="p">,</span> <span class="s">'업종'</span><span class="p">:</span> <span class="s">'sectors'</span><span class="p">,</span>
+                                              <span class="s">'상장일'</span><span class="p">:</span> <span class="s">'listing_date'</span><span class="p">})</span>
+    <span class="n">stock_code</span><span class="p">[</span><span class="s">'listing_date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">stock_code</span><span class="p">[</span><span class="s">'listing_date'</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="n">stock_code</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_stock_price</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">num_of_pages</span><span class="p">,</span> <span class="n">sort_date</span> <span class="o">=</span> <span class="bp">True</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"http://finance.naver.com/item/sise_day.nhn?code=</span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s">"</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'User-agent'</span><span class="p">:</span> <span class="s">'Mozilla/5.0'</span><span class="p">}</span> 
+    <span class="n">bs</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">).</span><span class="n">text</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
+    <span class="n">pgrr</span> <span class="o">=</span> <span class="n">bs</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">"td"</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s">"pgRR"</span><span class="p">)</span>
+    <span class="n">last_page</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">pgrr</span><span class="p">.</span><span class="n">a</span><span class="p">[</span><span class="s">"href"</span><span class="p">].</span><span class="n">split</span><span class="p">(</span><span class="s">'='</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    
+    <span class="n">pages</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">last_page</span><span class="p">,</span> <span class="n">num_of_pages</span><span class="p">)</span> <span class="c1"># 마지막 페이지와 가져올 페이지 수 중에 작은 값 선택
+</span>    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">pages</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">page_url</span> <span class="o">=</span> <span class="s">'{}&amp;page={}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="p">.</span><span class="n">read_html</span><span class="p">(</span><span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">page_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">'User-agent'</span><span class="p">:</span> <span class="s">'Mozilla/5.0'</span><span class="p">}).</span><span class="n">text</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s">'날짜'</span><span class="p">:</span><span class="s">'date'</span><span class="p">,</span><span class="s">'종가'</span><span class="p">:</span><span class="s">'close'</span><span class="p">,</span><span class="s">'전일비'</span><span class="p">:</span><span class="s">'diff'</span>
+                <span class="p">,</span><span class="s">'시가'</span><span class="p">:</span><span class="s">'open'</span><span class="p">,</span><span class="s">'고가'</span><span class="p">:</span><span class="s">'high'</span><span class="p">,</span><span class="s">'저가'</span><span class="p">:</span><span class="s">'low'</span><span class="p">,</span><span class="s">'거래량'</span><span class="p">:</span><span class="s">'volume'</span><span class="p">})</span> <span class="c1">#영문으로 컬럼명 변경
+</span>    <span class="n">df</span><span class="p">[</span><span class="s">'date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'date'</span><span class="p">])</span> 
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[[</span><span class="s">'close'</span><span class="p">,</span> <span class="s">'diff'</span><span class="p">,</span> <span class="s">'open'</span><span class="p">,</span> <span class="s">'high'</span><span class="p">,</span> <span class="s">'low'</span><span class="p">,</span> <span class="s">'volume'</span><span class="p">]]</span> <span class="o">=</span> \
+                            <span class="n">df</span><span class="p">[[</span><span class="s">'close'</span><span class="p">,</span><span class="s">'diff'</span><span class="p">,</span> <span class="s">'open'</span><span class="p">,</span> <span class="s">'high'</span><span class="p">,</span> <span class="s">'low'</span><span class="p">,</span> <span class="s">'volume'</span><span class="p">]].</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="c1"># int형으로 변경
+</span>    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s">'date'</span><span class="p">,</span> <span class="s">'open'</span><span class="p">,</span> <span class="s">'high'</span><span class="p">,</span> <span class="s">'low'</span><span class="p">,</span> <span class="s">'close'</span><span class="p">,</span> <span class="s">'diff'</span><span class="p">,</span> <span class="s">'volume'</span><span class="p">]]</span> <span class="c1"># 컬럼 순서 정렬
+</span>    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s">'date'</span><span class="p">)</span> <span class="c1"># 날짜순으로 정렬
+</span>    
+    <span class="k">if</span> <span class="n">sort_date</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">df</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">item_name</span> <span class="o">=</span> <span class="s">'삼성전자'</span>
+<span class="n">stock</span> <span class="o">=</span> <span class="n">get_krx_code</span><span class="p">().</span><span class="n">query</span><span class="p">(</span><span class="s">"name=='{}'"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">item_name</span><span class="p">))[</span><span class="s">'code'</span><span class="p">].</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> 
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">get_stock_price</span><span class="p">(</span><span class="n">stock</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date</th>
+      <th>open</th>
+      <th>high</th>
+      <th>low</th>
+      <th>close</th>
+      <th>diff</th>
+      <th>volume</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2021-08-02</td>
+      <td>79200</td>
+      <td>79500</td>
+      <td>78700</td>
+      <td>79300</td>
+      <td>800</td>
+      <td>11739124</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2021-08-03</td>
+      <td>79400</td>
+      <td>81400</td>
+      <td>79300</td>
+      <td>81400</td>
+      <td>2100</td>
+      <td>24339360</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2021-08-04</td>
+      <td>82200</td>
+      <td>83100</td>
+      <td>81800</td>
+      <td>82900</td>
+      <td>1500</td>
+      <td>25642368</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021-08-05</td>
+      <td>83300</td>
+      <td>83300</td>
+      <td>82000</td>
+      <td>82100</td>
+      <td>800</td>
+      <td>18485469</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2021-08-06</td>
+      <td>81900</td>
+      <td>82500</td>
+      <td>81300</td>
+      <td>81500</td>
+      <td>600</td>
+      <td>13342623</td>
+    </tr>
+  </tbody>
+</table>
+
+                </div>
+            </section>
+
+
+            <!-- Email subscribe form at the bottom of the page -->
+            <!-- 포스트 아래에 섭스크라이브 나오는 것 생략위해 주석처리
+            
+                <section class="subscribe-form">
+                    <h3 class="subscribe-form-title">Subscribe to Happy Plant</h3>
+                    <p>Get the latest posts delivered right to your inbox</p>
+                    <span id="searchform" method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  />
+    <input class="location" type="hidden" name="location"  />
+    <input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" onkeyup="myFunc()"
+               id="searchtext" type="text" name="searchtext"
+               placeholder="Search..." />
+    </div>
+    <script type="text/javascript">
+        function myFunc() {
+            if(event.keyCode == 13) {
+                var url = encodeURIComponent($("#searchtext").val());
+                location.href = "/search.html?query=" + url;
+            }
+        }
+    </script>
+</span>
+
+                </section>
+            
+            포스트 아래에 섭스크라이브 나오는 것 생략위해 주석처리리-->
+
+           <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                        <section class="author-card">
+                            
+                                <img class="author-profile-image" src="/assets/images/love-your-data.jpg" alt="km.yu99" />
+                            
+                            <section class="author-card-content">
+                                <h4 class="author-card-name"><a href="/author/km.yu99">Kwang Myung Yu</a></h4>
+                                
+                                    <p><a href="https://github.com/sguys99">github</a></p>
+                                
+                            </section>
+                        </section>
+                        <div class="post-full-footer-right">
+                            <a class="author-card-button" href="/author/km.yu99">Read More</a>
+                        </div>
+                    
+                
+                <!-- /author  -->
+            </footer>
+
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+
+            
+
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/main-cover.jpg)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; Happy Plant &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/algorithmic-trading/">Algorithmic-trading</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/trading2">KRX에서 종목코드 가져오기2</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/trading1">KRX에서 종목코드 가져오기1</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/algorithmic-trading/">
+                                
+                                    See all 2 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/it03">
+                <div class="post-card-image" style="background-image: url(/assets/images/post-cover-git.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/it03">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">It-tips</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">git cheat sheet3</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>이 포스트는 여러 절로 구성되어 있습니다. 
+
+  cheat sheet1 - 기본 명령어
+  cheat sheet2 - commit 조작
+  cheat sheet3 - branch 조작
+
+
+</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/love-your-data.jpg" alt="Kwang Myung Yu" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/km.yu99/">Kwang Myung Yu</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="https://sguys99.github.io//">
+            
+            <span>Happy Plant</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">네이버에서 일별 시세 가져오기</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=%EB%84%A4%EC%9D%B4%EB%B2%84%EC%97%90%EC%84%9C+%EC%9D%BC%EB%B3%84+%EC%8B%9C%EC%84%B8+%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0&amp;url=https://sguys99.github.io/trading03"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://sguys99.github.io/trading03"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+<!-- /post -->
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://sguys99.github.io//">Happy Plant</a> &copy; 2021</section>
+                <section class="poweredby">Published with <a href="https://jekyllrb.com/">Jekyll</a> &
+                    <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
+                    <a href="https://github.com/jekyllt/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
+                <nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    <a href="https://facebook.com/dbrhkdaud" target="_blank" rel="noopener">Facebook</a>
+                    <!--
+                    <a href="https://twitter.com/sguys99" target="_blank" rel="noopener">Twitter</a>
+                    -->
+                    <a href="https://www.linkedin.com/in/kmyu99" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="https://github.com/sguys99" target="_blank" rel="noopener">Github</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- The big email subscribe modal content -->
+    
+    <div id="subscribe" class="subscribe-overlay">
+        <a class="subscribe-overlay-close" href="#"></a>
+        <div class="subscribe-overlay-content">
+            
+            <h1 class="subscribe-overlay-title">Search Happy Plant</h1>
+            <p class="subscribe-overlay-description">
+                lunr.js를 이용한 posts 검색 </p>
+            <span id="searchform" method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  />
+    <input class="location" type="hidden" name="location"  />
+    <input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" onkeyup="myFunc()"
+               id="searchtext" type="text" name="searchtext"
+               placeholder="Search..." />
+    </div>
+    <script type="text/javascript">
+        function myFunc() {
+            if(event.keyCode == 13) {
+                var url = encodeURIComponent($("#searchtext").val());
+                location.href = "/search.html?query=" + url;
+            }
+        }
+    </script>
+</span>
+
+        </div>
+    </div>
+    
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-69281367-1', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>
