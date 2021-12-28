@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://sguys99.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://sguys99.github.io//" rel="alternate" type="text/html" /><updated>2021-12-27T09:41:05+00:00</updated><id>https://sguys99.github.io//feed.xml</id><title type="html">Happy Plant</title><subtitle>Data science, Machine learning, and Automatic control</subtitle><entry><title type="html">네이버에서 일별 시세 가져오기</title><link href="https://sguys99.github.io//trading03" rel="alternate" type="text/html" title="네이버에서 일별 시세 가져오기" /><published>2021-12-26T13:30:00+00:00</published><updated>2021-12-26T13:30:00+00:00</updated><id>https://sguys99.github.io//trading03</id><content type="html" xml:base="https://sguys99.github.io//trading03">&lt;p&gt;네이버에서는 국내 주식과 관련된 다양한 정보를 제공한다. 본 포스트에서는 네이버 금융에서 일별 주식 시세를 가져오는 방법을 소개한다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://sguys99.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://sguys99.github.io//" rel="alternate" type="text/html" /><updated>2021-12-28T09:01:08+00:00</updated><id>https://sguys99.github.io//feed.xml</id><title type="html">Happy Plant</title><subtitle>Data science, Machine learning, and Automatic control</subtitle><entry><title type="html">네이버에서 일별 시세 가져오기</title><link href="https://sguys99.github.io//trading03" rel="alternate" type="text/html" title="네이버에서 일별 시세 가져오기" /><published>2021-12-26T13:30:00+00:00</published><updated>2021-12-26T13:30:00+00:00</updated><id>https://sguys99.github.io//trading03</id><content type="html" xml:base="https://sguys99.github.io//trading03">&lt;p&gt;네이버에서는 국내 주식과 관련된 다양한 정보를 제공한다. 본 포스트에서는 네이버 금융에서 일별 주식 시세를 가져오는 방법을 소개한다.&lt;/p&gt;
 
 &lt;h3 id=&quot;1-홈페이지-둘러보기&quot;&gt;1. 홈페이지 둘러보기&lt;/h3&gt;
 
@@ -1716,7 +1716,51 @@ Results saved to runs/detect/exp
     &lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'listing_date'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'listing_date'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
     
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Kwang Myung Yu</name></author><category term="algorithmic-trading" /><summary type="html">1. 홈페이지 둘러보기</summary></entry><entry><title type="html">(경기 하남 맛집) 단밥</title><link href="https://sguys99.github.io//foody4" rel="alternate" type="text/html" title="(경기 하남 맛집) 단밥" /><published>2021-11-01T13:10:00+00:00</published><updated>2021-11-01T13:10:00+00:00</updated><id>https://sguys99.github.io//foody4</id><content type="html" xml:base="https://sguys99.github.io//foody4">&lt;p&gt;하남 팔당 가정식 백반 전문점 &lt;strong&gt;단밥&lt;/strong&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Kwang Myung Yu</name></author><category term="algorithmic-trading" /><summary type="html">1. 홈페이지 둘러보기</summary></entry><entry><title type="html">(세종 부강 맛집) 진성민속촌</title><link href="https://sguys99.github.io//foody5" rel="alternate" type="text/html" title="(세종 부강 맛집) 진성민속촌" /><published>2021-11-05T13:10:00+00:00</published><updated>2021-11-05T13:10:00+00:00</updated><id>https://sguys99.github.io//foody5</id><content type="html" xml:base="https://sguys99.github.io//foody5">&lt;p&gt;세종시 부강면 감자탕 맛집 진성민속촌&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;주 소 :&lt;/strong&gt;  &lt;a href=&quot;https://map.naver.com/v5/entry/place/17701080?c=14175622.9968650,4374494.9512310,14,0,0,0,dh&quot;&gt;세종 부강면 청연로 125&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;영업시간 :&lt;/strong&gt; 05:00 ~ 14:00(월요일 휴무)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;전화번호 :&lt;/strong&gt; 044-277-6262&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;대표메뉴 :&lt;/strong&gt; &lt;strong&gt;뼈해장국&lt;/strong&gt;(8,000원), 감자탕 소(20,000원), 뼈추가(10,000원)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p align=&quot;left&quot;&gt;
+&lt;iframe src=&quot;https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12823.591999905431!2d127.3615663!3d36.5324551!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x9965ddb211ef9bd7!2z7KeE7ISx66-87IaN7LSM!5e0!3m2!1sko!2skr!4v1640680389441!5m2!1sko!2skr&quot; width=&quot;400&quot; height=&quot;300&quot; style=&quot;border:0;&quot; allowfullscreen=&quot;&quot; loading=&quot;lazy&quot;&gt;&lt;/iframe&gt;
+&lt;/p&gt;
+
+&lt;p&gt;뼈해장국이 생각날 때 가끔 찾는 진성민속촌. 세종특별시에 속하긴 하지만 신도시에서 떨어진 부강면에 있다. 세종청사에서 자가용으로 20분 정도 소요된다. 영업시간은 오후 2시까지. 그렇다고 순진하게 오후 13시에 도착해서 식사를 하려고 한다면 허탕칠 것이다. 사장님이 하루에 정해진 양만 판매를 하고 정해진 수량이 다 팔리면 일찍 문을 닫는다. 알게모르게 찾는 사람이 많기 때문에 미리 떠날 채비를 해야한다. 본인도 3번이나 허탕을 치고 주말 8시에 가서 운좋게 식사하고 왔다.&lt;/p&gt;
+
+&lt;p&gt;응암농공단지에서 부강역으로 가는 도로 우측에 다 허물어져가는 초가집이 하나 있을 것이다. 그 곳이 진성민속촌이다. 입구에 커다란 장독대들이 놓여져있고, 매스컴에 노출된 사장님 사진이 걸려져 있다. 입구에 들어서면 사진에서 봤던 사장님이 반갑게 맞이 하신다. 서빙을 하는 이모님들도 친절하다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-05-foody5/diary05.05.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;단촐한 메뉴판. 직접 담근 막걸리는 포장할 경우 5,000원을 받고, 방문해서 먹으면 공짜다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-05-foody5/diary05.01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;밑반찬이 먼저 나온다. 뼈해장국 먹을 때 밑반찬은 안먹는지라 신경쓰지 못했는데 깍두기가 별미라고 한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-05-foody5/diary05.02.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;뼈가 가득들어간 해장국이 나온다. 새벽부터 삶아져서 고깃살이 야들야들하다. 잡내도 안난다. 고기와 국물 맛, 그리고 맵기의 밸런스가 훌륭하다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-05-foody5/diary05.03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;정신없이 먹다보니 사진을 별로 찍지 못했다. 해장국 한그릇을 먹어보기 위해 3번이나 허탕을 친 보람이 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-05-foody5/diary05.04.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;뼈다귀 해장국, 감자탕의 진수를 경험해보고 싶다면 이곳을 추천한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;총-평&quot;&gt;총 평&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;음식맛 : &lt;strong&gt;★★★★☆&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;가성비 : &lt;strong&gt;★★★★★&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;서비스 : &lt;strong&gt;★★★★☆&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;접근성 : &lt;strong&gt;★☆☆☆☆&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Kwang Myung Yu</name></author><category term="diary" /><summary type="html">세종시 부강면 감자탕 맛집 진성민속촌</summary></entry><entry><title type="html">(경기 하남 맛집) 단밥</title><link href="https://sguys99.github.io//foody4" rel="alternate" type="text/html" title="(경기 하남 맛집) 단밥" /><published>2021-11-01T13:10:00+00:00</published><updated>2021-11-01T13:10:00+00:00</updated><id>https://sguys99.github.io//foody4</id><content type="html" xml:base="https://sguys99.github.io//foody4">&lt;p&gt;하남 팔당 가정식 백반 전문점 &lt;strong&gt;단밥&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;주 소 :&lt;/strong&gt;  &lt;a href=&quot;https://map.naver.com/v5/search/%EB%8B%A8%EB%B0%A5/place/1994963986?placePath=%3Fentry%253Dpll&amp;amp;c=14162931.9737893,4514889.2799930,15,0,0,0,dh&quot;&gt;경기 하남시 검단산로 349-25&lt;/a&gt;&lt;/li&gt;
@@ -1788,48 +1832,4 @@ Results saved to runs/detect/exp
 
 &lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.11.jpg&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.12.jpg&quot; /&gt;&lt;/p&gt;</content><author><name>Kwang Myung Yu</name></author><category term="diary" /><summary type="html">하남 팔당 가정식 백반 전문점 단밥</summary></entry><entry><title type="html">(서울 송파 맛집) 평이담백뼈칼국수</title><link href="https://sguys99.github.io//foody3" rel="alternate" type="text/html" title="(서울 송파 맛집) 평이담백뼈칼국수" /><published>2021-10-30T13:10:00+00:00</published><updated>2021-10-30T13:10:00+00:00</updated><id>https://sguys99.github.io//foody3</id><content type="html" xml:base="https://sguys99.github.io//foody3">&lt;p&gt;평이담백뼈칼국수 방이점&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;주 소 :&lt;/strong&gt;  &lt;a href=&quot;https://map.naver.com/v5/entry/place/1263841676?c=14151538.7133373,4510335.4930609,13,0,0,0,dh&amp;amp;placePath=%2Fhome%3Fentry=plt&quot;&gt;서울 송파구 위례성대로18길 31-12&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;영업시간 :&lt;/strong&gt; 11:30 ~ 21:00(브레이크타임 15~17)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;전화번호 :&lt;/strong&gt; 02-417-7488&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;대표메뉴 :&lt;/strong&gt; &lt;strong&gt;뼈칼국수&lt;/strong&gt;(10,000원), 비빔칼국수(9,000원), 새우만두(6,000원)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p align=&quot;left&quot;&gt;
-&lt;iframe src=&quot;https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12659.774713727284!2d127.1253821!3d37.5092465!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xffedc2153daedd62!2z7Y-J7J2064u067Cx67yI7Lm86rWt7IiY67Cp7J207KCQ!5e0!3m2!1sko!2skr!4v1640505077086!5m2!1sko!2skr&quot; width=&quot;400&quot; height=&quot;300&quot; style=&quot;border:0;&quot; allowfullscreen=&quot;&quot; loading=&quot;lazy&quot;&gt;&lt;/iframe&gt;
-&lt;/p&gt;
-
-&lt;p&gt;이번에  소개할 가게는 망원에 본점을 둔 칼국수 체인이다. 돼지고기 등뼈를 칼국수 육수로 사용해서 색다른 맛을 느낄 수 있기에 추천해본다. 가게는 방이역 4번출구 인근에 위치해있다. 가게 앞에 3~4대 정도 주차할 수 있는 공간이 있다.  체인이라서 실내 인테리어도 깔끔하다.&lt;/p&gt;
-
-&lt;p&gt;주력메뉴는 뼈칼국수와 비빔국수이다. 가격은 약깐 비싸다고 느껴질 수 있겠다. 하지만 맛이 보장된다면 용납할 수 있을 정도다. 한가지만 주문하기 애매해서 뼈칼국수와 비빔칼국수 하나씩 주문했다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-10-30-foody3/diary03.05.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;뼈칼국수는 고기가 듬뿍 얹혀져서 나온다. 국물도 가볍지 않다. 개인적으로 퍼진 면발을 좋아하지 않는데, 면발이 상당히 쫄깃하다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-10-30-foody3/diary03.01.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;뼈에 붙은 고기의 양도 상당하다. 뼈해장국처럼 매운양념이 되어있지 않아서 고기 맛이 다소 심심할 수도 있다. 이 때는 함께 나오는 소스에 고기를 찍어 먹어보자.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-10-30-foody3/diary03.03.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;비빔칼국수. 갈아진 돼지고기와 고소한 콩가루가 들어간다. 양념장이 맵지도 않고 적당하다. 뼈칼국수를 시킬지 비빔국수를 시킬지, 방문할 때마다 고민될 것 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-10-30-foody3/diary03.02.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;여유가 된다면 새우만두도 함께 먹어보자. 4개에 6000원으로 다소 비싸보일 수도 있다. 얇은 만두피 안에 새우가 가득차있어 진한 풍미를 느낄 수있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-10-30-foody3/diary03.04.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;날씨가 쌀쌀해지면 뜨끈한 국물이 생각날때가 있다. 순대국의 든든함과 쫄깃한 면발을 함께 경험하고 싶다면 한번 방문해보자.&lt;/p&gt;
-
-&lt;h3 id=&quot;총-평&quot;&gt;총 평&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;음식맛 : &lt;strong&gt;★★★☆☆&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;가성비 : &lt;strong&gt;★★★☆☆&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;서비스 : &lt;strong&gt;★★★☆☆&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;접근성 : &lt;strong&gt;★★★★☆&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Kwang Myung Yu</name></author><category term="diary" /><summary type="html">평이담백뼈칼국수 방이점</summary></entry></feed>
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.12.jpg&quot; /&gt;&lt;/p&gt;</content><author><name>Kwang Myung Yu</name></author><category term="diary" /><summary type="html">하남 팔당 가정식 백반 전문점 단밥</summary></entry></feed>
