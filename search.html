@@ -202,6 +202,15 @@ into the {body} of the default.hbs template -->
 <script>
     window.store = {
     
+    "it04": {
+        "title": "jekyll 블로그에 utterance로 댓글기능 적용하기",
+            "author": "km.yu99",
+            "category": "",
+            "content": "jekyll 블로그에서는 댓글 기능을 제공하지 않는다. 따라서 별도로 댓글 서비스를 적용해야한다.자주 사용되는 댓글 서비스 중에 Disqus라는 것이 있다.  본인도 한동안 Disqus를 사용해왔다. 그런데 Disqus 무료 라이센스를 사용하면 블로그에 광고가 과도하게 붙는다. 그리고 서비스도 무거운 편이다.본 포스트에서는 또다른 댓글 관리 서비스인 utterances를 jekyll 블로그에 설정하는 방법을 소개한다. github에 issue를 활용하여 댓글을 관리하는데 광고도 붙지않고 가벼워서 개인 블로그 운영에 적합하다.1. 댓글 관리용 저장소 생성하기우선 개인 github 계정에 댓글들을 관리할 저장소를 생성한다. 본인의 경우에는 blog-comments라는 이름으로 생성하였다. public으로 생성한다.2. Utterances app 설치 및 설정다음 경로로 들어가서 Inatall 버튼을 클릭하여 utterences app을 설치한다.  https://github.com/apps/utterances설치할 저장소를 지정하는 부분이 표시되면, 앞에서 생성한 저장소 이름을 입력하면 된다.(여기서는 blog-comments) 그리고 Install 버튼을 클릭한다.계속해서 설정항목으로 이동한다.Repository 항목에서 저장소 정보를 설정한다. 계정이름/저장소이름 형태로 입력하면 된다. 여기서는 sguys99/blog-comments로 입력하였다.바로 아래 포스트와 github 저장소 간 댓글을 매핑하는 방법을 설정하는 항목이 있다. 개인 선호에 따라 선택하면 된다. 여기서는 Issue title contains page pathname을 선택하였다.선호하는 테마를 선택한다. 여기서는 Github Light를 선택하였다.모든 설정이 완료되면 맨아래에 설정을 반영한 script가 자동으로 생성된다. 이 부분을 복사해둔다.3. Jekyll 블로그에 설정 반영하기이제 설정한 내용을 블로그에 소스에 반영한다. 본인은 jasper2 템플릿을 사용한다. _layouts/post.html  파일은 블로그의 포스트 구성을 정의한 파일이다. 이 파일에 앞에 복사한 내용을 추가해주면 된다.jasper2 의 경우 Disqus를 기본 댓글 서비스로 사용하도록 작성되어 있다. 이와 관련된 부분을 주석처리한다.그리고 이 부분에 앞에서 복사한 script를 붙여 넣어준다.4. 시험해보기블로그 하단에 다음과 같은 댓글 항목이 나타나면 정상 동작하는 하는 것이다. 시험삼아 댓글을 입력해보자.입력된 댓글들은 생성한 저장소의 Issues 항목에서 관리할 수 있다.",
+        "url": "/it04"
+    }
+    ,
+    
     "trading03": {
         "title": "네이버에서 일별 시세 가져오기",
             "author": "km.yu99",

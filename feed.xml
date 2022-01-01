@@ -1,4 +1,64 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://sguys99.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://sguys99.github.io//" rel="alternate" type="text/html" /><updated>2022-01-01T11:04:50+00:00</updated><id>https://sguys99.github.io//feed.xml</id><title type="html">Happy Plant</title><subtitle>Data science, Machine learning, and Automatic control</subtitle><entry><title type="html">네이버에서 일별 시세 가져오기</title><link href="https://sguys99.github.io//trading03" rel="alternate" type="text/html" title="네이버에서 일별 시세 가져오기" /><published>2021-12-26T13:30:00+00:00</published><updated>2021-12-26T13:30:00+00:00</updated><id>https://sguys99.github.io//trading03</id><content type="html" xml:base="https://sguys99.github.io//trading03">&lt;p&gt;네이버에서는 국내 주식과 관련된 다양한 정보를 제공한다. 본 포스트에서는 네이버 금융에서 일별 주식 시세를 가져오는 방법을 소개한다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://sguys99.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://sguys99.github.io//" rel="alternate" type="text/html" /><updated>2022-01-01T11:57:06+00:00</updated><id>https://sguys99.github.io//feed.xml</id><title type="html">Happy Plant</title><subtitle>Data science, Machine learning, and Automatic control</subtitle><entry><title type="html">jekyll 블로그에 utterance로 댓글기능 적용하기</title><link href="https://sguys99.github.io//it04" rel="alternate" type="text/html" title="jekyll 블로그에 utterance로 댓글기능 적용하기" /><published>2021-12-30T15:00:00+00:00</published><updated>2021-12-30T15:00:00+00:00</updated><id>https://sguys99.github.io//it04</id><content type="html" xml:base="https://sguys99.github.io//it04">&lt;p&gt;jekyll 블로그에서는 댓글 기능을 제공하지 않는다. 따라서 별도로 댓글 서비스를 적용해야한다.&lt;/p&gt;
+
+&lt;p&gt;자주 사용되는 댓글 서비스 중에 Disqus라는 것이 있다.  본인도 한동안 Disqus를 사용해왔다. 그런데 Disqus 무료 라이센스를 사용하면 블로그에 광고가 과도하게 붙는다. 그리고 서비스도 무거운 편이다.&lt;/p&gt;
+
+&lt;p&gt;본 포스트에서는 또다른 댓글 관리 서비스인 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;utterances&lt;/code&gt;를 jekyll 블로그에 설정하는 방법을 소개한다. github에 issue를 활용하여 댓글을 관리하는데 광고도 붙지않고 가벼워서 개인 블로그 운영에 적합하다.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-댓글-관리용-저장소-생성하기&quot;&gt;1. 댓글 관리용 저장소 생성하기&lt;/h3&gt;
+
+&lt;p&gt;우선 개인 github 계정에 댓글들을 관리할 저장소를 생성한다. 본인의 경우에는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;blog-comments&lt;/code&gt;라는 이름으로 생성하였다. public으로 생성한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-30-it04/it04.01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-utterances-app-설치-및-설정&quot;&gt;2. Utterances app 설치 및 설정&lt;/h3&gt;
+
+&lt;p&gt;다음 경로로 들어가서 Inatall 버튼을 클릭하여 utterences app을 설치한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;https://github.com/apps/utterances&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-30-it04/it04.02.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;설치할 저장소를 지정하는 부분이 표시되면, 앞에서 생성한 저장소 이름을 입력하면 된다.(여기서는 blog-comments) 그리고 Install 버튼을 클릭한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-30-it04/it04.03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;계속해서 설정항목으로 이동한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Repository&lt;/code&gt; 항목에서 저장소 정보를 설정한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;계정이름/저장소이름&lt;/code&gt; 형태로 입력하면 된다. 여기서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sguys99/blog-comments&lt;/code&gt;로 입력하였다.&lt;/p&gt;
+
+&lt;p&gt;바로 아래 포스트와 github 저장소 간 댓글을 매핑하는 방법을 설정하는 항목이 있다. 개인 선호에 따라 선택하면 된다. 여기서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Issue title contains page pathname&lt;/code&gt;을 선택하였다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-30-it04/it04.04.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;선호하는 테마를 선택한다. 여기서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Github Light&lt;/code&gt;를 선택하였다.&lt;/p&gt;
+
+&lt;p&gt;모든 설정이 완료되면 맨아래에 설정을 반영한 script가 자동으로 생성된다. 이 부분을 복사해둔다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-30-it04/it04.05.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;3-jekyll-블로그에-설정-반영하기&quot;&gt;3. Jekyll 블로그에 설정 반영하기&lt;/h3&gt;
+
+&lt;p&gt;이제 설정한 내용을 블로그에 소스에 반영한다. 본인은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jasper2&lt;/code&gt; 템플릿을 사용한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layouts/post.html&lt;/code&gt;  파일은 블로그의 포스트 구성을 정의한 파일이다. 이 파일에 앞에 복사한 내용을 추가해주면 된다.&lt;/p&gt;
+
+&lt;p&gt;jasper2 의 경우 Disqus를 기본 댓글 서비스로 사용하도록 작성되어 있다. 이와 관련된 부분을 주석처리한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-30-it04/it04.06.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그리고 이 부분에 앞에서 복사한 script를 붙여 넣어준다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-30-it04/it04.07.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;4-시험해보기&quot;&gt;4. 시험해보기&lt;/h3&gt;
+
+&lt;p&gt;블로그 하단에 다음과 같은 댓글 항목이 나타나면 정상 동작하는 하는 것이다. 시험삼아 댓글을 입력해보자.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-30-it04/it04.08.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;입력된 댓글들은 생성한 저장소의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Issues&lt;/code&gt; 항목에서 관리할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-30-it04/it04.09.jpg&quot; /&gt;&lt;/p&gt;</content><author><name>Kwang Myung Yu</name></author><category term="it-tips" /><summary type="html">jekyll 블로그에서는 댓글 기능을 제공하지 않는다. 따라서 별도로 댓글 서비스를 적용해야한다.</summary></entry><entry><title type="html">네이버에서 일별 시세 가져오기</title><link href="https://sguys99.github.io//trading03" rel="alternate" type="text/html" title="네이버에서 일별 시세 가져오기" /><published>2021-12-26T13:30:00+00:00</published><updated>2021-12-26T13:30:00+00:00</updated><id>https://sguys99.github.io//trading03</id><content type="html" xml:base="https://sguys99.github.io//trading03">&lt;p&gt;네이버에서는 국내 주식과 관련된 다양한 정보를 제공한다. 본 포스트에서는 네이버 금융에서 일별 주식 시세를 가져오는 방법을 소개한다.&lt;/p&gt;
 
 &lt;h3 id=&quot;1-홈페이지-둘러보기&quot;&gt;1. 홈페이지 둘러보기&lt;/h3&gt;
 
@@ -1760,76 +1820,4 @@ Results saved to runs/detect/exp
   &lt;li&gt;가성비 : &lt;strong&gt;★★★★★&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;서비스 : &lt;strong&gt;★★★★☆&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;접근성 : &lt;strong&gt;★☆☆☆☆&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Kwang Myung Yu</name></author><category term="diary" /><summary type="html">세종시 부강면 감자탕 맛집 진성민속촌</summary></entry><entry><title type="html">(경기 하남 맛집) 단밥</title><link href="https://sguys99.github.io//foody4" rel="alternate" type="text/html" title="(경기 하남 맛집) 단밥" /><published>2021-11-01T13:10:00+00:00</published><updated>2021-11-01T13:10:00+00:00</updated><id>https://sguys99.github.io//foody4</id><content type="html" xml:base="https://sguys99.github.io//foody4">&lt;p&gt;하남 팔당 가정식 백반 전문점 &lt;strong&gt;단밥&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;주 소 :&lt;/strong&gt;  &lt;a href=&quot;https://map.naver.com/v5/search/%EB%8B%A8%EB%B0%A5/place/1994963986?placePath=%3Fentry%253Dpll&amp;amp;c=14162931.9737893,4514889.2799930,15,0,0,0,dh&quot;&gt;경기 하남시 검단산로 349-25&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;영업시간 :&lt;/strong&gt; 11:00 ~ 21:00(매일)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;전화번호 :&lt;/strong&gt; 031-793-7621&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;대표메뉴 : ** **참숯돼지불고기반상&lt;/strong&gt;(13,000원), 고등어구이반상(14,000원)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p align=&quot;left&quot;&gt;
-&lt;iframe src=&quot;https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d17895.32780357705!2d127.22715278510385!3d37.54382624838607!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xdefc704c34ca0835!2z64uo67Cl!5e0!3m2!1sko!2skr!4v1640570647458!5m2!1sko!2skr&quot; width=&quot;400&quot; height=&quot;300&quot; style=&quot;border:0;&quot; allowfullscreen=&quot;&quot; loading=&quot;lazy&quot;&gt;&lt;/iframe&gt;
-&lt;/p&gt;
-
-&lt;p&gt;하남 팔당대교 인근에 위치한 가정식 백반 전문점, 단밥. 나름 많은 식도락 경험을 가졌다고 자부한다. 그런데 간혹 그럴때가 있다. 한끼를 대충 때우고 싶진 않은데 식당의 음식들이 내키지 않을 때 말이다. 다수를 위해 뽑아내는 음식이 아니라, 단촐하더라도 오직 나를 위한 반찬과 밥들이 생각날 때가 있다.&lt;/p&gt;
-
-&lt;p&gt;가게는 팔당대교 인근에 있다. 2021년 현재 도로 공사중이고, 팔당댐을 방문하는 사람들 때문에 주말엔 교통이 번잡하다. 대중교통으로 오긴 힘들겠지만, 가게 앞에 주차공간이 넉넉해 자가용으로 이동하기에는 괜찮다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.01.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;입구에 들어서면 요일별 국이 포스팅되어있다. 국에 대한 자부심이 있는 듯 하다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.02.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;주말 이른 아침에 와서 오자마자 자리를 잡을 수 있었다. 테이블 수도 많고, 여유 공간도 충분하다. 날씨가 좋으면 야외 정원에서도 식사할 수 있다. 테이블 간격이 좁으면 식사를 하는 내내 소음에 시달려야 하는 경우도 있다. 여기서는 그런 걱정을 안해도 된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.03.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;메뉴는 메인 반찬을 중심으로 하는 반상으로 구성된다. 참숯돼지불고기와 고등어구이 반상, 그리고 아이를 위한 새우볶음밥을 주문했다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.05.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;에피타이저로 김치전이 먼저 나왔다. 들어간 것이 별로 없어 보이지만 갓구워서 식감이 좋다. 식욕을 끌어 올린다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.04.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이제 메인메뉴들이 나왔다. 직원들의 서빙도 훌륭하고 친절하다. 반찬과 밥, 그리고 국이 정갈하게 쟁반에 담겨 나온다. 반찬의 양이 적어 보이지만 하나하나 신경쓴 흔적을 엿볼 수 있다. 뭇국의 국물맛도 훌륭하다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.06.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;참숯돼지불고기 반상. 양이 부족한 감은 있지만 반찬 가짓수를 생각했을 때 그리 적다고 생각되지도 않는다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.07.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;고등어구이 반상. 메인반찬외에 나머지 반찬은 모두 같다. 여러명이서 온다면 다른 메뉴를 주문한 뒤 메인 반찬을 함께 먹어도 좋을 것 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.08.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;아이 음식으로 주문한 새우볶음밥&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.09.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;약간 외진 곳에 있어서 아쉽지만 정갈한 밥한끼가 생각날 때 가보면 좋은 곳이다. 기분 좋게 주말을 시작하도록 도와준 단밥을 추천한다.&lt;/p&gt;
-
-&lt;h3 id=&quot;총-평&quot;&gt;총 평&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;음식맛 : &lt;strong&gt;★★★★☆&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;가성비 : &lt;strong&gt;★★★☆☆&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;서비스 : &lt;strong&gt;★★★★☆&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;접근성 : &lt;strong&gt;★★☆☆☆&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;추-가&quot;&gt;추 가&lt;/h3&gt;
-
-&lt;p&gt;식사를 마친 후 팔당댐을 가려고 했지만 교통체증 때문에 포기를 했다. 근처에 갈 곳이라곤 스타필드 밖에 없다. 당연히 그쪽 방향도 차가 막혔다. 바로 옆에 &lt;strong&gt;우즈베이커리&lt;/strong&gt;에서 커피 한잔하며 기다리기로 했다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.10.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;입구는 현수막으로 도배되어 꺼림칙하지만 방대한 종류의 베이커리를 판매하는 곳이다. 커피 맛도 훌륭하다. 윗층으로 올라가면 다양한 미술품과 인테리어를 구경하는 재미도 쏠쏠하다. 식당과 함께 방문해 보는 것도 좋을 것 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.11.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.12.jpg&quot; /&gt;&lt;/p&gt;</content><author><name>Kwang Myung Yu</name></author><category term="diary" /><summary type="html">하남 팔당 가정식 백반 전문점 단밥</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Kwang Myung Yu</name></author><category term="diary" /><summary type="html">세종시 부강면 감자탕 맛집 진성민속촌</summary></entry></feed>

@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator>
   <link href="https://sguys99.github.io//tag/it-tips/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://sguys99.github.io//" rel="alternate" type="text/html" />
-  <updated>2022-01-01T11:04:50+00:00</updated>
+  <updated>2022-01-01T11:57:06+00:00</updated>
   <id>https://sguys99.github.io//tag/it-tips/feed.xml</id>
 
   
@@ -30,6 +30,100 @@
   
   
 
+  
+    <entry>
+      <title type="html">jekyll 블로그에 utterance로 댓글기능 적용하기</title>
+      <link href="https://sguys99.github.io//it04" rel="alternate" type="text/html" title="jekyll 블로그에 utterance로 댓글기능 적용하기" />
+      <published>2021-12-30T15:00:00+00:00</published>
+      <updated>2021-12-30T15:00:00+00:00</updated>
+      <id>https://sguys99.github.io//it04</id>
+      <content type="html" xml:base="https://sguys99.github.io//it04">&lt;p&gt;jekyll 블로그에서는 댓글 기능을 제공하지 않는다. 따라서 별도로 댓글 서비스를 적용해야한다.&lt;/p&gt;
+
+&lt;p&gt;자주 사용되는 댓글 서비스 중에 Disqus라는 것이 있다.  본인도 한동안 Disqus를 사용해왔다. 그런데 Disqus 무료 라이센스를 사용하면 블로그에 광고가 과도하게 붙는다. 그리고 서비스도 무거운 편이다.&lt;/p&gt;
+
+&lt;p&gt;본 포스트에서는 또다른 댓글 관리 서비스인 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;utterances&lt;/code&gt;를 jekyll 블로그에 설정하는 방법을 소개한다. github에 issue를 활용하여 댓글을 관리하는데 광고도 붙지않고 가벼워서 개인 블로그 운영에 적합하다.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-댓글-관리용-저장소-생성하기&quot;&gt;1. 댓글 관리용 저장소 생성하기&lt;/h3&gt;
+
+&lt;p&gt;우선 개인 github 계정에 댓글들을 관리할 저장소를 생성한다. 본인의 경우에는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;blog-comments&lt;/code&gt;라는 이름으로 생성하였다. public으로 생성한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-30-it04/it04.01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-utterances-app-설치-및-설정&quot;&gt;2. Utterances app 설치 및 설정&lt;/h3&gt;
+
+&lt;p&gt;다음 경로로 들어가서 Inatall 버튼을 클릭하여 utterences app을 설치한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;https://github.com/apps/utterances&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-30-it04/it04.02.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;설치할 저장소를 지정하는 부분이 표시되면, 앞에서 생성한 저장소 이름을 입력하면 된다.(여기서는 blog-comments) 그리고 Install 버튼을 클릭한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-30-it04/it04.03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;계속해서 설정항목으로 이동한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Repository&lt;/code&gt; 항목에서 저장소 정보를 설정한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;계정이름/저장소이름&lt;/code&gt; 형태로 입력하면 된다. 여기서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sguys99/blog-comments&lt;/code&gt;로 입력하였다.&lt;/p&gt;
+
+&lt;p&gt;바로 아래 포스트와 github 저장소 간 댓글을 매핑하는 방법을 설정하는 항목이 있다. 개인 선호에 따라 선택하면 된다. 여기서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Issue title contains page pathname&lt;/code&gt;을 선택하였다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-30-it04/it04.04.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;선호하는 테마를 선택한다. 여기서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Github Light&lt;/code&gt;를 선택하였다.&lt;/p&gt;
+
+&lt;p&gt;모든 설정이 완료되면 맨아래에 설정을 반영한 script가 자동으로 생성된다. 이 부분을 복사해둔다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-30-it04/it04.05.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;3-jekyll-블로그에-설정-반영하기&quot;&gt;3. Jekyll 블로그에 설정 반영하기&lt;/h3&gt;
+
+&lt;p&gt;이제 설정한 내용을 블로그에 소스에 반영한다. 본인은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jasper2&lt;/code&gt; 템플릿을 사용한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layouts/post.html&lt;/code&gt;  파일은 블로그의 포스트 구성을 정의한 파일이다. 이 파일에 앞에 복사한 내용을 추가해주면 된다.&lt;/p&gt;
+
+&lt;p&gt;jasper2 의 경우 Disqus를 기본 댓글 서비스로 사용하도록 작성되어 있다. 이와 관련된 부분을 주석처리한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-30-it04/it04.06.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그리고 이 부분에 앞에서 복사한 script를 붙여 넣어준다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-30-it04/it04.07.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;4-시험해보기&quot;&gt;4. 시험해보기&lt;/h3&gt;
+
+&lt;p&gt;블로그 하단에 다음과 같은 댓글 항목이 나타나면 정상 동작하는 하는 것이다. 시험삼아 댓글을 입력해보자.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-30-it04/it04.08.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;입력된 댓글들은 생성한 저장소의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Issues&lt;/code&gt; 항목에서 관리할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-30-it04/it04.09.jpg&quot; /&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Kwang Myung Yu</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="it-tips" />
+      
+
+      
+        <summary type="html">jekyll 블로그에서는 댓글 기능을 제공하지 않는다. 따라서 별도로 댓글 서비스를 적용해야한다.</summary>
+      
+
+      
+      
+    </entry>
   
     <entry>
       <title type="html">git cheat sheet3</title>
