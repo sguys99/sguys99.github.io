@@ -1,4 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://sguys99.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://sguys99.github.io//" rel="alternate" type="text/html" /><updated>2022-01-01T16:17:48+00:00</updated><id>https://sguys99.github.io//feed.xml</id><title type="html">Happy Plant</title><subtitle>Data science, Machine learning, and Automatic control</subtitle><entry><title type="html">jekyll 블로그에 utterance로 댓글기능 적용하기</title><link href="https://sguys99.github.io//it04" rel="alternate" type="text/html" title="jekyll 블로그에 utterance로 댓글기능 적용하기" /><published>2021-12-30T15:00:00+00:00</published><updated>2021-12-30T15:00:00+00:00</updated><id>https://sguys99.github.io//it04</id><content type="html" xml:base="https://sguys99.github.io//it04">&lt;p&gt;jekyll 블로그에서는 댓글 기능을 제공하지 않는다. 따라서 별도로 댓글 서비스를 적용해야한다.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Happy Plant</title>
+        <description>Data science, Machine learning, and Automatic control</description>
+        <link>https://sguys99.github.io///</link>
+        <atom:link href="https://sguys99.github.io///feed.xml" rel="self" type="application/rss+xml"/>
+        <pubDate>Sat, 01 Jan 2022 16:24:55 +0000</pubDate>
+        <lastBuildDate>Sat, 01 Jan 2022 16:24:55 +0000</lastBuildDate>
+        <generator>Jekyll v3.9.0</generator>
+        
+        <item>
+            <title>jekyll 블로그에 utterance로 댓글기능 적용하기</title>
+            <description>&lt;p&gt;jekyll 블로그에서는 댓글 기능을 제공하지 않는다. 따라서 별도로 댓글 서비스를 적용해야한다.&lt;/p&gt;
 
 &lt;p&gt;자주 사용되는 댓글 서비스 중에 Disqus라는 것이 있다.  본인도 한동안 Disqus를 사용해왔다. 그런데 Disqus 무료 라이센스를 사용하면 블로그에 광고가 과도하게 붙는다. 그리고 서비스도 무거운 편이다.&lt;/p&gt;
 
@@ -58,7 +71,20 @@
 
 &lt;p&gt;입력된 댓글들은 생성한 저장소의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Issues&lt;/code&gt; 항목에서 관리할 수 있다.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-30-it04/it04.09.jpg&quot; /&gt;&lt;/p&gt;</content><author><name>Kwang Myung Yu</name></author><category term="it-tips" /><summary type="html">jekyll 블로그에서는 댓글 기능을 제공하지 않는다. 따라서 별도로 댓글 서비스를 적용해야한다.</summary></entry><entry><title type="html">네이버에서 일별 시세 가져오기</title><link href="https://sguys99.github.io//trading03" rel="alternate" type="text/html" title="네이버에서 일별 시세 가져오기" /><published>2021-12-26T13:30:00+00:00</published><updated>2021-12-26T13:30:00+00:00</updated><id>https://sguys99.github.io//trading03</id><content type="html" xml:base="https://sguys99.github.io//trading03">&lt;p&gt;네이버에서는 국내 주식과 관련된 다양한 정보를 제공한다. 본 포스트에서는 네이버 금융에서 일별 주식 시세를 가져오는 방법을 소개한다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-30-it04/it04.09.jpg&quot; /&gt;&lt;/p&gt;
+</description>
+            <pubDate>Thu, 30 Dec 2021 15:00:00 +0000</pubDate>
+            <link>https://sguys99.github.io///it04</link>
+            <guid isPermaLink="true">https://sguys99.github.io///it04</guid>
+            
+            <category>it-tips</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>네이버에서 일별 시세 가져오기</title>
+            <description>&lt;p&gt;네이버에서는 국내 주식과 관련된 다양한 정보를 제공한다. 본 포스트에서는 네이버 금융에서 일별 주식 시세를 가져오는 방법을 소개한다.&lt;/p&gt;
 
 &lt;h3 id=&quot;1-홈페이지-둘러보기&quot;&gt;1. 홈페이지 둘러보기&lt;/h3&gt;
 
@@ -598,7 +624,20 @@ charset=euc-kr&quot;&amp;gt;\n&amp;lt;title&amp;gt;네이버 금융&amp;lt;/titl
       &lt;td&gt;13342623&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
-&lt;/table&gt;</content><author><name>Kwang Myung Yu</name></author><category term="algorithmic-trading" /><summary type="html">네이버에서는 국내 주식과 관련된 다양한 정보를 제공한다. 본 포스트에서는 네이버 금융에서 일별 주식 시세를 가져오는 방법을 소개한다.</summary></entry><entry><title type="html">git cheat sheet3</title><link href="https://sguys99.github.io//it03" rel="alternate" type="text/html" title="git cheat sheet3" /><published>2021-12-25T15:00:00+00:00</published><updated>2021-12-25T15:00:00+00:00</updated><id>https://sguys99.github.io//it03</id><content type="html" xml:base="https://sguys99.github.io//it03">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;/table&gt;
+</description>
+            <pubDate>Sun, 26 Dec 2021 13:30:00 +0000</pubDate>
+            <link>https://sguys99.github.io///trading03</link>
+            <guid isPermaLink="true">https://sguys99.github.io///trading03</guid>
+            
+            <category>algorithmic-trading</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>git cheat sheet3</title>
+            <description>&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
 &lt;ul class=&quot;table-of-contents-list&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet1 - 기본 명령어&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;./it02&quot;&gt;cheat sheet2 - commit 조작&lt;/a&gt;&lt;/li&gt;
@@ -663,7 +702,20 @@ charset=euc-kr&quot;&amp;gt;\n&amp;lt;title&amp;gt;네이버 금융&amp;lt;/titl
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git cherry-pick –-abort&lt;/code&gt; :  충돌과 같은 상황이 발생했을 때 cherry-pick 취소&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git cherry-pick –-continue&lt;/code&gt; : 충돌 상황 해결 후 cherry-pick 진행&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git cherry-pick –m [parent number] [merge commit ID]&lt;/code&gt; : merge commit을 추가. merge commit의 경우 어떤 부분의 merge를 가져올지 알 수 없다. 그래서 parent number를 추가해야 한다.(1부터 시작하며 main line이 1)&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Kwang Myung Yu</name></author><category term="it-tips" /><summary type="html">이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작 cheat sheet3 - branch 조작</summary></entry><entry><title type="html">git cheat sheet2</title><link href="https://sguys99.github.io//it02" rel="alternate" type="text/html" title="git cheat sheet2" /><published>2021-12-23T15:00:00+00:00</published><updated>2021-12-23T15:00:00+00:00</updated><id>https://sguys99.github.io//it02</id><content type="html" xml:base="https://sguys99.github.io//it02">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;/ul&gt;
+</description>
+            <pubDate>Sat, 25 Dec 2021 15:00:00 +0000</pubDate>
+            <link>https://sguys99.github.io///it03</link>
+            <guid isPermaLink="true">https://sguys99.github.io///it03</guid>
+            
+            <category>it-tips</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>git cheat sheet2</title>
+            <description>&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
 &lt;ul class=&quot;table-of-contents-list&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet1 - 기본 명령어&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;./it02&quot;&gt;cheat sheet2 - commit 조작&lt;/a&gt;&lt;/li&gt;
@@ -708,7 +760,21 @@ charset=euc-kr&quot;&amp;gt;\n&amp;lt;title&amp;gt;네이버 금융&amp;lt;/titl
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git reset –-soft [commit hash]&lt;/code&gt; : working directory, staging area 유지, commit reset&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git reset HEAD^&lt;/code&gt; : HEAD를 기준으로 직전의 commit으로 reset&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git reset HEAD~[정수]&lt;/code&gt; : HEAD를 기준으로 정수 값 단계 전 commit으로 reset&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Kwang Myung Yu</name></author><category term="it-tips" /><summary type="html">이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작 cheat sheet3 - branch 조작</summary></entry><entry><title type="html">git cheat sheet1</title><link href="https://sguys99.github.io//it01" rel="alternate" type="text/html" title="git cheat sheet1" /><published>2021-12-22T15:00:00+00:00</published><updated>2021-12-22T15:00:00+00:00</updated><id>https://sguys99.github.io//it01</id><content type="html" xml:base="https://sguys99.github.io//it01">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;/ul&gt;
+
+</description>
+            <pubDate>Thu, 23 Dec 2021 15:00:00 +0000</pubDate>
+            <link>https://sguys99.github.io///it02</link>
+            <guid isPermaLink="true">https://sguys99.github.io///it02</guid>
+            
+            <category>it-tips</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>git cheat sheet1</title>
+            <description>&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
 &lt;ul class=&quot;table-of-contents-list&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;./it01&quot;&gt;cheat sheet1 - 기본 명령어&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;./it02&quot;&gt;cheat sheet2 - commit 조작&lt;/a&gt;&lt;/li&gt;
@@ -775,7 +841,243 @@ charset=euc-kr&quot;&amp;gt;\n&amp;lt;title&amp;gt;네이버 금융&amp;lt;/titl
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git diff&lt;/code&gt; : 최근 commit과 변경사항이 발생한(Unstaged) 파일들의 내용비교&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git diff --staged&lt;/code&gt; : 최근 commit과 Staging area의 파일들 간의 변경사항 출력&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git diff [commit hash1] [commit hash2]&lt;/code&gt; : 두 commit의 파일들 간의 변경사항 출력&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Kwang Myung Yu</name></author><category term="it-tips" /><summary type="html">이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작 cheat sheet3 - branch 조작</summary></entry><entry><title type="html">custom dataset으로 YOLOv5 학습하기1</title><link href="https://sguys99.github.io//ds01" rel="alternate" type="text/html" title="custom dataset으로 YOLOv5 학습하기1" /><published>2021-12-21T13:30:00+00:00</published><updated>2021-12-21T13:30:00+00:00</updated><id>https://sguys99.github.io//ds01</id><content type="html" xml:base="https://sguys99.github.io//ds01">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;/ul&gt;
+
+</description>
+            <pubDate>Wed, 22 Dec 2021 15:00:00 +0000</pubDate>
+            <link>https://sguys99.github.io///it01</link>
+            <guid isPermaLink="true">https://sguys99.github.io///it01</guid>
+            
+            <category>it-tips</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>custom dataset으로 YOLOv5 학습하기2</title>
+            <description>&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;./ds01&quot;&gt;YOLO5 #1 - custom dataset으로 학습하기&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;./ds02&quot;&gt;YOLO5 #2 - 학습 파라미터 설정하기&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이전 포스트에서 custom dataset으로 YOLOv5 모델을 학습시키는 방법에 대해서 설명하였다. 여기서는 학습과 관련된 파라미터를 조정하는 방법에 대해서 설명한다. 앞에서와 마찬가지로 실습환경은 google colab이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-데이터셋-소개&quot;&gt;1. 데이터셋 소개&lt;/h3&gt;
+
+&lt;p&gt;실습에 사용되는 데이터셋은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;roboflow&lt;/code&gt;에서 제공되는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Mask Wearking Dataset&lt;/code&gt;(raw)이다.&lt;a href=&quot;https://public.roboflow.com/object-detection/mask-wearing/4&quot;&gt;[링크]&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;(raw와 416x416으로 변환된 데이터셋을 선택할 수 있는데, 여기서는 raw 데이터셋을 사용한다.)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-23-ds2/ds02.01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-colab에서-환경구축하기&quot;&gt;2. colab에서 환경구축하기&lt;/h3&gt;
+
+&lt;p&gt;환경구축은 앞과 같기 때문에 간력하게 설명한다. 상세한 내용은 이전 포스트를 참고한다. &lt;a href=&quot;https://sguys99.github.io/ds1&quot;&gt;[링크]&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;google colab에 접속하고 새 노트를 생성&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;런타임&lt;/code&gt;-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;런타임 유형 변경&lt;/code&gt;을 선택후, 가속기를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GPU&lt;/code&gt;로 설정&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;yolov5 파일을 다운로드 및 필수 라이브러리를 설치&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;git&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clone&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;https&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;github&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ultralytics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yolov5&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# yolov5 코드 clone
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yolov5&lt;/span&gt; 										  &lt;span class=&quot;c1&quot;&gt;# clone한 폴더로 진입
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;qr&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requirements&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;txt&lt;/span&gt;                 &lt;span class=&quot;c1&quot;&gt;# 필수 라이브러리 설치
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;custom dataset 업로드 (여기서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mask_dataset.zip&lt;/code&gt; 으로 설명)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;데이터 셋 파일 압축 해제&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unzip&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;custom_dataset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;zip&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;` yolov5/data/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt; 폴더에 &lt;/code&gt;mask_dataset.yaml`파일 작성&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;path: /content/yolov5/mask_dataset
+train: train/images
+val: valid/images
+test: test/images
+
+nc: 2
+names: ['mask', 'no-mask']
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-학습-파라미터-살펴보기&quot;&gt;3. 학습 파라미터 살펴보기&lt;/h3&gt;
+
+&lt;p&gt;이제 학습할 때 파라미터를 조정하는 방법에 대해서 설명한다.&lt;/p&gt;
+
+&lt;p&gt;모델을 학습할 때 다음과 같이 데이터셋 관련 경로만 입력하면 가능하다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;데이터셋.yaml 파일 경로&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;나머지 파라미터들은 디펄트 값으로 대체된다. 그러면 학습과 관련된 파라미터에는 어떤 것들이 있을까? yolov5 폴더 안에 있는 train.py 파일을 열어서 440번째 라인 부근에 있는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;parse_opt&lt;/code&gt; 함수를 살펴보자. 아래와 같이 파라미터들이 정의되어 있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;parse_opt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;known&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argparse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ArgumentParser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--weights'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ROOT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'yolov5s.pt'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'initial weights path'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--cfg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'model.yaml path'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--data'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ROOT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'data/coco128.yaml'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'dataset.yaml path'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--hyp'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ROOT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'data/hyps/hyp.scratch.yaml'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'hyperparameters path'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--epochs'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--batch-size'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'total batch size for all GPUs, -1 for autobatch'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--imgsz'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'--img'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'--img-size'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;640&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'train, val image size (pixels)'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--rect'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'store_true'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'rectangular training'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+    &lt;span class=&quot;o&quot;&gt;---&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;생&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;략&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;학습과 관련된 파라미터가 40여개나 된다. 하지만 모두 알 필요는 없다. 모델 성능이나 하드웨어 자원과 관련된 중요한 파라미터만 살펴보자.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;모델구조 (–weights)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;모델 구조와 관련된 파라미터이다. YOLOv5는 다양한 모델 구조를 제공한다. default 값은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YOLOv5&lt;/code&gt;로 구조가 제일 간단하다. 모델의 구조가 더 복잡한 것으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YOLOv5m&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YOLOv5l&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YOLOv5x&lt;/code&gt; 이 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-23-ds2/ds02.02.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;구조가 복잡할 수록 성능이 높아질 가능성은 높지만 학습할 때 더 많은 시간이 소요되고 많은 리소스가 요구된다. 예를 들어 yolov5m 모델을 학습시키고 싶다면 다음과 같이 입력하면 된다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;yolov5m.pt&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;공식 github에는 이외에 새로운 모델 구조가 지속적으로 업로드되고 있다. &lt;a href=&quot;https://github.com/ultralytics/yolov5/releases&quot;&gt;[링크]&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;배치 사이즈 (–batch-size)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;학습할 때 한번에 처리할 이미지 수(batch-size)를 지정할 수 있다. default는 16이다. batch size를 32로 입력하고 싶다면 다음과 같이 옵션 설정을 하면된다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;batch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;이미지 크기 (–imgsz,  –img, –img-size)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;YOLOv5는 학습할 때 모든 이미지 사이즈를 동일하게 resizing 한다. default 사이즈는 640x640이다. 이미지 사이즈를 크게 설정할수록 모델 성능은 더 좋아실 수 있다. 하지만 학습속도와 리소스 부담은 더 커지게 된다. 이미지 크기를 1280x1280으로 설정하고 싶다면 다음과 같이 입력한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imgsz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ow&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1280&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;검증이나 시험할 때 학습에 사용한 이미지 사이즈와 동일하게 설정해야한다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;에포크 수 (–epochs)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;데이터셋으로 학습을 반복할 횟수를 지정하는 에포크의 default 값은 300이다. 100으로 설정하고 싶다면 다음과 같이 입력한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;epochs&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;하이퍼 파라미터 (–hyp)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;하이퍼 파라미터가 정의되어 있는 경로를 지정한다. default 값은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;data/hyps/hyp.scratch.yaml&lt;/code&gt;이다. 해당 경로의 파일을 열어 확인해보자.&lt;/p&gt;
+
+&lt;h3 id=&quot;4-파라미터를-조정하여-모델-학습하기&quot;&gt;4. 파라미터를 조정하여 모델 학습하기&lt;/h3&gt;
+
+&lt;p&gt;colab에서 제공하는 자원을 최대한 사용하여 학습을 진행해보자. 모델 구조는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yolov5m.pt&lt;/code&gt;, 입력 이미지 크기는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1280&lt;/code&gt;, 배치 사이즈는 8, 에포크 수는 60으로 설정해보자. (모델 구조가 커지고 입력 이미지가 복잡해져서 colab gpu 한계를 맞추기 위해 배치 사이즈와 학습시간을 줄여야만 했다.)&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;data/mask_dataset.yaml&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;batch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1280&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;yolov5m.pt&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;epochs&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;60&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;train: weights=yolov5m.pt, cfg=, data=data/mask_dataset.yaml, hyp=data/hyps/hyp.scratch.yaml, epochs=60, batch_size=8, imgsz=1280, rect=False, 
+
+--(생 략)
+
+hyperparameters: lr0=0.01, lrf=0.1, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=0.05, cls=0.5, 
+--(생 략)
+                 from  n    params  module                                  arguments                     
+  0                -1  1      5280  models.common.Conv                      [3, 48, 6, 2, 2]              
+  1                -1  1     41664  models.common.Conv                      [48, 96, 3, 2]                
+  2                -1  2     65280  models.common.C3                        [96, 96, 2] 
+  
+--(생 략)
+
+Model Summary: 290 layers, 20856975 parameters, 0 gradients, 48.0 GFLOPs
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 2/2 [00:06&amp;lt;00:00,  3.12s/it]
+                 all         29        162       0.81      0.853      0.861      0.531
+                mask         29        142      0.871      0.805      0.888      0.559
+             no-mask         29         20       0.75        0.9      0.835      0.503
+Results saved to runs/train/exp3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;여기서는 학습 결과가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/runs/train/exp3&lt;/code&gt;에 저장되었다. 사용자 마다 저장위치가 다를 것이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;5-검증하기&quot;&gt;5. 검증하기&lt;/h3&gt;
+
+&lt;p&gt;검증과 관련된 파라미터는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;val.py&lt;/code&gt; 파일의 306번째 라인의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;parse_opt&lt;/code&gt; 함수에 정의되어 있다.&lt;/p&gt;
+
+&lt;p&gt;학습할 때 이미지 사이즈는 1280으로 설정하였고, 모델 가중치는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/runs/train/exp3/weights/best.pt&lt;/code&gt; 저장되어 있으므로 다음과 같이 입력하여 검증을 진행하자.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;!python val.py --data &quot;data/mask_dataset.yaml&quot; --img 1280 --weights &quot;/content/yolov5/runs/train/exp3/weights/best.pt&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;val: data=data/mask_dataset.yaml, weights=['/content/yolov5/runs/train/exp3/weights/best.pt'], batch_size=32, imgsz=1280, conf_thres=0.001, iou_thres=0.6, task=val, device=, workers=8, single_cls=False, augment=False, verbose=False, save_txt=False, save_hybrid=False, save_conf=False, save_json=False, project=runs/val, name=exp, exist_ok=False, half=False, dnn=False
+YOLOv5 🚀 v6.0-159-gdb6ec66 torch 1.10.0+cu111 CUDA:0 (Tesla K80, 11441MiB)
+
+Fusing layers... 
+Model Summary: 290 layers, 20856975 parameters, 0 gradients, 48.0 GFLOPs
+val: Scanning '/content/yolov5/mask_dataset/valid/labels.cache' images and labels... 29 found, 0 missing, 0 empty, 0 corrupted: 100% 29/29 [00:00&amp;lt;?, ?it/s]
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 1/1 [00:08&amp;lt;00:00,  8.05s/it]
+                 all         29        162      0.813      0.851      0.862      0.535
+                mask         29        142      0.878       0.81      0.887      0.556
+             no-mask         29         20      0.748      0.892      0.837      0.514
+Speed: 1.5ms pre-process, 166.8ms inference, 4.4ms NMS per image at shape (32, 3, 1280, 1280)
+Results saved to runs/val/exp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;예측결과가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;runs/val/exp&lt;/code&gt;에 저장되었다.&lt;/p&gt;
+
+&lt;h3 id=&quot;6-예측하기&quot;&gt;6. 예측하기&lt;/h3&gt;
+
+&lt;p&gt;예측할 때는 기본적으로 모델의 경로(–weights), 입력 데이터 경로(–source)를 지정해줘야 한다. 여기에 추가로 이미지 사이즈(–img)도 지정해주자.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;detect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1280&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/content/yolov5/runs/train/exp3/weights/best.pt&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/content/yolov5/mask_dataset/test/images&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;detect: weights=['/content/yolov5/runs/train/exp3/weights/best.pt'], source=/content/yolov5/mask_dataset/test/images, imgsz=[1280, 1280], conf_thres=0.25, 
+
+---(생 략)
+
+Results saved to runs/detect/exp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;runs/detect/exp&lt;/code&gt;에 예측 결과가 저장된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-23-ds2/ds02.03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;참 고 :&lt;/strong&gt; 기회가 되면 confidence threshold(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--conf-thres&lt;/code&gt;)와 IoU threshold(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--iou-thres&lt;/code&gt;) 도 변경해가며 예측결과를 비교해보자.&lt;/p&gt;
+
+</description>
+            <pubDate>Tue, 21 Dec 2021 13:30:00 +0000</pubDate>
+            <link>https://sguys99.github.io///ds02</link>
+            <guid isPermaLink="true">https://sguys99.github.io///ds02</guid>
+            
+            <category>data-science</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>custom dataset으로 YOLOv5 학습하기1</title>
+            <description>&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
 &lt;ul class=&quot;table-of-contents-list&quot;&gt;
     &lt;li&gt;&lt;a href=&quot;./ds01&quot;&gt;YOLO5 #1 - custom dataset으로 학습하기&lt;/a&gt;&lt;/li&gt;
     &lt;li&gt;&lt;a href=&quot;./ds02&quot;&gt;YOLO5 #2 - 학습 파라미터 설정하기&lt;/a&gt;&lt;/li&gt;
@@ -1030,215 +1332,20 @@ image 1/5 /content/yolov5/custom_dataset/test/images/chanterelle_02_jpg.rf.f7a48
 
 &lt;p&gt;폴더를 열어보면 class와 bounding box가 표시된 detection 결과 이미지가 저장되어 있다.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-21-ds1/ds01.16.jpg&quot; /&gt;&lt;/p&gt;</content><author><name>Kwang Myung Yu</name></author><category term="data-science" /><summary type="html">이 포스트는 여러 절로 구성되어 있습니다. YOLO5 #1 - custom dataset으로 학습하기 YOLO5 #2 - 학습 파라미터 설정하기</summary></entry><entry><title type="html">custom dataset으로 YOLOv5 학습하기2</title><link href="https://sguys99.github.io//ds02" rel="alternate" type="text/html" title="custom dataset으로 YOLOv5 학습하기2" /><published>2021-12-21T13:30:00+00:00</published><updated>2021-12-21T13:30:00+00:00</updated><id>https://sguys99.github.io//ds02</id><content type="html" xml:base="https://sguys99.github.io//ds02">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
-&lt;ul class=&quot;table-of-contents-list&quot;&gt;
-    &lt;li&gt;&lt;a href=&quot;./ds01&quot;&gt;YOLO5 #1 - custom dataset으로 학습하기&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;./ds02&quot;&gt;YOLO5 #2 - 학습 파라미터 설정하기&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;이전 포스트에서 custom dataset으로 YOLOv5 모델을 학습시키는 방법에 대해서 설명하였다. 여기서는 학습과 관련된 파라미터를 조정하는 방법에 대해서 설명한다. 앞에서와 마찬가지로 실습환경은 google colab이다.&lt;/p&gt;
-
-&lt;h3 id=&quot;1-데이터셋-소개&quot;&gt;1. 데이터셋 소개&lt;/h3&gt;
-
-&lt;p&gt;실습에 사용되는 데이터셋은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;roboflow&lt;/code&gt;에서 제공되는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Mask Wearking Dataset&lt;/code&gt;(raw)이다.&lt;a href=&quot;https://public.roboflow.com/object-detection/mask-wearing/4&quot;&gt;[링크]&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;(raw와 416x416으로 변환된 데이터셋을 선택할 수 있는데, 여기서는 raw 데이터셋을 사용한다.)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-23-ds2/ds02.01.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;2-colab에서-환경구축하기&quot;&gt;2. colab에서 환경구축하기&lt;/h3&gt;
-
-&lt;p&gt;환경구축은 앞과 같기 때문에 간력하게 설명한다. 상세한 내용은 이전 포스트를 참고한다. &lt;a href=&quot;https://sguys99.github.io/ds1&quot;&gt;[링크]&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;google colab에 접속하고 새 노트를 생성&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;런타임&lt;/code&gt;-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;런타임 유형 변경&lt;/code&gt;을 선택후, 가속기를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GPU&lt;/code&gt;로 설정&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;yolov5 파일을 다운로드 및 필수 라이브러리를 설치&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;git&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clone&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;https&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;github&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ultralytics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yolov5&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# yolov5 코드 clone
-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yolov5&lt;/span&gt; 										  &lt;span class=&quot;c1&quot;&gt;# clone한 폴더로 진입
-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;qr&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requirements&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;txt&lt;/span&gt;                 &lt;span class=&quot;c1&quot;&gt;# 필수 라이브러리 설치
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;custom dataset 업로드 (여기서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mask_dataset.zip&lt;/code&gt; 으로 설명)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;데이터 셋 파일 압축 해제&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unzip&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;custom_dataset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;zip&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;` yolov5/data/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt; 폴더에 &lt;/code&gt;mask_dataset.yaml`파일 작성&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;path: /content/yolov5/mask_dataset
-train: train/images
-val: valid/images
-test: test/images
-
-nc: 2
-names: ['mask', 'no-mask']
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;3-학습-파라미터-살펴보기&quot;&gt;3. 학습 파라미터 살펴보기&lt;/h3&gt;
-
-&lt;p&gt;이제 학습할 때 파라미터를 조정하는 방법에 대해서 설명한다.&lt;/p&gt;
-
-&lt;p&gt;모델을 학습할 때 다음과 같이 데이터셋 관련 경로만 입력하면 가능하다.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;데이터셋.yaml 파일 경로&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;나머지 파라미터들은 디펄트 값으로 대체된다. 그러면 학습과 관련된 파라미터에는 어떤 것들이 있을까? yolov5 폴더 안에 있는 train.py 파일을 열어서 440번째 라인 부근에 있는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;parse_opt&lt;/code&gt; 함수를 살펴보자. 아래와 같이 파라미터들이 정의되어 있다.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;parse_opt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;known&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argparse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ArgumentParser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--weights'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ROOT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'yolov5s.pt'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'initial weights path'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--cfg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'model.yaml path'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--data'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ROOT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'data/coco128.yaml'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'dataset.yaml path'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--hyp'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ROOT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'data/hyps/hyp.scratch.yaml'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'hyperparameters path'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--epochs'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--batch-size'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'total batch size for all GPUs, -1 for autobatch'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--imgsz'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'--img'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'--img-size'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;640&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'train, val image size (pixels)'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'--rect'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'store_true'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'rectangular training'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-    &lt;span class=&quot;o&quot;&gt;---&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;생&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;략&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;학습과 관련된 파라미터가 40여개나 된다. 하지만 모두 알 필요는 없다. 모델 성능이나 하드웨어 자원과 관련된 중요한 파라미터만 살펴보자.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;모델구조 (–weights)&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;모델 구조와 관련된 파라미터이다. YOLOv5는 다양한 모델 구조를 제공한다. default 값은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YOLOv5&lt;/code&gt;로 구조가 제일 간단하다. 모델의 구조가 더 복잡한 것으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YOLOv5m&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YOLOv5l&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YOLOv5x&lt;/code&gt; 이 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-23-ds2/ds02.02.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;구조가 복잡할 수록 성능이 높아질 가능성은 높지만 학습할 때 더 많은 시간이 소요되고 많은 리소스가 요구된다. 예를 들어 yolov5m 모델을 학습시키고 싶다면 다음과 같이 입력하면 된다.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;yolov5m.pt&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;공식 github에는 이외에 새로운 모델 구조가 지속적으로 업로드되고 있다. &lt;a href=&quot;https://github.com/ultralytics/yolov5/releases&quot;&gt;[링크]&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;배치 사이즈 (–batch-size)&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;학습할 때 한번에 처리할 이미지 수(batch-size)를 지정할 수 있다. default는 16이다. batch size를 32로 입력하고 싶다면 다음과 같이 옵션 설정을 하면된다.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;batch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;이미지 크기 (–imgsz,  –img, –img-size)&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;YOLOv5는 학습할 때 모든 이미지 사이즈를 동일하게 resizing 한다. default 사이즈는 640x640이다. 이미지 사이즈를 크게 설정할수록 모델 성능은 더 좋아실 수 있다. 하지만 학습속도와 리소스 부담은 더 커지게 된다. 이미지 크기를 1280x1280으로 설정하고 싶다면 다음과 같이 입력한다.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imgsz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ow&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1280&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;검증이나 시험할 때 학습에 사용한 이미지 사이즈와 동일하게 설정해야한다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;에포크 수 (–epochs)&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;데이터셋으로 학습을 반복할 횟수를 지정하는 에포크의 default 값은 300이다. 100으로 설정하고 싶다면 다음과 같이 입력한다.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;epochs&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;하이퍼 파라미터 (–hyp)&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;하이퍼 파라미터가 정의되어 있는 경로를 지정한다. default 값은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;data/hyps/hyp.scratch.yaml&lt;/code&gt;이다. 해당 경로의 파일을 열어 확인해보자.&lt;/p&gt;
-
-&lt;h3 id=&quot;4-파라미터를-조정하여-모델-학습하기&quot;&gt;4. 파라미터를 조정하여 모델 학습하기&lt;/h3&gt;
-
-&lt;p&gt;colab에서 제공하는 자원을 최대한 사용하여 학습을 진행해보자. 모델 구조는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yolov5m.pt&lt;/code&gt;, 입력 이미지 크기는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1280&lt;/code&gt;, 배치 사이즈는 8, 에포크 수는 60으로 설정해보자. (모델 구조가 커지고 입력 이미지가 복잡해져서 colab gpu 한계를 맞추기 위해 배치 사이즈와 학습시간을 줄여야만 했다.)&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;data/mask_dataset.yaml&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;batch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1280&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;yolov5m.pt&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;epochs&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;60&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;train: weights=yolov5m.pt, cfg=, data=data/mask_dataset.yaml, hyp=data/hyps/hyp.scratch.yaml, epochs=60, batch_size=8, imgsz=1280, rect=False, 
-
---(생 략)
-
-hyperparameters: lr0=0.01, lrf=0.1, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=0.05, cls=0.5, 
---(생 략)
-                 from  n    params  module                                  arguments                     
-  0                -1  1      5280  models.common.Conv                      [3, 48, 6, 2, 2]              
-  1                -1  1     41664  models.common.Conv                      [48, 96, 3, 2]                
-  2                -1  2     65280  models.common.C3                        [96, 96, 2] 
-  
---(생 략)
-
-Model Summary: 290 layers, 20856975 parameters, 0 gradients, 48.0 GFLOPs
-               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 2/2 [00:06&amp;lt;00:00,  3.12s/it]
-                 all         29        162       0.81      0.853      0.861      0.531
-                mask         29        142      0.871      0.805      0.888      0.559
-             no-mask         29         20       0.75        0.9      0.835      0.503
-Results saved to runs/train/exp3
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;여기서는 학습 결과가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/runs/train/exp3&lt;/code&gt;에 저장되었다. 사용자 마다 저장위치가 다를 것이다.&lt;/p&gt;
-
-&lt;h3 id=&quot;5-검증하기&quot;&gt;5. 검증하기&lt;/h3&gt;
-
-&lt;p&gt;검증과 관련된 파라미터는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;val.py&lt;/code&gt; 파일의 306번째 라인의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;parse_opt&lt;/code&gt; 함수에 정의되어 있다.&lt;/p&gt;
-
-&lt;p&gt;학습할 때 이미지 사이즈는 1280으로 설정하였고, 모델 가중치는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/runs/train/exp3/weights/best.pt&lt;/code&gt; 저장되어 있으므로 다음과 같이 입력하여 검증을 진행하자.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;!python val.py --data &quot;data/mask_dataset.yaml&quot; --img 1280 --weights &quot;/content/yolov5/runs/train/exp3/weights/best.pt&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;val: data=data/mask_dataset.yaml, weights=['/content/yolov5/runs/train/exp3/weights/best.pt'], batch_size=32, imgsz=1280, conf_thres=0.001, iou_thres=0.6, task=val, device=, workers=8, single_cls=False, augment=False, verbose=False, save_txt=False, save_hybrid=False, save_conf=False, save_json=False, project=runs/val, name=exp, exist_ok=False, half=False, dnn=False
-YOLOv5 🚀 v6.0-159-gdb6ec66 torch 1.10.0+cu111 CUDA:0 (Tesla K80, 11441MiB)
-
-Fusing layers... 
-Model Summary: 290 layers, 20856975 parameters, 0 gradients, 48.0 GFLOPs
-val: Scanning '/content/yolov5/mask_dataset/valid/labels.cache' images and labels... 29 found, 0 missing, 0 empty, 0 corrupted: 100% 29/29 [00:00&amp;lt;?, ?it/s]
-               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 1/1 [00:08&amp;lt;00:00,  8.05s/it]
-                 all         29        162      0.813      0.851      0.862      0.535
-                mask         29        142      0.878       0.81      0.887      0.556
-             no-mask         29         20      0.748      0.892      0.837      0.514
-Speed: 1.5ms pre-process, 166.8ms inference, 4.4ms NMS per image at shape (32, 3, 1280, 1280)
-Results saved to runs/val/exp
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;예측결과가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;runs/val/exp&lt;/code&gt;에 저장되었다.&lt;/p&gt;
-
-&lt;h3 id=&quot;6-예측하기&quot;&gt;6. 예측하기&lt;/h3&gt;
-
-&lt;p&gt;예측할 때는 기본적으로 모델의 경로(–weights), 입력 데이터 경로(–source)를 지정해줘야 한다. 여기에 추가로 이미지 사이즈(–img)도 지정해주자.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;detect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1280&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/content/yolov5/runs/train/exp3/weights/best.pt&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/content/yolov5/mask_dataset/test/images&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;detect: weights=['/content/yolov5/runs/train/exp3/weights/best.pt'], source=/content/yolov5/mask_dataset/test/images, imgsz=[1280, 1280], conf_thres=0.25, 
-
----(생 략)
-
-Results saved to runs/detect/exp
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;runs/detect/exp&lt;/code&gt;에 예측 결과가 저장된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-23-ds2/ds02.03.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;참 고 :&lt;/strong&gt; 기회가 되면 confidence threshold(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--conf-thres&lt;/code&gt;)와 IoU threshold(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--iou-thres&lt;/code&gt;) 도 변경해가며 예측결과를 비교해보자.&lt;/p&gt;</content><author><name>Kwang Myung Yu</name></author><category term="data-science" /><summary type="html">이 포스트는 여러 절로 구성되어 있습니다. YOLO5 #1 - custom dataset으로 학습하기 YOLO5 #2 - 학습 파라미터 설정하기</summary></entry><entry><title type="html">KRX에서 종목코드 가져오기2</title><link href="https://sguys99.github.io//trading2" rel="alternate" type="text/html" title="KRX에서 종목코드 가져오기2" /><published>2021-12-20T13:30:00+00:00</published><updated>2021-12-20T13:30:00+00:00</updated><id>https://sguys99.github.io//trading2</id><content type="html" xml:base="https://sguys99.github.io//trading2">&lt;p&gt;한국거래소(KRX)에서 증권과 관련된 데이터와 통계정보를 제공하는 정보데이터시스템 웹페이지가 있다.&lt;br /&gt;
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-21-ds1/ds01.16.jpg&quot; /&gt;&lt;/p&gt;
+</description>
+            <pubDate>Tue, 21 Dec 2021 13:30:00 +0000</pubDate>
+            <link>https://sguys99.github.io///ds01</link>
+            <guid isPermaLink="true">https://sguys99.github.io///ds01</guid>
+            
+            <category>data-science</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>KRX에서 종목코드 가져오기2</title>
+            <description>&lt;p&gt;한국거래소(KRX)에서 증권과 관련된 데이터와 통계정보를 제공하는 정보데이터시스템 웹페이지가 있다.&lt;br /&gt;
 여기서도 상장주식의 종목코드 리스트를 가져올 수 있다.&lt;/p&gt;
 
 &lt;h3 id=&quot;1-홈페이지-둘러보기&quot;&gt;1. 홈페이지 둘러보기&lt;/h3&gt;
@@ -1448,7 +1555,20 @@ Results saved to runs/detect/exp
                                               &lt;span class=&quot;s&quot;&gt;'액면가'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'par_value'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'상장주식수'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'total_shrs'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
     
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Kwang Myung Yu</name></author><category term="algorithmic-trading" /><summary type="html">한국거래소(KRX)에서 증권과 관련된 데이터와 통계정보를 제공하는 정보데이터시스템 웹페이지가 있다. 여기서도 상장주식의 종목코드 리스트를 가져올 수 있다.</summary></entry><entry><title type="html">KRX에서 종목코드 가져오기1</title><link href="https://sguys99.github.io//trading1" rel="alternate" type="text/html" title="KRX에서 종목코드 가져오기1" /><published>2021-12-19T13:30:00+00:00</published><updated>2021-12-19T13:30:00+00:00</updated><id>https://sguys99.github.io//trading1</id><content type="html" xml:base="https://sguys99.github.io//trading1">&lt;h3 id=&quot;1-홈페이지-둘러보기&quot;&gt;1. 홈페이지 둘러보기&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+            <pubDate>Mon, 20 Dec 2021 13:30:00 +0000</pubDate>
+            <link>https://sguys99.github.io///trading2</link>
+            <guid isPermaLink="true">https://sguys99.github.io///trading2</guid>
+            
+            <category>algorithmic-trading</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>KRX에서 종목코드 가져오기1</title>
+            <description>&lt;h3 id=&quot;1-홈페이지-둘러보기&quot;&gt;1. 홈페이지 둘러보기&lt;/h3&gt;
 
 &lt;p&gt;먼저 KRX 홈페이지(https://kind.krx.co.kr/) 를 방문하여 ‘상장법인상세정보’/ ‘상장법인목록’ 화면으로 이동한다.&lt;br /&gt;
 (또는 &lt;a href=&quot;http://kind.krx.co.kr/corpgeneral/corpList.do?method=loadInitPage&quot;&gt;[다음]&lt;/a&gt; 링크를 클릭한다.)&lt;/p&gt;
@@ -1776,7 +1896,20 @@ Results saved to runs/detect/exp
     &lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'listing_date'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'listing_date'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
     
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stock_code&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Kwang Myung Yu</name></author><category term="algorithmic-trading" /><summary type="html">1. 홈페이지 둘러보기</summary></entry><entry><title type="html">(세종 부강 맛집) 진성민속촌</title><link href="https://sguys99.github.io//foody5" rel="alternate" type="text/html" title="(세종 부강 맛집) 진성민속촌" /><published>2021-11-05T13:10:00+00:00</published><updated>2021-11-05T13:10:00+00:00</updated><id>https://sguys99.github.io//foody5</id><content type="html" xml:base="https://sguys99.github.io//foody5">&lt;p&gt;세종시 부강면 감자탕 맛집 진성민속촌&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+            <pubDate>Sun, 19 Dec 2021 13:30:00 +0000</pubDate>
+            <link>https://sguys99.github.io///trading1</link>
+            <guid isPermaLink="true">https://sguys99.github.io///trading1</guid>
+            
+            <category>algorithmic-trading</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>(세종 부강 맛집) 진성민속촌</title>
+            <description>&lt;p&gt;세종시 부강면 감자탕 맛집 진성민속촌&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;주 소 :&lt;/strong&gt;  &lt;a href=&quot;https://map.naver.com/v5/entry/place/17701080?c=14175622.9968650,4374494.9512310,14,0,0,0,dh&quot;&gt;세종 부강면 청연로 125&lt;/a&gt;&lt;/li&gt;
@@ -1820,4 +1953,283 @@ Results saved to runs/detect/exp
   &lt;li&gt;가성비 : &lt;strong&gt;★★★★★&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;서비스 : &lt;strong&gt;★★★★☆&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;접근성 : &lt;strong&gt;★☆☆☆☆&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Kwang Myung Yu</name></author><category term="diary" /><summary type="html">세종시 부강면 감자탕 맛집 진성민속촌</summary></entry></feed>
+&lt;/ul&gt;
+</description>
+            <pubDate>Fri, 05 Nov 2021 13:10:00 +0000</pubDate>
+            <link>https://sguys99.github.io///foody5</link>
+            <guid isPermaLink="true">https://sguys99.github.io///foody5</guid>
+            
+            <category>diary</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>(경기 하남 맛집) 단밥</title>
+            <description>&lt;p&gt;하남 팔당 가정식 백반 전문점 &lt;strong&gt;단밥&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;주 소 :&lt;/strong&gt;  &lt;a href=&quot;https://map.naver.com/v5/search/%EB%8B%A8%EB%B0%A5/place/1994963986?placePath=%3Fentry%253Dpll&amp;amp;c=14162931.9737893,4514889.2799930,15,0,0,0,dh&quot;&gt;경기 하남시 검단산로 349-25&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;영업시간 :&lt;/strong&gt; 11:00 ~ 21:00(매일)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;전화번호 :&lt;/strong&gt; 031-793-7621&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;대표메뉴 : ** **참숯돼지불고기반상&lt;/strong&gt;(13,000원), 고등어구이반상(14,000원)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p align=&quot;left&quot;&gt;
+&lt;iframe src=&quot;https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d17895.32780357705!2d127.22715278510385!3d37.54382624838607!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xdefc704c34ca0835!2z64uo67Cl!5e0!3m2!1sko!2skr!4v1640570647458!5m2!1sko!2skr&quot; width=&quot;400&quot; height=&quot;300&quot; style=&quot;border:0;&quot; allowfullscreen=&quot;&quot; loading=&quot;lazy&quot;&gt;&lt;/iframe&gt;
+&lt;/p&gt;
+
+&lt;p&gt;하남 팔당대교 인근에 위치한 가정식 백반 전문점, 단밥. 나름 많은 식도락 경험을 가졌다고 자부한다. 그런데 간혹 그럴때가 있다. 한끼를 대충 때우고 싶진 않은데 식당의 음식들이 내키지 않을 때 말이다. 다수를 위해 뽑아내는 음식이 아니라, 단촐하더라도 오직 나를 위한 반찬과 밥들이 생각날 때가 있다.&lt;/p&gt;
+
+&lt;p&gt;가게는 팔당대교 인근에 있다. 2021년 현재 도로 공사중이고, 팔당댐을 방문하는 사람들 때문에 주말엔 교통이 번잡하다. 대중교통으로 오긴 힘들겠지만, 가게 앞에 주차공간이 넉넉해 자가용으로 이동하기에는 괜찮다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;입구에 들어서면 요일별 국이 포스팅되어있다. 국에 대한 자부심이 있는 듯 하다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.02.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;주말 이른 아침에 와서 오자마자 자리를 잡을 수 있었다. 테이블 수도 많고, 여유 공간도 충분하다. 날씨가 좋으면 야외 정원에서도 식사할 수 있다. 테이블 간격이 좁으면 식사를 하는 내내 소음에 시달려야 하는 경우도 있다. 여기서는 그런 걱정을 안해도 된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;메뉴는 메인 반찬을 중심으로 하는 반상으로 구성된다. 참숯돼지불고기와 고등어구이 반상, 그리고 아이를 위한 새우볶음밥을 주문했다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.05.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;에피타이저로 김치전이 먼저 나왔다. 들어간 것이 별로 없어 보이지만 갓구워서 식감이 좋다. 식욕을 끌어 올린다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.04.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이제 메인메뉴들이 나왔다. 직원들의 서빙도 훌륭하고 친절하다. 반찬과 밥, 그리고 국이 정갈하게 쟁반에 담겨 나온다. 반찬의 양이 적어 보이지만 하나하나 신경쓴 흔적을 엿볼 수 있다. 뭇국의 국물맛도 훌륭하다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.06.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;참숯돼지불고기 반상. 양이 부족한 감은 있지만 반찬 가짓수를 생각했을 때 그리 적다고 생각되지도 않는다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.07.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;고등어구이 반상. 메인반찬외에 나머지 반찬은 모두 같다. 여러명이서 온다면 다른 메뉴를 주문한 뒤 메인 반찬을 함께 먹어도 좋을 것 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.08.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;아이 음식으로 주문한 새우볶음밥&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.09.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;약간 외진 곳에 있어서 아쉽지만 정갈한 밥한끼가 생각날 때 가보면 좋은 곳이다. 기분 좋게 주말을 시작하도록 도와준 단밥을 추천한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;총-평&quot;&gt;총 평&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;음식맛 : &lt;strong&gt;★★★★☆&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;가성비 : &lt;strong&gt;★★★☆☆&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;서비스 : &lt;strong&gt;★★★★☆&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;접근성 : &lt;strong&gt;★★☆☆☆&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;추-가&quot;&gt;추 가&lt;/h3&gt;
+
+&lt;p&gt;식사를 마친 후 팔당댐을 가려고 했지만 교통체증 때문에 포기를 했다. 근처에 갈 곳이라곤 스타필드 밖에 없다. 당연히 그쪽 방향도 차가 막혔다. 바로 옆에 &lt;strong&gt;우즈베이커리&lt;/strong&gt;에서 커피 한잔하며 기다리기로 했다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.10.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;입구는 현수막으로 도배되어 꺼림칙하지만 방대한 종류의 베이커리를 판매하는 곳이다. 커피 맛도 훌륭하다. 윗층으로 올라가면 다양한 미술품과 인테리어를 구경하는 재미도 쏠쏠하다. 식당과 함께 방문해 보는 것도 좋을 것 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.11.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-11-01-foody4/diary04.12.jpg&quot; /&gt;&lt;/p&gt;
+</description>
+            <pubDate>Mon, 01 Nov 2021 13:10:00 +0000</pubDate>
+            <link>https://sguys99.github.io///foody4</link>
+            <guid isPermaLink="true">https://sguys99.github.io///foody4</guid>
+            
+            <category>diary</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>(서울 송파 맛집) 평이담백뼈칼국수</title>
+            <description>&lt;p&gt;평이담백뼈칼국수 방이점&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;주 소 :&lt;/strong&gt;  &lt;a href=&quot;https://map.naver.com/v5/entry/place/1263841676?c=14151538.7133373,4510335.4930609,13,0,0,0,dh&amp;amp;placePath=%2Fhome%3Fentry=plt&quot;&gt;서울 송파구 위례성대로18길 31-12&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;영업시간 :&lt;/strong&gt; 11:30 ~ 21:00(브레이크타임 15~17)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;전화번호 :&lt;/strong&gt; 02-417-7488&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;대표메뉴 :&lt;/strong&gt; &lt;strong&gt;뼈칼국수&lt;/strong&gt;(10,000원), 비빔칼국수(9,000원), 새우만두(6,000원)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p align=&quot;left&quot;&gt;
+&lt;iframe src=&quot;https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12659.774713727284!2d127.1253821!3d37.5092465!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xffedc2153daedd62!2z7Y-J7J2064u067Cx67yI7Lm86rWt7IiY67Cp7J207KCQ!5e0!3m2!1sko!2skr!4v1640505077086!5m2!1sko!2skr&quot; width=&quot;400&quot; height=&quot;300&quot; style=&quot;border:0;&quot; allowfullscreen=&quot;&quot; loading=&quot;lazy&quot;&gt;&lt;/iframe&gt;
+&lt;/p&gt;
+
+&lt;p&gt;이번에  소개할 가게는 망원에 본점을 둔 칼국수 체인이다. 돼지고기 등뼈를 칼국수 육수로 사용해서 색다른 맛을 느낄 수 있기에 추천해본다. 가게는 방이역 4번출구 인근에 위치해있다. 가게 앞에 3~4대 정도 주차할 수 있는 공간이 있다.  체인이라서 실내 인테리어도 깔끔하다.&lt;/p&gt;
+
+&lt;p&gt;주력메뉴는 뼈칼국수와 비빔국수이다. 가격은 약깐 비싸다고 느껴질 수 있겠다. 하지만 맛이 보장된다면 용납할 수 있을 정도다. 한가지만 주문하기 애매해서 뼈칼국수와 비빔칼국수 하나씩 주문했다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-10-30-foody3/diary03.05.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;뼈칼국수는 고기가 듬뿍 얹혀져서 나온다. 국물도 가볍지 않다. 개인적으로 퍼진 면발을 좋아하지 않는데, 면발이 상당히 쫄깃하다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-10-30-foody3/diary03.01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;뼈에 붙은 고기의 양도 상당하다. 뼈해장국처럼 매운양념이 되어있지 않아서 고기 맛이 다소 심심할 수도 있다. 이 때는 함께 나오는 소스에 고기를 찍어 먹어보자.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-10-30-foody3/diary03.03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;비빔칼국수. 갈아진 돼지고기와 고소한 콩가루가 들어간다. 양념장이 맵지도 않고 적당하다. 뼈칼국수를 시킬지 비빔국수를 시킬지, 방문할 때마다 고민될 것 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-10-30-foody3/diary03.02.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;여유가 된다면 새우만두도 함께 먹어보자. 4개에 6000원으로 다소 비싸보일 수도 있다. 얇은 만두피 안에 새우가 가득차있어 진한 풍미를 느낄 수있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-10-30-foody3/diary03.04.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;날씨가 쌀쌀해지면 뜨끈한 국물이 생각날때가 있다. 순대국의 든든함과 쫄깃한 면발을 함께 경험하고 싶다면 한번 방문해보자.&lt;/p&gt;
+
+&lt;h3 id=&quot;총-평&quot;&gt;총 평&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;음식맛 : &lt;strong&gt;★★★☆☆&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;가성비 : &lt;strong&gt;★★★☆☆&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;서비스 : &lt;strong&gt;★★★☆☆&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;접근성 : &lt;strong&gt;★★★★☆&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+            <pubDate>Sat, 30 Oct 2021 13:10:00 +0000</pubDate>
+            <link>https://sguys99.github.io///foody3</link>
+            <guid isPermaLink="true">https://sguys99.github.io///foody3</guid>
+            
+            <category>diary</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>(서울 송파 맛집) 차고버거</title>
+            <description>&lt;p&gt;방이동 먹자골목 수제버거 전문점. 차고버거&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;주 소 :&lt;/strong&gt;  &lt;a href=&quot;https://map.naver.com/v5/entry/place/38274764?c=14150262.6023546,4511211.0508066,15,0,0,0,dh&quot;&gt;서울시 송파구 오금로 61-11&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;영업시간 :&lt;/strong&gt; 11:30 ~ 22:00(목~금, 브레이크타임 15~17), 11:30 ~ 22:00(토), 11:30 ~ 21:00(일), 월요일 휴무&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;전화번호 :&lt;/strong&gt; 0507-1410-0601&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;대표메뉴 : ** **차고 클래식&lt;/strong&gt;(7,900원), &lt;strong&gt;하와이안&lt;/strong&gt;(8,900원), 에그룸(9,900원), 칠리 치즈 프라이(8,800원)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p align=&quot;left&quot;&gt;
+&lt;iframe src=&quot;https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1881.7408812636288!2d127.11322211926064!3d37.51503276342397!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4f0b64abebbc9c5a!2z7LCo6rOg67KE6rGw!5e0!3m2!1sko!2skr!4v1640234762107!5m2!1sko!2skr&quot; width=&quot;400&quot; height=&quot;300&quot; style=&quot;border:0;&quot; allowfullscreen=&quot;&quot; loading=&quot;lazy&quot;&gt;&lt;/iframe&gt;
+&lt;/p&gt;
+
+&lt;p&gt;내가 사는 방이동 인근에는 식당들이 많다. 석촌 호수를 끼고 조성된 까페들과 양식집들. 최근에 사람들이 몰리고 있는 송리단길. 그리고 오래 전부터 주점들이 들어서 있었던 먹자골목 까지.&lt;/p&gt;
+
+&lt;p&gt;오늘 소개할 곳은 방이동 먹자골목에 위치한 &lt;strong&gt;차고버거&lt;/strong&gt;. 먹자골목 메인 식당가에서는 떨어져 있다. 개인적으로는 이 위치가 더 마음에 든다. 지하철역에서 가깝고 사람들로 붐비지 않아 편하게 이동할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;이 가게는 포장이나 배달도 가능하지만 본연의 맛을 느끼기 어렵다. 햄버거는 식어버리면 맛이 급격하게 떨어진다. 특히 프렌치 프라이가 박스안에 같혀서 오래 있으면 고소하고 바삭거리는 식감을 내기 힘들다. 오늘은 큰맘먹고 매장에서 식사를 했다.&lt;/p&gt;
+
+&lt;p&gt;입구는 넓어 보이지만 매장안에 테이블은 얼마 안된다. 입구 쪽을 확장해서 테이블을 몇개 더 두었다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-09-20-foody2/diary02.01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;에그롬과 로코모코, 그리고 하우스커피 한잔을 주문했다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-09-20-foody2/diary02.02.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;에그룸에는 패티, 베이컨, 계란 후라이가 들어간다. 일반적인 버거 내용물에 계란이 들어 가서 그런지 부드러운 맛이 더해졌다. 하지만 이 구성에 단품 9,900원은 약간 부담스럽다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-09-20-foody2/diary02.03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;괌 여행을 갔을 때 처음 먹어본 로코모코. 기본 이상은 해준다. 남자 기준으로 양은 약간 부족한 편.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-09-20-foody2/diary02.04.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;양이 부족한 것 같아 치즈 프라이도 하나 주문했다. 포장해왔을 때는 눅눅해져서 다 먹지 못했는데 확실히 매장에서 먹는 것이 맛있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-09-20-foody2/diary02.05.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;요즘 수제버거 가게가 많이 생겨서 흔한 맛이지만, 고깃집과 술집이 대부분인 방이동 먹자골목에서는 흔치 않은 소중한 식당이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;총-평&quot;&gt;총 평&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;음식맛 : &lt;strong&gt;★★★☆☆&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;가성비 : &lt;strong&gt;★★★☆☆&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;서비스 : &lt;strong&gt;★★★☆☆&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;접근성 : &lt;strong&gt;★★★★☆&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+            <pubDate>Thu, 02 Sep 2021 13:10:00 +0000</pubDate>
+            <link>https://sguys99.github.io///foody2</link>
+            <guid isPermaLink="true">https://sguys99.github.io///foody2</guid>
+            
+            <category>diary</category>
+            
+            
+        </item>
+        
+        <item>
+            <title>(서울, 과천 맛집) 메밀장터</title>
+            <description>&lt;p&gt;지하철 4호선 선바위역에 위치한 막국수 맛집. 메밀장터&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;주 소 :&lt;/strong&gt;  &lt;a href=&quot;https://map.naver.com/v5/search/%EB%A9%94%EB%B0%80%EC%9E%A5%ED%84%B0/place/38247636?placePath=%3Fentry=pll%26from=nx%26fromNxList=true&amp;amp;c=14136710.9348997,4502366.5506309,15,0,0,0,dh&quot;&gt;경기 과천시 뒷골로 5-7 선바위&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;영업시간 :&lt;/strong&gt; 10:40 ~ 21:20(매일)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;전화번호 :&lt;/strong&gt; 02-504-0122&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;주요메뉴&lt;/strong&gt; : &lt;strong&gt;들기름 막국수&lt;/strong&gt;(9,000원), 명태회 막국수(9,000원)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p align=&quot;left&quot;&gt;
+&lt;iframe src=&quot;https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12669.415796794536!2d127.0005728!3d37.4523641!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x78304809b8eee4a1!2z66mU67CA7J6l7YSw!5e0!3m2!1sko!2skr!4v1639471457273!5m2!1sko!2skr&quot; width=&quot;400&quot; height=&quot;300&quot; style=&quot;border:0;&quot; allowfullscreen=&quot;&quot; loading=&quot;lazy&quot;&gt;&lt;/iframe&gt;
+&lt;/p&gt;
+
+&lt;p&gt;지하철역 인근에 있어서 도보로 이동가능하다.&lt;br /&gt;
+점심시간을 피해 오후 2시 이후에 방문하면 기다리지 않고 입장할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-08-30-foody1/diary01.01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;아래 사진의 통로로 들어오면 가게 앞 주차장이 있다. 주차공간은 넓지 않은 편이다.&lt;br /&gt;
+사람들이 몰리는 시간대를 피해서 갔지만 주차할 공간이 없어서 인근에 주차해야 했다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-08-30-foody1/diary01.02.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;식당 안에는 앉아서 식사할 수 있는 방과 테이블이 있다. 테이블은 만석이라 방으로 이동했다.&lt;br /&gt;
+이 곳의 대표 메뉴는 들기름 막국수이다. 개인적으로 비빔국수를 좋아해서 들기름 막국수, 명태회 막국수 하나씩 주문했다.&lt;br /&gt;
+비주얼은 나름 괜찮다. 면 색깔로 보아 메밀이 많이 포함된 것 같아 보이진 않았다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-08-30-foody1/diary01.03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;들기름 막국수. 계란 반쪽과 들깨 가루 고명, 들기름이 양념의 전부이다. 과연 이것으로 맛을 낼수 있을까?&lt;br /&gt;
+국수를 잘 비벼서 한젓갈 입에 넣어본다. 입안에 들기름의 고소함이 퍼진다. 지금까지 맛본 들기름 중에 단연 고소함이 으뜸이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-08-30-foody1/diary01.04.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;명태회 막국수도 괜찮다. 명태회가 충분이 들어있고 양념장도 간이 잘되어 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-08-30-foody1/diary01.05.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;하지만 역시 이집의 으뜸은 들기름 막국수. 호불호가 갈릴수도 있지만, 두명이서 온다면 들기름, 명태회 막국수 하나씩 시켜서 쉐어하는 것도 괜찮아 보인다. 들기름 국수 면을 90% 정도 건저 먹은 후, 함께 나오는 동치미 국물을 조금 부어서 먹어보자. 이 또한 색다른 맛이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-08-30-foody1/diary01.06.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;물 막국수, 비빔 막국수에 익숙한 나에게 들기름 막국수의 세계로 안내한 가게였다.&lt;/p&gt;
+
+&lt;h3 id=&quot;총-평&quot;&gt;총 평&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;음식맛 : &lt;strong&gt;★★★★☆&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;가성비 : &lt;strong&gt;★★★☆☆&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;서비스 : &lt;strong&gt;★★★☆☆&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;접근성 : &lt;strong&gt;★★★★☆&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+            <pubDate>Wed, 01 Sep 2021 17:10:00 +0000</pubDate>
+            <link>https://sguys99.github.io///foody1</link>
+            <guid isPermaLink="true">https://sguys99.github.io///foody1</guid>
+            
+            <category>diary</category>
+            
+            
+        </item>
+        
+    </channel>
+</rss>
