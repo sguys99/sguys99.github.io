@@ -1,0 +1,1 @@
+{"version":3,"sources":["base.css"],"names":[],"mappings":"AAAA,OACE,cAAe,AACf,kBAAmB,AACnB,gBAAiB,AACjB,gBAAkB,CACnB","file":"base.css","sourcesContent":["img + em {\r\n  display: block;\r\n  text-align: center;\r\n  font-size: .8rem;\r\n  color: light-grey;\r\n}"]}
