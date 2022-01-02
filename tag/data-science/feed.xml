@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator>
   <link href="https://sguys99.github.io//tag/data-science/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://sguys99.github.io//" rel="alternate" type="text/html" />
-  <updated>2022-01-02T01:16:29+00:00</updated>
+  <updated>2022-01-02T02:55:29+00:00</updated>
   <id>https://sguys99.github.io//tag/data-science/feed.xml</id>
 
   
@@ -30,6 +30,111 @@
   
   
 
+  
+    <entry>
+      <title type="html">MySQL server 설치하기 - windows편</title>
+      <link href="https://sguys99.github.io//ds3" rel="alternate" type="text/html" title="MySQL server 설치하기 - windows편" />
+      <published>2021-12-31T13:30:00+00:00</published>
+      <updated>2021-12-31T13:30:00+00:00</updated>
+      <id>https://sguys99.github.io//ds3</id>
+      <content type="html" xml:base="https://sguys99.github.io//ds3">&lt;p&gt;본 포스트에서는 MySQL server 설치 방법에 대해서 다룬다. MySQL은 널리 사용되는 관계형 DB 솔루션 중 하나이다. 여기서는 windows os 기반으로 설명한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-mysql-installer-다운로드&quot;&gt;1. MySQL Installer 다운로드&lt;/h3&gt;
+
+&lt;p&gt;아래 다운로드 주소에 접속한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;https://dev.mysql.com/downloads/mysql/&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;OS가 Microsoft Windows로 설정된 것을 확인한 후, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Go to Download Page&lt;/code&gt; 버튼을 클릭한다. 이후 상황에 맞는 installer를 선택하여 Download 버튼을 클릭한다. 여기서는 local installer를 선택하였다. (로그인 화면으로 전환되면 로그인하여 진행. 또는 회원 가입 후 진행)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-31-ds3/ds03.01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-mysql-installer-설치&quot;&gt;2. MySQL Installer 설치&lt;/h3&gt;
+
+&lt;p&gt;다운 받은 installer 파일을 실행한다.&lt;/p&gt;
+
+&lt;p&gt;용도에 따른 Setup Type을 지정한다. 여기서는 개발자용인 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Developer Default&lt;/code&gt;를 선택하고 다음(Next)로 이동하였다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-31-ds3/ds03.01.01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;설치할 항목이 표시되면 리스트를 확인한 후 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Execute&lt;/code&gt;버튼을 선택한다. 설치가 진행될 것이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;3-product-configuration&quot;&gt;3. Product configuration&lt;/h3&gt;
+
+&lt;p&gt;설치가 완료된 후 Next 버튼을 클릭하면 설정항목으로 이동한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3.1 Type and Networking, Authentication Method&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Config Type을 용도에 맞기 설정한다.(여기서는 Development Computer) Connectivity 항목에서는 서버 연결에 사용할 포트를 지정한다. default 값은 3306이다. 만약 해당 포트가 사용중이면 다른 값을 지정한다.&lt;/p&gt;
+
+&lt;p&gt;Next를 눌러 Authentication Method를 지정한다. RECOMMENDED 설정으로 두고 Next 버튼을 선택한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-31-ds3/ds03.02.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3.2 Accounts and Roles, Windows Service Name&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;root 계정, 즉 최상위 권한 계정의 패스워드를 설정한다. 다음으로 이동하여 Windows Service를 설정한다. OS 부팅 후 자동으로 MySQL이 재시작 하도록, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Start the MySQL Server at System Startup&lt;/code&gt; 항목을 체크한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-31-ds3/ds03.03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3.3 Connect To Server&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Next 버튼을 선택하여 설정을 이어 나간다. Connect To Server 항목에서 앞에 설정한 패스워드를 입력하여 연결 시험을 해본다. 상단의 Status 항목에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Connection succeeded&lt;/code&gt; 문구가 표시되면 정상 연결되는 것이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-31-ds3/ds03.03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이후 Next를 선택하여 설치를 완료한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;4-mysql-workbench-실행하기&quot;&gt;4. MySQL Workbench 실행하기&lt;/h3&gt;
+
+&lt;p&gt;MySQL Workbench는 MySQL에 접근하기 위한 GUI 기반 프로그램이다. 앞에서 개발자용(Developer)으로 설치를 진행하였다면 함께 설치된다. 별도 설치를 하려면 &lt;a href=&quot;https://dev.mysql.com/downloads/workbench/&quot;&gt;다음&lt;/a&gt; 경로에 접속하여 설치한다.&lt;/p&gt;
+
+&lt;p&gt;Workbench를 실행하여 root 계정으로 로그인한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-31-ds3/ds03.04.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;로그인이 되면 정상 접근이 되는 것이다.&lt;/p&gt;
+
+&lt;p&gt;마지막으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Edit-Preferences&lt;/code&gt;를 선택한다. 설정 창 좌측에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SQL Editer&lt;/code&gt; 항목을 선택한다. 그리고 우측에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Safe Updates&lt;/code&gt; 항목을 해제한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-31-ds3/ds03.05.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Safe Updates 기능이란, 테이블의 넓은 범위를 update나 delete를 하려고 할때 에러 메시지를 발생시켜 방지하는 일종의 안전모드이다. 그대로 두고 싶다면 해제하지 않아도 된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;참 고&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;MySQL Server 접근은 Workbench 뿐만 아니라 command 창에서도 가능하다. 예를 들어 root 계정으로 로그인 하고자 한다면 커맨드 창에서 다음과 같이 입력한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mysql -u root -p
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Kwang Myung Yu</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="data-science" />
+      
+
+      
+        <summary type="html">본 포스트에서는 MySQL server 설치 방법에 대해서 다룬다. MySQL은 널리 사용되는 관계형 DB 솔루션 중 하나이다. 여기서는 windows os 기반으로 설명한다.</summary>
+      
+
+      
+      
+    </entry>
   
     <entry>
       <title type="html">custom dataset으로 YOLOv5 학습하기2</title>

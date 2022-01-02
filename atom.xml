@@ -38,6 +38,21 @@
     
       
       <item>
+        <title>MySQL server 설치하기 - windows편</title>
+        
+          <description>&lt;p&gt;본 포스트에서는 MySQL server 설치 방법에 대해서 다룬다. MySQL은 널리 사용되는 관계형 DB 솔루션 중 하나이다. 여기서는 windows os 기반으로 설명한다.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 31 Dec 2021 13:30:00 +0000</pubDate>
+        <link>
+        https://sguys99.github.io//ds3</link>
+        <guid isPermaLink="true">https://sguys99.github.io//ds3</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>jekyll 블로그에 utterance로 댓글기능 적용하기</title>
         
           <description>&lt;p&gt;jekyll 블로그에서는 댓글 기능을 제공하지 않는다. 따라서 별도로 댓글 서비스를 적용해야한다.&lt;/p&gt;

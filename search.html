@@ -220,6 +220,15 @@ into the {body} of the default.hbs template -->
     }
     ,
     
+    "ds3": {
+        "title": "MySQL server 설치하기 - windows편",
+            "author": "km.yu99",
+            "category": "",
+            "content": "본 포스트에서는 MySQL server 설치 방법에 대해서 다룬다. MySQL은 널리 사용되는 관계형 DB 솔루션 중 하나이다. 여기서는 windows os 기반으로 설명한다.1. MySQL Installer 다운로드아래 다운로드 주소에 접속한다.  https://dev.mysql.com/downloads/mysql/OS가 Microsoft Windows로 설정된 것을 확인한 후, Go to Download Page 버튼을 클릭한다. 이후 상황에 맞는 installer를 선택하여 Download 버튼을 클릭한다. 여기서는 local installer를 선택하였다. (로그인 화면으로 전환되면 로그인하여 진행. 또는 회원 가입 후 진행)2. MySQL Installer 설치다운 받은 installer 파일을 실행한다.용도에 따른 Setup Type을 지정한다. 여기서는 개발자용인 Developer Default를 선택하고 다음(Next)로 이동하였다.설치할 항목이 표시되면 리스트를 확인한 후 Execute버튼을 선택한다. 설치가 진행될 것이다.3. Product configuration설치가 완료된 후 Next 버튼을 클릭하면 설정항목으로 이동한다.3.1 Type and Networking, Authentication MethodConfig Type을 용도에 맞기 설정한다.(여기서는 Development Computer) Connectivity 항목에서는 서버 연결에 사용할 포트를 지정한다. default 값은 3306이다. 만약 해당 포트가 사용중이면 다른 값을 지정한다.Next를 눌러 Authentication Method를 지정한다. RECOMMENDED 설정으로 두고 Next 버튼을 선택한다.3.2 Accounts and Roles, Windows Service Nameroot 계정, 즉 최상위 권한 계정의 패스워드를 설정한다. 다음으로 이동하여 Windows Service를 설정한다. OS 부팅 후 자동으로 MySQL이 재시작 하도록, Start the MySQL Server at System Startup 항목을 체크한다.3.3 Connect To ServerNext 버튼을 선택하여 설정을 이어 나간다. Connect To Server 항목에서 앞에 설정한 패스워드를 입력하여 연결 시험을 해본다. 상단의 Status 항목에 Connection succeeded 문구가 표시되면 정상 연결되는 것이다.이후 Next를 선택하여 설치를 완료한다.4. MySQL Workbench 실행하기MySQL Workbench는 MySQL에 접근하기 위한 GUI 기반 프로그램이다. 앞에서 개발자용(Developer)으로 설치를 진행하였다면 함께 설치된다. 별도 설치를 하려면 다음 경로에 접속하여 설치한다.Workbench를 실행하여 root 계정으로 로그인한다.로그인이 되면 정상 접근이 되는 것이다.마지막으로 Edit-Preferences를 선택한다. 설정 창 좌측에서 SQL Editer 항목을 선택한다. 그리고 우측에 Safe Updates 항목을 해제한다.Safe Updates 기능이란, 테이블의 넓은 범위를 update나 delete를 하려고 할때 에러 메시지를 발생시켜 방지하는 일종의 안전모드이다. 그대로 두고 싶다면 해제하지 않아도 된다.참 고MySQL Server 접근은 Workbench 뿐만 아니라 command 창에서도 가능하다. 예를 들어 root 계정으로 로그인 하고자 한다면 커맨드 창에서 다음과 같이 입력한다.mysql -u root -p",
+        "url": "/ds3"
+    }
+    ,
+    
     "it04": {
         "title": "jekyll 블로그에 utterance로 댓글기능 적용하기",
             "author": "km.yu99",
