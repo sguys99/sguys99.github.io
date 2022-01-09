@@ -8,6 +8,21 @@
     
       
       <item>
+        <title>오프라인 환경에 파이썬 개발환경 구축하기</title>
+        
+          <description>&lt;p&gt;기업에서의 SW 개발환경은 보안 등의 이슈로 인해 인터넷으로부터 단절되어 있는 경우가 있다. 인터넷이 되더라도 특정 사이트가 방화벽으로 차단되어 있어 pip나 conda install이 원활하지 못할 수도 있다. 본 포스트에서는 오프라인 개발 환경에서 파이썬 개발환경을 구축하는 방법에 대해서 소개한다.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 05 Jan 2022 15:00:00 +0000</pubDate>
+        <link>
+        https://sguys99.github.io//it05</link>
+        <guid isPermaLink="true">https://sguys99.github.io//it05</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>나의 이직 이야기 - 2</title>
         
           <description>&lt;p&gt;&lt;strong&gt;- 임소장1 -&lt;/strong&gt;&lt;/p&gt;

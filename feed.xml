@@ -5,9 +5,156 @@
         <description>Data science, Machine learning, and Automatic control</description>
         <link>https://sguys99.github.io///</link>
         <atom:link href="https://sguys99.github.io///feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Sun, 09 Jan 2022 01:21:07 +0000</pubDate>
-        <lastBuildDate>Sun, 09 Jan 2022 01:21:07 +0000</lastBuildDate>
+        <pubDate>Sun, 09 Jan 2022 03:31:39 +0000</pubDate>
+        <lastBuildDate>Sun, 09 Jan 2022 03:31:39 +0000</lastBuildDate>
         <generator>Jekyll v3.9.0</generator>
+        
+        <item>
+            <title>오프라인 환경에 파이썬 개발환경 구축하기</title>
+            <description>&lt;p&gt;기업에서의 SW 개발환경은 보안 등의 이슈로 인해 인터넷으로부터 단절되어 있는 경우가 있다. 인터넷이 되더라도 특정 사이트가 방화벽으로 차단되어 있어 pip나 conda install이 원활하지 못할 수도 있다. 본 포스트에서는 오프라인 개발 환경에서 파이썬 개발환경을 구축하는 방법에 대해서 소개한다.&lt;/p&gt;
+
+&lt;p&gt;윈도우OS, Minicona를 환경을 기준으로 설명한다.&lt;/p&gt;
+
+&lt;p&gt;준비사항은 다음과 같다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;인터넷이 연결된 PC : 설치파일 및 파이썬 패키지 다운로드용, pip 인스톨러가 설치되어있다고 가정&lt;/li&gt;
+  &lt;li&gt;오프라인 PC&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;인터넷이 연결된 PC에서 설치파일과 패키지를 다운로드 받고, 이 것들을 오프라인 PC(개발환경)에 복사하여 설치를 진행하는 방식이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-05-it05/it05.00-1.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;1-miniconda-다운로드-및-설치&quot;&gt;1. Miniconda 다운로드 및 설치&lt;/h3&gt;
+&lt;p&gt;Anaconda는 데이터분석 패키지 관리와 사용을 용이하게 하는 어플리케이션이다. 개인이나 학생 등의 연구자는 Individual Edition을 사용하면 된다. Anaconda로 150여개의 패키지들이 함께 설치되므로 편리하다.&lt;br /&gt;
+2020년 하반기 유료버전(Commercial edition)에 대한 기준이 새롭게 설정되었다. 즉 200명 이상의 종업원을 보유한 기업이나 영리기관은 유료버전을 사용해야 한다.&lt;a href=&quot;https://www.anaconda.com/blog/anaconda-commercial-edition-faq&quot;&gt;[참고]&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-05-it05/it05.02.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-05-it05/it05.03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;유료버전을 사용하기 곤란한 상황이라면 대안이 있다. 바로 Miniconda를 사용하는 것이다. Minicona는 Anaconda의 minimal 버전으로 무료이다. 파이썬과 패키지 관리자 프로그램이 기본 제공된다. 다만 데이터 분석에 사용되는 패키지들은 포함되어 있지 않으므로 직접 설치해야한다. 회사에서 무료버전을 사용해야하거나 Anaconda에서 제공되는 라이브러리 전체를 사용하지 않아서 가벼운 환경을 원한다면 Miniconda가 대안이 될 수 있다.&lt;/p&gt;
+
+&lt;p&gt;이제 설치를 위해 공식문서 url에 접속한다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.conda.io/en/latest/miniconda.html&quot;&gt;https://docs.conda.io/en/latest/miniconda.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;여기서는 윈도우 OS를 기준으로 설명한다. 사용자의 OS, 파이썬 버전에 맞는 인스톨러를 다운로드 받는다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-05-it05/it05.03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이 파일을 오프라인 PC에 복사해서 설치한다.
+&lt;img src=&quot;assets/images/2022-01-05-it05/it05.04.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;윈도우 OS의 시작버튼을 클릭해서 Anaconda Prompt가 설치되어 있으면 정상 설치된 것이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-파이썬-패키지-다운로드-받기&quot;&gt;2. 파이썬 패키지 다운로드 받기&lt;/h3&gt;
+&lt;p&gt;이제 오프라인 pc에 설치할 패키지를 다운도르 받을 차례다.&lt;br /&gt;
+인터넷이 연결된 pc에서 패키지 다운로드 명령은 다음과 같은 형태이다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;pip download 패키지명==버전번호&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;예를 들어 numpy 1.19.5를 다운로드 받고 싶다면 다음과 같이 입력하면 된다. 버전번호를 입력하지 않으면 최신 버전이 저장된다.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip download numpy==1.19.5
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;우선 패키지들을 저장할 폴더를 생성하고 진입하자. (여기서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pkg&lt;/code&gt;라는 이름의 폴더를 생성하였다.)&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;base&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; C:&lt;span class=&quot;se&quot;&gt;\&amp;gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;pkg
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;base&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; C:&lt;span class=&quot;se&quot;&gt;\&amp;gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;pkg
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;base&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; C:&lt;span class=&quot;se&quot;&gt;\p&lt;/span&gt;kg&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;그리고 앞에서 설명한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pip download&lt;/code&gt; 명령을 사용해서 사용할 패키지들 다운로드 받는다. 패키지 사용에 필요한 dependency도 함께 저장된다.&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;base&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; C:&lt;span class=&quot;se&quot;&gt;\p&lt;/span&gt;kg&amp;gt;pip download &lt;span class=&quot;nv&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;1.19.5
+Collecting &lt;span class=&quot;nv&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;1.19.5
+  Using cached numpy-1.19.5-cp38-cp38-win_amd64.whl &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;13.3 MB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Saved c:&lt;span class=&quot;se&quot;&gt;\p&lt;/span&gt;kg&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;umpy-1.19.5-cp38-cp38-win_amd64.whl
+Successfully downloaded numpy
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;패키지를 다운로드 하면서 폴더안에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;requirements.txt&lt;/code&gt;파일을 생성하여 저장한 패키지명과 정보를 기록한다.
+다음과 같은 형태로 기록하면 된다.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;numpy==1.19.5
+pandas==1.2.4
+matplotlib==3.3.4
+lightgbm==3.2.1
+scikit-learn==0.24.1
+seaborn==0.11.1
+joblib==1.0.1
+jupyter
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;필요한 설치가 완료되면 폴더안에 requirements.txt 파일과 whl 확장자 파일이 저장되어 있을 것이다.
+&lt;img src=&quot;assets/images/2022-01-05-it05/it05.05.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;참 고 : 기존 환경에 설치된 패키지리스트를 다운로드 받고 싶다면?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pip freeze&lt;/code&gt; 명령은 현재 (가상)환경에 설치된 전체 패키지를 출력한다.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(base) C:\&amp;gt;pip freeze
+absl-py==0.14.1
+alabaster @ file:///home/ktietz/src/ci/alabaster_1611921544520/work
+anaconda-client==1.7.2
+anaconda-navigator==2.0.3
+anaconda-project @ file:///tmp/build/80754af9/anaconda-project_1610472525955/work
+anyio @ file:///C:/ci/anyio_1620153418380/work/dist
+appdirs==1.4.4
+argh==0.26.2
+
+---(생 략)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;패키지 리스트를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;requirements.txt&lt;/code&gt; 파일에 출력하고 싶다면 다음과 같이 입력한다.
+(파일에 기록할 때는 Anaconda prompt를 관린자 권한으로 실행해야 한다.)&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(base) C:\pkg&amp;gt;pip freeze &amp;gt; requirements.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이파일에 기록된 패키지를 다운로드 하는 명령은 다음과 같다.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(base) C:\pkg&amp;gt;pip download -r requirements.txt
+Collecting numpy==1.19.5
+  Downloading numpy-1.19.5-cp39-cp39-win_amd64.whl (13.3 MB)
+     |████████████████████████████████| 13.3 MB 6.4 MB/s
+Collecting pandas==1.2.4
+  Downloading pandas-1.2.4-cp39-cp39-win_amd64.whl (9.3 MB)
+     |████████████████████████████████| 9.3 MB ...
+Collecting matplotlib==3.3.4
+  Downloading matplotlib-3.3.4-cp39-cp39-win_amd64.whl (8.5 MB)
+     |████████████████████████████████| 8.5 MB 6.4 MB/s
+
+---(생 략)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;3-다운로드-받은-패키지-설치하기&quot;&gt;3. 다운로드 받은 패키지 설치하기&lt;/h3&gt;
+&lt;p&gt;앞에서 다운로드 받은 패키지 폴더 전체를 오프라인 pc에 복사한다.&lt;br /&gt;
+Miniconda의 Anaconda prompt를 실행한다.&lt;br /&gt;
+폴더 안으로 이동하여 오프라인 패키지를 설치하는 명령을 다음과 같이 입력한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(base) C:\pkg&amp;gt; pip install --no-index --find-links=&quot;./&quot; -r requirements.txt
+Looking in links: ./
+Processing c:\pkg\numpy-1.19.5-cp39-cp39-win_amd64.whl
+Processing c:\pkg\pandas-1.2.4-cp39-cp39-win_amd64.whl
+Processing c:\pkg\matplotlib-3.3.4-cp39-cp39-win_amd64.whl
+Processing c:\pkg\lightgbm-3.2.1-py3-none-win_amd64.whl
+Processing c:\pkg\scikit_learn-0.24.1-cp39-cp39-win_amd64.whl
+
+---(생 략)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;설치가 완료되었다. 설치 후에는 패키지 폴더를 삭제해도 된다.&lt;/p&gt;
+</description>
+            <pubDate>Wed, 05 Jan 2022 15:00:00 +0000</pubDate>
+            <link>https://sguys99.github.io///it05</link>
+            <guid isPermaLink="true">https://sguys99.github.io///it05</guid>
+            
+            <category>it-tips</category>
+            
+            
+        </item>
         
         <item>
             <title>나의 이직 이야기 - 2</title>
