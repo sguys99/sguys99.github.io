@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator>
   <link href="https://sguys99.github.io//author/km.yu99/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://sguys99.github.io//" rel="alternate" type="text/html" />
-  <updated>2022-01-03T11:57:05+00:00</updated>
+  <updated>2022-01-09T01:21:07+00:00</updated>
   <id>https://sguys99.github.io//author/km.yu99/feed.xml</id>
 
   
@@ -30,6 +30,135 @@
   
   
 
+  
+    <entry>
+      <title type="html">나의 이직 이야기 - 2</title>
+      <link href="https://sguys99.github.io//story03" rel="alternate" type="text/html" title="나의 이직 이야기 - 2" />
+      <published>2022-01-02T15:00:00+00:00</published>
+      <updated>2022-01-02T15:00:00+00:00</updated>
+      <id>https://sguys99.github.io//story03</id>
+      <content type="html" xml:base="https://sguys99.github.io//story03">&lt;p&gt;&lt;strong&gt;- 임소장1 -&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;2018년부터 나의 직함은 데이터사이언티스트가 되었다.&lt;/p&gt;
+
+&lt;p&gt;사내 데이터사이언티스트 공모에 지원했고, 덜컥 서류-면접을 통해 합격했다.&lt;/p&gt;
+
+&lt;p&gt;(지원 자격요건은 ‘데이터사이언스와 머신러닝에 호기심과 열정이 큰 직원’ 이었다.)&lt;/p&gt;
+
+&lt;p&gt;정부출연연구소나 공기업의 연구소의 운영 방식은 국회나 공무원 조직의 그것과 비슷하다.&lt;/p&gt;
+
+&lt;p&gt;조직의 장을 배치할 때 과거 이력이나 전문성 보다는, 그 사람의 지위나 영향력을 우선 고려한다.&lt;/p&gt;
+
+&lt;p&gt;장은 1, 2년 근무 후 타 부서 또는 다른 보직으로 이동해야 한다.&lt;/p&gt;
+
+&lt;p&gt;따라서 관리자들이 전문성을 유지하기 어렵고, 어짜피 1, 2년 후에는 이동하기 때문에 조직 운영에 대한 열정과 책임감도 약하다.&lt;/p&gt;
+
+&lt;p&gt;조직원 구성도 마찬가지다. 외부 전문가 채용에 인색한 편이다. 주로 내부 인원 차출, 재배치로 팀을 꾸린다.&lt;/p&gt;
+
+&lt;p&gt;유행에 따라 연구개발 테마도 자주 바뀐다. 선진국의 기술 트렌드를 쫒기 바쁘다.&lt;/p&gt;
+
+&lt;p&gt;미국, 독일, 일본에서 관련 연구를 시작했고 가시적인 성과가 나왔는지가 중요하다.&lt;/p&gt;
+
+&lt;p&gt;2030, 2050을 타겟으로 하는 중장기 로드맵은 있지만 매번 유행만 좆다보니 너덜너덜해졌다.&lt;/p&gt;
+
+&lt;p&gt;잦은 정책 변화 때문에 연구원들은 매년 책상 배치를 바꾸고 사무실을 이리저리 옮기는 조직개편 행사를 경험한다.&lt;/p&gt;
+
+&lt;p&gt;사람은 그대로다. 사무실 명패와 책상 배치만 달라질 뿐.&lt;/p&gt;
+
+&lt;p&gt;어쨌는 ‘한국형’ AI, ‘한국형’ 빅데이터 기술을 선도한다는 미명 아래,&lt;/p&gt;
+
+&lt;p&gt;나를 포함한 사내 공모 인력 다섯명은 빅데이터 전문가가 되었다.&lt;/p&gt;
+
+&lt;p&gt;이번에는 다를거라고 한다. 소장될분이 외부 전문가로 특별채용했고, 우리를 제외한 나머지 실무자들도 전공자로 영입될 계획이다.&lt;/p&gt;
+
+&lt;p&gt;우리는 1월 1일 부로 서울 데이터사이언스 연구소로 발령을 받았다.&lt;/p&gt;
+
+&lt;p&gt;연구소 사무실에는 30개 책상만 덩그러니 놓여 있었다. 앞으로 입사할 신입사원들 자리를 포함한 것이다.&lt;/p&gt;
+
+&lt;p&gt;책상만 제공 받았을 뿐, 관리자도 없고 행정 지원도 없다. 우리가 다 알아서 해야한다.&lt;/p&gt;
+
+&lt;p&gt;회사의 지원은 여기까지다. 정수기부터 인터넷 연결까지 알아서 처리해야 했다.&lt;/p&gt;
+
+&lt;p&gt;사무실에는 사외 전문가로 영입된 박사 인력 두명이 한달 전부터 근무하고 있었다.&lt;/p&gt;
+
+&lt;p&gt;우리들과 인사를 나눴지만 서로간에 미묘한 긴장감이 흐른다.&lt;/p&gt;
+
+&lt;p&gt;전문가 두분을 간단히 소개 하자면,&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;오박사(55세) : 도쿄대 경영학 박사. 나이가 많음…. 과거 경력이 빅데이터와 어떤 연관성이 있는지 알려져 있지 않음. 15개 이상의 기업에서 근무. 회사별 근속연수 평균 1.5년.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;박박사(39세) : 통계학 박사. 우리 중 유일하게 학교에서 데이터 관련 기술을 전공한 사람.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;첫날인데 조직의 리더인 연구소장이 보이지 않는다.&lt;/p&gt;
+
+&lt;p&gt;소장은 MIT에서 AI로 박사학위를 받고 국내 글로벌 대기업 S -&amp;gt; L -&amp;gt; S를 거쳐&lt;/p&gt;
+
+&lt;p&gt;우리회사에 스카웃된 데이터사이언스 최고 전문가라고 했다.&lt;/p&gt;
+
+&lt;p&gt;공공기관은 외부 인재 영입에 상당히 보수적이다.&lt;/p&gt;
+
+&lt;p&gt;위로 갈수록 보직자리가 줄어드는데 능력있는 사람이 오는 것을 반기지 않는다.&lt;/p&gt;
+
+&lt;p&gt;외부에서 인재를 채용하고 보직까지 부여했다는 것은 상당히 파격적인 인사였다.&lt;/p&gt;
+
+&lt;p&gt;당연히 전사 직원들의 관심이 몰렸다.&lt;/p&gt;
+
+&lt;p&gt;소장이 없는 동안 우리끼리 알아서 사무환경을 구축하고 연구소 운영계획을 세웠다.&lt;/p&gt;
+
+&lt;p&gt;인터넷 라인과 PC를 구매해서 사내 시스템에 연결했고, 세부조직을 어떻게 구성할지 의논했다.&lt;/p&gt;
+
+&lt;p&gt;잘나간다는 G사, N사, 그리고 ‘카’사 연구소를 방문해서 조직이 어떻게 운영되어야 할지 벤치마킹했다.&lt;/p&gt;
+
+&lt;p&gt;소장은 2주가 지나도 출근하지 않는다.&lt;/p&gt;
+
+&lt;p&gt;채용을 알선한 헤드헌터를 통해 한달 뒤에 입사하겠다고 통보했다고 한다.&lt;/p&gt;
+
+&lt;p&gt;그의 입사 날이 가까워짐에 따라 궁금증은 더 커져간다.&lt;/p&gt;
+
+&lt;p&gt;식사 시간이나 티타임 대화의 단골 주제는 소장에 관한 이야기였다.&lt;/p&gt;
+
+&lt;p&gt;‘MIT 박사면 우리가 일하는 모습에 답답해하지 않을까요? 초반부터 찍히면 안되는데…’&lt;/p&gt;
+
+&lt;p&gt;‘신임소장 이름이 임xx 래요. 대단한 사람이라고 하는데 인터넷 검색하면 정보가 하나도 안나와요.’&lt;/p&gt;
+
+&lt;p&gt;테이블 끝에 앉아있던 구차장이 한마디 꺼낸다.&lt;/p&gt;
+
+&lt;p&gt;‘내가 본사 담당자 한테 들은게 있는데…&lt;/p&gt;
+
+&lt;p&gt;소장, 신혼여행 가야한다고 입사 한달 연기해달라고 했대요. 안그러면 입사 안하겠다고…’&lt;/p&gt;
+
+&lt;p&gt;평범한 성격은 아닌 것 같다.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Kwang Myung Yu</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="diary" />
+      
+
+      
+        <summary type="html">- 임소장1 -</summary>
+      
+
+      
+      
+    </entry>
   
     <entry>
       <title type="html">(경기 수원 맛집) 수원만두</title>
@@ -1345,295 +1474,6 @@ charset=euc-kr&quot;&amp;gt;\n&amp;lt;title&amp;gt;네이버 금융&amp;lt;/titl
 
       
         <summary type="html">이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작 cheat sheet3 - branch 조작</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">custom dataset으로 YOLOv5 학습하기1</title>
-      <link href="https://sguys99.github.io//ds01" rel="alternate" type="text/html" title="custom dataset으로 YOLOv5 학습하기1" />
-      <published>2021-12-21T13:30:00+00:00</published>
-      <updated>2021-12-21T13:30:00+00:00</updated>
-      <id>https://sguys99.github.io//ds01</id>
-      <content type="html" xml:base="https://sguys99.github.io//ds01">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
-&lt;ul class=&quot;table-of-contents-list&quot;&gt;
-    &lt;li&gt;&lt;a href=&quot;./ds01&quot;&gt;YOLO5 #1 - custom dataset으로 학습하기&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;./ds02&quot;&gt;YOLO5 #2 - 학습 파라미터 설정하기&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;YOLO(You Only Look Once)는 널리 쓰이는 object detection 알고리즘이다. 최근에는 YOLOv5 까지 출시되었다. 여기서는 공식 github 계정에 업로드된 YOLOv5 코드로 custom dataset을 학습하는 방법에 대하여 설명한다. google colab 환경에서 진행되었다.&lt;/p&gt;
-
-&lt;h3 id=&quot;1-데이터셋-소개&quot;&gt;1. 데이터셋 소개&lt;/h3&gt;
-
-&lt;p&gt;실습에 사용되는 데이터셋은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;roboflow&lt;/code&gt;에서 제공되는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;North American Mushrooms Dataset&lt;/code&gt;이다.&lt;a href=&quot;https://public.roboflow.com/object-detection&quot;&gt;[링크]&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-21-ds1/ds01.01.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;여기서는 학습시간을 줄이기 위해서 416x416 사이즈의 이미지 51장을 다운 받았다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-21-ds1/ds01.02.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;object detection 알고리즘 라이브러리 구현방식에 따라, 그리고 YOLO 버전 별로도 사용하는 레이블링 파일의 포맷이 다르다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;roboflow&lt;/code&gt;에서는 레이블링 파일 포맷을 선택하여 다운도르 할 수 있다. 우리는 PyTorch로 구현된 공식 계정의 코드를 사용할 예정이므로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YOLO v5 PyTorch&lt;/code&gt;를 선택하고 다운로드 한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-21-ds1/ds01.03.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;참고로 YOLOv5 공식계정의 코드는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;txt&lt;/code&gt; 포맷의 레이블링 데이터를 사용한다.
-이 파일은 이미지에서 검출된 object에 대한 클래스와 bounding box 정보를 포함하고 있다. 검출 객체정보 배치는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[class, x_center, y_center, width, height]&lt;/code&gt; 형태로 되어있다. bounding box 정보는 이미지 사이즈에 의해 정규화 되어있다. 따라서 0~1 범위의 값을 가진다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-21-ds1/ds01.04.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;편의를 위해 다운로드한 데이터 셋 압축파일의 폴더 이름을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;custom_dataset&lt;/code&gt;으로 수정한다. 데이터 폴더 구성은 다음과 같다.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;custom_dataset
-│
-├── test/
-│   ├── images/                    
-│   └── labels/             
-│
-├── train/
-│   ├── images/                
-│   └── labels/               
-│
-├── valid/
-│   ├── images/                    
-│   └── labels/   
-│
-├── data.yaml
-└── README.dataset.txt
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;data.yaml&lt;/code&gt;파일을 메모장으로 열어보자. 데이터 셋 기본정보가 포함되어 있다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;우리는 *.yaml&lt;/code&gt; 파일을 새로 만들 것이다. 어떤 식으로 구성되는지 참고만 한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-21-ds1/ds01.05.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;train&lt;/code&gt;과 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;val&lt;/code&gt;은 각 데이터 셋의 경로정보이다. 그리고 nc는 class의 수(number of classes)를, names는 각 클래스의 이름이다.&lt;/p&gt;
-
-&lt;h3 id=&quot;2-colab에서-환경구축하기&quot;&gt;2. colab에서 환경구축하기&lt;/h3&gt;
-
-&lt;p&gt;google colab에 접속하고 새 노트를 생성한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;런타임&lt;/code&gt;-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;런타임 유형 변경&lt;/code&gt;을 선택하여, 하드웨어 가속기를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GPU&lt;/code&gt;로 설정한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-21-ds1/ds01.06.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이제 colab 노트에 공식 github 계정의 파일을 다운로드하고, 필수 라이브러리를 설치하는 명령을 입력한다.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;git&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clone&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;https&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;github&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ultralytics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yolov5&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# yolov5 코드 clone
-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yolov5&lt;/span&gt; 										  &lt;span class=&quot;c1&quot;&gt;# clone한 폴더로 진입
-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;qr&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requirements&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;txt&lt;/span&gt;                 &lt;span class=&quot;c1&quot;&gt;# 필수 라이브러리 설치
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Cloning into 'yolov5'...
-remote: Enumerating objects: 10354, done.
-remote: Total 10354 (delta 0), reused 0 (delta 0), pack-reused 10354
-Receiving objects: 100% (10354/10354), 10.58 MiB | 23.75 MiB/s, done.
-Resolving deltas: 100% (7149/7149), done.
-/content/yolov5
-     |████████████████████████████████| 596 kB 5.4 MB/s 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;파일 탐색기에 yolov5 폴더가 생성되었고, 파일들이 다운로드 되어있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-21-ds1/ds01.07.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이제 앞에서 다운로드한 데이터셋을 업로드 한다. 파일 탐색기의 업로드 아이콘을 클릭하여 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;custom_dataset.zip&lt;/code&gt; 파일을 업로드 한다.
-업로드가 완료되면 탐색기에 해당 파일이 표시된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-21-ds1/ds01.08.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;unzip 명령으로 데이터 셋 파일의 압축을 해제한다.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unzip&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;custom_dataset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;zip&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Archive:  ../custom_dataset.zip
-  inflating: custom_dataset/data.yaml  
-  inflating: custom_dataset/README.dataset.txt  
-  inflating: custom_dataset/README.roboflow.txt  
-   creating: custom_dataset/test/
-   creating: custom_dataset/test/images/
-  inflating: custom_dataset/test/images/chanterelle_02_jpg.rf.f7a48494b7393c532f641585d99a57be.jpg  
-  inflating: custom_dataset/test/images/chanterelle_03_jpg.rf.580f8d787af6a8050c21c065bf016f20.jpg  
-  inflating: custom_dataset/test/images/chanterelle_03_jpg.rf.cd892d2f06d228ba20d194fc360320fc.jpg  
-  --- (생 략)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;완료되면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yolov5/custom_dataset/&lt;/code&gt; 경로에 데이터 셋이 위치하게 된다. (현 작업 디렉토리가 yolov5이기 때문)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-21-ds1/ds01.09.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;마지막으로 데이터 셋 설정파일을 작성한다.&lt;/p&gt;
-
-&lt;p&gt;` yolov5/data/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt; 폴더에 &lt;/code&gt;custom_dataset.yaml`이라는 이름의 파일을 생성한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-21-ds1/ds01.10.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;여기에 다음과 같이 설정정보를 입력한다.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;path: /content/yolov5/custom_dataset  #root 디렉토리
-train: train/images					  # 학습데이터 경로
-val: valid/images
-test: test/images
-
-nc: 2								# 클래스 수
-names: ['CoW', 'chanterelle']		# 클래스 이름
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;자세한 내용은 다음 &lt;a href=&quot;https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data&quot;&gt;링크&lt;/a&gt;의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;**1.1 Create dataset.yaml**&lt;/code&gt; 항목을 참고하자.&lt;/p&gt;
-
-&lt;p&gt;이로써 학습을 위한 모든 준비가 완료 되었다.&lt;/p&gt;
-
-&lt;h3 id=&quot;3-모델-학습하기&quot;&gt;3. 모델 학습하기&lt;/h3&gt;
-
-&lt;p&gt;모델 학습 순서는 다음과 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-21-ds1/ds01.11.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;위와 같은 일련의 과정은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;train.py&lt;/code&gt;  파일 실행을 통해 가능하다. 인자로 학습 데이터 경로와 epoch 수를 입력하고 학습을 진행하자.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;data/custom_dataset.yaml&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;epochs&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#epoch 100회
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; Downloading https://ultralytics.com/assets/Arial.ttf to /root/.config/Ultralytics/Arial.ttf...
- train: weights=yolov5s.pt, cfg=, data=data/custom_dataset.yaml, hyp=data/hyps/hyp.scratch.yaml, epochs=100, batch_size=16, imgsz=640, '''
- 
- ---(생략)
- 
- Overriding model.yaml nc=80 with nc=2
- 
-                  from  n    params  module                                  arguments                     
-   0                -1  1      3520  models.common.Conv                      [3, 32, 6, 2, 2]              
-   1                -1  1     18560  models.common.Conv                      [32, 64, 3, 2]                
-   2                -1  1     18816  models.common.C3                        [64, 64, 1]
-   
- ---(생략)
- 
- Logging results to runs/train/exp
- Starting training for 100 epochs...
- 
-      Epoch   gpu_mem       box       obj       cls    labels  img_size
-       0/99     3.23G    0.1252   0.03226   0.02699        28       640: 100% 3/3 [00:05&amp;lt;00:00,  1.95s/it]
-                Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 1/1 [00:00&amp;lt;00:00,  2.48it/s]
-                  all          5         14    0.00695      0.311    0.00395     0.0011
-       
- ---(생략)
- 
- Validating runs/train/exp/weights/best.pt...
- Fusing layers... 
- Model Summary: 213 layers, 7015519 parameters, 0 gradients, 15.8 GFLOPs
-                Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 1/1 [00:00&amp;lt;00:00,  4.48it/s]
-                  all          5         14       0.95      0.996      0.973      0.697
-                  CoW          5          5          1      0.991      0.995      0.688
-          chanterelle          5          9      0.899          1      0.951      0.706
- Results saved to runs/train/exp
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;학습이 완료되면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;runs/train/exp&lt;/code&gt;경로에 학습 결과가 저장된다. 학습을 반복하면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;runs/train&lt;/code&gt;경로에 exp1, 2, 3… 같은 형태로 폴더가 생성되면서 학습 결과가 기록된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-21-ds1/ds01.12.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;학습 결과를 다운로드 하고 싶다면 zip 명령을 압축한 뒤, 저장한다 . 예를 들어 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;train_result.zip&lt;/code&gt;이라는 이름으로 압축하고 싶다면 다음과 같이 입력한다.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;zip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train_result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;zip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yolov5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;runs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;train&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exp&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;탐색기에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;train_result.zip&lt;/code&gt;가 표시되면 정상으로 압축된 것이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-21-ds1/ds01.13.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;4-학습한-모델-검증하기&quot;&gt;4. 학습한 모델 검증하기&lt;/h3&gt;
-
-&lt;p&gt;이제 학습한 모델로 검증을 진행해보자. 검증순서는 앞의 학습 절차에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;모델 가중치 업데이트&lt;/code&gt; 과정이 생략된 것이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-21-ds1/ds01.14.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;모델 검증은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;val.py&lt;/code&gt;  파일 실행을 통해 진행한다. 다양한 인자가 있지만 데이터 경로(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--data&lt;/code&gt;), 모델 가중치(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--weights&lt;/code&gt;) 정도만 입력해서 실행해보자. 앞에서 학습한 모델 가중치는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;runs/train/exp/weights/best.pt&lt;/code&gt;에 저장되었다.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;data/custom_dataset.yaml&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/content/yolov5/runs/train/exp/weights/best.pt&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;val: data=data/custom_dataset.yaml, weights=['/content/yolov5/runs/train/exp/weights/best.pt'], batch_size=32, imgsz=640, conf_thres=0.001, iou_thres=0.6, task=val, device=, workers=8, single_cls=False, augment=False, verbose=False, save_txt=False, save_hybrid=False, save_conf=False, save_json=False, project=runs/val, name=exp, exist_ok=False, half=False, dnn=False
-YOLOv5 🚀 v6.0-155-gdc54ed5 torch 1.10.0+cu111 CUDA:0 (Tesla K80, 11441MiB)
-
-Fusing layers... 
-Model Summary: 213 layers, 7015519 parameters, 0 gradients, 15.8 GFLOPs
-val: Scanning '/content/yolov5/custom_dataset/valid/labels.cache' images and labels... 5 found, 0 missing, 0 empty, 0 corrupted: 100% 5/5 [00:00&amp;lt;?, ?it/s]
-               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 1/1 [00:00&amp;lt;00:00,  2.58it/s]
-                 all          5         14      0.909      0.982      0.961      0.686
-                 CoW          5          5          1      0.965      0.995      0.672
-         chanterelle          5          9      0.818          1      0.926        0.7
-Speed: 0.6ms pre-process, 29.3ms inference, 3.0ms NMS per image at shape (32, 3, 640, 640)
-Results saved to runs/val/exp
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;검증결과는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;runs/val/exp&lt;/code&gt;에 저장된다. 앞에서와 마찬가지로 다운로드 받고 싶다면 폴더를 압축하자.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;zip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val_result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;zip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yolov5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;runs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exp&lt;/code&gt; 폴더 안에는 confusion matrix, F1 curve 등 성능과 관련된 차트가 저장되어 있다.&lt;/p&gt;
-
-&lt;h3 id=&quot;5-학습한-모델로-예측하기&quot;&gt;5. 학습한 모델로 예측하기&lt;/h3&gt;
-
-&lt;p&gt;예측과정은 아래 그림과 같은 절차로 진행된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-21-ds1/ds01.15.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;예측 과정은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;detect.py&lt;/code&gt; 파일을 사용한다. 단순 이미지 뿐만 아니라 웹캠, 비디오 파일 등에서도 실행 가능하다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--source&lt;/code&gt;인자에 다음과 같이 설정해주면 된다.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;!python detect.py --source 0  # webcam
-                            img.jpg  # image
-                            vid.mp4  # video
-                            path/  # directory
-                            path/*.jpg  # glob
-                            'https://youtu.be/Zgi9g1ksQHc'  # YouTube
-                            'rtsp://example.com/media.mp4'  # RTSP, RTMP, HTTP stream
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;여기서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;custom_dataset/test/images&lt;/code&gt; 경로에 있는 이미지에 대해서 object detection을 실행해본다. 인식 대상 (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--source&lt;/code&gt;), 모델 가중치(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--weights&lt;/code&gt;)  경로를 입력해서 실행해보자.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;detect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/content/yolov5/runs/train/exp/weights/best.pt&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/content/yolov5/custom_dataset/test/images&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;detect: weights=['/content/yolov5/runs/train/exp/weights/best.pt'], source=/content/yolov5/custom_dataset/test/images, imgsz=[640, 640], conf_thres=0.25, iou_thres=0.45, max_det=1000, device=, view_img=False, save_txt=False, save_conf=False, 
-
----(생략)
-
-Fusing layers... 
-Model Summary: 213 layers, 7015519 parameters, 0 gradients, 15.8 GFLOPs
-image 1/5 /content/yolov5/custom_dataset/test/images/chanterelle_02_jpg.rf.f7a48494b7393c532f641585d99a57be.jpg: 640x640 3 chanterelles, Done. (0.034s)
---- (생략)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;테스트 결과는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/runs/detect/exp&lt;/code&gt; 경로에 저장된다. 결과를 다운로드 하고 싶다면 다음과 같이 압축하여 저장한다.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;zip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;test_result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;zip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yolov5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;runs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;detect&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exp&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;폴더를 열어보면 class와 bounding box가 표시된 detection 결과 이미지가 저장되어 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/2021-12-21-ds1/ds01.16.jpg&quot; /&gt;&lt;/p&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name>Kwang Myung Yu</name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="data-science" />
-      
-
-      
-        <summary type="html">이 포스트는 여러 절로 구성되어 있습니다. YOLO5 #1 - custom dataset으로 학습하기 YOLO5 #2 - 학습 파라미터 설정하기</summary>
       
 
       
