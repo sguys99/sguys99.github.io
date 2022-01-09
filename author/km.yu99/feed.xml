@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator>
   <link href="https://sguys99.github.io//author/km.yu99/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://sguys99.github.io//" rel="alternate" type="text/html" />
-  <updated>2022-01-09T07:19:58+00:00</updated>
+  <updated>2022-01-09T09:31:48+00:00</updated>
   <id>https://sguys99.github.io//author/km.yu99/feed.xml</id>
 
   
@@ -241,7 +241,7 @@
 
 &lt;p&gt;연-월-일 시:분:초 형태로 표현된다.&lt;/p&gt;
 
-&lt;p&gt;**strftime 메서드 : ** 날짜정보를 문자열로 리턴한다. 메서드 인자로 문자열 포멧을 지정할 수 있다. &lt;br /&gt;
+&lt;p&gt;&lt;strong&gt;strftime 메서드 :&lt;/strong&gt; 날짜정보를 문자열로 리턴한다. 메서드 인자로 문자열 포멧을 지정할 수 있다. &lt;br /&gt;
 포멧에 대한 자세한 내용은 &lt;a href=&quot;https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior&quot;&gt;[이곳]&lt;/a&gt;을 참고한다.&lt;/p&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;today&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;today&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'%Y-%m-%d'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -534,7 +534,6 @@
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
 &lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
@@ -583,7 +582,6 @@
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;/div&gt;
 
 &lt;p&gt;Dataframe 살펴보기&lt;/p&gt;
 
