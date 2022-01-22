@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator>
   <link href="https://sguys99.github.io//tag/data-science/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://sguys99.github.io//" rel="alternate" type="text/html" />
-  <updated>2022-01-22T12:30:59+00:00</updated>
+  <updated>2022-01-22T16:51:47+00:00</updated>
   <id>https://sguys99.github.io//tag/data-science/feed.xml</id>
 
   
@@ -30,6 +30,214 @@
   
   
 
+  
+    <entry>
+      <title type="html">MySQL server 설치하기 - ubuntu linux 편</title>
+      <link href="https://sguys99.github.io//ds5" rel="alternate" type="text/html" title="MySQL server 설치하기 - ubuntu linux 편" />
+      <published>2022-01-15T13:30:00+00:00</published>
+      <updated>2022-01-15T13:30:00+00:00</updated>
+      <id>https://sguys99.github.io//ds5</id>
+      <content type="html" xml:base="https://sguys99.github.io//ds5">&lt;p&gt;본 포스트에서는 Ubuntu 20.04 환경에서 MySQL을 설치하는 방법에 대해 설명한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-패키지-업데이트&quot;&gt;1. 패키지 업데이트&lt;/h3&gt;
+
+&lt;p&gt;기존 설치되어 있는 패키지들을 업데이트 한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get update
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-15-ds5/ds05.01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-mysql-server-설치&quot;&gt;2. MySQL Server 설치&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;mysql-server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-15-ds5/ds05.02.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;3-secure-installation-option&quot;&gt;3. secure installation (option)&lt;/h3&gt;
+
+&lt;p&gt;보안설정을 위한 과정이다. 필요하지 않다면 넘어가도 좋다. 보안 설정을 하고 싶다면 다음 명령을 입력하고 중간 질문에 y 또는 n으로 답변하면 된다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;mysql_secure_installation
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;root password를 설정할 것인지 질문을 한다. 여기서는 y를 선택하였다. 이후 MySQL 접속 시 사용할 패스워드를 설정한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-15-ds5/ds05.03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-15-ds5/ds05.04.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;익명계정(anonymous)을 사용할지 묻는 질문이다. 여기서는 n을 선택하였다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-15-ds5/ds05.05.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;원격접속을 허용하지 않을 것인지(disallow) 묻는다. 필자의 경우 사용할 계획이므로 n을 선택하였다.(allow)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-15-ds5/ds05.06.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;테스트 데이터베이스를 생성할지 여부. y를 선택하였다. 필요하지 않으면 n을 선택해도 된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-15-ds5/ds05.07.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;설정을 적용하기 위해 privilege table들을 불러올지 여부. y를 선택했다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-15-ds5/ds05.08.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;4-mysql-server-실행&quot;&gt;4. MySQL Server 실행&lt;/h3&gt;
+
+&lt;p&gt;MySQL을 실행하려면 다음과 같이 명령을 입력한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start mysql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;ubuntu 부팅 시 MySQL을 자동으로 실행하고 싶다면 다음 명령으로 설정한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$sudo&lt;/span&gt; systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;mysql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-15-ds5/ds05.09.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;MySQL의 구동여부 확인은 다음 명령으로 가능하다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl status mysql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-15-ds5/ds05.10.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;만약 MySQL을 재시작 하려면 다음과 같이 입력한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;service mysql restart
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;5-mysql-계정-생성&quot;&gt;5. MySQL 계정 생성&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;5.1 MySQL 접속&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;다음 명령으로 MySQL에 접속한다. 앞에서 패스워드를 설정하였다면 접속 패스워드도 입력한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;mysql &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; root &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-15-ds5/ds05.11.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;사용자 정보를 확인한다.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;mysql&amp;gt; SELECT User, Host, authentication_string FROM mysql.user;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-15-ds5/ds05.12.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;로컬에서 접속가능한 root 계정만 존재한다. 원격접속을 하려면 원격접속을 허용하는 계정을 생생해야 한다.  계정의 아이디와 패스워드를 설정해주면 된다. 그 전에 패스워드 유효성 검사 기준을 조정해 주도록 한다.  요효성 검사 기준이 엄격하면 불편할 수도 있기 때문이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;5.2 패스워드 유효성 검사기준 변경&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;현재 패스워드 유효성 검사 기준을 확인한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;validate_password&lt;/code&gt;를 포함하는 모든 변수명을 출력하라는 명령이다.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;mysql&amp;gt; show variables like &quot;validate_password%&quot;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-15-ds5/ds05.13.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;유효성 검사기준을 변경한다. 여기서는 policy를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LOW&lt;/code&gt;로 패스워드에 포함할 특수문자 수를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0&lt;/code&gt;으로 조정하였다.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;mysql&amp;gt; set global validate_password.policy=LOW
+mysql&amp;gt; set global validate_password.special_char_count=0;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;5.3 원격접속 계정 등록&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;원격접속 계정 생성 명령 형식은 다음과 같다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;create user ＇아이디＇@＇원격접속지 IP＇ identified by ＇패스워드';&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;만약 모든 원격접속지에서 접근 가능한 계정을 생성하려면 원격 접속지 IP 입력 자리에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%&lt;/code&gt;를 입력하면된다. 여기서는 remote_client라는 이름의 계정을 생성하였다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mysql&amp;gt; create user 'remote_client'@'%' identified by '비밀번호';
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-15-ds5/ds05.14.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;5.4 데이터베이스 접근권한 부여&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;앞에서 생성한 계정의 데이터베이스 접근권한을 부여한다. 명령 형식은 다음과 같다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;grant all privileges on DB이름.* to '아이디'@'%' with grant option;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;만약 remote_client 계정에게 모든 DB에 대한 접근 권한을 부여하고자 한다면 DB이름 자리에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*&lt;/code&gt;를 입력한다.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;mysql&amp;gt; grant all privileges on *.* to 'remote_client'@'%' with grant option;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-15-ds5/ds05.15.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;부여한 권한을 적용하기 위한 명령을 입력한다.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;mysql&amp;gt; flush privileges;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;5.5 MySQL 접속해제&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;설정을 완료했다면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exit&lt;/code&gt;를 입력하여 접속을 해제한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-15-ds5/ds05.16.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;6-원격접속-설정option&quot;&gt;6. 원격접속 설정(Option)&lt;/h3&gt;
+
+&lt;p&gt;원격 접속을 위해서 몇가지 설정을 해야한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;6.1 원격접속을 위한 포트개방&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;원격으로 MySQL에 접속하고자 한다면 MySQL이 사용하는 포트를 개방해야한다. MySQL이 사용하는 Default 포트는 3306이다. 아래 명령을 입력하면 3306번이 허용된다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw allow mysql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;6.2  MySQL 설정파일 수정&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;마지막으로 설정파일(mysqld.cnf)을 문서 편집기로 수정해야 한다. 해당 파일을 연다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vim /etc/mysql/mysql.conf.d/mysqld.cnf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;설정항목중에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bind-address&lt;/code&gt; 부분을 주석처리한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-01-15-ds5/ds05.17.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;모든 설정완료 후 MySQL을 재시작한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;service mysql restart
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Kwang Myung Yu</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="data-science" />
+      
+
+      
+        <summary type="html">본 포스트에서는 Ubuntu 20.04 환경에서 MySQL을 설치하는 방법에 대해 설명한다.</summary>
+      
+
+      
+      
+    </entry>
   
     <entry>
       <title type="html">Timeseries Analysis1 - datetime 라이브러리</title>

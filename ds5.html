@@ -11,7 +11,7 @@
 
 
 
-    <title>git cheat sheet3</title>
+    <title>MySQL server 설치하기 - ubuntu linux 편</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -50,30 +50,30 @@
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="Data science, Machine learning, and Automatic control" />
     <link rel="shortcut icon" href="https://sguys99.github.io//assets/images/logo.png" type="image/png" />
-    <link rel="canonical" href="https://sguys99.github.io//it03" />
+    <link rel="canonical" href="https://sguys99.github.io//ds5" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Happy Plant" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="git cheat sheet3" />
-    <meta property="og:description" content="이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작 cheat sheet3 - branch 조작 git에 대한 자세한 내용은 다음 책을 참고 바란다. 본 절에서는 브랜치 작업과 관련된 명령어를 정리하였다. 1. Setup git branch : 브랜치 목록 표시 git branch [브랜치명] : 해당 브랜치" />
-    <meta property="og:url" content="https://sguys99.github.io//it03" />
-    <meta property="og:image" content="https://sguys99.github.io//assets/images/post-cover-git.jpg" />
+    <meta property="og:title" content="MySQL server 설치하기 - ubuntu linux 편" />
+    <meta property="og:description" content="본 포스트에서는 Ubuntu 20.04 환경에서 MySQL을 설치하는 방법에 대해 설명한다. 1. 패키지 업데이트 기존 설치되어 있는 패키지들을 업데이트 한다. $ sudo apt-get update 2. MySQL Server 설치 $ sudo apt-get install mysql-server 3. secure installation (option) 보안설정을 위한 과정이다. 필요하지 않다면 넘어가도 좋다. 보안 설정을 하고 싶다면 다음 명령을 입력하고" />
+    <meta property="og:url" content="https://sguys99.github.io//ds5" />
+    <meta property="og:image" content="https://sguys99.github.io//assets/images/post-cover-db.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/dbrhkdaud" />
     <meta property="article:author" content="https://www.facebook.com/dbrhkdaud" />
-    <meta property="article:published_time" content="2021-12-25T15:00:00+00:00" />
-    <meta property="article:modified_time" content="2021-12-25T15:00:00+00:00" />
-    <meta property="article:tag" content="It-tips" />
+    <meta property="article:published_time" content="2022-01-15T13:30:00+00:00" />
+    <meta property="article:modified_time" content="2022-01-15T13:30:00+00:00" />
+    <meta property="article:tag" content="Data-science" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="git cheat sheet3" />
-    <meta name="twitter:description" content="이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작 cheat sheet3 - branch 조작 git에 대한 자세한 내용은 다음 책을 참고 바란다. 본 절에서는 브랜치 작업과 관련된 명령어를 정리하였다. 1. Setup git branch : 브랜치 목록 표시 git branch [브랜치명] : 해당 브랜치" />
+    <meta name="twitter:title" content="MySQL server 설치하기 - ubuntu linux 편" />
+    <meta name="twitter:description" content="본 포스트에서는 Ubuntu 20.04 환경에서 MySQL을 설치하는 방법에 대해 설명한다. 1. 패키지 업데이트 기존 설치되어 있는 패키지들을 업데이트 한다. $ sudo apt-get update 2. MySQL Server 설치 $ sudo apt-get install mysql-server 3. secure installation (option) 보안설정을 위한 과정이다. 필요하지 않다면 넘어가도 좋다. 보안 설정을 하고 싶다면 다음 명령을 입력하고" />
     <meta name="twitter:url" content="https://sguys99.github.io//" />
-    <meta name="twitter:image" content="https://sguys99.github.io//assets/images/post-cover-git.jpg" />
+    <meta name="twitter:image" content="https://sguys99.github.io//assets/images/post-cover-db.jpg" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="Happy Plant" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="It-tips" />
+    <meta name="twitter:data2" content="Data-science" />
     <meta name="twitter:site" content="@sguys99" />
     <meta name="twitter:creator" content="@sguys99" />
     <meta property="og:image:width" content="1400" />
@@ -88,18 +88,18 @@
         "name": "Happy Plant",
         "logo": "https://sguys99.github.io//"
     },
-    "url": "https://sguys99.github.io//it03",
+    "url": "https://sguys99.github.io//ds5",
     "image": {
         "@type": "ImageObject",
-        "url": "https://sguys99.github.io//assets/images/post-cover-git.jpg",
+        "url": "https://sguys99.github.io//assets/images/post-cover-db.jpg",
         "width": 2000,
         "height": 666
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://sguys99.github.io//it03"
+        "@id": "https://sguys99.github.io//ds5"
     },
-    "description": "이 포스트는 여러 절로 구성되어 있습니다. cheat sheet1 - 기본 명령어 cheat sheet2 - commit 조작 cheat sheet3 - branch 조작 git에 대한 자세한 내용은 다음 책을 참고 바란다. 본 절에서는 브랜치 작업과 관련된 명령어를 정리하였다. 1. Setup git branch : 브랜치 목록 표시 git branch [브랜치명] : 해당 브랜치"
+    "description": "본 포스트에서는 Ubuntu 20.04 환경에서 MySQL을 설치하는 방법에 대해 설명한다. 1. 패키지 업데이트 기존 설치되어 있는 패키지들을 업데이트 한다. $ sudo apt-get update 2. MySQL Server 설치 $ sudo apt-get install mysql-server 3. secure installation (option) 보안설정을 위한 과정이다. 필요하지 않다면 넘어가도 좋다. 보안 설정을 하고 싶다면 다음 명령을 입력하고"
 }
     </script>
 
@@ -112,7 +112,7 @@
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="git cheat sheet3" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="MySQL server 설치하기 - ubuntu linux 편" href="/feed.xml" />
 
 
 </head>
@@ -189,98 +189,208 @@ into the {body} of the default.hbs template -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
 
-        <article class="post-full  tag-it-tips post ">
+        <article class="post-full  tag-data-science post ">
 
             <header class="post-full-header">
                 <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime="25 December 2021">25 December 2021</time>
+                    <time class="post-full-meta-date" datetime="15 January 2022">15 January 2022</time>
                     
                         <span class="date-divider">/</span>
                         
                             
-                               <a href='/tag/it-tips/'>IT-TIPS</a>
+                               <a href='/tag/data-science/'>DATA-SCIENCE</a>
                             
                         
                     
                 </section>
-                <h1 class="post-full-title">git cheat sheet3</h1>
+                <h1 class="post-full-title">MySQL server 설치하기 - ubuntu linux 편</h1>
             </header>
 
             <!-- 포스트 위에 그림나오는 것 생략하기 위해 주석처리
             
-            <figure class="post-full-image" style="background-image: url(/assets/images/post-cover-git.jpg)">
+            <figure class="post-full-image" style="background-image: url(/assets/images/post-cover-db.jpg)">
             </figure>
             
             포스트 위에 그림나오는 것 생략하기 위해 주석처리 -->
 
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <p><span class="table-of-contents-list">이 포스트는 여러 절로 구성되어 있습니다. </span></p>
-<ul class="table-of-contents-list">
-  <li><a href="./it01">cheat sheet1 - 기본 명령어</a></li>
-  <li><a href="./it02">cheat sheet2 - commit 조작</a></li>
-  <li><a href="./it03">cheat sheet3 - branch 조작</a></li>
-</ul>
+                    <p>본 포스트에서는 Ubuntu 20.04 환경에서 MySQL을 설치하는 방법에 대해 설명한다.</p>
 
-<p>git에 대한 자세한 내용은 <a href="https://wikidocs.net/book/7060">다음 책</a>을 참고 바란다.</p>
+<h3 id="1-패키지-업데이트">1. 패키지 업데이트</h3>
 
-<p>본 절에서는 브랜치 작업과 관련된 명령어를 정리하였다.</p>
+<p>기존 설치되어 있는 패키지들을 업데이트 한다.</p>
 
-<p><img src="assets/images/2021-12-25-it03/it03.01.jpg" /></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt-get update
+</code></pre></div></div>
 
-<h3 id="1-setup">1. Setup</h3>
+<p><img src="assets/images/2022-01-15-ds5/ds05.01.jpg" /></p>
+
+<h3 id="2-mysql-server-설치">2. MySQL Server 설치</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>mysql-server
+</code></pre></div></div>
+
+<p><img src="assets/images/2022-01-15-ds5/ds05.02.jpg" /></p>
+
+<h3 id="3-secure-installation-option">3. secure installation (option)</h3>
+
+<p>보안설정을 위한 과정이다. 필요하지 않다면 넘어가도 좋다. 보안 설정을 하고 싶다면 다음 명령을 입력하고 중간 질문에 y 또는 n으로 답변하면 된다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>mysql_secure_installation
+</code></pre></div></div>
+
+<p>root password를 설정할 것인지 질문을 한다. 여기서는 y를 선택하였다. 이후 MySQL 접속 시 사용할 패스워드를 설정한다.</p>
+
+<p><img src="assets/images/2022-01-15-ds5/ds05.03.jpg" /></p>
+
+<p><img src="assets/images/2022-01-15-ds5/ds05.04.jpg" /></p>
+
+<p>익명계정(anonymous)을 사용할지 묻는 질문이다. 여기서는 n을 선택하였다.</p>
+
+<p><img src="assets/images/2022-01-15-ds5/ds05.05.jpg" /></p>
+
+<p>원격접속을 허용하지 않을 것인지(disallow) 묻는다. 필자의 경우 사용할 계획이므로 n을 선택하였다.(allow)</p>
+
+<p><img src="assets/images/2022-01-15-ds5/ds05.06.jpg" /></p>
+
+<p>테스트 데이터베이스를 생성할지 여부. y를 선택하였다. 필요하지 않으면 n을 선택해도 된다.</p>
+
+<p><img src="assets/images/2022-01-15-ds5/ds05.07.jpg" /></p>
+
+<p>설정을 적용하기 위해 privilege table들을 불러올지 여부. y를 선택했다.</p>
+
+<p><img src="assets/images/2022-01-15-ds5/ds05.08.jpg" /></p>
+
+<h3 id="4-mysql-server-실행">4. MySQL Server 실행</h3>
+
+<p>MySQL을 실행하려면 다음과 같이 명령을 입력한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl start mysql
+</code></pre></div></div>
+
+<p>ubuntu 부팅 시 MySQL을 자동으로 실행하고 싶다면 다음 명령으로 설정한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$sudo</span> systemctl <span class="nb">enable </span>mysql
+</code></pre></div></div>
+
+<p><img src="assets/images/2022-01-15-ds5/ds05.09.jpg" /></p>
+
+<p>MySQL의 구동여부 확인은 다음 명령으로 가능하다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>systemctl status mysql
+</code></pre></div></div>
+
+<p><img src="assets/images/2022-01-15-ds5/ds05.10.jpg" /></p>
+
+<p>만약 MySQL을 재시작 하려면 다음과 같이 입력한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>service mysql restart
+</code></pre></div></div>
+
+<h3 id="5-mysql-계정-생성">5. MySQL 계정 생성</h3>
+
+<p><strong>5.1 MySQL 접속</strong></p>
+
+<p>다음 명령으로 MySQL에 접속한다. 앞에서 패스워드를 설정하였다면 접속 패스워드도 입력한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>mysql <span class="nt">-u</span> root <span class="nt">-p</span>
+</code></pre></div></div>
+
+<p><img src="assets/images/2022-01-15-ds5/ds05.11.jpg" /></p>
+
+<p>사용자 정보를 확인한다.</p>
+
+<pre><code class="language-mysql">mysql&gt; SELECT User, Host, authentication_string FROM mysql.user;
+</code></pre>
+
+<p><img src="assets/images/2022-01-15-ds5/ds05.12.jpg" /></p>
+
+<p>로컬에서 접속가능한 root 계정만 존재한다. 원격접속을 하려면 원격접속을 허용하는 계정을 생생해야 한다.  계정의 아이디와 패스워드를 설정해주면 된다. 그 전에 패스워드 유효성 검사 기준을 조정해 주도록 한다.  요효성 검사 기준이 엄격하면 불편할 수도 있기 때문이다.</p>
+
+<p><strong>5.2 패스워드 유효성 검사기준 변경</strong></p>
+
+<p>현재 패스워드 유효성 검사 기준을 확인한다. <code class="language-plaintext highlighter-rouge">validate_password</code>를 포함하는 모든 변수명을 출력하라는 명령이다.</p>
+
+<pre><code class="language-mysql">mysql&gt; show variables like "validate_password%";
+</code></pre>
+
+<p><img src="assets/images/2022-01-15-ds5/ds05.13.jpg" /></p>
+
+<p>유효성 검사기준을 변경한다. 여기서는 policy를 <code class="language-plaintext highlighter-rouge">LOW</code>로 패스워드에 포함할 특수문자 수를 <code class="language-plaintext highlighter-rouge">0</code>으로 조정하였다.</p>
+
+<pre><code class="language-mysql">mysql&gt; set global validate_password.policy=LOW
+mysql&gt; set global validate_password.special_char_count=0;
+</code></pre>
+
+<p><strong>5.3 원격접속 계정 등록</strong></p>
+
+<p>원격접속 계정 생성 명령 형식은 다음과 같다.</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">git branch</code> : 브랜치 목록 표시</li>
-  <li><code class="language-plaintext highlighter-rouge">git branch [브랜치명]</code> : 해당 브랜치 명으로 브랜치 생성</li>
-  <li><code class="language-plaintext highlighter-rouge">git checkout [브랜치명]</code> : 해당 브랜치로 전환</li>
-  <li><code class="language-plaintext highlighter-rouge">git checkout –b [브랜치명]</code> : 브랜치 생성과 동시에 전환</li>
-  <li><code class="language-plaintext highlighter-rouge">git branch -m [브랜치명] [새로운 브랜치명]</code> : 브랜치명 변경</li>
-  <li><code class="language-plaintext highlighter-rouge">git branch –d [브랜치명]</code> : 해당 브랜치 삭제</li>
+  <li><code class="language-plaintext highlighter-rouge">create user ＇아이디＇@＇원격접속지 IP＇ identified by ＇패스워드';</code></li>
 </ul>
 
-<h3 id="2-merge-rewrite">2. Merge, rewrite</h3>
-<p><strong>2.1 merge</strong></p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">git merge [브랜치명]</code> : 현 브랜치에 해당 브랜치의 내용 병합</li>
-</ul>
+<p>만약 모든 원격접속지에서 접근 가능한 계정을 생성하려면 원격 접속지 IP 입력 자리에 <code class="language-plaintext highlighter-rouge">%</code>를 입력하면된다. 여기서는 remote_client라는 이름의 계정을 생성하였다.</p>
 
-<p><img src="assets/images/2021-12-25-it03/it03.02.jpg" /></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql&gt; create user 'remote_client'@'%' identified by '비밀번호';
+</code></pre></div></div>
+
+<p><img src="assets/images/2022-01-15-ds5/ds05.14.jpg" /></p>
+
+<p><strong>5.4 데이터베이스 접근권한 부여</strong></p>
+
+<p>앞에서 생성한 계정의 데이터베이스 접근권한을 부여한다. 명령 형식은 다음과 같다.</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">git merge --ff [브랜치명]</code> : fast-forward 관계에 있으면 commit을 생성하지 않고 현재 브랜치의 참조 값 만 변경(default)</li>
+  <li><code class="language-plaintext highlighter-rouge">grant all privileges on DB이름.* to '아이디'@'%' with grant option;</code></li>
 </ul>
 
-<p><img src="assets/images/2021-12-25-it03/it03.03.jpg" /></p>
+<p>만약 remote_client 계정에게 모든 DB에 대한 접근 권한을 부여하고자 한다면 DB이름 자리에 <code class="language-plaintext highlighter-rouge">*</code>를 입력한다.</p>
 
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">git merge --no-ff [브랜치명]</code> : fast-forward 관계에 있어도 merged commit 생성</li>
-</ul>
+<pre><code class="language-mysql">mysql&gt; grant all privileges on *.* to 'remote_client'@'%' with grant option;
+</code></pre>
 
-<p><img src="assets/images/2021-12-25-it03/it03.04.jpg" /></p>
+<p><img src="assets/images/2022-01-15-ds5/ds05.15.jpg" /></p>
 
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">git merge --squash [브랜치명]</code> : fast-forward 관계에 있어도 merged commit 생성, merging 브랜치 정보 생략</li>
-</ul>
+<p>부여한 권한을 적용하기 위한 명령을 입력한다.</p>
 
-<p><strong>2.2 rebase</strong><br />
-<img src="assets/images/2021-12-25-it03/it03.05.jpg" /></p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">git rebase [브랜치명]</code> : 현재 브랜치가 해당 브랜치(브랜치명)에부터 분기하도록 재배치</li>
-  <li><code class="language-plaintext highlighter-rouge">git rebase --continue</code> : 충돌 수정 후 재배치 진행(commit 대신)</li>
-  <li><code class="language-plaintext highlighter-rouge">git rebase --abort</code> : rebase 취소</li>
-</ul>
+<pre><code class="language-mysql">mysql&gt; flush privileges;
+</code></pre>
 
-<p><strong>2.3 cherry-pick</strong><br />
-<img src="assets/images/2021-12-25-it03/it03.06.jpg" /></p>
+<p><strong>5.5 MySQL 접속해제</strong></p>
 
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">git cherry-pick [commit hash]</code> : 해당 commit의 내용을 현재 브랜치에 추가. 뒤에 commit hash 를 연속 입력하면 복수 추가 가능</li>
-  <li><code class="language-plaintext highlighter-rouge">git cherry-pick [commit hash start].. [commit hash end]</code> : 해당 구간의 commit을 한번에 추가</li>
-  <li><code class="language-plaintext highlighter-rouge">git cherry-pick –-abort</code> :  충돌과 같은 상황이 발생했을 때 cherry-pick 취소</li>
-  <li><code class="language-plaintext highlighter-rouge">git cherry-pick –-continue</code> : 충돌 상황 해결 후 cherry-pick 진행</li>
-  <li><code class="language-plaintext highlighter-rouge">git cherry-pick –m [parent number] [merge commit ID]</code> : merge commit을 추가. merge commit의 경우 어떤 부분의 merge를 가져올지 알 수 없다. 그래서 parent number를 추가해야 한다.(1부터 시작하며 main line이 1)</li>
-</ul>
+<p>설정을 완료했다면 <code class="language-plaintext highlighter-rouge">exit</code>를 입력하여 접속을 해제한다.</p>
+
+<p><img src="assets/images/2022-01-15-ds5/ds05.16.jpg" /></p>
+
+<h3 id="6-원격접속-설정option">6. 원격접속 설정(Option)</h3>
+
+<p>원격 접속을 위해서 몇가지 설정을 해야한다.</p>
+
+<p><strong>6.1 원격접속을 위한 포트개방</strong></p>
+
+<p>원격으로 MySQL에 접속하고자 한다면 MySQL이 사용하는 포트를 개방해야한다. MySQL이 사용하는 Default 포트는 3306이다. 아래 명령을 입력하면 3306번이 허용된다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ufw allow mysql
+</code></pre></div></div>
+
+<p><strong>6.2  MySQL 설정파일 수정</strong></p>
+
+<p>마지막으로 설정파일(mysqld.cnf)을 문서 편집기로 수정해야 한다. 해당 파일을 연다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vim /etc/mysql/mysql.conf.d/mysqld.cnf
+</code></pre></div></div>
+
+<p>설정항목중에 <code class="language-plaintext highlighter-rouge">bind-address</code> 부분을 주석처리한다.</p>
+
+<p><img src="assets/images/2022-01-15-ds5/ds05.17.jpg" /></p>
+
+<p>모든 설정완료 후 MySQL을 재시작한다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>service mysql restart
+</code></pre></div></div>
+
 
                 </div>
             </section>
@@ -379,7 +489,7 @@ into the {body} of the default.hbs template -->
                         <header class="read-next-card-header">
                             <small class="read-next-card-header-sitetitle">&mdash; Happy Plant &mdash;</small>
                             
-                                <h3 class="read-next-card-header-title"><a href="/tag/it-tips/">It-tips</a></h3>
+                                <h3 class="read-next-card-header-title"><a href="/tag/data-science/">Data-science</a></h3>
                             
                         </header>
                         <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
@@ -391,6 +501,25 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/ds4">Timeseries Analysis1 - datetime 라이브러리</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
                                 
                                   
                                 
@@ -402,7 +531,7 @@ into the {body} of the default.hbs template -->
                                     
                                         
                                         
-                                            <li><a href="/it05">오프라인 환경에 파이썬 개발환경 구축하기</a></li>
+                                            <li><a href="/ds3">MySQL server 설치하기 - windows편</a></li>
                                         
                                     
                                   
@@ -421,22 +550,7 @@ into the {body} of the default.hbs template -->
                                     
                                         
                                         
-                                            <li><a href="/it04">jekyll 블로그에 utterance로 댓글기능 적용하기</a></li>
-                                        
-                                    
-                                  
-                                
-                                  
-                                
-                                  
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                            <li><a href="/it02">git cheat sheet2</a></li>
+                                            <li><a href="/ds02">custom dataset으로 YOLOv5 학습하기2</a></li>
                                         
                                     
                                   
@@ -446,10 +560,6 @@ into the {body} of the default.hbs template -->
                                         
                                         
                                     
-                                  
-                                
-                                  
-                                
                                   
                                 
                                   
@@ -469,7 +579,7 @@ into the {body} of the default.hbs template -->
                             </ul>
                         </div>
                         <footer class="read-next-card-footer">
-                            <a href="/tag/it-tips/">
+                            <a href="/tag/data-science/">
                                 
                                     See all 4 posts  →
                                 
@@ -485,26 +595,26 @@ into the {body} of the default.hbs template -->
 
     <article class="post-card post-template">
         
-            <a class="post-card-image-link" href="/trading03">
-                <div class="post-card-image" style="background-image: url(/assets/images/post-cover-naver.jpg)"></div>
+            <a class="post-card-image-link" href="/foody7">
+                <div class="post-card-image" style="background-image: url(/assets/images/post-cover-foody.jpg)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/trading03">
+            <a class="post-card-content-link" href="/foody7">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Algorithmic-trading</span>
+                                <span class="post-card-tags">Diary</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">네이버에서 일별 시세 가져오기</h2>
+                    <h2 class="post-card-title">(서울 송파 맛집) 셰프의 부엌</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>네이버에서는 국내 주식과 관련된 다양한 정보를 제공한다. 본 포스트에서는 네이버 금융에서 일별 주식 시세를 가져오는 방법을 소개한다.
+                        <p>송파구 방이시장 인근 파스타 맛집 셰프의 부엌
 
 </p>
                     
@@ -524,7 +634,7 @@ into the {body} of the default.hbs template -->
                 <span class="reading-time">
                     
                     
-                      4 min read
+                      1 min read
                     
                 </span>
             </footer>
@@ -539,31 +649,26 @@ into the {body} of the default.hbs template -->
 
     <article class="post-card post-template">
         
-            <a class="post-card-image-link" href="/it02">
-                <div class="post-card-image" style="background-image: url(/assets/images/post-cover-git.jpg)"></div>
+            <a class="post-card-image-link" href="/story05">
+                <div class="post-card-image" style="background-image: url(/assets/images/post-cover-resignation.png)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/it02">
+            <a class="post-card-content-link" href="/story05">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">It-tips</span>
+                                <span class="post-card-tags">Diary</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">git cheat sheet2</h2>
+                    <h2 class="post-card-title">나의 이직 이야기 - 4</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>이 포스트는 여러 절로 구성되어 있습니다. 
-
-  cheat sheet1 - 기본 명령어
-  cheat sheet2 - commit 조작
-  cheat sheet3 - branch 조작
-
+                        <p>- 임소장3 -
 
 </p>
                     
@@ -605,18 +710,18 @@ into the {body} of the default.hbs template -->
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">git cheat sheet3</div>
+    <div class="floating-header-title">MySQL server 설치하기 - ubuntu linux 편</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=git+cheat+sheet3&amp;url=https://sguys99.github.io/it03"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=MySQL+server+%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0+-+ubuntu+linux+%ED%8E%B8&amp;url=https://sguys99.github.io/ds5"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://sguys99.github.io/it03"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://sguys99.github.io/ds5"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 

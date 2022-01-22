@@ -211,6 +211,15 @@ into the {body} of the default.hbs template -->
     }
     ,
     
+    "ds5": {
+        "title": "MySQL server 설치하기 - ubuntu linux 편",
+            "author": "km.yu99",
+            "category": "",
+            "content": "본 포스트에서는 Ubuntu 20.04 환경에서 MySQL을 설치하는 방법에 대해 설명한다.1. 패키지 업데이트기존 설치되어 있는 패키지들을 업데이트 한다.$ sudo apt-get update2. MySQL Server 설치$ sudo apt-get install mysql-server3. secure installation (option)보안설정을 위한 과정이다. 필요하지 않다면 넘어가도 좋다. 보안 설정을 하고 싶다면 다음 명령을 입력하고 중간 질문에 y 또는 n으로 답변하면 된다.$ sudo mysql_secure_installationroot password를 설정할 것인지 질문을 한다. 여기서는 y를 선택하였다. 이후 MySQL 접속 시 사용할 패스워드를 설정한다.익명계정(anonymous)을 사용할지 묻는 질문이다. 여기서는 n을 선택하였다.원격접속을 허용하지 않을 것인지(disallow) 묻는다. 필자의 경우 사용할 계획이므로 n을 선택하였다.(allow)테스트 데이터베이스를 생성할지 여부. y를 선택하였다. 필요하지 않으면 n을 선택해도 된다.설정을 적용하기 위해 privilege table들을 불러올지 여부. y를 선택했다.4. MySQL Server 실행MySQL을 실행하려면 다음과 같이 명령을 입력한다.$ sudo systemctl start mysqlubuntu 부팅 시 MySQL을 자동으로 실행하고 싶다면 다음 명령으로 설정한다.$sudo systemctl enable mysqlMySQL의 구동여부 확인은 다음 명령으로 가능하다.$ systemctl status mysql만약 MySQL을 재시작 하려면 다음과 같이 입력한다.$ sudo service mysql restart5. MySQL 계정 생성5.1 MySQL 접속다음 명령으로 MySQL에 접속한다. 앞에서 패스워드를 설정하였다면 접속 패스워드도 입력한다.$ sudo mysql -u root -p사용자 정보를 확인한다.mysql&gt; SELECT User, Host, authentication_string FROM mysql.user;로컬에서 접속가능한 root 계정만 존재한다. 원격접속을 하려면 원격접속을 허용하는 계정을 생생해야 한다.  계정의 아이디와 패스워드를 설정해주면 된다. 그 전에 패스워드 유효성 검사 기준을 조정해 주도록 한다.  요효성 검사 기준이 엄격하면 불편할 수도 있기 때문이다.5.2 패스워드 유효성 검사기준 변경현재 패스워드 유효성 검사 기준을 확인한다. validate_password를 포함하는 모든 변수명을 출력하라는 명령이다.mysql&gt; show variables like \"validate_password%\";유효성 검사기준을 변경한다. 여기서는 policy를 LOW로 패스워드에 포함할 특수문자 수를 0으로 조정하였다.mysql&gt; set global validate_password.policy=LOWmysql&gt; set global validate_password.special_char_count=0;5.3 원격접속 계정 등록원격접속 계정 생성 명령 형식은 다음과 같다.  create user ＇아이디＇@＇원격접속지 IP＇ identified by ＇패스워드';만약 모든 원격접속지에서 접근 가능한 계정을 생성하려면 원격 접속지 IP 입력 자리에 %를 입력하면된다. 여기서는 remote_client라는 이름의 계정을 생성하였다.mysql&gt; create user 'remote_client'@'%' identified by '비밀번호';5.4 데이터베이스 접근권한 부여앞에서 생성한 계정의 데이터베이스 접근권한을 부여한다. 명령 형식은 다음과 같다.  grant all privileges on DB이름.* to '아이디'@'%' with grant option;만약 remote_client 계정에게 모든 DB에 대한 접근 권한을 부여하고자 한다면 DB이름 자리에 *를 입력한다.mysql&gt; grant all privileges on *.* to 'remote_client'@'%' with grant option;부여한 권한을 적용하기 위한 명령을 입력한다.mysql&gt; flush privileges;5.5 MySQL 접속해제설정을 완료했다면 exit를 입력하여 접속을 해제한다.6. 원격접속 설정(Option)원격 접속을 위해서 몇가지 설정을 해야한다.6.1 원격접속을 위한 포트개방원격으로 MySQL에 접속하고자 한다면 MySQL이 사용하는 포트를 개방해야한다. MySQL이 사용하는 Default 포트는 3306이다. 아래 명령을 입력하면 3306번이 허용된다.$ sudo ufw allow mysql6.2  MySQL 설정파일 수정마지막으로 설정파일(mysqld.cnf)을 문서 편집기로 수정해야 한다. 해당 파일을 연다.$ sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf설정항목중에 bind-address 부분을 주석처리한다.모든 설정완료 후 MySQL을 재시작한다.$ sudo service mysql restart",
+        "url": "/ds5"
+    }
+    ,
+    
     "story05": {
         "title": "나의 이직 이야기 - 4",
             "author": "km.yu99",
