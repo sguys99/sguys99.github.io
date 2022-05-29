@@ -202,6 +202,15 @@ into the {body} of the default.hbs template -->
 <script>
     window.store = {
     
+    "it06": {
+        "title": "WSL2 설치하기",
+            "author": "km.yu99",
+            "category": "",
+            "content": "Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다.1. Windows 버전 확인WSL2는 Windows 10 빌드 19041 이상, 또는 Windows 11 이상에서 동작한다. 만약 Windows 10을 사용하고 있다면 작업 표시줄 검색창에서 PC 정보를 입력해서 사용하는 OS 빌드 정보를 확인해본다. 버전이 낮다면 OS 업데이트를 진행한다.2. Windows Terminal 설치 (선택사항)WSL2 설치는 터미널을 통해 진행한다. 기본으로 설치되어 있는 PowerShell도 사용할 수 있지만, 사용에 장점이 많은 Windows Terminal 설치를 추천한다. Windows Terminal은 작업 표시줄 검색으로 Microsoft Store에 접속하여 Windows Terminal을 검색하여 다운, 설치할 수 있다. 또는 다음 [링크]에 접속하여 다운받는다.설치가 완료된 후, 다시 작업 표시줄 검색에서 터미널을 입력하면 Windows Terminal 프로그램을 실행할 수 있다.3. WSL2 셋업하기  먼저 Windows Terminal을 관리자 권한으로 실행한다. 그리고 WSL2를 셋업하기 위해 다음 두 명령어를 차례대로 입력한다. WSL과 가상환경 옵션을 활성화 해주는 명령이다.&gt; dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart&gt; dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart활성화가 끝나면 Windows를 재시작 한다.  Linux커널 업데이트 패키지를 다운, 설치한다. 여기에 접속하여 x64용 msi 파일을 다운로드한다. 다운받은 wsl_update_x64.msi파일을 실행하여 설치를 진행한다.  WSL이 정상적으로 설정되었는지 확인한다. Windows Terminal에서 wsl을 입력했을 때 다음과 같은 메시지가 실행되면 제대로 설정된 것이다.  계속해서 WSL2를 기본버전으로 설정해준다.&gt; wsl --set-default-version 24. Linux 배포 버전 설치이제 WSL2에서 구동되는 Linux 배포 버전을 설치한다. 여기서는 Ubuntu 22.04를 기준으로 설명한다.  Microsoft Store에서 Ubuntu 22.04를 검색해서 다운로드 버튼을 클릭한다. 다운이 완료되면 열기를 클릭한다.  언어나 사용자/ 패스워드 설정을 진행한다.  Windows Terminal을 실행하면 Ubuntu 22.04 터미널 항목이 추가되었다. 선택하면 우분투 터미널을 사용할 수 있다.참 고 : WSL2 Ubuntu 환경에서 Docker 사용하기WSL2하의 Ubuntu에서 Docker를 사용하기 위해서는 Windows용 Docker를 설치해야 한다.  Docker 공식 사이트의 Windows 버전 설치 페이지로 이동한다. 그리고 Docker Desktop for Windows 버튼을 클릭해서 설치파일을 다운 받는다.  다운 받은 설치 파일을 실행해서 설치를 진행한다.  Use WSL2… 항목이 체크된 것을 확인한다.설치가 완료되면 Windows를 재시작한다.  Windows Terminal에서 Ubuntu를 실행한다. 터미널에서 docker ps를 입력해서 결과가 다음과 같으면 정상적으로 설치된 것이다.",
+        "url": "/it06"
+    }
+    ,
+    
     "foody7": {
         "title": "(서울 송파 맛집) 셰프의 부엌",
             "author": "km.yu99",

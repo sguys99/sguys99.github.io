@@ -8,6 +8,21 @@
     
       
       <item>
+        <title>WSL2 설치하기</title>
+        
+          <description>&lt;p&gt;Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 28 May 2022 15:00:00 +0000</pubDate>
+        <link>
+        https://sguys99.github.io//it06</link>
+        <guid isPermaLink="true">https://sguys99.github.io//it06</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>(서울 송파 맛집) 셰프의 부엌</title>
         
           <description>&lt;p&gt;송파구 방이시장 인근 파스타 맛집 &lt;strong&gt;셰프의 부엌&lt;/strong&gt;&lt;/p&gt;

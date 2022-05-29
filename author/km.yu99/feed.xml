@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator>
   <link href="https://sguys99.github.io//author/km.yu99/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://sguys99.github.io//" rel="alternate" type="text/html" />
-  <updated>2022-01-22T17:55:24+00:00</updated>
+  <updated>2022-05-29T12:19:06+00:00</updated>
   <id>https://sguys99.github.io//author/km.yu99/feed.xml</id>
 
   
@@ -30,6 +30,136 @@
   
   
 
+  
+    <entry>
+      <title type="html">WSL2 설치하기</title>
+      <link href="https://sguys99.github.io//it06" rel="alternate" type="text/html" title="WSL2 설치하기" />
+      <published>2022-05-28T15:00:00+00:00</published>
+      <updated>2022-05-28T15:00:00+00:00</updated>
+      <id>https://sguys99.github.io//it06</id>
+      <content type="html" xml:base="https://sguys99.github.io//it06">&lt;p&gt;Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-windows-버전-확인&quot;&gt;1. Windows 버전 확인&lt;/h3&gt;
+&lt;p&gt;WSL2는 Windows 10 빌드 19041 이상, 또는 Windows 11 이상에서 동작한다. 만약 Windows 10을 사용하고 있다면 작업 표시줄 검색창에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PC 정보&lt;/code&gt;를 입력해서 사용하는 OS 빌드 정보를 확인해본다. 버전이 낮다면 OS 업데이트를 진행한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-05-28-it06/it06.01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-windows-terminal-설치-선택사항&quot;&gt;2. Windows Terminal 설치 (선택사항)&lt;/h3&gt;
+
+&lt;p&gt;WSL2 설치는 터미널을 통해 진행한다. 기본으로 설치되어 있는 PowerShell도 사용할 수 있지만, 사용에 장점이 많은 Windows Terminal 설치를 추천한다. Windows Terminal은 작업 표시줄 검색으로 Microsoft Store에 접속하여 Windows Terminal을 검색하여 다운, 설치할 수 있다. 또는 다음 &lt;a href=&quot;https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701?hl=ko-KR&amp;amp;gl=KR&quot;&gt;[링크]&lt;/a&gt;에 접속하여 다운받는다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-05-28-it06/it06.02.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;설치가 완료된 후, 다시 작업 표시줄 검색에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;터미널&lt;/code&gt;을 입력하면 Windows Terminal 프로그램을 실행할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-05-28-it06/it06.03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;3-wsl2-셋업하기&quot;&gt;3. WSL2 셋업하기&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;먼저 Windows Terminal을 &lt;strong&gt;관리자 권한&lt;/strong&gt;으로 실행한다. 그리고 WSL2를 셋업하기 위해 다음 두 명령어를 차례대로 입력한다. WSL과 가상환경 옵션을 활성화 해주는 명령이다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+&amp;gt; dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-05-28-it06/it06.04.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;활성화가 끝나면 &lt;strong&gt;Windows를 재시작&lt;/strong&gt; 한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Linux커널 업데이트 패키지를 다운, 설치한다. &lt;a href=&quot;https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi&quot;&gt;여기&lt;/a&gt;에 접속하여 x64용 msi 파일을 다운로드한다. 다운받은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wsl_update_x64.msi&lt;/code&gt;파일을 실행하여 설치를 진행한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-05-28-it06/it06.05.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;WSL이 정상적으로 설정되었는지 확인한다. Windows Terminal에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wsl&lt;/code&gt;을 입력했을 때 다음과 같은 메시지가 실행되면 제대로 설정된 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-05-28-it06/it06.06.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;계속해서 WSL2를 기본버전으로 설정해준다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; wsl --set-default-version 2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-05-28-it06/it06.07.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;4-linux-배포-버전-설치&quot;&gt;4. Linux 배포 버전 설치&lt;/h3&gt;
+
+&lt;p&gt;이제 WSL2에서 구동되는 Linux 배포 버전을 설치한다. 여기서는 Ubuntu 22.04를 기준으로 설명한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Microsoft Store에서 Ubuntu 22.04를 검색해서 다운로드 버튼을 클릭한다. 다운이 완료되면 열기를 클릭한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-05-28-it06/it06.08.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;언어나 사용자/ 패스워드 설정을 진행한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-05-28-it06/it06.09.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Windows Terminal을 실행하면 Ubuntu 22.04 터미널 항목이 추가되었다. 선택하면 우분투 터미널을 사용할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-05-28-it06/it06.10.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;참-고--wsl2-ubuntu-환경에서-docker-사용하기&quot;&gt;참 고 : WSL2 Ubuntu 환경에서 Docker 사용하기&lt;/h3&gt;
+
+&lt;p&gt;WSL2하의 Ubuntu에서 Docker를 사용하기 위해서는 Windows용 Docker를 설치해야 한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Docker 공식 사이트의 &lt;a href=&quot;https://docs.docker.com/desktop/windows/install/&quot;&gt;Windows 버전 설치 페이지&lt;/a&gt;로 이동한다. 그리고 &lt;strong&gt;Docker Desktop for Windows&lt;/strong&gt; 버튼을 클릭해서 설치파일을 다운 받는다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-05-28-it06/it06.11.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;다운 받은 설치 파일을 실행해서 설치를 진행한다.  Use WSL2… 항목이 체크된 것을 확인한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-05-28-it06/it06.12.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;설치가 완료되면 Windows를 재시작한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Windows Terminal에서 Ubuntu를 실행한다. 터미널에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker ps&lt;/code&gt;를 입력해서 결과가 다음과 같으면 정상적으로 설치된 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-05-28-it06/it06.13.jpg&quot; /&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Kwang Myung Yu</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="it-tips" />
+      
+
+      
+        <summary type="html">Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다.</summary>
+      
+
+      
+      
+    </entry>
   
     <entry>
       <title type="html">(서울 송파 맛집) 셰프의 부엌</title>
@@ -1533,76 +1663,6 @@ Processing c:\pkg\scikit_learn-0.24.1-cp39-cp39-win_amd64.whl
 
       
         <summary type="html">- 소박한 환송회 -</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">나의 이직 이야기 - 프롤로그</title>
-      <link href="https://sguys99.github.io//story01" rel="alternate" type="text/html" title="나의 이직 이야기 - 프롤로그" />
-      <published>2022-01-01T13:10:00+00:00</published>
-      <updated>2022-01-01T13:10:00+00:00</updated>
-      <id>https://sguys99.github.io//story01</id>
-      <content type="html" xml:base="https://sguys99.github.io//story01">&lt;p&gt;2020년 6월 30일.&lt;/p&gt;
-
-&lt;p&gt;10년간 다니던 회사에 사직서를 제출했다.&lt;/p&gt;
-
-&lt;p&gt;이제 구직자 신세가 되었다.&lt;/p&gt;
-
-&lt;p&gt;이렇게 대책없이 회사를 그만 둘 것이라고는 상상도 못했다.&lt;/p&gt;
-
-&lt;p&gt;회사를 그만두는 과정은 그야말로 충동적이었다.&lt;/p&gt;
-
-&lt;p&gt;퇴사 결심부터 회사에 알리기까지 1주일도 안걸렸다.&lt;/p&gt;
-
-&lt;p&gt;부서장께 퇴직 의사를 밝히고, 동료들의 회유가 한창일때도 몰랐다. 내가 무슨짓을 저지르고 있는지.&lt;/p&gt;
-
-&lt;p&gt;‘너 나가면 우리는 어떡하냐’, ‘멋지다, 부럽다’  걷치레인줄 알면서도 동료들의 한마디를 들으면 뭔지 모르게 뿌듯했다.&lt;/p&gt;
-
-&lt;p&gt;며칠 휴가를 낸 후, 퇴사일이 되서 사무실에 인사하러 들렀다.&lt;/p&gt;
-
-&lt;p&gt;딱히 날 잡는 사람은 없다. 아무일 없었다는 듯 다들 분주하다.&lt;/p&gt;
-
-&lt;p&gt;서운한 감정도 없잖았지만 웃으며 다음을 기약한다.&lt;/p&gt;
-
-&lt;p&gt;사무실에 있던 짐들을 담은 박스를 들고 대로를 터벅터벅 걸으며 생각에 잠긴다.&lt;/p&gt;
-
-&lt;p&gt;내가 지금 뭘 한거지? 제대로 하고 있는거지?&lt;/p&gt;
-
-&lt;p&gt;회사의 울타리를 갓 벗어나서야 보이기 시작한다.&lt;/p&gt;
-
-&lt;p&gt;회사 안은 따뜻한 온돌방이다. 한겨울에 밖이 얼마나 추운지 잘 모른다. 딱 그 느낌.&lt;/p&gt;
-
-&lt;p&gt;조직에 몸담고 있을 때는 사무실이 감옥 같았다. 문을 박차고 나가야 창창한 앞날이 펼쳐질 것만 같았다.&lt;/p&gt;
-
-&lt;p&gt;정신이 번쩍 든다. 문틈으로 보이는 빛들은 그저 미지에 대한 호기심이었다.&lt;/p&gt;
-
-&lt;p&gt;아무런 준비도 없이 일을 저질러 버렸다.&lt;/p&gt;
-
-&lt;p&gt;이제 서야 현실의 찬바람이 느껴지기 시작한다.&lt;/p&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name>Kwang Myung Yu</name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="diary" />
-      
-
-      
-        <summary type="html">2020년 6월 30일.</summary>
       
 
       
