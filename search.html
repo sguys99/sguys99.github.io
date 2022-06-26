@@ -202,6 +202,15 @@ into the {body} of the default.hbs template -->
 <script>
     window.store = {
     
+    "it07": {
+        "title": "ubuntu 환경에서 docker 설치하기",
+            "author": "km.yu99",
+            "category": "",
+            "content": "도커(docker)는 리눅스 환경에서 동작하는 응용 프로그램들을 컨테이너(container)라고 하는 독립적인 실행환경에서 운영하도록 돕는 오픈소스 프로젝트이다. 과거에 VMware나 VirtualBox와 같이 호스트 OS위에 가상화 소프트웨어를 설치하여 OS를 구동하는 방식이 존재했다. 이에 비해 도커는 호스트 OS 위에 추가적으로 OS를 설치하지 않기 때문에 설치 용량이 적고 실행속도도 빠르다.도커는 일반적으로 서버환경 구축, 운영을 위해 널리 사용된다. 이외에 다수의 딥러닝 엔지니어들이 GPU 자원을 함께 사용해야 하는 환경에서 도커 이미지로 개별 개발 환경을 구축하는데 사용할 수 있다. 이렇게 하면 GPU OS의 기본 설정 변경을 최소화 하면서, 각자가 선호하는 모델 개발 환경을 만들어서 작업을 진행할 수 있다.  본 포스트는 도커를 사용한 딥러닝 개발환경 구축을 염두해두고, 도커를 설치하는 방법에 대해서 설명한다.Ubuntu 20.04를 기준으로 설치 방법을 설명한다. WSL2나 windos OS 상에서 도커를 설치하는 방법에 대해서는 WSL2 설치하기 포스트를 참고한다.1. 구버전 삭제 및 사전 설정이미 구버전이 설치되어 있다면, 삭제한다. 그리고 패키지를 업데이트 한다.$ apt-get remove docker docker-engine docker.io containerd runc$ sudo apt-get update도커를 설치하는데 필요한 필수 패키지를 설치한다.$ sudo apt-get install apt-transport-https ca-certificates curl gnupg lsb-release도커의 GPG 키를 추가한다. 리눅스의 패키지 관리 툴이 도커 엔진 설치 전에 패키지가 유효한지 확인하기 위해 검증을 하는데 이때 GPG키가 필요하다. 따라서 curl로 GPG 키를 다운 받아 apt 키 리스트에 추가해야 한다.$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg패키지 관리 시스템이 안정된 버전의 도커 설치 파일이 있는 저장소를 바라보도록 설정한다.$ echo \"deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\" | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null2. 도커엔진 설치패키지 업데이트 후, 도커 엔진 최신 버전을 설치한다.$ sudo apt-get update$ sudo apt-get install docker-ce docker-ce-cli containerd.io이로써 기본적인 도커 설치가 완료되었다.3. 기본 사용자 권한 설정정상적으로 설치되었는지 확인하기 위해, 간단한 도커 명령어를 입력해보자. 가동 중인 컨테이너 리스트를 출력해주는 docker ps 명령을 입력해본다.$ docker ps컨테이너 리스트가 출력되지 않고 permission denied 메시지가 출력된다. 도커는 기본적으로 root 권한으로만 명령어 사용이 가능하다.매번 도커 명령 앞에 sudo를 입력하면 번거롭다. root 권한이 아닌 호스트의 기본 유저에게도 사용 권한을 주도록 설정한다. 그리고 도커를 재시작(restart) 한다.$ sudo usermod -a -G docker $USER$ sudo service docker restart마지막으로 OS를 재시작한다.$ sudo reboot재부팅을 한 후, 터미널을 실행해서 동작중인 컨테이너 리스트를 출력해본다.$ docker ps컨테이너 생성을 하지 않았기 때문에 어떤 컨테이너도 표시되지 않는다. 하지만 앞에서와는 달리 빈 리스트 정보가 표시된다. 도커가 정상적으로 설치된 것이다.",
+        "url": "/it07"
+    }
+    ,
+    
     "it06": {
         "title": "WSL2 설치하기",
             "author": "km.yu99",
