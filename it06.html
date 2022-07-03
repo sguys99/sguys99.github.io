@@ -57,7 +57,7 @@
     <meta property="og:site_name" content="Happy Plant" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="WSL2 설치하기" />
-    <meta property="og:description" content="Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다. 1. Windows 버전 확인 WSL2는 Windows 10 빌드 19041 이상, 또는 Windows 11 이상에서 동작한다. 만약 Windows 10을 사용하고 있다면 작업 표시줄 검색창에서 PC" />
+    <meta property="og:description" content="이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다. 1. Windows 버전 확인 WSL2는 Windows 10" />
     <meta property="og:url" content="https://sguys99.github.io//it06" />
     <meta property="og:image" content="https://sguys99.github.io//assets/images/2022-05-28-it06/it06.00.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/dbrhkdaud" />
@@ -67,7 +67,7 @@
     <meta property="article:tag" content="It-tips" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="WSL2 설치하기" />
-    <meta name="twitter:description" content="Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다. 1. Windows 버전 확인 WSL2는 Windows 10 빌드 19041 이상, 또는 Windows 11 이상에서 동작한다. 만약 Windows 10을 사용하고 있다면 작업 표시줄 검색창에서 PC" />
+    <meta name="twitter:description" content="이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다. 1. Windows 버전 확인 WSL2는 Windows 10" />
     <meta name="twitter:url" content="https://sguys99.github.io//" />
     <meta name="twitter:image" content="https://sguys99.github.io//assets/images/2022-05-28-it06/it06.00.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -99,7 +99,7 @@
         "@type": "WebPage",
         "@id": "https://sguys99.github.io//it06"
     },
-    "description": "Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다. 1. Windows 버전 확인 WSL2는 Windows 10 빌드 19041 이상, 또는 Windows 11 이상에서 동작한다. 만약 Windows 10을 사용하고 있다면 작업 표시줄 검색창에서 PC"
+    "description": "이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다. 1. Windows 버전 확인 WSL2는 Windows 10"
 }
     </script>
 
@@ -215,7 +215,14 @@ into the {body} of the default.hbs template -->
 
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <p>Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다.</p>
+                    <p><span class="table-of-contents-list">이 포스트는 여러 절로 구성되어 있습니다. </span></p>
+<ul class="table-of-contents-list">
+  <li><a href="./it06">(1)WSL2 설치하기</a></li>
+  <li><a href="./it07">(2)ubuntu 환경에서 docker 설치하기</a></li>
+  <li><a href="./it08">(3)docker로 gpu기반 딥러닝 개발환경 구축하기</a></li>
+</ul>
+
+<p>Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다.</p>
 
 <h3 id="1-windows-버전-확인">1. Windows 버전 확인</h3>
 <p>WSL2는 Windows 10 빌드 19041 이상, 또는 Windows 11 이상에서 동작한다. 만약 Windows 10을 사용하고 있다면 작업 표시줄 검색창에서 <code class="language-plaintext highlighter-rouge">PC 정보</code>를 입력해서 사용하는 OS 빌드 정보를 확인해본다. 버전이 낮다면 OS 업데이트를 진행한다.</p>
@@ -423,6 +430,15 @@ into the {body} of the default.hbs template -->
                                     
                                         
                                         
+                                            <li><a href="/it08">docker로 gpu기반 딥러닝 개발환경 구축하기</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
                                             <li><a href="/it07">ubuntu 환경에서 docker 설치하기</a></li>
                                         
                                     
@@ -464,8 +480,6 @@ into the {body} of the default.hbs template -->
                                   
                                     
                                         
-                                        
-                                            <li><a href="/it04">jekyll 블로그에 utterance로 댓글기능 적용하기</a></li>
                                         
                                     
                                   
@@ -516,7 +530,7 @@ into the {body} of the default.hbs template -->
                         <footer class="read-next-card-footer">
                             <a href="/tag/it-tips/">
                                 
-                                    See all 6 posts  →
+                                    See all 7 posts  →
                                 
                             </a>
                         </footer>
@@ -549,7 +563,14 @@ into the {body} of the default.hbs template -->
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>도커(docker)는 리눅스 환경에서 동작하는 응용 프로그램들을 컨테이너(container)라고 하는 독립적인 실행환경에서 운영하도록 돕는 오픈소스 프로젝트이다. 과거에 VMware나 VirtualBox와 같이 호스트 OS위에 가상화 소프트웨어를 설치하여 OS를 구동하는 방식이 존재했다. 이에 비해 도커는 호스트 OS 위에</p>
+                        <p>이 포스트는 여러 절로 구성되어 있습니다. 
+
+  (1)WSL2 설치하기
+  (2)ubuntu 환경에서 docker 설치하기
+  (3)docker로 gpu기반 딥러닝 개발환경 구축하기
+
+
+</p>
                     
                 </section>
             </a>

@@ -57,7 +57,7 @@
     <meta property="og:site_name" content="Happy Plant" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="ubuntu 환경에서 docker 설치하기" />
-    <meta property="og:description" content="도커(docker)는 리눅스 환경에서 동작하는 응용 프로그램들을 컨테이너(container)라고 하는 독립적인 실행환경에서 운영하도록 돕는 오픈소스 프로젝트이다. 과거에 VMware나 VirtualBox와 같이 호스트 OS위에 가상화 소프트웨어를 설치하여 OS를 구동하는 방식이 존재했다. 이에 비해 도커는 호스트 OS 위에 추가적으로 OS를 설치하지 않기 때문에 설치 용량이 적고 실행속도도 빠르다. 도커는 일반적으로 서버환경 구축, 운영을 위해 널리" />
+    <meta property="og:description" content="이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 도커(docker)는 리눅스 환경에서 동작하는 응용 프로그램들을 컨테이너(container)라고 하는 독립적인 실행환경에서 운영하도록 돕는 오픈소스 프로젝트이다. 과거에 VMware나 VirtualBox와 같이 호스트 OS위에 가상화 소프트웨어를 설치하여 OS를 구동하는 방식이 존재했다. 이에 비해 도커는 호스트 OS 위에" />
     <meta property="og:url" content="https://sguys99.github.io//it07" />
     <meta property="og:image" content="https://sguys99.github.io//assets/images/2022-05-28-it06/it06.00.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/dbrhkdaud" />
@@ -67,7 +67,7 @@
     <meta property="article:tag" content="It-tips" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="ubuntu 환경에서 docker 설치하기" />
-    <meta name="twitter:description" content="도커(docker)는 리눅스 환경에서 동작하는 응용 프로그램들을 컨테이너(container)라고 하는 독립적인 실행환경에서 운영하도록 돕는 오픈소스 프로젝트이다. 과거에 VMware나 VirtualBox와 같이 호스트 OS위에 가상화 소프트웨어를 설치하여 OS를 구동하는 방식이 존재했다. 이에 비해 도커는 호스트 OS 위에 추가적으로 OS를 설치하지 않기 때문에 설치 용량이 적고 실행속도도 빠르다. 도커는 일반적으로 서버환경 구축, 운영을 위해 널리" />
+    <meta name="twitter:description" content="이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 도커(docker)는 리눅스 환경에서 동작하는 응용 프로그램들을 컨테이너(container)라고 하는 독립적인 실행환경에서 운영하도록 돕는 오픈소스 프로젝트이다. 과거에 VMware나 VirtualBox와 같이 호스트 OS위에 가상화 소프트웨어를 설치하여 OS를 구동하는 방식이 존재했다. 이에 비해 도커는 호스트 OS 위에" />
     <meta name="twitter:url" content="https://sguys99.github.io//" />
     <meta name="twitter:image" content="https://sguys99.github.io//assets/images/2022-05-28-it06/it06.00.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -99,7 +99,7 @@
         "@type": "WebPage",
         "@id": "https://sguys99.github.io//it07"
     },
-    "description": "도커(docker)는 리눅스 환경에서 동작하는 응용 프로그램들을 컨테이너(container)라고 하는 독립적인 실행환경에서 운영하도록 돕는 오픈소스 프로젝트이다. 과거에 VMware나 VirtualBox와 같이 호스트 OS위에 가상화 소프트웨어를 설치하여 OS를 구동하는 방식이 존재했다. 이에 비해 도커는 호스트 OS 위에 추가적으로 OS를 설치하지 않기 때문에 설치 용량이 적고 실행속도도 빠르다. 도커는 일반적으로 서버환경 구축, 운영을 위해 널리"
+    "description": "이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 도커(docker)는 리눅스 환경에서 동작하는 응용 프로그램들을 컨테이너(container)라고 하는 독립적인 실행환경에서 운영하도록 돕는 오픈소스 프로젝트이다. 과거에 VMware나 VirtualBox와 같이 호스트 OS위에 가상화 소프트웨어를 설치하여 OS를 구동하는 방식이 존재했다. 이에 비해 도커는 호스트 OS 위에"
 }
     </script>
 
@@ -215,7 +215,14 @@ into the {body} of the default.hbs template -->
 
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <p>도커(docker)는 리눅스 환경에서 동작하는 응용 프로그램들을 컨테이너(container)라고 하는 독립적인 실행환경에서 운영하도록 돕는 오픈소스 프로젝트이다. 과거에 VMware나 VirtualBox와 같이 호스트 OS위에 가상화 소프트웨어를 설치하여 OS를 구동하는 방식이 존재했다. 이에 비해 도커는 호스트 OS 위에 추가적으로 OS를 설치하지 않기 때문에 설치 용량이 적고 실행속도도 빠르다.</p>
+                    <p><span class="table-of-contents-list">이 포스트는 여러 절로 구성되어 있습니다. </span></p>
+<ul class="table-of-contents-list">
+  <li><a href="./it06">(1)WSL2 설치하기</a></li>
+  <li><a href="./it07">(2)ubuntu 환경에서 docker 설치하기</a></li>
+  <li><a href="./it08">(3)docker로 gpu기반 딥러닝 개발환경 구축하기</a></li>
+</ul>
+
+<p>도커(docker)는 리눅스 환경에서 동작하는 응용 프로그램들을 컨테이너(container)라고 하는 독립적인 실행환경에서 운영하도록 돕는 오픈소스 프로젝트이다. 과거에 VMware나 VirtualBox와 같이 호스트 OS위에 가상화 소프트웨어를 설치하여 OS를 구동하는 방식이 존재했다. 이에 비해 도커는 호스트 OS 위에 추가적으로 OS를 설치하지 않기 때문에 설치 용량이 적고 실행속도도 빠르다.</p>
 
 <p>도커는 일반적으로 서버환경 구축, 운영을 위해 널리 사용된다. 이외에 다수의 딥러닝 엔지니어들이 GPU 자원을 함께 사용해야 하는 환경에서 도커 이미지로 개별 개발 환경을 구축하는데 사용할 수 있다. 이렇게 하면 GPU OS의 기본 설정 변경을 최소화 하면서, 각자가 선호하는 모델 개발 환경을 만들어서 작업을 진행할 수 있다.  본 포스트는 도커를 사용한 딥러닝 개발환경 구축을 염두해두고, 도커를 설치하는 방법에 대해서 설명한다.</p>
 
@@ -285,14 +292,12 @@ $ sudo service docker restart
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo reboot
 </code></pre></div></div>
 
-<p><img src="assets/images/2022-06-25-it07/it07.07.jpg" /></p>
-
 <p>재부팅을 한 후, 터미널을 실행해서 동작중인 컨테이너 리스트를 출력해본다.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker ps
 </code></pre></div></div>
 
-<p><img src="assets/images/2022-06-25-it07/it07.08.jpg" /></p>
+<p><img src="assets/images/2022-06-25-it07/it07.07.jpg" /></p>
 
 <p>컨테이너 생성을 하지 않았기 때문에 어떤 컨테이너도 표시되지 않는다. 하지만 앞에서와는 달리 빈 리스트 정보가 표시된다. 도커가 정상적으로 설치된 것이다.</p>
 
@@ -404,6 +409,15 @@ $ sudo service docker restart
                                 
                                   
                                     
+                                        
+                                        
+                                            <li><a href="/it08">docker로 gpu기반 딥러닝 개발환경 구축하기</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
                                   
                                 
                                   
@@ -447,8 +461,6 @@ $ sudo service docker restart
                                   
                                     
                                         
-                                        
-                                            <li><a href="/it04">jekyll 블로그에 utterance로 댓글기능 적용하기</a></li>
                                         
                                     
                                   
@@ -499,7 +511,7 @@ $ sudo service docker restart
                         <footer class="read-next-card-footer">
                             <a href="/tag/it-tips/">
                                 
-                                    See all 6 posts  →
+                                    See all 7 posts  →
                                 
                             </a>
                         </footer>
@@ -508,6 +520,62 @@ $ sudo service docker restart
             
 
             <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/it08">
+                <div class="post-card-image" style="background-image: url(/assets/images/2022-05-28-it06/it06.00.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/it08">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">It-tips</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">docker로 gpu기반 딥러닝 개발환경 구축하기</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>이 포스트는 여러 절로 구성되어 있습니다. 
+
+  (1)WSL2 설치하기
+  (2)ubuntu 환경에서 docker 설치하기
+  (3)docker로 gpu기반 딥러닝 개발환경 구축하기
+
+
+</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/love-your-data.jpg" alt="Kwang Myung Yu" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/km.yu99/">Kwang Myung Yu</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      3 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
             
 
             <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
@@ -535,7 +603,12 @@ $ sudo service docker restart
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다.
+                        <p>이 포스트는 여러 절로 구성되어 있습니다. 
+
+  (1)WSL2 설치하기
+  (2)ubuntu 환경에서 docker 설치하기
+  (3)docker로 gpu기반 딥러닝 개발환경 구축하기
+
 
 </p>
                     

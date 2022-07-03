@@ -8,9 +8,34 @@
     
       
       <item>
+        <title>docker로 gpu기반 딥러닝 개발환경 구축하기</title>
+        
+          <description>&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;./it06&quot;&gt;(1)WSL2 설치하기&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it07&quot;&gt;(2)ubuntu 환경에서 docker 설치하기&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it08&quot;&gt;(3)docker로 gpu기반 딥러닝 개발환경 구축하기&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        
+        <pubDate>Fri, 01 Jul 2022 15:00:00 +0000</pubDate>
+        <link>
+        https://sguys99.github.io//it08</link>
+        <guid isPermaLink="true">https://sguys99.github.io//it08</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>ubuntu 환경에서 docker 설치하기</title>
         
-          <description>&lt;p&gt;도커(docker)는 리눅스 환경에서 동작하는 응용 프로그램들을 컨테이너(container)라고 하는 독립적인 실행환경에서 운영하도록 돕는 오픈소스 프로젝트이다. 과거에 VMware나 VirtualBox와 같이 호스트 OS위에 가상화 소프트웨어를 설치하여 OS를 구동하는 방식이 존재했다. 이에 비해 도커는 호스트 OS 위에 추가적으로 OS를 설치하지 않기 때문에 설치 용량이 적고 실행속도도 빠르다.&lt;/p&gt;
+          <description>&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;./it06&quot;&gt;(1)WSL2 설치하기&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it07&quot;&gt;(2)ubuntu 환경에서 docker 설치하기&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it08&quot;&gt;(3)docker로 gpu기반 딥러닝 개발환경 구축하기&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 </description>
         
@@ -25,7 +50,12 @@
       <item>
         <title>WSL2 설치하기</title>
         
-          <description>&lt;p&gt;Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다.&lt;/p&gt;
+          <description>&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;./it06&quot;&gt;(1)WSL2 설치하기&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it07&quot;&gt;(2)ubuntu 환경에서 docker 설치하기&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it08&quot;&gt;(3)docker로 gpu기반 딥러닝 개발환경 구축하기&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 </description>
         
