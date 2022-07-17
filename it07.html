@@ -57,7 +57,7 @@
     <meta property="og:site_name" content="Happy Plant" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="ubuntu 환경에서 docker 설치하기" />
-    <meta property="og:description" content="이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 도커(docker)는 리눅스 환경에서 동작하는 응용 프로그램들을 컨테이너(container)라고 하는 독립적인 실행환경에서 운영하도록 돕는 오픈소스 프로젝트이다. 과거에 VMware나 VirtualBox와 같이 호스트 OS위에 가상화 소프트웨어를 설치하여 OS를 구동하는 방식이 존재했다. 이에 비해 도커는 호스트 OS 위에" />
+    <meta property="og:description" content="이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 (4)파이토치 컨테이너 실습 도커(docker)는 리눅스 환경에서 동작하는 응용 프로그램들을 컨테이너(container)라고 하는 독립적인 실행환경에서 운영하도록 돕는 오픈소스 프로젝트이다. 과거에 VMware나 VirtualBox와 같이 호스트 OS위에 가상화 소프트웨어를 설치하여 OS를 구동하는 방식이 존재했다. 이에 비해 도커는" />
     <meta property="og:url" content="https://sguys99.github.io//it07" />
     <meta property="og:image" content="https://sguys99.github.io//assets/images/2022-05-28-it06/it06.00.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/dbrhkdaud" />
@@ -67,7 +67,7 @@
     <meta property="article:tag" content="It-tips" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="ubuntu 환경에서 docker 설치하기" />
-    <meta name="twitter:description" content="이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 도커(docker)는 리눅스 환경에서 동작하는 응용 프로그램들을 컨테이너(container)라고 하는 독립적인 실행환경에서 운영하도록 돕는 오픈소스 프로젝트이다. 과거에 VMware나 VirtualBox와 같이 호스트 OS위에 가상화 소프트웨어를 설치하여 OS를 구동하는 방식이 존재했다. 이에 비해 도커는 호스트 OS 위에" />
+    <meta name="twitter:description" content="이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 (4)파이토치 컨테이너 실습 도커(docker)는 리눅스 환경에서 동작하는 응용 프로그램들을 컨테이너(container)라고 하는 독립적인 실행환경에서 운영하도록 돕는 오픈소스 프로젝트이다. 과거에 VMware나 VirtualBox와 같이 호스트 OS위에 가상화 소프트웨어를 설치하여 OS를 구동하는 방식이 존재했다. 이에 비해 도커는" />
     <meta name="twitter:url" content="https://sguys99.github.io//" />
     <meta name="twitter:image" content="https://sguys99.github.io//assets/images/2022-05-28-it06/it06.00.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -99,7 +99,7 @@
         "@type": "WebPage",
         "@id": "https://sguys99.github.io//it07"
     },
-    "description": "이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 도커(docker)는 리눅스 환경에서 동작하는 응용 프로그램들을 컨테이너(container)라고 하는 독립적인 실행환경에서 운영하도록 돕는 오픈소스 프로젝트이다. 과거에 VMware나 VirtualBox와 같이 호스트 OS위에 가상화 소프트웨어를 설치하여 OS를 구동하는 방식이 존재했다. 이에 비해 도커는 호스트 OS 위에"
+    "description": "이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 (4)파이토치 컨테이너 실습 도커(docker)는 리눅스 환경에서 동작하는 응용 프로그램들을 컨테이너(container)라고 하는 독립적인 실행환경에서 운영하도록 돕는 오픈소스 프로젝트이다. 과거에 VMware나 VirtualBox와 같이 호스트 OS위에 가상화 소프트웨어를 설치하여 OS를 구동하는 방식이 존재했다. 이에 비해 도커는"
 }
     </script>
 
@@ -220,6 +220,7 @@ into the {body} of the default.hbs template -->
   <li><a href="./it06">(1)WSL2 설치하기</a></li>
   <li><a href="./it07">(2)ubuntu 환경에서 docker 설치하기</a></li>
   <li><a href="./it08">(3)docker로 gpu기반 딥러닝 개발환경 구축하기</a></li>
+  <li><a href="./it09">(4)파이토치 컨테이너 실습</a></li>
 </ul>
 
 <p>도커(docker)는 리눅스 환경에서 동작하는 응용 프로그램들을 컨테이너(container)라고 하는 독립적인 실행환경에서 운영하도록 돕는 오픈소스 프로젝트이다. 과거에 VMware나 VirtualBox와 같이 호스트 OS위에 가상화 소프트웨어를 설치하여 OS를 구동하는 방식이 존재했다. 이에 비해 도커는 호스트 OS 위에 추가적으로 OS를 설치하지 않기 때문에 설치 용량이 적고 실행속도도 빠르다.</p>
@@ -411,6 +412,15 @@ $ sudo service docker restart
                                     
                                         
                                         
+                                            <li><a href="/it09">파이토치 컨테이너 실습</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
                                             <li><a href="/it08">docker로 gpu기반 딥러닝 개발환경 구축하기</a></li>
                                         
                                     
@@ -442,8 +452,6 @@ $ sudo service docker restart
                                   
                                     
                                         
-                                        
-                                            <li><a href="/it05">오프라인 환경에 파이썬 개발환경 구축하기</a></li>
                                         
                                     
                                   
@@ -511,7 +519,7 @@ $ sudo service docker restart
                         <footer class="read-next-card-footer">
                             <a href="/tag/it-tips/">
                                 
-                                    See all 7 posts  →
+                                    See all 8 posts  →
                                 
                             </a>
                         </footer>
@@ -549,6 +557,7 @@ $ sudo service docker restart
   (1)WSL2 설치하기
   (2)ubuntu 환경에서 docker 설치하기
   (3)docker로 gpu기반 딥러닝 개발환경 구축하기
+  (4)파이토치 컨테이너 실습
 
 
 </p>
@@ -608,6 +617,7 @@ $ sudo service docker restart
   (1)WSL2 설치하기
   (2)ubuntu 환경에서 docker 설치하기
   (3)docker로 gpu기반 딥러닝 개발환경 구축하기
+  (4)파이토치 컨테이너 실습
 
 
 </p>

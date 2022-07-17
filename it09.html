@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>파이토치 컨테이너 실습</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+
+    <!--custom.css-->
+    <link rel="stylesheet" type="text/css" href="/assets/built/custom.css" />
+
+    <!-Font Awesome-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--웹폰트 추가-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" />
+
+    <!--syntax.css 추가-->
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+    
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="Data science, Machine learning, and Automatic control" />
+    <link rel="shortcut icon" href="https://sguys99.github.io//assets/images/logo.png" type="image/png" />
+    <link rel="canonical" href="https://sguys99.github.io//it09" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="Happy Plant" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="파이토치 컨테이너 실습" />
+    <meta property="og:description" content="이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 (4)파이토치 컨테이너 실습 본 포스트에서는 자주 사용되는 도커 명령과 옵션을 살펴보고, 파이토치 딥러닝 프레임워크를 도커 컨테이너로 구동하는 실습을 진행한다. Ubuntu 20.04, 엔비디아 RTX 3080 gpu 환경을 기준으로 설명한다. WSL2 환경에서도 같은 방법으로 실습이" />
+    <meta property="og:url" content="https://sguys99.github.io//it09" />
+    <meta property="og:image" content="https://sguys99.github.io//assets/images/2022-05-28-it06/it06.00.jpg" />
+    <meta property="article:publisher" content="https://www.facebook.com/dbrhkdaud" />
+    <meta property="article:author" content="https://www.facebook.com/dbrhkdaud" />
+    <meta property="article:published_time" content="2022-07-08T15:00:00+00:00" />
+    <meta property="article:modified_time" content="2022-07-08T15:00:00+00:00" />
+    <meta property="article:tag" content="It-tips" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="파이토치 컨테이너 실습" />
+    <meta name="twitter:description" content="이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 (4)파이토치 컨테이너 실습 본 포스트에서는 자주 사용되는 도커 명령과 옵션을 살펴보고, 파이토치 딥러닝 프레임워크를 도커 컨테이너로 구동하는 실습을 진행한다. Ubuntu 20.04, 엔비디아 RTX 3080 gpu 환경을 기준으로 설명한다. WSL2 환경에서도 같은 방법으로 실습이" />
+    <meta name="twitter:url" content="https://sguys99.github.io//" />
+    <meta name="twitter:image" content="https://sguys99.github.io//assets/images/2022-05-28-it06/it06.00.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Happy Plant" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="It-tips" />
+    <meta name="twitter:site" content="@sguys99" />
+    <meta name="twitter:creator" content="@sguys99" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Happy Plant",
+        "logo": "https://sguys99.github.io//"
+    },
+    "url": "https://sguys99.github.io//it09",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://sguys99.github.io//assets/images/2022-05-28-it06/it06.00.jpg",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://sguys99.github.io//it09"
+    },
+    "description": "이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 (4)파이토치 컨테이너 실습 본 포스트에서는 자주 사용되는 도커 명령과 옵션을 살펴보고, 파이토치 딥러닝 프레임워크를 도커 컨테이너로 구동하는 실습을 진행한다. Ubuntu 20.04, 엔비디아 RTX 3080 gpu 환경을 기준으로 설명한다. WSL2 환경에서도 같은 방법으로 실습이"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="파이토치 컨테이너 실습" href="/feed.xml" />
+
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="https://sguys99.github.io//">Happy Plant</a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">Home</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">About</a></li>
+    <li class="nav-data-science" role="menuitem"><a href="/tag/data-science/">Data Science</a></li>
+    <li class="nav-algorithmic-trading" role="menuitem"><a href="/tag/algorithmic-trading/">Trading</a></li>
+    <li class="nav-python" role="menuitem"><a href="/tag/it-tips/">It Tips</a></li>
+    <li class="nav-diary" role="menuitem"><a href="/tag/diary/">Diary</a></li>
+    <!-- 주석
+    <li class="nav-goto-turtles3040" role="menuitem"><a href="https://github.com/turtles3040">turtles3040</a></li>
+    -->
+    <li class="nav-archive" role="menuitem">
+        <a href="/archive.html">All Posts</a>
+    </li>
+    <li class="nav-archive" role="menuitem">
+        <a href="/author_archive.html">Posts by Tag</a>
+    </li>
+</ul>
+
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+                <a class="social-link social-link-fb" href="https://facebook.com/dbrhkdaud" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+</a>
+            
+            
+            <a class="social-link social-link-tw" href="https://www.github.com/sguys99" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+</svg></a>
+            
+            
+            <a class="social-link social-link-tw" href="https://www.linkedin.com/in/kmyu99" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  width="24" height="24" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M21,21H17V14.25C17,13.19 15.81,12.31 14.75,12.31C13.69,12.31 13,13.19 13,14.25V21H9V9H13V11C13.66,9.93 15.36,9.24 16.5,9.24C19,9.24 21,11.28 21,13.75V21M7,21H3V9H7V21M5,3A2,2 0 0,1 7,5A2,2 0 0,1 5,7A2,2 0 0,1 3,5A2,2 0 0,1 5,3Z" /></svg></a>
+            
+            
+                <a class="social-link social-link-tw" href="https://twitter.com/sguys99" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            
+        </div>
+        
+            <a class="subscribe-button" href="#subscribe">Search</a>
+        
+    </div>
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full  tag-it-tips post ">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime=" 8 July 2022"> 8 July 2022</time>
+                    
+                        <span class="date-divider">/</span>
+                        
+                            
+                               <a href='/tag/it-tips/'>IT-TIPS</a>
+                            
+                        
+                    
+                </section>
+                <h1 class="post-full-title">파이토치 컨테이너 실습</h1>
+            </header>
+
+            <!-- 포스트 위에 그림나오는 것 생략하기 위해 주석처리
+            
+            <figure class="post-full-image" style="background-image: url(/assets/images/2022-05-28-it06/it06.00.jpg)">
+            </figure>
+            
+            포스트 위에 그림나오는 것 생략하기 위해 주석처리 -->
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p><span class="table-of-contents-list">이 포스트는 여러 절로 구성되어 있습니다. </span></p>
+<ul class="table-of-contents-list">
+  <li><a href="./it06">(1)WSL2 설치하기</a></li>
+  <li><a href="./it07">(2)ubuntu 환경에서 docker 설치하기</a></li>
+  <li><a href="./it08">(3)docker로 gpu기반 딥러닝 개발환경 구축하기</a></li>
+  <li><a href="./it09">(4)파이토치 컨테이너 실습</a></li>
+</ul>
+
+<p>본 포스트에서는 자주 사용되는 도커 명령과 옵션을 살펴보고, 파이토치 딥러닝 프레임워크를 도커 컨테이너로 구동하는 실습을 진행한다.</p>
+
+<p>Ubuntu 20.04, 엔비디아 RTX 3080 gpu 환경을 기준으로 설명한다. WSL2 환경에서도 같은 방법으로 실습이 가능하다.</p>
+
+<h3 id="1-기본-명령어">1. 기본 명령어</h3>
+<p>먼저 자주 사용되는 pull, images, run, ps 명령에 대해서 살펴보자. 모든 도커 명령어는 <code class="language-plaintext highlighter-rouge">docker</code>로 시작된다. 예를 들어 pull 명령은 <code class="language-plaintext highlighter-rouge">docker pull xx</code> 과 같은 형식으로 입력한다.</p>
+
+<p>여기서는  <a href="https://hub.docker.com/">도커 허브(Docker Hub)</a>에 저장되어 있는 파이썬 3.9.2 이미지를 가져와서 기본 명령어 실습을 진행할 것이다.</p>
+
+<p><img src="assets/images/2022-07-08-it09/it09.01.jpg" /></p>
+
+<p>도커 이미지는 이미지 이름과 태그(Tag)로 표시된다. 일반적으로 태그에는 해당 이미지나 이미지가 포함하는 대표 라이브러리의 버전정보를 표시한다. 위의 경우 파이썬 3.9.2버전의 이미지를 <code class="language-plaintext highlighter-rouge">python:3.9.2</code>로 표현하였다. 도커 허브에서 필요로 하는 이미지를 가져오려면 이미지 이름과 함께 태그 정보도 정확하게 알고 있어야 한다.</p>
+
+<h4 id="11-이미지-가져오기--docker-pull">1.1 이미지 가져오기 : docker pull</h4>
+
+<p>도커 허브에서 로컬로 이미지를 가져오는(pull) 명령 형식은 다음과 같다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker pull [이미지 이름]:[태그]
+</code></pre></div></div>
+
+<p>예를 들어 <code class="language-plaintext highlighter-rouge">python:3.9.2</code> 이미지를 로컬 PC로 다운로드하기 위해서 다음과 같이 입력한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ docker pull python:3.9.2
+</code></pre></div></div>
+
+<p><img src="assets/images/2022-07-08-it09/it09.02.jpg" /></p>
+
+<h4 id="12-이미지-리스트-확인하기--docker-images">1.2 이미지 리스트 확인하기 : docker images</h4>
+
+<p>로컬 PC에 저장되어 있는 이미지를 조회하는 명령이다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker images
+</code></pre></div></div>
+
+<p>앞에서 이미지를 가져온 후, 명령을 입력하면 python 3.9.2 버전의 이미지를 확인할 수 있다.</p>
+
+<p><img src="assets/images/2022-07-08-it09/it09.03.jpg" /></p>
+
+<h4 id="13-컨테이너-생성-실행하기--docker-create-start-run">1.3 컨테이너 생성, 실행하기 : docker create, start, run</h4>
+
+<p>컨테이너를 생성하는 명령은 다음과 같다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker create [옵션] [이미지 이름]:[태그]
+</code></pre></div></div>
+
+<p>생성된 컨테이너를 실행하는 명령은 다음과 같다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker start [옵션] [이미지 이름]:[태그]
+</code></pre></div></div>
+
+<p>컨테이너 생성과 실행을 한번에 진행할 때는 run 명령을 사용한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run [옵션] [이미지 이름]:[태그]
+</code></pre></div></div>
+
+<p>예를 들어 앞에서 받은 <code class="language-plaintext highlighter-rouge">python:3.9.2</code>  이미지로 컨테이너를 실행하려면 다음과 같이 입력한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run python:3.9.2
+</code></pre></div></div>
+
+<p>그런데 현재 사용 중인 터미널을 통해 컨테이너에 접근하여 명령을 입력하려면 -i(interactive), -t(tty모드) 옵션을 사용해야 한다. 두 옵션을 하나로 해서 -it로 명시해도 된다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it python:3.9.2
+</code></pre></div></div>
+
+<p><img src="assets/images/2022-07-08-it09/it09.04.jpg" /></p>
+
+<p>이 옵션을 지정하면 사용중이던 터미널을 통해 컨테이너 내부에서 실행되는 파이썬 쉘에 접근하여 사용할 수 있다.</p>
+
+<p>exit()를 입력하면 파이썬이 종료되고, 컨테이너도 정지된다.</p>
+
+<p>컨테이너 내부에서 외부의 파일이나 디렉토리에 접근이 필요한 경우가 있다. 이를 위해서는 컨테이너 내부의 작업 디렉토리와 외부의 디렉토리를 연동시켜줘야 하는데, 이를 볼륨(Volumne) 지정이라고 한다. 볼륨 지정을 위한 옵션 지정 방법은 <code class="language-plaintext highlighter-rouge">-v [외부공간 경로]:[컨테이너 경로]</code> 형식이다. 예를 들어 외부에 <code class="language-plaintext highlighter-rouge">~/outer_dir</code>라는 디렉토리와 컨테이너 내부의 <code class="language-plaintext highlighter-rouge">/inner_dir</code> 디렉토리를 연결하고 싶다면 다음과 같이 입력한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -v ~/outer_dir:/inner_dir [이미지 이름]:[태그]
+</code></pre></div></div>
+
+<p>자세한 내용은 뒤의 실습에서 다루도록 한다.</p>
+
+<h4 id="14-컨테이너-리스트-확인하기--docker-ps">1.4 컨테이너 리스트 확인하기 : docker ps</h4>
+
+<p>현재 실행되고 있는 컨테이너 목록을 조회하는 명령은 다음과 같다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker ps
+</code></pre></div></div>
+
+<p>앞에서 실행했던 python:3.9.2 이미지로 만든 컨테이너는 보이지 않는다. docker ps 명령은 실행 중인 컨테이너 리스트만 출력하기 때문이다. 정지된 컨테이너도 출력하려면 -a 옵션을 사용하면 된다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker ps -a
+</code></pre></div></div>
+
+<p><img src="assets/images/2022-07-08-it09/it09.06.jpg" /></p>
+
+<h3 id="2-도커로-딥러닝-프레임워크-사용하기">2. 도커로 딥러닝 프레임워크 사용하기</h3>
+
+<p>간단한 시나리오 기반으로 컨테이너에서 딥러닝 프레임워크를 구동하는 실습을 진행해본다.</p>
+
+<h4 id="21-파이토치-컨테이너-실행하기">2.1 파이토치 컨테이너 실행하기</h4>
+
+<p><img src="assets/images/2022-07-08-it09/it09.07.jpg" /></p>
+
+<p>도커 허브의 파이토치 공식 저장소에 있는 <code class="language-plaintext highlighter-rouge">1.7.1-cuda11.0-cudnn8-runtime</code> 이미지를 가져온다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker pull pytorch/pytorch:1.7.1-cuda11.0-cudnn8-runtime
+</code></pre></div></div>
+
+<p><img src="assets/images/2022-07-08-it09/it09.08.jpg" /></p>
+
+<p>저장된 이미지 리스트를 확인한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker images
+</code></pre></div></div>
+
+<p><img src="assets/images/2022-07-08-it09/it09.09.jpg" /></p>
+
+<p>docker run 명령으로 컨테이너를 생성한다. <code class="language-plaintext highlighter-rouge">-it</code> 옵션을 사용해서 터미널로 컨테이너에 접근해본다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it pytorch/pytorch:1.7.1-cuda11.0-cudnn8-runtime 
+</code></pre></div></div>
+
+<p><img src="assets/images/2022-07-08-it09/it09.10.jpg" /></p>
+
+<p>컨테이너의 bash 쉘에 접근하였다. 위 그림에서 <code class="language-plaintext highlighter-rouge">23b25xx</code>는 컨테이너의 아이디이다. <code class="language-plaintext highlighter-rouge">/workspace</code> 는 컨테이너에서 사용하는 root 디렉토리이다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">pwd</code> 명령으로 현재 디렉토리를 확인할 수 있다. 본 컨테이너에는 python이 기본으로 내장되어 있다. <code class="language-plaintext highlighter-rouge">python</code> 명령을 입력하여 파이썬 인터프리터를 실행할 수있다. 그리고 파이토치 라이브러리를 import하여 버전을 확인할 수 있다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;&gt;&gt; import torch
+&gt;&gt;&gt; torch.__version__
+</code></pre></div></div>
+
+<p><img src="assets/images/2022-07-08-it09/it09.11.jpg" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">exit()</code>를 입력하여 파이썬을 종료하고, shell에서 <code class="language-plaintext highlighter-rouge">exit</code>를 입력하여 컨테이너를 정지하자. 리눅스 터미널로 돌아올 것이다.</p>
+
+<p><img src="assets/images/2022-07-08-it09/it09.12.jpg" /></p>
+
+<h4 id="22-파이토치-컨테이너에서-cuda-런타임-사용하기">2.2 파이토치 컨테이너에서 CUDA 런타임 사용하기</h4>
+
+<p>도커 컨테이너에서 gpu, 즉 CUDA 런타임을 사용하기 위해서는 다음의 사전 작업이 필요하다.</p>
+
+<ul>
+  <li>엔비디아 그래픽 드라이버 설치</li>
+  <li>도커 설치</li>
+  <li>엔비디아 도커(런타임) 설치 : docker ce 19.03 이후 버전을 설치했다면, 별도로 설치할 필요없음</li>
+</ul>
+
+<p>설치 방법과 CUDA 런타임을 사용하는 방법은 <a href="https://sguys99.github.io/it08"><strong>docker로 gpu기반 딥러닝 개발환경 구축하기</strong></a> 포스트에 설명했다. 따라서 여기서는 CUDA 런타임이 동작하는 컨테이너를 실행하는 명령에 대해서만 정리하겠다. 자세한 내용은 해당 포스트를 참고 하기 바란다.</p>
+
+<ul>
+  <li>docker 19.03 이후 버전을 설치한 경우</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --gpus all pytorch/pytorch:1.7.1-cuda11.0-cudnn8-runtime
+</code></pre></div></div>
+
+<ul>
+  <li>엔비디아 도커2를 설치한 경우 : 두가지 명령 사용가능</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --runtime=nvidia -it all pytorch/pytorch:1.7.1-cuda11.0-cudnn8-runtime
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ nvidia-docker run -it all pytorch/pytorch:1.7.1-cuda11.0-cudnn8-runtime
+</code></pre></div></div>
+
+<h4 id="23-볼륨을-지정하여-컨테이너에서-파이토치-예제를-실행하기">2.3 볼륨을 지정하여 컨테이너에서 파이토치 예제를 실행하기</h4>
+
+<p>먼저 실습에 사용할 파이토치 예제를 받아온다.</p>
+
+<p><img src="assets/images/2022-07-08-it09/it09.13.jpg" /></p>
+
+<p>적당한 위치에 <code class="language-plaintext highlighter-rouge">PythonProgramming</code>이라는 폴더를 만들고, 해당 폴더로 들어가서 저장소의 파일을 복제해온다. 여기서는 <code class="language-plaintext highlighter-rouge">https://github.com/yunjey/pytorch-tutorial</code>에 있는 실습파일을 가져왔다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir PythonProgramming
+$ cd PythonProgramming
+~/PythonProgramming$ https://github.com/yunjey/pytorch-tutorial.git
+</code></pre></div></div>
+
+<p><img src="assets/images/2022-07-08-it09/it09.14.jpg" /></p>
+
+<p>복제한 저장소 폴더 내부로 진입한다. 그리고 파일 리스트를 확인해본다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/PythonProgramming$ cd pytorch-tutorial
+~/PythonProgramming/pytorch-tutorial$ ls
+</code></pre></div></div>
+
+<p><img src="assets/images/2022-07-08-it09/it09.15.jpg" /></p>
+
+<p>이제 CUDA 런타임이 동작하는 파이토치 컨테이너를 실행한다. 이때 외부의 <code class="language-plaintext highlighter-rouge">/PythonProgramming</code> 폴더와 내부의 <code class="language-plaintext highlighter-rouge">/workspace</code> 폴더 볼륨을 지정해준다.(앞에서 파이토치 컨테이너의 루트 디렉토리가 /workspace 였음을 기억하자.)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --runtime=nvidia -it -v ~/PythonProgramming:/workspace pytorch/pytorch:1.7.1-cuda11.0-cudnn8-runtime
+</code></pre></div></div>
+
+<p>그리고 컨테이너의 쉘의 루트 디렉토리(/workspace) 파일 리스트를 확인해본다. 외부의 PythonProgramming 디렉토리 내부에 있는 <code class="language-plaintext highlighter-rouge">pythorch-tutorial</code> 폴더가 확인된다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/workspace# ls
+</code></pre></div></div>
+
+<p><img src="assets/images/2022-07-08-it09/it09.16.jpg" /></p>
+
+<p>이제 저장소 폴더 내부로 진입해서 실습파일을 실행해보자.</p>
+
+<p>우선 <code class="language-plaintext highlighter-rouge">pytorch-tutorial/tutorials/01-basics/linear_regression</code> 폴더로 진입한다. 해당 폴더 안에 main.py 파일도 확인한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/workspace# cd pytorch-tutorial
+/workspace/pytorch-tutorial# cd tutorials
+/workspace/pytorch-tutorial/tutorials# cd 01-basics
+/workspace/pytorch-tutorial/tutorials/01-basics# cd linear_regression
+/workspace/pytorch-tutorial/tutorials/01-basics/linear_regression# ls
+</code></pre></div></div>
+
+<p><img src="assets/images/2022-07-08-it09/it09.17.jpg" /></p>
+
+<p>main.py 실습파일을 실행해보자.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/workspace/pytorch-tutorial/tutorials/01-basics/linear_regression# python main.py
+</code></pre></div></div>
+
+<p><img src="assets/images/2022-07-08-it09/it09.18.jpg" /></p>
+
+<p>정상작으로 실행되지 않는다. 해당 컨테이너에는 python과 파이토치 라이브러리는 설치되어 있지만, main.py 실행에 필요한 <code class="language-plaintext highlighter-rouge">matplotlib</code> 라이브러리가 설치되어 있지 않기 때문이다.</p>
+
+<p>라이브러리를 설치하고 다시 main.py를 실행해보자.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/workspace/pytorch-tutorial/tutorials/01-basics/linear_regression# pip install matplotlib
+/workspace/pytorch-tutorial/tutorials/01-basics/linear_regression# python main.py
+</code></pre></div></div>
+
+<p><img src="assets/images/2022-07-08-it09/it09.19.jpg" /></p>
+
+<p>이번에는 main.py 내부에 구현된 모델 학습 기능이 실행되었다.</p>
+
+<p>폴더 안에 학습 완료된 모델이 생성된 것을 확인한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/workspace/pytorch-tutorial/tutorials/01-basics/linear_regression# ls
+</code></pre></div></div>
+
+<p><img src="assets/images/2022-07-08-it09/it09.20.jpg" /></p>
+
+<p>이제 컨테이너를 종료하고 외부 디렉토리에서도 학습 결과 파일이 확인되는지 살펴본다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/workspace/pytorch-tutorial/tutorials/01-basics/linear_regression# exit
+$ cd PythonProgramming
+~/PythonProgramming$ cd pytorch-tutorial
+~/PythonProgramming/pytorch-tutorial$ cd tutorials/01-basics
+~/PythonProgramming/pytorch-tutorial/tutorials/01-basics$ cd linear_regression
+~/PythonProgramming/pytorch-tutorial/tutorials/01-basics/linear_regression$ ls
+</code></pre></div></div>
+
+<p><img src="assets/images/2022-07-08-it09/it09.21.jpg" /></p>
+
+<p>다음 포스트에서는 텐서플로(Tensorflow) 라이브러리가 탑재된 컨테이너를 실행하고 포트를 연계하는 실습을 진행한다.</p>
+
+                </div>
+            </section>
+
+
+            <!-- Email subscribe form at the bottom of the page -->
+            <!-- 포스트 아래에 섭스크라이브 나오는 것 생략위해 주석처리
+            
+                <section class="subscribe-form">
+                    <h3 class="subscribe-form-title">Subscribe to Happy Plant</h3>
+                    <p>Get the latest posts delivered right to your inbox</p>
+                    <span id="searchform" method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  />
+    <input class="location" type="hidden" name="location"  />
+    <input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" onkeyup="myFunc()"
+               id="searchtext" type="text" name="searchtext"
+               placeholder="Search..." />
+    </div>
+    <script type="text/javascript">
+        function myFunc() {
+            if(event.keyCode == 13) {
+                var url = encodeURIComponent($("#searchtext").val());
+                location.href = "/search.html?query=" + url;
+            }
+        }
+    </script>
+</span>
+
+                </section>
+            
+            포스트 아래에 섭스크라이브 나오는 것 생략위해 주석처리리-->
+
+           <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                        <section class="author-card">
+                            
+                                <img class="author-profile-image" src="/assets/images/love-your-data.jpg" alt="km.yu99" />
+                            
+                            <section class="author-card-content">
+                                <h4 class="author-card-name"><a href="/author/km.yu99">Kwang Myung Yu</a></h4>
+                                
+                                    <p><a href="https://github.com/sguys99">github</a></p>
+                                
+                            </section>
+                        </section>
+                        <div class="post-full-footer-right">
+                            <a class="author-card-button" href="/author/km.yu99">Read More</a>
+                        </div>
+                    
+                
+                <!-- /author  -->
+            </footer>
+
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            <!-- Disqus 사용안해서 주석처리
+            
+            -->
+
+        <!-- utterance comments 추가-->
+        <script src="https://utteranc.es/client.js"
+                repo="sguys99/blog-comments"
+                issue-term="pathname"
+                theme="github-light"
+                crossorigin="anonymous"
+                async>
+        </script>
+        <!-- utterance comments 추가-->
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/main-cover.jpg)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; Happy Plant &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/it-tips/">It-tips</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/it08">docker로 gpu기반 딥러닝 개발환경 구축하기</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/it07">ubuntu 환경에서 docker 설치하기</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/it06">WSL2 설치하기</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/it-tips/">
+                                
+                                    See all 8 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/it08">
+                <div class="post-card-image" style="background-image: url(/assets/images/2022-05-28-it06/it06.00.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/it08">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">It-tips</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">docker로 gpu기반 딥러닝 개발환경 구축하기</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>이 포스트는 여러 절로 구성되어 있습니다. 
+
+  (1)WSL2 설치하기
+  (2)ubuntu 환경에서 docker 설치하기
+  (3)docker로 gpu기반 딥러닝 개발환경 구축하기
+  (4)파이토치 컨테이너 실습
+
+
+</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/love-your-data.jpg" alt="Kwang Myung Yu" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/km.yu99/">Kwang Myung Yu</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      3 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="https://sguys99.github.io//">
+            
+            <span>Happy Plant</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">파이토치 컨테이너 실습</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=%ED%8C%8C%EC%9D%B4%ED%86%A0%EC%B9%98+%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88+%EC%8B%A4%EC%8A%B5&amp;url=https://sguys99.github.io/it09"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://sguys99.github.io/it09"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+<!-- /post -->
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://sguys99.github.io//">Happy Plant</a> &copy; 2022</section>
+                <section class="poweredby">Published with <a href="https://jekyllrb.com/">Jekyll</a> &
+                    <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
+                    <a href="https://github.com/jekyllt/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
+                <nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    <a href="https://facebook.com/dbrhkdaud" target="_blank" rel="noopener">Facebook</a>
+                    <!--
+                    <a href="https://twitter.com/sguys99" target="_blank" rel="noopener">Twitter</a>
+                    -->
+                    <a href="https://www.linkedin.com/in/kmyu99" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="https://github.com/sguys99" target="_blank" rel="noopener">Github</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- The big email subscribe modal content -->
+    
+    <div id="subscribe" class="subscribe-overlay">
+        <a class="subscribe-overlay-close" href="#"></a>
+        <div class="subscribe-overlay-content">
+            
+            <h1 class="subscribe-overlay-title">Search Happy Plant</h1>
+            <p class="subscribe-overlay-description">
+                lunr.js를 이용한 posts 검색 </p>
+            <span id="searchform" method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  />
+    <input class="location" type="hidden" name="location"  />
+    <input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" onkeyup="myFunc()"
+               id="searchtext" type="text" name="searchtext"
+               placeholder="Search..." />
+    </div>
+    <script type="text/javascript">
+        function myFunc() {
+            if(event.keyCode == 13) {
+                var url = encodeURIComponent($("#searchtext").val());
+                location.href = "/search.html?query=" + url;
+            }
+        }
+    </script>
+</span>
+
+        </div>
+    </div>
+    
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'G-826PCGZRG1', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>

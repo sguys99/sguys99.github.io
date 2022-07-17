@@ -57,7 +57,7 @@
     <meta property="og:site_name" content="Happy Plant" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="docker로 gpu기반 딥러닝 개발환경 구축하기" />
-    <meta property="og:description" content="이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 딥러닝 개발 환경을 구축하는 작업은 번거롭다. 프로젝트 별로 모델 개발 또는 구동 환경이 다를 수 있는데, 이 때마다 설정을 반복해야 한다. 물론 가상 환경을 사용하면 단일 서버에 여러 개의 개발 환경을 관리할 수" />
+    <meta property="og:description" content="이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 (4)파이토치 컨테이너 실습 딥러닝 개발 환경을 구축하는 작업은 번거롭다. 프로젝트 별로 모델 개발 또는 구동 환경이 다를 수 있는데, 이 때마다 설정을 반복해야 한다. 물론 가상 환경을 사용하면 단일 서버에 여러 개의 개발" />
     <meta property="og:url" content="https://sguys99.github.io//it08" />
     <meta property="og:image" content="https://sguys99.github.io//assets/images/2022-05-28-it06/it06.00.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/dbrhkdaud" />
@@ -67,7 +67,7 @@
     <meta property="article:tag" content="It-tips" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="docker로 gpu기반 딥러닝 개발환경 구축하기" />
-    <meta name="twitter:description" content="이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 딥러닝 개발 환경을 구축하는 작업은 번거롭다. 프로젝트 별로 모델 개발 또는 구동 환경이 다를 수 있는데, 이 때마다 설정을 반복해야 한다. 물론 가상 환경을 사용하면 단일 서버에 여러 개의 개발 환경을 관리할 수" />
+    <meta name="twitter:description" content="이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 (4)파이토치 컨테이너 실습 딥러닝 개발 환경을 구축하는 작업은 번거롭다. 프로젝트 별로 모델 개발 또는 구동 환경이 다를 수 있는데, 이 때마다 설정을 반복해야 한다. 물론 가상 환경을 사용하면 단일 서버에 여러 개의 개발" />
     <meta name="twitter:url" content="https://sguys99.github.io//" />
     <meta name="twitter:image" content="https://sguys99.github.io//assets/images/2022-05-28-it06/it06.00.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -99,7 +99,7 @@
         "@type": "WebPage",
         "@id": "https://sguys99.github.io//it08"
     },
-    "description": "이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 딥러닝 개발 환경을 구축하는 작업은 번거롭다. 프로젝트 별로 모델 개발 또는 구동 환경이 다를 수 있는데, 이 때마다 설정을 반복해야 한다. 물론 가상 환경을 사용하면 단일 서버에 여러 개의 개발 환경을 관리할 수"
+    "description": "이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 (4)파이토치 컨테이너 실습 딥러닝 개발 환경을 구축하는 작업은 번거롭다. 프로젝트 별로 모델 개발 또는 구동 환경이 다를 수 있는데, 이 때마다 설정을 반복해야 한다. 물론 가상 환경을 사용하면 단일 서버에 여러 개의 개발"
 }
     </script>
 
@@ -220,6 +220,7 @@ into the {body} of the default.hbs template -->
   <li><a href="./it06">(1)WSL2 설치하기</a></li>
   <li><a href="./it07">(2)ubuntu 환경에서 docker 설치하기</a></li>
   <li><a href="./it08">(3)docker로 gpu기반 딥러닝 개발환경 구축하기</a></li>
+  <li><a href="./it09">(4)파이토치 컨테이너 실습</a></li>
 </ul>
 
 <p>딥러닝 개발 환경을 구축하는 작업은 번거롭다. 프로젝트 별로 모델 개발 또는 구동 환경이 다를 수 있는데, 이 때마다 설정을 반복해야 한다. 물론 가상 환경을 사용하면 단일 서버에 여러 개의 개발 환경을 관리할 수 있다. 그러나 매번 환경 설정을 해야하는 불편함은 그대로다. 누군가 잘 만들어둔 환경 세팅을 가져와서 쓸 수 있다면, 시간을 단축 시킬 수 있을 것이다. 그리고 또 한가지. 여러 사람이 협업을 하는 프로젝트의 경우, 각자 개발 환경 통일이 되지 않는 다면 시행착오를 겪을 것이다. 구성원 간 개발 환경을 통일하는 작업 또한 골칫거리다. 한가지 더 예를 들어보자. 하나의 GPU 서버 자원을 여러 사람이 함께 사용해야하는 상황을 생각해보자. 누군가는 텐서플로를 사용하고, 다른 사람은 파이토치를 사용할 수도 있다. 사용하는 프레임워크의 버전, 라이브러리의 종류도 제각각이다. 각자 자신의 입맛에 맞는 가상환경을 설정하다보면 서버 시스템 환경이 지저분해질 수 있다.</p>
@@ -504,6 +505,15 @@ $ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.
                                 
                                   
                                     
+                                        
+                                        
+                                            <li><a href="/it09">파이토치 컨테이너 실습</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
                                   
                                 
                                   
@@ -537,8 +547,6 @@ $ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.
                                   
                                     
                                         
-                                        
-                                            <li><a href="/it05">오프라인 환경에 파이썬 개발환경 구축하기</a></li>
                                         
                                     
                                   
@@ -606,7 +614,7 @@ $ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.
                         <footer class="read-next-card-footer">
                             <a href="/tag/it-tips/">
                                 
-                                    See all 7 posts  →
+                                    See all 8 posts  →
                                 
                             </a>
                         </footer>
@@ -615,6 +623,63 @@ $ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.
             
 
             <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/it09">
+                <div class="post-card-image" style="background-image: url(/assets/images/2022-05-28-it06/it06.00.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/it09">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">It-tips</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">파이토치 컨테이너 실습</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>이 포스트는 여러 절로 구성되어 있습니다. 
+
+  (1)WSL2 설치하기
+  (2)ubuntu 환경에서 docker 설치하기
+  (3)docker로 gpu기반 딥러닝 개발환경 구축하기
+  (4)파이토치 컨테이너 실습
+
+
+</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/love-your-data.jpg" alt="Kwang Myung Yu" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/km.yu99/">Kwang Myung Yu</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      4 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
             
 
             <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
@@ -647,6 +712,7 @@ $ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.
   (1)WSL2 설치하기
   (2)ubuntu 환경에서 docker 설치하기
   (3)docker로 gpu기반 딥러닝 개발환경 구축하기
+  (4)파이토치 컨테이너 실습
 
 
 </p>

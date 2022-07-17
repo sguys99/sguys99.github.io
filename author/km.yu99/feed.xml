@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator>
   <link href="https://sguys99.github.io//author/km.yu99/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://sguys99.github.io//" rel="alternate" type="text/html" />
-  <updated>2022-07-03T09:37:55+00:00</updated>
+  <updated>2022-07-17T11:25:17+00:00</updated>
   <id>https://sguys99.github.io//author/km.yu99/feed.xml</id>
 
   
@@ -32,6 +32,298 @@
 
   
     <entry>
+      <title type="html">파이토치 컨테이너 실습</title>
+      <link href="https://sguys99.github.io//it09" rel="alternate" type="text/html" title="파이토치 컨테이너 실습" />
+      <published>2022-07-08T15:00:00+00:00</published>
+      <updated>2022-07-08T15:00:00+00:00</updated>
+      <id>https://sguys99.github.io//it09</id>
+      <content type="html" xml:base="https://sguys99.github.io//it09">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;이 포스트는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;./it06&quot;&gt;(1)WSL2 설치하기&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it07&quot;&gt;(2)ubuntu 환경에서 docker 설치하기&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it08&quot;&gt;(3)docker로 gpu기반 딥러닝 개발환경 구축하기&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it09&quot;&gt;(4)파이토치 컨테이너 실습&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;본 포스트에서는 자주 사용되는 도커 명령과 옵션을 살펴보고, 파이토치 딥러닝 프레임워크를 도커 컨테이너로 구동하는 실습을 진행한다.&lt;/p&gt;
+
+&lt;p&gt;Ubuntu 20.04, 엔비디아 RTX 3080 gpu 환경을 기준으로 설명한다. WSL2 환경에서도 같은 방법으로 실습이 가능하다.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-기본-명령어&quot;&gt;1. 기본 명령어&lt;/h3&gt;
+&lt;p&gt;먼저 자주 사용되는 pull, images, run, ps 명령에 대해서 살펴보자. 모든 도커 명령어는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker&lt;/code&gt;로 시작된다. 예를 들어 pull 명령은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker pull xx&lt;/code&gt; 과 같은 형식으로 입력한다.&lt;/p&gt;
+
+&lt;p&gt;여기서는  &lt;a href=&quot;https://hub.docker.com/&quot;&gt;도커 허브(Docker Hub)&lt;/a&gt;에 저장되어 있는 파이썬 3.9.2 이미지를 가져와서 기본 명령어 실습을 진행할 것이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-07-08-it09/it09.01.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;도커 이미지는 이미지 이름과 태그(Tag)로 표시된다. 일반적으로 태그에는 해당 이미지나 이미지가 포함하는 대표 라이브러리의 버전정보를 표시한다. 위의 경우 파이썬 3.9.2버전의 이미지를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python:3.9.2&lt;/code&gt;로 표현하였다. 도커 허브에서 필요로 하는 이미지를 가져오려면 이미지 이름과 함께 태그 정보도 정확하게 알고 있어야 한다.&lt;/p&gt;
+
+&lt;h4 id=&quot;11-이미지-가져오기--docker-pull&quot;&gt;1.1 이미지 가져오기 : docker pull&lt;/h4&gt;
+
+&lt;p&gt;도커 허브에서 로컬로 이미지를 가져오는(pull) 명령 형식은 다음과 같다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker pull [이미지 이름]:[태그]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;예를 들어 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python:3.9.2&lt;/code&gt; 이미지를 로컬 PC로 다운로드하기 위해서 다음과 같이 입력한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; $ docker pull python:3.9.2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-07-08-it09/it09.02.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;12-이미지-리스트-확인하기--docker-images&quot;&gt;1.2 이미지 리스트 확인하기 : docker images&lt;/h4&gt;
+
+&lt;p&gt;로컬 PC에 저장되어 있는 이미지를 조회하는 명령이다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker images
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;앞에서 이미지를 가져온 후, 명령을 입력하면 python 3.9.2 버전의 이미지를 확인할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-07-08-it09/it09.03.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;13-컨테이너-생성-실행하기--docker-create-start-run&quot;&gt;1.3 컨테이너 생성, 실행하기 : docker create, start, run&lt;/h4&gt;
+
+&lt;p&gt;컨테이너를 생성하는 명령은 다음과 같다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker create [옵션] [이미지 이름]:[태그]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;생성된 컨테이너를 실행하는 명령은 다음과 같다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker start [옵션] [이미지 이름]:[태그]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;컨테이너 생성과 실행을 한번에 진행할 때는 run 명령을 사용한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run [옵션] [이미지 이름]:[태그]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;예를 들어 앞에서 받은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python:3.9.2&lt;/code&gt;  이미지로 컨테이너를 실행하려면 다음과 같이 입력한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ docker run python:3.9.2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;그런데 현재 사용 중인 터미널을 통해 컨테이너에 접근하여 명령을 입력하려면 -i(interactive), -t(tty모드) 옵션을 사용해야 한다. 두 옵션을 하나로 해서 -it로 명시해도 된다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ docker run -it python:3.9.2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-07-08-it09/it09.04.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이 옵션을 지정하면 사용중이던 터미널을 통해 컨테이너 내부에서 실행되는 파이썬 쉘에 접근하여 사용할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;exit()를 입력하면 파이썬이 종료되고, 컨테이너도 정지된다.&lt;/p&gt;
+
+&lt;p&gt;컨테이너 내부에서 외부의 파일이나 디렉토리에 접근이 필요한 경우가 있다. 이를 위해서는 컨테이너 내부의 작업 디렉토리와 외부의 디렉토리를 연동시켜줘야 하는데, 이를 볼륨(Volumne) 지정이라고 한다. 볼륨 지정을 위한 옵션 지정 방법은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-v [외부공간 경로]:[컨테이너 경로]&lt;/code&gt; 형식이다. 예를 들어 외부에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/outer_dir&lt;/code&gt;라는 디렉토리와 컨테이너 내부의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/inner_dir&lt;/code&gt; 디렉토리를 연결하고 싶다면 다음과 같이 입력한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run -v ~/outer_dir:/inner_dir [이미지 이름]:[태그]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;자세한 내용은 뒤의 실습에서 다루도록 한다.&lt;/p&gt;
+
+&lt;h4 id=&quot;14-컨테이너-리스트-확인하기--docker-ps&quot;&gt;1.4 컨테이너 리스트 확인하기 : docker ps&lt;/h4&gt;
+
+&lt;p&gt;현재 실행되고 있는 컨테이너 목록을 조회하는 명령은 다음과 같다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker ps
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;앞에서 실행했던 python:3.9.2 이미지로 만든 컨테이너는 보이지 않는다. docker ps 명령은 실행 중인 컨테이너 리스트만 출력하기 때문이다. 정지된 컨테이너도 출력하려면 -a 옵션을 사용하면 된다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ docker ps -a
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-07-08-it09/it09.06.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-도커로-딥러닝-프레임워크-사용하기&quot;&gt;2. 도커로 딥러닝 프레임워크 사용하기&lt;/h3&gt;
+
+&lt;p&gt;간단한 시나리오 기반으로 컨테이너에서 딥러닝 프레임워크를 구동하는 실습을 진행해본다.&lt;/p&gt;
+
+&lt;h4 id=&quot;21-파이토치-컨테이너-실행하기&quot;&gt;2.1 파이토치 컨테이너 실행하기&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-07-08-it09/it09.07.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;도커 허브의 파이토치 공식 저장소에 있는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1.7.1-cuda11.0-cudnn8-runtime&lt;/code&gt; 이미지를 가져온다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ docker pull pytorch/pytorch:1.7.1-cuda11.0-cudnn8-runtime
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-07-08-it09/it09.08.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;저장된 이미지 리스트를 확인한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ docker images
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-07-08-it09/it09.09.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;docker run 명령으로 컨테이너를 생성한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-it&lt;/code&gt; 옵션을 사용해서 터미널로 컨테이너에 접근해본다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ docker run -it pytorch/pytorch:1.7.1-cuda11.0-cudnn8-runtime 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-07-08-it09/it09.10.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;컨테이너의 bash 쉘에 접근하였다. 위 그림에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;23b25xx&lt;/code&gt;는 컨테이너의 아이디이다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/workspace&lt;/code&gt; 는 컨테이너에서 사용하는 root 디렉토리이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pwd&lt;/code&gt; 명령으로 현재 디렉토리를 확인할 수 있다. 본 컨테이너에는 python이 기본으로 내장되어 있다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python&lt;/code&gt; 명령을 입력하여 파이썬 인터프리터를 실행할 수있다. 그리고 파이토치 라이브러리를 import하여 버전을 확인할 수 있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import torch
+&amp;gt;&amp;gt;&amp;gt; torch.__version__
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-07-08-it09/it09.11.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exit()&lt;/code&gt;를 입력하여 파이썬을 종료하고, shell에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exit&lt;/code&gt;를 입력하여 컨테이너를 정지하자. 리눅스 터미널로 돌아올 것이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-07-08-it09/it09.12.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;22-파이토치-컨테이너에서-cuda-런타임-사용하기&quot;&gt;2.2 파이토치 컨테이너에서 CUDA 런타임 사용하기&lt;/h4&gt;
+
+&lt;p&gt;도커 컨테이너에서 gpu, 즉 CUDA 런타임을 사용하기 위해서는 다음의 사전 작업이 필요하다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;엔비디아 그래픽 드라이버 설치&lt;/li&gt;
+  &lt;li&gt;도커 설치&lt;/li&gt;
+  &lt;li&gt;엔비디아 도커(런타임) 설치 : docker ce 19.03 이후 버전을 설치했다면, 별도로 설치할 필요없음&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;설치 방법과 CUDA 런타임을 사용하는 방법은 &lt;a href=&quot;https://sguys99.github.io/it08&quot;&gt;&lt;strong&gt;docker로 gpu기반 딥러닝 개발환경 구축하기&lt;/strong&gt;&lt;/a&gt; 포스트에 설명했다. 따라서 여기서는 CUDA 런타임이 동작하는 컨테이너를 실행하는 명령에 대해서만 정리하겠다. 자세한 내용은 해당 포스트를 참고 하기 바란다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;docker 19.03 이후 버전을 설치한 경우&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ docker run -it --gpus all pytorch/pytorch:1.7.1-cuda11.0-cudnn8-runtime
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;엔비디아 도커2를 설치한 경우 : 두가지 명령 사용가능&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ docker run --runtime=nvidia -it all pytorch/pytorch:1.7.1-cuda11.0-cudnn8-runtime
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ nvidia-docker run -it all pytorch/pytorch:1.7.1-cuda11.0-cudnn8-runtime
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;23-볼륨을-지정하여-컨테이너에서-파이토치-예제를-실행하기&quot;&gt;2.3 볼륨을 지정하여 컨테이너에서 파이토치 예제를 실행하기&lt;/h4&gt;
+
+&lt;p&gt;먼저 실습에 사용할 파이토치 예제를 받아온다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-07-08-it09/it09.13.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;적당한 위치에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PythonProgramming&lt;/code&gt;이라는 폴더를 만들고, 해당 폴더로 들어가서 저장소의 파일을 복제해온다. 여기서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://github.com/yunjey/pytorch-tutorial&lt;/code&gt;에 있는 실습파일을 가져왔다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir PythonProgramming
+$ cd PythonProgramming
+~/PythonProgramming$ https://github.com/yunjey/pytorch-tutorial.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-07-08-it09/it09.14.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;복제한 저장소 폴더 내부로 진입한다. 그리고 파일 리스트를 확인해본다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~/PythonProgramming$ cd pytorch-tutorial
+~/PythonProgramming/pytorch-tutorial$ ls
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-07-08-it09/it09.15.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이제 CUDA 런타임이 동작하는 파이토치 컨테이너를 실행한다. 이때 외부의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/PythonProgramming&lt;/code&gt; 폴더와 내부의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/workspace&lt;/code&gt; 폴더 볼륨을 지정해준다.(앞에서 파이토치 컨테이너의 루트 디렉토리가 /workspace 였음을 기억하자.)&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ docker run --runtime=nvidia -it -v ~/PythonProgramming:/workspace pytorch/pytorch:1.7.1-cuda11.0-cudnn8-runtime
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;그리고 컨테이너의 쉘의 루트 디렉토리(/workspace) 파일 리스트를 확인해본다. 외부의 PythonProgramming 디렉토리 내부에 있는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pythorch-tutorial&lt;/code&gt; 폴더가 확인된다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/workspace# ls
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-07-08-it09/it09.16.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이제 저장소 폴더 내부로 진입해서 실습파일을 실행해보자.&lt;/p&gt;
+
+&lt;p&gt;우선 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pytorch-tutorial/tutorials/01-basics/linear_regression&lt;/code&gt; 폴더로 진입한다. 해당 폴더 안에 main.py 파일도 확인한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/workspace# cd pytorch-tutorial
+/workspace/pytorch-tutorial# cd tutorials
+/workspace/pytorch-tutorial/tutorials# cd 01-basics
+/workspace/pytorch-tutorial/tutorials/01-basics# cd linear_regression
+/workspace/pytorch-tutorial/tutorials/01-basics/linear_regression# ls
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-07-08-it09/it09.17.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;main.py 실습파일을 실행해보자.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/workspace/pytorch-tutorial/tutorials/01-basics/linear_regression# python main.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-07-08-it09/it09.18.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;정상작으로 실행되지 않는다. 해당 컨테이너에는 python과 파이토치 라이브러리는 설치되어 있지만, main.py 실행에 필요한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;matplotlib&lt;/code&gt; 라이브러리가 설치되어 있지 않기 때문이다.&lt;/p&gt;
+
+&lt;p&gt;라이브러리를 설치하고 다시 main.py를 실행해보자.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/workspace/pytorch-tutorial/tutorials/01-basics/linear_regression# pip install matplotlib
+/workspace/pytorch-tutorial/tutorials/01-basics/linear_regression# python main.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-07-08-it09/it09.19.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이번에는 main.py 내부에 구현된 모델 학습 기능이 실행되었다.&lt;/p&gt;
+
+&lt;p&gt;폴더 안에 학습 완료된 모델이 생성된 것을 확인한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/workspace/pytorch-tutorial/tutorials/01-basics/linear_regression# ls
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-07-08-it09/it09.20.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이제 컨테이너를 종료하고 외부 디렉토리에서도 학습 결과 파일이 확인되는지 살펴본다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/workspace/pytorch-tutorial/tutorials/01-basics/linear_regression# exit
+$ cd PythonProgramming
+~/PythonProgramming$ cd pytorch-tutorial
+~/PythonProgramming/pytorch-tutorial$ cd tutorials/01-basics
+~/PythonProgramming/pytorch-tutorial/tutorials/01-basics$ cd linear_regression
+~/PythonProgramming/pytorch-tutorial/tutorials/01-basics/linear_regression$ ls
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/2022-07-08-it09/it09.21.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;다음 포스트에서는 텐서플로(Tensorflow) 라이브러리가 탑재된 컨테이너를 실행하고 포트를 연계하는 실습을 진행한다.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Kwang Myung Yu</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="it-tips" />
+      
+
+      
+        <summary type="html">이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 (4)파이토치 컨테이너 실습</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
       <title type="html">docker로 gpu기반 딥러닝 개발환경 구축하기</title>
       <link href="https://sguys99.github.io//it08" rel="alternate" type="text/html" title="docker로 gpu기반 딥러닝 개발환경 구축하기" />
       <published>2022-07-01T15:00:00+00:00</published>
@@ -42,6 +334,7 @@
   &lt;li&gt;&lt;a href=&quot;./it06&quot;&gt;(1)WSL2 설치하기&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;./it07&quot;&gt;(2)ubuntu 환경에서 docker 설치하기&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;./it08&quot;&gt;(3)docker로 gpu기반 딥러닝 개발환경 구축하기&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it09&quot;&gt;(4)파이토치 컨테이너 실습&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;딥러닝 개발 환경을 구축하는 작업은 번거롭다. 프로젝트 별로 모델 개발 또는 구동 환경이 다를 수 있는데, 이 때마다 설정을 반복해야 한다. 물론 가상 환경을 사용하면 단일 서버에 여러 개의 개발 환경을 관리할 수 있다. 그러나 매번 환경 설정을 해야하는 불편함은 그대로다. 누군가 잘 만들어둔 환경 세팅을 가져와서 쓸 수 있다면, 시간을 단축 시킬 수 있을 것이다. 그리고 또 한가지. 여러 사람이 협업을 하는 프로젝트의 경우, 각자 개발 환경 통일이 되지 않는 다면 시행착오를 겪을 것이다. 구성원 간 개발 환경을 통일하는 작업 또한 골칫거리다. 한가지 더 예를 들어보자. 하나의 GPU 서버 자원을 여러 사람이 함께 사용해야하는 상황을 생각해보자. 누군가는 텐서플로를 사용하고, 다른 사람은 파이토치를 사용할 수도 있다. 사용하는 프레임워크의 버전, 라이브러리의 종류도 제각각이다. 각자 자신의 입맛에 맞는 가상환경을 설정하다보면 서버 시스템 환경이 지저분해질 수 있다.&lt;/p&gt;
@@ -237,7 +530,7 @@ $ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.
       
 
       
-        <summary type="html">이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기</summary>
+        <summary type="html">이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 (4)파이토치 컨테이너 실습</summary>
       
 
       
@@ -255,6 +548,7 @@ $ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.
   &lt;li&gt;&lt;a href=&quot;./it06&quot;&gt;(1)WSL2 설치하기&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;./it07&quot;&gt;(2)ubuntu 환경에서 docker 설치하기&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;./it08&quot;&gt;(3)docker로 gpu기반 딥러닝 개발환경 구축하기&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it09&quot;&gt;(4)파이토치 컨테이너 실습&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;도커(docker)는 리눅스 환경에서 동작하는 응용 프로그램들을 컨테이너(container)라고 하는 독립적인 실행환경에서 운영하도록 돕는 오픈소스 프로젝트이다. 과거에 VMware나 VirtualBox와 같이 호스트 OS위에 가상화 소프트웨어를 설치하여 OS를 구동하는 방식이 존재했다. 이에 비해 도커는 호스트 OS 위에 추가적으로 OS를 설치하지 않기 때문에 설치 용량이 적고 실행속도도 빠르다.&lt;/p&gt;
@@ -355,7 +649,7 @@ $ sudo service docker restart
       
 
       
-        <summary type="html">이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기</summary>
+        <summary type="html">이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 (4)파이토치 컨테이너 실습</summary>
       
 
       
@@ -373,6 +667,7 @@ $ sudo service docker restart
   &lt;li&gt;&lt;a href=&quot;./it06&quot;&gt;(1)WSL2 설치하기&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;./it07&quot;&gt;(2)ubuntu 환경에서 docker 설치하기&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;./it08&quot;&gt;(3)docker로 gpu기반 딥러닝 개발환경 구축하기&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./it09&quot;&gt;(4)파이토치 컨테이너 실습&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다.&lt;/p&gt;
@@ -492,7 +787,7 @@ $ sudo service docker restart
       
 
       
-        <summary type="html">이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기</summary>
+        <summary type="html">이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 (4)파이토치 컨테이너 실습</summary>
       
 
       
@@ -1673,135 +1968,6 @@ Processing c:\pkg\scikit_learn-0.24.1-cp39-cp39-win_amd64.whl
 
       
         <summary type="html">기업에서의 SW 개발환경은 보안 등의 이슈로 인해 인터넷으로부터 단절되어 있는 경우가 있다. 인터넷이 되더라도 특정 사이트가 방화벽으로 차단되어 있어 pip나 conda install이 원활하지 못할 수도 있다. 본 포스트에서는 오프라인 개발 환경에서 파이썬 개발환경을 구축하는 방법에 대해서 소개한다.</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">나의 이직 이야기 - 2</title>
-      <link href="https://sguys99.github.io//story03" rel="alternate" type="text/html" title="나의 이직 이야기 - 2" />
-      <published>2022-01-02T15:00:00+00:00</published>
-      <updated>2022-01-02T15:00:00+00:00</updated>
-      <id>https://sguys99.github.io//story03</id>
-      <content type="html" xml:base="https://sguys99.github.io//story03">&lt;p&gt;&lt;strong&gt;- 임소장1 -&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;2018년부터 나의 직함은 데이터사이언티스트가 되었다.&lt;/p&gt;
-
-&lt;p&gt;사내 데이터사이언티스트 공모에 지원했고, 덜컥 서류-면접을 통해 합격했다.&lt;/p&gt;
-
-&lt;p&gt;(지원 자격요건은 ‘데이터사이언스와 머신러닝에 호기심과 열정이 큰 직원’ 이었다.)&lt;/p&gt;
-
-&lt;p&gt;정부출연연구소나 공기업의 연구소의 운영 방식은 국회나 공무원 조직의 그것과 비슷하다.&lt;/p&gt;
-
-&lt;p&gt;조직의 장을 배치할 때 과거 이력이나 전문성 보다는, 그 사람의 지위나 영향력을 우선 고려한다.&lt;/p&gt;
-
-&lt;p&gt;장은 1, 2년 근무 후 타 부서 또는 다른 보직으로 이동해야 한다.&lt;/p&gt;
-
-&lt;p&gt;따라서 관리자들이 전문성을 유지하기 어렵고, 어짜피 1, 2년 후에는 이동하기 때문에 조직 운영에 대한 열정과 책임감도 약하다.&lt;/p&gt;
-
-&lt;p&gt;조직원 구성도 마찬가지다. 외부 전문가 채용에 인색한 편이다. 주로 내부 인원 차출, 재배치로 팀을 꾸린다.&lt;/p&gt;
-
-&lt;p&gt;유행에 따라 연구개발 테마도 자주 바뀐다. 선진국의 기술 트렌드를 쫒기 바쁘다.&lt;/p&gt;
-
-&lt;p&gt;미국, 독일, 일본에서 관련 연구를 시작했고 가시적인 성과가 나왔는지가 중요하다.&lt;/p&gt;
-
-&lt;p&gt;2030, 2050을 타겟으로 하는 중장기 로드맵은 있지만 매번 유행만 좆다보니 너덜너덜해졌다.&lt;/p&gt;
-
-&lt;p&gt;잦은 정책 변화 때문에 연구원들은 매년 책상 배치를 바꾸고 사무실을 이리저리 옮기는 조직개편 행사를 경험한다.&lt;/p&gt;
-
-&lt;p&gt;사람은 그대로다. 사무실 명패와 책상 배치만 달라질 뿐.&lt;/p&gt;
-
-&lt;p&gt;어쨌는 ‘한국형’ AI, ‘한국형’ 빅데이터 기술을 선도한다는 미명 아래,&lt;/p&gt;
-
-&lt;p&gt;나를 포함한 사내 공모 인력 다섯명은 빅데이터 전문가가 되었다.&lt;/p&gt;
-
-&lt;p&gt;이번에는 다를거라고 한다. 소장될분이 외부 전문가로 특별채용했고, 우리를 제외한 나머지 실무자들도 전공자로 영입될 계획이다.&lt;/p&gt;
-
-&lt;p&gt;우리는 1월 1일 부로 서울 데이터사이언스 연구소로 발령을 받았다.&lt;/p&gt;
-
-&lt;p&gt;연구소 사무실에는 30개 책상만 덩그러니 놓여 있었다. 앞으로 입사할 신입사원들 자리를 포함한 것이다.&lt;/p&gt;
-
-&lt;p&gt;책상만 제공 받았을 뿐, 관리자도 없고 행정 지원도 없다. 우리가 다 알아서 해야한다.&lt;/p&gt;
-
-&lt;p&gt;회사의 지원은 여기까지다. 정수기부터 인터넷 연결까지 알아서 처리해야 했다.&lt;/p&gt;
-
-&lt;p&gt;사무실에는 사외 전문가로 영입된 박사 인력 두명이 한달 전부터 근무하고 있었다.&lt;/p&gt;
-
-&lt;p&gt;우리들과 인사를 나눴지만 서로간에 미묘한 긴장감이 흐른다.&lt;/p&gt;
-
-&lt;p&gt;전문가 두분을 간단히 소개 하자면,&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;오박사(55세) : 도쿄대 경영학 박사. 나이가 많음…. 과거 경력이 빅데이터와 어떤 연관성이 있는지 알려져 있지 않음. 15개 이상의 기업에서 근무. 회사별 근속연수 평균 1.5년.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;박박사(39세) : 통계학 박사. 우리 중 유일하게 학교에서 데이터 관련 기술을 전공한 사람.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;첫날인데 조직의 리더인 연구소장이 보이지 않는다.&lt;/p&gt;
-
-&lt;p&gt;소장은 MIT에서 AI로 박사학위를 받고 국내 글로벌 대기업 S -&amp;gt; L -&amp;gt; S를 거쳐&lt;/p&gt;
-
-&lt;p&gt;우리회사에 스카웃된 데이터사이언스 최고 전문가라고 했다.&lt;/p&gt;
-
-&lt;p&gt;공공기관은 외부 인재 영입에 상당히 보수적이다.&lt;/p&gt;
-
-&lt;p&gt;위로 갈수록 보직자리가 줄어드는데 능력있는 사람이 오는 것을 반기지 않는다.&lt;/p&gt;
-
-&lt;p&gt;외부에서 인재를 채용하고 보직까지 부여했다는 것은 상당히 파격적인 인사였다.&lt;/p&gt;
-
-&lt;p&gt;당연히 전사 직원들의 관심이 몰렸다.&lt;/p&gt;
-
-&lt;p&gt;소장이 없는 동안 우리끼리 알아서 사무환경을 구축하고 연구소 운영계획을 세웠다.&lt;/p&gt;
-
-&lt;p&gt;인터넷 라인과 PC를 구매해서 사내 시스템에 연결했고, 세부조직을 어떻게 구성할지 의논했다.&lt;/p&gt;
-
-&lt;p&gt;잘나간다는 G사, N사, 그리고 ‘카’사 연구소를 방문해서 조직이 어떻게 운영되어야 할지 벤치마킹했다.&lt;/p&gt;
-
-&lt;p&gt;소장은 2주가 지나도 출근하지 않는다.&lt;/p&gt;
-
-&lt;p&gt;채용을 알선한 헤드헌터를 통해 한달 뒤에 입사하겠다고 통보했다고 한다.&lt;/p&gt;
-
-&lt;p&gt;그의 입사 날이 가까워짐에 따라 궁금증은 더 커져간다.&lt;/p&gt;
-
-&lt;p&gt;식사 시간이나 티타임 대화의 단골 주제는 소장에 관한 이야기였다.&lt;/p&gt;
-
-&lt;p&gt;‘MIT 박사면 우리가 일하는 모습에 답답해하지 않을까요? 초반부터 찍히면 안되는데…’&lt;/p&gt;
-
-&lt;p&gt;‘신임소장 이름이 임xx 래요. 대단한 사람이라고 하는데 인터넷 검색하면 정보가 하나도 안나와요.’&lt;/p&gt;
-
-&lt;p&gt;테이블 끝에 앉아있던 구차장이 한마디 꺼낸다.&lt;/p&gt;
-
-&lt;p&gt;‘내가 본사 담당자 한테 들은게 있는데…&lt;/p&gt;
-
-&lt;p&gt;소장, 신혼여행 가야한다고 입사 한달 연기해달라고 했대요. 안그러면 입사 안하겠다고…’&lt;/p&gt;
-
-&lt;p&gt;평범한 성격은 아닌 것 같다.&lt;/p&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name>Kwang Myung Yu</name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="diary" />
-      
-
-      
-        <summary type="html">- 임소장1 -</summary>
       
 
       

@@ -57,7 +57,7 @@
     <meta property="og:site_name" content="Happy Plant" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="WSL2 설치하기" />
-    <meta property="og:description" content="이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다. 1. Windows 버전 확인 WSL2는 Windows 10" />
+    <meta property="og:description" content="이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 (4)파이토치 컨테이너 실습 Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다. 1. Windows 버전 확인" />
     <meta property="og:url" content="https://sguys99.github.io//it06" />
     <meta property="og:image" content="https://sguys99.github.io//assets/images/2022-05-28-it06/it06.00.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/dbrhkdaud" />
@@ -67,7 +67,7 @@
     <meta property="article:tag" content="It-tips" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="WSL2 설치하기" />
-    <meta name="twitter:description" content="이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다. 1. Windows 버전 확인 WSL2는 Windows 10" />
+    <meta name="twitter:description" content="이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 (4)파이토치 컨테이너 실습 Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다. 1. Windows 버전 확인" />
     <meta name="twitter:url" content="https://sguys99.github.io//" />
     <meta name="twitter:image" content="https://sguys99.github.io//assets/images/2022-05-28-it06/it06.00.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -99,7 +99,7 @@
         "@type": "WebPage",
         "@id": "https://sguys99.github.io//it06"
     },
-    "description": "이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다. 1. Windows 버전 확인 WSL2는 Windows 10"
+    "description": "이 포스트는 여러 절로 구성되어 있습니다. (1)WSL2 설치하기 (2)ubuntu 환경에서 docker 설치하기 (3)docker로 gpu기반 딥러닝 개발환경 구축하기 (4)파이토치 컨테이너 실습 Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다. 1. Windows 버전 확인"
 }
     </script>
 
@@ -220,6 +220,7 @@ into the {body} of the default.hbs template -->
   <li><a href="./it06">(1)WSL2 설치하기</a></li>
   <li><a href="./it07">(2)ubuntu 환경에서 docker 설치하기</a></li>
   <li><a href="./it08">(3)docker로 gpu기반 딥러닝 개발환경 구축하기</a></li>
+  <li><a href="./it09">(4)파이토치 컨테이너 실습</a></li>
 </ul>
 
 <p>Windows Subsystem for Linux(WSL)는 Windows 환경에서 가상머신이나 듀얼부팅 설정 없이 Linux를 사용할 수 있도록 돕는 소프트웨어이다. 여기서는 WSL2 기반 환경에서, Ubuntu 22.04를 설치/사용하는 방법에 대해서 설명한다.</p>
@@ -430,6 +431,15 @@ into the {body} of the default.hbs template -->
                                     
                                         
                                         
+                                            <li><a href="/it09">파이토치 컨테이너 실습</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
                                             <li><a href="/it08">docker로 gpu기반 딥러닝 개발환경 구축하기</a></li>
                                         
                                     
@@ -461,8 +471,6 @@ into the {body} of the default.hbs template -->
                                   
                                     
                                         
-                                        
-                                            <li><a href="/it05">오프라인 환경에 파이썬 개발환경 구축하기</a></li>
                                         
                                     
                                   
@@ -530,7 +538,7 @@ into the {body} of the default.hbs template -->
                         <footer class="read-next-card-footer">
                             <a href="/tag/it-tips/">
                                 
-                                    See all 7 posts  →
+                                    See all 8 posts  →
                                 
                             </a>
                         </footer>
@@ -568,6 +576,7 @@ into the {body} of the default.hbs template -->
   (1)WSL2 설치하기
   (2)ubuntu 환경에서 docker 설치하기
   (3)docker로 gpu기반 딥러닝 개발환경 구축하기
+  (4)파이토치 컨테이너 실습
 
 
 </p>
