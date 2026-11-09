@@ -106,10 +106,11 @@
 ## 단계 2. 디자인 콘셉트 선정 (G1)
 
 - [x] 2.1 **[확인]** 색·분위기 선호와 참고하고 싶은 다른 사이트 질문 — 시안별로 폭넓게, 기본 테마는 시스템 설정 따름, 참고 사이트 없음, 검토는 로컬 비교 페이지 + claude.ai 비공개 링크
-- [ ] 2.2 콘셉트 시안 3종 제작: A. Quiet Dossier / B. Editorial Dossier / C. Blueprint Dossier
+- [x] 2.2 콘셉트 시안 3종 제작: A. Quiet Dossier / B. Editorial Dossier / C. Blueprint Dossier
   - 공통 골격: 고정 사이드바 + 카드형 섹션 + 타이포 위계
   - 범위: 사이드바, About, Selected Work, Experience, 고밀도 목록 1개 (실제 영문 콘텐츠 사용)
-- [ ] 2.3 시안별로 데스크톱/모바일, 라이트/다크, 영문/국문 화면 준비
+  - 결과: `docs/design-drafts/g1/{a,b,c}.html`, 콘텐츠는 `src/content`에서 생성한 `content.js`(`node docs/design-drafts/export-content.mjs <폴더>`)
+- [x] 2.3 시안별로 데스크톱/모바일, 라이트/다크, 영문/국문 화면 준비 — `?theme=`·`?lang=` 파라미터와 화면 내 전환, 비교 페이지 `g1/index.html`(1440/390 폭), 스크린샷 `g1/shots/`
 - [ ] 2.4 **[시안]** 시안별 의도와 장단점을 붙여 제시 → 선택 또는 조합
 - [ ] 2.5 선택 결과를 Decision Log 초안에 기록, 시안을 `docs/design-drafts/g1/`에 보관
 

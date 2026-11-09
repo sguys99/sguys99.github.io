@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>G1 Concept Drafts</title>
+<style>
+  :root { --bg:#f4f4f5; --fg:#18181b; --muted:#52525b; --line:#d4d4d8; --panel:#fff; --on:#18181b; --on-fg:#fff; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#111113; --fg:#ececee; --muted:#a1a1aa; --line:#3f3f46; --panel:#1c1c1f; --on:#ececee; --on-fg:#111113; } }
+  :root[data-theme="dark"] { --bg:#111113; --fg:#ececee; --muted:#a1a1aa; --line:#3f3f46; --panel:#1c1c1f; --on:#ececee; --on-fg:#111113; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:14px/1.5 system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif; }
+  header { position:sticky; top:0; z-index:2; background:var(--bg); border-bottom:1px solid var(--line); padding:12px 16px; display:flex; flex-wrap:wrap; gap:12px 20px; align-items:center; }
+  h1 { font-size:15px; margin:0 8px 0 0; }
+  .group { display:flex; gap:4px; align-items:center; }
+  .group span { color:var(--muted); margin-right:4px; }
+  button { font:inherit; border:1px solid var(--line); background:var(--panel); color:var(--fg); padding:4px 10px; border-radius:6px; cursor:pointer; }
+  button[aria-pressed="true"] { background:var(--on); color:var(--on-fg); border-color:var(--on); }
+  button:focus-visible, a:focus-visible { outline:2px solid #2563eb; outline-offset:2px; }
+  main { padding:16px; display:grid; gap:24px; }
+  main.side { grid-template-columns:repeat(3, minmax(0,1fr)); }
+  figure { margin:0; min-width:0; }
+  figcaption { display:flex; justify-content:space-between; gap:8px; margin-bottom:8px; }
+  figcaption a { color:var(--muted); }
+  .notes { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:12px 14px; margin-bottom:10px; }
+  .notes p { margin:0 0 6px; } .notes ul { margin:0; padding-left:18px; }
+  .frame { background:var(--panel); border:1px solid var(--line); border-radius:8px; overflow:hidden; position:relative; }
+  iframe { border:0; display:block; transform-origin:0 0; }
+  @media (max-width: 900px) { main.side { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>G1 콘셉트 시안</h1>
+  <div class="group" data-key="view"><span>보기</span><button data-v="side">3안 나란히</button><button data-v="a">A</button><button data-v="b">B</button><button data-v="c">C</button></div>
+  <div class="group" data-key="device"><span>화면</span><button data-v="desktop">데스크톱 1440</button><button data-v="mobile">모바일 390</button></div>
+  <div class="group" data-key="theme"><span>테마</span><button data-v="light">라이트</button><button data-v="dark">다크</button></div>
+  <div class="group" data-key="lang"><span>언어</span><button data-v="en">EN</button><button data-v="ko">KO</button></div>
+</header>
+<main id="main"></main>
+<script>
+// Filled from the subagent reports after drafts are done.
+const NOTES = {
+  a: { name: 'A. Quiet Dossier', intent: '차가운 무채색 바탕에 얇은 선의 카드, 포인트 색 하나(슬레이트 블루)만 쓴 정제형. 타이포 위계와 여백만으로 단정하고 중립적인 인상.',
+    pros: ['모든 목록이 같은 행 문법이라 훑어 읽기 쉽고 항목이 늘어도 질서 유지', '영문/국문, 라이트/다크 간 완성도 차이가 가장 적고 토큰으로 옮기기 쉬움'],
+    cons: ['가장 무난해 개성과 기억에 남는 인상은 B·C보다 약함', '카드 안의 카드로 선이 겹치고, 넓은 화면에서 오른쪽 여백이 남음'] },
+  b: { name: 'B. Editorial Dossier', intent: '큰 세리프 제목과 따뜻한 종이 톤으로 위계를 만들고, 테두리 대신 여백과 가는 선으로 나눈 편집형. 대표작 1건은 넓은 피처 카드.',
+    pros: ['첫인상이 가장 세련되고 다른 개발자 포트폴리오와 확실히 구별됨', '박스가 적어 문장이 주인공이 되고 긴 국문도 편하게 읽힘'],
+    cons: ['제목·여백이 커서 스크롤이 길고 모바일 정보 밀도가 낮음', '영문·국문 세리프 인상 차이, 테라코타 색은 기술 직군에 다소 감성적일 수 있음'] },
+  c: { name: 'C. Blueprint Dossier', intent: '번호 붙은 섹션, 모노스페이스 메타, 사이드바의 세로 궤적 축(T1–T4)으로 제어공학에서 휴머노이드까지의 경력을 엔지니어링 문서처럼 보여줌.',
+    pros: ['경력 흐름이 사이드바 축에 항상 보여 정체성이 가장 분명함', '사양서식 메타/본문 분리로 정보가 많아도 정돈되어 보임'],
+    cons: ['밀도가 높아 처음 보는 사람에게 딱딱한 서류 인상', 'P-01 같은 ID·모눈·정합 표시는 장식에 가까워 과하면 덜어내야 함'] },
+};
+const state = { view: 'side', device: 'desktop', theme: 'light', lang: 'en' };
+const main = document.getElementById('main');
+const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+
+function render() {
+  document.querySelectorAll('.group').forEach((g) =>
+    g.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(state[g.dataset.key] === b.dataset.v))));
+  const ids = state.view === 'side' ? ['a', 'b', 'c'] : [state.view];
+  main.className = ids.length > 1 ? 'side' : '';
+  main.innerHTML = ids.map((id) => {
+    const n = NOTES[id];
+    const src = `${id}.html?theme=${state.theme}&lang=${state.lang}`;
+    return `<figure><figcaption><strong>${n.name}</strong><a href="${src}" target="_blank" rel="noopener">새 창에서 열기 ↗</a></figcaption>
+      ${n.intent ? `<div class="notes"><p>${esc(n.intent)}</p><ul>${n.pros.map((p) => `<li>장점: ${esc(p)}</li>`).join('')}${n.cons.map((p) => `<li>단점: ${esc(p)}</li>`).join('')}</ul></div>` : ''}
+      <div class="frame"><iframe title="${n.name}" src="${src}" loading="lazy"></iframe></div></figure>`;
+  }).join('');
+  fit();
+}
+
+// Render each draft at its real viewport width, then scale it down to the column.
+function fit() {
+  const w = state.device === 'desktop' ? 1440 : 390;
+  const h = state.device === 'desktop' ? 1000 : 844;
+  main.querySelectorAll('.frame').forEach((f) => {
+    const scale = Math.min(1, f.clientWidth / w);
+    const iframe = f.querySelector('iframe');
+    iframe.style.width = w + 'px';
+    iframe.style.height = h + 'px';
+    iframe.style.transform = `scale(${scale})`;
+    f.style.height = h * scale + 'px';
+    f.style.maxWidth = w + 'px';
+  });
+}
+
+document.querySelectorAll('.group').forEach((g) => g.addEventListener('click', (e) => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  state[g.dataset.key] = b.dataset.v;
+  if (g.dataset.key === 'theme') document.documentElement.dataset.theme = b.dataset.v;
+  render();
+}));
+addEventListener('resize', fit);
+render();
+</script>
+</body>
+</html>
