@@ -114,6 +114,42 @@ const experience = defineCollection({
   }),
 });
 
+/** basic-plan 4.4. Each section is 1–4 bullets; Stack is the project's `stack` field. */
+const bullets = z.array(localized).min(1).max(4);
+
+/** Conceptual diagram as data (task 1.5.4), rendered once G4 picks a design. Flows reference layer ids. */
+const architecture = z
+  .strictObject({
+    layers: z
+      .array(z.strictObject({ id: text, label: localized, nodes: z.array(localized).min(1) }))
+      .min(2),
+    flows: z
+      .array(z.strictObject({ from: text, to: text, label: localized.optional() }))
+      .optional(),
+  })
+  .superRefine((a, ctx) => {
+    const ids = new Set(a.layers.map((l) => l.id));
+    if (ids.size !== a.layers.length)
+      ctx.addIssue({ code: 'custom', message: 'duplicate layer id' });
+    for (const f of a.flows ?? [])
+      for (const end of [f.from, f.to])
+        if (!ids.has(end)) ctx.addIssue({ code: 'custom', message: `unknown layer id "${end}"` });
+  });
+
+const caseStudy = z.strictObject({
+  context: bullets,
+  problem: bullets,
+  role: bullets,
+  approach: bullets,
+  outcome: bullets,
+  decisions: z
+    .array(z.strictObject({ title: localized, rationale: localized, tradeoff: localized }))
+    .min(1)
+    .max(4)
+    .optional(),
+  architecture: architecture.optional(),
+});
+
 const projects = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
   schema: z.strictObject({
@@ -130,6 +166,7 @@ const projects = defineCollection({
     stack: z.array(text),
     featured: z.boolean().default(false),
     order: z.number().optional(),
+    caseStudy: caseStudy.optional(), // featured projects only; not required (some material is pending)
   }),
 });
 
