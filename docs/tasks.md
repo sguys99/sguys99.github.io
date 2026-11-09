@@ -46,7 +46,7 @@
 - [x] 0.1 `sguys99/sguys99.github.io` 저장소를 받아 비어 있는지 확인 (origin과 동기화, 사이트 코드 없음, 문서·사진만 존재)
 - [x] 0.2 ~~`dev` 브랜치 생성~~ 취소: `master`에서 작업, 브랜치는 사용자가 필요할 때 생성
 - [x] 0.3 문서 배치: `CLAUDE.md`는 루트, `basic-plan.md`·`tasks.md`는 `docs/`, 원본 자료는 `docs/private/`(gitignore)
-- [ ] 0.4 Node LTS 확인 후 Astro 프로젝트 초기화 (최소 템플릿, TypeScript strict)
+- [x] 0.4 Node LTS 확인 후 Astro 프로젝트 초기화 (최소 템플릿, TypeScript strict) — Node 24 LTS(`.nvmrc`), Astro 7.4.7
 - [ ] 0.5 CLAUDE.md의 디렉터리 구조 생성
 - [ ] 0.6 `astro.config`에 사이트 주소와 i18n 설정 (`en` 기본, `ko`는 `/ko/`)
 - [ ] 0.7 `.gitignore`(Astro용으로 교체 완료), 코드 포맷 설정(Prettier) 추가
