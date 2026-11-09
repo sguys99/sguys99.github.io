@@ -11,8 +11,8 @@ genon:
       Propose and run new Physical AI and agent-system projects and hire talent.
     ko: >-
       Physical AI 휴머노이드 제품 총괄(PO), 제품 정의, 기술트리, 상용화 로드맵 수립, 고객사 프로젝트 PM.
-      음성 대화, 시나리오 실행, VLA, VLN, 자율주행, 모션 통합 아키텍처 설계, 관제시스템 설계 및 개발.
-      Physical AI, 에이전트 시스템 분야 신규 프로젝트 제안·운영, 인재 채용.
+      음성 대화, 시나리오 실행, VLA, VLN, 자율주행, 모션을 아우르는 통합 아키텍처 설계, 로봇 관제시스템 설계 및 개발.
+      Physical AI·에이전트 시스템 분야 신규 프로젝트 제안·운영, 인재 채용.
 
 pwc:
   org: { en: 'PwC Consulting, Digital & AI', ko: PwC 컨설팅 Digital & AI }
@@ -54,8 +54,8 @@ semco:
       Analyzed and visualized manufacturing equipment performance and logistics data,
       and taught data analysis to employees.
     ko: >-
-      데이터 기반 이상탐지 및 예지보전, 딥러닝 구동용 SW 플랫폼 구축.
-      제조설비 운영실적, 물류 데이터 분석 및 시각화, 사내 직원 데이터 분석 교육.
+      데이터 기반 이상탐지·예지보전과 딥러닝 모델 구동을 위한 SW 플랫폼 구축.
+      제조설비 운영실적·물류 데이터 분석 및 시각화, 사내 직원 데이터 분석 교육.
 
 kepco:
   org:
@@ -70,8 +70,8 @@ kepco:
       Built the AI and data science roadmap, identified and planned new research projects,
       and planned research infrastructure and analytics environments.
     ko: >-
-      이상탐지 알고리즘, 시계열 예측, 딥러닝(sequence model, generative model 등) 연구.
-      AI·데이터과학 분야 로드맵 구축, 신규 과제 발굴 및 기획, 연구 인프라 및 분석 환경 구축 계획 수립.
+      이상탐지 알고리즘, 시계열 예측, 딥러닝(시퀀스 모델, 생성 모델 등) 연구.
+      AI·데이터과학 분야 로드맵 수립, 신규 과제 발굴 및 기획, 연구 인프라·분석 환경 구축 계획 수립.
 
 posco-enc:
   org: { en: 'POSCO E&C, Energy Business Division', ko: 포스코이앤씨 에너지사업본부 }

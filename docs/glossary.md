@@ -149,6 +149,8 @@
 | workflow | 워크플로우 | |
 | anomaly detection | 이상탐지 | 붙여 씀 |
 | time-series forecasting | 시계열 예측 | |
+| sequence model | 시퀀스 모델 | |
+| generative model | 생성 모델 | |
 | raw-material price forecasting | 원자재 가격 예측 | |
 | market analysis dashboard | 시황 분석 대시보드 | |
 | green material | 그린소재 | |
