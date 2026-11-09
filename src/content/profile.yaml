@@ -5,3 +5,75 @@ contact:
   email: sguys99@naver.com
   github: https://github.com/sguys99
   linkedin: https://www.linkedin.com/in/kmyu99/
+about:
+  en: >-
+    AI engineer who builds industrial AI end to end, from control algorithms to humanoid robots.
+    Started in power plant automation and model predictive control, then developed anomaly detection,
+    forecasting, and computer vision models for energy and manufacturing. Led RAG, agent, and
+    Text-to-SQL services for enterprise clients, and now leads GenON's Physical AI humanoid product,
+    GenP, from product definition to VLA training pipelines.
+  ko: >-
+    제어 알고리즘부터 휴머노이드 로봇까지, 산업 현장의 AI를 처음부터 끝까지 만들어 온 AI Engineer.
+    발전 플랜트 자동화와 모델 기반 예측 제어(MPC)로 시작해 에너지·제조 분야의 이상탐지, 예측, 컴퓨터 비전 모델을
+    개발했다. 이후 기업 고객을 위한 RAG, 에이전트, Text-to-SQL 서비스를 총괄했고, 지금은 GenON에서 Physical AI
+    휴머노이드 제품(GenP)을 제품 정의부터 VLA 학습 파이프라인까지 총괄한다.
+taglines:
+  - en: Building industrial AI, from control rooms to humanoid robots.
+    ko: 제어실에서 휴머노이드 로봇까지, 산업 현장의 AI를 만듭니다.
+  - en: Turning machine learning into systems that run in plants, factories, and robots.
+    ko: 머신러닝을 플랜트, 공장, 로봇에서 실제로 돌아가는 시스템으로 만듭니다.
+  - en: Physical AI, LLM agents, and industrial ML, taken from prototype to production.
+    ko: Physical AI, LLM 에이전트, 산업용 머신러닝을 프로토타입에서 실제 운영까지.
+trajectory:
+  - label: { en: Control & Automation, ko: 제어·자동화 }
+    years: 2008 – 2015
+    description:
+      en: Designed automation for power and energy plants, then built model predictive control and PID tuning tools for power generation.
+      ko: 전력 에너지 플랜트 자동화 설계, 발전 설비용 모델 기반 예측 제어(MPC)와 PID 제어기 튜닝 도구 개발
+  - label: { en: Data Science & ML, ko: 데이터 사이언스·머신러닝 }
+    years: 2015 – 2022
+    description:
+      en: Applied ML to the power grid and factories, from solar power forecasting and transformer anomaly detection to a machine vision platform.
+      ko: 태양광 출력 예측, 변압기 이상탐지부터 머신비전 플랫폼까지 전력망과 제조 현장에 머신러닝 적용
+  - label: { en: Generative AI & Agents, ko: 생성형 AI·에이전트 }
+    years: 2023 – 2026
+    description:
+      en: Led RAG, agent, and Text-to-SQL services for enterprises, alongside industrial ML for anomaly detection and process optimization.
+      ko: 기업용 RAG, 에이전트, Text-to-SQL 서비스 총괄과 이상탐지, 공정 최적화를 위한 산업용 머신러닝 개발
+  - label: { en: Physical AI, ko: Physical AI }
+    years: 2026 –
+    description:
+      en: Leads a humanoid robot product that unifies voice conversation, VLA manipulation, autonomous navigation, and whole-body control in one workflow.
+      ko: 음성 대화, VLA 조작, 자율주행, 전신 제어를 하나의 워크플로우로 통합한 휴머노이드 로봇 제품 총괄
+skills:
+  - label: { en: Programming, ko: 프로그래밍 }
+    summary:
+      en: Python for ML and services, C/C++ for control and embedded code, plus SQL and TypeScript.
+      ko: 머신러닝과 서비스 개발에 Python, 제어·임베디드 코드에 C/C++, 그 밖에 SQL, TypeScript
+  - label: { en: AI/ML, ko: AI/ML }
+    summary:
+      en: LLM agents and RAG with LangChain/LangGraph, LiteLLM, OpenRouter, FastMCP, and Braintrust; anomaly detection, time-series forecasting, and computer vision with PyTorch and scikit-learn.
+      ko: LangChain/LangGraph, LiteLLM, OpenRouter, FastMCP, Braintrust 기반 LLM 에이전트·RAG, PyTorch와 scikit-learn 기반 이상탐지, 시계열 예측, 컴퓨터 비전
+  - label: { en: Robotics, ko: 로보틱스 }
+    summary:
+      en: Humanoid development on Unitree G1 and AgiBot X2 SDKs, VLA training, simulation in Isaac Lab and MuJoCo, and SLAM-based navigation.
+      ko: Unitree G1, AgiBot X2 SDK 기반 휴머노이드 개발, VLA 학습, Isaac Lab·MuJoCo 시뮬레이션, SLAM 기반 자율주행
+  - label: { en: Serving & Infrastructure, ko: 서빙·인프라 }
+    summary:
+      en: Model and LLM serving with FastAPI, vLLM, and Ollama on Docker and AWS, with MLflow, PostgreSQL, and vector databases (pgVector, Qdrant).
+      ko: Docker, AWS 환경에서 FastAPI, vLLM, Ollama 기반 모델·LLM 서빙, MLflow, PostgreSQL, 벡터 DB(pgVector, Qdrant)
+  - label: { en: Domains, ko: 도메인 }
+    summary:
+      en: Energy and utilities (thermal power, renewables, ESS), petrochemical and steel processes, manufacturing, healthcare, and industrial automation (PLC, DCS).
+      ko: 에너지·유틸리티(화력발전, 신재생, ESS), 석유화학·철강 공정, 제조, 헬스케어, 산업용 자동화(PLC, DCS)
+availability:
+  - en: Technical advisory on LLM applications, including RAG, vector databases, agent systems, and workflow design
+    ko: RAG, 벡터 DB, 에이전트 시스템, 워크플로우 설계 등 LLM 애플리케이션 기술자문
+  - en: AI lectures and corporate training for engineers, researchers, and consultants
+    ko: 엔지니어, 연구원, 컨설턴트 대상 AI 강의와 기업 교육
+  - en: Enterprise AI roadmaps and PoC planning
+    ko: 기업 AI 로드맵 수립과 PoC 기획
+  - en: Architecture and PoC for LLM agent and RAG services
+    ko: LLM 에이전트·RAG 서비스 아키텍처 설계와 PoC
+  - en: Physical AI and humanoid robot projects, from system architecture to VLA data and training pipelines
+    ko: 시스템 아키텍처부터 VLA 데이터·학습 파이프라인까지 Physical AI·휴머노이드 로봇 프로젝트

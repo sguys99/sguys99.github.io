@@ -78,15 +78,13 @@ const profile = defineCollection({
     headline: localized,
     currentRole: localized,
     contact: z.strictObject({ email: z.email(), github: z.url(), linkedin: z.url() }),
-    // shortcut: optional until the 1.2 copy lands; make required (with the counts below) then.
-    about: localized.optional(),
-    taglines: z.array(localized).max(3).optional(),
+    about: localized,
+    taglines: z.array(localized).min(1).max(3),
     trajectory: z
       .array(z.strictObject({ label: localized, years: text, description: localized }))
-      .length(4)
-      .optional(),
-    skills: z.array(z.strictObject({ label: localized, summary: localized })).optional(),
-    availability: z.array(localized).optional(),
+      .length(4),
+    skills: z.array(z.strictObject({ label: localized, summary: localized })).min(1),
+    availability: z.array(localized).min(3).max(5),
   }),
 });
 

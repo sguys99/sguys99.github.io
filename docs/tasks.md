@@ -68,15 +68,15 @@
 - [x] 1.1.4 **[확인]** 이력서 확인 사항 질문 (basic-plan 5.4): 기간 겹침, 특허 등록번호 `10-140515`, 프로그램 등록 2건의 현재 상태, "16년" 기준 — 기간 이력서 그대로, 번호 숨김, pending 표기, 연수 표기 안 함, 지아이비타 소속명 표기
 
 ### 1.2 영문 작성
-- [ ] 1.2.1 Profile: About 문단, 기술 스택 군별 요약
-- [ ] 1.2.2 경력 궤적 4단계 문안 (Control & Automation → Data Science & ML → Generative AI & Agents → Physical AI)
-- [ ] 1.2.3 한 줄 소개 후보 3개 정리 (선택은 G3)
+- [x] 1.2.1 Profile: About 문단, 기술 스택 군별 요약
+- [x] 1.2.2 경력 궤적 4단계 문안 (Control & Automation → Data Science & ML → Generative AI & Agents → Physical AI)
+- [x] 1.2.3 한 줄 소개 후보 3개 정리 (선택은 G3) — B안은 연수 표기를 빼고 수정
 - [x] 1.2.4 Experience 6곳: 직함, 기간, 역할 2~3줄 (Awards·Education도 함께 작성. GPA·교육 이수 2건은 스키마에 자리가 없어 미포함, 1.2.11에서 확인)
 - [ ] 1.2.5 Projects 18건: 한 줄 요약, 핵심 2~3줄, 스택, 분류 태그, Lead 여부
 - [ ] 1.2.6 Patents 15건(등록 7, 출원 8), Software 10건: 영문 제목 + 원제
 - [ ] 1.2.7 Publications: 논문 3편, 보고서 대표작 선정안
 - [ ] 1.2.8 Teaching · Books · Advisory, Awards, Education
-- [ ] 1.2.9 Contact 문안: 의뢰 가능 분야 포함
+- [x] 1.2.9 Contact 문안: 의뢰 가능 분야 포함 (`profile.yaml`의 availability)
 - [ ] 1.2.10 외부 링크 수집: 논문, 저서 출판사 페이지, 강의 관련 페이지
 - [ ] 1.2.11 **[확인]** 영문 전체 검토
 
