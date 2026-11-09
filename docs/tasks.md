@@ -16,7 +16,7 @@
 
 | 단계 | 내용 | 상태 |
 |---|---|---|
-| 0 | 저장소와 개발 환경 준비 | 진행 중 |
+| 0 | 저장소와 개발 환경 준비 | 완료 |
 | 1 | 콘텐츠 작성 (영문 → 국문) | 대기 |
 | 2 | 디자인 콘셉트 선정 (G1) | 대기 |
 | 3 | 세부 디자인 (G2~G6) | 대기 |
@@ -50,8 +50,8 @@
 - [x] 0.5 CLAUDE.md의 디렉터리 구조 생성
 - [x] 0.6 `astro.config`에 사이트 주소와 i18n 설정 (`en` 기본, `ko`는 `/ko/`) — `trailingSlash: always`, 빈 `/`·`/ko/` 페이지
 - [x] 0.7 `.gitignore`(Astro용으로 교체 완료), 코드 포맷 설정(Prettier) 추가 — `npm run format` / `format:check`
-- [ ] 0.8 `npm run dev / build / preview` 동작 확인, CLAUDE.md의 명령어와 다르면 수정
-- [ ] 0.9 첫 커밋
+- [x] 0.8 `npm run dev / build / preview` 동작 확인, CLAUDE.md의 명령어와 다르면 수정 — format 명령 추가, 링크 검사는 7.7로 명시
+- [x] 0.9 첫 커밋 — 작업 단위별 커밋으로 대체 (f91afcc~)
 
 **완료 기준**: 빈 영문·국문 페이지가 로컬에서 열리고 빌드가 통과한다.
 
