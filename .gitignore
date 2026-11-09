@@ -1,52 +1,27 @@
+# build output
+dist/
+.astro/
+
 # dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+node_modules/
 
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
+# logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
+pnpm-debug.log*
 
-# env files
+# env
 .env
-.env*.local
+.env.*
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-
-# IDE
+# OS / IDE
+.DS_Store
+Thumbs.db
 .idea/
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
 
-# OS
-Thumbs.db
-
-# data artifacts (keep folder structure, ignore contents)
-/data/raw/*
-/data/intermediate/*
-/data/processed/*
-!/data/**/.gitkeep
+# 원본 자료 (이력서·경력기술서·사진 원본). 공개 저장소이므로 절대 커밋하지 않음
+/docs/private/
