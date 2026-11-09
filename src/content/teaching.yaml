@@ -1,1 +1,83 @@
-{}
+# Teaching · Books · Advisory (resume "주요활동" + "저술활동"): advisory/teaching 8, books 2.
+
+incheon-visiting-researcher:
+  kind: advisory
+  title: { en: Visiting Researcher / Technical Advisor, ko: 방문연구원 / 기술자문 }
+  org:
+    en: Department of Safety Engineering, Incheon National University
+    ko: 인천대학교 안전공학과
+  years: 2020 – 2026
+  details:
+    - en: Advised on LLM application development, including RAG, vector DB, agent system, and workflow design
+      ko: 'LLM 활용 어플리케이션 개발 방안 지원: RAG, 벡터 DB, 에이전트 시스템, 워크플로우 설계'
+    - en: Supported development of combustion-state diagnosis models from flame image sequences (ResNet, autoencoder, LSTM-CNN)
+      ko: '화염 이미지 시퀀스를 활용한 연소 상태 진단 모델 개발 지원: ResNet, Autoencoder, LSTM-CNN'
+    - en: Developed industrial boiler anomaly detection models and built their deployment environment with Scikit-learn, LightGBM, FastAPI, and AWS EC2
+      ko: '산업용 보일러 이상탐지 모델 개발 및 배포환경 구축: Scikit-learn, LightGBM, FastAPI, AWS EC2 활용'
+    - en: Supported development of an LSTM autoencoder anomaly detection model using dynamic pressure sensors on power plant combustors
+      ko: '발전용 연소설비 동압 센서를 활용한 이상탐지 모델 개발 지원: LSTM Autoencoder'
+incheon-llm-agent-lectures:
+  kind: teaching
+  title:
+    en: Lectures on LLMs, agents, and Harness Engineering for undergraduate and master's researchers
+    ko: 학부·석사 연구원 대상 LLM, 에이전트, Harness Engineering 강의
+  org:
+    en: Engineering Education Center, Incheon National University
+    ko: 인천대학교 공학교육센터
+  years: '2026'
+pwc-ai-curriculum:
+  kind: teaching
+  title:
+    en: AI training curriculum for consultants (design and lectures)
+    ko: 컨설턴트 대상 AI 교육 커리큘럼 기획 및 강의
+  org: { en: PwC Consulting, ko: PwC 컨설팅 }
+  years: '2025'
+control-data-analysis-course:
+  kind: teaching
+  title:
+    en: Hands-on course on control systems and data analysis
+    ko: 제어시스템 및 데이터분석 기술 실무 과정 강의
+  org:
+    en: Korea Measurement & Control Technology Education Center
+    ko: (재)한국계측제어기술교육센터
+  years: 2014 – 2023
+tacademy-big-data-analyst:
+  kind: teaching
+  title: { en: Big data analyst training program, ko: 빅데이터분석가 교육과정 }
+  org: { en: SK planet Tacademy, ko: SK planet Tacademy }
+  years: '2023'
+koscom-git-github:
+  kind: teaching
+  title:
+    en: Software version control with Git and GitHub (parts 1 and 2)
+    ko: Git, GitHub를 활용한 소프트웨어 버전관리(1, 2)
+  org: { en: Koscom, ko: 코스콤 }
+  years: '2023'
+incheon-future-education-advisory:
+  kind: advisory
+  title:
+    en: Advisory Committee Member, Future Education
+    ko: 미래교육 자문위원
+  org: { en: Incheon National University, ko: 인천대학교 }
+  years: 2023, 2024
+kepco-ict-data-science:
+  kind: teaching
+  title:
+    en: Data science lectures for new ICT employees
+    ko: ICT 신입직원 대상 데이터사이언스 강의
+  org:
+    en: KEPCO Human Resources Development Institute
+    ko: 한국전력 인재개발원
+  years: 2019 – 2020
+
+# --- Books (en: translated title, ko: original title) ---
+book-git-github-python:
+  kind: book
+  title: { en: Learning Git & GitHub with Python Code, ko: 파이썬 코드로 배우는 Git&Github }
+  org: { en: Youngjin.com, ko: 영진닷컴 }
+  years: '2022'
+book-git-visual-studio:
+  kind: book
+  title: { en: Git for Visual Studio Users, ko: Visual studio 사용자를 위한 git }
+  org: { en: WikiDocs, ko: 위키독스 }
+  years: '2021'

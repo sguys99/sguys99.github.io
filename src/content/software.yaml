@@ -1,1 +1,69 @@
-{}
+# Software registrations (resume: 10). en: English translation, ko: Korean original title.
+# The two Python 3.6 programs are pending (basic-plan 5.4 decision 5): no number or date.
+
+object-detection-preprocessing:
+  title:
+    en: Image data preprocessing program for equipment recognition (deep learning object detection) (Python 3.6)
+    ko: 설비인식용(Deep learning object detection) 이미지 데이터 전처리 프로그램(Python 3.6)
+  status: pending
+anomaly-detection-preprocessing:
+  title:
+    en: Automated data preprocessing program for training anomaly detection machine learning models (Python 3.6)
+    ko: 이상탐지용 머신러닝 모델 학습을 위한 데이터 전처리 자동화 프로그램(Python 3.6)
+  status: pending
+ess-control-simulation:
+  title:
+    en: ESS control algorithm simulation program (Matlab Simulink)
+    ko: ESS 제어알고리즘 시뮬레이션 프로그램(Matlab Simulink)
+  status: registered
+  number: C-2018-029345
+  date: '2018-10-29'
+gas-turbine-combined-cycle-simulator:
+  title:
+    en: Simulator model for verifying gas turbine combined-cycle plant operation
+    ko: 가스터빈 복합화력 운전 검증용 시뮬레이터 모델
+  status: registered
+  number: C-2018-029332
+  date: '2018-10-29'
+pid-loop-frequency-analysis:
+  title:
+    en: Frequency analysis program for proportional-integral-derivative control loops (Matlab)
+    ko: 비례, 적분, 미분 제어루프 주파수 분석 프로그램(Matlab)
+  status: registered
+  number: C-2015-019326
+  date: '2015-08-17'
+pid-auto-tuning:
+  title:
+    en: Automatic PID controller tuning parameter calculation program for power generation control systems
+    ko: 발전 제어시스템 PID 제어기 튜닝 파라미터 자동연산 프로그램
+  status: registered
+  number: C-2015-019311
+  date: '2015-08-17'
+pid-process-identification:
+  title:
+    en: Process identification program for proportional-integral-derivative controller design (Matlab)
+    ko: 비례, 적분, 미분 제어기 설계용 공정식별 프로그램(Matlab)
+  status: registered
+  number: C-2015-019309
+  date: '2015-08-17'
+dmc-controller-simulator:
+  title:
+    en: Dynamic matrix-based predictive controller and simulator (C, C++)
+    ko: 동적행렬기반 예측제어기 및 시뮬레이터(C, C++)
+  status: registered
+  number: C-2015-019308
+  date: '2015-08-17'
+pid-tuning-gui:
+  title:
+    en: PID controller tuning parameter calculation program (Matlab GUI)
+    ko: PID 제어기 튜닝 파라미터 연산 프로그램(Matlab GUI)
+  status: registered
+  number: C-2014-027714
+  date: '2014-09-01'
+mimo-matrix-computation:
+  title:
+    en: Matrix computation program for multiple-input multiple-output (MIMO) control (C, C++)
+    ko: 다중입출력(MIMO) 제어용 행렬연산 프로그램(C, C++)
+  status: registered
+  number: C-2014-027696
+  date: '2014-11-10'

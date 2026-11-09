@@ -73,9 +73,9 @@
 - [x] 1.2.3 한 줄 소개 후보 3개 정리 (선택은 G3) — B안은 연수 표기를 빼고 수정
 - [x] 1.2.4 Experience 6곳: 직함, 기간, 역할 2~3줄 (Awards·Education도 함께 작성. GPA·교육 이수 2건은 스키마에 자리가 없어 미포함, 1.2.11에서 확인)
 - [x] 1.2.5 Projects 18건: 한 줄 요약, 핵심 2~3줄, 스택, 분류 태그, Lead 여부 — featured는 1.5.1 선정 후 지정
-- [ ] 1.2.6 Patents 15건(등록 7, 출원 8), Software 10건: 영문 제목 + 원제
-- [ ] 1.2.7 Publications: 논문 3편, 보고서 대표작 선정안
-- [ ] 1.2.8 Teaching · Books · Advisory, Awards, Education
+- [x] 1.2.6 Patents 15건(등록 7, 출원 8), Software 10건: 영문 제목 + 원제
+- [x] 1.2.7 Publications: 논문 3편, 보고서 대표작 선정안 — 보고서 19건 중 6건 featured 제안
+- [x] 1.2.8 Teaching · Books · Advisory, Awards, Education
 - [x] 1.2.9 Contact 문안: 의뢰 가능 분야 포함 (`profile.yaml`의 availability)
 - [ ] 1.2.10 외부 링크 수집: 논문, 저서 출판사 페이지, 강의 관련 페이지
 - [ ] 1.2.11 **[확인]** 영문 전체 검토

@@ -1,1 +1,176 @@
-{}
+# Papers (3) and reports (19 listed on the resume, out of 50+).
+# Links/DOIs come in task 1.2.10. English-original titles keep the original in both languages.
+
+# --- Papers ---
+boiler-diagnosis-energies-2026:
+  type: paper
+  authors: D. J. Jang, M. J. Jeon, K. M. Yu, and M. C. Lee
+  title:
+    en: 'A Novel Diagnostic Method on the Industrial Boilers Using Machine Learning: t-SNE, Auto-Encoder and LGBM'
+    ko: 'A Novel Diagnostic Method on the Industrial Boilers Using Machine Learning: t-SNE, Auto-Encoder and LGBM'
+  venue:
+    en: Energies, vol. 19, no. 4, art. 874
+    ko: Energies, vol. 19, no. 4, art. 874
+  year: 2026
+ess-frequency-control-kepco-2018:
+  type: paper
+  authors: K. Yu, I. Choi, and J. Woo
+  title:
+    en: Lessons Learned from Energy Storage System Demonstrations for Primary Frequency Control
+    ko: Lessons Learned from Energy Storage System Demonstrations for Primary Frequency Control
+  venue:
+    en: KEPCO Journal on Electric Power and Energy, vol. 4, no. 2, pp. 107–114
+    ko: KEPCO Journal on Electric Power and Energy, vol. 4, no. 2, pp. 107–114
+  year: 2018
+dmc-block-rcp-icros-2015:
+  type: paper
+  authors: 이영삼, 유광명 # as on the resume; English romanization not provided
+  title:
+    en: Development and application of a DMC (Dynamic Matrix Control) block for RCP systems
+    ko: RCP 시스템에서 사용 가능한 DMC(Dynamic Matrix Control) 블록의 개발과 응용
+  venue:
+    en: Journal of Institute of Control, Robotics and Systems, pp. 827–835
+    ko: 제어로봇시스템학회 논문지, pp. 827–835
+  year: 2015
+
+# --- Reports ---
+genp-product-definition:
+  type: report
+  title:
+    en: 'Physical AI humanoid product (GenP) definition: common core and domain profiles'
+    ko: 'Physical AI 휴머노이드 제품(GenP) 정의서: 공통 코어와 도메인 프로파일'
+  publisher: { en: GenON, ko: GenON }
+  year: 2026
+  featured: true
+genp-commercialization-roadmap:
+  type: report
+  title:
+    en: 'GenP commercialization roadmap: phase-by-phase product readiness and transition to an operations business'
+    ko: 'GenP 상용화 로드맵: Phase별 제품 준비와 운영 사업 전환 계획'
+  publisher: { en: GenON, ko: GenON }
+  year: 2026
+humanoid-docent-market-research:
+  type: report
+  title:
+    en: Market research on humanoid docent and promotional robots
+    ko: 휴머노이드 도슨트/ 홍보 로봇 시장 조사
+  publisher: { en: GenON, ko: GenON }
+  year: 2026
+llm-apps-with-claude-code:
+  type: report
+  title:
+    en: LLM application development with Claude Code
+    ko: LLM 어플리케이션 개발(클로드코드 활용)
+  year: 2026 # no publisher on the resume
+genai-core-tech-ecosystem:
+  type: report
+  title:
+    en: Core generative AI technologies and the ecosystem for building services
+    ko: 생성형 AI 핵심 기술 및 서비스 구축을 위한 생태계
+  publisher: { en: PwC Consulting, ko: PwC 컨설팅 }
+  year: 2025
+  featured: true
+petrochemical-ai-masterplan-poc:
+  type: report
+  title:
+    en: AI project master plan and generative AI PoC case study for a petrochemical company
+    ko: 석유화학 기업 AI 과제 MP 수립 및 Gen AI PoC 수행사례
+  publisher: { en: PwC Consulting, ko: PwC 컨설팅 }
+  year: 2025
+transformer-ltsf-survey:
+  type: report
+  title:
+    en: A survey of Transformer-based long-term time-series forecasting (LTFS) methods
+    ko: 트랜스포머를 활용한 LTFS(Long-term Timeseries Forecasting) 기법 조사
+  publisher: { en: MakinaRocks, ko: 마키나락스 }
+  year: 2023
+  featured: true
+lifelog-diet-guidance-design:
+  type: report
+  title:
+    en: Designing a diet guidance service with lifelog data and machine learning
+    ko: 라이프로그 데이터와 머신러닝을 활용한 식습관 가이드 서비스 설계
+  publisher: { en: GIVita, ko: 지아이비타 }
+  year: 2022
+cgm-personalized-diet-case-study:
+  type: report
+  title:
+    en: Case study of a personalized diet management service using CGM data
+    ko: CGM데이터를 활용한 개인화 식단관리 서비스 사례 연구
+  publisher: { en: GIVita, ko: 지아이비타 }
+  year: 2022
+  featured: true
+cgm-time-series-analysis:
+  type: report
+  title:
+    en: Time-series analysis of CGM data
+    ko: CGM데이터를 활용한 시계열데이터 분석
+  publisher: { en: GIVita / Kyung Hee University Medical Center, ko: 지아이비타 / 경희의료원 }
+  year: 2022
+smartphone-lifelog-walking:
+  type: report
+  title:
+    en: 'Smartphone lifelog data analysis: when and how much do people walk?'
+    ko: '스마트폰 라이프로그(lifelog) 데이터 분석: 사람들은 언제, 얼마나 걸을까'
+  publisher: { en: GIVita, ko: 지아이비타 }
+  year: 2022
+deep-anomaly-detection-unsupervised:
+  type: report
+  title:
+    en: 'Deep learning for anomaly detection: unsupervised approach'
+    ko: 'Deep learning for anomaly detection: unsupervised approach'
+  publisher: { en: KEPCO Data Science Lab, ko: 한전 데이터사이언스연구소 }
+  year: 2020
+  featured: true
+jeju-ev-charging-load-correlation:
+  type: report
+  title:
+    en: Correlation analysis of EV charging station data and distribution line load in Jeju
+    ko: 제주지역 전기차충전소 데이터 및 선로부하 상관도 분석결과
+  publisher: { en: KEPCO Data Science Lab, ko: 한전 데이터사이언스연구소 }
+  year: 2019
+transformer-diagnosis-progress:
+  type: report
+  title:
+    en: Progress report on a deep learning-based condition diagnosis model for substation transformers
+    ko: 딥러닝 기반 변전용 변압기 상태진단 모델 개발 진행경과
+  publisher: { en: KEPCO Data Science Lab, ko: 한전 데이터사이언스연구소 }
+  year: 2019
+distribution-object-detection-status:
+  type: report
+  title:
+    en: Status of deep learning object detection model development for distribution equipment
+    ko: 딥러닝 활용 배전설비 사물인식(Object detection) 모델 개발현황
+  publisher: { en: KEPCO Data Science Lab, ko: 한전 데이터사이언스연구소 }
+  year: 2019
+docker-spark-distributed-dl:
+  type: report
+  title:
+    en: Configuring a distributed operating environment for deep learning models with Docker and Spark
+    ko: Docker 및 Spark를 활용한 딥러닝 모델 분산운영환경 구성방안 연구
+  publisher: { en: KEPCO Research Institute (KEPRI), ko: 한전 전력연구원 }
+  year: 2018
+ess-frequency-regulation-need:
+  type: report
+  title:
+    en: The need for frequency regulation ESS as renewable generation grows
+    ko: 신재생발전 증가에 따른 주파수제어용 ESS의 필요성
+  publisher:
+    en: Korean Institute of Electrical Engineers (KIEE), 전기의 세계 (The World of Electricity), vol. 67, no. 3
+    ko: 대한전기학회 전기의 세계, 제67권 3호
+  year: 2018
+  featured: true
+substation-ess-performance-analysis:
+  type: report
+  title:
+    en: Data analysis report for substation ESS performance evaluation (Sokcho, Nongong, Ulsan, Gimje)
+    ko: 변전용 ESS 성능평가를 위한 데이터분석 결과보고서(속초, 논공, 울산, 김제)
+  publisher: { en: KEPCO Research Institute (KEPRI), ko: 한전 전력연구원 }
+  year: 2017
+scikit-learn-statistical-ml:
+  type: report
+  title:
+    en: Developing statistical machine learning models with Scikit-learn
+    ko: Scikit-learn을 활용한 통계기반 머신러닝 모델 개발방안
+  publisher: { en: KEPCO Research Institute (KEPRI), ko: 한전 전력연구원 }
+  year: 2016

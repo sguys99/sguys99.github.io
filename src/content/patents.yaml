@@ -1,1 +1,109 @@
-{}
+# Patents (resume: 15 = 7 registered + 8 filed). en: English translation, ko: Korean original title.
+# Numbers and dates exactly as on the resume.
+
+# --- Filed (8) ---
+vlm-pid-report-verification:
+  title:
+    en: Method and system for automatically generating P&ID work reports and verifying them against the original drawings using a vision-language model
+    ko: 시각언어모델을 이용한 P&ID 작업보고서 자동 작성 및 도면 원문 대조 검증 방법 및 시스템
+  status: filed # filing in progress: no application number yet
+  date: '2026-10'
+power-equipment-diagnosis:
+  title:
+    en: Apparatus and method for diagnosing power equipment
+    ko: 전력설비 진단 장치 및 방법
+  status: filed
+  number: '2020-0014135'
+  date: '2020-02-06'
+hybrid-ess-control:
+  title:
+    en: Control system for a hybrid energy storage system
+    ko: 복합 에너지 저장장치 제어 시스템
+  status: filed
+  number: '2018-0075487'
+  date: '2018-06-29'
+frequency-control:
+  title:
+    en: Frequency control system
+    ko: 주파수 제어시스템
+  status: filed
+  number: '2017-0128140'
+  date: '2017-09-29'
+model-predictive-control:
+  title:
+    en: Model-based predictive control apparatus and method
+    ko: 모델 기반 예측 제어 장치 및 방법
+  status: filed
+  number: '10-2015-0053682'
+  date: '2015-04-16'
+turbine-dynamics-simulator:
+  title:
+    en: Steam turbine dynamics simulator, gas turbine dynamics simulator, and turbine generator control apparatus and method using the same
+    ko: 증기터빈 동특성 시뮬레이터, 가스터빈 동특성 시뮬레이터, 그를 이용하는 터빈 발전기 제어장치 및 방법
+  status: filed
+  number: '10-2015-0060614'
+  date: '2015-04-29'
+sco2-brayton-control:
+  title:
+    en: Integrated control apparatus for a supercritical Brayton cycle with a variable heat source
+    ko: 가변 열원을 적용한 초임계 브레이튼 사이클 통합 제어 장치
+  status: filed
+  number: '10-2014-0064618'
+  date: '2014-05-28'
+lubricant-supply:
+  title:
+    en: Lubricant supply apparatus
+    ko: 윤활유 공급 장치
+  status: filed
+  number: '10-2013-0099508'
+  date: '2013-08-22'
+
+# --- Registered (7) ---
+main-steam-temperature-control:
+  title:
+    en: Main steam temperature control apparatus and method
+    ko: 주증기온도제어장치 및 주증기온도제어방법
+  status: registered
+  number: '10-2107853'
+  date: '2020-04-28'
+control-network-traffic-analysis:
+  title:
+    en: Traffic analysis apparatus for network-based control systems and operating method thereof
+    ko: 네트워크 기반 제어시스템용 트래픽 분석장치 및 이의 동작방법
+  status: registered
+  number: '10-1958295'
+  date: '2019-03-08'
+power-plant-simulator:
+  title:
+    en: Power plant simulator
+    ko: 발전소 시뮬레이터
+  status: registered
+  number: '10-1837653'
+  date: '2018-03-06'
+superheater-temperature-control:
+  title:
+    en: Superheater temperature control method
+    ko: 과열기 온도 제어 방법
+  status: registered
+  number: '10-1804477'
+  date: '2017-11-28'
+oxy-fuel-boiler-control:
+  title:
+    en: Operation control method for an oxy-fuel combustion boiler
+    ko: 순산소 연소 보일러의 운전제어방법
+  status: registered
+  number: '10-1439883'
+  date: '2014-09-03'
+combustion-air-supply:
+  title:
+    en: Air supply apparatus and air supply method for combustion equipment
+    ko: 연소설비의 공기공급장치 및 공기공급방법
+  status: registered # number omitted on purpose (basic-plan 5.4 decision 4)
+  date: '2014-06-02'
+process-control-interface:
+  title:
+    en: Interface apparatus for a process control system
+    ko: 공정 제어 시스템의 인터페이스 장치
+  status: registered
+  number: '10-1373473'
+  date: '2014-03-05'
