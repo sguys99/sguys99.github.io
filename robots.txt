@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://sguys99.github.io/sitemap.xml
-Sitemap: https://sguys99.github.io/global-ai-news/sitemap.xml
