@@ -49,7 +49,7 @@
 - [x] 0.4 Node LTS 확인 후 Astro 프로젝트 초기화 (최소 템플릿, TypeScript strict) — Node 24 LTS(`.nvmrc`), Astro 7.4.7
 - [x] 0.5 CLAUDE.md의 디렉터리 구조 생성
 - [ ] 0.6 `astro.config`에 사이트 주소와 i18n 설정 (`en` 기본, `ko`는 `/ko/`)
-- [ ] 0.7 `.gitignore`(Astro용으로 교체 완료), 코드 포맷 설정(Prettier) 추가
+- [x] 0.7 `.gitignore`(Astro용으로 교체 완료), 코드 포맷 설정(Prettier) 추가 — `npm run format` / `format:check`
 - [ ] 0.8 `npm run dev / build / preview` 동작 확인, CLAUDE.md의 명령어와 다르면 수정
 - [ ] 0.9 첫 커밋
 
