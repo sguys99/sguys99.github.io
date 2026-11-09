@@ -32,7 +32,7 @@
 <body>
 <header>
   <h1>G1 콘셉트 시안</h1>
-  <div class="group" data-key="view"><span>보기</span><button data-v="side">3안 나란히</button><button data-v="a">A</button><button data-v="b">B</button><button data-v="c">C</button></div>
+  <div class="group" data-key="view"><span>보기</span><button data-v="side">3안 나란히</button><button data-v="a,a2">A vs A′</button><button data-v="a">A</button><button data-v="a2">A′</button><button data-v="b">B</button><button data-v="c">C</button></div>
   <div class="group" data-key="device"><span>화면</span><button data-v="desktop">데스크톱 1440</button><button data-v="mobile">모바일 390</button></div>
   <div class="group" data-key="theme"><span>테마</span><button data-v="light">라이트</button><button data-v="dark">다크</button></div>
   <div class="group" data-key="lang"><span>언어</span><button data-v="en">EN</button><button data-v="ko">KO</button></div>
@@ -44,6 +44,9 @@ const NOTES = {
   a: { name: 'A. Quiet Dossier', intent: '차가운 무채색 바탕에 얇은 선의 카드, 포인트 색 하나(슬레이트 블루)만 쓴 정제형. 타이포 위계와 여백만으로 단정하고 중립적인 인상.',
     pros: ['모든 목록이 같은 행 문법이라 훑어 읽기 쉽고 항목이 늘어도 질서 유지', '영문/국문, 라이트/다크 간 완성도 차이가 가장 적고 토큰으로 옮기기 쉬움'],
     cons: ['가장 무난해 개성과 기억에 남는 인상은 B·C보다 약함', '카드 안의 카드로 선이 겹치고, 넓은 화면에서 오른쪽 여백이 남음'] },
+  a2: { name: 'A′. Quiet Dossier (참고 사이트 반영)', intent: 'A의 색과 차분함은 유지하고 참고 사이트의 골격(250px 사이드바 + 본문 중앙 정렬, 상단 메뉴), 사각 불릿 제목 + 카드, 서체 역할(Space Grotesk / Public Sans / IBM Plex Mono)을 반영.',
+    pros: ['넓은 화면의 빈 공간이 없어지고 상단 메뉴가 현재 위치를 밑줄로 표시', '경력·특허·프로젝트가 모두 "왼쪽 제목, 오른쪽 모노 날짜" 문법이고 카드 이중선 제거'],
+    cons: ['참고 사이트와 골격이 비슷해 독자성은 B·C보다 약함', '소개 카드가 길어 대표작이 첫 화면에 보이지 않음'] },
   b: { name: 'B. Editorial Dossier', intent: '큰 세리프 제목과 따뜻한 종이 톤으로 위계를 만들고, 테두리 대신 여백과 가는 선으로 나눈 편집형. 대표작 1건은 넓은 피처 카드.',
     pros: ['첫인상이 가장 세련되고 다른 개발자 포트폴리오와 확실히 구별됨', '박스가 적어 문장이 주인공이 되고 긴 국문도 편하게 읽힘'],
     cons: ['제목·여백이 커서 스크롤이 길고 모바일 정보 밀도가 낮음', '영문·국문 세리프 인상 차이, 테라코타 색은 기술 직군에 다소 감성적일 수 있음'] },
@@ -58,7 +61,7 @@ const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>'
 function render() {
   document.querySelectorAll('.group').forEach((g) =>
     g.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(state[g.dataset.key] === b.dataset.v))));
-  const ids = state.view === 'side' ? ['a', 'b', 'c'] : [state.view];
+  const ids = state.view === 'side' ? ['a', 'b', 'c'] : state.view.split(',');
   main.className = ids.length > 1 ? 'side' : '';
   main.innerHTML = ids.map((id) => {
     const n = NOTES[id];
