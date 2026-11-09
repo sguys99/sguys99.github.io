@@ -76,8 +76,8 @@ genai-core-tech-ecosystem:
 petrochemical-ai-masterplan-poc:
   type: report
   title:
-    en: AI project master plan and generative AI PoC case study for a petrochemical company
-    ko: 석유화학 기업 AI 과제 MP 수립 및 Gen AI PoC 수행사례
+    en: AI project master plan and generative AI PoC case study for LOTTE Fine Chemical
+    ko: 롯데정밀화학 AI 과제 MP 수립 및 Gen AI PoC 수행사례
   publisher: { en: PwC Consulting, ko: PwC 컨설팅 }
   year: 2025
 transformer-ltsf-survey:

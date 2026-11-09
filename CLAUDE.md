@@ -82,6 +82,9 @@ docs/private/         원본 자료: 이력서, 경력기술서, 사진 원본 (
 | SCM 데이터 분석 및 업무 지원 서비스 (PwC) | Samsung Electronics |
 | 온라인 상담 지원 및 제품 추천 어시스턴트 (PwC) | Samsung Electronics |
 | AI 프로젝트 마스터플랜 및 LLM 서비스 PoC (PwC) | LOTTE Fine Chemical |
+| ├ 원자재 가격 예측 (마스터플랜 PoC, PwC) | LOTTE Fine Chemical |
+| └ 그린소재 재고 조합 최적화 (마스터플랜 PoC, PwC) | LOTTE Fine Chemical |
+| 보고서: AI 과제 MP 수립 및 Gen AI PoC 수행사례 (PwC, 2025) | LOTTE Fine Chemical |
 | 그 외 모든 고객사 | 익명 (예: "a global F&B company") |
 
 - 새 프로젝트를 추가할 때 기본은 익명이다. 실명은 건별로 사용자 승인을 받는다.
