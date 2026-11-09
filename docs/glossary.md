@@ -31,22 +31,22 @@
 | Equipment Technology Research Institute | 설비기술연구소 | 삼성전기 내 조직. 영문 [확인 필요] |
 | KEPCO (Korea Electric Power Corporation) | 한국전력 | 첫 언급만 전체 이름, 이후 KEPCO / 한전 |
 | Data Science Lab | 데이터사이언스연구소 | KEPCO 내 조직 (이력서 경력란 표기 "Data Science Lab.") |
-| KEPCO Research Institute (KEPRI) | 한전 전력연구원 | 영문 공식 명칭 [확인 필요] |
+| KEPCO Research Institute (KEPRI) | 한전 전력연구원 | 한전 발행 KEPCO Journal과 ICROS 논문(2015)의 저자 소속 표기로 확인 (https://koreascience.kr/article/JAKO201815061086549.page). 외부 매체의 "Korea Electric Power Research Institute"는 쓰지 않음 |
 | KEPCO Human Resources Development Institute | 한국전력 인재개발원 | 영문 [확인 필요] |
-| POSCO E&C | 포스코이앤씨 | 이력서 표기는 "포스코EnC". 재직 당시 사명과 국문 표기 [확인 필요] |
+| POSCO E&C | 포스코이앤씨 | 이력서 표기는 "포스코EnC". 재직 당시(2008–2010) 국문 사명은 포스코건설이며, 2023-03-20에 포스코이앤씨(POSCO E&C)로 변경 (https://www.smarttoday.co.kr/ko-kr/articles/28125). 현재 사명과 당시 사명 중 어느 쪽을 쓸지 [확인 필요] |
 | Energy Business Division | 에너지사업본부 | POSCO E&C 내 조직. 영문 [확인 필요] |
 
 ### 2.2 그 밖의 소속·기관
 
 | English | 한국어 | note |
 |---|---|---|
-| GIVita | 지아이비타 | 프로젝트 소속명 그대로 표기 (승인됨). 영문 철자 [확인 필요] |
+| GIVita | 지아이비타 | 프로젝트 소속명 그대로 표기 (승인됨). 영문 철자 [확인 필요]. 외부 기업 정보 사이트·기사는 "GI VITA"로 표기 (회사 공식 사이트는 확인 못 함) |
 | Kyung Hee University Medical Center | 경희의료원 | 보고서 공동 기관 |
 | KAIST | KAIST (한국과학기술원) | 국문 첫 언급만 괄호 병기 |
 | Pusan National University | 부산대학교 | 줄임: Pusan National Univ. |
 | Incheon National University | 인천대학교 | |
 | Department of Safety Engineering | 안전공학과 | 인천대학교 |
-| Engineering Education Center | 공학교육센터 | 인천대학교. 영문 [확인 필요] |
+| Engineering Education Center | 공학교육센터 | 인천대학교. 영문 [확인 필요]. 대학 사이트의 국문 명칭은 "공학교육혁신센터" (https://icee.inu.ac.kr). 같은 기관인지 사용자 확인 필요 |
 | Korea Measurement & Control Technology Education Center | (재)한국계측제어기술교육센터 | 영문 [확인 필요] |
 | SK planet Tacademy | SK planet Tacademy | 원문 표기 유지 |
 | Koscom | 코스콤 | |
@@ -56,9 +56,10 @@
 | WikiDocs | 위키독스 | 온라인 출판 플랫폼 |
 | Energies (MDPI) | Energies | 저널명은 원문 그대로 |
 | KEPCO Journal on Electric Power and Energy | KEPCO Journal on Electric Power and Energy | 저널명 원문 유지 |
-| Institute of Control, Robotics and Systems (ICROS) | 제어로봇시스템학회 | 논문지: Journal of ICROS / 제어로봇시스템학회 논문지 |
-| Korean Institute of Electrical Engineers (KIEE) | 대한전기학회 | 기고 매체 "전기의 세계"는 원제 병기 |
-| Korea Copyright Commission | 한국저작권위원회 | 이력서는 "한국저작권협회". 프로그램 등록 기관 명칭 [확인 필요] |
+| Institute of Control, Robotics and Systems (ICROS) | 제어로봇시스템학회 | 논문지: Journal of Institute of Control, Robotics and Systems / 제어로봇시스템학회 논문지 (DOI 메타데이터 표기) |
+| Korean Institute of Electrical Engineers (KIEE) | 대한전기학회 | |
+| The Proceedings of the KIEE | 전기의 세계 | 대한전기학회 월간지 (KIEE Magazine). 학회 영문 사이트 표기 (https://www.kiee.or.kr/eng/html/publication.vm) |
+| Korea Copyright Commission | 한국저작권위원회 | 이력서는 "한국저작권협회". 2009-07 이후 프로그램 등록 기관은 한국저작권위원회 (등록일 2014–2018). https://www.copyright.or.kr/committee-introduction/committee/trace/index.do |
 
 ## 3. 직함·역할
 

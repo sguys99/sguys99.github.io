@@ -76,8 +76,10 @@ book-git-github-python:
   title: { en: Learning Git & GitHub with Python Code, ko: 파이썬 코드로 배우는 Git&Github }
   org: { en: Youngjin.com, ko: 영진닷컴 }
   years: '2022'
+  url: https://www.youngjin.com/book/book_detail.asp?prod_cd=9788931467659&seq=7193
 book-git-visual-studio:
   kind: book
   title: { en: Git for Visual Studio Users, ko: Visual studio 사용자를 위한 git }
   org: { en: WikiDocs, ko: 위키독스 }
   years: '2021'
+  url: https://wikidocs.net/book/7060

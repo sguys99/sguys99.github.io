@@ -1,5 +1,5 @@
 # Papers (3) and reports (19 listed on the resume, out of 50+).
-# Links/DOIs come in task 1.2.10. English-original titles keep the original in both languages.
+# DOIs verified via Crossref/doi.org in task 1.2.10. English-original titles keep the original in both languages.
 
 # --- Papers ---
 boiler-diagnosis-energies-2026:
@@ -12,6 +12,7 @@ boiler-diagnosis-energies-2026:
     en: Energies, vol. 19, no. 4, art. 874
     ko: Energies, vol. 19, no. 4, art. 874
   year: 2026
+  doi: 10.3390/en19040874
 ess-frequency-control-kepco-2018:
   type: paper
   authors: K. Yu, I. Choi, and J. Woo
@@ -22,16 +23,18 @@ ess-frequency-control-kepco-2018:
     en: KEPCO Journal on Electric Power and Energy, vol. 4, no. 2, pp. 107–114
     ko: KEPCO Journal on Electric Power and Energy, vol. 4, no. 2, pp. 107–114
   year: 2018
+  doi: 10.18770/KEPCO.2018.04.02.107
 dmc-block-rcp-icros-2015:
   type: paper
-  authors: 이영삼, 유광명 # as on the resume; English romanization not provided
+  authors: Y.-S. Lee and K.-M. Yu # as printed in the paper's English metadata (이영삼, 유광명)
   title:
-    en: Development and application of a DMC (Dynamic Matrix Control) block for RCP systems
+    en: Development of a DMC Block for Use with an RCP System and its Application # official English title
     ko: RCP 시스템에서 사용 가능한 DMC(Dynamic Matrix Control) 블록의 개발과 응용
   venue:
-    en: Journal of Institute of Control, Robotics and Systems, pp. 827–835
-    ko: 제어로봇시스템학회 논문지, pp. 827–835
+    en: Journal of Institute of Control, Robotics and Systems, vol. 21, no. 9, pp. 827–835
+    ko: 제어로봇시스템학회 논문지, 제21권 9호, pp. 827–835
   year: 2015
+  doi: 10.5302/J.ICROS.2015.15.0086
 
 # --- Reports ---
 genp-product-definition:
@@ -156,7 +159,7 @@ ess-frequency-regulation-need:
     en: The need for frequency regulation ESS as renewable generation grows
     ko: 신재생발전 증가에 따른 주파수제어용 ESS의 필요성
   publisher:
-    en: Korean Institute of Electrical Engineers (KIEE), 전기의 세계 (The World of Electricity), vol. 67, no. 3
+    en: Korean Institute of Electrical Engineers (KIEE), The Proceedings of the KIEE, vol. 67, no. 3
     ko: 대한전기학회 전기의 세계, 제67권 3호
   year: 2018
   featured: true
