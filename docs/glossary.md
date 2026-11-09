@@ -151,6 +151,15 @@
 | time-series forecasting | 시계열 예측 | |
 | sequence model | 시퀀스 모델 | |
 | generative model | 생성 모델 | |
+| convex optimization | 볼록 최적화 | |
+| gradient descent | 경사하강법 | |
+| quadratic programming | 이차계획법 | |
+| on-premise | 온프레미스 | |
+| on-device | 온디바이스 | |
+| rule-based | 규칙 기반 | |
+| multi-horizon forecast | 다구간 예측 | |
+| depth sensor | 깊이 센서 | |
+| experiment environment | 실험 환경 | |
 | raw-material price forecasting | 원자재 가격 예측 | |
 | market analysis dashboard | 시황 분석 대시보드 | |
 | green material | 그린소재 | |

@@ -7,9 +7,9 @@ summary:
   ko: 제조 설비 진단 시스템을 위한 RAG 기반 질의응답 챗봇 PoC 개발
 highlights:
   - en: Designed a RAG question-answering workflow and ran the PoC.
-    ko: RAG 기반 질의응답 워크플로우 설계 및 PoC 진행
+    ko: RAG 기반 질의응답 워크플로우 설계 및 PoC 수행
   - en: Built a demo dashboard to showcase the chatbot.
-    ko: 시연용 대시보드 개발
+    ko: 챗봇 시연용 대시보드 개발
 period: { start: 2023-06, end: 2023-11 }
 org: { en: MakinaRocks, ko: 마키나락스 }
 domain: Manufacturing
