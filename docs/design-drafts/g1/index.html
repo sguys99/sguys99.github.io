@@ -32,7 +32,7 @@
 <body>
 <header>
   <h1>G1 콘셉트 시안</h1>
-  <div class="group" data-key="view"><span>보기</span><button data-v="side">3안 나란히</button><button data-v="a,a2">A vs A′</button><button data-v="a">A</button><button data-v="a2">A′</button><button data-v="b">B</button><button data-v="c">C</button></div>
+  <div class="group" data-key="view"><span>보기</span><button data-v="side">3안 나란히</button><button data-v="a3">A + 상단 메뉴</button><button data-v="a,a2">A vs A′</button><button data-v="a">A</button><button data-v="a2">A′</button><button data-v="b">B</button><button data-v="c">C</button></div>
   <div class="group" data-key="device"><span>화면</span><button data-v="desktop">데스크톱 1440</button><button data-v="mobile">모바일 390</button></div>
   <div class="group" data-key="theme"><span>테마</span><button data-v="light">라이트</button><button data-v="dark">다크</button></div>
   <div class="group" data-key="lang"><span>언어</span><button data-v="en">EN</button><button data-v="ko">KO</button></div>
@@ -44,6 +44,9 @@ const NOTES = {
   a: { name: 'A. Quiet Dossier', intent: '차가운 무채색 바탕에 얇은 선의 카드, 포인트 색 하나(슬레이트 블루)만 쓴 정제형. 타이포 위계와 여백만으로 단정하고 중립적인 인상.',
     pros: ['모든 목록이 같은 행 문법이라 훑어 읽기 쉽고 항목이 늘어도 질서 유지', '영문/국문, 라이트/다크 간 완성도 차이가 가장 적고 토큰으로 옮기기 쉬움'],
     cons: ['가장 무난해 개성과 기억에 남는 인상은 B·C보다 약함', '카드 안의 카드로 선이 겹치고, 넓은 화면에서 오른쪽 여백이 남음'] },
+  a3: { name: 'A + 상단 메뉴 (사용자 조합안)', intent: 'A를 그대로 두고 본문 위에 고정 상단 메뉴를 추가. 현재 섹션은 밑줄로 표시하고, 사이드바 목차는 빼고, 언어·테마 전환은 메뉴 오른쪽 끝으로 옮김.',
+    pros: ['A의 차분한 인상을 유지하면서 긴 페이지에서도 현재 위치를 잃지 않음', '사이드바가 프로필과 연락처에만 집중해 더 단정해짐'],
+    cons: ['넓은 화면에서 오른쪽 여백과 카드 이중선은 A와 같음 (G3·G4에서 조정)'] },
   a2: { name: 'A′. Quiet Dossier (참고 사이트 반영)', intent: 'A의 색과 차분함은 유지하고 참고 사이트의 골격(250px 사이드바 + 본문 중앙 정렬, 상단 메뉴), 사각 불릿 제목 + 카드, 서체 역할(Space Grotesk / Public Sans / IBM Plex Mono)을 반영.',
     pros: ['넓은 화면의 빈 공간이 없어지고 상단 메뉴가 현재 위치를 밑줄로 표시', '경력·특허·프로젝트가 모두 "왼쪽 제목, 오른쪽 모노 날짜" 문법이고 카드 이중선 제거'],
     cons: ['참고 사이트와 골격이 비슷해 독자성은 B·C보다 약함', '소개 카드가 길어 대표작이 첫 화면에 보이지 않음'] },
