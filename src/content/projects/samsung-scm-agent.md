@@ -19,5 +19,6 @@ lead: true
 domain: Manufacturing
 capability: [LLM Agents & RAG]
 stack: [Llama 3 8B/70B, LangChain, LangGraph, Hugging Face, vLLM, Milvus, LiteLLM, Braintrust]
-featured: false
+featured: true
+order: 3
 ---

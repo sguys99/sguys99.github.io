@@ -87,7 +87,7 @@
 | English | 한국어 | 적용 프로젝트 |
 |---|---|---|
 | Samsung Electronics | 삼성전자 | SCM 데이터 분석·업무 지원 서비스, 온라인 상담 지원·제품 추천 어시스턴트 (PwC) |
-| LOTTE Fine Chemical | 롯데정밀화학 | AI 프로젝트 마스터플랜 및 LLM 서비스 PoC (PwC) |
+| LOTTE Fine Chemical | 롯데정밀화학 | AI 프로젝트 마스터플랜 및 LLM 서비스 PoC, 원자재 가격 예측, 그린소재 재고 조합 최적화 (PwC), 관련 보고서 1건 |
 
 ### 4.2 익명 업종 표기
 
@@ -149,6 +149,10 @@
 | workflow | 워크플로우 | |
 | anomaly detection | 이상탐지 | 붙여 씀 |
 | time-series forecasting | 시계열 예측 | |
+| raw-material price forecasting | 원자재 가격 예측 | |
+| market analysis dashboard | 시황 분석 대시보드 | |
+| green material | 그린소재 | |
+| inventory blend optimization | 재고 조합 최적화 | |
 | demand forecasting / price forecasting | 수요 예측 / 가격 예측 | |
 | predictive maintenance | 예지보전 | |
 | object detection | 객체 탐지 | 이력서의 "사물인식", "설비인식"은 이 표기로 통일 |

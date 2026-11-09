@@ -21,5 +21,6 @@ lead: true
 domain: Robotics
 capability: [Physical AI]
 stack: [AgiBot X2 Ultra, AgiBot SDK, SLAM, FastAPI, React, Next.js, External STT/TTS APIs]
-featured: false
+featured: true
+order: 2
 ---

@@ -82,7 +82,7 @@
 | 구분 | 참고 사이트 | 본 프로젝트 (이력서 기준) |
 |---|---|---|
 | 경력 | 3곳 | 6곳 (2008~현재) |
-| 프로젝트 | 4건 | 18건 |
+| 프로젝트 | 4건 | 20건 (이력서 18 + 롯데 PoC 2건 분리) |
 | 논문/특허 | 논문 4편 | 논문 3편, 특허 15건(등록 7, 출원 8), 프로그램 등록 10건, 보고서 50여 편 |
 | 기타 | 활동 2건 | 강의·자문 8건, 저서 2권, 수상 4건 |
 
@@ -119,7 +119,7 @@
 - C. *Physical AI, LLM agents, and industrial ML, taken from prototype to production.*
 
 ### 3.3 숫자 요약 스트립 **[가정, 수치 확인 필요]**
-~~`16+ years in AI & data`~~ (연수 표기 안 함 [확정]) · `18 projects` · `15 patents` · `50+ technical reports` · `2 books`
+~~`16+ years in AI & data`~~ (연수 표기 안 함 [확정]) · `20 projects` · `15 patents` · `50+ technical reports` · `2 books`
 
 ---
 
@@ -151,7 +151,7 @@
 |---|---|---|
 | 1층 (첫 화면) | 이름, 한 줄 포지셔닝, 현재 역할, 궤적 4단계, 숫자 요약 | 사이드바 + 첫 카드 |
 | 2층 (스크롤) | 대표 프로젝트 5~6건, 경력 6곳 요약 | 카드 |
-| 3층 (펼침/필터) | 프로젝트 18건, 특허 15건, 프로그램 10건, 보고서 목록 | 접힌 목록 + "Show all", 도메인/기술 필터 |
+| 3층 (펼침/필터) | 프로젝트 20건, 특허 15건, 프로그램 10건, 보고서 목록 | 접힌 목록 + "Show all", 도메인/기술 필터 |
 | 4층 (별도 페이지) | 케이스 스터디, 전체 CV | 상세 페이지, PDF |
 
 ### 4.3 프로젝트 분류 체계 **[가정]**
@@ -189,7 +189,7 @@
 | 학력 | 2 | Awards & Education | KAIST M.S., Pusan National Univ. B.S. |
 | 기술스택 | 5개 군 | About 하단 또는 Skills | 태그 나열 대신 군별 한 줄 요약 |
 | 경력사항 | 6 | Experience | 회사·직함·기간·역할 2~3줄. 이력서에 없는 소속·구간은 표기하지 않음 [확정] |
-| 프로젝트 | 18 | Selected Work + Projects | 대표 5~6건 상세(추후 지정), 나머지 목록 |
+| 프로젝트 | 20 (이력서 18 + 롯데 PoC 2건 분리) | Selected Work + Projects | 대표 5~6건 상세(추후 지정), 나머지 목록 |
 | (이력서 외) 개인 프로젝트 | 추후 제공 | Personal Projects | 회사 프로젝트와 구분된 별도 섹션 [확정] |
 | 특허 | 15 | IP | 등록 7 / 출원 8 구분, 기본 접힘 |
 | 프로그램 등록 | 10 | IP | 기본 접힘 |
@@ -212,7 +212,7 @@
 src/content/
   profile.yaml        이름, 직함, 소개, 링크
   experience.yaml     경력 6곳
-  projects/*.md       프로젝트 18건 (기간, 역할, domain, capability, featured, client.public)
+  projects/*.md       프로젝트 20건 (이력서 18 + 롯데 PoC 2건 분리) (기간, 역할, domain, capability, featured, client.public)
   personal/*.md       개인 프로젝트 (이름, 한 줄 설명, 스택, 저장소·데모 링크, 상태)
   patents.yaml        특허 15건
   software.yaml       프로그램 등록 10건

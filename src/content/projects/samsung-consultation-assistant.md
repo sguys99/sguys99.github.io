@@ -19,5 +19,6 @@ lead: true
 domain: Manufacturing
 capability: [LLM Agents & RAG]
 stack: [Microsoft Azure, Azure AI Search, Python, LangChain, RAGAS]
-featured: false
+featured: true
+order: 4
 ---

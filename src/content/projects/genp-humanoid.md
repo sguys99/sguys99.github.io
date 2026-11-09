@@ -18,5 +18,6 @@ lead: true
 domain: Robotics
 capability: [Physical AI]
 stack: [Unitree G1, Unitree SDK, LeRobot (VLA), Isaac Lab, MuJoCo, FAST-LIO2, FastAPI, React, Next.js]
-featured: false
+featured: true
+order: 1
 ---
