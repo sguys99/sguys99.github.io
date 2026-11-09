@@ -44,7 +44,7 @@
 ## 단계 0. 저장소와 개발 환경 준비
 
 - [ ] 0.1 `sguys99/sguys99.github.io` 저장소를 받아 비어 있는지 확인
-- [ ] 0.2 `dev` 브랜치 생성. 공개 전까지 모든 작업은 `dev`에서 진행 (`master`에 올리면 즉시 사이트가 공개되기 때문)
+- [x] 0.2 ~~`dev` 브랜치 생성~~ 취소: `master`에서 작업, 브랜치는 사용자가 필요할 때 생성
 - [x] 0.3 문서 배치: `CLAUDE.md`는 루트, `basic-plan.md`·`tasks.md`는 `docs/`, 원본 자료는 `docs/private/`(gitignore)
 - [ ] 0.4 Node LTS 확인 후 Astro 프로젝트 초기화 (최소 템플릿, TypeScript strict)
 - [ ] 0.5 CLAUDE.md의 디렉터리 구조 생성
@@ -53,7 +53,7 @@
 - [ ] 0.8 `npm run dev / build / preview` 동작 확인, CLAUDE.md의 명령어와 다르면 수정
 - [ ] 0.9 첫 커밋
 
-**완료 기준**: `dev` 브랜치에서 빈 영문·국문 페이지가 로컬에서 열리고 빌드가 통과한다.
+**완료 기준**: 빈 영문·국문 페이지가 로컬에서 열리고 빌드가 통과한다.
 
 ---
 
@@ -234,7 +234,7 @@
 - [ ] 8.2 **[확인]** 저장소 Settings → Pages의 Source를 GitHub Actions로 설정 (사용자가 직접)
 - [ ] 8.3 **[확인]** GoatCounter 계정 생성 후 사이트 코드 전달 (사용자가 직접), 집계 스크립트 적용
 - [ ] 8.4 README 작성, 라이선스 표기 결정 (코드와 콘텐츠의 권리 범위) **[확인]**
-- [ ] 8.5 **[확인]** `dev` → `master` 병합과 push 승인
+- [ ] 8.5 **[확인]** `master` push 승인
 - [ ] 8.6 배포 확인: `https://sguys99.github.io`, `/ko/`, 케이스 스터디, CV PDF, 404
 - [ ] 8.7 공개 후 확인: 실제 주소에서 OG 미리보기, `hreflang`, sitemap, 집계 동작
 - [ ] 8.8 (선택) Google Search Console 등록, GitHub·LinkedIn 프로필에 주소 추가 (사용자가 직접)
