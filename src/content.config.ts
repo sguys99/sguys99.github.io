@@ -67,7 +67,23 @@ const CAPABILITIES = [
 ] as const;
 
 // Files are maps keyed by entry id (`genon: {...}`), not arrays: the file loader silently drops array items without `id`.
-const data = (name: string) => file(`src/content/${name}.yaml`);
+// The file loader only logs invalid YAML / missing files and keeps going (stale cache or empty section), so fail the build on any loader error.
+const data = (name: string) => {
+  const loader = file(`src/content/${name}.yaml`);
+  return {
+    ...loader,
+    load: async (ctx: Parameters<typeof loader.load>[0]) => {
+      let failed = false;
+      const logger = Object.create(ctx.logger);
+      logger.error = (msg: string) => {
+        failed = true;
+        ctx.logger.error(msg);
+      };
+      await loader.load({ ...ctx, logger });
+      if (failed) throw new Error(`src/content/${name}.yaml could not be loaded (invalid YAML?)`);
+    },
+  };
+};
 
 // --- Collections ----------------------------------------------------------
 
