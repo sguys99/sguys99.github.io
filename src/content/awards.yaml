@@ -1,1 +1,23 @@
-{}
+pwc-best-people:
+  title: { en: Best People Awards, ko: Best People Awards }
+  org: { en: PwC Consulting, ko: PwC 컨설팅 }
+  years: '2025'
+
+ewp-big-data-ai:
+  title:
+    en: President's Award (Excellence Prize), Big Data & AI Competition
+    ko: 빅데이터 AI 경진대회 사장표창(우수상)
+  org: { en: Korea East-West Power (EWP), ko: 한국동서발전 }
+  years: '2020'
+
+kepco-merit:
+  title: { en: Merit Award (R&D), ko: 공로상(연구개발) }
+  org: { en: KEPCO, ko: 한국전력 }
+  years: '2018'
+
+pnu-honors:
+  title:
+    en: Honors graduate; academic excellence scholarship
+    ko: 우등졸업 / 성적우수 장학생
+  org: { en: Pusan National University, ko: 부산대학교 }
+  years: 2000, 2003 – 2006

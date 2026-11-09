@@ -1,1 +1,85 @@
-{}
+genon:
+  org: { en: 'GenON, R&D Group', ko: GenON R&D그룹 }
+  role: { en: Director / AI Product Engineer, ko: Director · AI Product Engineer }
+  period: { start: 2026-07, status: present }
+  summary:
+    en: >-
+      Lead the Physical AI humanoid product as Product Owner (PO), defining the product, technology tree,
+      and commercialization roadmap, and manage client projects as Project Manager (PM).
+      Design the integrated architecture for voice conversation, scenario execution, VLA, VLN, navigation,
+      and motion, and build the robot control panel.
+      Propose and run new Physical AI and agent-system projects and hire talent.
+    ko: >-
+      Physical AI 휴머노이드 제품 총괄(PO), 제품 정의, 기술트리, 상용화 로드맵 수립, 고객사 프로젝트 PM.
+      음성 대화, 시나리오 실행, VLA, VLN, 자율주행, 모션 통합 아키텍처 설계, 관제시스템 설계 및 개발.
+      Physical AI, 에이전트 시스템 분야 신규 프로젝트 제안·운영, 인재 채용.
+
+pwc:
+  org: { en: 'PwC Consulting, Digital & AI', ko: PwC 컨설팅 Digital & AI }
+  role: { en: Director / Senior ML Engineer, ko: Director · Senior ML Engineer }
+  period: { start: 2024-03, end: 2025-08 }
+  summary:
+    en: >-
+      Developed generative AI services (RAG and agents), ML-based equipment diagnostics,
+      price and demand forecasting, and control optimization.
+      Proposed new projects, ran AI training for firm-wide and division staff, and hired talent.
+    ko: >-
+      생성형 AI(RAG, 에이전트) 서비스, ML 기반 설비 진단, 가격·수요 예측, 제어 최적화 개발.
+      신규 프로젝트 제안, 전사·본부 직원 AI 교육, 인재 채용.
+
+makinarocks:
+  org: { en: 'MakinaRocks, AI Project Team', ko: 마키나락스 AI 프로젝트팀 }
+  role: { en: Part Leader / Senior ML Engineer / PO, ko: 파트 리더 · Senior ML Engineer · PO }
+  period: { start: 2023-04, end: 2024-04 }
+  summary:
+    en: >-
+      Developed anomaly detection, control optimization, and guidance models as well as RAG-based services,
+      and supported LLMOps and MLOps environment setup.
+      Planned new projects, improved the traceability and reproducibility of project deliverables,
+      researched ML technology trends, and hired talent.
+    ko: >-
+      이상탐지, 제어 최적화 및 가이던스 모델, RAG 기반 서비스 개발, LLMOps·MLOps 환경 구축 지원.
+      신규 프로젝트 기획, 프로젝트 산출물 추적성·재현성 개선, ML 기술 동향 조사, 인재 채용.
+
+semco:
+  org:
+    en: Samsung Electro-Mechanics, Equipment Technology Research Institute
+    ko: 삼성전기 설비기술연구소
+  role: { en: Principal Researcher, ko: 수석연구원 }
+  period: { start: 2021-03, end: 2022-05 }
+  summary:
+    en: >-
+      Built a software platform for data-driven anomaly detection and predictive maintenance
+      and for running deep learning models.
+      Analyzed and visualized manufacturing equipment performance and logistics data,
+      and taught data analysis to employees.
+    ko: >-
+      데이터 기반 이상탐지 및 예지보전, 딥러닝 구동용 SW 플랫폼 구축.
+      제조설비 운영실적, 물류 데이터 분석 및 시각화, 사내 직원 데이터 분석 교육.
+
+kepco:
+  org:
+    en: KEPCO (Korea Electric Power Corporation), Data Science Lab
+    ko: 한국전력 데이터사이언스연구소
+  role: { en: Senior Data Scientist, ko: Senior Data Scientist }
+  period: { start: 2010-07, end: 2020-06 }
+  summary:
+    en: >-
+      Researched anomaly detection algorithms, time-series forecasting, and deep learning,
+      including sequence and generative models.
+      Built the AI and data science roadmap, identified and planned new research projects,
+      and planned research infrastructure and analytics environments.
+    ko: >-
+      이상탐지 알고리즘, 시계열 예측, 딥러닝(sequence model, generative model 등) 연구.
+      AI·데이터과학 분야 로드맵 구축, 신규 과제 발굴 및 기획, 연구 인프라 및 분석 환경 구축 계획 수립.
+
+posco-enc:
+  org: { en: 'POSCO E&C, Energy Business Division', ko: 포스코이앤씨 에너지사업본부 }
+  role: { en: Automation Design Engineer, ko: 자동화 설계 엔지니어 }
+  period: { start: 2008-01, end: 2010-07 }
+  summary:
+    en: >-
+      Designed electrical and automation systems for power and energy plants, designed and built
+      data acquisition infrastructure, developed control algorithms, and supported commissioning.
+    ko: >-
+      전력 에너지 플랜트 전기·자동화 설계, 데이터 수집 인프라 설계 및 구축, 제어 알고리즘 개발, 시운전 지원.

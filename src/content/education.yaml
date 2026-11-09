@@ -1,1 +1,9 @@
-{}
+kaist:
+  school: { en: KAIST, ko: KAIST (한국과학기술원) }
+  degree: { en: M.S. in Electrical Engineering, ko: 전기 및 전자공학 공학석사 }
+  period: { start: 2006-03, end: 2008-02 }
+
+pnu:
+  school: { en: Pusan National University, ko: 부산대학교 }
+  degree: { en: 'B.S., School of Electrical Engineering', ko: 전기전자통신공학부 공학사 }
+  period: { start: 1999-03, end: 2006-02 }

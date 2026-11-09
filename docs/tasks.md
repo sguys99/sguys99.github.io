@@ -71,7 +71,7 @@
 - [ ] 1.2.1 Profile: About 문단, 기술 스택 군별 요약
 - [ ] 1.2.2 경력 궤적 4단계 문안 (Control & Automation → Data Science & ML → Generative AI & Agents → Physical AI)
 - [ ] 1.2.3 한 줄 소개 후보 3개 정리 (선택은 G3)
-- [ ] 1.2.4 Experience 6곳: 직함, 기간, 역할 2~3줄
+- [x] 1.2.4 Experience 6곳: 직함, 기간, 역할 2~3줄 (Awards·Education도 함께 작성. GPA·교육 이수 2건은 스키마에 자리가 없어 미포함, 1.2.11에서 확인)
 - [ ] 1.2.5 Projects 18건: 한 줄 요약, 핵심 2~3줄, 스택, 분류 태그, Lead 여부
 - [ ] 1.2.6 Patents 15건(등록 7, 출원 8), Software 10건: 영문 제목 + 원제
 - [ ] 1.2.7 Publications: 논문 3편, 보고서 대표작 선정안
