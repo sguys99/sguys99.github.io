@@ -263,7 +263,12 @@
     return f;
   }
   var q = new URLSearchParams(location.search);
-  if (q.get('og')) {
+  if (q.get('apple')) {
+    // apple-touch-icon export: opaque 180 square in tile color (iOS rounds corners itself)
+    document.documentElement.classList.add('export');
+    document.body.style.cssText = 'background:#141a22;display:grid;place-items:center;height:100vh';
+    var ai = new Image(180, 180); ai.src = uri('light'); ai.alt = ''; document.body.appendChild(ai);
+  } else if (q.get('og')) {
     document.documentElement.classList.add('export');
     document.body.appendChild(card(q.get('og') === 'ko' ? 'ko' : 'en'));
   } else {

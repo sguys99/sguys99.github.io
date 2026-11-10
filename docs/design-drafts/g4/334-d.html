@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.3.4 D. KM Tile · Favicon & OG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<script>
+  // Set theme/lang before paint to avoid a flash.
+  (function () {
+    var q = new URLSearchParams(location.search);
+    var t = q.get('theme');
+    if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+    document.documentElement.lang = q.get('lang') === 'ko' ? 'ko' : 'en';
+  })();
+</script>
+<script src="content.js"></script>
+<style>
+  /* =====================================================================
+     TOKENS — G3 base (round-1 picks merged). Round-2 drafts copy this file
+     and edit ONLY this block; it later becomes src/styles/tokens.css.
+     Everything below "BASE" uses these variables; no raw colors/fonts there.
+     Picks: 3.1.1 A type · 3.1.2 A Slate Ink · 3.1.3 C sidebar · 3.1.6 C mobile.
+     ===================================================================== */
+  :root {
+    /* --- font families (3.1.1 A: Geist + Geist Mono, Pretendard for Hangul) --- */
+    --font: "Geist", "Pretendard Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-ko: "Pretendard Variable", "Pretendard", system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif;
+    --font-display: var(--font);
+    --font-meta: "Geist Mono", "Pretendard Variable", ui-monospace, "SFMono-Regular", monospace;
+
+    /* --- type scale (px @16): 11 / 12 / 13 / 15 / 17 / 22 / 30 --- */
+    --fs-2xs: 0.6875rem;
+    --fs-xs: 0.75rem;
+    --fs-sm: 0.8125rem;
+    --fs-md: 0.9375rem;
+    --fs-lg: 1.0625rem;
+    --fs-xl: 1.375rem;
+    --fs-2xl: 1.875rem;
+    --fw-name: 600; --fw-tagline: 500; --fw-tagline-ko: 600; --fw-title: 600; --fw-strong: 600; --fw-eyebrow: 500;
+    --lh-body: 1.6; --lh-body-ko: 1.75; --lh-tagline: 1.22; --lh-tagline-ko: 1.4;
+    --ls-body: -0.005em; --ls-body-ko: -0.01em; --ls-name: -0.02em; --ls-tagline: -0.03em; --ls-tagline-ko: -0.035em;
+    --ls-title: -0.012em; --ls-title-ko: -0.02em; --ls-eyebrow: 0.06em; --ls-eyebrow-ko: 0;
+
+    /* --- color: light (3.1.2 A Slate Ink) --- */
+    color-scheme: light;
+    --bg: #f3f5f8;
+    --surface: #ffffff;
+    --line: #dfe3ea;
+    --line-strong: #c5ccd6;
+    --text: #141a22;
+    --text-2: #475260;
+    --text-3: #5f6a78;
+    --chip: #eef1f5;
+    --header-bg: rgba(243, 245, 248, 0.9);
+    --scrim: rgba(22, 25, 29, 0.32);
+    --photo-ring: var(--line);
+    --photo-filter: none;
+    --accent: #2b5a8a;
+    --accent-soft: #e6edf6;
+    --focus: var(--accent);
+
+    /* --- radius --- */
+    --radius: 10px;
+    --radius-sm: 6px;
+    --radius-xs: 4px;
+    --radius-pill: 999px;
+
+    /* --- spacing --- */
+    --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px;
+
+    /* --- layout --- */
+    --sidebar: 320px;
+    --main: 960px;
+    --header-h: 56px;
+    --sb-photo-w: 132px; /* 3.1.3 C sidebar photo */
+    --sb-key: 64px;      /* 3.1.3 C key column */
+    --sheet-w: 340px;    /* 3.1.6 C mobile menu sheet */
+
+    /* --- motion --- */
+    --dur: 180ms;
+
+    --mask-solid: #000; /* mask alpha only, not a visible color */
+  }
+  html:lang(ko) { --font-display: var(--font-ko); }
+
+  /* --- color: dark (3.1.2 A Slate Ink). Same values in both blocks below:
+         OS preference when no explicit light choice, and explicit [data-theme=dark]. --- */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #0d1117;
+      --surface: #151b23;
+      --line: #252d38;
+      --line-strong: #364150;
+      --text: #e6eaf0;
+      --text-2: #b1bac6;
+      --text-3: #8b95a3;
+      --chip: #1d2530;
+      --header-bg: rgba(13, 17, 23, 0.9);
+      --scrim: rgba(0, 0, 0, 0.6);
+      --photo-ring: var(--line-strong);
+      --photo-filter: brightness(0.86); /* tone down the white photo backdrop on dark */
+      --accent: #8db3e2;
+      --accent-soft: #1a283b;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0d1117;
+    --surface: #151b23;
+    --line: #252d38;
+    --line-strong: #364150;
+    --text: #e6eaf0;
+    --text-2: #b1bac6;
+    --text-3: #8b95a3;
+    --chip: #1d2530;
+    --header-bg: rgba(13, 17, 23, 0.9);
+    --scrim: rgba(0, 0, 0, 0.6);
+    --photo-ring: var(--line-strong);
+    --photo-filter: brightness(0.86);
+    --accent: #8db3e2;
+    --accent-soft: #1a283b;
+  }
+  
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: var(--fs-md); line-height: var(--lh-body); -webkit-font-smoothing: antialiased; }
+  :lang(ko) body { font-family: var(--font-ko); }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: var(--sp-7) var(--sp-5); }
+  h1 { font-size: var(--fs-2xl); letter-spacing: var(--ls-tagline); margin: 0; font-weight: 600; }
+  h2 { font-family: var(--font-meta); font-size: var(--fs-xs); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--text-3); font-weight: 500; margin: var(--sp-7) 0 var(--sp-3); }
+  .intent { color: var(--text-2); max-width: 760px; margin: var(--sp-2) 0 0; }
+  .rec { font-family: var(--font-meta); font-size: var(--fs-2xs); color: var(--accent); border: 1px solid var(--accent); border-radius: var(--radius-pill); padding: 2px 8px; vertical-align: middle; margin-left: var(--sp-2); }
+  .grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-4); }
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: var(--sp-5); min-width: 0; }
+  pre { margin: 0; font-family: var(--font-meta); font-size: var(--fs-xs); line-height: 1.55; color: var(--text-2); white-space: pre-wrap; word-break: break-all; }
+  /* browser-tab mockups: fixed light/dark chrome regardless of page theme */
+  .tabs { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
+  .bar { display: flex; align-items: flex-end; gap: 2px; padding: 10px 10px 0; }
+  .tab { display: flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 8px 8px 0 0; font: 12px/1 system-ui, sans-serif; flex: 0 1 200px; min-width: 0; white-space: nowrap; overflow: hidden; }
+  .tab img { width: 16px; height: 16px; flex: none; }
+  .addr { padding: 8px 12px; font: 12px/1 system-ui, sans-serif; }
+  .addr span { display: block; border-radius: 999px; padding: 7px 12px; }
+  .light .bar { background: #dee1e6; } .light .tab.on { background: #fff; color: #1f1f1f; } .light .tab { color: #474747; } .light .addr { background: #fff; } .light .addr span { background: #f1f3f4; color: #474747; }
+  .dark .bar { background: #202124; } .dark .tab.on { background: #35363a; color: #e8eaed; } .dark .tab { color: #9aa0a6; } .dark .addr { background: #35363a; } .dark .addr span { background: #202124; color: #bdc1c6; }
+  .sizes { display: flex; align-items: flex-end; gap: var(--sp-5); padding: var(--sp-5); flex-wrap: wrap; }
+  .sizes figure { margin: 0; display: grid; justify-items: center; gap: 6px; }
+  .sizes figcaption { font: 11px/1 ui-monospace, monospace; }
+  .light .sizes { background: #fff; color: #5f6a78; } .dark .sizes { background: #202124; color: #9aa0a6; }
+  .s512 { width: 256px; height: 256px; } /* 512 asset shown at 50% */
+  .ios { width: 90px; height: 90px; border-radius: 20px; overflow: hidden; } /* 180 @2x */
+  .ios img { width: 100%; height: 100%; display: block; }
+  .ios { background: #f3f5f8; } /* apple-touch-icon is an opaque PNG with no dark mode: always the light mark */
+  .ogbox { overflow: hidden; border-radius: var(--radius-sm); border: 1px solid var(--line); }
+  .ogscale { transform-origin: 0 0; }
+  .og { width: 1200px; height: 630px; position: relative; overflow: hidden; font-family: var(--font); }
+  .og:lang(ko) { font-family: var(--font-ko); }
+  .og p { margin: 0; }
+  .og .tg { text-wrap: balance; } .og:lang(ko) { word-break: keep-all; }
+  
+  .og { background: #f3f5f8; color: #141a22; padding: 72px 80px; display: flex; flex-direction: column; }
+  .og .mark { width: 96px; height: 96px; }
+  .og .body { margin-top: auto; }
+  .og .nm { font-size: 76px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; margin: 0; }
+  .og .hl { font-size: 34px; font-weight: 500; color: #2b5a8a; margin: 14px 0 0; }
+  .og .tg { font-size: 36px; font-weight: 500; color: #475260; letter-spacing: -0.02em; line-height: 1.3; margin: 34px 0 0; max-width: 920px; }
+  .og .url { position: absolute; right: 80px; top: 92px; font-family: var(--font-meta); font-size: 26px; color: #5f6a78; }
+  .og:lang(ko) .tg { letter-spacing: -0.035em; font-weight: 600; }
+  .thumbs { display: flex; gap: var(--sp-4); flex-wrap: wrap; align-items: flex-start; }
+
+  .cap { font-family: var(--font-meta); font-size: var(--fs-2xs); color: var(--text-3); margin-top: 6px; }
+  @media (max-width: 900px) { .grid2 { grid-template-columns: minmax(0, 1fr); } }
+  /* export mode (?og=en|ko): only the 1200x630 card, for headless screenshots */
+  html.export, html.export body { margin: 0; background: none; overflow: hidden; }
+  html.export .wrap { display: none; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <p class="cap">3.3.4 Favicon &amp; OG share image</p>
+  <h1>D. KM Tile<span class="rec">recommended</span></h1>
+  <p class="intent">User-chosen "KM" monogram on a 16px pixel grid (stems on whole pixels, crisp at 16/32). Ink tile inverts in dark mode. OG: light Slate paper, KM tile, name + headline + tagline, no photo.</p>
+
+  <h2>Favicon · SVG source (adapts via prefers-color-scheme)</h2>
+  <div class="panel"><pre>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  &lt;style>
+    .tile { fill: #141a22; } .ink { fill: #f3f5f8; }
+    @media (prefers-color-scheme: dark) { .tile { fill: #e6eaf0; } .ink { fill: #0d1117; } }
+  &lt;/style>
+  &lt;rect class="tile" width="16" height="16" rx="3.5"/>
+  &lt;!-- 16px grid: stems and caps sit on whole pixels so 16/32 render crisp; only diagonals anti-alias -->
+  &lt;path class="ink" d="M3 4h1v8H3z M5.8 4H7.2L4 9V7z M4.7 7.9L5.6 6.8L7.3 12H5.9z
+    M8 4h1v8H8z M12 4h1v8h-1z M8.4 4H9.5L10.5 7.4L11.5 4H12.6L11.1 9.4H9.9z"/>
+&lt;/svg></pre></div>
+
+  <h2>Rendered · 16 / 32 / 180 (apple-touch, opaque) / 512 (shown at 50%)</h2>
+  <div class="grid2">
+    <div class="tabs light">
+      <div class="bar"><div class="tab on"><img src="__light__" alt="">Kwang Myung Yu</div><div class="tab"><img src="__light__" alt="">유광명</div></div>
+      <div class="addr"><span>sguys99.github.io</span></div>
+      <div class="sizes">
+        <figure><img src="__light__" width="16" height="16" alt=""><figcaption>16</figcaption></figure>
+        <figure><img src="__light__" width="32" height="32" alt=""><figcaption>32</figcaption></figure>
+        <figure><div class="ios"><img src="__light__" alt=""></div><figcaption>180</figcaption></figure>
+        <figure><img class="s512" src="__light__" alt=""><figcaption>512</figcaption></figure>
+      </div></div>
+    <div class="tabs dark">
+      <div class="bar"><div class="tab on"><img src="__dark__" alt="">Kwang Myung Yu</div><div class="tab"><img src="__dark__" alt="">유광명</div></div>
+      <div class="addr"><span>sguys99.github.io</span></div>
+      <div class="sizes">
+        <figure><img src="__dark__" width="16" height="16" alt=""><figcaption>16</figcaption></figure>
+        <figure><img src="__dark__" width="32" height="32" alt=""><figcaption>32</figcaption></figure>
+        <figure><div class="ios"><img src="__light__" alt=""></div><figcaption>180</figcaption></figure>
+        <figure><img class="s512" src="__dark__" alt=""><figcaption>512</figcaption></figure>
+      </div></div>
+  </div>
+
+  <h2>OG image · 1200×630 (shown at 50%)</h2>
+  <div class="grid2" id="ogfull"></div>
+  <h2>Thumbnail check · 400px wide (link-preview size)</h2>
+  <div class="thumbs" id="ogthumb"></div>
+</main>
+<template id="og"><div class="og"><img class="mark" alt="" src="__MARK__"><div class="url" data-url></div>
+      <div class="body"><p class="nm" data-name></p><p class="hl" data-headline></p><p class="tg" data-tagline></p></div></div></template>
+<script>
+  var SVG = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 16 16\">\n  <style>\n    .tile { fill: #141a22; } .ink { fill: #f3f5f8; }\n    @media (prefers-color-scheme: dark) { .tile { fill: #e6eaf0; } .ink { fill: #0d1117; } }\n  </style>\n  <rect class=\"tile\" width=\"16\" height=\"16\" rx=\"3.5\"/>\n  <!-- 16px grid: stems and caps sit on whole pixels so 16/32 render crisp; only diagonals anti-alias -->\n  <path class=\"ink\" d=\"M3 4h1v8H3z M5.8 4H7.2L4 9V7z M4.7 7.9L5.6 6.8L7.3 12H5.9z\n    M8 4h1v8H8z M12 4h1v8h-1z M8.4 4H9.5L10.5 7.4L11.5 4H12.6L11.1 9.4H9.9z\"/>\n</svg>";
+  // light: drop the dark block; dark: force it. Mockups need a fixed scheme, the exported file keeps the media query.
+  function uri(mode) {
+    var s = SVG.replace('@media (prefers-color-scheme: dark)', mode === 'dark' ? '@media all' : '@media not all');
+    return 'data:image/svg+xml,' + encodeURIComponent(s);
+  }
+  document.querySelectorAll('img[src="__light__"]').forEach(function (i) { i.src = uri('light'); });
+  document.querySelectorAll('img[src="__dark__"]').forEach(function (i) { i.src = uri('dark'); });
+  var P = window.CONTENT.profile;
+  function card(lang) {
+    var n = document.getElementById('og').content.firstElementChild.cloneNode(true);
+    n.lang = lang;
+    n.querySelectorAll('[data-name]').forEach(function (e) { e.textContent = P.name[lang]; });
+    n.querySelectorAll('[data-headline]').forEach(function (e) { e.textContent = P.headline[lang]; });
+    n.querySelectorAll('[data-tagline]').forEach(function (e) { e.textContent = P.taglines[0][lang]; });
+    n.querySelectorAll('[data-url]').forEach(function (e) { e.textContent = 'sguys99.github.io'; });
+    n.querySelectorAll('img[src="__MARK__"]').forEach(function (e) { e.src = uri('light'); });
+    return n;
+  }
+  function boxed(lang, w) {
+    var b = document.createElement('div');
+    var s = document.createElement('div');
+    b.className = 'ogbox'; s.className = 'ogscale';
+    s.style.transform = 'scale(' + (w / 1200) + ')';
+    s.appendChild(card(lang)); b.appendChild(s);
+    var f = document.createElement('div');
+    f.appendChild(b);
+    var c = document.createElement('div'); c.className = 'cap'; c.textContent = lang + ' · ' + (w < 600 ? Math.round(w) + 'px wide' : '1200×630');
+    f.appendChild(c);
+    return f;
+  }
+  var q = new URLSearchParams(location.search);
+  if (q.get('apple')) {
+    // apple-touch-icon export: opaque 180 square in tile color (iOS rounds corners itself)
+    document.documentElement.classList.add('export');
+    document.body.style.cssText = 'background:#141a22;display:grid;place-items:center;height:100vh';
+    var ai = new Image(180, 180); ai.src = uri('light'); ai.alt = ''; document.body.appendChild(ai);
+  } else if (q.get('og')) {
+    document.documentElement.classList.add('export');
+    document.body.appendChild(card(q.get('og') === 'ko' ? 'ko' : 'en'));
+  } else {
+    var order = document.documentElement.lang === 'ko' ? ['ko', 'en'] : ['en', 'ko'];
+    var full = document.getElementById('ogfull');
+    function fit() {
+      full.innerHTML = '';
+      var w = Math.min(600, (full.clientWidth - 16) / (full.clientWidth > 900 ? 2 : 1));
+      order.forEach(function (l) { var f = boxed(l, w); f.firstChild.style.width = w + 'px'; f.firstChild.style.height = (w * 0.525) + 'px'; full.appendChild(f); });
+    }
+    fit(); addEventListener('resize', fit);
+    var tw = Math.min(400, full.clientWidth); order.forEach(function (l) { var f = boxed(l, tw); f.firstChild.style.width = tw + 'px'; f.firstChild.style.height = (tw * 0.525) + 'px'; document.getElementById('ogthumb').appendChild(f); });
+  }
+</script>
+</body>
+</html>

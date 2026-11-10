@@ -47,7 +47,8 @@
     --cv-fs-label: 0.76em;
     --cv-lh: 1.5; --cv-lh-ko: 1.62;
     --cv-gutter: 24mm;            /* A: section label column */
-    --cv-date: 19mm;              /* date column inside rows */
+    --cv-date: 24mm;              /* date column inside rows; fits "2000, 2003–2006" on one line */
+    --cv-key: 31mm;               /* Skills label column */
     --cv-gap: 5mm;
   }
   @media (prefers-color-scheme: dark) {
@@ -138,7 +139,7 @@
   .about { color: var(--text); max-width: 60em; }
 
   .row { display: grid; grid-template-columns: var(--cv-date) minmax(0, 1fr); gap: 0 3mm; break-inside: avoid; }
-  .row .when { font: 400 var(--cv-fs-meta)/1.75 var(--font-meta); color: var(--text-3); }
+  .row .when { font: 400 var(--cv-fs-meta)/1.75 var(--font-meta); color: var(--text-3); white-space: nowrap; }
   .row h3 { font-size: 1em; font-weight: var(--fw-title); letter-spacing: var(--ls-title); }
   html:lang(ko) .row h3 { letter-spacing: var(--ls-title-ko); }
   .row .sub { color: var(--text-2); }
@@ -156,8 +157,8 @@
   .tight .row .meta, .tight .row .sub { display: inline; margin-left: 2mm; }
   .st { font: 500 var(--cv-fs-label)/1 var(--font-meta); color: var(--text-3); border: 1px solid var(--line-strong); border-radius: var(--radius-xs); padding: 0.3mm 1mm; margin-left: 1.2mm; white-space: nowrap; vertical-align: 0.1em; }
   .st.on { color: var(--accent); border-color: currentColor; }
-  .kv { display: grid; grid-template-columns: var(--cv-date) minmax(0, 1fr); gap: 0.8mm 3mm; }
-  .kv dt { font-weight: var(--fw-strong); }
+  .kv { display: grid; grid-template-columns: var(--cv-key) minmax(0, 1fr); gap: 0.8mm 3mm; }
+  .kv dt { font-weight: var(--fw-strong); min-width: 0; overflow-wrap: break-word; }
   .kv dd { margin: 0; color: var(--text-2); }
   .kv > div { display: contents; }
   .nw { white-space: nowrap; }
@@ -215,7 +216,7 @@
   }
   var byStart = function (a, b) { return b.period.start.localeCompare(a.period.start); };
   function sec(key, inner, extra) { return '<section class="sec" aria-labelledby="h-' + key + '"><h2 id="h-' + key + '">' + u(key) + (extra ? '<small>' + extra + '</small>' : '') + '</h2><div class="body' + (/^(other|patents|software|papers|reports|teaching|books|awards|education)$/.test(key) ? ' tight' : '') + '">' + inner + '</div></section>'; }
-  function row(when, body) { return '<div class="row"><span class="when num">' + when + '</span><div>' + body + '</div></div>'; }
+  function row(when, body) { return '<div class="row"><span class="when num">' + String(when).replace(/ – /g, '\u2009–\u2009') + '</span><div>' + body + '</div></div>'; }
 
   function render() {
     L = root.lang;
