@@ -2355,3 +2355,326 @@ glossary를 따른다. 국문 페이지에서도 영문으로 두는 것:
 | 폴백 메트릭 보정 (`size-adjust` 등) | 5.2에서 결정 |
 | 라이선스 | Geist·Geist Mono·Pretendard 모두 SIL OFL로 알려져 있음. 5.2에서 배포본 라이선스 파일로 확인하고 함께 둔다 |
 | 인쇄(CV) | `@page` 여백 상자는 웹폰트·변수를 못 쓸 수 있어 333-a가 서체명을 직접 적었다. 셀프 호스팅 후 같은 이름으로 해석되는지 5.2에서 확인 |
+
+## 8. Dark Mode
+
+색 값과 대비비는 3장 Color 표를 따른다. 이 장은 테마를 고르는 방식과 다크 전용 처리만 다룬다.
+
+### 테마 결정 순서
+
+| 순서 | 조건 | 결과 |
+|---|---|---|
+| 1 | 저장된 수동 선택(`light` / `dark`)이 있음 | `<html data-theme="…">` 설정 |
+| 2 | 저장값 없음 | `data-theme`를 **설정하지 않는다**. CSS `@media (prefers-color-scheme: dark)`가 OS 설정을 따른다 |
+
+- 결정 근거: G1 "기본 테마는 시스템 설정을 따르고, 수동 전환은 기억한다".
+- 시안 스크립트는 저장값이 없어도 OS 값을 읽어 `data-theme`을 늘 넣는다. 구현은 2번처럼 속성을 비워 둔다. 그래야 페이지를 연 채 OS 설정을 바꿔도 따라간다.
+- 수동 선택을 지우고 시스템으로 돌아가는 UI는 시안에 없다. 두지 않는다.
+
+### 저장
+
+| 항목 | 값 |
+|---|---|
+| 저장소 | `localStorage` (같은 출처라 `/`와 `/ko/`가 공유) |
+| 키 이름 | `theme` (값 `light` 또는 `dark`). 시안의 `?theme=` 쿼리는 시안 전용 |
+| 값 | `"light"` 또는 `"dark"`. 그 외 값은 없는 것으로 본다 |
+| 오류 처리 | 읽기·쓰기를 `try/catch`로 감싼다. 실패하면 2번(OS 설정)으로 동작하고 전환은 그 페이지에서만 유지 |
+
+### 첫 페인트 전 스크립트
+
+- `<head>`의 스타일시트보다 앞에 인라인 `<script>`로 둔다 (`is:inline`, 외부 파일 금지: 요청이 끝나기 전에 그려지면 깜빡인다).
+- 하는 일: 저장값을 읽어 유효하면 `document.documentElement.dataset.theme`에 넣는다. 그 외는 하지 않는다.
+- 시안 head 스크립트의 `?theme=`, `?lang=` 쿼리 처리와 `history.replaceState`(`setParam`)는 **시안 전용**이다. 구현하지 않는다. 언어는 경로(`/`, `/ko/`)와 빌드 시 `lang` 속성으로 정한다.
+
+### 토큰 블록 두 벌
+
+| 블록 | 선택자 | 적용 상황 |
+|---|---|---|
+| A | `@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { … } }` | 저장값 없음 + OS 다크 |
+| B | `:root[data-theme="dark"] { … }` | 수동으로 다크 선택 |
+
+- 두 블록의 내용은 **같아야 한다** (3장 다크 열 전체, `color-scheme: dark` 포함). 하나를 고치면 다른 하나도 고친다.
+- 다크에 따라 달라지는 다른 규칙(아이콘 표시 등)도 같은 두 조건에 나란히 건다. `[data-theme="dark"]`만 쓰면 OS 다크에서 빠진다.
+- 수동 라이트(`data-theme="light"`)는 `:root` 기본값을 그대로 쓴다. 별도 블록 없음.
+
+### `color-scheme`
+
+- `:root`에 `color-scheme: light`, 두 다크 블록에 `color-scheme: dark`. 폼 컨트롤·스크롤바·`<select>` 옵션 목록이 테마를 따른다.
+- `<meta name="color-scheme">`는 두지 않는다 (시안에 없음. 토큰이 이미 같은 일을 한다).
+
+### 다크 전용 조정
+
+| 대상 | 처리 | 출처 |
+|---|---|---|
+| 프로필 사진 | `filter: var(--photo-filter)` (다크 `brightness(0.86)`), 테두리 `--photo-ring` | base |
+| 경력 로고 | 글자색 단색. 구현은 SVG를 `fill="currentColor"`로 정리해 인라인으로 넣고 `color: var(--text)`, `opacity: var(--logo-op)` / 현재 소속·hover `--logo-op-cur` | 3.2.7 C, decision-log G4 |
+| 경력 로고 (대안) | SVG를 인라인으로 못 넣는 로고만 `<img>` + `filter: var(--logo-filter)` 사용. 이 경우 글자색과 완전히 같지 않음을 감수 | base |
+| 파비콘 | SVG 안의 `@media (prefers-color-scheme: dark)`로 타일·글자 반전 (값은 3장 자산 고정색). **브라우저·OS 테마를 따르며 사이트의 수동 선택(`data-theme`)과 무관** | 334-d |
+| apple-touch-icon, OG | 다크 없음 (라이트 고정) | 334-d |
+| 테마 전환 효과 | View Transitions 크로스페이드 `--m-theme` 320ms. 전환 중에는 `m-notx` 클래스로 개별 `transition`을 끈다. `document.startViewTransition`이 없거나 모션 줄이기면 즉시 전환 | 331-c |
+
+로고 처리 방식이 `currentColor`로 바뀌면 3장의 `--logo-filter`는 대안 경로에서만 쓴다.
+
+### 테마 전환 버튼
+
+| 항목 | 규칙 |
+|---|---|
+| 위치 | 데스크톱 상단 메뉴 오른쪽 끝(`#theme`), 모바일 메뉴 시트 "Theme / 테마" 줄(`.theme-btn`). 인쇄용 CV 화면 도구 줄 |
+| 형태 | `.icon-btn` (`--ctl-h-lg`), 아이콘 `--icon` |
+| 아이콘 | 라이트일 때 달(`.i-moon`), 다크일 때 해(`.i-sun`) — 누르면 바뀔 테마를 보여준다. 표시 규칙은 위 두 다크 조건에 함께 건다 |
+| 이름 | `aria-label` "Toggle dark mode" / "다크 모드 전환" (시안 문구) |
+| 상태 | `aria-pressed` (`true` 또는 `false`)(다크일 때 true). 시안은 상태를 알리지 않아 스크린 리더가 현재 테마를 알 수 없음 |
+| 동작 | 현재 실효 테마(`data-theme` 또는 OS 값)의 반대로 바꾸고 저장 |
+
+---
+
+## 9. Accessibility
+
+### 기준
+
+- **WCAG 2.2 AA**. 검수는 7.3(키보드·포커스·대비·대체 텍스트·제목·`lang`), 7.4(모션 줄이기), 7.5(Lighthouse 접근성 95 이상).
+- 대비는 3장 대비비 표를 기준으로 한다. 본문 글자 4.5:1 이상(전 조합 충족), 포커스 링·선택 상태 같은 비텍스트 요소 3:1 이상. 선(`--line`, `--line-strong`)만으로 정보를 전달하지 않는다. 색을 바꿀 때는 3장 표를 다시 계산한다.
+
+### 랜드마크
+
+| 요소 | 홈 | 케이스 스터디 | 404 | CV |
+|---|---|---|---|---|
+| `<aside>` | 프로필 사이드바 (`aria-label` "Profile") | 프로젝트 기록표 | 프로필 사이드바 | — |
+| `<header>` | 상단 메뉴 `.topbar` | 같음 (Work 탭 현재) | 같음 (탭 `nav` 숨김) | — |
+| `<nav>` | 탭 (`aria-label` "Sections"), 메뉴 시트 안 nav | 탭, 목차 `.toc`(`aria-label` "On this page"), 이전·다음 `.pn` | — | — |
+| `<main id="main">` | 섹션 카드 | 번호 붙은 문서 | 404 카드 | CV 본문 |
+| `<footer>` | 콜로폰 한 줄 (`main` 안, 335-a) | 같음 | 같음 | — |
+
+- 섹션은 `<section aria-labelledby="h-…">`. 404 카드는 `<article>`.
+- `nav`가 둘 이상인 페이지는 모두 `aria-label`을 단다 (국문 페이지는 국문 이름).
+
+### 제목 구조
+
+| 페이지 | h1 | h2 | h3 | h4 |
+|---|---|---|---|---|
+| 홈 | 사이드바 이름 | 섹션 제목 (About … Contact) | 대표작 제목, 전체 프로젝트 원장 제목, 궤적 단계, 경력 행, 강의 등 묶음 라벨(`.lg-label`), 개인 프로젝트 이름, Contact eyebrow 2개 | 강의·수상 행 |
+| 케이스 스터디 | 케이스 제목 (사이드바 기록표 안) | 문서 섹션 | 섹션 안 소제목 (예: Decisions) | — |
+| 404 | **404 제목** | 섹션 바로가기 목록 제목 (`.sr-only`) | — | — |
+| CV | 이름 | 섹션 라벨 | 행 제목 | — |
+
+- **404 정리 (decision-log 3.3)**: 시안은 사이드바 이름이 h1, 404 제목이 h2, 목록 제목이 h3이다. 구현은 404 페이지에서 사이드바 이름을 제목이 아닌 요소(`<p class="name">`)로 바꾸고, 404 제목을 h1, 목록 제목을 h2로 올린다. 모양은 같은 클래스로 유지.
+- 케이스 스터디의 사이드바 이름(`.who` 링크)은 제목이 아니다.
+- **시안 버그**: IP 서랍의 연도 머리(`.yh`)가 h4라서 섹션 h2 다음에 h3를 건너뛴다. 연도 머리를 h3로 올린다 (서랍 `summary` 안에는 제목을 넣지 않는다: 펼침 버튼 역할과 겹침).
+- 메뉴 시트 제목 h2는 `<dialog>` 안이라 페이지 개요와 따로 본다.
+
+### 본문 바로가기
+
+시안에 없음. [구현 기본값] 최소 규칙:
+
+| 항목 | 규칙 |
+|---|---|
+| 위치 | `<body>` 첫 요소, `<a class="skip" href="#main">` |
+| 문구 | "Skip to content" / "본문 바로가기" (5.7에서 용어집 등록) |
+| 표시 | 평소 `.sr-only`와 같은 방식으로 숨김, `:focus-visible`이면 왼쪽 위에 보임. `z-index: var(--z-skip)`(상단 메뉴 위), 바탕 `--surface`, 테두리 `--line`, 모서리 `--radius-xs` |
+| 대상 | `<main id="main" tabindex="-1">` (포커스 이동 보장) |
+
+### 키보드 순서
+
+DOM 순서 = 탭 순서. 시안 순서를 따른다.
+
+| 페이지 | 순서 |
+|---|---|
+| 홈 (데스크톱) | 본문 바로가기 → 사이드바(CV 다운로드, 이메일, GitHub, LinkedIn) → 탭 6개 → 언어 → 테마 → 본문 |
+| 홈 (≤860px) | 본문 바로가기 → 바 이름 링크 → 언어 → 메뉴 버튼 → 사이드바 → 본문 |
+| 케이스 스터디 | 본문 바로가기 → 기록표(홈 링크, 목차, 이전·다음) → 탭 → 언어 → 테마 → 본문 |
+
+- `tabindex` 양수 금지. 숨긴 요소(`hidden`, 접힌 행)는 포커스되지 않아야 한다.
+- 필터 버튼을 누른 뒤 목록이 다시 그려져도 포커스는 누른 버튼에 남긴다 (시안 `refocus`).
+- CV 다운로드 자리(6.12 전)는 `href` 없는 `<a aria-disabled="true">`라 포커스되지 않는다. 6.12 후 일반 링크.
+
+### 포커스 표시
+
+| 대상 | 규칙 |
+|---|---|
+| 기본 | `:focus-visible { outline: var(--focus-w) solid var(--focus); outline-offset: var(--focus-offset); border-radius: var(--radius-xs) }` |
+| 탭, IP 서랍 `summary` | 안쪽 링: `outline-offset: calc(-1 * var(--focus-offset))` (스크롤 영역·선에 잘리지 않게) |
+| 대표작 행 (제목 링크가 행 전체를 덮는 경우) | 링크 자신은 `outline: none`, `::after` 덮개에 링 (`outline-offset: 0`) |
+| 선택 상자 `.sel` | `select`의 링을 끄고 감싼 `.sel:focus-within`에 링 + `border-color: var(--accent)` |
+| 마우스 클릭 | `:focus-visible`만 쓰므로 링이 나오지 않는다. `:focus`에 링을 걸지 않는다 |
+
+상단 메뉴가 고정이라 포커스된 요소가 그 밑에 가리지 않게 한다 (WCAG 2.4.11). 섹션·앵커 대상의 `scroll-margin-top`은 4장 규칙을 따른다.
+
+### 메뉴 시트 (≤860px)
+
+| 항목 | 규칙 |
+|---|---|
+| 요소 | `<dialog class="sheet" aria-labelledby="sheet-title">`, `showModal()`로 연다 |
+| 포커스 가둠 | `showModal()`이 바깥을 inert로 만든다. 별도 트랩 코드 없음 |
+| 닫기 | Esc(기본 동작), 닫기 버튼(`aria-label` "Close menu" / 국문은 5.7), 바깥 backdrop 클릭, 시트 안 섹션 링크 클릭 |
+| 포커스 복귀 | 닫으면 메뉴 버튼으로 돌아간다 (`<dialog>` 기본 동작. 안 되는 브라우저 대비로 `close` 이벤트에서 `menuBtn.focus()`) |
+| 메뉴 버튼 | `aria-haspopup="dialog"`, `aria-controls="sheet"`, `aria-expanded`를 열고 닫을 때 갱신, `aria-label` "Open menu" |
+
+### 현재 위치 `aria-current`
+
+| 대상 | 값 |
+|---|---|
+| 상단 탭, 시트 섹션 링크 | 스크롤 위치의 섹션 링크에 `aria-current="true"`, 나머지 `"false"` (시안) |
+| 케이스 스터디 탭 | Work 탭 고정 `aria-current="true"` (332-a2-case) |
+| 케이스 목차 `.toc` | 스크롤 위치에 따라 `aria-current="true"` |
+| 언어 토글 `.seg` | 현재 언어 버튼 `aria-pressed="true"` |
+
+색(`--text`, 밑줄 `--accent`)만이 아니라 속성으로도 현재 위치를 알린다. 탭 밑줄은 `aria-hidden` 장식.
+
+### 상태 알림
+
+| 상황 | 방법 | 문구 (시안) |
+|---|---|---|
+| 전체 프로젝트 필터 | `<p class="pl-status" role="status">`에 결과 수 | "Showing n of N projects" / "전체 N건 중 n건 표시" |
+| 개인 프로젝트 상태 필터 | 시안은 알림 없음(버튼에 건수 표시). 같은 `role="status"` 한 줄 — 필터 두 곳의 동작을 맞추기 위해 | 문구는 5.7 |
+| 이메일 복사 | 버튼 글자 "Copy" → "Copied" 1800ms, 동시에 `.sr-only aria-live="polite"` 영역에 문장 → 1800ms 뒤 비움 | "Email address copied" / "이메일 주소를 복사했습니다" |
+| 복사 버튼 이름 | `aria-label` "Copy email: {주소}" (보이는 글자 "Copy"로 시작해 label-in-name 충족) | — |
+| 접힘 토글 ("모두 보기") | `aria-expanded`, `aria-controls` | — |
+| IP 서랍 | 기본 `<details>`. 펼침 상태는 브라우저가 알림 | — |
+
+### 숫자 카운트업
+
+- 숫자 셀은 최종값을 빌드 시 HTML에 넣는다 (JS 없이도 완성).
+- 구조: `<dd class="n"><span aria-hidden="true">{표시값}</span><span class="sr-only">{최종값}</span></dd>`. 애니메이션은 `aria-hidden` 쪽만 바꾼다. 스크린 리더는 늘 최종값만 읽는다 (decision-log 3.3. 시안은 이 처리가 없음).
+- 모션 줄이기면 카운트업하지 않는다.
+
+### 대체 텍스트
+
+| 이미지 | `alt` | 이유 |
+|---|---|---|
+| 사이드바·모바일 프로필 사진 | `""` | 바로 옆 h1에 이름이 있어 중복 (시안) |
+| 케이스 스터디 `.who` 사진 | `""` | 같은 링크 안에 이름 글자가 있음 |
+| 경력 행 로고 | `""` (인라인 SVG면 `aria-hidden="true"`) | 같은 행에 회사명 글자가 있음 |
+| 프로젝트 메타 안 로고 (회사명 대신 표시) | 회사명 (예: "PwC") | 로고가 유일한 표기 |
+| 아이콘 SVG | `aria-hidden="true"` | 장식. 아이콘만 있는 버튼은 버튼에 `aria-label` |
+| 번호(01–06), 화살표 `.go`, 궤적 점·선 | `aria-hidden="true"` 또는 CSS 장식 | 순서는 `<ol>`이 전달 |
+| 같은 문구가 반복되는 링크 (Repo, Demo) | `.sr-only` 로 대상 이름 덧붙임 (": {프로젝트 이름}") | 링크 목록에서 구분 |
+
+### `lang` 속성
+
+| 범위 | 값 |
+|---|---|
+| 페이지 | 영문 라우트 `<html lang="en">`, `/ko/` 라우트 `<html lang="ko">` (빌드 시 고정, JS로 바꾸지 않음) |
+| 영문 페이지의 국문 원제 (IP 목록 `.og`) | `lang="ko"` |
+| 언어 토글 버튼 `EN` / `KO`, 다른 언어 이름 링크("한국어" / "English") | 그 언어의 `lang` |
+| 국문 페이지의 기술명·회사명 등 영문 고유명사 | 표시하지 않음 [구현 기본값] (짧은 고유명사라 발음 영향이 작음) |
+
+- 구현에서 언어 전환은 버튼이 아니라 상대 언어 페이지로 가는 `<a href hreflang lang>` 링크다 (시안은 한 파일이라 버튼). 상단 토글의 현재 언어 표시는 `aria-current="true"`로 바꾼다.
+- 404는 경로(`/ko/` 시작 여부)로 언어를 정한다 (decision-log 3.3).
+
+### 터치 대상
+
+- 최소 24×24px (WCAG 2.2 2.5.8). 컨트롤 높이 토큰 `--ctl-h-sm` 28 / `--ctl-h` 32 / `--ctl-h-lg` 36이 모두 충족(3장).
+- 문장 안 링크(사이드바 연락처, 본문 링크)는 예외 대상. 아이콘만 있는 버튼은 `--ctl-h-lg` 정사각.
+
+### 모션 줄이기 (`prefers-reduced-motion: reduce`)
+
+331-c의 모든 모션을 끈다. 끈 상태가 완성 상태다.
+
+| 끄는 것 | 대체 |
+|---|---|
+| 섹션 등장(fade/rise)과 행 순서 등장 | 처음부터 보임 (`m-wait` 미부여) |
+| 경력 궤적 선 그리기·점 확대 | 처음부터 그려진 상태 |
+| 숫자 카운트업 | 최종값 |
+| 탭 밑줄 미끄러짐 | 탭별 고정 밑줄 (`.m-ind` 미생성) |
+| 테마 크로스페이드 (View Transitions) | 즉시 전환 |
+| 언어 전환 크로스페이드 (`@view-transition`) | 즉시 이동 (`@view-transition`을 `no-preference` 안에만 선언) |
+| 메뉴 시트 슬라이드·backdrop 페이드 | 즉시 표시 |
+| hover 색·밑줄·chev 회전 등 모든 `transition` | 즉시 변경 (`*, *::before, *::after { transition: none !important; animation: none !important }`) |
+| `scroll-behavior: smooth` | 즉시 이동 (`no-preference`에서만 smooth) |
+
+JS도 `matchMedia('(prefers-reduced-motion: reduce)')`가 참이면 모션 코드를 실행하지 않는다 (CSS만 끄면 카운트업이 남는다).
+
+### `.sr-only` 위치 버그 (decision-log G4)
+
+- 문제: 시안 `.sr-only`는 `position: absolute`인데 기준 요소가 없어 문서 기준으로 배치되고, 360px에서 가로 스크롤을 만들 수 있다.
+- 해결(5.1 전역 스타일): `.sr-only`를 담는 컴포넌트(카드 `.card`, 링크 행, 숫자 셀)에 `position: relative`를 주어 그 안에 머물게 한다. 정의는 시안 값 유지(`width/height: 1px; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); clip-path: inset(50%); white-space: nowrap; border: 0`).
+- 확인: 7.1에서 360px 홈·케이스·404·CV의 `document.documentElement.scrollWidth`가 화면 폭과 같은지 본다.
+
+---
+
+## 10. Print
+
+### 인쇄용 CV `/cv/`, `/ko/cv/` (333-a)
+
+토큰은 3장 Print (CV). 화면에서는 A4 종이 미리보기, 인쇄에서는 종이 그대로.
+
+**쪽**
+
+| 항목 | 값 |
+|---|---|
+| 크기 | `@page { size: A4 }` |
+| 여백 | `@page { margin: 15mm 16mm 16mm }` (`--cv-margin`. `@page`는 변수를 못 읽어 값을 직접 씀) |
+| 분량 | 영·국 각 4쪽 (시안 결과. 고정 규칙 아님, 7.10에서 확인) |
+| 쪽 하단 왼쪽 | `@bottom-left`: "{이름} · CV · sguys99.github.io" / "{이름} · 이력서 · sguys99.github.io". 7pt Geist Mono, `#5f6a78` |
+| 쪽 하단 오른쪽 | `@bottom-right`: `counter(page) " / " counter(pages)`. 같은 글꼴·색 |
+| 사진 | 없음 |
+
+- **시안 버그**: 시안은 쪽 하단 글자를 `content: var(--cv-foot)`로 넣는데, `@page` 여백 상자는 변수를 못 읽는다(시안 주석과 같은 이유). 구현은 라우트별로 빌드 시 문자열을 직접 쓴다.
+
+**조판 (한 단 장부형)**
+
+| 요소 | 규칙 |
+|---|---|
+| 머리 `.head` | 왼쪽 이름(h1, `--cv-fs-name`) + 직함 · 현재 소속(`--cv-fs-title`, `--text-2`), 오른쪽 연락처 4줄(이메일, GitHub, LinkedIn, 사이트 주소. `--font-meta` `--cv-fs-meta`). 아래 1.5px `--text` 선, 4mm 패딩, 5mm 간격 |
+| 섹션 `.sec` | 2열: 라벨 칸 `--cv-gutter` 24mm + 본문, 열 간격 `--cv-gap`. 위 1px `--line`, 상하 2.6mm |
+| 라벨 칸 | 영문 `--font-meta` 대문자, `--cv-fs-label`, `--ls-eyebrow`, `--text-3`. 국문 `--font-ko` 600, 0.86em, 자간 0. 보조 줄(`small`, 예: 특허 "Registered n · Filed n")은 라벨 아래 줄 |
+| 라벨 칸 겹침 해소 | 라벨 보조 줄은 `display: block`으로 라벨 아래에 두고, Skills 키는 `min-width: 0; overflow-wrap: break-word`로 31mm 칸 안에서 줄바꿈해 본문을 덮지 않는다 (3.3.3 사용자 요청) |
+| 행 `.row` | 2열: 기간 `--cv-date` 24mm + 내용, 간격 3mm. 행 사이 2.2mm, 촘촘한 목록(`.tight`) 1mm |
+| 기간 | **한 줄** (`white-space: nowrap`), 연도만 (`2019 – 2023`, 같은 해면 하나, 진행 중이면 "Present / 현재"). 대시 양옆 thin space. 24mm는 "2000, 2003–2006"이 한 줄에 들어가는 폭 |
+| 행 내용 | 제목(`--fw-title`) + 부제(` — 직무`, `--text-2`) / 메타(회사 · 고객, `--font-meta`) / 요약·성과(짧은 선 글머리, `--text-2`) / 스택(`--font-meta`, `--text-3`) |
+| 촘촘한 목록 | 기타 프로젝트, 특허, 프로그램, 논문, 보고서, 강의·자문, 저서, 수상, 학력: 제목과 메타를 한 줄로 이어 씀 |
+| Skills | `<dl>` 2열, 키 `--cv-key` 31mm |
+| 글자 | 기준 `--cv-base` (화면 13px, 인쇄 8.4pt), 행간 `--cv-lh` 1.5 / 국문 `--cv-lh-ko` 1.62, 국문 자간 -0.005em |
+| 링크 | 글자색 그대로, 밑줄 없음. URL은 본문에 펼치지 않는다 (연락처는 이미 주소 글자) |
+
+섹션 순서(시안): Profile → Skills → Experience → Education → Selected Projects → Other Projects → Patents → Software → Papers → Selected Reports → Teaching & Advisory → Books → Awards. 섹션 이름은 시안 UI 문구, 국문은 5.7 용어집에 맞춘다.
+
+**쪽 나눔**
+
+| 대상 | 규칙 |
+|---|---|
+| 행 `.row` | `break-inside: avoid` (한 항목이 두 쪽에 갈리지 않음) |
+| 섹션 라벨 `.sec > h2` | `break-after: avoid` (라벨만 쪽 끝에 남지 않음) |
+| 섹션 | 나눔 허용 (긴 섹션은 행 단위로 다음 쪽으로 넘어감) |
+
+**내용 규칙**
+
+- 특허·프로그램 **등록번호를 싣지 않는다**. 상태(Registered / Filed / Pending)만 (1.1.4, 3.3 결정).
+- 상태 배지 `.st`: `--cv-fs-label` Geist Mono 500, `--text-3`, 1px `--line-strong` 테두리, `--radius-xs`. **시안의 "Planned / 예정" 배지는 홈과 같은 "In progress / 진행 중"으로 바꾼다** (decision-log 3.3).
+- 보고서는 대표 건만 싣고 끝에 "+n more reports at sguys99.github.io" 안내 한 줄 (시안 문구, 국문은 5.7).
+- 고객사 표기는 콘텐츠의 공개 여부를 따른다 (실명 3건 외 업종 표기).
+
+**색**
+
+- 인쇄는 화면 테마와 관계없이 라이트 팔레트, `--bg`·`--surface`는 `#ffffff` (3장 Color "인쇄", 333-a `@media print`). 다크 블록 두 벌보다 뒤에 `@media print { :root, :root[data-theme] { … } }`로 덮는다.
+- 시안 CV 본문은 포인트 색을 쓰지 않는다(`.st.on`은 정의만 있고 미사용). 배경색 인쇄에 의존하지 않는다.
+
+**화면 전용**
+
+| 요소 | 화면 | 인쇄 |
+|---|---|---|
+| 도구 줄 `.tools` (언어, 테마, "Print / Save PDF") | 종이 위 오른쪽 | `display: none` |
+| 종이 `.cv` | `--cv-paper-w`, `--cv-pad`, `--surface` 바탕, `--line` 테두리, `--radius-sm` | 여백·테두리·모서리 없음, 쪽 흐름 |
+| ≤720px | 라벨 칸·연락처·Skills를 1열로, 좌우 테두리 없음 | — |
+
+- 도구 줄은 시안의 `role="toolbar"`를 쓰지 않는다 [구현 기본값]: toolbar 역할은 화살표 키 이동을 요구하는데 버튼 3개라 일반 Tab 이동이 맞다.
+- 도구 줄의 언어 전환은 `/cv/` ↔ `/ko/cv/` 링크, 테마는 8장 버튼과 같은 동작.
+
+### 일반 페이지 인쇄 (홈, 케이스 스터디, 404)
+
+시안에는 등장 효과 강제 완성(`.m-wait { opacity: 1; transform: none }`)만 있다. [구현 기본값] 최소 규칙:
+
+| 항목 | 규칙 |
+|---|---|
+| 색 | CV와 같은 인쇄 라이트 팔레트 |
+| 숨김 | 상단 메뉴 `.topbar`, 메뉴 시트, 본문 바로가기, 언어·테마 버튼, 복사 버튼, 필터·"모두 보기" 토글, 푸터의 "맨 위로" |
+| 사이드바 | 고정 해제, 본문 위에 흐름으로 (2열 격자 해제) |
+| 카드 | 테두리 유지, 그림자 없음, 행 단위 `break-inside: avoid` |
+| 모션 | 등장 상태 완성, 카운트업 최종값 (331-c) |
+| 접힌 목록 | 접힌 상태 그대로 인쇄 (펼침 강제하지 않음) — 전체 이력은 `/cv/`가 담당 |
+
+### PDF (6.12)와의 관계
+
+- PDF는 **`/cv/`, `/ko/cv/`의 인쇄 결과를 그대로** 쓴다. PDF 전용 레이아웃이나 스타일을 따로 두지 않는다.
+- 빌드 후 두 페이지를 인쇄 매체로 렌더링해 영문·국문 PDF를 만들고, 사이드바 CV 다운로드 자리와 연결한다. 도구는 6.12에서 정한다 (`@page` 여백 상자와 `counter(pages)`를 지원해야 함).
+- 확인은 7.10(내용·조판), 7.11(브라우저 인쇄).
