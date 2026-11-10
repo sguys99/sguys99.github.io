@@ -1923,3 +1923,288 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 **미정·확인**
 - 기간 옆 "Planned / 예정" 배지: 홈과 CV는 `planned`를 "In progress / 진행 중"으로 표시한다(3.3 결정은 CV만 명시). 케이스 기록표도 같은 문구로 맞출지 확인 필요.
 - 시안의 UI 문구 `domain`(분야)은 정의만 있고 기록표에 쓰이지 않는다 → 기록표에 Domain을 넣지 않는다(시안 그대로).
+
+## 6. Page Templates
+
+페이지별 구성, 섹션 순서, 라우트, 언어 전환, head 메타. 컴포넌트 내부는 5장, 치수·브레이크포인트는 4장, 인쇄 조판은 10장을 따른다.
+
+기준 시안: 홈 `g4/332-a2.html`(기준안 `base.html` + 탭 확정안), 케이스 스터디 `g4/332-a2-case.html`, CV `g4/333-a.html`, 404·푸터 `g4/335-a.html`, 파비콘·OG `g4/334-d.html`.
+
+**표기**
+- 컴포넌트 이름은 5장 이름을 쓴다 (→ 5장). 5장과 합칠 때 이름이 다르면 5장에 맞춘다.
+- **[구현 기본값]**: 시안에 없어 일반 관례로 정한 값. 디자인 결정이 아니므로 시안 없이 구현하되, 바꾸려면 사용자에게 묻는다.
+- **미정**: 결정이 필요하다. 해당 단계에서 사용자에게 묻는다.
+
+**공통 규칙**
+- 모든 내부 링크와 자산 경로는 루트 기준 절대 경로(`/…`)이고 끝에 `/`를 붙인다 (`trailingSlash: 'always'`). 404는 임의 경로에서 서비스되므로 상대 경로를 쓰면 깨진다.
+- 앵커 id는 영문·국문이 같다 (영문 소문자). 언어 전환 시 앵커를 그대로 붙일 수 있게 하기 위해서다.
+- `<html lang>`은 `/ko/` 아래면 `ko`, 그 밖은 `en`.
+- 페이지 문장은 `src/content/`와 `src/i18n/`에서만 가져온다 (CLAUDE.md 규칙 2).
+
+### 6.1 Routes
+
+| 페이지 | 영문 | 국문 | 레이아웃 | 비고 |
+|---|---|---|---|---|
+| 홈 | `/` | `/ko/` | 사이트 셸: 프로필 사이드바 + 상단 메뉴 + 본문 + 푸터 | 단일 스크롤, 섹션 앵커는 6.2 |
+| 케이스 스터디 | `/work/<slug>/` | `/ko/work/<slug>/` | 케이스 셸: 기록표 사이드바 + 상단 메뉴(Work 표시) + 문서 + 푸터 | `featured: true`이고 `caseStudy`가 있는 프로젝트만 생성. 현재 5건 (6.3) |
+| CV (화면·인쇄) | `/cv/` | `/ko/cv/` | 종이 셸: 도구 막대 + A4 용지 한 장 | 사이드바·상단 메뉴 없음 (6.4) |
+| CV PDF | 미정 | 미정 | — | 6.12(PDF 생성)에서 파일 경로·이름 결정. 그때 사이드바 "Download CV"에 연결 |
+| 404 | `/404.html` (모든 없는 경로) | 같은 파일 | 사이트 셸에서 섹션 대신 카드 하나 | GitHub Pages는 루트 `404.html` 하나만 쓴다. 국문 404 파일은 따로 만들지 않는다 (6.5) |
+
+- `<slug>` = `src/content/projects/`의 파일 이름 (예: `samsung-scm-agent`). 영문·국문 같은 slug.
+- `/work/`(목록 페이지)는 만들지 않는다. 목록은 홈 `#work`가 담당한다 [구현 기본값: 링크가 없으므로 404].
+- 저장소 이름과 겹치는 경로(`sguys99.github.io/<repo>/`)가 생기지 않게 최상위 경로는 위 표의 것만 쓴다 (basic-plan 4.1).
+
+**언어 전환 이동 대상**
+
+| 지금 페이지 | 전환 후 | 앵커 |
+|---|---|---|
+| `/` ↔ `/ko/` | 반대 언어 홈 | 현재 섹션 앵커를 붙인다 (예: `/#ip` → `/ko/#ip`) |
+| `/work/<slug>/` ↔ `/ko/work/<slug>/` | 같은 slug의 반대 언어 페이지 | 현재 섹션 앵커를 붙인다 (예: `#approach`) |
+| `/cv/` ↔ `/ko/cv/` | 반대 언어 CV | 없음 |
+| 404 | 반대 언어 홈 (`/` 또는 `/ko/`) | 없음. 반대 언어의 같은 경로가 있는지 알 수 없으므로 |
+
+- "현재 섹션"은 scroll-spy가 표시 중인 섹션이다 (주소창 hash는 스크롤 후 낡을 수 있음). 페이지 맨 위면 앵커를 붙이지 않는다 [구현 기본값].
+- 전환 컨트롤은 `href`가 반대 언어 경로인 링크로 만든다. JS가 꺼져 있어도 같은 페이지로 이동하고, JS는 앵커만 덧붙인다 [구현 기본값]. 시안은 `<button>`으로 제자리 다시 그리기였지만 사이트는 페이지가 언어별로 따로 있다.
+- 데스크톱은 상단 메뉴 오른쪽 EN/KO, 모바일은 바의 언어 버튼과 메뉴 시트 Language 항목. 세 곳 모두 같은 대상으로 간다. 언어 선택은 저장하지 않는다 (주소가 곧 상태). 테마는 저장한다 (G1).
+
+### 6.2 Home
+
+**섹션 순서** (decision-log G6 "함께 정한 것")
+
+| 순서 | 섹션 (en / ko 제목) | 앵커 id | 상단 탭 | 사용 컴포넌트 (5장) | 콘텐츠 출처 |
+|---|---|---|---|---|---|
+| — | 사이드바 | — | — | Sidebar 5.1 (Dossier Record: 사진, 이름 `h1`, 직함, 키/값 표 Now·Email·GitHub·LinkedIn, CV 다운로드 자리) | `profile` (name, headline, currentRole, contact) |
+| — | 상단 메뉴 / 모바일 바 | — | — | Top navigation 5.2, Mobile bar + menu sheet 5.3 | `src/i18n/` |
+| 1 | About / 소개 | `about` | About / 소개 | Card 5.14, Hero 5.15, Career trajectory 5.16, Stats table 5.17(숫자 표 4칸), Skills(5.15) | `profile` (taglines[0], about, trajectory, skills). Figures는 `projects`·`patents`·`software`·`teaching`(book) 건수를 빌드 시 계산 |
+| 2 | Selected Work / 대표 프로젝트 | `work` | Work / 대표 프로젝트 | Card 5.14, Selected work list 5.18(번호 목록 01–06), Project ledger 5.19(전체 원장 + Domain·Capability 선택 상자 + 모두 보기) | `projects` (대표작: `featured`, `order` 순. 원장: 전체 20건) |
+| 3 | Experience / 경력 | `experience` | Experience / 경력 | Card 5.14, Period ledger row 5.22(기간 열 + 단색 로고) | `experience` (6곳) + `public/` 로고 |
+| 4 | Teaching · Books · Advisory / 강의 · 저서 · 자문 | `teaching` | Experience / 경력 | Card 5.14, Period ledger row 5.22 (Books · Teaching · Advisory 묶음) | `teaching` (`kind` 순서: book, teaching, advisory) |
+| 5 | Awards & Education / 수상 · 학력 | `awards` | Experience / 경력 | Card 5.14, Period ledger row 5.22 (Awards, Education 두 묶음) | `awards`, `education` |
+| 6 | Personal Projects / 개인 프로젝트 | `personal` | Personal / 개인 프로젝트 | Card 5.14, Personal projects index 5.20(번호 목록 + 상태 필터 + 저장소·데모 링크) | `personal` |
+| 7 | IP & Publications / 지식재산 · 출판물 | `ip` | Publications / 지식재산 · 출판물 | Card 5.14, Index drawer 5.21(유형별 서랍: 특허·프로그램·논문·보고서, 서랍 id `ip-<유형>`) | `patents`, `software`, `publications` |
+| 8 | Contact / 연락처 | `contact` | Contact / 연락처 | Card 5.14, Contact 5.23(의뢰 가능 분야 \| 이메일·복사·링크) | `profile` (availability, contact) |
+| — | 푸터 | — | — | Footer 5.5 (Colophon 한 줄: ©·최종 수정일·사이트 소스·맨 위로) | 최종 수정일은 빌드 시 `src/content` 마지막 커밋 날짜 |
+
+- 제목 단계: 사이드바 이름이 페이지의 `h1`, 섹션 제목 `h2`, 섹션 안 묶음(예: Books, Awards, Education)·대표작 제목 `h3`.
+- 각 섹션은 `<section id aria-labelledby>`. `main`의 id는 `main` (푸터 "맨 위로"와 건너뛰기 링크의 대상).
+- 예약 id: 위 8개 앵커, `main`, `side-contact`(사이드바 연락처 목록). 기준안의 사이드바 목록 id `contact`가 Contact 섹션과 충돌하므로 `side-contact`로 바꾼다 (decision-log G6 구현 시 처리).
+
+**탭과 섹션 매핑 규칙** (3.3.2 A 수정안)
+
+| 탭 (en / ko) | 링크 | 현재 표시되는 섹션 |
+|---|---|---|
+| About / 소개 | `#about` | `about` |
+| Work / 대표 프로젝트 | `#work` | `work` |
+| Experience / 경력 | `#experience` | `experience`, `teaching`, `awards` |
+| Personal / 개인 프로젝트 | `#personal` | `personal` |
+| Publications / 지식재산 · 출판물 | `#ip` | `ip` |
+| Contact / 연락처 | `#contact` | `contact` |
+
+- 탭 순서와 섹션 순서는 같다. Experience 탭은 Teaching·Awards 구간을 지나는 동안에도 현재 상태를 유지한다 (탭이 덮는 섹션 목록을 마크업에 둔다. 시안은 `data-for="experience teaching awards"`).
+- 현재 섹션 판정 (시안 그대로): 상단 메뉴 아래 끝 + 화면 높이 25% 선을 지난 마지막 섹션. 페이지 끝에 닿으면 마지막 섹션(Contact). 탭·앵커를 눌러 이동하면 사용자가 직접 스크롤(wheel, touchstart, keydown)할 때까지 누른 섹션을 유지한다 (짧은 Awards가 다음 섹션에 덮이지 않게).
+- 현재 탭: `aria-current="true"` + 미끄러지는 밑줄(5.2, 모션은 3장 Motion).
+- 모바일 바의 현재 섹션 이름은 탭 이름이 아니라 **섹션** 이름을 보인다 (예: Teaching 구간에서 "Teaching · Books · Advisory").
+- 메뉴 시트: 탭 6개, Experience 아래 하위 링크 3개(Experience, Teaching · Books · Advisory, Awards & Education). 하위 링크는 자기 섹션일 때만 현재 표시.
+- 앵커 이동으로 들어온 섹션은 등장 효과를 건너뛴다 (decision-log G6, 3장 Motion).
+
+**영문/국문 차이**
+- 구성·순서·앵커 같음. 문구만 다르다 (탭·섹션 이름은 위 표).
+- 기간 표기: 영문 `Mar 2024 – Jan 2025`, 국문 `2024.03 – 2025.01`. 현재 진행은 `Present` / `현재`.
+- 국문의 서체·행간·자간은 7장.
+
+### 6.3 Case study
+
+**구조** (3.2.3 C 케이스 파일 + 3.3.2 케이스 메뉴)
+
+| 영역 | 내용 | 컴포넌트 (5장) |
+|---|---|---|
+| 사이드바 (기록표) | ① 작은 프로필(사진·이름·직함, 홈 `#about` 링크) ② 경로: "← Selected Work"(홈 `#work`) + 위치 `01 / 05` ③ 프로젝트 제목 `h1` ④ 기록표: Client, Organization, Period, Role, Stack ⑤ "On this page" 번호 목차 ⑥ 이전·다음 | Case study 5.24 (기록표·목차·이전·다음) |
+| 상단 메뉴 | 홈과 같은 탭 6개. 링크는 홈 섹션(`/#about` 등, 국문은 `/ko/#about`). **Work 탭을 현재로 고정** (밑줄 정지, 스크롤과 무관). 오른쪽 끝 EN/KO·테마 | Top navigation 5.2 (케이스 변형) |
+| 모바일 바 | 이름 + 현재 **케이스 섹션** 이름. 이름 링크는 홈 `#work` | Mobile bar 5.3 |
+| 메뉴 시트 | 첫 줄 "← Selected Work"(홈 `#work`), 이어서 케이스 섹션 목록. 언어·테마 | Menu sheet 5.3 |
+| 본문 | 리드 문단(프로젝트 `summary`) + 번호 붙은 섹션 | Case study 5.24 (본문 섹션·아키텍처 표) |
+| 본문 끝 | 이전·다음 한 번 더 | Case study 5.24 (이전·다음) |
+| 푸터 | 홈과 같은 Colophon [구현 기본값: 시안은 임시 한 줄] | Footer 5.5 |
+
+**기록표 항목** (값이 없는 행은 숨김)
+
+| 키 (en / ko) | 출처 | 비고 |
+|---|---|---|
+| Client / 고객 | `client` (`public`이면 `name`, 아니면 `label`) | 실명은 승인된 2곳만 (CLAUDE.md 규칙 3) |
+| Organization / 소속 | `org` | |
+| Period / 기간 | `period` | `planned`이면 배지. 배지 문구는 홈과 같은 "In progress / 진행 중" (decision-log G6의 CV 배지 통일과 같은 기준) |
+| Role / 역할 | `lead` | Lead일 때만 "Lead / 총괄". 별도 역할 필드 없음 (G4) |
+| Stack / 기술 스택 | `stack` | ` · `로 이음 |
+
+**본문 섹션 순서** (basic-plan 4.4: Context → Problem → My role → Approach & Architecture → Stack → Outcome)
+
+| 번호 | 섹션 (en / ko) | 앵커 id | 출처 | 조건 |
+|---|---|---|---|---|
+| — | 리드 문단 | — | `summary` | 항상 |
+| 01 | Context / 배경 | `context` | `caseStudy.context` | 항상 |
+| 02 | Problem / 문제 | `problem` | `caseStudy.problem` | 항상 |
+| 03 | My role / 역할 | `role` | `caseStudy.role` | 항상 |
+| 04 | Approach / 접근 (+ Key decisions / 주요 결정 표) | `approach` | `caseStudy.approach`, `caseStudy.decisions` | 결정 표는 `decisions`가 있을 때만 |
+| 05 | Architecture / 아키텍처 | `arch` | `caseStudy.architecture` (계층 \| 구성 요소 \| 흐름 표) | 있을 때만. 없으면 번호를 당긴다 |
+| 06 | Outcome / 성과 | `outcome` | `caseStudy.outcome` | 항상. 진행 중(`present`·`planned`)이면 제목 옆 "In progress / 진행 중" 배지 |
+
+- Stack은 본문 섹션이 아니라 기록표의 Stack 행으로 보인다 (시안 그대로). basic-plan 4.4의 Stack 단계는 이 행이 담당한다.
+- 섹션 번호는 화면용 장식(`aria-hidden`), 제목은 `h2`. 결정 표 제목은 `h3`.
+- 목차·모바일 바의 현재 섹션 판정: 화면 위 20%~아래 70%를 뺀 띠에 들어온 섹션 (시안 `rootMargin: -20% 0px -70% 0px`).
+
+**이전·다음 순서**
+- 목록 = `featured: true` **이고** `caseStudy`가 있는 프로젝트, `order` 오름차순. 홈 대표작 목록(5.18)와 같은 순서에서 케이스가 없는 항목만 빠진다.
+- 처음 항목은 "이전" 칸, 마지막 항목은 "다음" 칸을 비워 둔다 (돌아가지 않음).
+- 각 칸: "Previous / 이전" 또는 "Next / 다음" + 대상 제목. `rel="prev"`/`rel="next"`.
+- 위치 표시 `NN / NN`의 분모도 이 목록 길이다 (현재 `/ 05`).
+
+**케이스 스터디가 없는 대표작** (현재 그린소재 재고 조합 최적화)
+- 페이지를 만들지 않는다. 홈 대표작 목록(5.18)에서 제목에 링크·화살표가 없고, 전체 원장에서도 링크가 없다 (G4 함께 정한 것).
+- `caseStudy`가 채워지면 다음 빌드에서 페이지·이전·다음·위치 표시에 자동으로 들어간다. 따로 손댈 곳이 없어야 한다.
+
+**영문/국문 차이**
+- 같은 slug, 같은 섹션 id. 섹션 이름·기록표 키는 위 표. 언어 전환 시 현재 섹션 앵커 유지 (6.1).
+
+### 6.4 CV
+
+화면 보기 구조만 다룬다. A4 조판, 쪽 나눔, 쪽 하단 글자는 10장.
+
+| 영역 | 내용 |
+|---|---|
+| 도구 막대 (`role="toolbar"`) | 용지 위 오른쪽 정렬, 버튼 3개: 반대 언어("한국어" / "English", 6.1 규칙으로 반대 언어 CV로 이동), 테마("Theme / 테마"), 인쇄("Print / Save PDF" / "인쇄 / PDF 저장", 포인트 색). 인쇄 시 숨김 |
+| 용지 (`main`) | 머리 + 섹션 13개. 화면에서는 테두리 있는 용지 한 장, ≤720px에서 테두리 없이 1열 |
+| 머리 (`header`) | 이름 `h1`, 직함 줄(`headline · currentRole`), 연락처 열: 이메일, GitHub 호스트, LinkedIn 호스트, 사이트 주소(영문 `sguys99.github.io`, 국문 `sguys99.github.io/ko/`) |
+
+사이드바·상단 메뉴·모바일 바·푸터 없음. 사진 없음 (3.3.3 A).
+
+**섹션 순서** (333-a 그대로. 각 섹션: 왼쪽 칸 `h2`, 오른쪽 칸 행. 행 제목 `h3`)
+
+| 순서 | en / ko | 출처 | 비고 |
+|---|---|---|---|
+| 1 | Profile / 소개 | `profile.about` | |
+| 2 | Skills / 기술 | `profile.skills` | 키/값 표 |
+| 3 | Experience / 경력 | `experience` | |
+| 4 | Education / 학력 | `education` | |
+| 5 | Selected Projects / 대표 프로젝트 | `projects` (`featured`, `order` 순) | 성과·스택 포함. 진행 중 배지는 "In progress / 진행 중" (시안의 "Planned"를 바꿈, decision-log G6) |
+| 6 | Other Projects / 기타 프로젝트 | `projects` (나머지, 시작일 내림차순) | 촘촘한 목록 |
+| 7 | Patents / 특허 | `patents` (날짜 내림차순) | 제목 옆 "등록 n · 출원 n". 등록번호 없음 (G6) |
+| 8 | Software / 프로그램 등록 | `software` | 등록번호 없음 |
+| 9 | Papers / 논문 | `publications` (`paper`) | DOI 링크 |
+| 10 | Selected Reports / 주요 보고서 | `publications` (`report`, `featured`) | 끝에 나머지 건수와 사이트 주소 한 줄. 총량 "50+"는 쓰지 않는다 (G4) |
+| 11 | Teaching & Advisory / 강의·자문 | `teaching` (book 제외) | |
+| 12 | Books / 저서 | `teaching` (book) | `url` 있으면 링크 |
+| 13 | Awards / 수상 | `awards` | |
+
+- 기간 열은 연도만 (`2024 – 2025`, 같은 해면 한 번).
+- 개인 프로젝트(`personal`)는 싣지 않는다 (시안 그대로).
+- `<title>`: `Kwang Myung Yu · CV` / `유광명 · 이력서` (시안 그대로).
+- 진입 경로: 시안에 `/cv/` HTML 페이지로 가는 링크가 없다. 사이드바 "Download CV"는 PDF로 연결한다. HTML CV 링크를 둘지는 **미정** (6.12와 함께 결정).
+
+### 6.5 404
+
+3.3.5 A: 사이트 셸을 유지하고 본문에 카드 하나.
+
+| 영역 | 404에서의 모습 |
+|---|---|
+| 사이드바 | 홈과 같음 (사진, 이름, 연락처, CV). 단 이름은 `h1`이 아닌 일반 문단으로 낮춘다 (아래 제목 단계) |
+| 상단 메뉴 | 탭 목록 숨김, 언어·테마 컨트롤만 오른쪽 끝 |
+| 모바일 바 | 이름 + 현재 위치 자리에 `404`. 이름 링크는 그 언어의 홈 |
+| 본문 카드 | ① `404` (mono, 작은 글자) ② 제목 ③ 설명 한 줄(최대 52ch) ④ 버튼 2개 ⑤ 섹션 바로 가기 목록 |
+| 푸터 | 홈과 같은 Colophon |
+
+컴포넌트: Sidebar 5.1, Top navigation 5.2(탭 숨김 상태), Mobile bar + menu sheet 5.3, Card 5.14(404 카드), Buttons 5.6, Footer 5.5.
+
+**문구** (335-a 그대로, 용어집 등록은 5.7)
+
+| 항목 | en | ko |
+|---|---|---|
+| 제목 | Page not found | 페이지를 찾을 수 없습니다 |
+| 설명 | The page you requested does not exist or has moved. | 요청하신 페이지가 없거나 주소가 바뀌었습니다. |
+| 주 버튼 → 같은 언어 홈 | Go to home | 홈으로 |
+| 보조 버튼 → 반대 언어 홈 (`lang` 속성 표시) | 한국어 홈 | English home |
+| 바로 가기 목록 이름 (화면에는 숨김) | Sections | 섹션 바로 가기 |
+
+**섹션 바로 가기**: 01 About `#about`, 02 Selected Work `#work`, 03 Experience `#experience`, 04 IP & Publications `#ip`. 링크는 그 언어의 홈 기준 (`/#ip`, `/ko/#ip`). 시안의 네 번째 항목 `patents`는 G6 이전 이름이므로 `ip`로 바꾼다.
+
+**언어 판별** (decision-log G6 구현 시 처리)
+- 경로 기준: `location.pathname`이 `/ko/` 또는 `/ko`로 시작하면 국문, 아니면 영문.
+- 404 파일은 영문으로 빌드하고 국문 문구를 함께 넣어 둔다. 인라인 스크립트가 첫 그리기 전에 `<html lang>`, `<title>`, 카드·사이드바·메뉴 문구, 링크 대상을 국문으로 바꾼다 (깜빡임 없게 테마 스크립트와 같은 위치) [구현 기본값].
+- JS가 꺼져 있으면 영문 404가 보인다. 보조 버튼으로 국문 홈에 갈 수 있다.
+- 언어 전환 컨트롤은 반대 언어 홈으로 간다 (6.1).
+
+**제목 단계** (decision-log G6 구현 시 처리. 시안은 카드 제목이 `h2`, 바로 가기 이름이 `h3`이고 `h1`이 사이드바 이름)
+- 카드 제목 = `h1` (페이지 주제가 "페이지 없음"이므로).
+- 사이드바 이름 = `p` (같은 스타일 유지).
+- 바로 가기 목록 이름 = `h2` (`sr-only`).
+
+**그 밖** [구현 기본값]
+- `<title>`: `Page not found · Kwang Myung Yu` / `페이지를 찾을 수 없습니다 · 유광명` (시안 그대로).
+- `<meta name="robots" content="noindex">`. canonical·hreflang·JSON-LD 없음.
+- 요청 주소는 보여 주지 않는다 (3.3.5 A에 없음).
+
+### 6.6 Head & sharing
+
+모든 페이지의 `<head>` 공통 항목. 구현 단계 5.8.
+
+**title · description**
+
+| 페이지 | `<title>` | `description` |
+|---|---|---|
+| 홈 | `Kwang Myung Yu · AI Engineer` / `유광명 · AI Engineer` [구현 기본값: `name · headline`] | `profile.taglines[0]` [구현 기본값] |
+| 케이스 스터디 | `<프로젝트 제목> · Kwang Myung Yu` / `<프로젝트 제목> · 유광명` (시안 그대로) | 프로젝트 `summary` [구현 기본값] |
+| CV | `Kwang Myung Yu · CV` / `유광명 · 이력서` (시안 그대로) | `name · headline · currentRole` [구현 기본값] |
+| 404 | 6.5 | 없음 |
+
+- 구분자는 시안이 쓴 ` · ` 하나로 통일.
+- 값은 모두 콘텐츠·i18n에서 조합한다. 페이지에 문장을 직접 쓰지 않는다.
+
+**OG · 공유 카드** (3.3.4 D)
+
+| 항목 | 값 |
+|---|---|
+| 이미지 | 언어별 PNG 2장 (영문·국문), 1200×630. 밝은 바탕에 KM 타일, URL `sguys99.github.io`, 이름·직함·한 줄 소개(`taglines[0]`). 사진 없음. 색은 3장 "자산 고정색" |
+| 파일 경로 | `/og-en.png`, `/og-ko.png` [구현 기본값]. 시안 원본 `g4/334/d-og-en.png`, `d-og-ko.png` |
+| 사용 | 모든 페이지가 자기 언어 이미지를 쓴다. 케이스 스터디별 이미지는 만들지 않는다 [구현 기본값: 시안이 사이트 공통 카드만 정함] |
+| 메타 | `og:title`·`og:description`(= title·description), `og:url`(= canonical), `og:image`(절대 URL), `og:image:width` 1200, `og:image:height` 630, `og:image:alt`(이름 · 직함), `og:type` `website`, `og:site_name` 이름, `og:locale` `en_US` / `ko_KR`, `og:locale:alternate` 반대 언어, `twitter:card` `summary_large_image` [구현 기본값] |
+| 생성 | 텍스트가 콘텐츠에서 오므로 이름·직함·한 줄 소개가 바뀌면 다시 만들어야 한다. 빌드 시 생성할지 수동 갱신할지는 5.8에서 정한다 (미정) |
+
+**파비콘 세트** (3.3.4 D, 파일 생성은 5.8)
+
+| 파일 | 크기 | 내용 | `<link>` |
+|---|---|---|---|
+| `/favicon.svg` | 16 격자 (`viewBox 0 0 16 16`) | 334-d SVG 원본 그대로. 타일 `rx 3.5`, `prefers-color-scheme: dark`에서 타일·글자 반전 (색은 3장 자산 고정색) | `<link rel="icon" href="/favicon.svg" type="image/svg+xml">` |
+| `/favicon.ico` | 32 (16 포함 권장) | 라이트 타일. SVG 미지원 브라우저용 | `<link rel="icon" href="/favicon.ico" sizes="32x32">` |
+| `/apple-touch-icon.png` | 180×180 | 불투명, 바탕 = 타일색 `#141a22`, 라이트 마크. 다크 버전 없음 (iOS가 모서리를 둥글게 처리). 시안 원본 `g4/334/d-apple-touch-180.png` | `<link rel="apple-touch-icon" href="/apple-touch-icon.png">` |
+
+- 파일 경로는 [구현 기본값] (루트 관례). 브라우저는 사이트의 테마 토글이 아니라 OS 설정을 따라 파비콘을 바꾼다 (SVG 미디어 쿼리 한계).
+- `theme-color`, 웹 매니페스트는 시안에 없어 두지 않는다.
+
+**canonical · hreflang** [구현 기본값]
+
+| 페이지 | canonical | alternate |
+|---|---|---|
+| 홈 | `https://sguys99.github.io/` / `…/ko/` | `hreflang="en"` → 영문, `hreflang="ko"` → 국문, `hreflang="x-default"` → 영문 |
+| 케이스 스터디 | `https://sguys99.github.io/work/<slug>/` / `…/ko/work/<slug>/` | 같은 방식 |
+| CV | `…/cv/` / `…/ko/cv/` | 같은 방식 |
+| 404 | 없음 | 없음 |
+
+- 절대 URL, 끝에 `/`. Astro `site` 값(`https://sguys99.github.io`)으로 만든다.
+- 두 언어 페이지는 서로를 가리키고 자기 자신도 포함한다.
+
+**JSON-LD `Person`** [구현 기본값: 필드 선택] — 홈(`/`, `/ko/`)에만 넣는다. 값은 모두 `profile`에서.
+
+| 필드 | 값 |
+|---|---|
+| `@context` / `@type` | `https://schema.org` / `Person` |
+| `name` | 그 페이지 언어의 이름 (`Kwang Myung Yu` / `유광명`) |
+| `alternateName` | 반대 언어 이름 |
+| `jobTitle` | `headline` (AI Engineer) |
+| `worksFor` | `{"@type": "Organization", "name": "GenON"}` |
+| `url` | 그 페이지의 canonical |
+| `image` | `https://sguys99.github.io/images/profile.jpg` |
+| `email` | `mailto:` + `contact.email` |
+| `sameAs` | `contact.github`, `contact.linkedin` |
+
+- 전화번호·주소·생년 등 개인정보 필드는 넣지 않는다 (CLAUDE.md 규칙 3).
+- `worksFor`의 회사명은 현재 `currentRole` 문자열 안에 있어 따로 뽑을 필드가 없다. 구현 시 `profile`에 필드를 추가할지 상수로 둘지 정한다 (미정, 콘텐츠 스키마 변경이라 사용자 확인).

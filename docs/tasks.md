@@ -161,7 +161,7 @@
 - [x] 4.2 Tokens: color(라이트/다크), type, spacing, radius, motion — 대비비 실측, 직접 쓴 값 토큰화·단계 정리(사용자 승인), z-index·CV 토큰 포함
 - [x] 4.3 Layout & Breakpoints — 와이어프레임, 브레이크포인트 표, 앵커 오프셋. 하단 여백 2건은 4.10에서 확인
 - [x] 4.4 Components: 컴포넌트별 구조, 상태(hover, focus, active), 반응형 동작 — 24개(5.1~5.24), 콘텐츠 출처 필드·접근성·모션 포함. genon 로고 PNG 처리는 4.10에서 확인
-- [ ] 4.5 Page Templates: 홈, 케이스 스터디, CV, 404
+- [x] 4.5 Page Templates: 홈, 케이스 스터디, CV, 404 — 라우트 표, 섹션·앵커·탭 매핑, head·OG·hreflang·JSON-LD. CV 링크 위치·PDF 경로는 4.10에서 확인
 - [ ] 4.6 Bilingual Typography: 언어별 서체, 행간, 자간 조정값
 - [ ] 4.7 Dark Mode, Accessibility, Print
 - [ ] 4.8 Decision Log: Gate별 시안, 선택, 이유 (`docs/design-drafts/decision-log.md` 초안 이전)
