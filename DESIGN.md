@@ -218,7 +218,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | `--fs-sm` | 0.8125 | 13 | 보조 본문(요약·설명), 탭, 사이드바 값, 원장 행 |
 | `--fs-md` | 0.9375 | 15 | 본문 기준(`body`), 경력 행 제목, 궤적 제목 |
 | `--fs-lg` | 1.0625 | 17 | 대표작 제목, 서랍 유형명, Contact 이메일, 모바일 이름 |
-| `--fs-xl` | 1.375 | 22 | 사이드바 이름, 서랍 건수, 케이스 제목, 메뉴 시트 항목, 모바일 한 줄 소개 |
+| `--fs-xl` | 1.375 | 22 | 사이드바 이름, 서랍 건수, 케이스 제목, 모바일 한 줄 소개 (메뉴 시트 항목은 `--fs-lg`/`--fs-sm`, 5.3) |
 | `--fs-2xl` | 1.875 | 30 | 한 줄 소개, 숫자 표, 404 제목 |
 
 국문 크기 규칙: 영문 대문자 라벨은 국문에서 한 단계 올린다. `--fs-2xs` → `--fs-xs` (키·라벨·배지 보조), `--fs-xs` → `--fs-sm` (섹션 제목, eyebrow, 시트 라벨). 국문에는 `text-transform`·넓은 자간이 의미 없기 때문.
@@ -704,3 +704,1222 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 - ≤1100px에서 `main` 하단 패딩이 `--sp-8`(64) → `--sp-6`(32)으로 줄어드는 것이 의도인지. 시안의 `main { padding: var(--sp-6) }` 한 줄이 하단까지 덮은 결과로 보인다.
 - 마지막 카드 → 푸터 간격이 카드 `margin-bottom`(24) + 푸터 `margin-top`(32) = 56px로 겹쳐 더해진다. 시안 그대로 둘지.
 - `aside.sidebar`·`.shell`은 `100vh`, 메뉴 시트는 `100dvh`. 모바일에서는 사이드바가 static이라 문제없지만 단위를 맞출지 구현 시 결정.
+
+## 5. Components
+
+컴포넌트마다 **구조**(HTML 골격) / **토큰** / **상태** / **반응형** / **접근성** / **모션** / **콘텐츠 출처** 순서로 적는다. 값은 3장 토큰 이름으로만 쓰고, 토큰이 없는 값은 "컴포넌트 값"으로 표시한다. 출처 시안: 홈 `g4/base.html` + 3차 확정안(`331-c`, `332-a2`, `332-a2-case`, `335-a`). 클래스 이름은 시안 그대로이며 구현에서 바꿔도 된다(역할 대응만 유지).
+5.1~5.12는 틀·내비게이션·기본 요소, 이후 번호는 콘텐츠 컴포넌트다.
+
+공통 규칙
+
+| 항목 | 규칙 |
+|---|---|
+| 포커스 | 전역 `:focus-visible { outline: var(--focus-w) solid var(--focus); outline-offset: var(--focus-offset); border-radius: var(--radius-xs) }`. 예외는 각 컴포넌트에 적는다 |
+| hover 전환 | 색·테두리·밑줄은 `var(--dur) ease`. 다른 시간·easing 금지 |
+| 테마·언어 전환 중 | 루트에 `m-notx`를 붙여 개별 transition을 끈다 (3장 Motion) |
+| `prefers-reduced-motion: reduce` | 모든 transition·animation 끔. 아래 "모션" 줄은 `no-preference`일 때만 |
+| 아이콘 | 모두 `aria-hidden="true"`. 의미는 옆 글자나 `aria-label`이 전달 (5.12) |
+| UI 문구 | `src/i18n/`(메뉴·버튼·aria-label). 이력 내용은 `src/content/` |
+
+### 5.1 Sidebar (프로필 기록표, 3.1.3 C)
+
+**구조**
+
+```html
+<aside class="sidebar" aria-label="Profile">
+  <img class="photo" src="/images/profile.jpg" alt="" width="132" height="165">
+  <div>
+    <h1 class="name">Kwang Myung Yu</h1>
+    <p class="headline">AI Engineer</p>
+    <p class="role">Director, R&D Group, GenON</p>        <!-- ≤860에서만 보임 -->
+  </div>
+  <ul class="contact" id="side-contact">                    <!-- id: Contact 섹션(#contact)과 충돌 방지 -->
+    <li class="now"><span class="k">Now</span><span class="v">Director, R&D Group, GenON</span></li>
+    <li class="em"><span class="k" aria-hidden="true">Email</span><a class="v" href="mailto:…">{icon mail}<span class="lbl">sguys99@naver.com</span></a></li>
+    <li><span class="k" aria-hidden="true">GitHub</span><a class="v" href="…">{icon gh}<span class="lbl">GitHub</span><span class="h">github.com/sguys99</span></a></li>
+    <li><span class="k" aria-hidden="true">LinkedIn</span><a class="v" href="…">{icon in}<span class="lbl">LinkedIn</span><span class="h">in/kmyu99</span></a></li>
+  </ul>
+  <a class="cv" aria-disabled="true" role="link">Download CV <span class="badge">Placeholder</span></a>
+</aside>
+```
+
+**토큰 (≥861px)**
+
+| 요소 | 속성 → 토큰 |
+|---|---|
+| `aside.sidebar` | `position: sticky; top: 0; height: 100vh; overflow-y: auto`, 폭 `--sidebar`, 패딩 `--sp-7` `--sp-6`, 세로 간격 `--sp-5`, 오른쪽 선 1px `--line`, 바탕 `--bg` |
+| `.photo` | 폭 `--sb-photo-w`, `aspect-ratio: 4/5; object-fit: cover`, 모서리 `--radius-sm`, 테두리 1px `--photo-ring`, 바탕 `--chip`, `filter: var(--photo-filter)` |
+| `.name` | `--font-display`, `--fs-xl`, `--fw-name`, `--ls-name`, 행간 1.25(컴포넌트 값) |
+| `.headline` | `--accent`, `--fw-medium`, `--fs-md`, 위 여백 `--sp-1` |
+| `.role` | 숨김 (기록표의 Now 행이 대신함) |
+| 기록표 `ul` | 위 선 1px `--line-strong`, 행 `grid: var(--sb-key) 1fr`, 열 간격 `--sp-3`, 행 패딩 `--sp-3` 0, 행 아래 선 1px `--line`, `align-items: baseline` |
+| `.k` | `--fs-2xs`, `--fw-strong`, `--ls-label`, 대문자, `--text-3`. 국문 `--fs-xs` + `--ls-label-ko` |
+| `.v` | `--fs-sm`, `--text`, `--lh-row`. GitHub·LinkedIn은 `.h`(주소 축약)만 보이고 넘치면 말줄임 |
+| 기록표 링크 | 밑줄 `--line-strong`, `text-underline-offset: var(--underline-offset)` |
+| `.cv` 자리 | 1px **dashed** `--line-strong`, 모서리 `--radius-sm`, 패딩 `--sp-2` `--sp-3`, `--fs-sm` `--fw-medium` `--text-2`, 배지 `--text-3` |
+
+**상태**
+
+| 상태 | 처리 |
+|---|---|
+| 링크 hover | 글자·밑줄 `--accent` |
+| focus-visible | 전역 링 |
+| CV disabled | 6.12(PDF 생성) 전까지 `aria-disabled="true"`, `cursor: not-allowed`, "Placeholder / 자리 표시" 배지. 활성 상태의 모양은 **미정(구현 시 시안 제시)**: 시안에 활성 CV 버튼이 없음 |
+
+**반응형**
+
+| 폭 | 동작 |
+|---|---|
+| ≤1100 | `--sidebar` 280px |
+| ≤860 | 고정 해제(`position: static; height: auto`), 상단 프로필로 전환: 모바일 바(5.3) 아래, 아래 선 1px `--line`, 패딩 `--sp-4`, `grid: var(--sb-photo-w-sm) 1fr`, 간격 `--sp-2` `--sp-4`. 사진 `--sb-photo-w-sm`·모서리 `--radius`. 이름 `--fs-lg`, 직함 `--fs-sm`, `.role` 보임(`--fs-xs` `--text-2`). 기록표 대신 아이콘 + 글자 한 줄(`flex-wrap`, 간격 `--sp-2` `--sp-4`, 위 선 `--line`, 패딩 위 `--sp-3`), 글자 `--fs-sm` `--text-2`, hover `--accent`. Now 행·키·CV 자리 숨김 |
+| ≤560 | 이메일 라벨 `max-width: 100%` (긴 주소 줄바꿈 대비) |
+
+**접근성**
+- 이름 `h1`은 홈의 유일한 h1. 사이드바는 `aside` + `aria-label`(국문 "프로필").
+- **시안 버그**: ≥861에서 GitHub·LinkedIn 링크의 이름이 사라진다(`.lbl`은 `display: none`, `.h`·`.k`는 `aria-hidden`). 구현 시 `.h`의 `aria-hidden`을 빼거나 링크에 `aria-label="GitHub: github.com/sguys99"`를 준다.
+- 사진은 바로 옆에 이름 h1이 있어 시안대로 `alt=""`(장식)로 둔다. [제안] 사진이 단독으로 쓰이는 곳(OG 등)은 해당 없음.
+- 외부 링크는 시안대로 같은 탭에서 열고 `rel="noopener"`.
+
+**모션**: hover 색만 (`--dur`). 등장 효과 없음 (첫 화면).
+**콘텐츠 출처**: 이름·직함·현재 소속·연락처 = `src/content/profile`. 키 라벨(Now/Email)·CV 문구 = `src/i18n`. GitHub·LinkedIn 축약 주소는 URL에서 계산.
+
+### 5.2 Top navigation (332-a2, 케이스 변형 332-a2-case)
+
+**구조 (홈)**
+
+```html
+<header class="topbar">
+  <div class="bar">
+    <a class="bar-id" href="#about">…</a>                    <!-- 5.3, ≤860에서만 -->
+    <nav aria-label="Sections">
+      <ul class="tabs" data-nav>
+        <li><a href="#about" data-for="about">About</a></li>
+        <li><a href="#work" data-for="work">Work</a></li>
+        <li><a href="#experience" data-for="experience teaching awards">Experience</a></li>
+        <li><a href="#personal" data-for="personal">Personal</a></li>
+        <li><a href="#ip" data-for="ip">Publications</a></li>
+        <li><a href="#contact" data-for="contact">Contact</a></li>
+      </ul>
+      <span class="ink" aria-hidden="true"></span>
+    </nav>
+    <div class="controls">{5.4 언어 전환}{5.4 테마 전환}</div>
+    {5.3 lang-btn, menu-btn}                                    <!-- ≤860에서만 -->
+  </div>
+</header>
+```
+
+**탭 문구**
+
+| 탭 | 영문 | 국문 | 앵커 | 현재 표시되는 섹션(`data-for`) |
+|---|---|---|---|---|
+| 1 | About | 소개 | `#about` | about |
+| 2 | Work | 대표 프로젝트 | `#work` | work (전체 프로젝트 원장 포함) |
+| 3 | Experience | 경력 | `#experience` | experience, teaching, awards |
+| 4 | Personal | 개인 프로젝트 | `#personal` | personal |
+| 5 | Publications | 지식재산 · 출판물 | `#ip` | ip |
+| 6 | Contact | 연락처 | `#contact` | contact |
+
+**토큰**
+
+| 요소 | 속성 → 토큰 |
+|---|---|
+| `.topbar` | `position: sticky; top: 0; z-index: var(--z-header)`, 바탕 `--header-bg`, `backdrop-filter: var(--header-blur)`, 아래 선 1px `--line` |
+| `.bar` | 높이 `--header-h`, 최대 폭 `--main`, 좌우 패딩 `--sp-7`, 간격 `--sp-4`, `align-items: center` |
+| `nav` | `flex: 1; min-width: 0; align-self: stretch; position: relative` |
+| `.tabs` | 간격 `--sp-6`, `overflow: visible` |
+| `.tabs a` | `--fs-sm`, `--fw-medium`, `--text-3`, 밑줄 없음, 높이는 바 전체(`align-self: stretch`) |
+| `.ink` (현재 막대) | 하나뿐인 막대. `position: absolute; bottom: -1px`(바 아래 선 위에 겹침), 높이 `--focus-w`, 색 `--accent`, 모서리 `var(--radius-bar) var(--radius-bar) 0 0`, 위치·폭은 JS가 `--ink-x`·`--ink-w`로 넣음 |
+| hover 선 (`a::before`) | 탭 아래 1px `--line-strong`, `opacity` 0→1 |
+
+**상태**
+
+| 상태 | 처리 |
+|---|---|
+| 기본 | `--text-3` |
+| hover | 글자 `--text`, 아래 1px `--line-strong` 선 (현재 탭에는 안 그림) |
+| current | `aria-current="true"`, 글자 `--text`, `.ink`가 그 탭 아래로 이동. 아닌 탭은 속성을 지운다 |
+| focus-visible | 링을 안쪽으로: `outline-offset: -6px`(컴포넌트 값, 바 높이 안에 링이 들어가게) |
+
+**현재 섹션 판정 (scroll-spy, 332-a2)**
+
+| 규칙 | 값 |
+|---|---|
+| 판정선 | 상단 메뉴 아래 + 화면 높이 25%. 위쪽 끝이 판정선을 지난 마지막 섹션이 현재 |
+| 페이지 끝 | 끝까지 스크롤하면 마지막 섹션(Contact) |
+| 탭 클릭 후 | 클릭한 섹션을 고정(hold). `wheel`·`touchstart`·`keydown`이 오면 해제 (짧은 Awards가 덮어쓰이지 않게) |
+| 갱신 | `scroll`(rAF로 묶음), `resize`, `load` |
+| 막대 재측정 | `ResizeObserver`(탭 목록), 글꼴 로드 후, 언어별 문구 길이 차이 |
+| 앵커 이동 | `scroll-margin-top: calc(var(--header-h) + var(--sp-5))` (카드). 앵커로 들어온 섹션은 등장 효과를 건너뜀 (3장 Motion) |
+
+**반응형**
+
+| 폭 | 동작 |
+|---|---|
+| ≤1100 | 바 좌우 패딩 `--sp-6` |
+| ≤1000 (861~1000) | 탭 간격 `--sp-6` → `--sp-4` (6탭 + 전환 버튼이 한 줄에 들어가게, 3.3.2) |
+| ≤860 | `nav`·`.controls` 숨김 → 5.3 모바일 바. `--header-h` 52px, 바 패딩 `--sp-4`, 간격 `--sp-3`, 상단 메뉴가 사이드바 위로(`order: -1`) |
+
+- 구현 시 삭제: base의 ≤860 `.tabs` 가로 스크롤·`mask-image`(그 폭에서 `nav`가 숨겨져 무효)와 탭별 `::after scaleX` 밑줄(`.ink`로 대체).
+
+**접근성**
+- `nav`에 `aria-label`("Sections" / "섹션"). 케이스 시안은 JS로 넣지만(`data-ui-label`) 구현은 빌드 시 정적으로 넣는다.
+- JS 없음: 탭은 앵커로 동작하고 `.ink`는 폭 0(현재 표시 없음). 허용.
+- 본문 바로가기 링크: 시안에 없음. 9장 접근성 규칙에 따라 `<body>` 첫 요소로 두고 포커스 시 `z-index: var(--z-skip)`로 상단 메뉴 위에 보인다. 모양은 **미정(구현 시 시안 제시)**.
+- "상단 메뉴 위쪽의 정체 모를 흔적"(decision-log 3.3): `332-a2-desktop-light-en.png` 상단 About~Experience 위에 흐린 사각형이 보인다. 반투명 바(`--header-bg` 90%) 뒤로 비친 본문으로 추정. 구현 후 브라우저에서 확인.
+
+**모션 (331-c)**: `.ink` 이동 `transform`·`width` `var(--m-nav) var(--ease-out)`. 첫 배치는 transition 없이(`ready` 클래스를 2프레임 뒤에 붙임). hover 선·글자색 `--dur`. 모션 줄이기: 막대가 즉시 이동.
+
+**케이스 스터디 변형 (332-a2-case)**
+
+| 항목 | 홈과 다른 점 |
+|---|---|
+| 표시 | 데스크톱에도 상단 메뉴를 보인다 (3.2.3 C에서는 숨김이었음) |
+| 탭 링크 | 홈 섹션으로 이동: 영문 `/#about`…, 국문 `/ko/#about`… |
+| current | 항상 Work에 `aria-current="true"` 고정, `.ink`는 Work 아래 정지 (scroll-spy 없음, 재측정만) |
+| 전환 버튼 | 언어·테마를 상단 메뉴 `.controls`로 (기록표 하단 `.side-foot`에서 뺌) |
+| 사이드바 | 케이스 기록표 `--sidebar` 340px, ≤1000에서 280px (3장 Layout) |
+| 모바일 바 | `.bar-id`는 홈 `#work`로, `.bar-cur`는 현재 케이스 섹션 이름 |
+| 메뉴 시트 | 그룹 없음. 첫 행 "← Work / ← 대표 프로젝트"(홈 `#work`) + 케이스 섹션 목록 |
+
+### 5.3 Mobile bar + menu sheet (3.1.6 C + 332-a2, ≤860)
+
+**구조**
+
+```html
+<!-- .topbar .bar 안 (5.2와 같은 header) -->
+<a class="bar-id" href="#about"><span class="bar-name">Kwang Myung Yu</span><span class="bar-cur">Experience</span></a>
+<a class="icon-btn lang-btn" href="/ko/" lang="ko" hreflang="ko" aria-label="한국어로 보기">KO</a>
+<button class="icon-btn menu-btn" aria-haspopup="dialog" aria-expanded="false" aria-controls="sheet" aria-label="Open menu">{icon menu}</button>
+
+<dialog class="sheet" id="sheet" aria-labelledby="sheet-title">
+  <div class="sheet-in">
+    <div class="sheet-head"><h2 id="sheet-title">Menu</h2><button class="icon-btn" aria-label="Close menu">{icon close}</button></div>
+    <nav aria-label="Sections"><ul class="sheet-nav grouped" data-nav>
+      <li><a href="#about" data-for="about">About</a></li> …
+      <li><a href="#experience" data-for="experience teaching awards">Experience</a>
+        <ul class="sheet-sub"><li><a href="#experience">Experience</a></li><li><a href="#teaching">Teaching · Books · Advisory</a></li><li><a href="#awards">Awards & Education</a></li></ul></li>
+      …
+    </ul></nav>
+    <ul class="contact">{mail, GitHub, LinkedIn: 아이콘 + 글자}</ul>
+    <div class="sheet-prefs">
+      <div><span class="sheet-label">Language</span>{5.4 언어 전환}</div>
+      <div><span class="sheet-label">Theme</span>{5.4 테마 전환}</div>
+    </div>
+  </div>
+</dialog>
+```
+
+**토큰**
+
+| 요소 | 속성 → 토큰 |
+|---|---|
+| `.bar-id` | `flex: 1; min-width: 0; white-space: nowrap`, 간격 `--sp-2`, 밑줄 없음 |
+| `.bar-name` | `--fs-md`, `--fw-strong`, 자간 -0.01em(컴포넌트 값) |
+| `.bar-cur` | `--fs-sm`, `--text-3`, 말줄임. 앞에 `/` 구분자(`--line-strong`, 오른쪽 `--sp-2`) |
+| `.lang-btn` | `.icon-btn`(5.6)에 폭 auto, 좌우 패딩 `--sp-3`, `--font-meta` `--fs-xs` `--fw-medium` `--ls-label-ko` |
+| `.sheet` | 오른쪽 붙임(`margin-left: auto`), 폭 `min(var(--sheet-w), 88vw)`, 높이 `100dvh`, 바탕 `--surface`, 왼쪽 선 1px `--line`, `::backdrop` `--scrim` |
+| `.sheet-in` | 세로 flex, 간격 `--sp-6`, 패딩 `--sp-3` `--sp-5` `--sp-6` |
+| `.sheet-head` | 높이 `--header-h`, 양 끝 정렬 |
+| `.sheet-head h2`, `.sheet-label` | `--fs-xs`, `--fw-strong`, `--ls-label`, 대문자, `--text-3`. 국문 `--fs-sm` + `--ls-label-ko` |
+| `.sheet-nav` | 위 선 1px `--line`, 그룹 행마다 아래 선 1px `--line` |
+| 그룹 행 `> li > a` | `--fs-lg`, `--fw-medium`, `--text-2`, 패딩 `--sp-3` 0, 오른쪽 끝에 현재 점 `--dot` |
+| `.sheet-sub` | 왼쪽 선 1px `--line`, 패딩 0 0 `--sp-3` `--sp-4`, 위 여백 `calc(-1 * var(--sp-2))` |
+| 하위 행 `a` | `--fs-sm`, `--fw-regular`, 자간 0, `--text-3`, 패딩 `--sp-1` 0 |
+| `.contact` (시트) | 아이콘 + 글자, 세로 간격 `--sp-3` |
+| `.sheet-prefs` | `margin-top: auto`(바닥 고정), 위 선 1px `--line`, 패딩 위 `--sp-4`, 행 간격 `--sp-3`, 행은 라벨 ↔ 컨트롤 양 끝 정렬 |
+
+- 3장 Typography 표의 "`--fs-xl` 메뉴 시트 항목"은 base의 평면 목록 값이다. 확정안 332-a2는 그룹 목록이라 그룹 행 `--fs-lg`, 하위 행 `--fs-sm`을 쓴다.
+
+**상태**
+
+| 대상 | 상태 | 처리 |
+|---|---|---|
+| 그룹 행 | current | `aria-current="true"`, 글자 `--text`, 오른쪽 점 `--accent` (`--radius-pill`) |
+| 그룹 행 (하위 있음) | current | 글자만 `--text`, 점은 하위 행이 대신하므로 투명 |
+| 하위 행 | current | 글자 `--accent` |
+| `.bar-cur` | — | 현재 섹션 이름(탭 이름이 아니라 섹션 이름: "Teaching · Books · Advisory" 등) |
+| `menu-btn` | open | `aria-expanded="true"`, 닫히면 `false` (`close` 이벤트) |
+| 시트 행 | hover / focus-visible | hover 색 규칙 없음(시안). 포커스는 전역 링 |
+
+**동작**
+- 열기: `menu-btn` → `sheet.showModal()`. 배경은 inert, 포커스는 시트 안, Esc로 닫힘 (네이티브 `<dialog>`).
+- 닫기: 닫기 버튼, backdrop 클릭(`e.target === sheet`), 시트 안 섹션 링크 클릭.
+- [제안] 시트가 열린 채 861px 이상으로 넓어지면 닫는다 (`matchMedia` 변경 시 `close()`). 시안에 처리 없음.
+
+**반응형**: 861px 이상에서는 `.bar-id`, `.lang-btn`, `.menu-btn`, 시트 모두 숨김. 360px에서 바 = 이름 + 현재 섹션(말줄임) + 언어 + 메뉴, 가로 스크롤 없음.
+
+**접근성**: 메뉴 버튼·닫기 버튼 `aria-label` ("Open menu / 메뉴 열기", "Close menu / 메뉴 닫기"). 시트 `aria-labelledby` = 제목. 시트 안 `nav`에도 `aria-label`. 언어 버튼은 다른 언어 이름을 읽게 하고 `lang`을 그 언어로 둔다.
+
+**모션 (331-c)**: 시트 `translateX(100%)→0` `var(--m-sheet) var(--ease-out)`, backdrop fade `var(--m-sheet) var(--ease-out)` (base의 `translateX(24px)`+fade, 키워드 `ease-out`은 쓰지 않음). 모션 줄이기: 즉시 표시.
+
+### 5.4 Language switch & Theme toggle
+
+**언어 전환 (세그먼트, `.seg`)**
+
+```html
+<div class="seg" role="group" aria-label="Language">
+  <a href="/" lang="en" hreflang="en" aria-current="true">EN</a>
+  <a href="/ko/" lang="ko" hreflang="ko">KO</a>
+</div>
+```
+
+- 시안은 같은 페이지를 다시 그리는 `<button aria-pressed>`다. 실제 사이트는 `/`와 `/ko/`가 별개 페이지라 **링크**로 바꾼다. [제안] 현재 언어 표시는 `aria-current="true"`, 이동 대상은 같은 경로의 상대 언어 페이지(케이스 스터디는 같은 slug, 404는 언어 홈).
+- 같은 `.seg` 모양을 개인 프로젝트 상태 필터(`aria-pressed` 버튼)도 쓴다. 필터 동작은 해당 콘텐츠 컴포넌트 명세를 따른다.
+
+| 요소 | 속성 → 토큰 |
+|---|---|
+| `.seg` | `inline-flex`, 테두리 1px `--line`, 모서리 `--radius-pill`, 안쪽 여백 2px(컴포넌트 값), 바탕 `--surface` |
+| 항목 | `--fs-xs`, `--fw-medium`, `--ls-label-ko`, `--text-3`, 패딩 `--sp-1` 10px(컴포넌트 값), 최소 높이 `--ctl-h-sm`, 모서리 `--radius-pill` |
+| 선택됨 (`aria-current` / `aria-pressed="true"`) | 바탕 `--accent-soft`, 글자 `--accent` |
+
+**테마 전환**
+
+```html
+<button type="button" class="icon-btn" id="theme" aria-label="Toggle dark mode">
+  <svg class="i-moon" …/><svg class="i-sun" …/>
+</button>
+```
+
+| 항목 | 규칙 |
+|---|---|
+| 기본값 | 시스템 설정(`prefers-color-scheme`). 수동 전환은 기억 (G1 결정). [제안] `localStorage`에 `light`/`dark` 저장, `<head>` 인라인 스크립트로 첫 페인트 전에 `data-theme` 적용(시안은 같은 방식을 URL 인자로 대신함) |
+| 아이콘 | 라이트에서 달(→ 다크로), 다크에서 해. 시안 CSS는 `data-theme`이 있을 때만 하나를 숨겨, 속성이 없으면 둘 다 보인다. 구현은 `data-theme`을 항상 넣거나 `prefers-color-scheme`에도 같은 숨김 규칙을 둔다 |
+| 이름 | `aria-label` "Toggle dark mode / 다크 모드 전환" (고정). [제안] `aria-pressed`를 다크일 때 `true`로 두어 현재 상태를 읽게 한다 (시안에 없음) |
+| 모양 | `.icon-btn` (5.6) |
+
+**접근성**: 세그먼트 `role="group"` + `aria-label`("Language / 언어"). 각 언어 항목에 `lang`(EN은 `en`, KO는 `ko`) — 화면 읽기 프로그램이 올바른 발음으로 읽게. 키보드는 Tab으로 각 항목.
+**모션 (331-c)**: 테마 = View Transitions 크로스페이드 `--m-theme`(`data-vt="theme"`), 언어 = 문서 간 `@view-transition { navigation: auto }` `--m-lang`. 지원하지 않는 브라우저와 모션 줄이기에서는 즉시 바뀜. 세그먼트 바탕·글자 `--dur`.
+**콘텐츠 출처**: 라벨·aria-label = `src/i18n`.
+
+### 5.5 Footer (335-a 콜로폰 한 줄)
+
+**구조**
+
+```html
+<footer class="foot">
+  <p>© <span class="num">2026</span> Kwang Myung Yu</p>
+  <ul>
+    <li>Last updated <time datetime="2026-11-10" class="num">Nov 10, 2026</time></li>
+    <li><a href="https://github.com/sguys99/sguys99.github.io" rel="noopener">Site source</a></li>
+    <li><a href="#main">Back to top ↑</a></li>
+  </ul>
+</footer>
+```
+
+| 요소 | 속성 → 토큰 |
+|---|---|
+| `footer` | `--font-meta`, `--fs-xs`, `--text-3`. `flex-wrap`, 양 끝 정렬, `align-items: baseline`, 간격 `--sp-2` `--sp-5`, 위 여백 `--sp-6`, 패딩 `--sp-4` `--sp-1` 0, 위 헤어라인 1px `--line` |
+| `ul` | `flex-wrap`, 간격 `--sp-2` `--sp-5`, 목록 기호 없음 |
+| 링크 | `--text-2`, 밑줄 `--line-strong`, `--underline-offset`. hover 글자·밑줄 `--accent` |
+
+| 항목 | 규칙 |
+|---|---|
+| 연도 | 최종 수정일의 연도 |
+| 최종 수정일 | 빌드 시 `git log -1 --format=%cs -- src/content`. 영문 `Nov 10, 2026`, 국문 `2026.11.10`. 시안의 "sample date / 예시 날짜" 배지는 시안 전용이라 넣지 않음 |
+| 국문 | "최종 수정", "사이트 소스", "맨 위로" (용어집 등록 → 5.7) |
+| 위치 | 홈과 404의 마지막 카드 아래. 케이스 스터디 적용 여부는 4.5에서 정함 |
+
+**반응형**: ≤560에서 세로 1열(`flex-direction: column`).
+**접근성**: 시안은 `footer`가 `<main>` 안에 있어 contentinfo 랜드마크가 되지 않는다. [제안] `<main>` 바로 뒤(본문 열 안)로 옮긴다. "Back to top"은 `#main`으로 이동하므로 `<main id="main" tabindex="-1">`로 포커스도 옮긴다. `↑`는 장식이라 `aria-hidden` span으로.
+**모션**: hover 색만.
+**콘텐츠 출처**: 이름 = `profile`, 저장소 주소·문구 = `src/i18n`/사이트 설정, 날짜 = 빌드.
+
+### 5.6 Buttons & links
+
+**링크**
+
+| 종류 | 클래스 (시안) | 토큰 | hover |
+|---|---|---|---|
+| 본문 외부 링크 | `.ext` | 글자 상속, 밑줄 `--line-strong`, `--underline-offset`, 뒤에 외부 아이콘 `--icon-xs`(왼쪽 `--sp-1`, `vertical-align: -1px`, `--icon-stroke-sm`) | 글자·밑줄 `--accent` |
+| 메타 링크 (DOI 등) | `.it .mt a` | `--accent`, `--font-meta`, 밑줄 투명, `overflow-wrap: anywhere` | 밑줄 `currentColor` |
+| 사이드바 기록 링크 | 5.1 | `--text`, 밑줄 `--line-strong` | `--accent` |
+| 머리 링크 (GitHub 주소) | `.pp-head-link` | `--font-meta`, `--fs-xs`, `--text-3`, 밑줄 `--line-strong` | `--accent` |
+| 이메일 강조 | `.mail` | `--fs-lg`, `--fw-medium`, `--accent`, 밑줄 `--line-strong`, `--underline-offset`(시안 4px → 3px 확정) | 밑줄 `--accent` |
+| 아이콘 + 글자 링크 | `.links a`, 모바일 `.contact a` | 아이콘 `--icon`, 간격 `--sp-2`, `--fs-sm`, `--text-2`, 밑줄 없음 | `--accent` |
+| 글자 버튼 | `.linkish` (Clear filters) | `<button>`, `--fs-sm`, `--accent`, 밑줄, `--underline-offset` | — |
+| 푸터 링크 | 5.5 | | |
+
+- 외부 링크는 모두 `rel="noopener"`, 같은 탭 (시안에 `target` 없음).
+
+**버튼·칩**
+
+| 종류 | 클래스 | 크기 | 토큰 | hover | 사용처 |
+|---|---|---|---|---|---|
+| 아이콘 버튼 | `.icon-btn` | `--ctl-h-lg` 정사각 (시안 34px → 36px 확정) | 테두리 1px `--line`, `--radius-pill`, 바탕 `--surface`, 아이콘 `--icon` `--icon-stroke`, `--text-2` | 아이콘 `--accent`, 테두리 `--line-strong` | 테마, 메뉴, 시트 닫기, 모바일 언어 |
+| 칩 링크 | `.chip-lnk` | 최소 높이 `--ctl-h` (시안 30px → 32px) | 패딩 0 `--sp-3`, 테두리 1px `--line`, `--radius-pill`, `--font-meta` `--fs-xs` `--text-2`, 아이콘 `--icon-sm`(시안 13px → 14px) `--icon-stroke-sm`, 간격 `--sp-1h` | 글자·테두리 `--accent` | 개인 프로젝트 저장소·데모 |
+| 펼침 버튼 | `.toggle-all` | 패딩 6px 14px(컴포넌트 값) | `--fs-sm` `--fw-medium` `--text-2`, 바탕 없음, 테두리 1px `--line`, `--radius-pill`, 위 여백 `--sp-4` | 글자 `--accent`, 테두리 `--line-strong` | 전체 프로젝트·개인 프로젝트 "모두 보기" (5.9) |
+| 복사 버튼 | `.copy` | 5.8 | | | Contact |
+| 404 버튼 (보조) | `.btn` | 최소 높이 `--ctl-h-lg` | 패딩 0 `--sp-4`, 테두리 1px `--line`, `--radius-pill`, `--fs-sm` `--fw-medium` `--text-2`, 아이콘 `--icon-sm`, 간격 `--sp-1h` | 글자 `--accent`, 테두리 `--line-strong` | 404 "한국어 홈 / English home" |
+| 404 버튼 (주) | `.btn.pri` | 같음 | 바탕 `--accent-soft`, 테두리 투명, 글자 `--accent`, 뒤에 화살표 아이콘 | (같은 규칙) | 404 "Go to home / 홈으로" |
+
+**상태 공통**
+
+| 상태 | 처리 |
+|---|---|
+| focus-visible | 전역 링 (`--focus-w`, `--focus-offset`, `--radius-xs`) |
+| active | 시안에 별도 스타일 없음. 추가하지 않는다 |
+| disabled | 사이드바 CV 자리만 (`aria-disabled`, 5.1). 그 밖의 버튼은 비활성 상태 대신 숨김(`hidden`) |
+
+- `.toggle-all` 패딩 6px 14px는 `--ctl-h`와 높이가 맞지 않는다. [제안] 구현 시 `min-height: var(--ctl-h); padding: 0 var(--sp-4)`로 맞추면 컨트롤 높이 단계에 들어간다. 시각 차이가 2px 안팎이라 확인만 받는다.
+
+**반응형**: ≤560에서 칩 링크는 행 아래 가로로 줄바꿈 배치(해당 콘텐츠 컴포넌트). 버튼 크기는 바뀌지 않는다.
+**접근성**: 아이콘 버튼은 `aria-label` 필수. 칩 링크는 같은 문구("Repository")가 여러 번 나오므로 `<span class="sr-only">: {프로젝트 이름}</span>`을 붙인다. 404 보조 버튼에 그 언어의 `lang`. 모든 컨트롤 24px 이상.
+**모션**: 색·테두리 `--dur`. `.btn`·`.chip-lnk` 화살표 이동 없음.
+
+### 5.7 Tags & badges
+
+| 종류 | 클래스 | 문구 (영/국) | 토큰 | 사용처 |
+|---|---|---|---|---|
+| 도메인 태그 | `.tag` | 콘텐츠 값 (예: Manufacturing) | `--fs-xs`, 패딩 `--sp-0` `--sp-2`, `--radius-pill`, 바탕 `--chip`, `--text-2`, 행간 1.6 | 대표작 태그 첫 칸 |
+| 역량 태그 | `.tag.k` | 콘텐츠 값 (예: LLM Agents) | 바탕 `--accent-soft`, 글자 `--accent` | 대표작 태그 둘째 칸부터 |
+| 태그 목록 | `.tags` | — | `<ul>`, `flex-wrap`, 간격 `--sp-1h` | |
+| 총괄 배지 | `.badge` | Lead / 총괄 | `--font-meta`, `--fs-2xs`, `--fw-medium`, 패딩 0 `--sp-1h`, 테두리 1px `--line-strong`, `--radius-xs`, `--text-2` | 전체 프로젝트 원장 제목 뒤 |
+| 대표 배지 | `.badge.f` | Selected / 대표 | 테두리·글자 `--accent` | 원장의 대표작 행 |
+| 진행 배지 | `.badge.live` | In progress / 진행 중 | 테두리·글자 `--accent`, 왼쪽 `--sp-2` | 케이스 스터디 Outcome 제목 (진행 중 건) |
+| 자리 표시 배지 | `.badge` | Placeholder / 자리 표시 | 글자 `--text-3` | 사이드바 CV 자리 |
+| 진행 상태 (점) | `.status` | In progress / 진행 중 | `--fs-xs` `--fw-medium` `--accent`, 앞 점 `--dot` `--accent` + 후광 `0 0 0 var(--halo) var(--accent-soft)`, 간격 `--sp-1h` | 대표작 메타 (현재·예정 건) |
+| 상태 점 | `.st` | 아래 표 | 앞 점 `--dot`, 테두리 1px `--text-3`, 간격 5px(정렬 보정값) | 개인 프로젝트, 특허·SW |
+| 선택 표시 | `.sel-mark` | Selected / 대표 | `--font-meta` `--fs-2xs` `--ls-eyebrow` 대문자 `--accent`. 국문 `--font-ko` `--fs-xs` 자간 0 | IP 보고서 대표 건 |
+
+**상태 점 (`.st`)**
+
+| 변형 | 점 | 글자 | 의미 |
+|---|---|---|---|
+| `.st.reg` | 채움 `--accent` | `--text-2` | Active / 운영 중, Registered / 등록 |
+| `.st` | 빈 원 (실선 `--text-3`) | `--text-3` | Filed / 출원, In progress / 진행 중(개인), Archived / 보관 |
+| `.st.pen` | 빈 원 (점선) | `--text-3` | Filing in progress / 출원 진행 중, Pending / 등록 진행 중 |
+
+- 국문 배지·라벨은 3장 규칙대로 한 단계 크게(`--fs-2xs` → `--fs-xs`) 하고 대문자·자간을 끈다.
+- "Selected / 대표"가 원장(`.badge.f`, 테두리 배지)과 IP 보고서(`.sel-mark`, 글자만) 두 모양으로 나뉜다. 시안 그대로 두되 하나로 합칠지는 사용자 확인.
+- CV의 "Planned" 배지는 "In progress / 진행 중"으로 맞춘다 (decision-log 3.3).
+
+**상태**: 태그·배지는 상호작용 없음(hover·focus 없음).
+**반응형**: 태그 목록은 줄바꿈. 배지는 제목 줄 끝에 붙어 함께 줄바꿈.
+**접근성**: 상태는 점 색만이 아니라 항상 글자로 표시 (색만으로 정보 전달 금지). 점은 `::before` 장식. 태그 목록은 `<ul>`.
+**모션**: 없음.
+**콘텐츠 출처**: 도메인·역량·Lead·featured·status = `src/content/projects`·`personal`·`patents`. 배지 문구 = `src/i18n` (용어집: Lead → 총괄).
+
+### 5.8 Copy button (이메일 복사)
+
+```html
+<div class="mail-row">
+  <a class="mail" href="mailto:sguys99@naver.com">sguys99@naver.com</a>
+  <button type="button" class="copy" aria-label="Copy email address: sguys99@naver.com">
+    <svg class="i-copy" aria-hidden="true">…</svg><svg class="i-ok" aria-hidden="true">…</svg><span class="copy-l">Copy</span>
+  </button>
+</div>
+<span class="sr-only" aria-live="polite" id="copy-status"></span>
+```
+
+| 요소 | 속성 → 토큰 |
+|---|---|
+| `.copy` | 최소 높이 `--ctl-h`, 패딩 `--sp-1` `--sp-3`, 테두리 1px `--line`, `--radius-pill`, 바탕 `--surface`, `--fs-xs` `--fw-medium` `--text-2`, 아이콘 `--icon-sm` `--icon-stroke-sm`, 간격 `--sp-1h` |
+| `.mail-row` | `flex-wrap`, 간격 `--sp-2` `--sp-3` |
+
+| 상태 | 처리 |
+|---|---|
+| 기본 | 복사 아이콘 + "Copy / 복사" |
+| hover | 글자 `--accent`, 테두리 `--line-strong` |
+| focus-visible | 전역 링 |
+| 복사됨 (`data-state="ok"`) | 체크 아이콘 + "Copied / 복사됨", 글자·테두리 `--accent`. 라이브 영역에 "Email address copied / 이메일 주소를 복사했습니다". 1800ms(컴포넌트 값, 모션이 아닌 표시 시간) 뒤 기본으로 |
+| 연속 클릭 | 타이머를 다시 시작 |
+
+- 복사: `navigator.clipboard.writeText`, 실패하거나 없으면 임시 `textarea` + `execCommand('copy')` 후 버튼으로 포커스 복귀.
+- JS 없음: 버튼을 숨기고 `mailto` 링크만 남긴다. [제안] 시안은 JS 없을 때도 버튼이 보임.
+- 접근성: `aria-label`에 보이는 글자 "Copy"가 포함(이름-라벨 일치). 결과는 라이브 영역으로 알림. `.sr-only`는 위치 기준 요소를 갖게 고친다 (decision-log, 5.1 전역 스타일).
+- 모션: 색·테두리 `--dur`. 아이콘 교체는 즉시.
+- 콘텐츠 출처: 이메일 = `profile`, 문구 = `src/i18n`.
+
+### 5.9 Disclosure (접힘 공통 동작)
+
+시안에는 접힘이 두 종류 있다. 목적에 따라 구분해 쓴다.
+
+| 종류 | 마크업 | 쓰는 곳 | 고른 이유 |
+|---|---|---|---|
+| A. 서랍 | 네이티브 `<details><summary>` | IP & Publications 유형별 서랍 | 전체가 접히고 펼쳐지는 단순 구조. JS 없이 동작, Enter/Space, 펼침 상태 낭독이 기본 제공 |
+| B. 일부 보기 | `<button class="toggle-all" aria-expanded aria-controls>` + 목록 행 `hidden` | 전체 프로젝트 원장, 개인 프로젝트 | 앞의 N행은 늘 보이고 나머지만 접힘 + 필터와 연동. `<details>`로는 일부 노출이 안 됨 |
+
+**A. 서랍 (`details`)**
+
+| 항목 | 규칙 |
+|---|---|
+| summary | `list-style: none`, `::-webkit-details-marker { display: none }`, `cursor: pointer`, `--text-2` |
+| chev 아이콘 | `--icon-sm`, `--icon-stroke-sm`, 기본 `--text-3`, 열림 시 `rotate(180deg)` |
+| hover | summary 글자 `--text`, chev `--accent` |
+| open | chev `--accent` + 회전 |
+| focus-visible | 링을 안쪽으로 `outline-offset: calc(-1 * var(--focus-offset))` |
+| 앵커 | `scroll-margin-top: calc(var(--header-h) + var(--sp-5))` |
+| JS 없음 | 그대로 동작 (모두 닫힌 상태로 시작) |
+
+**B. 일부 보기 (버튼)**
+
+| 항목 | 규칙 |
+|---|---|
+| 문구 | 닫힘 "Show all (N) / 모두 보기 (N)", 열림 "Show less / 접기" |
+| 상태 | `aria-expanded` true/false, `aria-controls` = 목록 id. 숨긴 행은 `hidden` 속성 |
+| 모양 | `.toggle-all` (5.6) |
+| 버튼 숨김 | 보일 행이 N 이하이면 `hidden` |
+| 필터와 함께 | 필터를 바꾸면 접힘으로 되돌린다(개인 프로젝트). 결과 건수는 `role="status"` 줄로 알림 |
+| 포커스 | 버튼은 다시 그리지 않아 포커스 유지. 필터 변경 후에는 바꾼 컨트롤로 포커스 복귀 |
+| JS 없음 | 모든 행을 보이고 버튼은 숨김 |
+
+**반응형**: 두 종류 모두 폭과 관계없이 같은 동작. 서랍 summary 배치(≤560 2줄 격자)는 콘텐츠 명세.
+**모션 (331-c)**: chev 회전 `--dur ease`. 펼침 높이 애니메이션 없음 (331-c에 없음). 섹션 첫 등장 시 서랍 행은 순서 등장 대상(`.drawers > details`).
+
+### 5.10 Select (필터 선택 상자)
+
+```html
+<label class="sel">
+  <span class="sel-k">Domain</span>
+  <select id="pl-d"><option value="">All (24)</option><option value="manufacturing">Manufacturing (9)</option>…</select>
+</label>
+<button type="button" class="linkish" hidden>Clear filters</button>
+```
+
+| 요소 | 속성 → 토큰 |
+|---|---|
+| `.sel` | `inline-flex`, 테두리 1px `--line`, `--radius-pill`, 바탕 `--surface` |
+| `.sel-k` (키) | 왼쪽 패딩 `--sp-3`, `--font-meta` `--fs-2xs` `--ls-eyebrow` 대문자 `--text-3`, `pointer-events: none`. 국문 `--font-ko` `--fs-xs` 자간 0 |
+| `select` | `appearance: none`, `--fs-sm` `--text`, 바탕 없음, 테두리 없음, 최소 높이 `--ctl-h`, 패딩 5px `calc(var(--sp-3) + 14px)` 5px `--sp-2`, 최대 폭 220px(컴포넌트 값), 말줄임 |
+| 화살표 | 배경 그라디언트 두 개로 그린 5px 꺾쇠, 색 `--text-3` (컴포넌트 값). [제안] chev 아이콘(5.12)과 모양이 다르지만 `select` 안이라 시안대로 둔다 |
+| `option` | 글자 `--text`, 바탕 `--surface` (다크에서 OS 목록 색 맞춤, `color-scheme` 함께) |
+
+| 상태 | 처리 |
+|---|---|
+| hover | 테두리 `--line-strong` |
+| focus | `.sel:focus-within` 테두리 `--accent` + 링 `--focus-w` `--focus` `--focus-offset`. `select` 자체 링은 끔 |
+| 값 선택됨 (`.on`) | 테두리 `--accent`, 바탕 `--accent-soft`, 글자 `--accent` |
+| 옵션 disabled | 다른 필터와 조합해 0건이면 `disabled` (건수는 옵션 글자에 `(n)`) |
+| 해제 버튼 | 필터가 하나라도 걸리면 보임(`.linkish`), 누르면 모두 해제 후 첫 선택 상자로 포커스 |
+
+**반응형**: ≤560에서 도구 영역 1열 격자, `.sel` 폭 100%, `select`는 `flex: 1; max-width: none`.
+**접근성**: `label`이 감싸 키 글자가 이름이 된다. 네이티브 `select`라 키보드·낭독 기본 제공. 결과 건수는 `role="status"`. JS 없음: 선택 상자 영역 `hidden`, 모든 행 표시.
+**모션**: 테두리 `--dur`.
+**콘텐츠 출처**: 옵션 = 프로젝트 콘텐츠의 domain·capability 값에서 계산, 라벨 = `src/i18n`.
+
+### 5.11 Logos (경력 회사 로고, 3.2.7 C)
+
+경력 6곳에만 공식 로고를 글자색 단색으로 쓴다. 고객사 로고는 쓰지 않는다. 출처: `docs/design-drafts/g3/327-logos/SOURCES.txt` (구현 파일은 `g4/logos/`와 같음).
+
+| 키 | 파일 (시안) | 배율 `--s` | 형식 |
+|---|---|---|---|
+| genon | `genon.png` | 0.9 | PNG (래스터) |
+| pwc | `pwc.svg` | 1.5 | SVG |
+| makinarocks | `makinarocks.svg` | 0.78 | SVG |
+| semco | `semco-mono.svg` | 1.05 | SVG (흰 글자를 휘도 마스크로 뚫음) |
+| kepco | `kepco-mono.svg` | 0.95 | SVG (흰 선을 휘도 마스크로 뚫음) |
+| posco-enc | `posco-enc.svg` | 1.45 | SVG |
+
+`--s`는 로고마다 그림 여백이 달라 눈으로 맞춘 배율이다. 토큰 파일이 아니라 로고 데이터에 둔다.
+
+**색 처리 (구현 규칙)**
+- 시안은 `<img>` + `filter: var(--logo-filter)`라 다크에서 글자색과 정확히 같지 않다. 구현은 **SVG를 `currentColor`로 정리**한다 (decision-log 3.2): 채움을 모두 `fill="currentColor"`로, 흰 knockout(semco·kepco)은 마스크나 `fill-rule`로 투명하게 유지. 모양은 바꾸지 않는다.
+- 색은 `color: var(--text)`, 농도는 `opacity: var(--logo-op)` / 현재 소속 `var(--logo-op-cur)`. 이렇게 하면 `--logo-filter`는 쓰이지 않는다 → 3장에서 삭제 후보 (사용자 확인).
+- genon은 PNG라 `currentColor`가 안 된다. **미정**: (a) 공식 SVG를 구하거나 (b) PNG를 CSS `mask-image`로 쓰고 `background: currentColor`. 결정 필요.
+- 인라인 SVG로 넣을 때 파일마다 `id`(마스크 등)가 겹치지 않게 접두어를 붙인다.
+
+| 위치 | 높이 | 최대 폭 | 농도 | 대체 텍스트 |
+|---|---|---|---|---|
+| 경력 행 기간 아래 (`.lg-row .logo`) | `calc(var(--logo-h) * var(--s))`, 위 여백 `--sp-3` | `--logo-w` | 기본 `--logo-op`, 현재 소속(`.cur`)·행 hover `--logo-op-cur` | 장식: `alt=""` / `aria-hidden` (행 제목 h3에 회사 이름) |
+| 대표작 메타 (`.proj-meta .logo`) | `calc(var(--logo-h-sm) * var(--s))` | `--logo-w` | 항상 `--logo-op-cur` | 회사 이름 (글자 대신 로고가 이름 역할). SVG면 `role="img"` + `aria-label` |
+
+공통: `object-fit: contain; object-position: left center` 상당(왼쪽 정렬), `display: block`(메타 안에서는 `inline-block`, 간격 `--sp-2`).
+
+**반응형**: ≤560 경력 행에서 기간 칸이 가로 flex(양 끝 정렬, 간격 `--sp-3`, 아래 `--sp-2`)가 되고 로고가 기간 **앞**(`order: -1`), 높이 ×0.85, 위 여백 0.
+**접근성**: 로고 농도 근사 대비 라이트 6.2:1, 다크 6.8:1 (3장). 이름 정보는 항상 글자로도 있다(경력 행).
+**모션**: 농도 `opacity var(--dur) ease`.
+**콘텐츠 출처**: 회사 → 로고 키 대응은 `src/content/experience`(또는 로고 데이터 파일). 로고 파일은 `public/` 또는 컴포넌트 import. SOURCES.txt의 "Not approved for the real site" 문구는 G4 결정(6곳 승인)보다 앞선 것이라 구현 시 갱신한다.
+
+### 5.12 Icons
+
+**세트**: 외부 아이콘 세트·의존성 없음. 시안에 직접 쓴 인라인 SVG(`viewBox="0 0 24 24"`, 선형, `fill: none; stroke: currentColor`). 모양은 Tabler/Lucide 계열과 비슷하지만 path를 직접 쓴 것이다. [제안] 구현은 한 파일(예: `Icon.astro`, 이름 → path)로 모은다.
+
+| 규칙 | 값 |
+|---|---|
+| 크기 | `--icon-xs` 12 / `--icon-sm` 14 / `--icon` 16 / `--icon-lg` 18 |
+| 선 굵기 | `--icon` 이상 `--icon-stroke` (1.5), `--icon-sm` 이하 `--icon-stroke-sm` (1.6) |
+| 색 | `currentColor` (부모 글자색 따라 hover 시 같이 바뀜) |
+| 선 끝 | 시안은 기본값(`butt`). 바꾸지 않는다 |
+| 접근성 | 항상 `aria-hidden="true"`, `focusable="false"`. 아이콘만 있는 버튼은 `aria-label` |
+| `flex: none` | 글자와 나란할 때 줄어들지 않게 |
+
+| 이름 | path 요약 | 크기 | 사용처 |
+|---|---|---|---|
+| mail | 봉투 (`rect` + V선) | `--icon` | 사이드바(모바일)·시트 연락처 |
+| gh | GitHub 고양이 윤곽 | `--icon` / `--icon-sm` | 연락처, Contact 링크 / 저장소 칩 링크 |
+| in | LinkedIn 사각 + in | `--icon` | 연락처, Contact 링크 |
+| arrow | → (`M5 12h14M13 6l6 6-6 6`) | `--icon-lg` / `--icon-sm` / `--icon-xs` | 대표작 행 끝 / 404 주 버튼 / 케이스 "다음" |
+| back | ← | `--icon-sm` / `--icon-xs` | 케이스 이동 경로 / 케이스 "이전" |
+| ext | ↗ (`M7 17 17 7M9 7h8v8`) | `--icon-xs` / `--icon-sm` | 본문 외부 링크 / 데모 칩 링크 |
+| chev | ∨ (`m6 9 6 6 6-6`) | `--icon-sm` | 서랍 (5.9) |
+| copy | 겹친 사각형 | `--icon-sm` | 복사 버튼 |
+| ok | ✓ (`m5 12 5 5L20 7`) | `--icon-sm` | 복사됨 |
+| moon / sun | 달 / 해 | `--icon` | 테마 전환 |
+| menu | 가로줄 2개 (`M4 8h16M4 16h16`) | `--icon` | 모바일 메뉴 버튼 |
+| close | × | `--icon` | 시트 닫기 |
+
+- 시안 값과 다른 확정: `.chip-lnk` 아이콘 13px → `--icon-sm` 14px (3장 정리 이력).
+- 케이스 이동 경로·이전/다음의 배치는 케이스 스터디 명세(후반부)가 정한다. 여기서는 아이콘 크기만.
+
+### 5.13 Section head
+
+홈 카드마다 맨 위에 두는 줄. 왼쪽은 섹션 제목(eyebrow 모양의 h2), 오른쪽은 건수나 보조 링크.
+
+```html
+<div class="sec-head">
+  <h2 id="h-work">Selected Work</h2>
+  <span class="meta num">6 / 20 projects</span>   <!-- 또는 링크(5.20), 없을 수 있음 -->
+</div>
+```
+
+| 요소 | 토큰 / 값 |
+|---|---|
+| `.sec-head` | `display: flex; align-items: baseline; justify-content: space-between; gap: --sp-4; margin-bottom: --sp-5` |
+| `h2` 영문 | `--font-meta`, `--fs-xs`, `--fw-eyebrow`, `--ls-eyebrow`, `text-transform: uppercase`, `--text-3` |
+| `h2` 국문 | `--font-ko`, `--fs-sm`, `--fw-strong`, `--ls-eyebrow-ko`, 대문자 변환 없음 |
+| `.meta` | `--font-meta`, `--fs-xs`, `--text-3`, `tabular-nums` |
+
+| 섹션 | 오른쪽 내용 (콘텐츠에서 계산) | 영문 / 국문 |
+|---|---|---|
+| About, Awards & Education, Contact | 없음 | — |
+| Selected Work | `featured` 건수 / `projects` 전체 건수 | `6 / 20 projects` / `6 / 20 건` |
+| Experience | `experience` 항목 수 | `6 organizations` / `6 곳` |
+| Teaching · Books · Advisory | `teaching.kind`별 건수 (book, teaching, advisory 순) | `Books 2 · Teaching 6 · Advisory 2` |
+| Personal Projects | GitHub 프로필 링크 (5.20) | `github.com/sguys99` |
+| IP & Publications | 특허+프로그램+논문+보고서 합계 | `N records` / `총 N건` |
+
+- 반응형: ≤560px에서 `#ip`는 세로 쌓기(`flex-direction: column; align-items: flex-start; gap: --sp-0`), `#teaching`은 `flex-wrap: wrap; row-gap: --sp-1`. [제안] 두 규칙을 `.sec-head` 공통 규칙(≤560px `flex-wrap: wrap`)으로 합친다. 이유: 국문 건수 문구가 길어지는 섹션이 더 생길 수 있음.
+- 접근성: `h2`에 id를 두고 카드의 `aria-labelledby`가 가리킨다. 섹션 제목 단계는 h2, 카드 안 소제목은 h3, 그 아래는 h4.
+- 모션: 없음 (카드 등장에 포함, 5.14).
+- 문구: 섹션 이름·단위(`organizations`, `records` 등)는 `src/i18n/` (5.7). 숫자만 콘텐츠에서 계산.
+
+### 5.14 Card (section container)
+
+홈 섹션 8개와 404, 케이스 스터디 본문이 쓰는 공통 상자. 카드 안에 카드를 두지 않는다(3.2.1 결정). 안쪽 구분은 헤어라인으로만 한다.
+
+```html
+<section class="card" id="work" aria-labelledby="h-work">
+  <div class="sec-head">…</div>
+  …
+</section>
+```
+
+| 속성 | 값 |
+|---|---|
+| 바탕 / 테두리 / 모서리 | `--surface` / `1px solid --line` / `--radius` |
+| 안쪽 여백 | `--sp-6` (≤860px: `--sp-5 --sp-4`) |
+| 카드 사이 | `margin-bottom: --sp-5` (≤860px: `--sp-4`) |
+| 앵커 위치 | `scroll-margin-top: calc(--header-h + --sp-5)` |
+| 안쪽 구분선 | 목록 머리 `--line-strong`, 행 사이 `--line` |
+
+**섹션 순서와 앵커** (3.3 결정): `#about` → `#work` → `#experience` → `#teaching` → `#awards` → `#personal` → `#ip` → `#contact`. 상단 메뉴 탭과의 대응은 5.2 참조.
+
+**모션 (331-c)**
+
+| 상태 | 규칙 |
+|---|---|
+| 첫 화면에 걸린 카드, JS 없음 | 완성 상태 그대로. 숨기지 않는다 |
+| 첫 화면 아래 카드 | JS가 `m-wait` 부여 → `opacity: 0; transform: translateY(--m-rise)` |
+| 화면에 들어옴 (`IntersectionObserver`, `rootMargin: 0px 0px -8% 0px`) | `m-in` 추가 → `--m-reveal` `--ease-out`로 fade/rise, 관찰 해제(1회) |
+| 안쪽 행 | 각 컴포넌트의 "대상 행"이 `--m-row`로 순서 등장. 지연 `calc(--m-reveal / 3 + --i × --m-stagger)`, `--i`는 `:nth-child`로 0~7 (8번째부터 7) |
+| 앵커·탭 이동으로 들어온 카드 | 등장 효과 없이 바로 완성 상태 (decision-log 3.3). [제안] 이동 대상 카드와 그 위의 `m-wait` 카드를 함께 `m-wait` 해제한다. 이유: 부드러운 스크롤이 지나가는 카드가 이동 직후 비어 보이는 문제가 같은 원인 |
+| 인쇄 | `opacity: 1; transform: none` 강제 |
+| `prefers-reduced-motion: reduce` | `m-wait`를 붙이지 않는다 |
+
+대상 행 선택자(331-c): `.work > li`, `.lg > .lg-row`, `.pidx > li`, `.ledger > li`, `.drawers > details`, `.figs > .fig`, `.skills > div`, `.ct > *`. 구현에서 클래스 이름이 바뀌면 이 목록도 같이 바꾼다.
+
+### 5.15 Hero / About intro
+
+About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 궤적(5.16), 숫자 표(5.17), 역량 표가 이어진다. 이름·직함은 사이드바(5.1)에 있고 About 카드는 반복하지 않는다.
+
+```html
+<section class="card" id="about" aria-labelledby="h-about">
+  <div class="sec-head"><h2 id="h-about">About</h2></div>
+  <p class="tagline">Building industrial AI, from control rooms to humanoid robots.</p>
+  <p class="about">…</p>
+  <ol class="traj">…</ol>      <!-- 5.16 -->
+  <dl class="figs">…</dl>      <!-- 5.17 -->
+  <dl class="skills">…</dl>
+</section>
+```
+
+| 요소 | 토큰 / 값 | 콘텐츠 |
+|---|---|---|
+| `.tagline` | `--font-display`, `--fs-2xl` (≤860px `--fs-xl`), `--fw-tagline`/`-ko`, `--lh-tagline`/`-ko`, `--ls-tagline`/`-ko`, `max-width: 30ch` (국문 24ch), `text-wrap: balance`, `margin: 0 0 --sp-4` | `profile.taglines[0]` |
+| `.about` | `--text-2`, 본문 크기, `max-width: --measure` | `profile.about` |
+| `.skills` | `margin-top: --sp-6` (숫자 표 바로 뒤면 `--sp-5`), 위 `--line` | `profile.skills[].label`, `.summary` |
+| `.skills > div` | `grid: 180px minmax(0,1fr)`, `gap: --sp-4`, `padding: --sp-3 0`, 아래 `--line` (마지막 행 없음) | — |
+| `.skills dt` / `dd` | `--fs-sm` `--fw-strong` / `--fs-sm` `--text-2` | — |
+
+- 반응형: ≤560px에서 `.skills > div`는 1열, `gap: --sp-0`.
+- 접근성: 한 줄 소개는 `p` (페이지 h1은 사이드바 이름). 영문 페이지에 국문이 섞이지 않는다.
+- 모션: 한 줄 소개·문단은 첫 화면이라 등장 효과 없음. `.skills > div`는 대상 행이지만 About이 첫 화면에 있으면 실제로 재생되지 않는다.
+- 남은 일: 한 줄 소개와 About 첫 문장의 단어 중복 → 1.2.11.
+
+### 5.16 Career trajectory
+
+4단계 가로 타임라인(G1 기준안 유지, 3.1.5). 점 + 선, 현재 단계(마지막)만 채운 점과 포인트 색.
+
+```html
+<ol class="traj">
+  <li><span class="yrs num">2008 – 2015</span><h3>Control & Automation</h3><p>…</p></li>
+  … (4개, 마지막이 현재)
+</ol>
+```
+
+| 요소 | 값 |
+|---|---|
+| `.traj` | `grid-template-columns: repeat(4, minmax(0,1fr))`, `gap: --sp-4`, `margin-top: --sp-6` |
+| `li` | `position: relative; padding-top: --sp-5` |
+| 선 `li::before` | `top: 4px` (점 중심), `left: 0; right: calc(-1 * --sp-4)` (다음 칸까지 이어짐), `height: 1px`, `--line-strong` |
+| 마지막 구간 | `right: 0`, `linear-gradient(to right, --accent, transparent)` — **사용자 승인된 그라디언트 예외** (원칙의 "그라디언트 금지"에서 이 한 곳만 제외). 현재 단계가 계속된다는 뜻 |
+| 점 `li::after` | `--dot-lg` 정사각, `--radius-pill`, 바탕 `--surface`, `1px solid --line-strong` |
+| 현재 점 | 바탕·테두리 `--accent`, `box-shadow: 0 0 0 --halo-lg --accent-soft` |
+| `.yrs` | `--font-meta`, `--fs-xs`, `--text-3` |
+| `h3` | `--fs-md`, `--fw-strong`, `--lh-title`, `margin: --sp-0 0 --sp-1`. 현재 단계는 `--accent` |
+| `p` | `--fs-sm`, `--text-2`, 행간 1.55 |
+
+| 폭 | 배치 |
+|---|---|
+| ≥1101px | 4열 |
+| ≤1100px | 2열, `row-gap: --sp-5`. 2번째 칸 선은 `right: 0` (줄 끝에서 끊김) |
+| ≤560px | 1열 세로. `margin-left: --sp-1`, `li { padding: 0 0 --sp-4 --sp-5 }`. 선은 세로(`left: 4px; top: 4px; bottom: 0; width: 1px`), 마지막 칸 선(그라디언트)은 숨김 |
+
+- 상태: 현재 단계는 위치(마지막 항목)로 정한다. 콘텐츠에 현재 표시 필드는 없다(`trajectory`는 정확히 4개, `.length(4)`).
+- 접근성: 순서 있는 목록 `ol`. 선·점은 의사 요소라 읽히지 않는다. 현재 단계를 색만으로 표시하므로 [제안] 마지막 `li`에 `aria-current="step"`을 둔다. 이유: 색 외의 수단으로 현재를 알림.
+- 모션 (331-c): 로드 시 1회 선 그리기. 구간 `i`(0~3)마다 `animation-delay: i × --m-draw-seg`, 선은 `scaleX(0)→1` (`transform-origin: left`), 점은 같은 시점에 `scale(0.4)`·투명 → 1. ≤560px는 `scaleY` (`transform-origin: top`). 글자는 숨기지 않는다. `--i`는 `:nth-child`로 주므로 JS가 따로 넣을 필요 없음. 시안은 다시 그리기를 막으려고 4000ms 뒤 `m-draw` 클래스를 지운다 → [제안] 마지막 점의 `animationend`에서 지운다. 이유: 시안 밖 시간값을 두지 않음.
+- 콘텐츠: `profile.trajectory[]` → `years`(`.yrs`), `label`(`h3`), `description`(`p`).
+
+### 5.17 Stats table
+
+궤적 아래 4칸 숫자 표 (3.2.8 A). 모든 숫자는 빌드 시 콘텐츠에서 센다. 손으로 쓰지 않는다. 연수(경력 년수)는 싣지 않는다.
+
+```html
+<dl class="figs" aria-label="At a glance">
+  <div class="fig">
+    <dt>Projects</dt>
+    <dd class="n"><span aria-hidden="true">20</span><span class="sr-only">20</span></dd>
+    <dd class="s">6 featured</dd>
+  </div> … (4칸)
+</dl>
+```
+
+| 칸 | 큰 숫자 | 보조줄 영문 / 국문 | 출처 |
+|---|---|---|---|
+| Projects / 프로젝트 | `projects` 전체 | `6 featured` / `대표 6건` | `projects.featured` |
+| Patents / 특허 | `patents` 전체 | `7 registered · 8 filed` / `등록 7 · 출원 8` | `patents.status` (`filed`는 전체 − `registered`) |
+| Software / 프로그램 등록 | `software` 전체 | `8 registered · 2 pending` / `등록 8 · 진행 중 2` | `software.status` |
+| Books / 저서 | `teaching` 중 `kind: book` | 없음 | `teaching.kind` |
+
+(예시 숫자는 현재 콘텐츠 기준이며 빌드마다 다시 센다.)
+
+| 요소 | 값 |
+|---|---|
+| `.figs` | `grid: repeat(4, minmax(0,1fr))`, `margin-top: --sp-6`, 위 `--line` |
+| `.fig` | 세로 flex, `padding: --sp-4 --sp-4 0`, 왼쪽 `--line` (첫 칸은 선·왼쪽 여백 없음). 시각 순서: 숫자(`order: 1`) → 이름(2) → 보조줄(3) |
+| `.n` | `--font-display`, `--fs-2xl` (≤560px `--fs-xl`), `--fw-medium`, `--text`, 행간 1.1, `--ls-name`, `tabular-nums` |
+| `dt` | `--fs-sm`, `--fw-medium`, `--text-2` |
+| `.s` | `--font-meta` `--fs-2xs` `--text-3`, `margin-top: --sp-0` (국문 `--font-ko` `--fs-xs`) |
+
+- 반응형: ≤560px 2열. 홀수 칸 왼쪽 선 없음, 3·4번째 칸은 위 `--line` + `margin-top: --sp-4`.
+- 접근성: `dl`의 `dt`가 이름, 첫 `dd`가 값. DOM 순서는 이름 → 값이고 화면 순서만 `order`로 바꾼다. **카운트업 중에는 움직이는 숫자를 `aria-hidden`으로 두고 최종값을 읽게 한다** (decision-log 3.3): 보이는 숫자 `span`은 늘 `aria-hidden="true"`, 최종값은 `.sr-only` `span`. JS가 없으면 보이는 숫자도 최종값으로 렌더된다.
+- 모션 (331-c): 처음 화면에 보일 때 1회, `--m-count` 동안 0 → 최종값, ease-out cubic `1-(1-p)^3`, 정수 반올림. `.figs > .fig`는 대상 행이라 카드가 아래에 있으면 순서 등장과 겹친다. `prefers-reduced-motion: reduce`면 카운트업 없이 최종값.
+- 문구: 칸 이름, `featured`·`registered`·`filed`·`pending` 단어는 `src/i18n/`.
+
+### 5.18 Selected work list
+
+대표작 번호 목록 (3.2.1 A). 01–06 한 열, 가는 선 구분, 안쪽 상자 없음.
+
+```html
+<ol class="work">
+  <li class="proj">
+    <span class="idx num" aria-hidden="true">01</span>
+    <div class="body">
+      <p class="proj-meta"><span class="org">[logo] <span>· Samsung Electronics</span></span>
+        <span class="num">Feb 2025 – Aug 2025</span> [<span class="status">In progress</span>]</p>
+      <h3><a href="/work/samsung-scm-agent/">…</a></h3>   <!-- 케이스 없으면 링크 없이 텍스트 -->
+      <p class="sum">…</p>
+      <p class="out"><span class="k">Outcome</span>…</p>   <!-- 완료 건만 -->
+      <ul class="tags">…</ul>
+    </div>
+    <span class="go" aria-hidden="true">[arrow]</span>       <!-- 케이스 있는 건만 -->
+  </li>
+</ol>
+```
+
+| 요소 | 값 |
+|---|---|
+| `.proj` | `grid: --col-idx minmax(0,1fr) 24px`, `gap: 0 --sp-4`, `padding: --sp-5 0`, 위 `--line`. 첫 행: 선 없음, `padding-top: --sp-1`. 마지막 행 `padding-bottom: 0` |
+| `.idx` | `--font-meta`, `--fs-sm`, `--text-3`, `padding-top: --sp-0` |
+| `.body` | `grid; gap: --sp-1h; min-width: 0` |
+| `.proj-meta` | flex wrap, `gap: --sp-1 --sp-3`, `--fs-xs`, `--text-3`. `.org`는 `--text-2` `--fw-medium`, 인라인 flex `gap: --sp-2` |
+| 상태 `.status` | "In progress" + `--dot` 점(`--accent`, 후광 `--halo`). 5.7 참조 |
+| `h3` | `--font-display`, `--fs-lg`, `--fw-title`, `--lh-title`, `--ls-title`/`-ko` |
+| `.sum` | `--fs-sm`, `--text-2`, `max-width: --measure-sm` |
+| `.out` | `--fs-sm`, `--text`, `--measure-sm`. `.k`: `--font-meta` `--fs-2xs` 대문자 `--ls-eyebrow` `--text-3`, `margin-right: --sp-2` (국문 `--font-ko` `--fs-xs`, 자간 0) |
+| `.tags` | `margin-top: --sp-1`. Domain 태그 1개 + Capability 태그(포인트 바탕) → 5.7 |
+| `.go` | 화살표 `--icon-lg`, `--text-3`, `padding-top: --sp-1` |
+
+| 상태 | 표현 (케이스 스터디가 있는 행만) |
+|---|---|
+| 기본 | 위 표 |
+| hover (`(hover: hover)`) | 행 바탕 `--row-tint` + 좌우 `box-shadow: ±--sp-3 0 0 --row-tint`로 바탕을 행 밖으로 넓힘, `h3`·`.idx`·`.go` `--accent`, `.go` `translateX(3px)`. 전환 `--dur` |
+| focus | 링크는 `h3 a::after`가 행 전체를 덮는다(`position: absolute; inset: 0 calc(-1 * --sp-2)`, `--radius-sm`). 포커스 링은 `::after`에 `--focus-w solid --focus` |
+| 케이스 없음 | 링크·화살표·hover 없음. 제목은 텍스트 (현재 그린소재 재고 조합 최적화 1건) |
+
+- 콘텐츠: `projects` 중 `featured: true`, `order` 오름차순.
+
+| 화면 요소 | 필드 |
+|---|---|
+| 번호 | 정렬 순번 (01부터) |
+| 소속 | `org` — 경력 6곳이면 로고(alt = 회사 이름, 5.11), 아니면 텍스트 |
+| 고객 | `client.public ? client.name : client.label` (실명은 승인된 2곳만, 스키마가 막음) |
+| 기간 | `period` (`start – end`, `status: present`면 "Present") |
+| 진행 중 | `period.status`가 `present` 또는 `planned`면 `.status` "In progress / 진행 중"을 붙이고 성과 줄은 뺀다 |
+| 제목 / 요약 | `title` / `summary` |
+| 성과 첫 줄 | 완료 건의 `caseStudy.outcome[0]`. `caseStudy`가 없으면 줄 없음 |
+| 태그 | `domain`, `capability[]` (국문 표기는 `src/i18n/`, 5.7) |
+| 링크 | `caseStudy`가 있으면 `/work/<slug>/` (국문 `/ko/work/<slug>/`) |
+
+- 반응형: ≤560px `grid: --col-idx-sm minmax(0,1fr)`, `.idx` `--fs-xs` `padding-top: 3px`, `.go` 숨김.
+- 접근성: 번호는 `aria-hidden` (`ol`이 순서를 전달). 행 전체가 클릭 영역이지만 링크는 제목 하나뿐(탭 정지 1회). 로고는 `img alt`로 회사 이름을 읽는다.
+- 모션: 대상 행 `.work > li`.
+
+### 5.19 Project ledger + filters
+
+대표작 아래, 같은 Selected Work 카드 안에 이어지는 전체 프로젝트 원장 (3.2.2 B). 한 줄 원장 + Domain·Capability 선택 상자 2개 + "모두 보기" 접힘.
+
+```html
+<div class="pl">
+  <div class="pl-head">
+    <h3 class="pl-title" id="pl-title">All Projects <span class="num">20</span></h3>
+    <div class="pl-tools" hidden>   <!-- JS가 hidden 해제 -->
+      <label class="sel">…Domain…<select id="pl-d"></select></label>      <!-- 5.10 -->
+      <label class="sel">…Capability…<select id="pl-c"></select></label>
+      <button type="button" class="linkish" hidden>Clear filters</button>
+    </div>
+  </div>
+  <p class="pl-status" role="status"></p>
+  <ol class="ledger" aria-labelledby="pl-title">
+    <li class="pl-row">
+      <span class="pl-y num">2024–2025</span>
+      <div><p class="pl-t">… <span class="badge">Lead</span> <span class="badge f">Selected</span></p>
+           <p class="pl-who">PwC Consulting · LOTTE Fine Chemical</p></div>
+      <p class="pl-cap"><b>Petrochemical & Steel</b>Forecasting · …</p>
+    </li>
+  </ol>
+  <p class="pl-none" hidden>No projects match these filters.</p>
+  <button type="button" class="toggle-all" aria-controls="…" aria-expanded="false" hidden>Show all (20)</button>
+</div>
+```
+
+| 요소 | 값 |
+|---|---|
+| `.pl` | `margin-top: --sp-6; padding-top: --sp-5`, 위 `--line-strong` |
+| `.pl-head` | flex wrap, `space-between`, `gap: --sp-3 --sp-4`, `margin-bottom: --sp-3` |
+| `.pl-title` | `--fs-md` `--fw-strong`. 건수 `.num`: `--font-meta` `--fs-xs` `--fw-regular` `--text-3`, `margin-left: --sp-1` |
+| `.pl-tools` | flex wrap, `gap: --sp-2 --sp-3` |
+| `.pl-status` | `--font-meta` `--fs-xs` `--text-3`, `margin: 0 0 --sp-2`, 비면 숨김 |
+| `.ledger` | 위 `--line` |
+| `.pl-row` | `grid: --col-year-wide minmax(0,1fr) auto`, `gap: --sp-1 --sp-4`, `padding: --sp-3 0`, 아래 `--line` |
+| `.pl-y` | `--font-meta` `--fs-xs` `--text-3`, `padding-top: --sp-0`, 줄바꿈 없음 |
+| `.pl-t` | `--fs-sm` `--fw-medium` `--lh-row`. 배지는 5.7 (`.badge.f`는 테두리·글자 `--accent`) |
+| `.pl-who` | `--fs-xs` `--text-3`, `margin-top: --sp-0` |
+| `.pl-cap` | 오른쪽 정렬, `--font-meta` `--fs-2xs` `--text-3`, `padding-top: 3px`. `b`(Domain)는 블록, `--fw-medium` `--text-2` (국문 `--font-ko` `--fs-xs`) |
+| `.pl-none` | `--fs-sm` `--text-2`, `margin-top: --sp-3` |
+| `.linkish` (필터 해제) | 글자 버튼 `--fs-sm` `--accent`, 밑줄 `--underline-offset` → 5.6 |
+| `.toggle-all` | → 5.6. `margin-top: --sp-4` |
+
+**동작과 상태**
+
+| 상태 | 규칙 |
+|---|---|
+| JS 없음 | 전체 행을 그대로 보인다. 선택 상자·필터 해제·상태 줄·모두 보기 버튼은 숨김. 빌드 HTML에 모든 행이 들어 있어야 한다 |
+| JS 기본 | 처음 6행만 보이고 나머지는 `hidden`. 모두 보기 버튼에 전체 건수 `Show all (20)` |
+| 펼침 | 모두 보이고 버튼은 `Show less / 접기`, `aria-expanded="true"` |
+| 필터 선택 | 하나라도 고르면 접힘을 무시하고 맞는 행을 모두 보인다. 모두 보기 버튼 숨김, 필터 해제 버튼 표시, 고른 선택 상자는 `.on` (5.10) |
+| 선택 항목 | 첫 항목 `All domains (N)` / `All capabilities (N)`. 각 항목 뒤 건수는 **다른 선택 상자의 현재 값과 겹친 건수**. 0건 항목은 `disabled` |
+| 상태 줄 | `Showing n of 20 projects` / `전체 20건 중 n건 표시` (`role="status"`로 읽힘) |
+| 빈 결과 | `.pl-none` "No projects match these filters. / 조건에 맞는 프로젝트가 없습니다." 0건 항목을 막으므로 실제로는 거의 생기지 않지만 남겨 둔다 |
+| 필터 해제 | 두 값을 비우고 Domain 선택 상자로 포커스 |
+| 포커스 | 필터를 바꿔도 포커스는 그 선택 상자에 남는다. 시안은 목록을 다시 그려 포커스를 되돌리지만, 구현은 행의 `hidden`만 바꾸고 선택 상자는 다시 만들지 않는다 |
+
+- 정렬: `period.start` 내림차순, 같으면 slug 오름차순.
+- 콘텐츠
+
+| 화면 요소 | 필드 |
+|---|---|
+| 연도 | `period.start` 연도 – `end` 연도 (같으면 한 번, `present`면 "Present") |
+| 제목 | `title` |
+| 배지 | `lead: true` → Lead/총괄, `featured: true` → Selected/대표 |
+| 소속 · 고객 | `org` · (`client.name` 또는 `client.label`) |
+| Domain / Capability | `domain` / `capability[]` (선택지 목록은 `content.config.ts`의 `DOMAINS`·`CAPABILITIES` 순서) |
+
+- 반응형: ≤560px `.pl-tools`는 1열 grid로 폭 전체, `.sel` 폭 100%. `.pl-row`는 1열 `gap: --sp-0`, `.pl-cap` 왼쪽 정렬·줄바꿈 허용·`padding-top: --sp-1`, Domain은 인라인 + 뒤에 " · ".
+- 접근성: 선택 상자는 `label`로 감싼 네이티브 `select`. 원장 행은 링크가 아니다(시안 그대로. 대표작은 위 목록에서 링크). 접힌 행은 `hidden`이라 읽히지 않는다.
+- 모션: 대상 행 `.ledger > li`. 필터·펼침에는 모션 없음.
+
+### 5.20 Personal projects index
+
+개인 프로젝트 번호 목록 (3.2.4 B). 고정폭 번호 + 상태 필터 + 오른쪽 저장소·데모 버튼.
+
+```html
+<section class="card" id="personal" aria-labelledby="h-personal">
+  <div class="sec-head"><h2 …>Personal Projects</h2>
+    <a class="pp-head-link" href="https://github.com/sguys99" rel="noopener">github.com/sguys99</a></div>
+  <div class="filters seg" role="group" aria-label="Personal Projects">   <!-- JS 있을 때만 -->
+    <button type="button" aria-pressed="true">All <span class="num">10</span></button> …
+  </div>
+  <ol class="pidx">
+    <li><span class="n num" aria-hidden="true">01</span>
+      <div><div class="ttl"><h3>AI Wiki</h3><span class="st reg">Active</span></div>
+        <p class="sum">…</p><p class="stk">Python / Claude Code / …</p></div>
+      <div class="acts"><a class="chip-lnk" href="…">[gh] Repository<span class="sr-only">: AI Wiki</span></a>
+        <a class="chip-lnk" href="…">[ext] Live demo<span class="sr-only">: AI Wiki</span></a></div>
+    </li>
+  </ol>
+  <button type="button" class="toggle-all" aria-controls="…" aria-expanded="false">Show all (10)</button>
+</section>
+```
+
+| 요소 | 값 |
+|---|---|
+| `.pp-head-link` | `--font-meta` `--fs-xs` `--text-3`, 밑줄 `--line-strong` `--underline-offset`. hover 글자·밑줄 `--accent` |
+| 필터 | 세그먼트 토글 → 5.4와 같은 `.seg` 모양, `margin-bottom: --sp-4`, 버튼 사이 `gap: --sp-2`. 선택은 `aria-pressed="true"` (바탕 `--accent-soft`, 글자 `--accent`) |
+| `.pidx` | 위 `--line-strong` |
+| `li` | `grid: 40px minmax(0,1fr) auto`, `gap: --sp-4`, `padding: --sp-4 0`, 아래 `--line` |
+| `.n` | `--font-meta` `--fs-xs` `--text-3`, `padding-top: 3px` |
+| `.ttl` | flex wrap baseline, `gap: --sp-1 --sp-3` |
+| `h3` | `--fs-md` `--fw-strong` `--lh-row` |
+| 상태 `.st` | `--font-meta` `--fs-xs` `--text-3`, 앞에 `--dot` 빈 점(`1px solid --text-3`). `active`는 점을 `--accent`로 채우고 글자 `--text-2` |
+| `.sum` | `--fs-sm` `--text-2`, `--measure-sm`, `margin-top: --sp-1` |
+| `.stk` | `--font-meta` `--fs-xs` `--text-3`, `margin-top: --sp-2`, " / "로 연결 |
+| `.acts` | 세로 flex, `gap: --sp-2`, 폭 맞춤(`align-items: stretch`), `min-width: 112px` |
+| `.chip-lnk` | `--ctl-h`, `padding: 0 --sp-3`, `1px solid --line`, `--radius-pill`, `--font-meta` `--fs-xs` `--text-2`, 아이콘 `--icon-sm` `--icon-stroke-sm`, `gap: --sp-1h`. hover 글자·테두리 `--accent` (전환 `--dur`) |
+
+**동작과 상태**
+
+| 상태 | 규칙 |
+|---|---|
+| 정렬 | `active` → `in-progress` → `archived`, 같은 상태 안은 콘텐츠 순서 |
+| 필터 | `All` + 건수가 1 이상인 상태만 버튼으로. 버튼 글자에 건수 |
+| 필터 변경 | 접힘을 다시 닫고(처음 5행), 번호는 걸러진 목록 기준으로 01부터 다시 매긴다. 포커스는 누른 버튼에 남는다 |
+| 접힘 | 처음 5행. 넘치면 `Show all (n)` / `Show less`, `aria-expanded` |
+| JS 없음 | 필터·모두 보기 버튼 숨김, 전체 행 표시 |
+| 데모 없음 | 저장소 버튼만 |
+
+| 상태 값 | 영문 / 국문 (시안) |
+|---|---|
+| `active` | Active / 운영 중 |
+| `in-progress` | In progress / 개발 중 |
+| `archived` | Archived / 보관 |
+
+- 콘텐츠: `personal` 컬렉션 → `name`(h3, 언어 공통), `summary`(`.sum`), `stack[]`(`.stk`), `status`, `repo`, `demo?`. 머리 링크는 `profile.contact.github`.
+- 반응형: ≤560px `grid: --col-idx-sm minmax(0,1fr)`, `gap: --sp-1 --sp-3`. `.acts`는 2열째 아래로 내려와 가로 배치(`flex-wrap`), `min-width: 0`, `margin-top: --sp-2`.
+- 접근성: 버튼에 보이는 글자는 짧게 두고 `.sr-only`로 프로젝트 이름을 붙여 링크 이름을 구분한다 (`Repository: AI Wiki`). 필터는 `role="group"` + `aria-label`. 번호는 `aria-hidden`. 외부 링크는 `rel="noopener"`.
+- 모션: 대상 행 `.pidx > li`.
+- 남은 일: 상태 문구와 정렬 순서(콘텐츠에 순서 필드 없음) → 1.5.6. glob 로더의 "콘텐츠 순서"는 파일 이름순이므로, 순서를 정하려면 필드가 필요하다.
+
+### 5.21 Index drawer
+
+특허·프로그램·논문·보고서 색인 서랍 (3.2.5 B). 유형별 한 줄(건수·내역·연도 범위), 열면 연도별 목록. 섹션 이름 IP & Publications / 지식재산 · 출판물, 앵커 `#ip`.
+
+```html
+<div class="drawers">
+  <details class="dr" id="ip-pat">
+    <summary>
+      <span class="dn">Patents</span><span class="dc">15</span>
+      <span class="db">7 registered · 8 filed</span><span class="dy">YYYY–YYYY</span>[chev]
+    </summary>
+    <div class="dbody">
+      <ol class="yg">
+        <li><h4 class="yh">2025</h4>
+          <ol class="ip-list">
+            <li class="it"><div>
+              <span class="tt">English title</span>
+              <span class="og" lang="ko">국문 원제</span>        <!-- 영문 페이지만 -->
+              <p class="au">…<b>K. M. Yu</b>…</p>                 <!-- 논문만 -->
+              <p class="mt"><span class="st reg">Registered</span><span>venue</span><a href="https://doi.org/…">DOI …</a></p>
+            </div></li>
+          </ol></li>
+      </ol>
+    </div>
+  </details> … (pat, sw, paper, report)
+</div>
+```
+
+| 요소 | 값 |
+|---|---|
+| `.drawers` | 위 `--line-strong` |
+| `.dr` | 아래 `--line`, `scroll-margin-top: calc(--header-h + --sp-5)` |
+| `summary` | `grid: minmax(0,1.4fr) 64px minmax(0,2fr) 96px 20px`, `align-items: baseline`, `gap: --sp-4`, `padding: --sp-4 0`, `--text-2`. 기본 표식 제거(`list-style: none`, `::-webkit-details-marker`) |
+| `.dn` 유형 | `--fs-lg` `--fw-strong` `--text`, 자간 -0.01em |
+| `.dc` 건수 | `--font-meta` `--fs-xl` `--fw-medium` `--text`, 오른쪽 정렬, 행간 1 |
+| `.db` 내역 | `--fs-sm` `--text-2` |
+| `.dy` 연도 범위 | `--font-meta` `--fs-xs` `--text-3`, 오른쪽 정렬 |
+| `.chev` | `--icon-sm`, `--icon-stroke-sm`, `--text-3`, `align-self: center` |
+| `.dbody` | `padding: 0 0 --sp-5` |
+| `.yg > li` | `grid: --col-year minmax(0,1fr)`, `gap: --sp-4`, 위 `--line` |
+| `.yh` | `--font-meta` `--fs-xs` `--fw-medium` `--text-3`, `padding-top: calc(--sp-3 + --sp-0)` (국문 `--font-ko`) |
+| `.it` | `padding: --sp-3 0`, 위 `--line` (연도 묶음의 첫 항목은 선 없음) |
+| `.tt` | 블록, `--fs-sm` `--fw-medium` 행간 1.5 `--text` |
+| `.og` | 블록, `margin-top: --sp-0`, `--font-ko` `--fs-xs` 행간 1.55 `--text-3`, `word-break: keep-all` |
+| `.au` | `--fs-xs` `--text-2`, `margin-top: --sp-1`. 본인 이름 `b`는 `--fw-strong` `--text` |
+| `.mt` | flex wrap, `gap: --sp-1 --sp-3`, `--fs-xs` `--text-3`, `margin-top: --sp-1`. DOI 링크 `--accent` `--font-meta`, 밑줄은 hover 때만(`--underline-offset`), `overflow-wrap: anywhere` |
+| 상태 `.st` | `--dot` 점 + 글자. `registered` 채운 점 `--accent`·글자 `--text-2` / `filed` 빈 점 / `filing`·`pending` 점선 빈 점 |
+| `.sel-mark` | 대표 보고서 표시. `--font-meta` `--fs-2xs` 대문자 `--ls-eyebrow` `--accent` (국문 `--font-ko` `--fs-xs` 자간 0) |
+
+| 상태 | 표현 |
+|---|---|
+| 닫힘 (기본) | 한 줄만 |
+| hover | `summary` 글자 `--text`, chev `--accent` (`--dur`) |
+| 열림 | chev `--accent` + `rotate(180deg)` (`--dur`), `summary` `padding-bottom: --sp-2` |
+| focus | `summary`에 포커스 링, `outline-offset: calc(-1 * --focus-offset)` (안쪽) |
+| 언어 전환 | 별도 페이지라 열린 상태는 유지하지 않는다 (시안은 같은 페이지 다시 그리기라 유지했음) |
+
+**유형별 내용과 콘텐츠**
+
+| 유형 | 컬렉션 | 내역 (`.db`) | 정렬 · 연도 | 항목 메타 |
+|---|---|---|---|---|
+| Patents / 특허 | `patents` | `N registered · N filed` (`filed` = `filed` 전체) | `date` 내림차순, 연도 = `date` 앞 4자리 | 상태: `registered` → Registered/등록, `filed`이고 `number` 있음 → Filed/출원, `number` 없음 → Filing in progress/출원 진행 중. **`number`는 표시하지 않는다** |
+| Software / 프로그램 등록 | `software` | `N registered · N pending` | `date` 내림차순. `date` 없는 `pending`은 맨 위, 연도 칸에 "Pending / 등록 진행 중" | 상태 `registered` / `pending`. `number` 표시 안 함 |
+| Papers / 논문 | `publications` `type: paper` | `with DOI / DOI 연결` | `year` 내림차순 | `authors`(본인 이름 굵게), `venue`, `doi` → `https://doi.org/<doi>` 링크 |
+| Reports / 연구보고서 | `publications` `type: report` | `N selected / 대표 N` (`featured` 건수) | `year` 내림차순 | `publisher?`, `featured`면 `.sel-mark` Selected/대표 |
+
+- 공통: 제목 `title.en`(영문 페이지) + 원제 `title.ko`(`.og`, `lang="ko"`, 영문 페이지에서 두 값이 다를 때만). 국문 페이지는 `title.ko`만.
+- 보고서 총량("50+")은 쓰지 않는다. 콘텐츠 건수(현재 19건) 그대로.
+- 반응형: ≤560px `summary`는 `grid-template-columns: minmax(0,1fr) auto 20px`, 영역 `"n c v" "b y ."`, `row-gap: --sp-0`, `.db` `--fs-xs`, `.dy` 줄바꿈 없음. `.yg > li` 1열 `gap: 0`, `.yh` `padding-top: --sp-3`, 묶음 첫 항목 `padding-top: --sp-1`. `.it` 1열.
+- 접근성: 네이티브 `details`/`summary` (JS 없이 열고 닫힘, Enter/Space, 펼침 상태 전달). 유형 서랍마다 `id` (`#ip-pat` 등)로 직접 이동 가능. chev `aria-hidden`.
+- 모션: 대상 행 `.drawers > details`. 열고 닫기에는 높이 애니메이션 없음 (chev 회전만).
+- 남은 일: `publications.url`(논문)은 시안에서 쓰지 않는다. DOI가 없고 `url`만 있는 논문이 생기면 표시 방법 미정(구현 시 시안 제시).
+
+### 5.22 Period ledger row
+
+경력·강의·수상·학력이 함께 쓰는 "기간 | 항목" 행 (3.2.6 A). 세 섹션이 같은 문법.
+
+```html
+<!-- Experience: 그룹 없이 바로 -->
+<ol class="lg">
+  <li class="lg-row cur">
+    <span class="lg-when mono"><span class="when-cell"><span>Jul 2026 – Present</span><img class="logo" alt=""></span></span>
+    <div><h3>GenON, R&D Group</h3><p class="lg-sub">Director / AI Product Engineer</p><p class="lg-desc">…</p></div>
+  </li>
+</ol>
+<!-- Teaching, Awards & Education: 그룹 머리 + 행 -->
+<div class="lg-group">
+  <h3 class="lg-label"><span>Books</span><span class="mono">2</span></h3>
+  <ol class="lg"><li class="lg-row"><span class="lg-when mono">2023, 2024</span>
+    <div><h4><a class="ext" href="…">Title[ext]</a></h4><p class="lg-sub">Org</p><ul class="dl-list">…</ul></div></li></ol>
+</div>
+```
+
+| 요소 | 값 |
+|---|---|
+| `.lg-row` | `grid: --row-when minmax(0,1fr)`, `gap: --sp-5`, `padding: --sp-4 0`, 위 `--line` (첫 행 선 없음, 그룹 없는 목록의 첫 행 `padding-top: 0`) |
+| 그룹 안 행 | `padding: --sp-3 0` |
+| `.lg-when` | `--font-meta` `--fs-xs` `--text-3` `tabular-nums`, `padding-top: 3px` |
+| `h3` / `h4` | `--fs-md` `--fw-strong` `--lh-row`. 그룹 안 `h4`는 `--fs-sm` 행간 1.5 |
+| `.lg-sub` | `--fs-sm` `--text-2`, `margin-top: --sp-0`. 경력은 `--accent` `--fw-medium` (직함). 그룹 안은 `--fs-xs` `--text-3` |
+| `.lg-desc` | `--fs-sm` `--text-2`, `--measure`, `margin-top: --sp-2` |
+| `.dl-list` | 강의 세부. `--fs-sm` `--text-2`, `--measure`, `padding-left: --sp-4`, 항목 간 `--sp-0`, 표식 `--text-3` |
+| `.ext` (제목 링크) | 밑줄 `--line-strong` `--underline-offset`, 외부 아이콘 `--icon-xs` (`margin-left: --sp-1`). hover 글자·밑줄 `--accent` → 5.6 |
+| `.lg-group + .lg-group` | `margin-top: --sp-6` |
+| `.lg-label` | flex baseline `space-between`, `padding-bottom: --sp-2`, `margin-bottom: --sp-1`, 아래 `--line-strong`, `--fs-2xs` `--fw-strong` `--ls-label` 대문자 `--text-3` (국문 `--fs-xs` `--ls-label-ko`). 건수 `.mono`는 `--fw-regular` |
+
+**로고 위치** (3.2.7 C, 경력 6곳만): 기간 글자 아래, 기간 열 안. `margin-top: --sp-3`, 높이 `calc(--logo-h * --s)`, 최대 폭 `--logo-w`, 왼쪽 정렬. 단색·농도·`--s` 배율은 5.11. 현재 소속과 hover 행은 `--logo-op-cur`. 로고는 장식(`alt=""`) — 회사 이름은 `h3`가 읽힌다.
+
+| 상태 | 표현 |
+|---|---|
+| 현재 (`.cur`) | `period.status: present`인 경력. 기간 글자 `--accent`, 로고 `--logo-op-cur` |
+| hover | 로고만 `--logo-op-cur` (`--dur`). 행 자체는 링크가 아니다 |
+
+| 섹션 | 그룹 | 행 정렬 | 기간 열 | 제목 | 부제 | 본문 |
+|---|---|---|---|---|---|---|
+| Experience | 없음 (`h3`) | 콘텐츠 순서 (최신 먼저) | `experience.period` + 로고 | `org` | `role` | `summary` |
+| Teaching · Books · Advisory | `teaching.kind`: book → teaching → advisory | `years`의 마지막 연도 내림차순, 같으면 첫 연도 | `years` (자유 표기 그대로) | `title` (`url` 있으면 `.ext` 링크) | `org` | `details[]` → `.dl-list` |
+| Awards & Education — Awards | `awards` | `years` 같은 규칙 | `years` | `title` | `org` | — |
+| Awards & Education — Education | `education` | 콘텐츠 순서 | `period` | `school` | `degree` | — |
+
+- 그룹 머리 건수는 그룹 항목 수. 그룹 이름(Books/Teaching/Advisory/Awards/Education)은 `src/i18n/`.
+- 반응형: ≤560px 1열(`gap: --sp-0`), `.lg-when` `padding-top: 0`. 로고가 있는 칸(`.when-cell`)은 가로 flex `space-between`, `gap: --sp-3`, `margin-bottom: --sp-2`, 로고가 왼쪽(`order: -1`)·`margin-top: 0`·높이 ×0.85, 기간은 오른쪽.
+- 접근성: 행은 `ol > li`. 외부 링크 아이콘 `aria-hidden`, `rel="noopener"`.
+- 모션: 대상 행 `.lg > .lg-row`. 그룹이 여러 개면 그룹마다 `--i`가 0부터 다시 시작한다 (`:nth-child` 기준).
+- 남은 일: 용어집 [확인 필요] 영문 기관명이 Teaching에 그대로 노출됨 → 1.2.11.
+
+### 5.23 Contact
+
+2단 Contact (3.2.8 A): 왼쪽 의뢰 가능 분야 번호 목록 | 오른쪽 이메일·복사·링크.
+
+```html
+<section class="card" id="contact" aria-labelledby="h-contact">
+  <div class="sec-head"><h2 id="h-contact">Contact</h2></div>
+  <div class="ct">
+    <div><h3 class="eyebrow">Open to</h3><ul class="avail"><li>…</li></ul></div>
+    <div><h3 class="eyebrow">Reach me</h3>
+      <div class="reach">
+        <div class="mail-row"><a class="mail" href="mailto:…">sguys99@naver.com</a><button class="copy">…</button></div>
+        <ul class="links"><li><a href="…">[gh] GitHub</a></li><li><a href="…">[in] LinkedIn</a></li></ul>
+      </div></div>
+  </div>
+  <span class="sr-only" aria-live="polite"></span>   <!-- 복사 알림, 5.8 -->
+</section>
+```
+
+| 요소 | 값 |
+|---|---|
+| `.ct` | `grid: minmax(0,1.35fr) minmax(0,1fr)`, `gap: --sp-7` |
+| `.eyebrow` | `margin: 0 0 --sp-3`, `--font-meta` `--fs-xs` `--fw-medium` `--ls-eyebrow` 대문자 `--text-3` (국문 `--font-ko` `--fs-sm` `--fw-strong` `--ls-eyebrow-ko`) |
+| `.avail` | 위 `--line`, CSS counter |
+| `.avail li` | `grid: --col-idx-sm minmax(0,1fr)`, `gap: --sp-2`, `padding: --sp-3 0`, 아래 `--line`, `--fs-sm` `--text`. 번호 `::before` `decimal-leading-zero`, `--font-meta` `--fs-xs` `--text-3`, `padding-top: --sp-0` |
+| `.reach` | 위 `--line`, `padding-top: --sp-4`, grid `gap: --sp-4` |
+| `.mail-row` | flex wrap, `gap: --sp-2 --sp-3` |
+| `.mail` | `--fs-lg` `--fw-medium` `--accent`, 밑줄 `--line-strong` `--underline-offset`, `overflow-wrap: anywhere`. hover 밑줄 `--accent` |
+| 복사 버튼 | → 5.8 |
+| `.links` | 세로, `gap: --sp-2`. 링크 `--fs-sm` `--text-2`, 아이콘 `--icon` `--icon-stroke`, `gap: --sp-2`. hover `--accent` |
+
+- 콘텐츠: `profile.availability[]`(3~5개) → `.avail`, `profile.contact.email` / `.github` / `.linkedin`. 전화번호는 두지 않는다.
+- 반응형: ≤860px 1열, `gap: --sp-6`.
+- 접근성: 의뢰 분야는 `ul`이지만 번호는 CSS counter라 장식. 이메일은 `mailto:` 링크로 글자 그대로 노출(복사 실패에 대비). 복사 버튼 이름에 주소를 포함 (5.8).
+- 모션: 대상 행 `.ct > *` (두 열이 차례로).
+- 기준안 버그: 사이드바 연락처 목록 id `contact`가 이 섹션 id와 충돌 → 사이드바 쪽을 `side-contact`로 바꾼다 (decision-log 3.3, 5.1).
+
+### 5.24 Case study (323-c 케이스 파일)
+
+기준: `g4/case.html` + `g4/332-a2-case.html`(상단 메뉴 표시, 사이드바 폭). 사이드바가 프로젝트 기록표로 바뀌고, 본문은 번호 붙은 문서 한 장. 상단 메뉴는 홈과 같고 Work 탭이 현재로 고정 (5.2).
+
+**페이지 골격**
+
+```html
+<aside class="sidebar" aria-label="Project facts">
+  <div class="who"><a href="/#about"><img alt=""> Kwang Myung Yu <span>AI Engineer</span></a></div>
+  <div><p class="crumb"><a href="/#work">[back] Selected Work</a><span class="pos">01 / 05</span></p>
+       <h1 class="cs-title">…</h1></div>
+  <dl class="rec">…</dl>
+  <nav class="toc" aria-label="On this page"><ol>…</ol></nav>
+  <div class="side-foot"><nav class="pn" aria-label="Case studies">…</nav></div>
+</aside>
+<header class="topbar">…</header>   <!-- 5.2 -->
+<main><article class="card doc">
+  <p class="lede">…</p>
+  <section class="d-sec" id="context" aria-labelledby="h-context">…</section> …
+</article>
+<div class="pn-end">…</div>   <!-- ≤860px 이전·다음 -->
+<footer>…</footer></main>   <!-- 5.5 -->
+```
+
+| 폭 | 사이드바 | 본문 |
+|---|---|---|
+| >1000px | `--sidebar` 340px, sticky `top: 0`, `padding: --sp-6 --sp-6 --sp-5`, `gap: --sp-5` | `.doc` `padding: --sp-7` (≤1100px `--sp-6`) |
+| 861–1000px | 280px (탭 6개 + 토글이 들어가도록, 3.3.2) | 같음 |
+| ≤860px | 상단 블록(`display: block`, `padding: --sp-5 --sp-4 --sp-4`, 자식 간 `--sp-4`). `.who`·`.toc`·`.side-foot` 숨김 → 이동 경로·제목·기록표만 | `.doc` `padding: --sp-5 --sp-4`. 끝에 `.pn-end`. 섹션 이동은 메뉴 시트(5.3)의 "← Selected Work" + 목차 |
+
+#### 5.24.1 기록표 사이드바
+
+| 요소 | 값 |
+|---|---|
+| `.who` 링크 | 인라인 flex `gap: --sp-2`, `--fs-sm` `--fw-strong`, 직함 `span`은 `--text-3` `--fw-regular`. hover `--accent`. 사진 28px 원(`--radius-pill`, `--photo-ring`, `--photo-filter`, `object-position: top`) |
+| `.crumb` | flex wrap, `gap: --sp-1 --sp-3`, `margin-bottom: --sp-3`, `--fs-sm`. 링크 `--text-2` `--fw-medium`, 아이콘 `--icon-sm` `gap: --sp-1h`, hover `--accent`. `.pos` `--font-meta` `--fs-xs` `--text-3` |
+| `.cs-title` (h1) | `--font-display` `--fs-xl` `--fw-title` `--ls-title`, 행간 1.28, `text-wrap: balance` (국문 `--ls-title-ko`, 행간 1.4) |
+| `.rec` | 위 `--line-strong` |
+| `.rec > div` | `grid: 96px minmax(0,1fr)`, `gap: --sp-3`, baseline, `padding: --sp-2 0`, 아래 `--line` |
+| `dt` | `--fs-2xs` `--fw-strong` `--ls-label` 대문자 `--text-3` (국문 `--fs-xs` `--ls-label-ko`) |
+| `dd` | `--fs-sm` `--lh-row`. 스택은 `--font-meta` `--fs-xs` `--text-2` 행간 1.7 |
+| `.side-foot` | `margin-top: auto` (사이드바 바닥), `padding-top: --sp-4`, 위 `--line`, grid `gap: --sp-3` |
+
+| 기록 행 | 필드 | 조건 |
+|---|---|---|
+| Client / 고객 | `client.name` 또는 `client.label` | `client` 있을 때 |
+| Organization / 소속 | `org` | `org` 있을 때 |
+| Period / 기간 | `period` (+ `planned`면 배지) | 항상 |
+| Role / 역할 | `lead: true`면 "Lead / 총괄" | `lead`일 때만. `role` 필드는 쓰지 않는다 (3.2 결정) |
+| Stack / 기술 스택 | `stack[]`을 " · "로 | 항상 |
+
+- `.pos`: 케이스 목록 안 순번 / 전체 (두 자리).
+- 접근성: 사이드바 `aria-label` "Project facts / 프로젝트 정보". 프로필 사진 `alt=""` (이름이 옆 글자).
+
+#### 5.24.2 번호 목차
+
+| 요소 | 값 |
+|---|---|
+| `ol` | `list-style: none`, CSS counter |
+| `a` | flex `gap: --sp-3`, `padding: 3px 0`, `--fs-sm` `--text-3`. hover `--text` |
+| 번호 `a::before` | `decimal-leading-zero`, `--font-meta` `--fs-xs`, `padding-top: 1px`. 색은 아래 버그 참조 |
+| 현재 (`aria-current="true"`) | 글자 `--text` `--fw-medium`, 번호 `--accent` |
+
+- 현재 표시: 홈과 같은 스크롤 위치 판정(5.2)으로 `aria-current`를 `.d-sec`에 맞춘다. 상단 메뉴 탭은 Work 고정이고 목차만 움직인다.
+- **시안 버그**: 비현재 번호 색이 `--line-strong`(라이트 1.62:1)이라 4.5:1 미달 → `--text-3`으로 바꾼다 (번호가 글자로 읽힐 수 있으므로).
+
+#### 5.24.3 본문 섹션
+
+| 요소 | 값 |
+|---|---|
+| `.lede` | `--fs-lg` `--text`, 행간 1.55, `max-width: 60ch`, `margin-bottom: --sp-6`. 내용 `summary` |
+| `.d-sec` | `grid: --col-idx minmax(0,1fr)`, `gap: 0 --sp-3`, `padding: --sp-6 0`, 위 `--line`, `scroll-margin-top: calc(--header-h + --sp-5)` |
+| `.no` | 두 자리 번호, `--font-meta` `--fs-sm` `--accent`, 행간 1.75, `aria-hidden` |
+| `h2` | `--fs-lg` `--fw-title` `--ls-title`/`-ko`, 행간 1.4, `margin-bottom: --sp-3` |
+| `h3` (Key decisions) | `margin: --sp-5 0 --sp-2`, `--fs-xs` `--fw-strong` `--ls-label` 대문자 `--text-3` (국문 `--fs-sm` `--ls-label-ko`) |
+| `.bl` 목록 | grid `gap: --sp-2`. `li` `padding-left: --sp-4` `--text-2` `--measure`. 표식 `::before` 가로선 7×1px `--text-3`, `top: 0.8em` |
+| 성과 `.oc` | `li` `--text` `--fw-medium`. 표식 `--dot` 정사각 `--accent`, 모서리 1px, `top: 0.6em` |
+| 진행 중 배지 | 성과 제목 옆 `.badge.live`(테두리·글자 `--accent`, `margin-left: --sp-2`) "In progress / 진행 중" → 5.7 |
+
+| 순서 | id | 제목 영문 / 국문 | 필드 | 조건 |
+|---|---|---|---|---|
+| 01 | `context` | Context / 배경 | `caseStudy.context[]` | 항상 |
+| 02 | `problem` | Problem / 문제 | `caseStudy.problem[]` | 항상 |
+| 03 | `role` | My role / 역할 | `caseStudy.role[]` | 항상 |
+| 04 | `approach` | Approach / 접근 | `caseStudy.approach[]` + `decisions[]` 표 | 결정 표는 `decisions` 있을 때 |
+| 05 | `arch` | Architecture / 아키텍처 | `caseStudy.architecture` | 있을 때만. 없으면 번호가 당겨진다 |
+| 06 | `outcome` | Outcome / 성과 | `caseStudy.outcome[]` | 항상. `period.status`가 `present`/`planned`면 진행 중 배지 |
+
+결정 표(`.tbl`): 열 Decision / Why / Trade-off (결정 / 이유 / 트레이드오프) ← `decisions[].title` / `.rationale` / `.tradeoff`. 시안은 "Decision"·"Why"를 코드에 직접 썼다 → `src/i18n/`로.
+
+#### 5.24.4 아키텍처 표 (layers / flows)
+
+그림 대신 표 (3.2.3 C). 계층 한 줄 = 행.
+
+```html
+<table class="tbl ledger">
+  <thead><tr><th scope="col">Layer</th><th scope="col">Components</th><th scope="col">Flows</th></tr></thead>
+  <tbody><tr>
+    <td><span class="n">01</span> Data</td>
+    <td data-l="Components"><ul><li>…</li></ul></td>
+    <td data-l="Flows"><span class="flow-col"><span class="flow">→ 02 Agent <em>· query</em></span>
+                                              <span class="flow back">↩ 01 Data</span></span></td>
+  </tr></tbody>
+</table>
+```
+
+| 요소 | 값 |
+|---|---|
+| `.tbl` | 폭 100%, `border-collapse: collapse`, `--fs-sm` |
+| `th` | 왼쪽 정렬, `--fw-medium` `--fs-2xs` `--ls-eyebrow` 대문자 `--text-3`, `padding: 0 --sp-3 --sp-2 0`, 아래 `--line-strong` (국문 `--fs-xs` 자간 0) |
+| `td` | 위 정렬, `padding: --sp-3 --sp-3 --sp-3 0`, 아래 `--line`(마지막 행 없음), `--text-2` 행간 1.5. 첫 열 `--text` `--fw-medium`, 아키텍처 표에서는 `width: 1%; white-space: nowrap` |
+| `.n` 계층 번호 | `--font-meta` `--fs-xs` `--accent` `--fw-regular` |
+| `td ul` | 표식 없음, grid `gap: --sp-0` |
+| `.flow` | `--font-meta` `--fs-xs` `--text-2`, 줄바꿈 없음. 앞으로 가는 흐름 `→ NN 계층명`, 뒤로 돌아가는 흐름(대상 순번 < 현재) `↩`·`--text-3`. 흐름 라벨 `em`은 기울임 없이 `--text-3`, 앞에 " · " |
+| 결정 표의 3열 `.to` | `--text-3` |
+
+- 콘텐츠: `caseStudy.architecture.layers[]`(`id`, `label`, `nodes[]`) → 행 순서·번호·구성 요소. `flows[]`(`from`, `to`, `label?`) → `from` 계층 행의 흐름 칸. 스키마가 `from`/`to`가 있는 `id`인지 검사한다.
+- 반응형: ≤560px 표를 쌓인 기록으로 (`table`·`tr`·`td` `display: block`). `thead`는 시각적으로 숨김(`.sr-only`와 같은 규칙), `tr` `padding: --sp-3 0` + 아래 `--line`, `td` `padding: 0 0 --sp-1`. 라벨은 `td[data-l]::before`(`--fs-2xs` `--ls-eyebrow` 대문자 `--text-3`, `margin-top: --sp-1`; 국문 `--fs-xs` 자간 0). 첫 열 `nowrap` 해제.
+- 접근성: 진짜 `table` + `th scope="col"`. 쌓인 모양에서도 `thead`는 남아 있어 읽힌다. 화살표 글자(→ ↩)는 [제안] `aria-hidden` + `.sr-only` "to / back to"로 바꾼다. 이유: 화면 낭독기가 기호를 다르게 읽음.
+- 클래스 이름: 시안의 `.ledger`(아키텍처 표)는 홈 전체 프로젝트 원장(`.ledger`, 5.19)과 이름이 겹치고 `.n`·`.stk`·`.sum`도 여러 컴포넌트가 다르게 쓴다. 구현은 Astro 컴포넌트 범위 스타일로 분리한다.
+
+#### 5.24.5 이전·다음
+
+| 요소 | 값 |
+|---|---|
+| `.pn` | grid `gap: --sp-1`, `nav aria-label="Case studies / 케이스 스터디 목록"` |
+| `.pn-a` | `grid: auto minmax(0,1fr)`, `gap: --sp-2`, baseline, `padding: 3px 0`, `--fs-sm` `--text-2`. hover `--accent` |
+| `.pn-k` | 인라인 flex `gap: --sp-1`, `--font-meta` `--fs-xs` `--text-3`, `min-width: 64px`. 아이콘 `--icon-xs` `--icon-stroke-sm`: Previous 앞에 ←, Next 뒤에 → |
+| `.pn-t` | 제목 한 줄 말줄임 (`ellipsis`) |
+| 끝 항목 | 첫 케이스는 Previous, 마지막은 Next를 그리지 않는다 (순환 없음) |
+| ≤860px `.pn-end` | 본문 아래, `margin-top: --sp-2`. 링크마다 `padding: --sp-3 0` + 위 `--line`, 제목 줄바꿈 허용 |
+
+- 순서: `featured: true`이고 `caseStudy`가 있는 프로젝트, `order` 오름차순 (현재 5건). 링크 `rel="prev"`/`"next"`.
+- 접근성: 링크 이름 = "Previous" + 제목 전체(말줄임은 시각만).
+
+**케이스 스터디 모션**: 331-c 시안은 홈만 다룬다. 케이스 페이지는 등장·순서 효과 없이 hover 전환(`--dur`)과 상단 메뉴·메뉴 시트 모션(5.2, 5.3)만 둔다 [제안]. 이유: 한 장짜리 문서라 앵커 이동이 많고, 시안에 기준이 없음.
+
+**미정·확인**
+- 기간 옆 "Planned / 예정" 배지: 홈과 CV는 `planned`를 "In progress / 진행 중"으로 표시한다(3.3 결정은 CV만 명시). 케이스 기록표도 같은 문구로 맞출지 확인 필요.
+- 시안의 UI 문구 `domain`(분야)은 정의만 있고 기록표에 쓰이지 않는다 → 기록표에 Domain을 넣지 않는다(시안 그대로).
