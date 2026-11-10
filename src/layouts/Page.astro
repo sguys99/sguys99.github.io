@@ -5,6 +5,7 @@ import Base from './Base.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Topbar from '../components/Topbar.astro';
 import MenuSheet from '../components/MenuSheet.astro';
+import Footer from '../components/Footer.astro';
 import { t, type Lang } from '../i18n/ui';
 
 interface Props {
@@ -26,7 +27,7 @@ const { lang, title } = Astro.props;
     <main id="main" tabindex="-1">
       <slot />
     </main>
-    {/* Footer: tasks 5.9 (right column, row after main) */}
+    <Footer lang={lang} />
   </div>
   <MenuSheet lang={lang} />
 </Base>
@@ -59,8 +60,8 @@ const { lang, title } = Astro.props;
   .shell {
     display: grid;
     grid-template-columns: var(--sidebar) minmax(0, 1fr);
-    /* Row 1 reserves the bar (+1px bottom line); the bar itself spans every row so it can stay sticky. */
-    grid-template-rows: calc(var(--header-h) + 1px) 1fr;
+    /* Row 1 reserves the bar (+1px bottom line), row 3 is the footer; the bar spans every row so it can stay sticky. */
+    grid-template-rows: calc(var(--header-h) + 1px) 1fr auto;
     min-height: 100vh;
     min-height: 100dvh;
     max-width: calc(var(--sidebar) + var(--main));
@@ -86,6 +87,11 @@ const { lang, title } = Astro.props;
     max-width: var(--main);
     width: 100%;
     padding: var(--sp-6) var(--sp-7);
+  }
+
+  .shell > :global(.foot) {
+    grid-column: 2;
+    grid-row: 3;
   }
 
   main:focus {
