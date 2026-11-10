@@ -164,7 +164,7 @@
 - [x] 4.5 Page Templates: 홈, 케이스 스터디, CV, 404 — 라우트 표, 섹션·앵커·탭 매핑, head·OG·hreflang·JSON-LD. CV 링크 위치·PDF 경로는 4.10에서 확인
 - [x] 4.6 Bilingual Typography: 언어별 서체, 행간, 자간 조정값 — 역할별 영/국 비교, 줄바꿈, 연도 범위 표기 통일, 웹폰트 방침(세부는 5.2)
 - [x] 4.7 Dark Mode, Accessibility, Print — 테마 결정 순서·깜빡임 방지, WCAG 2.2 AA 항목별 규칙, CV 조판·PDF 관계
-- [ ] 4.8 Decision Log: Gate별 시안, 선택, 이유 (`docs/design-drafts/decision-log.md` 초안 이전)
+- [x] 4.8 Decision Log: Gate별 시안, 선택, 이유 (`docs/design-drafts/decision-log.md` 초안 이전) — 11장, 단계 4 결정 추가, 이관 항목 추적표로 통합. 초안 파일은 안내만 남김
 - [ ] 4.9 `src/styles/tokens.css`를 DESIGN.md의 토큰과 일치하게 생성
 - [ ] 4.10 **[확인]** DESIGN.md 검토
 

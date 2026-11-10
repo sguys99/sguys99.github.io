@@ -1,3 +1,4 @@
+2026-11-10 G4(3.2.7 C)에서 경력 6곳 로고 사용 승인
 3.2.7 C draft only. Official logos fetched 2026-11-10 from each company's own website.
 Not approved for the real site: each logo needs the owner's (user's) per-logo confirmation before use.
 
