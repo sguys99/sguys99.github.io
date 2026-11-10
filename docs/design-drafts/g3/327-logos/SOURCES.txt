@@ -1,0 +1,12 @@
+3.2.7 C draft only. Official logos fetched 2026-11-10 from each company's own website.
+Not approved for the real site: each logo needs the owner's (user's) per-logo confirmation before use.
+
+genon.png        https://www.genon.ai/ header logo (Framer asset) https://framerusercontent.com/images/bz6vbmuciGCAX1UmlKt6dEk2azs.png (1024w)
+pwc.svg          https://www.pwc.com/kr/ko.html header logo https://www.pwc.com/etc.clientlibs/pwc/clientlibs/rebrand-clientlibs/components-colors/resources/images/slim-header-v2/PwC-logo.svg
+makinarocks.svg  https://www.makinarocks.ai/ header logo https://www.makinarocks.ai/images/layout/makinarocks-1.svg
+semco.svg        https://www.samsungsem.com/kr/index.do header logo https://www.samsungsem.com/resources/images/kr/common/logo_oval.svg
+kepco.svg        https://www.kepco.co.kr/ header logo (inline SVG in a.logo, saved as-is)
+posco-enc.svg    https://www.poscoenc.com/ header logo https://www.poscoenc.com/ko/common/images/logos/posco-enc-logo-white.svg
+
+semco-mono.svg, kepco-mono.svg: same artwork wrapped in a luminance mask so the white knockouts
+(SAMSUNG letters, KEPCO symbol lines) stay transparent when the page tints the logo to one ink. Shapes unchanged.

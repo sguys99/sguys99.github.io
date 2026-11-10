@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.2.7 B · Monogram badge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<script>
+  // Set theme/lang before paint to avoid a flash.
+  (function () {
+    var q = new URLSearchParams(location.search);
+    var t = q.get('theme');
+    if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+    document.documentElement.lang = q.get('lang') === 'ko' ? 'ko' : 'en';
+  })();
+</script>
+<style>
+  /* =====================================================================
+     TOKENS — G3 base (round-1 picks merged). Round-2 drafts copy this file
+     and edit ONLY this block; it later becomes src/styles/tokens.css.
+     Everything below "BASE" uses these variables; no raw colors/fonts there.
+     Picks: 3.1.1 A type · 3.1.2 A Slate Ink · 3.1.3 C sidebar · 3.1.6 C mobile.
+     ===================================================================== */
+  :root {
+    /* --- font families (3.1.1 A: Geist + Geist Mono, Pretendard for Hangul) --- */
+    --font: "Geist", "Pretendard Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-ko: "Pretendard Variable", "Pretendard", system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif;
+    --font-display: var(--font);
+    --font-meta: "Geist Mono", "Pretendard Variable", ui-monospace, "SFMono-Regular", monospace;
+
+    /* --- type scale (px @16): 11 / 12 / 13 / 15 / 17 / 22 / 30 --- */
+    --fs-2xs: 0.6875rem;
+    --fs-xs: 0.75rem;
+    --fs-sm: 0.8125rem;
+    --fs-md: 0.9375rem;
+    --fs-lg: 1.0625rem;
+    --fs-xl: 1.375rem;
+    --fs-2xl: 1.875rem;
+    --fw-name: 600; --fw-tagline: 500; --fw-tagline-ko: 600; --fw-title: 600; --fw-strong: 600; --fw-eyebrow: 500;
+    --lh-body: 1.6; --lh-body-ko: 1.75; --lh-tagline: 1.22; --lh-tagline-ko: 1.4;
+    --ls-body: -0.005em; --ls-body-ko: -0.01em; --ls-name: -0.02em; --ls-tagline: -0.03em; --ls-tagline-ko: -0.035em;
+    --ls-title: -0.012em; --ls-title-ko: -0.02em; --ls-eyebrow: 0.06em; --ls-eyebrow-ko: 0;
+
+    /* --- color: light (3.1.2 A Slate Ink) --- */
+    color-scheme: light;
+    --bg: #f3f5f8;
+    --surface: #ffffff;
+    --line: #dfe3ea;
+    --line-strong: #c5ccd6;
+    --text: #141a22;
+    --text-2: #475260;
+    --text-3: #5f6a78;
+    --chip: #eef1f5;
+    --header-bg: rgba(243, 245, 248, 0.9);
+    --scrim: rgba(22, 25, 29, 0.32);
+    --photo-ring: var(--line);
+    --photo-filter: none;
+    --accent: #2b5a8a;
+    --accent-soft: #e6edf6;
+    --focus: var(--accent);
+
+    /* --- radius --- */
+    --radius: 10px;
+    --radius-sm: 6px;
+    --radius-xs: 4px;
+    --radius-pill: 999px;
+
+    /* --- spacing --- */
+    --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px;
+
+    /* --- layout --- */
+    --sidebar: 320px;
+    --main: 960px;
+    --header-h: 56px;
+    --sb-photo-w: 132px; /* 3.1.3 C sidebar photo */
+    --sb-key: 64px;      /* 3.1.3 C key column */
+    --sheet-w: 340px;    /* 3.1.6 C mobile menu sheet */
+    --mark: 36px;        /* 3.2.7 B monogram badge (experience) */
+    --mark-sm: 20px;     /* 3.2.7 B monogram badge (project meta) */
+
+    /* --- motion --- */
+    --dur: 180ms;
+
+    --mask-solid: #000; /* mask alpha only, not a visible color */
+  }
+  html:lang(ko) { --font-display: var(--font-ko); }
+
+  /* --- color: dark (3.1.2 A Slate Ink). Same values in both blocks below:
+         OS preference when no explicit light choice, and explicit [data-theme=dark]. --- */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #0d1117;
+      --surface: #151b23;
+      --line: #252d38;
+      --line-strong: #364150;
+      --text: #e6eaf0;
+      --text-2: #b1bac6;
+      --text-3: #8b95a3;
+      --chip: #1d2530;
+      --header-bg: rgba(13, 17, 23, 0.9);
+      --scrim: rgba(0, 0, 0, 0.6);
+      --photo-ring: var(--line-strong);
+      --photo-filter: brightness(0.86); /* tone down the white photo backdrop on dark */
+      --accent: #8db3e2;
+      --accent-soft: #1a283b;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0d1117;
+    --surface: #151b23;
+    --line: #252d38;
+    --line-strong: #364150;
+    --text: #e6eaf0;
+    --text-2: #b1bac6;
+    --text-3: #8b95a3;
+    --chip: #1d2530;
+    --header-bg: rgba(13, 17, 23, 0.9);
+    --scrim: rgba(0, 0, 0, 0.6);
+    --photo-ring: var(--line-strong);
+    --photo-filter: brightness(0.86);
+    --accent: #8db3e2;
+    --accent-soft: #1a283b;
+  }
+  /* ============================ BASE ============================ */
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: var(--fs-md);
+    line-height: 1.6;
+    font-feature-settings: "tnum" 0;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color var(--dur) ease, color var(--dur) ease;
+  }
+  :lang(ko) body, :lang(ko) { font-family: var(--font-ko); }
+  html:lang(ko) body { line-height: 1.75; word-break: keep-all; overflow-wrap: anywhere; letter-spacing: -0.005em; }
+  html:lang(en) body { letter-spacing: -0.003em; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-xs); }
+  .num { font-variant-numeric: tabular-nums; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* ---------- Layout ---------- */
+  /* Centered on wide screens (from A2): sidebar + main share one column; the top menu lives inside it. */
+  .shell { display: grid; grid-template-columns: var(--sidebar) minmax(0, 1fr); min-height: 100vh; max-width: calc(var(--sidebar) + var(--main)); margin: 0 auto; }
+  aside.sidebar {
+    position: sticky; top: 0; height: 100vh;
+    border-right: 1px solid var(--line);
+    padding: var(--sp-7) var(--sp-6);
+    display: flex; flex-direction: column; gap: var(--sp-5);
+    overflow-y: auto;
+  }
+  .col { min-width: 0; }
+  main { padding: var(--sp-6) var(--sp-7) var(--sp-8); max-width: var(--main); width: 100%; }
+
+  /* ---------- Top menu (sticky, right column) ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--header-bg);
+    -webkit-backdrop-filter: saturate(1.2) blur(8px); backdrop-filter: saturate(1.2) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar .bar {
+    max-width: var(--main); height: var(--header-h); padding: 0 var(--sp-7);
+    display: flex; align-items: center; gap: var(--sp-4);
+  }
+  .topbar nav { flex: 1; min-width: 0; align-self: stretch; display: flex; }
+  .tabs { display: flex; gap: var(--sp-5); margin: 0; padding: 0; list-style: none; }
+  .tabs li { display: flex; }
+  .tabs a {
+    position: relative; display: flex; align-items: center; white-space: nowrap;
+    font-size: var(--fs-sm); font-weight: 500; color: var(--text-3); text-decoration: none;
+    transition: color var(--dur) ease;
+  }
+  .tabs a::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; border-radius: 2px;
+    background: var(--accent); transform: scaleX(0); transition: transform var(--dur) ease;
+  }
+  .tabs a:hover { color: var(--text); }
+  .tabs a[aria-current="true"] { color: var(--text); }
+  .tabs a[aria-current="true"]::after { transform: scaleX(1); }
+  .tabs a:focus-visible { outline-offset: -2px; }
+
+  /* ---------- Sidebar ---------- */
+  .photo {
+    width: 112px; height: auto; aspect-ratio: 4 / 5; object-fit: cover;
+    border-radius: var(--radius); border: 1px solid var(--photo-ring);
+    background: var(--chip); display: block; filter: var(--photo-filter);
+  }
+  .name { font-size: var(--fs-xl); font-weight: 600; letter-spacing: -0.015em; margin: 0; line-height: 1.25; }
+  .headline { margin: var(--sp-1) 0 0; color: var(--accent); font-weight: 500; font-size: var(--fs-md); }
+  .role { margin: var(--sp-1) 0 0; color: var(--text-2); font-size: var(--fs-sm); }
+  .contact { list-style: none; margin: 0; padding: var(--sp-4) 0 0; border-top: 1px solid var(--line); display: grid; gap: var(--sp-2); }
+  .contact a {
+    display: flex; align-items: center; gap: var(--sp-3);
+    text-decoration: none; color: var(--text-2); font-size: var(--fs-sm);
+    transition: color var(--dur) ease;
+  }
+  .contact a:hover { color: var(--accent); }
+  .contact svg { width: 16px; height: 16px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.5; }
+  .contact .lbl { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  .controls { display: flex; gap: var(--sp-2); align-items: center; flex: none; }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 2px; background: var(--surface); }
+  .seg button {
+    font: inherit; font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.02em;
+    border: 0; background: none; color: var(--text-3); cursor: pointer;
+    padding: 4px 10px; border-radius: var(--radius-pill); min-height: 28px;
+    transition: background-color var(--dur) ease, color var(--dur) ease;
+  }
+  .seg button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); }
+  .icon-btn {
+    display: inline-grid; place-items: center; width: 34px; height: 34px;
+    border: 1px solid var(--line); border-radius: var(--radius-pill); background: var(--surface);
+    color: var(--text-2); cursor: pointer; transition: color var(--dur) ease, border-color var(--dur) ease;
+  }
+  .icon-btn:hover { color: var(--accent); border-color: var(--line-strong); }
+  .icon-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+  [data-theme="dark"] .i-moon, [data-theme="light"] .i-sun { display: none; }
+
+  /* ---------- Cards / sections ---------- */
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: var(--sp-6); margin-bottom: var(--sp-5);
+    scroll-margin-top: calc(var(--header-h) + var(--sp-5));
+  }
+  .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-4); margin-bottom: var(--sp-5); }
+  .sec-head h2 {
+    margin: 0; font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3);
+  }
+  html:lang(ko) .sec-head h2 { letter-spacing: 0.04em; font-size: var(--fs-sm); }
+  .sec-head .meta { font-size: var(--fs-xs); color: var(--text-3); }
+
+  /* About */
+  .tagline { margin: 0 0 var(--sp-4); font-size: var(--fs-2xl); line-height: 1.3; font-weight: 500; letter-spacing: -0.02em; max-width: 30ch; }
+  html:lang(ko) .tagline { line-height: 1.45; letter-spacing: -0.03em; max-width: 24ch; }
+  .tagline { text-wrap: balance; }
+  .about { margin: 0; color: var(--text-2); max-width: 68ch; }
+
+  .traj { list-style: none; margin: var(--sp-6) 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sp-4); }
+  .traj li { position: relative; padding-top: var(--sp-5); }
+  .traj li::before { content: ""; position: absolute; top: 4px; left: 0; right: calc(-1 * var(--sp-4)); height: 1px; background: var(--line-strong); }
+  .traj li:last-child::before { right: 0; background: linear-gradient(to right, var(--accent), transparent); }
+  .traj li::after { content: ""; position: absolute; top: 0; left: 0; width: 9px; height: 9px; border-radius: 50%; background: var(--surface); border: 1px solid var(--line-strong); }
+  .traj li:last-child::after { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+  .traj .yrs { font-size: var(--fs-xs); color: var(--text-3); }
+  .traj h3 { margin: 2px 0 var(--sp-1); font-size: var(--fs-md); font-weight: 600; line-height: 1.35; }
+  .traj li:last-child h3 { color: var(--accent); }
+  .traj p { margin: 0; font-size: var(--fs-sm); color: var(--text-2); line-height: 1.55; }
+
+  .skills { margin: var(--sp-6) 0 0; padding: 0; border-top: 1px solid var(--line); }
+  .skills div { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: var(--sp-4); padding: var(--sp-3) 0; border-bottom: 1px solid var(--line); }
+  .skills div:last-child { border-bottom: 0; padding-bottom: 0; }
+  .skills dt { font-size: var(--fs-sm); font-weight: 600; }
+  .skills dd { margin: 0; font-size: var(--fs-sm); color: var(--text-2); }
+
+  /* Selected Work */
+  .work { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-4); }
+  .proj {
+    display: flex; flex-direction: column; gap: var(--sp-3);
+    border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--sp-5);
+    transition: border-color var(--dur) ease;
+  }
+  .proj:hover { border-color: var(--line-strong); }
+  .proj-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sp-1) var(--sp-3); font-size: var(--fs-xs); color: var(--text-3); }
+  .proj-meta .org { color: var(--text-2); font-weight: 500; }
+  .proj h3 { margin: 0; font-size: var(--fs-lg); font-weight: 600; line-height: 1.35; letter-spacing: -0.01em; }
+  html:lang(ko) .proj h3 { letter-spacing: -0.02em; }
+  .proj p { margin: 0; font-size: var(--fs-sm); color: var(--text-2); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+  .tag { font-size: var(--fs-xs); padding: 2px 8px; border-radius: var(--radius-pill); background: var(--chip); color: var(--text-2); line-height: 1.6; }
+  .tag.k { background: var(--accent-soft); color: var(--accent); }
+  .stack { font-size: var(--fs-xs); color: var(--text-3); margin: 0; }
+  .more {
+    margin-top: auto; padding-top: var(--sp-2); align-self: flex-start;
+    font-size: var(--fs-sm); font-weight: 500; color: var(--accent); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .more svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.6; transition: transform var(--dur) ease; }
+  .more:hover svg { transform: translateX(3px); }
+  .badge { font-size: var(--fs-2xs); font-weight: 500; padding: 0 6px; border: 1px solid var(--line-strong); border-radius: var(--radius-xs); color: var(--text-2); }
+
+  /* Rows (experience, patents) — same grammar: date | title / sub / meta */
+  .rows { list-style: none; margin: 0; padding: 0; }
+  .row { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: var(--sp-5); padding: var(--sp-4) 0; border-top: 1px solid var(--line); }
+  .row:first-child { border-top: 0; padding-top: 0; }
+  .row .when { font-size: var(--fs-sm); color: var(--text-3); padding-top: 1px; }
+  .row h3 { margin: 0; font-size: var(--fs-md); font-weight: 600; line-height: 1.4; }
+  .row .sub { margin: 2px 0 0; font-size: var(--fs-sm); color: var(--accent); font-weight: 500; }
+  .row .desc { margin: var(--sp-2) 0 0; font-size: var(--fs-sm); color: var(--text-2); max-width: 68ch; }
+  .row.current .when { color: var(--accent); }
+  /* 3.2.7 B: monogram badge, employers only */
+  .ex { display: grid; grid-template-columns: var(--mark) minmax(0, 1fr); gap: var(--sp-4); align-items: start; }
+  .mono {
+    display: inline-grid; place-items: center; flex: none; width: var(--mark); height: var(--mark);
+    border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: var(--surface);
+    font-family: var(--font-meta); font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.02em; line-height: 1; color: var(--text-2);
+  }
+  .row.current .mono { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+  .mono.sm { width: var(--mark-sm); height: var(--mark-sm); font-size: var(--fs-2xs); border-radius: var(--radius-xs); letter-spacing: 0; }
+  .proj-meta .org { display: inline-flex; align-items: center; gap: var(--sp-2); }
+
+  .filters { display: flex; gap: var(--sp-2); flex-wrap: wrap; margin-bottom: var(--sp-4); }
+  .pat .row { grid-template-columns: 100px minmax(0, 1fr); padding: var(--sp-3) 0; }
+  .pat h3 { font-weight: 500; font-size: var(--fs-sm); line-height: 1.5; }
+  .pat .pm { margin: 2px 0 0; font-size: var(--fs-xs); color: var(--text-3); display: flex; gap: var(--sp-2); align-items: center; flex-wrap: wrap; }
+  .st { display: inline-flex; align-items: center; gap: 5px; }
+  .st::before { content: ""; width: 6px; height: 6px; border-radius: 50%; border: 1px solid var(--text-3); }
+  .st.reg::before { background: var(--accent); border-color: var(--accent); }
+  .st.reg { color: var(--text-2); }
+  .toggle-all {
+    margin-top: var(--sp-4); font: inherit; font-size: var(--fs-sm); font-weight: 500;
+    background: none; border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 6px 14px;
+    color: var(--text-2); cursor: pointer; transition: border-color var(--dur) ease, color var(--dur) ease;
+  }
+  .toggle-all:hover { color: var(--accent); border-color: var(--line-strong); }
+  .pat .row[hidden] { display: none; }
+
+  /* 3.1.6 C: slim bar identity + menu button (mobile only) and the menu sheet */
+  .bar-id, .menu-btn, .lang-btn { display: none; }
+  .lang-btn { width: auto; padding: 0 var(--sp-3); font: inherit; font-family: var(--font-meta); font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.02em; }
+  .sheet {
+    margin: 0 0 0 auto; padding: 0; border: 0; border-left: 1px solid var(--line);
+    width: min(var(--sheet-w), 88vw); height: 100dvh; max-width: none; max-height: none;
+    background: var(--surface); color: var(--text);
+  }
+  .sheet::backdrop { background: var(--scrim); }
+  .sheet[open] { animation: sheet-in var(--dur) ease-out; }
+  .sheet[open]::backdrop { animation: fade-in var(--dur) ease-out; }
+  @keyframes sheet-in { from { transform: translateX(24px); opacity: 0; } }
+  @keyframes fade-in { from { opacity: 0; } }
+  .sheet-in { min-height: 100%; display: flex; flex-direction: column; gap: var(--sp-6); padding: var(--sp-3) var(--sp-5) var(--sp-6); }
+  .sheet-head { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); }
+  .sheet-head h2, .sheet-label { margin: 0; font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); }
+  html:lang(ko) .sheet-head h2, html:lang(ko) .sheet-label { letter-spacing: 0.04em; font-size: var(--fs-sm); }
+  .sheet-nav { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .sheet-nav a {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3);
+    padding: var(--sp-4) 0; border-bottom: 1px solid var(--line);
+    font-size: var(--fs-xl); font-weight: 500; letter-spacing: -0.015em; text-decoration: none; color: var(--text-2);
+  }
+  .sheet-nav a::after { content: ""; width: 6px; height: 6px; border-radius: var(--radius-pill); background: transparent; }
+  .sheet-nav a[aria-current="true"] { color: var(--text); }
+  .sheet-nav a[aria-current="true"]::after { background: var(--accent); }
+  .sheet .contact { display: grid; gap: var(--sp-3); border-top: 0; padding-top: var(--sp-2); }
+  .sheet-prefs { margin-top: auto; display: grid; gap: var(--sp-3); padding-top: var(--sp-4); border-top: 1px solid var(--line); }
+  .sheet-prefs > div { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); font-size: var(--fs-sm); color: var(--text-2); }
+
+  footer { font-size: var(--fs-xs); color: var(--text-3); padding: var(--sp-2) var(--sp-1); }
+
+
+  /* ---------- 3.1.3 C · Dossier Record (desktop only) ---------- */
+  .contact .k, .contact .h, .contact .now, .cv { display: none; }
+  @media (min-width: 861px) {
+    aside.sidebar { gap: var(--sp-5); }
+    .photo { width: var(--sb-photo-w); border-radius: var(--radius-sm); }
+    .headline { margin-top: var(--sp-1); }
+    .role { display: none; } /* shown as the "Now" row in the record */
+    /* key / value record with hairlines */
+    .sidebar .contact { gap: 0; padding-top: 0; border-top: 1px solid var(--line-strong); }
+    .sidebar .contact li { display: grid; grid-template-columns: var(--sb-key) minmax(0, 1fr); align-items: baseline; gap: var(--sp-3); padding: var(--sp-3) 0; border-bottom: 1px solid var(--line); }
+    .sidebar .contact .now { display: grid; }
+    .sidebar .contact .k { display: block; font-size: var(--fs-2xs); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); }
+    html:lang(ko) .sidebar .contact .k { font-size: var(--fs-xs); letter-spacing: 0.02em; }
+    .sidebar .contact .v { font-size: var(--fs-sm); color: var(--text); line-height: 1.45; }
+    .sidebar .contact a { color: var(--text); }
+    .sidebar .contact a:hover { color: var(--accent); }
+    .sidebar .contact svg, .contact li:not(.em) .lbl { display: none; }
+    .sidebar .contact .h { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sidebar .contact a { text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
+    .sidebar .contact a:hover { text-decoration-color: var(--accent); }
+    .cv {
+      display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2);
+      padding: var(--sp-2) var(--sp-3); border: 1px dashed var(--line-strong); border-radius: var(--radius-sm);
+      font-size: var(--fs-sm); font-weight: 500; color: var(--text-2); text-decoration: none; cursor: not-allowed;
+    }
+    .cv .badge { color: var(--text-3); }
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1100px) {
+    :root { --sidebar: 280px; }
+    main { padding: var(--sp-6); }
+    .topbar .bar { padding: 0 var(--sp-6); }
+    .traj { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--sp-5); }
+    .traj li:nth-child(2)::before { right: 0; }
+  }
+  @media (max-width: 860px) {
+    .shell { display: block; }
+    aside.sidebar {
+      position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line);
+      padding: var(--sp-5) var(--sp-4) var(--sp-4);
+      display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: var(--sp-2) var(--sp-4); align-items: center;
+    }
+    .photo { width: 64px; }
+    .name { font-size: var(--fs-lg); }
+    .headline { font-size: var(--fs-sm); margin-top: 0; }
+    .role { font-size: var(--fs-xs); margin-top: 0; }
+    :root { --header-h: 52px; }
+    .topbar .bar { padding: 0 var(--sp-4); gap: var(--sp-3); }
+    /* Tabs scroll sideways; controls stay pinned on the right */
+    .tabs { overflow-x: auto; scrollbar-width: none; gap: var(--sp-4); padding-right: var(--sp-5);
+      -webkit-mask-image: linear-gradient(to right, var(--mask-solid) calc(100% - 24px), transparent); mask-image: linear-gradient(to right, var(--mask-solid) calc(100% - 24px), transparent); }
+    .tabs::-webkit-scrollbar { display: none; }
+    /* 3.1.6 C: the bar moves above the profile and holds only identity + menu button */
+    .shell { display: flex; flex-direction: column; }
+    .col { display: contents; }
+    .topbar { order: -1; }
+    .topbar nav, .topbar .controls { display: none; }
+    .bar-id { text-decoration: none; display: flex; align-items: baseline; gap: var(--sp-2); flex: 1; min-width: 0; white-space: nowrap; }
+    .bar-name { font-size: var(--fs-md); font-weight: 600; letter-spacing: -0.01em; }
+    .bar-cur { font-size: var(--fs-sm); color: var(--text-3); overflow: hidden; text-overflow: ellipsis; }
+    .bar-cur::before { content: "/"; margin-right: var(--sp-2); color: var(--line-strong); }
+    .menu-btn, .lang-btn { display: inline-grid; }
+    aside.sidebar { padding-top: var(--sp-4); }
+    .contact { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-4); padding-top: var(--sp-3); }
+    .contact .lbl { white-space: nowrap; }
+    main { padding: var(--sp-4) var(--sp-4) var(--sp-7); }
+    .card { padding: var(--sp-5) var(--sp-4); margin-bottom: var(--sp-4); }
+    .work { grid-template-columns: minmax(0, 1fr); }
+    .tagline { font-size: var(--fs-xl); }
+  }
+  @media (max-width: 560px) {
+    .traj { grid-template-columns: minmax(0, 1fr); gap: 0; margin-left: var(--sp-1); }
+    .traj li { padding: 0 0 var(--sp-4) var(--sp-5); }
+    .traj li::before, .traj li:nth-child(2)::before { top: 4px; bottom: 0; left: 4px; right: auto; width: 1px; height: auto; }
+    .traj li:last-child::before { display: none; }
+    .skills div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+    .row, .pat .row { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+    .contact .em .lbl { max-width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+  /* ===== TYPE ROLES (3.1.1) — typography only: family, weight, tracking, line-height ===== */
+  .name, .tagline, .proj h3 { font-family: var(--font-display); }
+  .sec-head h2, .sec-head .meta, .traj .yrs, .proj-meta .num, .row .when, .pat .pm .num, .badge, footer { font-family: var(--font-meta); font-size: var(--fs-xs); letter-spacing: 0; }
+  .badge { font-size: var(--fs-2xs); }
+  html:lang(ko) .sec-head h2 { font-family: var(--font-ko); }
+  body { line-height: var(--lh-body); }
+  html:lang(en) body { letter-spacing: var(--ls-body); }
+  html:lang(ko) body { line-height: var(--lh-body-ko); letter-spacing: var(--ls-body-ko); }
+  .name { font-weight: var(--fw-name); letter-spacing: var(--ls-name); }
+  .tagline { font-weight: var(--fw-tagline); line-height: var(--lh-tagline); letter-spacing: var(--ls-tagline); }
+  html:lang(ko) .tagline { font-weight: var(--fw-tagline-ko); line-height: var(--lh-tagline-ko); letter-spacing: var(--ls-tagline-ko); }
+  .proj h3 { font-weight: var(--fw-title); letter-spacing: var(--ls-title); }
+  html:lang(ko) .proj h3 { letter-spacing: var(--ls-title-ko); }
+  .traj h3, .row h3, .skills dt { font-weight: var(--fw-strong); }
+  .sec-head h2 { font-weight: var(--fw-eyebrow); letter-spacing: var(--ls-eyebrow); }
+  html:lang(ko) .sec-head h2 { font-weight: var(--fw-strong); letter-spacing: var(--ls-eyebrow-ko); }
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar" aria-label="Profile">
+    <img class="photo" id="photo" src="profile.jpg" alt="" width="112" height="140"
+         onerror="this.onerror=null;this.src='../../../public/images/profile.jpg'">
+    <div>
+      <h1 class="name" data-k="profile.name"></h1>
+      <p class="headline" data-k="profile.headline"></p>
+      <p class="role" data-k="profile.currentRole"></p>
+    </div>
+    <ul class="contact" id="contact"></ul>
+    <a class="cv" id="cv" aria-disabled="true" role="link"><span data-ui="cv"></span><span class="badge" data-ui="ph"></span></a>
+  </aside>
+
+  <div class="col">
+  <header class="topbar">
+    <div class="bar">
+      <a class="bar-id" href="#about"><span class="bar-name" data-k="profile.name"></span><span class="bar-cur" id="bar-cur" data-ui="about"></span></a>
+      <nav aria-label="Sections">
+        <ul class="tabs" id="tabs">
+          <li><a href="#about" data-ui="about" aria-current="true"></a></li>
+          <li><a href="#work" data-ui="work" aria-current="false"></a></li>
+          <li><a href="#experience" data-ui="experience" aria-current="false"></a></li>
+          <li><a href="#patents" data-ui="patents" aria-current="false"></a></li>
+        </ul>
+      </nav>
+      <div class="controls">
+        <div class="seg" role="group" aria-label="Language">
+          <button type="button" data-lang="en" lang="en">EN</button>
+          <button type="button" data-lang="ko" lang="ko">KO</button>
+        </div>
+        <button type="button" class="icon-btn" id="theme" aria-label="Toggle dark mode">
+          <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+          <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+      </div>
+      <button type="button" class="icon-btn lang-btn" id="lang-btn"></button>
+      <button type="button" class="icon-btn menu-btn" id="menu-btn" aria-haspopup="dialog" aria-expanded="false" aria-controls="sheet">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="card" id="about" aria-labelledby="h-about">
+      <div class="sec-head"><h2 id="h-about" data-ui="about"></h2></div>
+      <p class="tagline" id="tagline"></p>
+      <p class="about" data-k="profile.about"></p>
+      <ol class="traj" id="traj"></ol>
+      <dl class="skills" id="skills"></dl>
+    </section>
+
+    <section class="card" id="work" aria-labelledby="h-work">
+      <div class="sec-head"><h2 id="h-work" data-ui="work"></h2><span class="meta" id="work-meta"></span></div>
+      <div class="work" id="work-list"></div>
+    </section>
+
+    <section class="card" id="experience" aria-labelledby="h-exp">
+      <div class="sec-head"><h2 id="h-exp" data-ui="experience"></h2></div>
+      <ol class="rows" id="exp-list"></ol>
+    </section>
+
+    <section class="card pat" id="patents" aria-labelledby="h-pat">
+      <div class="sec-head"><h2 id="h-pat" data-ui="patents"></h2><span class="meta" id="pat-meta"></span></div>
+      <div class="filters seg" role="group" id="pat-filter" aria-label="Filter patents" style="display:inline-flex"></div>
+      <ol class="rows" id="pat-list"></ol>
+      <button type="button" class="toggle-all" id="pat-toggle" aria-controls="pat-list"></button>
+    </section>
+
+    <footer id="foot"></footer>
+  </main>
+  </div>
+</div>
+
+<!-- 3.1.6 C: menu sheet. showModal() makes the page inert (focus stays inside) and Esc closes it. -->
+<dialog class="sheet" id="sheet" aria-labelledby="sheet-title">
+  <div class="sheet-in">
+    <div class="sheet-head">
+      <h2 id="sheet-title" data-ui="menu"></h2>
+      <button type="button" class="icon-btn" id="sheet-close">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <nav id="sheet-nav-wrap">
+      <ul class="sheet-nav">
+        <li><a href="#about" data-ui="about" aria-current="true"></a></li>
+        <li><a href="#work" data-ui="work" aria-current="false"></a></li>
+        <li><a href="#experience" data-ui="experience" aria-current="false"></a></li>
+        <li><a href="#patents" data-ui="patents" aria-current="false"></a></li>
+      </ul>
+    </nav>
+    <ul class="contact"></ul>
+    <div class="sheet-prefs">
+      <div><span class="sheet-label" data-ui="language"></span>
+        <div class="seg" role="group" aria-label="Language">
+          <button type="button" data-lang="en" lang="en">EN</button>
+          <button type="button" data-lang="ko" lang="ko">KO</button>
+        </div></div>
+      <div><span class="sheet-label" data-ui="themeL"></span>
+        <button type="button" class="icon-btn theme-btn">
+          <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+          <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button></div>
+    </div>
+  </div>
+</dialog>
+
+<script src="content.js"></script>
+<script>
+(function () {
+  var C = window.CONTENT;
+  var root = document.documentElement;
+  var L = root.lang;
+  var patFilter = 'all', patOpen = false, PAT_N = 5;
+
+  // UI chrome strings (drafting only; final site keeps these in src/i18n/)
+  var UI = {
+    about: { en: 'About', ko: '소개' },
+    work: { en: 'Selected Work', ko: '대표 프로젝트' },
+    experience: { en: 'Experience', ko: '경력' },
+    patents: { en: 'Patents', ko: '특허' },
+    read: { en: 'Read case study', ko: '케이스 스터디 보기' },
+    present: { en: 'Present', ko: '현재' },
+    planned: { en: 'Planned', ko: '예정' },
+    lead: { en: 'Lead', ko: '총괄' },
+    all: { en: 'All', ko: '전체' },
+    registered: { en: 'Registered', ko: '등록' },
+    filed: { en: 'Filed', ko: '출원' },
+    showAll: { en: 'Show all', ko: '모두 보기' },
+    showLess: { en: 'Show less', ko: '접기' },
+    client: { en: 'Client', ko: '고객' },
+    of: { en: 'projects', ko: '건' },
+    draft: { en: '3.2.7 B · monogram badge', ko: '3.2.7 B · 이니셜 배지' },
+    theme: { en: 'Toggle dark mode', ko: '다크 모드 전환' },
+    cv: { en: 'Download CV', ko: '이력서 PDF' },
+    ph: { en: 'Placeholder', ko: '자리 표시' },
+    now: { en: 'Now', ko: '현재' },
+    email: { en: 'Email', ko: '이메일' },
+    menu: { en: 'Menu', ko: '메뉴' },
+    openMenu: { en: 'Open menu', ko: '메뉴 열기' },
+    closeMenu: { en: 'Close menu', ko: '메뉴 닫기' },
+    language: { en: 'Language', ko: '언어' },
+    themeL: { en: 'Theme', ko: '테마' },
+    sections: { en: 'Sections', ko: '섹션' },
+    otherLang: { en: 'KO', ko: 'EN' },
+    switchLang: { en: '한국어로 보기', ko: 'View in English' }
+  };
+  var t = function (o) { return o == null ? '' : (typeof o === 'string' ? o : (o[L] || o.en || '')); };
+  var u = function (k) { return UI[k][L]; };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var get = function (path) { return path.split('.').reduce(function (o, k) { return o && o[k]; }, C); };
+
+  // 3.2.7: marks exist only for the 6 employers (experience keys). Client names never get a mark.
+  var ORG2EMP = { 'GenON': 'genon', 'PwC Consulting': 'pwc', 'MakinaRocks': 'makinarocks', 'Samsung Electro-Mechanics': 'semco', 'KEPCO': 'kepco', 'POSCO E&C': 'posco-enc' };
+  var MONO = { genon: 'GN', pwc: 'PW', makinarocks: 'MR', semco: 'SE', kepco: 'KE', 'posco-enc': 'PE' };
+  function mono(k, cls) { return '<span class="mono' + (cls ? ' ' + cls : '') + '" aria-hidden="true">' + MONO[k] + '</span>'; }
+
+  var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function ym(s) {
+    if (!s) return '';
+    var p = s.split('-');
+    return L === 'ko' ? p[0] + '.' + p[1] + (p[2] ? '.' + p[2] : '') : (p[1] ? MON[+p[1] - 1] + ' ' : '') + p[0];
+  }
+  function period(p) {
+    var end = p.status === 'present' ? u('present') : ym(p.end);
+    return ym(p.start) + ' – ' + end;
+  }
+
+  var ICON = {
+    mail: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>',
+    gh: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4 1.5-4-2-6-2.5m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>',
+    in: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg>',
+    arrow: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
+  };
+
+  function renderStatic() {
+    var c = C.profile.contact;
+    document.querySelectorAll('.contact').forEach(function (ul) { ul.innerHTML =
+      (ul.id === 'contact' ? '<li class="now" id="c-now"></li>' : '') +
+      '<li class="em"><a href="mailto:' + esc(c.email) + '">' + ICON.mail + '<span class="lbl">' + esc(c.email) + '</span></a></li>' +
+      '<li><a href="' + esc(c.github) + '" rel="noopener">' + ICON.gh + '<span class="lbl">GitHub</span></a></li>' +
+      '<li><a href="' + esc(c.linkedin) + '" rel="noopener">' + ICON.in + '<span class="lbl">LinkedIn</span></a></li>'; });
+  }
+
+  function render() {
+    L = root.lang;
+    document.querySelectorAll('[data-k]').forEach(function (el) { el.textContent = t(get(el.dataset.k)); });
+    document.querySelectorAll('[data-ui]').forEach(function (el) { el.textContent = u(el.dataset.ui); });
+    document.getElementById('photo').alt = t(C.profile.name);
+    document.querySelectorAll('#theme, .theme-btn').forEach(function (b) { b.setAttribute('aria-label', u('theme')); });
+    document.getElementById('menu-btn').setAttribute('aria-label', u('openMenu'));
+    var lb = document.getElementById('lang-btn');
+    lb.textContent = u('otherLang'); lb.lang = L === 'en' ? 'ko' : 'en'; lb.setAttribute('aria-label', u('switchLang'));
+    document.getElementById('sheet-close').setAttribute('aria-label', u('closeMenu'));
+    document.getElementById('sheet-nav-wrap').setAttribute('aria-label', u('sections'));
+    document.getElementById('tagline').textContent = t(C.profile.taglines[0]);
+    document.title = t(C.profile.name) + ' · ' + t(C.profile.headline);
+
+    document.getElementById('traj').innerHTML = C.profile.trajectory.map(function (s) {
+      return '<li><span class="yrs num">' + esc(s.years) + '</span><h3>' + esc(t(s.label)) + '</h3><p>' + esc(t(s.description)) + '</p></li>';
+    }).join('');
+
+    document.getElementById('skills').innerHTML = C.profile.skills.map(function (s) {
+      return '<div><dt>' + esc(t(s.label)) + '</dt><dd>' + esc(t(s.summary)) + '</dd></div>';
+    }).join('');
+
+    var feat = Object.values(C.projects).filter(function (p) { return p.featured; }).sort(function (a, b) { return a.order - b.order; });
+    document.getElementById('work-meta').textContent = feat.length + ' / ' + Object.keys(C.projects).length + ' ' + u('of');
+    document.getElementById('work-list').innerHTML = feat.map(function (p) {
+      var client = p.client ? t(p.client.public ? p.client.name : p.client.label) : '';
+      var ek = p.org && ORG2EMP[p.org.en];
+      var org = (ek ? mono(ek, 'sm') : '') + '<span>' + esc(t(p.org)) + (client ? ' · ' + esc(client) : '') + '</span>';
+      var end = p.status === 'planned' || p.period.status === 'planned' ? ' <span class="badge">' + u('planned') + '</span>' : '';
+      var tags = [p.domain].concat(p.capability || []).filter(Boolean);
+      return '<article class="proj">' +
+        '<div class="proj-meta"><span class="org">' + org + '</span><span class="num">' + period(p.period) + end + '</span></div>' +
+        '<h3>' + esc(t(p.title)) + '</h3>' +
+        '<p>' + esc(t(p.summary)) + '</p>' +
+        '<ul class="tags">' + tags.map(function (x, i) { return '<li class="tag' + (i ? ' k' : '') + '">' + esc(x) + '</li>'; }).join('') + '</ul>' +
+        (p.stack && p.stack.length ? '<p class="stack">' + p.stack.map(esc).join(' · ') + '</p>' : '') +
+        '<a class="more" href="#">' + u('read') + ICON.arrow + '<span class="sr-only">: ' + esc(t(p.title)) + '</span></a>' +
+        '</article>';
+    }).join('');
+
+    document.getElementById('exp-list').innerHTML = Object.keys(C.experience).map(function (k) {
+      var e = C.experience[k], cur = e.period.status === 'present';
+      return '<li class="row' + (cur ? ' current' : '') + '"><span class="when num">' + period(e.period) + '</span><div class="ex">' + mono(k) + '<div>' +
+        '<h3>' + esc(t(e.org)) + '</h3><p class="sub">' + esc(t(e.role)) + '</p>' +
+        '<p class="desc">' + esc(t(e.summary)) + '</p></div></div></li>';
+    }).join('');
+
+    var c3 = C.profile.contact, now = document.getElementById('c-now');
+    now.innerHTML = '<span class="k">' + u('now') + '</span><span class="v">' + esc(t(C.profile.currentRole)) + '</span>';
+    var lis = document.querySelectorAll('#contact > li:not(.now)'), keys = [u('email'), 'GitHub', 'LinkedIn'],
+        hs = [c3.email, c3.github.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''), c3.linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\//, '').replace(/\/$/, '')];
+    lis.forEach(function (li, i) {
+      var k = li.querySelector('.k') || li.insertBefore(document.createElement('span'), li.firstChild);
+      k.className = 'k'; k.textContent = keys[i]; k.setAttribute('aria-hidden', 'true');
+      var a = li.querySelector('a'); a.classList.add('v');
+      if (i && !a.querySelector('.h')) { var h = document.createElement('span'); h.className = 'h'; h.setAttribute('aria-hidden', 'true'); h.textContent = hs[i]; a.appendChild(h); }
+    });
+    renderPatents();
+    document.getElementById('foot').textContent = '© ' + t(C.profile.name) + ' — ' + u('draft');
+
+    document.querySelectorAll('[data-lang]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === L)); });
+  }
+
+  function renderPatents() {
+    var all = Object.values(C.patents).slice().sort(function (a, b) { return b.date.localeCompare(a.date); });
+    var reg = all.filter(function (p) { return p.status === 'registered'; }).length;
+    var counts = { all: all.length, registered: reg, filed: all.length - reg };
+    document.getElementById('pat-meta').textContent = u('registered') + ' ' + reg + ' · ' + u('filed') + ' ' + (all.length - reg);
+    document.getElementById('pat-filter').innerHTML = ['all', 'registered', 'filed'].map(function (k) {
+      return '<button type="button" data-f="' + k + '" aria-pressed="' + (patFilter === k) + '">' + u(k) + ' <span class="num">' + counts[k] + '</span></button>';
+    }).join('');
+    var list = all.filter(function (p) { return patFilter === 'all' || p.status === patFilter; });
+    document.getElementById('pat-list').innerHTML = list.map(function (p, i) {
+      var r = p.status === 'registered';
+      return '<li class="row"' + (!patOpen && i >= PAT_N ? ' hidden' : '') + '><span class="when num">' + ym(p.date.slice(0, 7)) + '</span><div>' +
+        '<h3>' + esc(t(p.title)) + '</h3><p class="pm"><span class="st' + (r ? ' reg' : '') + '">' + u(p.status) + '</span>' +
+        (p.number ? '<span class="num">No. ' + esc(p.number) + '</span>' : '') + '</p></div></li>';
+    }).join('');
+    var btn = document.getElementById('pat-toggle');
+    btn.hidden = list.length <= PAT_N;
+    btn.setAttribute('aria-expanded', String(patOpen));
+    btn.textContent = patOpen ? u('showLess') : u('showAll') + ' (' + list.length + ')';
+  }
+
+  function setParam(k, v) {
+    var q = new URLSearchParams(location.search); q.set(k, v);
+    history.replaceState(null, '', '?' + q.toString() + location.hash);
+  }
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) return;
+    if (b.dataset.lang || b.id === 'lang-btn') { var lg = b.dataset.lang || (L === 'en' ? 'ko' : 'en'); root.lang = lg; setParam('lang', lg); render(); }
+    else if (b.id === 'theme' || b.classList.contains('theme-btn')) { var th = root.dataset.theme === 'dark' ? 'light' : 'dark'; root.dataset.theme = th; setParam('theme', th); }
+    else if (b.dataset.f) { patFilter = b.dataset.f; patOpen = false; renderPatents(); b = document.querySelector('[data-f="' + patFilter + '"]'); b && b.focus(); }
+    else if (b.id === 'pat-toggle') { patOpen = !patOpen; renderPatents(); }
+  });
+
+  // Underline the tab of the section in view. Tabs are static markup (only labels are
+  // re-rendered on language switch), so the current state survives a language change.
+  function setCurrent(id) {
+    var bar = document.getElementById('tabs');
+    var cur = document.getElementById('bar-cur');
+    cur.dataset.ui = id; cur.textContent = u(cur.dataset.ui);
+    document.querySelectorAll('.sheet-nav a').forEach(function (a) { a.setAttribute('aria-current', String(a.getAttribute('href') === '#' + id)); });
+    bar.querySelectorAll('a').forEach(function (a) {
+      var on = a.getAttribute('href') === '#' + id;
+      a.setAttribute('aria-current', String(on));
+      // Keep the current tab visible in the scrolling mobile tab bar.
+      if (on && bar.scrollWidth > bar.clientWidth) bar.scrollLeft = a.offsetLeft - bar.offsetLeft - 16;
+    });
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting) setCurrent(en.target.id); });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { io.observe(s); });
+  }
+
+  // 3.1.6 C: menu sheet open/close; native <dialog> handles focus containment and Esc.
+  var sheet = document.getElementById('sheet'), menuBtn = document.getElementById('menu-btn');
+  menuBtn.addEventListener('click', function () { sheet.showModal(); menuBtn.setAttribute('aria-expanded', 'true'); });
+  sheet.addEventListener('close', function () { menuBtn.setAttribute('aria-expanded', 'false'); });
+  sheet.addEventListener('click', function (e) {
+    // target === sheet only on the backdrop, since .sheet-in fills the dialog box
+    if (e.target === sheet || e.target.closest('#sheet-close, .sheet-nav a')) sheet.close();
+  });
+
+  renderStatic();
+  render();
+})();
+</script>
+</body>
+</html>
