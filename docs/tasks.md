@@ -185,7 +185,7 @@
 - [x] 5.6 언어 전환: 같은 위치의 반대 언어 페이지로 이동 — `src/i18n/ui.ts` `langPath(path, to)`(`/x/` ↔ `/ko/x/`, 404는 그 언어 홈, 5.8 hreflang에서 재사용)로 세 곳(데스크톱·시트 세그먼트, 모바일 바 언어 버튼)의 `href`를 빌드 시 반대 언어 같은 경로로. 반대 언어 링크에 `data-lang-alt`, 홈 scroll-spy가 현재 섹션을 `hash`로 붙임(주소창 hash 아님, 페이지 맨 위면 없음). JS 없으면 반대 언어 페이지 맨 위. 덤: 시트를 닫을 때 메뉴 버튼 포커스 복귀가 sticky 바 때문에 페이지를 약 400px 위로 올리던 문제 수정(`focus({ preventScroll: true })`). Playwright 확인: 세 컨트롤 모두 `/#experience` ↔ `/ko/#experience` 이동·`lang`·도착 섹션 일치, 스크롤만 한 경우 spy 섹션(`#ip`), 맨 위는 앵커 없음, JS 끔 → `/ko/`·`/`, 360px 가로 스크롤 없음
 - [x] 5.7 UI 문구 번역 파일 (`src/i18n/`) — Domain·Capability 태그 국문 표기 포함 (콘텐츠에는 영문 값만 있음, 용어집에 추가) — `src/i18n/ui.ts`에 사이트 전체 UI 문구(5장 컴포넌트, 6장 케이스·CV·404, 9장 보조 기술·알림)를 `{ en, ko }` 사전으로 모음. `{n}` 같은 자리는 `t(lang, key, vars)`가 채움. 태그는 `tag(lang, value)`(영문은 콘텐츠 값 그대로, 국문은 용어집 6절), 이를 위해 `content.config.ts`의 `DOMAINS`·`CAPABILITIES`를 export. 빌드는 타입 검사를 안 하므로 값 누락·빈 값·en/ko 자리 불일치·태그 국문 누락이면 모듈 로드 시 오류로 빌드 실패(확인함). `astro check`는 의존성 추가가 필요해 쓰지 않음. 용어집 7절을 절별로 재정리하고 "Show all" 국문을 DESIGN.md대로 "모두 보기"로 고침. 개인 프로젝트 `in-progress` 국문은 5.20 값 "개발 중"에 `TODO(1.5.6)`
 - [x] 5.8 공통 head: 메타, OG, canonical, `hreflang`, `Person` JSON-LD, 파비콘 — `src/components/Head.astro`(Base `head` 슬롯: description, canonical·hreflang en/ko/x-default·`og:url`, OG·`twitter:card`, 파비콘 링크, 홈만 JSON-LD `Person`. 404는 `canonical={false}`로 생략). 홈 `<title>` = `이름 · 직함`, description = `taglines[0]`. `worksFor`는 `experience`의 `status: present` 항목 회사명(GenON). OG는 명함 A에서 현 소속 줄을 빼고 직함을 선 아래로 옮겨 다시 렌더(`public/og-en.png`·`og-ko.png`, 라이트, 수동 갱신 `docs/design-drafts/og/render.mjs --site`, 명령은 DESIGN.md 6.6). 파비콘 `favicon.svg`(334-d 그대로)·`favicon.ico`(16+32)·`apple-touch-icon.png`(180). 확인: 빌드 후 `dist/index.html`·`dist/ko/index.html` head 검사(JSON-LD 파싱, hreflang 쌍, og:image 절대 URL), 자산 7개 200. 케이스 스터디·CV·404 연결은 각 페이지 작업(6.x, 7.x)에서
-- [ ] 5.9 푸터: 최종 수정일 자동 표기
+- [x] 5.9 푸터: 최종 수정일 자동 표기 — `src/components/Footer.astro`(335-a 콜로폰: © 연도·이름, 최종 수정 `<time>`, 사이트 소스, 맨 위로 → `#main`). 날짜는 빌드 시 `git log -1 --format=%cs -- src/content`, 실패 시 빌드 날짜로 대체. 1440/1100/390/360 × 라이트/다크 × en/ko 확인
 - [ ] 5.10 공통 컴포넌트: 카드, 항목 행, 태그, 배지, 접힘, 버튼·링크
 
 **완료 기준**: 빈 섹션으로 구성된 홈이 영문/국문, 라이트/다크, 데스크톱/모바일에서 명세대로 보인다.
@@ -239,7 +239,7 @@
 
 ## 단계 8. 배포와 공개
 
-- [ ] 8.1 GitHub Actions 워크플로 작성: 빌드 → PDF 생성 → Pages 배포 (`master` 대상)
+- [ ] 8.1 GitHub Actions 워크플로 작성: 빌드 → PDF 생성 → Pages 배포 (`master` 대상) — `actions/checkout`에 `fetch-depth: 0` 필요 (얕은 복제면 푸터 최종 수정일이 매 배포 날짜로 바뀜, 5.9)
 - [ ] 8.2 **[확인]** 저장소 Settings → Pages의 Source를 GitHub Actions로 설정 (사용자가 직접)
 - [ ] 8.3 **[확인]** GoatCounter 계정 생성 후 사이트 코드 전달 (사용자가 직접), 집계 스크립트 적용
 - [ ] 8.4 README 작성, 라이선스 표기 결정 (코드와 콘텐츠의 권리 범위) **[확인]**
