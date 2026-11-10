@@ -20,7 +20,7 @@
 | 1 | 콘텐츠 작성 (영문 → 국문) | 작성 완료, 사용자 검토·자료 대기 (1.2.11, 1.3.2, 1.5.2~1.5.3 그린소재, 1.5.6) |
 | 2 | 디자인 콘셉트 선정 (G1) | 완료 (A + 상단 메뉴 + 중앙 정렬) |
 | 3 | 세부 디자인 (G2~G6) | 완료 |
-| 4 | DESIGN.md 작성 | 다음 작업 (기준 시안: `g4/base.html`, `g4/case.html`, 확정안 `331-c`·`332-a2`·`333-a`·`334-d`·`335-a`) |
+| 4 | DESIGN.md 작성 | 진행 중 (4.1~) |
 | 5 | 구현: 기반 | 대기 |
 | 6 | 구현: 섹션과 페이지 | 대기 |
 | 7 | 검수 | 대기 |
@@ -157,7 +157,7 @@
 
 ## 단계 4. DESIGN.md 작성
 
-- [ ] 4.1 Brand & Tone, Principles
+- [x] 4.1 Brand & Tone, Principles — Do/Don't, UI 문구 어조 포함
 - [ ] 4.2 Tokens: color(라이트/다크), type, spacing, radius, motion
 - [ ] 4.3 Layout & Breakpoints
 - [ ] 4.4 Components: 컴포넌트별 구조, 상태(hover, focus, active), 반응형 동작
