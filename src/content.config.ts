@@ -48,7 +48,7 @@ const client = z.discriminatedUnion('public', [
 ]);
 
 // basic-plan 4.3
-const DOMAINS = [
+export const DOMAINS = [
   'Energy & Utilities',
   'Manufacturing',
   'Petrochemical & Steel',
@@ -56,7 +56,7 @@ const DOMAINS = [
   'Robotics',
   'Public & Legal',
 ] as const;
-const CAPABILITIES = [
+export const CAPABILITIES = [
   'Physical AI',
   'LLM Agents & RAG',
   'Anomaly Detection',

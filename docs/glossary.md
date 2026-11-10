@@ -210,6 +210,8 @@
 
 ## 6. 분류 라벨 (basic-plan 4.3) [가정]
 
+콘텐츠에는 영문 값만 있다. 국문 화면의 태그 표기는 이 표를 `src/i18n/ui.ts`(`tag()`)가 그대로 쓴다.
+
 | 구분 | English | 한국어 |
 |---|---|---|
 | 축 이름 | Domain / Capability / Role | 도메인 / 역량 / 역할 |
@@ -233,26 +235,103 @@
 
 ## 7. 섹션·UI 이름
 
+UI 문구의 원본은 `src/i18n/ui.ts`다. 이 표는 표기 기준이며, 문구를 바꾸면 두 곳을 함께 고친다. 영문 어조는 `DESIGN.md` 1장 "UI 문구 어조"를 따른다.
+
+### 7.1 섹션·탭
+
 | English | 한국어 | note |
 |---|---|---|
 | About | 소개 | |
-| Selected Work | 대표 프로젝트 | |
+| Selected Work | 대표 프로젝트 | 탭은 Work / 대표 프로젝트 |
 | Experience | 경력 | |
-| Projects | 프로젝트 | |
-| Personal Projects | 개인 프로젝트 | |
-| Patents | 특허 | |
-| Software | 프로그램 등록 | 이력서 섹션명 기준 |
-| Publications | 논문 | |
-| Reports | 연구보고서 | |
 | Teaching · Books · Advisory | 강의 · 저서 · 자문 | |
 | Awards & Education | 수상 · 학력 | |
+| Personal Projects | 개인 프로젝트 | 탭은 Personal / 개인 프로젝트 |
+| IP & Publications | 지식재산 · 출판물 | 탭은 Publications / 지식재산 · 출판물 |
 | Contact | 연락처 | |
-| Show all / Show less | 전체 보기 / 접기 | |
-| All (filter) | 전체 | |
-| Download CV | CV 다운로드 | |
+| All Projects | 전체 프로젝트 | Selected Work 카드 안 원장 제목 |
 | Case study | 케이스 스터디 | |
+| Case studies | 케이스 스터디 목록 | 이전·다음 `nav` 이름 |
 
-UI 문구의 어조는 시안 단계(규칙 1)에서 바뀔 수 있다. 바뀌면 이 표를 고친다.
+### 7.2 기록 종류 (숫자 표, IP 서랍, 묶음 라벨, CV)
+
+| English | 한국어 | note |
+|---|---|---|
+| Projects | 프로젝트 | |
+| Patents | 특허 | |
+| Software | 프로그램 등록 | 이력서 섹션명 기준 |
+| Papers | 논문 | IP 서랍·CV. 섹션 이름 Publications(출판물)과 구분 |
+| Reports | 연구보고서 | CV 섹션은 Selected Reports / 주요 보고서 |
+| Books | 저서 | |
+| Teaching | 강의 | 묶음 라벨 |
+| Advisory | 자문 | 묶음 라벨 |
+| Awards | 수상 | 묶음 라벨 |
+| Education | 학력 | 묶음 라벨 |
+
+### 7.3 버튼·라벨·배지
+
+| English | 한국어 | note |
+|---|---|---|
+| Show all (N) / Show less | 모두 보기 (N) / 접기 | DESIGN.md 1장·5.9 기준 (이전 표기 "전체 보기"를 바꿈) |
+| All (filter) | 전체 | 개인 프로젝트 상태 필터 |
+| All domains / All capabilities | 모든 도메인 / 모든 역량 | 원장 선택 상자 첫 항목 |
+| Clear filters | 필터 해제 | |
+| Download CV | CV 다운로드 | |
+| Placeholder | 자리 표시 | 준비 중인 항목 배지 |
+| Now | 현재 | 사이드바 기록표 키 |
+| Email | 이메일 | |
+| Selected | 대표 | 대표작·대표 보고서 배지 |
+| Lead | 총괄 | 6절 Badge와 같음 |
+| In progress | 진행 중 | 진행 중·예정 프로젝트 배지. 개인 프로젝트 상태는 아래 |
+| Present | 현재 | 기간 끝 (9.1) |
+| Active / In progress / Archived | 운영 중 / 개발 중 / 보관 | 개인 프로젝트 상태. `in-progress` 국문은 [확인 필요]: "개발 중"과 "진행 중" 중 결정 (tasks 1.5.6) |
+| Outcome | 성과 | |
+| Repository / Live demo | 저장소 / 데모 | 개인 프로젝트 링크 |
+| Open to | 의뢰 가능 분야 | Contact |
+| Reach me | 연락 방법 | Contact |
+| Copy / Copied | 복사 / 복사됨 | 이메일 복사 버튼 |
+| At a glance | 숫자로 보기 | 숫자 표 이름 |
+| featured / registered / filed / pending | 대표 / 등록 / 출원 / 등록 진행 중 | 숫자 표 보조줄 (`6 featured` / `대표 6건`) |
+| with DOI | DOI 연결 | 논문 서랍 |
+| N organizations / N records | N 곳 / 총 N건 | 섹션 머리 건수 |
+| Last updated / Site source / Back to top | 최종 수정 / 사이트 소스 / 맨 위로 | 푸터 |
+| Print / Save PDF | 인쇄 / PDF 저장 | CV 도구 막대 |
+| CV | 이력서 | CV 페이지 제목 |
+
+### 7.4 케이스 스터디
+
+| English | 한국어 | note |
+|---|---|---|
+| Context / Problem / My role / Approach / Architecture / Outcome | 배경 / 문제 / 역할 / 접근 / 아키텍처 / 성과 | 본문 섹션 |
+| Key decisions | 주요 결정 | |
+| Decision / Why / Trade-off | 결정 / 이유 / 트레이드오프 | 결정 표 열 |
+| Layer / Components / Flows | 계층 / 구성 요소 / 흐름 | 아키텍처 표 열 |
+| Client / Organization / Period / Role / Stack | 고객 / 소속 / 기간 / 역할 / 기술 스택 | 기록표 키 |
+| Project facts | 프로젝트 정보 | 사이드바 이름 |
+| On this page | 이 페이지 | 목차 |
+| Previous / Next | 이전 / 다음 | |
+| Profile / Skills / Other Projects / Teaching & Advisory | 소개 / 기술 / 기타 프로젝트 / 강의·자문 | CV 섹션 |
+
+### 7.5 안내 문장·보조 기술용 문구
+
+| English | 한국어 | note |
+|---|---|---|
+| Skip to content | 본문 바로가기 | |
+| Open menu / Close menu / Menu | 메뉴 열기 / 메뉴 닫기 / 메뉴 | |
+| Sections | 섹션 | `nav` 이름. 404 바로 가기 목록은 "섹션 바로 가기" |
+| Language / Theme | 언어 / 테마 | |
+| Toggle dark mode | 다크 모드 전환 | |
+| View in English / 한국어로 보기 | (각 언어 그대로) | 모바일 언어 버튼 |
+| Profile | 프로필 | 사이드바 `aside` 이름 |
+| Copy email address: {주소} | 이메일 주소 복사: {주소} | 복사 버튼 `aria-label` |
+| Email address copied | 이메일 주소를 복사했습니다 | 라이브 영역 알림 |
+| Showing n of N projects | 전체 N건 중 n건 표시 | 필터 결과 (원장·개인 프로젝트 공통) |
+| No projects match these filters. | 조건에 맞는 프로젝트가 없습니다. | |
+| Page not found | 페이지를 찾을 수 없습니다 | 404 |
+| The page you requested does not exist or has moved. | 요청하신 페이지가 없거나 주소가 바뀌었습니다. | 404 |
+| Go to home / 한국어 홈 | 홈으로 / English home | 404 버튼 |
+| +n more reports at {site} | 보고서 n건 더 보기: {site} | CV 보고서 끝줄 |
+| to / back to | 연결 / 되돌아감 | 아키텍처 흐름 화살표(→ ↩)의 화면 낭독용 글자 |
 
 ## 8. 학위·수상
 
