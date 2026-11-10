@@ -21,7 +21,7 @@ const { email, github, linkedin } = (await getEntry('profile', 'profile'))!.data
       </button>
     </div>
     <nav aria-label={t(lang, 'sections')}>
-      {/* Current-section marks (aria-current) come with the scroll-spy in tasks 5.4. */}
+      {/* aria-current is set by the scroll-spy in Topbar.astro. */}
       <ul class="sheet-nav" data-nav>
         {TABS.map((tab) => (
           <li>
@@ -89,7 +89,9 @@ const { email, github, linkedin } = (await getEntry('profile', 'profile'))!.data
   sheet.addEventListener('click', (e) => {
     const el = e.target as Element;
     // target is the dialog itself only on the backdrop, since .sheet-in fills the box.
-    if (el === sheet || el.closest('[data-sheet-close], .sheet-nav a')) sheet.close();
+    if (el === sheet || el.closest('[data-sheet-close]')) sheet.close();
+    // Section links: close after the anchor jump starts; closing first cancels the scroll (Chromium).
+    else if (el.closest('.sheet-nav a')) setTimeout(() => sheet.close());
   });
   // The sheet only exists on mobile; close it if the window widens past the breakpoint.
   matchMedia('(min-width: 861px)').addEventListener('change', (e) => {
@@ -204,7 +206,7 @@ const { email, github, linkedin } = (await getEntry('profile', 'profile'))!.data
     color: var(--text-2);
   }
 
-  /* Current-section dot; filled by aria-current (tasks 5.4). */
+  /* Current-section dot; filled by aria-current. */
   .sheet-nav > li > a::after {
     content: '';
     width: var(--dot);

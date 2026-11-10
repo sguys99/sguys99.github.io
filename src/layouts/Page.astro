@@ -1,5 +1,6 @@
 ---
-// Page frame shared by home, case study and 404 (DESIGN.md 4장): skip link, sidebar + right column, mobile menu sheet.
+// Page frame shared by home, case study and 404 (DESIGN.md 4장): skip link, top bar, sidebar, main, mobile menu sheet.
+// DOM order is navigation first (9장 키보드 순서); grid placement keeps the sidebar visually on the left.
 import Base from './Base.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Topbar from '../components/Topbar.astro';
@@ -20,14 +21,12 @@ const { lang, title } = Astro.props;
     {t(lang, 'skip')}
   </a>
   <div class="shell">
+    <Topbar lang={lang} />
     <Sidebar lang={lang} />
-    <div class="col">
-      <Topbar lang={lang} />
-      <main id="main" tabindex="-1">
-        <slot />
-      </main>
-      {/* Footer: tasks 5.9 */}
-    </div>
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    {/* Footer: tasks 5.9 (right column, row after main) */}
   </div>
   <MenuSheet lang={lang} />
 </Base>
@@ -60,17 +59,30 @@ const { lang, title } = Astro.props;
   .shell {
     display: grid;
     grid-template-columns: var(--sidebar) minmax(0, 1fr);
+    /* Row 1 reserves the bar (+1px bottom line); the bar itself spans every row so it can stay sticky. */
+    grid-template-rows: calc(var(--header-h) + 1px) 1fr;
     min-height: 100vh;
     min-height: 100dvh;
     max-width: calc(var(--sidebar) + var(--main));
     margin: 0 auto;
   }
 
-  .col {
+  .shell > :global(.topbar) {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    align-self: start;
     min-width: 0;
   }
 
+  .shell > :global(.sidebar) {
+    grid-column: 1;
+    grid-row: 1 / -1;
+  }
+
   main {
+    grid-column: 2;
+    grid-row: 2;
+    min-width: 0;
     max-width: var(--main);
     width: 100%;
     padding: var(--sp-6) var(--sp-7);
@@ -100,13 +112,8 @@ const { lang, title } = Astro.props;
       flex-direction: column;
     }
 
-    .col {
-      display: contents;
-    }
-
-    /* Bar moves above the profile. */
-    .col > :global(.topbar) {
-      order: -1;
+    .shell > :global(.topbar) {
+      align-self: stretch;
     }
 
     main {

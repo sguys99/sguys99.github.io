@@ -179,7 +179,7 @@
 - [x] 5.1 전역 스타일과 리셋, 토큰 적용 — `src/styles/global.css` + `src/layouts/Base.astro`(lang·title, head 슬롯). 국문은 body 상속(`html:lang(ko) body`), `.sr-only`는 감싼 요소를 `:where(:has(> .sr-only))`로 기준 요소화. 360px 가로 스크롤 없음. `::selection`은 명세에 없어 브라우저 기본 유지
 - [x] 5.2 웹폰트 셀프 호스팅 (국문 서브셋 분할, 라이선스 확인, `font-display` 설정) — `src/styles/fonts.css` + `public/fonts/`. Geist·Geist Mono는 Latin·사용 굵기로 잘라 각 약 24KB, Pretendard는 배포본 dynamic subset 그대로. 전부 `swap`, 영문만 Geist 프리로드, Geist 폴백 메트릭 보정(`Geist Fallback`). 라이선스 OFL 1.1 파일 동봉. Astro Fonts API는 패밀리 이름 해시화로 미채택
 - [x] 5.3 기본 레이아웃: 사이드바 + 본문, 모바일 전환 — `src/layouts/Page.astro`(본문 바로가기, `.shell`, `main#main`) + `src/components/`(Sidebar, Topbar, MenuSheet, Icon, Home) + `src/i18n/ui.ts`(최소 UI 문구, 5.7에서 확장). 홈은 섹션 8개 빈 카드. 시트는 네이티브 `<dialog>`(Esc·backdrop·링크 클릭 닫힘, 861px 이상이면 닫힘, 열린 동안 스크롤 잠금). 탭(5.4)·언어/테마 토글(5.5, 5.6)·푸터(5.9)·이메일 복사(5.10)는 자리만. 모바일 언어 버튼은 상대 언어 홈으로 가는 임시 링크. 360px 가로 스크롤 없음(시트 열림 포함)
-- [ ] 5.4 상단 내비게이션, 앵커 스크롤, 현재 위치 표시
+- [x] 5.4 상단 내비게이션, 앵커 스크롤, 현재 위치 표시 — `Topbar.astro`에 탭 6개 + 미끄러지는 `.ink`(`--m-nav` `--ease-out`, 첫 배치는 transition 없이) + 위치 기반 scroll-spy(판정선 바 아래 + 25%, 페이지 끝은 Contact, 탭·시트 클릭 후 손 스크롤 전까지 고정). 탭·시트 링크 `aria-current`, 모바일 바는 섹션 이름 표시. 케이스 변형은 `current` prop(홈 앵커 링크 + 고정 표시)만. DOM 순서를 내비게이션 먼저로 바꾸고 그리드 자리 지정으로 배치 유지(`.col` 제거, 11.7 사용자 결정). 시트 링크가 앵커 스크롤을 취소하던 5.3 버그 수정. 앵커 오프셋: 카드 위 = 바 아래 23px(데스크톱·모바일). JS 없으면 탭은 앵커, 막대 없음. 11.6 '상단 메뉴 흔적'은 반투명 바 뒤 본문으로 확인
 - [ ] 5.5 테마 전환: 시스템 설정 따름 + 수동 전환 기억, 로딩 시 깜빡임 없음
 - [ ] 5.6 언어 전환: 같은 위치의 반대 언어 페이지로 이동
 - [ ] 5.7 UI 문구 번역 파일 (`src/i18n/`) — Domain·Capability 태그 국문 표기 포함 (콘텐츠에는 영문 값만 있음, 용어집에 추가)

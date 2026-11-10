@@ -2,18 +2,21 @@
 // Top bar in the right column (DESIGN.md 5.2, 5.3). ≥861px: tabs + toggles. ≤860px: identity + language + menu button.
 import { getEntry } from 'astro:content';
 import Icon from './Icon.astro';
-import { t, homePath, type Lang } from '../i18n/ui';
+import { t, homePath, TABS, type Lang, type SectionId } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
+  /** Case study variant (332-a2-case): tabs link to home sections and this tab stays current, no scroll-spy. */
+  current?: SectionId;
 }
 
-const { lang } = Astro.props;
+const { lang, current } = Astro.props;
+const base = current ? homePath(lang) : '';
 const other: Lang = lang === 'en' ? 'ko' : 'en';
 const profile = (await getEntry('profile', 'profile'))!.data;
 ---
 
-<header class="topbar">
+<header class="topbar" data-spy={current ? undefined : ''}>
   <div class="bar">
     <a class="bar-id" href="#about">
       <span class="bar-name">{profile.name[lang]}</span>
@@ -21,7 +24,23 @@ const profile = (await getEntry('profile', 'profile'))!.data;
         {t(lang, 'about')}
       </span>
     </a>
-    {/* Section tabs: tasks 5.4. Language and theme toggles (.controls): tasks 5.5, 5.6. */}
+    <nav aria-label={t(lang, 'sections')}>
+      <ul class="tabs" data-nav>
+        {TABS.map((tab) => (
+          <li>
+            <a
+              href={`${base}#${tab.id}`}
+              data-for={tab.covers.join(' ')}
+              aria-current={tab.id === current ? 'true' : undefined}
+            >
+              {t(lang, `tab_${tab.id}`)}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <span class="ink" aria-hidden="true"></span>
+    </nav>
+    {/* Language and theme toggles (.controls): tasks 5.5, 5.6. */}
     {/* shortcut: links to the other language's home; tasks 5.6 keeps the reader's position. */}
     <a
       class="icon-btn lang-btn"
@@ -45,6 +64,85 @@ const profile = (await getEntry('profile', 'profile'))!.data;
   </div>
 </header>
 
+<script>
+  // Current section (DESIGN.md 5.2, 6.2): tabs and sheet links get aria-current, the ink slides
+  // under the current tab, and the mobile bar shows the section name.
+  const topbar = document.querySelector<HTMLElement>('.topbar')!;
+  const tabs = topbar.querySelector<HTMLElement>('.tabs')!;
+  const ink = topbar.querySelector<HTMLElement>('.ink')!;
+  const barCur = topbar.querySelector<HTMLElement>('[data-bar-cur]')!;
+  const sections = [...document.querySelectorAll<HTMLElement>('main > section[id]')];
+
+  function placeInk() {
+    const on = tabs.querySelector('[aria-current="true"]');
+    if (!on) return ink.style.setProperty('--ink-w', '0px');
+    const n = ink.parentElement!.getBoundingClientRect();
+    const r = on.getBoundingClientRect();
+    ink.style.setProperty('--ink-x', `${r.left - n.left}px`);
+    ink.style.setProperty('--ink-w', `${r.width}px`);
+  }
+
+  new ResizeObserver(placeInk).observe(tabs);
+  document.fonts.ready.then(placeInk);
+  // First placement without transition.
+  requestAnimationFrame(() => requestAnimationFrame(() => ink.classList.add('ready')));
+
+  if (topbar.hasAttribute('data-spy') && sections.length) {
+    let cur = '';
+    let hold = '';
+
+    const setCurrent = (id: string) => {
+      cur = id;
+      // Section name, not tab name (6.2): the section heading carries it.
+      barCur.textContent = document.getElementById(`h-${id}`)?.textContent ?? '';
+      // Tabs list the sections they cover in data-for; sheet sub-links match their own href.
+      for (const a of document.querySelectorAll<HTMLAnchorElement>('[data-nav] a')) {
+        const ids = (a.dataset.for ?? a.hash.slice(1)).split(' ');
+        if (ids.includes(id)) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      }
+      placeInk();
+    };
+
+    // Last section whose top passed the line (bar bottom + 25% of the viewport); the last one at page end.
+    const spy = () => {
+      const line = topbar.getBoundingClientRect().bottom + innerHeight * 0.25;
+      let id = sections[0].id;
+      for (const s of sections) if (s.getBoundingClientRect().top <= line) id = s.id;
+      if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2)
+        id = sections.at(-1)!.id;
+      if (hold) id = hold;
+      if (id !== cur) setCurrent(id);
+    };
+
+    let ticking = false;
+    addEventListener(
+      'scroll',
+      () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          ticking = false;
+          spy();
+        });
+      },
+      { passive: true },
+    );
+    addEventListener('resize', spy);
+    addEventListener('load', spy);
+    // Hold the clicked section until the user scrolls by hand, so a short section (Awards) is not overridden.
+    for (const ev of ['wheel', 'touchstart', 'keydown'])
+      addEventListener(ev, () => (hold = ''), { passive: true });
+    document.addEventListener('click', (e) => {
+      const a = (e.target as Element).closest<HTMLAnchorElement>('[data-nav] a, .bar-id');
+      if (!a?.hash) return;
+      hold = a.hash.slice(1);
+      setCurrent(hold);
+    });
+    spy();
+  }
+</script>
+
 <style>
   .topbar {
     position: sticky;
@@ -63,6 +161,84 @@ const profile = (await getEntry('profile', 'profile'))!.data;
     display: flex;
     align-items: center;
     gap: var(--sp-4);
+  }
+
+  nav {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    align-self: stretch;
+    display: flex;
+  }
+
+  .tabs {
+    display: flex;
+    gap: var(--sp-6);
+    list-style: none;
+  }
+
+  .tabs li {
+    display: flex;
+  }
+
+  .tabs a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--text-3);
+    text-decoration: none;
+    transition: color var(--dur) ease;
+  }
+
+  /* Hover: a hairline where the ink would land. */
+  .tabs a::before {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 1px;
+    background: var(--line-strong);
+    opacity: 0;
+    transition: opacity var(--dur) ease;
+  }
+
+  .tabs a:hover,
+  .tabs a[aria-current='true'] {
+    color: var(--text);
+  }
+
+  .tabs a:hover::before {
+    opacity: 1;
+  }
+
+  .tabs a[aria-current='true']::before {
+    opacity: 0;
+  }
+
+  /* Ring inside the bar height (component value, DESIGN.md 5.2). */
+  .tabs a:focus-visible {
+    outline-offset: -6px;
+  }
+
+  /* One bar sliding between tabs, on the bar's bottom line. Width 0 without JS. */
+  .ink {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    height: var(--focus-w);
+    width: var(--ink-w, 0);
+    transform: translateX(var(--ink-x, 0));
+    background: var(--accent);
+    border-radius: var(--radius-bar) var(--radius-bar) 0 0;
+    pointer-events: none;
+  }
+
+  .ink.ready {
+    transition:
+      transform var(--m-nav) var(--ease-out),
+      width var(--m-nav) var(--ease-out);
   }
 
   .bar-id,
@@ -87,7 +263,17 @@ const profile = (await getEntry('profile', 'profile'))!.data;
     }
   }
 
+  @media (max-width: 1000px) {
+    .tabs {
+      gap: var(--sp-4);
+    }
+  }
+
   @media (max-width: 860px) {
+    nav {
+      display: none;
+    }
+
     .bar {
       padding: 0 var(--sp-4);
       gap: var(--sp-3);

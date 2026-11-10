@@ -499,29 +499,30 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 ### 페이지 골격 (홈)
 
 ```html
+<a class="skip" href="#main">…</a>          <!-- 본문 바로가기 (9장) -->
 <div class="shell">
+  <header class="topbar"><div class="bar">…</div></header>  <!-- 오른쪽 열 위 -->
   <aside class="sidebar">…</aside>          <!-- 왼쪽 열: 프로필 -->
-  <div class="col">                          <!-- 오른쪽 열 -->
-    <header class="topbar"><div class="bar">…</div></header>
-    <main id="main">
-      <section class="card" id="about">…</section> … <section class="card" id="contact">…</section>
-    </main>
-    <footer class="foot-a">…</footer>
-  </div>
+  <main id="main">                           <!-- 오른쪽 열 -->
+    <section class="card" id="about">…</section> … <section class="card" id="contact">…</section>
+  </main>
+  <footer class="foot-a">…</footer>          <!-- 오른쪽 열, main 아래 -->
 </div>
 <dialog class="sheet">…</dialog>             <!-- 모바일 메뉴 시트, top layer -->
 ```
 
+- **DOM 순서는 내비게이션 먼저**(상단 메뉴 → 사이드바 → 본문, 11.7 사용자 결정). 보이는 배치는 그리드 자리 지정으로 시안과 같게 둔다. 시안의 `.col` 감싸개는 쓰지 않는다.
+
 | 요소 | 규칙 |
 |---|---|
-| `.shell` | `display: grid; grid-template-columns: var(--sidebar) minmax(0, 1fr); min-height: 100vh; max-width: calc(var(--sidebar) + var(--main)); margin: 0 auto` |
+| `.shell` | `display: grid; grid-template-columns: var(--sidebar) minmax(0, 1fr); grid-template-rows: calc(var(--header-h) + 1px) 1fr; min-height: 100vh; max-width: calc(var(--sidebar) + var(--main)); margin: 0 auto` |
 | 중앙 정렬 | 넓은 화면에서 사이드바와 본문이 한 덩어리로 가운데 온다. 양옆 빈 곳은 `body`의 `--bg`. 최대 폭 = 320 + 960 = 1280px |
 | `aside.sidebar` | `position: sticky; top: 0; height: 100vh; overflow-y: auto; border-right: 1px solid var(--line); padding: var(--sp-7) var(--sp-6); display: flex; flex-direction: column; gap: var(--sp-5)`. 바탕은 `--bg` (카드가 아님). 내부 → 5장 |
-| `.col` | `min-width: 0` (긴 내용이 그리드 열을 넓히지 않게) |
-| `.topbar` | 오른쪽 열(`.col`) 안에 있다. 사이드바 위로 걸치지 않는다. `position: sticky; top: 0; z-index: var(--z-header); background: var(--header-bg); backdrop-filter: var(--header-blur); border-bottom: 1px solid var(--line)` |
+| 자리 지정 | `.sidebar`: `grid-column: 1; grid-row: 1 / -1`. `.topbar`: `grid-column: 2; grid-row: 1 / -1; align-self: start` (모든 행에 걸쳐야 sticky가 페이지 끝까지 유지된다. 첫 행이 바 높이 + 아래 선 1px을 비워 둔다). `main`: `grid-column: 2; grid-row: 2`. 오른쪽 열 요소는 `min-width: 0` (긴 내용이 그리드 열을 넓히지 않게) |
+| `.topbar` | 오른쪽 열에 있다. 사이드바 위로 걸치지 않는다. `position: sticky; top: 0; z-index: var(--z-header); background: var(--header-bg); backdrop-filter: var(--header-blur); border-bottom: 1px solid var(--line)` |
 | `.topbar .bar` | `max-width: var(--main); height: var(--header-h); padding: 0 var(--sp-7)`. 좌우 패딩은 항상 `main`의 좌우 패딩과 같게 둔다(탭 왼쪽 끝 = 카드 왼쪽 끝). 탭·토글 내부 → 5장 |
 | `main` | `max-width: var(--main); width: 100%; padding: var(--sp-6) var(--sp-7) var(--sp-6)` (하단 `--sp-6`은 마지막 카드 → 푸터 간격) |
-| 푸터 | `main` 바로 뒤(오른쪽 열 `.col` 안, contentinfo 랜드마크). 폭·좌우 패딩은 `main`과 같게, 아래 여백 `--sp-8`(본문 열 하단 여백). 별도 열·전폭 띠가 아니다 → 5.5 |
+| 푸터 | `main` 바로 뒤(오른쪽 열, `main` 다음 행, contentinfo 랜드마크). 폭·좌우 패딩은 `main`과 같게, 아래 여백 `--sp-8`(본문 열 하단 여백). 별도 열·전폭 띠가 아니다 → 5.5 |
 
 ### 세로 리듬
 
@@ -593,8 +594,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 요소 | 규칙 |
 |---|---|
 | `.shell` | `display: flex; flex-direction: column` (그리드 해제, 중앙 정렬 폭 제한은 의미 없어짐) |
-| `.col` | `display: contents` → 상단 메뉴·`main`이 `.shell`의 직접 자식처럼 배치 |
-| `.topbar` | `order: -1`로 사이드바 **위**로 올라간다. sticky 유지. 내용: `.bar-id`(이름 / 현재 섹션) + 언어 버튼 + 메뉴 버튼 → 5장 |
+| `.topbar` | DOM 순서대로 사이드바 **위**에 온다(`align-self: stretch`로 전폭). sticky 유지. 내용: `.bar-id`(이름 / 현재 섹션) + 언어 버튼 + 메뉴 버튼 → 5장 |
 | `aside.sidebar` | `position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); padding: var(--sp-4) var(--sp-4) var(--sp-4)`. `display: grid; grid-template-columns: var(--sb-photo-w-sm) minmax(0, 1fr); gap: var(--sp-2) var(--sp-4)`. 연락처는 `grid-column: 1 / -1`로 아래 한 줄 → 5장 |
 | `main` | 위 "세로 리듬" 표 |
 | 메뉴 시트 | `<dialog>` 오른쪽에서 열림, 폭 `min(var(--sheet-w), 88vw)`, 높이 `100dvh` → 5장 |
@@ -658,7 +658,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 규칙 | 적용 |
 |---|---|
 | 그리드 가변 열은 항상 `minmax(0, 1fr)` | `.shell`, 모든 행 그리드. `1fr` 단독 금지 |
-| 그리드·플렉스 자식 중 글이 긴 것은 `min-width: 0` | `.col`, `.body`, `.bar-id`, `.topbar nav`, `.proj-meta .org`, `.fig`, `.pidx .acts` |
+| 그리드·플렉스 자식 중 글이 긴 것은 `min-width: 0` | 오른쪽 열 요소(`.topbar`, `main`), `.body`, `.bar-id`, `.topbar nav`, `.proj-meta .org`, `.fig`, `.pidx .acts` |
 | 고정 폭 열은 ≤560px에서 해제하거나 줄인다 | `--row-when`, `--col-year`, `--col-year-wide`, Skills 180px → 1열 / `--col-idx` → `--col-idx-sm` / 404 바로가기 140 → 56px |
 | 한 줄로 두는 긴 글은 말줄임 | `.contact .lbl`, `.bar-cur`, `.pn-t`, 사이드바 `.h`: `overflow: hidden; text-overflow: ellipsis; white-space: nowrap` |
 | 국문 줄바꿈 | `html:lang(ko) body { word-break: keep-all; overflow-wrap: anywhere }` (keep-all이 긴 어절로 넘치지 않게 anywhere를 같이 둔다) |
@@ -671,7 +671,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 
 ### 케이스 스터디 페이지 골격
 
-골격(`.shell` 그리드, 중앙 정렬, sticky 사이드바, 오른쪽 열 안 상단 메뉴)은 홈과 같다. 다른 점만 적는다.
+골격(`.shell` 그리드, 중앙 정렬, sticky 사이드바, 오른쪽 열 상단 메뉴, 내비게이션 먼저인 DOM 순서)은 홈과 같다. 다른 점만 적는다.
 
 | 항목 | 홈 | 케이스 스터디 (332-a2-case) |
 |---|---|---|
@@ -856,7 +856,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 |---|---|
 | ≤1100 | 바 좌우 패딩 `--sp-6` |
 | ≤1000 (861~1000) | 탭 간격 `--sp-6` → `--sp-4` (6탭 + 전환 버튼이 한 줄에 들어가게, 3.3.2) |
-| ≤860 | `nav`·`.controls` 숨김 → 5.3 모바일 바. `--header-h` 52px, 바 패딩 `--sp-4`, 간격 `--sp-3`, 상단 메뉴가 사이드바 위로(`order: -1`) |
+| ≤860 | `nav`·`.controls` 숨김 → 5.3 모바일 바. `--header-h` 52px, 바 패딩 `--sp-4`, 간격 `--sp-3`, 상단 메뉴가 사이드바 위 (DOM 순서 그대로, 4장 모바일 골격) |
 
 - 구현 시 삭제: base의 ≤860 `.tabs` 가로 스크롤·`mask-image`(그 폭에서 `nav`가 숨겨져 무효)와 탭별 `::after scaleX` 밑줄(`.ink`로 대체).
 
@@ -2476,13 +2476,13 @@ glossary를 따른다. 국문 페이지에서도 영문으로 두는 것:
 
 ### 키보드 순서
 
-DOM 순서 = 탭 순서. 시안 순서를 따른다.
+DOM 순서 = 탭 순서. **내비게이션 먼저**: 본문 바로가기 → 상단 메뉴 → 사이드바 → 본문 (11.7 사용자 결정. 시안은 사이드바 먼저). 보이는 배치는 4장 골격의 그리드 자리 지정으로 유지한다.
 
 | 페이지 | 순서 |
 |---|---|
-| 홈 (데스크톱) | 본문 바로가기 → 사이드바(이메일, GitHub, LinkedIn, CV 다운로드는 tasks 6.12 후) → 탭 6개 → 언어 → 테마 → 본문 |
-| 홈 (≤860px) | 본문 바로가기 → 바 이름 링크 → 언어 → 메뉴 버튼 → 사이드바 → 본문 |
-| 케이스 스터디 | 본문 바로가기 → 기록표(홈 링크, 목차, 이전·다음) → 탭 → 언어 → 테마 → 본문 |
+| 홈 (데스크톱) | 본문 바로가기 → 탭 6개 → 언어 → 테마 → 사이드바(이메일, GitHub, LinkedIn, CV 다운로드는 tasks 6.12 후) → 본문 |
+| 홈 (≤860px) | 본문 바로가기 → 바 이름 링크 → 언어 → 메뉴 버튼 → 사이드바(이메일, GitHub, LinkedIn) → 본문 |
+| 케이스 스터디 | 본문 바로가기 → 탭 → 언어 → 테마 → 기록표(홈 링크, 목차, 이전·다음) → 본문 |
 
 - `tabindex` 양수 금지. 숨긴 요소(`hidden`, 접힌 행)는 포커스되지 않아야 한다.
 - 필터 버튼을 누른 뒤 목록이 다시 그려져도 포커스는 누른 버튼에 남긴다 (시안 `refocus`).
@@ -2853,7 +2853,7 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 404 언어 판별은 경로(`/ko/`) 기준 | G6 | 4장 404 골격, 6.5, 7장 `:lang()` 적용 방식 | 문서에 반영됨 → 6.5 |
 | 404 제목 단계(h1/h2) 정리 | G6 | 9장 제목 구조, 6.5 | 문서에 반영됨 → 9장 제목 구조 |
 | 사이드바 연락처 목록과 Contact 섹션의 id 충돌 → `side-contact` | G6 | 5.1 | 문서에 반영됨 → 5.1 |
-| 상단 메뉴 위쪽의 정체 모를 흔적 (시안 `332-a2` 캡처) | G6 | 5.2 (반투명 바 뒤 본문으로 추정, 구현 후 브라우저 확인) | 구현 대기 |
+| 상단 메뉴 위쪽의 정체 모를 흔적 (시안 `332-a2` 캡처) | G6 | 5.2 (반투명 바 뒤 본문으로 추정, 구현 후 브라우저 확인) | 확인됨 (tasks 5.4): 바(`--header-bg` 90% + blur) 밑을 지나는 카드 바탕·섹션 제목이 흐리게 비친 것. 명세대로의 반투명 효과이며 버그 아님. 바꾸려면 디자인 결정 필요 |
 | CV의 도슨트 건 "Planned" 배지 → "In progress / 진행 중" | G6 | 5.7, 6.4, 10장 (11.5에서 케이스 스터디까지 확대) | 문서에 반영됨 → 5.7 |
 | 새 UI 문구(최종 수정, 맨 위로, 페이지를 찾을 수 없습니다 등) 용어집 등록 | G6 | tasks 5.7 (5.5 국문 문구) | 구현 대기 |
 | apple-touch-icon 180, favicon.ico 대체 파일 생성 | G6 | tasks 5.8 (6.6 파일 목록) | 구현 대기 |
@@ -2880,6 +2880,7 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | OG 공유 이미지는 3.3.4 D(KM 타일)를 바꿔 명함형 A "Card on paper"로 한다. 종이색 바탕 위 흰 명함, KM 마크·주소·풀네임·직함·GitHub. **현재 소속 줄은 넣지 않는다.** 한 번 만든 PNG를 수동 갱신(빌드 시 생성 안 함). 파비콘은 KM 유지. 시안 `docs/design-drafts/og/` | → 6.6 |
 | JSON-LD `worksFor`는 `experience`에서 종료일이 없는 항목의 회사명으로 만든다 (스키마 변경 없음) | → 6.6 |
 | 텍스트 선택 색은 `--accent-soft` 바탕, 글자색 유지 (라이트·다크 공통) | → `src/styles/global.css` |
+| 키보드·DOM 순서는 **내비게이션 먼저**: 본문 바로가기 → 상단 메뉴(데스크톱 탭·토글, 모바일 바) → 사이드바 → 본문. 보이는 배치는 그대로(그리드 자리 지정). 데스크톱과 모바일이 같은 DOM으로 같은 원칙을 따른다 (tasks 5.4, 아래 tasks 5.3 줄의 확인 요청에 대한 답) | → 4장 페이지 골격·모바일 골격, 9장 키보드 순서 |
 
 **구현 기본값 (오케스트레이터 결정)**
 
@@ -2888,4 +2889,8 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 화면 높이는 `100dvh`, 앞에 `100vh`를 폴백으로 둔다 | 모바일 주소창 높이 변화에 맞추고, 미지원 브라우저도 대응 |
 | 메뉴 시트가 열려 있는 동안 페이지 스크롤을 잠근다: `html:has(.sheet[open]) { overflow: hidden }` (tasks 5.3) | 명세에 없음. 모달 `<dialog>`는 배경 스크롤을 막지 않아 시트 뒤 본문이 움직임. JS 없이 CSS 한 줄 |
 | 본문 바로가기는 `.sr-only`와 같은 숨김을 `:not(:focus-visible)`에만 걸고, `main:focus`의 링은 끈다 (tasks 5.3) | `main`(`tabindex="-1"`) 전체에 포커스 링이 그려지지 않게 |
-| 키보드 순서: DOM은 4장 골격대로 사이드바 → 오른쪽 열(상단 바). 그래서 ≤860px에서는 본문 바로가기 → 사이드바 연락처 → 바 이름 → 언어 → 메뉴 순이다 (tasks 5.3) | 9장 키보드 순서의 모바일 줄(바 → 사이드바)은 데스크톱 줄(사이드바 → 탭)과 같은 DOM으로 동시에 맞출 수 없다. **사용자 확인 필요** |
+| ~~키보드 순서: DOM은 4장 골격대로 사이드바 → 오른쪽 열(상단 바) (tasks 5.3)~~ → 위 사용자 결정(내비게이션 먼저)으로 대체 (tasks 5.4) | 9장 키보드 순서의 모바일 줄(바 → 사이드바)은 데스크톱 줄(사이드바 → 탭)과 같은 DOM으로 동시에 맞출 수 없었다 |
+| 현재 섹션 판정은 5.2 명세대로 위치 기반(`scroll` + rAF, 판정선 = 바 아래 + 화면 25%)으로 한다. `IntersectionObserver`는 쓰지 않는다 (tasks 5.4) | 페이지 끝 처리와 짧은 섹션(Awards) 판정이 위치 계산 쪽이 단순하고 시안과 같다 |
+| 모바일 바의 현재 섹션 이름은 섹션 제목(`#h-{id}`)의 글자를 그대로 쓴다 (tasks 5.4) | 섹션 이름 문구를 클라이언트에 따로 싣지 않는다. 제목과 바 이름이 늘 같다 |
+| 메뉴 시트의 섹션 링크는 앵커 이동이 시작된 뒤(`setTimeout`) 시트를 닫는다 (tasks 5.4) | 클릭 즉시 닫으면 Chromium에서 앵커 스크롤이 취소되어 위치가 어긋났다(5.3 버그) |
+
