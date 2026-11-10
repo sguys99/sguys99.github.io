@@ -1,0 +1,139 @@
+/*
+ * Global base: reset, element defaults, typography base, utilities.
+ * Spec: DESIGN.md 4장 (anchors, 360px), 7장 (bilingual type), 9장 (focus, sr-only, motion).
+ * Values come from tokens.css only. Component styles live with their components.
+ */
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+dl,
+dd,
+figure,
+blockquote {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+
+/* Page */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* One offset for every anchor target (DESIGN.md 4장): follows --header-h per breakpoint. */
+  scroll-padding-top: calc(var(--header-h) + var(--sp-5));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Korean pages inherit from body only, so --font-meta set on descendants still wins (DESIGN.md 7장). */
+html:lang(ko) body {
+  font-family: var(--font-ko);
+  line-height: var(--lh-body-ko);
+  letter-spacing: var(--ls-body-ko);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+/* Korean fragments on English pages (e.g. original titles). */
+[lang='ko'] {
+  font-family: var(--font-ko);
+}
+
+/* Links and focus */
+a {
+  color: inherit;
+  text-underline-offset: var(--underline-offset);
+}
+
+:focus-visible {
+  outline: var(--focus-w) solid var(--focus);
+  outline-offset: var(--focus-offset);
+  border-radius: var(--radius-xs);
+}
+
+/* Utilities */
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/*
+ * Keep .sr-only inside its holder so it cannot widen the page at 360px (DESIGN.md 9장).
+ * Zero specificity: a component that needs another position (e.g. a row-covering link) overrides it.
+ */
+:where(:has(> .sr-only)) {
+  position: relative;
+}
+
+/* Motion off: the static state is the finished state (DESIGN.md 9장). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

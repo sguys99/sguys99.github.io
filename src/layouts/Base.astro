@@ -1,0 +1,25 @@
+---
+// Document shell shared by every page: <html lang>, token + global styles.
+// Hooks for later tasks: theme script before styles (5.5), head meta (5.8) via the "head" slot.
+import '../styles/tokens.css';
+import '../styles/global.css';
+
+interface Props {
+  lang: 'en' | 'ko';
+  title: string;
+}
+
+const { lang, title } = Astro.props;
+---
+
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

@@ -176,7 +176,7 @@
 
 각 작업의 공통 완료 기준: DESIGN.md의 해당 명세와 일치하고, 토큰 변수만 사용하며, 빌드가 통과한다.
 
-- [ ] 5.1 전역 스타일과 리셋, 토큰 적용
+- [x] 5.1 전역 스타일과 리셋, 토큰 적용 — `src/styles/global.css` + `src/layouts/Base.astro`(lang·title, head 슬롯). 국문은 body 상속(`html:lang(ko) body`), `.sr-only`는 감싼 요소를 `:where(:has(> .sr-only))`로 기준 요소화. 360px 가로 스크롤 없음. `::selection`은 명세에 없어 브라우저 기본 유지
 - [ ] 5.2 웹폰트 셀프 호스팅 (국문 서브셋 분할, 라이선스 확인, `font-display` 설정)
 - [ ] 5.3 기본 레이아웃: 사이드바 + 본문, 모바일 전환
 - [ ] 5.4 상단 내비게이션, 앵커 스크롤, 현재 위치 표시
