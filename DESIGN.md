@@ -118,7 +118,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 
 - 카드 안에 카드를 넣지 않는다 (이중 테두리 금지, G1 → 3.2.1 A에서 해소).
 - 포인트 색을 두 번째 색과 섞지 않는다. 대표 행의 왼쪽 포인트 색 선도 쓰지 않는다 (3.1.2 A, 3.2.2 B 사용자 요청).
-- 그림자·그라디언트로 카드를 띄우거나 배경을 칠하지 않는다. 예외는 3곳뿐이다: 궤적 마지막 구간의 페이드(사용자 승인), 넘침 마스크, 선택 상자 화살표 (G1 A, 11장 단계 4).
+- 그림자·그라디언트로 카드를 띄우거나 배경을 칠하지 않는다. 예외는 3곳뿐이다: 궤적 마지막 구간의 페이드(사용자 승인), 넘침 마스크, 선택 상자 화살표 (G1 A, 11.5).
 - 고객사 로고, 이니셜 배지를 쓰지 않는다. 로고는 경력 6곳만 (3.2.7 C).
 - 경력 연수("16+ years")와 보고서 총량("50+")을 표기하지 않는다 (1.1.4, G4 + G5 함께 정한 것).
 - 승인된 실명 2곳(Samsung Electronics, LOTTE Fine Chemical) 외 고객사 실명을 쓰지 않는다 (CLAUDE.md 규칙 3).
@@ -192,7 +192,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 |---|---|---|---|
 | favicon.svg 라이트 | 타일 / 글자 | `#141a22` / `#f3f5f8` | `--text` / `--bg` (라이트) |
 | favicon.svg 다크 (`prefers-color-scheme`) | 타일 / 글자 | `#e6eaf0` / `#0d1117` | `--text` / `--bg` (다크) |
-| apple-touch-icon | 바탕 | `#f3f5f8` (다크 없음) | `--bg` 라이트 |
+| apple-touch-icon | 바탕(타일) / 글자 | `#141a22` / `#f3f5f8` (다크 없음, 꽉 찬 타일) | `--text` / `--bg` (라이트) |
 | OG 1200×630 | 바탕 / 이름 / 직함 / 한 줄 소개 / URL | `#f3f5f8` / `#141a22` / `#2b5a8a` / `#475260` / `#5f6a78` | `--bg` / `--text` / `--accent` / `--text-2` / `--text-3` |
 | CV `@page` 쪽 하단 | 글자 | `#5f6a78` | `--text-3` 라이트 (`@page`에서 변수 미해석) |
 
@@ -207,7 +207,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | `--font-display` | `var(--font)`, `html:lang(ko)`에서 `var(--font-ko)` | 이름, 한 줄 소개, 프로젝트 제목, 404 제목 |
 | `--font-meta` | `"Geist Mono", "Pretendard Variable", ui-monospace, "SFMono-Regular", monospace` | 날짜, 번호, 건수, 배지, 섹션 라벨(영문), 푸터 |
 
-시안 로드: Geist 400/500/600, Geist Mono 400/500 (Google Fonts), Pretendard Variable v1.3.9 dynamic subset (jsDelivr). Geist Mono에는 600이 없으므로 `--font-meta`에 600을 쓰지 않는다. 자체 호스팅 여부·서브셋은 미정(구현 시 결정).
+시안 로드: Geist 400/500/600, Geist Mono 400/500 (Google Fonts), Pretendard Variable v1.3.9 dynamic subset (jsDelivr). Geist Mono에는 600이 없으므로 `--font-meta`에 600을 쓰지 않는다. 자체 호스팅 여부·서브셋은 미정(tasks 5.2, 11.6).
 
 **크기 스케일** (1rem = 16px)
 
@@ -260,9 +260,9 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | `--ls-tagline-ko` | -0.035em | 한 줄 소개 국문 |
 | `--ls-title` | -0.012em | 프로젝트·케이스 제목 영문 |
 | `--ls-title-ko` | -0.02em | 같은 요소 국문 |
-| `--ls-eyebrow` | 0.06em | 12px 영문 대문자 섹션 제목·eyebrow·선택 상자 키·`.out .k`·`.sel-mark` |
+| `--ls-eyebrow` | 0.06em | 영문 대문자 섹션 제목·eyebrow(12px), 선택 상자 키·`.out .k`·`.sel-mark`·표 머리(11px) |
 | `--ls-eyebrow-ko` | 0 | 국문 섹션 제목 |
-| `--ls-label` | 0.1em | 11px 영문 대문자 키 라벨(사이드바 키, `.lg-label`, `.rec dt`), 메뉴 시트 제목 |
+| `--ls-label` | 0.1em | 영문 대문자 키 라벨(11px: 사이드바 키, `.lg-label`, `.rec dt`), 메뉴 시트 제목·라벨과 케이스 소제목(12px) |
 | `--ls-label-ko` | 0.02em | 국문 키 라벨, 토글 버튼 글자 |
 
 **정리 이력: 시안 값 → 확정 값 (Typography)**
@@ -308,7 +308,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 
 | 토큰 | 값 | 용도 |
 |---|---|---|
-| `--radius` | 10px | 카드, 데스크톱 기본 사진 |
+| `--radius` | 10px | 카드, 모바일 상단 프로필 사진(≤860px) |
 | `--radius-sm` | 6px | 사이드바 사진(861px 이상), CV 다운로드 자리, 링크 행 hover 영역, CV 종이 |
 | `--radius-xs` | 4px | 배지, 포커스 링 |
 | `--radius-bar` | 2px | 탭 밑줄 막대(`2px 2px 0 0` 포함) |
@@ -321,7 +321,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | `--sidebar` | 320px | 홈 ≤1100px: 280px | 사이드바 폭 |
 | `--sidebar` (케이스 스터디) | 340px | ≤1000px: 280px (332-a2-case) | 케이스 기록표 사이드바 |
 | `--main` | 960px | — | 본문 최대 폭 (`.shell` 최대 = sidebar + main) |
-| `--header-h` | 56px | ≤860px: 52px | 상단 메뉴·모바일 바 높이, `scroll-margin-top` 계산 |
+| `--header-h` | 56px | ≤860px: 52px | 상단 메뉴·모바일 바 높이, `scroll-padding-top` 계산 |
 | `--header-blur` | `saturate(1.2) blur(8px)` | — | 상단 메뉴 `backdrop-filter` |
 | `--sb-photo-w` | 132px | ≥861px | 사이드바 사진 폭 (4:5) |
 | `--sb-photo-w-sm` | 64px | ≤860px | 모바일 상단 프로필 사진 폭 |
@@ -504,8 +504,8 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
     <header class="topbar"><div class="bar">…</div></header>
     <main id="main">
       <section class="card" id="about">…</section> … <section class="card" id="contact">…</section>
-      <footer class="foot-a">…</footer>
     </main>
+    <footer class="foot-a">…</footer>
   </div>
 </div>
 <dialog class="sheet">…</dialog>             <!-- 모바일 메뉴 시트, top layer -->
@@ -520,7 +520,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | `.topbar` | 오른쪽 열(`.col`) 안에 있다. 사이드바 위로 걸치지 않는다. `position: sticky; top: 0; z-index: var(--z-header); background: var(--header-bg); backdrop-filter: var(--header-blur); border-bottom: 1px solid var(--line)` |
 | `.topbar .bar` | `max-width: var(--main); height: var(--header-h); padding: 0 var(--sp-7)`. 좌우 패딩은 항상 `main`의 좌우 패딩과 같게 둔다(탭 왼쪽 끝 = 카드 왼쪽 끝). 탭·토글 내부 → 5장 |
 | `main` | `max-width: var(--main); width: 100%; padding: var(--sp-6) var(--sp-7) var(--sp-8)` |
-| 푸터 | `main` 안, 마지막 카드 다음. 별도 열·전폭 띠가 아니다 → 5장 |
+| 푸터 | `main` 바로 뒤(오른쪽 열 `.col` 안, contentinfo 랜드마크). 폭·좌우 패딩은 `main`과 같게. 별도 열·전폭 띠가 아니다 → 5.5 |
 
 ### 세로 리듬
 
@@ -536,7 +536,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 사이드바 블록 사이 (`gap`) | `--sp-5` | `--sp-5` | 모바일 프로필 → 아래 표 |
 
 - 리듬은 "카드 사이 < 카드 안쪽 패딩 < 본문 좌우 여백" 순서를 지킨다(24 < 32 < 48, 모바일 16 = 16 < 20).
-- ≤1100px에서 `main` 하단이 `--sp-8`→`--sp-6`으로 줄어드는 것은 시안 그대로다(`main { padding: var(--sp-6) }`가 세 방향을 모두 덮음). 의도인지 확인 필요(아래 "확인할 점").
+- ≤1100px에서 `main` 하단이 `--sp-8`→`--sp-6`으로 줄어드는 것은 시안 그대로다(`main { padding: var(--sp-6) }`가 세 방향을 모두 덮음). 의도인지 확인 필요(아래 "확인할 점", 11.6).
 
 ### 카드형 섹션 컨테이너
 
@@ -545,7 +545,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 마크업 | 홈 섹션 하나 = `<section class="card" id="…" aria-labelledby="h-…">` 하나. 첫 자식은 `.sec-head`(h2 + 선택 meta) → 5장 |
 | 겉모양 | `background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius)`. 그림자 없음 |
 | 패딩·간격 | 위 "세로 리듬" 표 |
-| 앵커 | `scroll-margin-top: calc(var(--header-h) + var(--sp-5))` (아래 "앵커 스크롤") |
+| 앵커 | `html`의 `scroll-padding-top`이 처리 (아래 "앵커 스크롤 오프셋") |
 | 중첩 | 카드 안에 카드를 두지 않는다. 카드 안 구분은 헤어라인(`--line`, 강한 구분은 `--line-strong`)과 행 패딩으로만 한다 |
 | 폭 | 카드는 `main` 폭을 꽉 채운다. 읽기 폭 제한은 카드가 아니라 안쪽 문단에 `--measure`/`--measure-sm`으로 건다 |
 | 등장 효과 대상 | `main > section.card` (331-c, 3장 Motion) |
@@ -554,14 +554,11 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 
 | 대상 | 값 | 출처 |
 |---|---|---|
-| `.card` (홈 섹션) | `scroll-margin-top: calc(var(--header-h) + var(--sp-5))` | base |
-| `.dr` (IP 서랍, 개별 앵커) | 같은 값 | base |
-| `.d-sec` (케이스 스터디 문서 절) | 같은 값 | 332-a2-case (case.html의 `var(--sp-5)`를 덮음. 케이스에도 상단 메뉴가 생겼기 때문) |
+| `html` | `scroll-padding-top: calc(var(--header-h) + var(--sp-5))`. 홈 카드, IP 서랍 `.dr`, 케이스 문서 절 `.d-sec` 등 모든 앵커 대상에 한 번에 적용 | 11.5 (시안은 요소별 `scroll-margin-top`) |
 | `html` | `scroll-behavior: smooth`는 `prefers-reduced-motion: no-preference`에서만 | base |
 
 - 오프셋은 `--header-h`를 따라 자동으로 바뀐다: 데스크톱 56 + 24 = 80px, ≤860px 52 + 24 = 76px. 상단 메뉴가 모바일에서도 sticky이므로 같은 식을 쓴다.
-- 시안은 `html { scroll-padding-top }`을 쓰지 않고 요소별 `scroll-margin-top`을 쓴다. 구현도 요소별로 둔다. 새로 앵커가 되는 요소(`id`로 링크되는 것)는 같은 값을 반드시 붙인다.
-  - 구현: 요소별 scroll-margin 대신 `html { scroll-padding-top: calc(var(--header-h) + var(--sp-5)) }` 하나로 둔다. 결과 위치는 시안과 같고 앵커 누락을 막는다.
+- 시안은 요소별 `scroll-margin-top`(`.card`, `.dr`, `.d-sec`)을 쓰지만, 구현은 `html { scroll-padding-top }` 하나로 둔다. 결과 위치는 시안과 같고, 새 앵커 요소에 값을 붙이지 않아도 된다. 요소별 `scroll-margin-top`은 쓰지 않는다.
 - 앵커·탭으로 들어온 섹션은 등장 효과(`m-wait`)를 건너뛴다 (decision-log 3.3 "구현 시 처리할 것"). 이동 직후 카드가 비어 보이지 않게 하기 위함 → 3장 Motion.
 
 ### 브레이크포인트
@@ -663,7 +660,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 국문 줄바꿈 | `html:lang(ko) body { word-break: keep-all; overflow-wrap: anywhere }` (keep-all이 긴 어절로 넘치지 않게 anywhere를 같이 둔다) |
 | 가로 스크롤을 허용하는 곳은 요소 안에서만 | 탭 목록(`.tabs`)은 자기 안에서만 넘칠 수 있다(데스크톱 `overflow: visible`은 861–1000px 간격 축소로 보장). 페이지 전체에 넘치면 안 된다 |
 | 뷰포트 폭 단위 | `100vw` 쓰지 않는다(스크롤바 폭만큼 넘침). 시트만 `88vw`를 `min()` 안에서 쓴다 |
-| 절대 배치 숨김 요소 | `.sr-only`가 위치 기준 없이 절대 배치되어 넘칠 수 있음 → 5.1 전역 스타일에서 해결 (decision-log 3.2 이후로 넘긴 것) |
+| 절대 배치 숨김 요소 | `.sr-only`가 위치 기준 없이 절대 배치되어 넘칠 수 있음 → 9장 `.sr-only` 위치 버그에서 해결 (tasks 5.1 전역 스타일) |
 | 검사 | 구현 후 360px에서 `document.documentElement.scrollWidth <= innerWidth`를 홈·케이스·404, 영문·국문, 메뉴 시트 열림/닫힘으로 확인 |
 
 시안에서 확인이 필요한 곳: 케이스 아키텍처 표의 `.flow`(`white-space: nowrap`)는 ≤560px에서 표가 쌓인 기록으로 바뀐 뒤에도 nowrap이 남는다. 흐름 문구가 길면 360px에서 넘칠 수 있으므로 구현 시 실제 콘텐츠로 확인한다.
@@ -675,13 +672,13 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 항목 | 홈 | 케이스 스터디 (332-a2-case) |
 |---|---|---|
 | `--sidebar` | 320 / ≤1100: 280 | 340 / ≤1000: 280 (861–1000에서 탭 6개 + 토글이 들어가게) |
-| 사이드바 내용 | 프로필 기록 | 프로젝트 기록표: `.who`(작은 사진 + 이름) → 경로(`← Work` + `01 / 07`) + 제목 h1 → `.rec`(키-값) → `.toc`(번호 목차) → `.side-foot`(이전·다음, `margin-top: auto`로 바닥에 붙음). 내부 → 5장 |
+| 사이드바 내용 | 프로필 기록 | 프로젝트 기록표: `.who`(작은 사진 + 이름) → 경로(`← Selected Work` / `← 대표 프로젝트` + `01 / 05`) + 제목 h1 → `.rec`(키-값) → `.toc`(번호 목차) → `.side-foot`(이전·다음, `margin-top: auto`로 바닥에 붙음). 내부 → 5장 |
 | 사이드바 패딩 | `--sp-7` `--sp-6` | `--sp-6` `--sp-6` `--sp-5` |
 | 상단 메뉴 | 홈 섹션 탭 | 같은 탭 6개, Work 표시, 링크는 홈 섹션으로. 언어·테마 토글은 상단 메뉴에만 (사이드바에 없음) |
 | `main` 내용 | 섹션별 카드 여러 개 | `article.card.doc` **하나**. 안에 요약(`.lede`) + 번호 붙은 절(`.d-sec`)들 |
 | 카드 패딩 | `--sp-6` | `.doc` `--sp-7` / ≤1100: `--sp-6` / ≤860: `--sp-5` `--sp-4` |
 | 절 구분 | 카드 사이 간격 | `.d-sec`: `padding: var(--sp-6) 0; border-top: 1px solid var(--line)`, `grid-template-columns: var(--col-idx) minmax(0, 1fr)` (≤560 1열) |
-| 앵커 | `.card` | `.d-sec` (값은 같음) |
+| 앵커 | `.card` | `.d-sec` (오프셋은 `html` 공통) |
 | ≥861px 메뉴 시트 | 숨김(메뉴 버튼 없음) | `display: none` 명시 |
 
 **케이스 모바일 (≤860px)**: 사이드바가 `display: block`이 되고 `.who`·`.toc`·`.side-foot`을 숨긴다. 경로·제목·기록표만 남고 자식 사이 `margin-top: var(--sp-4)`. 목차는 메뉴 시트로(맨 위 `← Work` + 절 목록), 이전·다음은 문서 끝 `.pn-end`로 옮긴다.
@@ -692,10 +689,10 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 |---|---|
 | 골격 | 홈과 같은 `.shell`. 사이드바 유지 |
 | 상단 메뉴 | 탭(`nav`) 숨김, 토글만 오른쪽(`margin-left: auto`). 모바일은 홈과 같은 바 |
-| `main` | 카드 하나(`article.card.nf`) + 푸터. 다른 섹션 없음 |
+| `main` | 카드 하나(`article.card.nf`). 다른 섹션 없음. 푸터는 `main` 바로 뒤 |
 | 카드 내용 | 코드 · 제목 · 설명(`max-width: 52ch`) · 버튼 · 섹션 바로가기 목록 → 5장 |
 | 언어 | 경로(`/ko/`)로 판별 (decision-log 3.3) |
-| 제목 단계 | 사이드바 이름이 h1, 404 제목이 h2인 시안 구조를 정리해야 한다 (decision-log 3.3). 어느 쪽을 h1로 할지 미정 → 9장 |
+| 제목 단계 | 시안은 사이드바 이름이 h1, 404 제목이 h2. 구현은 404 제목을 h1, 사이드바 이름을 `p`로 낮춘다 → 6.5, 9장 제목 구조 |
 
 시안의 `html[data-view="404"]`로 섹션을 숨기는 방식은 시안 전용이다. 구현은 404 페이지가 처음부터 카드 하나만 렌더한다.
 
@@ -777,7 +774,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 **접근성**
 - 이름 `h1`은 홈의 유일한 h1. 사이드바는 `aside` + `aria-label`(국문 "프로필").
 - **시안 버그**: ≥861에서 GitHub·LinkedIn 링크의 이름이 사라진다(`.lbl`은 `display: none`, `.h`·`.k`는 `aria-hidden`). 구현 시 `.h`의 `aria-hidden`을 빼거나 링크에 `aria-label="GitHub: github.com/sguys99"`를 준다.
-- 사진은 바로 옆에 이름 h1이 있어 시안대로 `alt=""`(장식)로 둔다. [제안] 사진이 단독으로 쓰이는 곳(OG 등)은 해당 없음.
+- 사진은 바로 옆에 이름 h1이 있어 시안대로 `alt=""`(장식)로 둔다. [구현 기본값] 사진이 단독으로 쓰이는 곳(OG 등)은 해당 없음.
 - 외부 링크는 시안대로 같은 탭에서 열고 `rel="noopener"`.
 
 **모션**: hover 색만 (`--dur`). 등장 효과 없음 (첫 화면).
@@ -849,7 +846,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 탭 클릭 후 | 클릭한 섹션을 고정(hold). `wheel`·`touchstart`·`keydown`이 오면 해제 (짧은 Awards가 덮어쓰이지 않게) |
 | 갱신 | `scroll`(rAF로 묶음), `resize`, `load` |
 | 막대 재측정 | `ResizeObserver`(탭 목록), 글꼴 로드 후, 언어별 문구 길이 차이 |
-| 앵커 이동 | `scroll-margin-top: calc(var(--header-h) + var(--sp-5))` (카드). 앵커로 들어온 섹션은 등장 효과를 건너뜀 (3장 Motion) |
+| 앵커 이동 | 오프셋은 `html { scroll-padding-top }` (4장 앵커 스크롤 오프셋). 앵커로 들어온 섹션은 등장 효과를 건너뜀 (3장 Motion) |
 
 **반응형**
 
@@ -864,7 +861,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 **접근성**
 - `nav`에 `aria-label`("Sections" / "섹션"). 케이스 시안은 JS로 넣지만(`data-ui-label`) 구현은 빌드 시 정적으로 넣는다.
 - JS 없음: 탭은 앵커로 동작하고 `.ink`는 폭 0(현재 표시 없음). 허용.
-- 본문 바로가기 링크: 시안에 없음. 9장 접근성 규칙에 따라 `<body>` 첫 요소로 두고 포커스 시 `z-index: var(--z-skip)`로 상단 메뉴 위에 보인다. 모양은 **미정(구현 시 시안 제시)**.
+- 본문 바로가기 링크: 시안에 없음. 9장 "본문 바로가기" [구현 기본값]을 따른다: `<body>` 첫 요소, 포커스 시 `z-index: var(--z-skip)`로 상단 메뉴 위 왼쪽 위에 보이고, 바탕 `--surface`·테두리 `--line`·모서리 `--radius-xs`.
 - "상단 메뉴 위쪽의 정체 모를 흔적"(decision-log 3.3): `332-a2-desktop-light-en.png` 상단 About~Experience 위에 흐린 사각형이 보인다. 반투명 바(`--header-bg` 90%) 뒤로 비친 본문으로 추정. 구현 후 브라우저에서 확인.
 
 **모션 (331-c)**: `.ink` 이동 `transform`·`width` `var(--m-nav) var(--ease-out)`. 첫 배치는 transition 없이(`ready` 클래스를 2프레임 뒤에 붙임). hover 선·글자색 `--dur`. 모션 줄이기: 막대가 즉시 이동.
@@ -879,7 +876,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 전환 버튼 | 언어·테마를 상단 메뉴 `.controls`로 (기록표 하단 `.side-foot`에서 뺌) |
 | 사이드바 | 케이스 기록표 `--sidebar` 340px, ≤1000에서 280px (3장 Layout) |
 | 모바일 바 | `.bar-id`는 홈 `#work`로, `.bar-cur`는 현재 케이스 섹션 이름 |
-| 메뉴 시트 | 그룹 없음. 첫 행 "← Work / ← 대표 프로젝트"(홈 `#work`) + 케이스 섹션 목록 |
+| 메뉴 시트 | 그룹 없음. 첫 행 "← Selected Work / ← 대표 프로젝트"(홈 `#work`) + 케이스 섹션 목록 |
 
 ### 5.3 Mobile bar + menu sheet (3.1.6 C + 332-a2, ≤860)
 
@@ -928,7 +925,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | `.contact` (시트) | 아이콘 + 글자, 세로 간격 `--sp-3` |
 | `.sheet-prefs` | `margin-top: auto`(바닥 고정), 위 선 1px `--line`, 패딩 위 `--sp-4`, 행 간격 `--sp-3`, 행은 라벨 ↔ 컨트롤 양 끝 정렬 |
 
-- 3장 Typography 표의 "`--fs-xl` 메뉴 시트 항목"은 base의 평면 목록 값이다. 확정안 332-a2는 그룹 목록이라 그룹 행 `--fs-lg`, 하위 행 `--fs-sm`을 쓴다.
+- base의 평면 목록은 시트 항목에 `--fs-xl`을 썼다. 확정안 332-a2는 그룹 목록이라 그룹 행 `--fs-lg`, 하위 행 `--fs-sm`을 쓴다 (3장 Typography `--fs-xl` 주석과 같음).
 
 **상태**
 
@@ -944,7 +941,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 **동작**
 - 열기: `menu-btn` → `sheet.showModal()`. 배경은 inert, 포커스는 시트 안, Esc로 닫힘 (네이티브 `<dialog>`).
 - 닫기: 닫기 버튼, backdrop 클릭(`e.target === sheet`), 시트 안 섹션 링크 클릭.
-- [제안] 시트가 열린 채 861px 이상으로 넓어지면 닫는다 (`matchMedia` 변경 시 `close()`). 시안에 처리 없음.
+- [구현 기본값] 시트가 열린 채 861px 이상으로 넓어지면 닫는다 (`matchMedia` 변경 시 `close()`). 시안에 처리 없음.
 
 **반응형**: 861px 이상에서는 `.bar-id`, `.lang-btn`, `.menu-btn`, 시트 모두 숨김. 360px에서 바 = 이름 + 현재 섹션(말줄임) + 언어 + 메뉴, 가로 스크롤 없음.
 
@@ -963,7 +960,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 </div>
 ```
 
-- 시안은 같은 페이지를 다시 그리는 `<button aria-pressed>`다. 실제 사이트는 `/`와 `/ko/`가 별개 페이지라 **링크**로 바꾼다. [제안] 현재 언어 표시는 `aria-current="true"`, 이동 대상은 같은 경로의 상대 언어 페이지(케이스 스터디는 같은 slug, 404는 언어 홈).
+- 시안은 같은 페이지를 다시 그리는 `<button aria-pressed>`다. 실제 사이트는 `/`와 `/ko/`가 별개 페이지라 **링크**로 바꾼다. 현재 언어 표시는 `aria-current="true"`, 이동 대상은 같은 경로의 상대 언어 페이지(케이스 스터디는 같은 slug, 404는 언어 홈).
 - 같은 `.seg` 모양을 개인 프로젝트 상태 필터(`aria-pressed` 버튼)도 쓴다. 필터 동작은 해당 콘텐츠 컴포넌트 명세를 따른다.
 
 | 요소 | 속성 → 토큰 |
@@ -982,9 +979,9 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 
 | 항목 | 규칙 |
 |---|---|
-| 기본값 | 시스템 설정(`prefers-color-scheme`). 수동 전환은 기억 (G1 결정). [제안] `localStorage`에 `light`/`dark` 저장, `<head>` 인라인 스크립트로 첫 페인트 전에 `data-theme` 적용(시안은 같은 방식을 URL 인자로 대신함) |
+| 기본값 | 시스템 설정(`prefers-color-scheme`). 수동 전환은 기억 (G1 결정). `localStorage`에 `light`/`dark` 저장, `<head>` 인라인 스크립트로 첫 페인트 전에 `data-theme` 적용(시안은 같은 방식을 URL 인자로 대신함) |
 | 아이콘 | 라이트에서 달(→ 다크로), 다크에서 해. 시안 CSS는 `data-theme`이 있을 때만 하나를 숨겨, 속성이 없으면 둘 다 보인다. 구현은 `data-theme`을 항상 넣거나 `prefers-color-scheme`에도 같은 숨김 규칙을 둔다 |
-| 이름 | `aria-label` "Toggle dark mode / 다크 모드 전환" (고정). [제안] `aria-pressed`를 다크일 때 `true`로 두어 현재 상태를 읽게 한다 (시안에 없음) |
+| 이름 | `aria-label` "Toggle dark mode / 다크 모드 전환" (고정). `aria-pressed`를 다크일 때 `true`로 두어 현재 상태를 읽게 한다 (시안에 없음, 8장) |
 | 모양 | `.icon-btn` (5.6) |
 
 **접근성**: 세그먼트 `role="group"` + `aria-label`("Language / 언어"). 각 언어 항목에 `lang`(EN은 `en`, KO는 `ko`) — 화면 읽기 프로그램이 올바른 발음으로 읽게. 키보드는 Tab으로 각 항목.
@@ -1016,11 +1013,11 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 |---|---|
 | 연도 | 최종 수정일의 연도 |
 | 최종 수정일 | 빌드 시 `git log -1 --format=%cs -- src/content`. 영문 `Nov 10, 2026`, 국문 `2026.11.10`. 시안의 "sample date / 예시 날짜" 배지는 시안 전용이라 넣지 않음 |
-| 국문 | "최종 수정", "사이트 소스", "맨 위로" (용어집 등록 → 5.7) |
-| 위치 | 홈과 404의 마지막 카드 아래. 케이스 스터디 적용 여부는 4.5에서 정함 |
+| 국문 | "최종 수정", "사이트 소스", "맨 위로" (용어집 등록 → tasks 5.7) |
+| 위치 | `main` 바로 뒤 (홈·404·케이스 스터디 공통, 6.3). 화면에서는 마지막 카드 아래에 이어져 보인다 |
 
 **반응형**: ≤560에서 세로 1열(`flex-direction: column`).
-**접근성**: 시안은 `footer`가 `<main>` 안에 있어 contentinfo 랜드마크가 되지 않는다. [제안] `<main>` 바로 뒤(본문 열 안)로 옮긴다. "Back to top"은 `#main`으로 이동하므로 `<main id="main" tabindex="-1">`로 포커스도 옮긴다. `↑`는 장식이라 `aria-hidden` span으로.
+**접근성**: 시안은 `footer`가 `<main>` 안에 있어 contentinfo 랜드마크가 되지 않는다. 구현은 `<main>` 바로 뒤(본문 열 안)로 옮긴다 (11.5). "Back to top"은 `#main`으로 이동하므로 `<main id="main" tabindex="-1">`로 포커스도 옮긴다. `↑`는 장식이라 `aria-hidden` span으로.
 **모션**: hover 색만.
 **콘텐츠 출처**: 이름 = `profile`, 저장소 주소·문구 = `src/i18n`/사이트 설정, 날짜 = 빌드.
 
@@ -1060,7 +1057,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | active | 시안에 별도 스타일 없음. 추가하지 않는다 |
 | disabled | 사이드바 CV 자리만 (`aria-disabled`, 5.1). 그 밖의 버튼은 비활성 상태 대신 숨김(`hidden`) |
 
-- `.toggle-all` 패딩 6px 14px는 `--ctl-h`와 높이가 맞지 않는다. [제안] 구현 시 `min-height: var(--ctl-h); padding: 0 var(--sp-4)`로 맞추면 컨트롤 높이 단계에 들어간다. 시각 차이가 2px 안팎이라 확인만 받는다.
+- `.toggle-all` 패딩 6px 14px는 `--ctl-h`와 높이가 맞지 않는다. [구현 기본값] 구현 시 `min-height: var(--ctl-h); padding: 0 var(--sp-4)`로 맞추면 컨트롤 높이 단계에 들어간다. 시각 차이가 2px 안팎이라 확인만 받는다.
 
 **반응형**: ≤560에서 칩 링크는 행 아래 가로로 줄바꿈 배치(해당 콘텐츠 컴포넌트). 버튼 크기는 바뀌지 않는다.
 **접근성**: 아이콘 버튼은 `aria-label` 필수. 칩 링크는 같은 문구("Repository")가 여러 번 나오므로 `<span class="sr-only">: {프로젝트 이름}</span>`을 붙인다. 404 보조 버튼에 그 언어의 `lang`. 모든 컨트롤 24px 이상.
@@ -1125,8 +1122,8 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 연속 클릭 | 타이머를 다시 시작 |
 
 - 복사: `navigator.clipboard.writeText`, 실패하거나 없으면 임시 `textarea` + `execCommand('copy')` 후 버튼으로 포커스 복귀.
-- JS 없음: 버튼을 숨기고 `mailto` 링크만 남긴다. [제안] 시안은 JS 없을 때도 버튼이 보임.
-- 접근성: `aria-label`에 보이는 글자 "Copy"가 포함(이름-라벨 일치). 결과는 라이브 영역으로 알림. `.sr-only`는 위치 기준 요소를 갖게 고친다 (decision-log, 5.1 전역 스타일).
+- JS 없음: 버튼을 숨기고 `mailto` 링크만 남긴다. [구현 기본값] 시안은 JS 없을 때도 버튼이 보임.
+- 접근성: `aria-label`에 보이는 글자 "Copy"가 포함(이름-라벨 일치). 결과는 라이브 영역으로 알림. `.sr-only`는 위치 기준 요소를 갖게 고친다 (9장 `.sr-only` 위치 버그).
 - 모션: 색·테두리 `--dur`. 아이콘 교체는 즉시.
 - 콘텐츠 출처: 이메일 = `profile`, 문구 = `src/i18n`.
 
@@ -1148,7 +1145,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | hover | summary 글자 `--text`, chev `--accent` |
 | open | chev `--accent` + 회전 |
 | focus-visible | 링을 안쪽으로 `outline-offset: calc(-1 * var(--focus-offset))` |
-| 앵커 | `scroll-margin-top: calc(var(--header-h) + var(--sp-5))` |
+| 앵커 | 오프셋은 `html { scroll-padding-top }` (4장) |
 | JS 없음 | 그대로 동작 (모두 닫힌 상태로 시작) |
 
 **B. 일부 보기 (버튼)**
@@ -1181,7 +1178,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | `.sel` | `inline-flex`, 테두리 1px `--line`, `--radius-pill`, 바탕 `--surface` |
 | `.sel-k` (키) | 왼쪽 패딩 `--sp-3`, `--font-meta` `--fs-2xs` `--ls-eyebrow` 대문자 `--text-3`, `pointer-events: none`. 국문 `--font-ko` `--fs-xs` 자간 0 |
 | `select` | `appearance: none`, `--fs-sm` `--text`, 바탕 없음, 테두리 없음, 최소 높이 `--ctl-h`, 패딩 5px `calc(var(--sp-3) + 14px)` 5px `--sp-2`, 최대 폭 220px(컴포넌트 값), 말줄임 |
-| 화살표 | 배경 그라디언트 두 개로 그린 5px 꺾쇠, 색 `--text-3` (컴포넌트 값). [제안] chev 아이콘(5.12)과 모양이 다르지만 `select` 안이라 시안대로 둔다 |
+| 화살표 | 배경 그라디언트 두 개로 그린 5px 꺾쇠, 색 `--text-3` (컴포넌트 값). [구현 기본값] chev 아이콘(5.12)과 모양이 다르지만 `select` 안이라 시안대로 둔다 |
 | `option` | 글자 `--text`, 바탕 `--surface` (다크에서 OS 목록 색 맞춤, `color-scheme` 함께) |
 
 | 상태 | 처리 |
@@ -1214,7 +1211,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 
 **색 처리 (구현 규칙)**
 - 시안은 `<img>` + `filter: var(--logo-filter)`라 다크에서 글자색과 정확히 같지 않다. 구현은 **SVG를 `currentColor`로 정리**한다 (decision-log 3.2): 채움을 모두 `fill="currentColor"`로, 흰 knockout(semco·kepco)은 마스크나 `fill-rule`로 투명하게 유지. 모양은 바꾸지 않는다.
-- 색은 `color: var(--text)`, 농도는 `opacity: var(--logo-op)` / 현재 소속 `var(--logo-op-cur)`. 이렇게 하면 `--logo-filter`는 쓰이지 않는다 → 3장에서 삭제 후보 (사용자 확인).
+- 색은 `color: var(--text)`, 농도는 `opacity: var(--logo-op)` / 현재 소속 `var(--logo-op-cur)`. `--logo-filter`는 SVG를 인라인으로 못 넣는 로고의 대안 경로용으로 3장에 유지한다 (8장 다크 전용 조정).
 - genon은 PNG라 `currentColor`가 안 된다. **미정**: (a) 공식 SVG를 구하거나 (b) PNG를 CSS `mask-image`로 쓰고 `background: currentColor`. 결정 필요.
 - 인라인 SVG로 넣을 때 파일마다 `id`(마스크 등)가 겹치지 않게 접두어를 붙인다.
 
@@ -1232,7 +1229,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 
 ### 5.12 Icons
 
-**세트**: 외부 아이콘 세트·의존성 없음. 시안에 직접 쓴 인라인 SVG(`viewBox="0 0 24 24"`, 선형, `fill: none; stroke: currentColor`). 모양은 Tabler/Lucide 계열과 비슷하지만 path를 직접 쓴 것이다. [제안] 구현은 한 파일(예: `Icon.astro`, 이름 → path)로 모은다.
+**세트**: 외부 아이콘 세트·의존성 없음. 시안에 직접 쓴 인라인 SVG(`viewBox="0 0 24 24"`, 선형, `fill: none; stroke: currentColor`). 모양은 Tabler/Lucide 계열과 비슷하지만 path를 직접 쓴 것이다. [구현 기본값] 구현은 한 파일(예: `Icon.astro`, 이름 → path)로 모은다.
 
 | 규칙 | 값 |
 |---|---|
@@ -1288,10 +1285,10 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | Personal Projects | GitHub 프로필 링크 (5.20) | `github.com/sguys99` |
 | IP & Publications | 특허+프로그램+논문+보고서 합계 | `N records` / `총 N건` |
 
-- 반응형: ≤560px에서 `#ip`는 세로 쌓기(`flex-direction: column; align-items: flex-start; gap: --sp-0`), `#teaching`은 `flex-wrap: wrap; row-gap: --sp-1`. [제안] 두 규칙을 `.sec-head` 공통 규칙(≤560px `flex-wrap: wrap`)으로 합친다. 이유: 국문 건수 문구가 길어지는 섹션이 더 생길 수 있음.
+- 반응형: ≤560px에서 `#ip`는 세로 쌓기(`flex-direction: column; align-items: flex-start; gap: --sp-0`), `#teaching`은 `flex-wrap: wrap; row-gap: --sp-1`. [구현 기본값] 두 규칙을 `.sec-head` 공통 규칙(≤560px `flex-wrap: wrap`)으로 합친다. 이유: 국문 건수 문구가 길어지는 섹션이 더 생길 수 있음.
 - 접근성: `h2`에 id를 두고 카드의 `aria-labelledby`가 가리킨다. 섹션 제목 단계는 h2, 카드 안 소제목은 h3, 그 아래는 h4.
 - 모션: 없음 (카드 등장에 포함, 5.14).
-- 문구: 섹션 이름·단위(`organizations`, `records` 등)는 `src/i18n/` (5.7). 숫자만 콘텐츠에서 계산.
+- 문구: 섹션 이름·단위(`organizations`, `records` 등)는 `src/i18n/` (tasks 5.7). 숫자만 콘텐츠에서 계산.
 
 ### 5.14 Card (section container)
 
@@ -1309,7 +1306,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 바탕 / 테두리 / 모서리 | `--surface` / `1px solid --line` / `--radius` |
 | 안쪽 여백 | `--sp-6` (≤860px: `--sp-5 --sp-4`) |
 | 카드 사이 | `margin-bottom: --sp-5` (≤860px: `--sp-4`) |
-| 앵커 위치 | `scroll-margin-top: calc(--header-h + --sp-5)` |
+| 앵커 위치 | `html { scroll-padding-top }` (4장 앵커 스크롤 오프셋) |
 | 안쪽 구분선 | 목록 머리 `--line-strong`, 행 사이 `--line` |
 
 **섹션 순서와 앵커** (3.3 결정): `#about` → `#work` → `#experience` → `#teaching` → `#awards` → `#personal` → `#ip` → `#contact`. 상단 메뉴 탭과의 대응은 5.2 참조.
@@ -1322,7 +1319,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 첫 화면 아래 카드 | JS가 `m-wait` 부여 → `opacity: 0; transform: translateY(--m-rise)` |
 | 화면에 들어옴 (`IntersectionObserver`, `rootMargin: 0px 0px -8% 0px`) | `m-in` 추가 → `--m-reveal` `--ease-out`로 fade/rise, 관찰 해제(1회) |
 | 안쪽 행 | 각 컴포넌트의 "대상 행"이 `--m-row`로 순서 등장. 지연 `calc(--m-reveal / 3 + --i × --m-stagger)`, `--i`는 `:nth-child`로 0~7 (8번째부터 7) |
-| 앵커·탭 이동으로 들어온 카드 | 등장 효과 없이 바로 완성 상태 (decision-log 3.3). [제안] 이동 대상 카드와 그 위의 `m-wait` 카드를 함께 `m-wait` 해제한다. 이유: 부드러운 스크롤이 지나가는 카드가 이동 직후 비어 보이는 문제가 같은 원인 |
+| 앵커·탭 이동으로 들어온 카드 | 등장 효과 없이 바로 완성 상태 (decision-log 3.3). [구현 기본값] 이동 대상 카드와 그 위의 `m-wait` 카드를 함께 `m-wait` 해제한다. 이유: 부드러운 스크롤이 지나가는 카드가 이동 직후 비어 보이는 문제가 같은 원인 |
 | 인쇄 | `opacity: 1; transform: none` 강제 |
 | `prefers-reduced-motion: reduce` | `m-wait`를 붙이지 않는다 |
 
@@ -1386,8 +1383,8 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | ≤560px | 1열 세로. `margin-left: --sp-1`, `li { padding: 0 0 --sp-4 --sp-5 }`. 선은 세로(`left: 4px; top: 4px; bottom: 0; width: 1px`), 마지막 칸 선(그라디언트)은 숨김 |
 
 - 상태: 현재 단계는 위치(마지막 항목)로 정한다. 콘텐츠에 현재 표시 필드는 없다(`trajectory`는 정확히 4개, `.length(4)`).
-- 접근성: 순서 있는 목록 `ol`. 선·점은 의사 요소라 읽히지 않는다. 현재 단계를 색만으로 표시하므로 [제안] 마지막 `li`에 `aria-current="step"`을 둔다. 이유: 색 외의 수단으로 현재를 알림.
-- 모션 (331-c): 로드 시 1회 선 그리기. 구간 `i`(0~3)마다 `animation-delay: i × --m-draw-seg`, 선은 `scaleX(0)→1` (`transform-origin: left`), 점은 같은 시점에 `scale(0.4)`·투명 → 1. ≤560px는 `scaleY` (`transform-origin: top`). 글자는 숨기지 않는다. `--i`는 `:nth-child`로 주므로 JS가 따로 넣을 필요 없음. 시안은 다시 그리기를 막으려고 4000ms 뒤 `m-draw` 클래스를 지운다 → [제안] 마지막 점의 `animationend`에서 지운다. 이유: 시안 밖 시간값을 두지 않음.
+- 접근성: 순서 있는 목록 `ol`. 선·점은 의사 요소라 읽히지 않는다. 현재 단계를 색만으로 표시하므로 [구현 기본값] 마지막 `li`에 `aria-current="step"`을 둔다. 이유: 색 외의 수단으로 현재를 알림.
+- 모션 (331-c): 로드 시 1회 선 그리기. 구간 `i`(0~3)마다 `animation-delay: i × --m-draw-seg`, 선은 `scaleX(0)→1` (`transform-origin: left`), 점은 같은 시점에 `scale(0.4)`·투명 → 1. ≤560px는 `scaleY` (`transform-origin: top`). 글자는 숨기지 않는다. `--i`는 `:nth-child`로 주므로 JS가 따로 넣을 필요 없음. 시안은 다시 그리기를 막으려고 4000ms 뒤 `m-draw` 클래스를 지운다 → [구현 기본값] 마지막 점의 `animationend`에서 지운다. 이유: 시안 밖 시간값을 두지 않음.
 - 콘텐츠: `profile.trajectory[]` → `years`(`.yrs`), `label`(`h3`), `description`(`p`).
 
 ### 5.17 Stats table
@@ -1408,7 +1405,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 |---|---|---|---|
 | Projects / 프로젝트 | `projects` 전체 | `6 featured` / `대표 6건` | `projects.featured` |
 | Patents / 특허 | `patents` 전체 | `7 registered · 8 filed` / `등록 7 · 출원 8` | `patents.status` (`filed`는 전체 − `registered`) |
-| Software / 프로그램 등록 | `software` 전체 | `8 registered · 2 pending` / `등록 8 · 진행 중 2` | `software.status` |
+| Software / 프로그램 등록 | `software` 전체 | `8 registered · 2 pending` / `등록 8 · 등록 진행 중 2` | `software.status` |
 | Books / 저서 | `teaching` 중 `kind: book` | 없음 | `teaching.kind` |
 
 (예시 숫자는 현재 콘텐츠 기준이며 빌드마다 다시 센다.)
@@ -1478,7 +1475,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 진행 중 | `period.status`가 `present` 또는 `planned`면 `.status` "In progress / 진행 중"을 붙이고 성과 줄은 뺀다 |
 | 제목 / 요약 | `title` / `summary` |
 | 성과 첫 줄 | 완료 건의 `caseStudy.outcome[0]`. `caseStudy`가 없으면 줄 없음 |
-| 태그 | `domain`, `capability[]` (국문 표기는 `src/i18n/`, 5.7) |
+| 태그 | `domain`, `capability[]` (국문 표기는 `src/i18n/`, tasks 5.7) |
 | 링크 | `caseStudy`가 있으면 `/work/<slug>/` (국문 `/ko/work/<slug>/`) |
 
 - 반응형: ≤560px `grid: --col-idx-sm minmax(0,1fr)`, `.idx` `--fs-xs` `padding-top: 3px`, `.go` 숨김.
@@ -1633,7 +1630,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
     </summary>
     <div class="dbody">
       <ol class="yg">
-        <li><h4 class="yh">2025</h4>
+        <li><h3 class="yh">2025</h3>
           <ol class="ip-list">
             <li class="it"><div>
               <span class="tt">English title</span>
@@ -1651,7 +1648,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 요소 | 값 |
 |---|---|
 | `.drawers` | 위 `--line-strong` |
-| `.dr` | 아래 `--line`, `scroll-margin-top: calc(--header-h + --sp-5)` |
+| `.dr` | 아래 `--line` (앵커 오프셋은 4장 `scroll-padding-top`) |
 | `summary` | `grid: minmax(0,1.4fr) 64px minmax(0,2fr) 96px 20px`, `align-items: baseline`, `gap: --sp-4`, `padding: --sp-4 0`, `--text-2`. 기본 표식 제거(`list-style: none`, `::-webkit-details-marker`) |
 | `.dn` 유형 | `--fs-lg` `--fw-strong` `--text`, 자간 -0.01em |
 | `.dc` 건수 | `--font-meta` `--fs-xl` `--fw-medium` `--text`, 오른쪽 정렬, 행간 1 |
@@ -1660,7 +1657,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | `.chev` | `--icon-sm`, `--icon-stroke-sm`, `--text-3`, `align-self: center` |
 | `.dbody` | `padding: 0 0 --sp-5` |
 | `.yg > li` | `grid: --col-year minmax(0,1fr)`, `gap: --sp-4`, 위 `--line` |
-| `.yh` | `--font-meta` `--fs-xs` `--fw-medium` `--text-3`, `padding-top: calc(--sp-3 + --sp-0)` (국문 `--font-ko`) |
+| `.yh` | `--font-meta` `--fs-xs` `--fw-medium` `--text-3`, `padding-top: calc(--sp-3 + --sp-0)` (국문에서도 `--font-meta` 유지, 7장) |
 | `.it` | `padding: --sp-3 0`, 위 `--line` (연도 묶음의 첫 항목은 선 없음) |
 | `.tt` | 블록, `--fs-sm` `--fw-medium` 행간 1.5 `--text` |
 | `.og` | 블록, `margin-top: --sp-0`, `--font-ko` `--fs-xs` 행간 1.55 `--text-3`, `word-break: keep-all` |
@@ -1804,14 +1801,15 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
   <section class="d-sec" id="context" aria-labelledby="h-context">…</section> …
 </article>
 <div class="pn-end">…</div>   <!-- ≤860px 이전·다음 -->
-<footer>…</footer></main>   <!-- 5.5 -->
+</main>
+<footer>…</footer>   <!-- 5.5, main 바로 뒤 -->
 ```
 
 | 폭 | 사이드바 | 본문 |
 |---|---|---|
 | >1000px | `--sidebar` 340px, sticky `top: 0`, `padding: --sp-6 --sp-6 --sp-5`, `gap: --sp-5` | `.doc` `padding: --sp-7` (≤1100px `--sp-6`) |
 | 861–1000px | 280px (탭 6개 + 토글이 들어가도록, 3.3.2) | 같음 |
-| ≤860px | 상단 블록(`display: block`, `padding: --sp-5 --sp-4 --sp-4`, 자식 간 `--sp-4`). `.who`·`.toc`·`.side-foot` 숨김 → 이동 경로·제목·기록표만 | `.doc` `padding: --sp-5 --sp-4`. 끝에 `.pn-end`. 섹션 이동은 메뉴 시트(5.3)의 "← Selected Work" + 목차 |
+| ≤860px | 상단 블록(`display: block`, `padding: --sp-5 --sp-4 --sp-4`, 자식 간 `--sp-4`). `.who`·`.toc`·`.side-foot` 숨김 → 이동 경로·제목·기록표만 | `.doc` `padding: --sp-5 --sp-4`. 끝에 `.pn-end`. 섹션 이동은 메뉴 시트(5.3)의 "← Selected Work / ← 대표 프로젝트" + 목차 |
 
 #### 5.24.1 기록표 사이드바
 
@@ -1846,7 +1844,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 번호 `a::before` | `decimal-leading-zero`, `--font-meta` `--fs-xs`, `padding-top: 1px`. 색은 아래 버그 참조 |
 | 현재 (`aria-current="true"`) | 글자 `--text` `--fw-medium`, 번호 `--accent` |
 
-- 현재 표시: 홈과 같은 스크롤 위치 판정(5.2)으로 `aria-current`를 `.d-sec`에 맞춘다. 상단 메뉴 탭은 Work 고정이고 목차만 움직인다.
+- 현재 표시: 화면 위 20%~아래 70%를 뺀 띠(`rootMargin: -20% 0px -70% 0px`)에 들어온 `.d-sec`에 `aria-current`를 맞춘다 (6.3. 홈의 25% 판정선과 다름). 상단 메뉴 탭은 Work 고정이고 목차만 움직인다.
 - **시안 버그**: 비현재 번호 색이 `--line-strong`(라이트 1.62:1)이라 4.5:1 미달 → `--text-3`으로 바꾼다 (번호가 글자로 읽힐 수 있으므로).
 
 #### 5.24.3 본문 섹션
@@ -1854,7 +1852,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 요소 | 값 |
 |---|---|
 | `.lede` | `--fs-lg` `--text`, 행간 1.55, `max-width: 60ch`, `margin-bottom: --sp-6`. 내용 `summary` |
-| `.d-sec` | `grid: --col-idx minmax(0,1fr)`, `gap: 0 --sp-3`, `padding: --sp-6 0`, 위 `--line`, `scroll-margin-top: calc(--header-h + --sp-5)` |
+| `.d-sec` | `grid: --col-idx minmax(0,1fr)`, `gap: 0 --sp-3`, `padding: --sp-6 0`, 위 `--line` (앵커 오프셋은 4장 `scroll-padding-top`) |
 | `.no` | 두 자리 번호, `--font-meta` `--fs-sm` `--accent`, 행간 1.75, `aria-hidden` |
 | `h2` | `--fs-lg` `--fw-title` `--ls-title`/`-ko`, 행간 1.4, `margin-bottom: --sp-3` |
 | `h3` (Key decisions) | `margin: --sp-5 0 --sp-2`, `--fs-xs` `--fw-strong` `--ls-label` 대문자 `--text-3` (국문 `--fs-sm` `--ls-label-ko`) |
@@ -1901,7 +1899,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 - 콘텐츠: `caseStudy.architecture.layers[]`(`id`, `label`, `nodes[]`) → 행 순서·번호·구성 요소. `flows[]`(`from`, `to`, `label?`) → `from` 계층 행의 흐름 칸. 스키마가 `from`/`to`가 있는 `id`인지 검사한다.
 - 반응형: ≤560px 표를 쌓인 기록으로 (`table`·`tr`·`td` `display: block`). `thead`는 시각적으로 숨김(`.sr-only`와 같은 규칙), `tr` `padding: --sp-3 0` + 아래 `--line`, `td` `padding: 0 0 --sp-1`. 라벨은 `td[data-l]::before`(`--fs-2xs` `--ls-eyebrow` 대문자 `--text-3`, `margin-top: --sp-1`; 국문 `--fs-xs` 자간 0). 첫 열 `nowrap` 해제.
-- 접근성: 진짜 `table` + `th scope="col"`. 쌓인 모양에서도 `thead`는 남아 있어 읽힌다. 화살표 글자(→ ↩)는 [제안] `aria-hidden` + `.sr-only` "to / back to"로 바꾼다. 이유: 화면 낭독기가 기호를 다르게 읽음.
+- 접근성: 진짜 `table` + `th scope="col"`. 쌓인 모양에서도 `thead`는 남아 있어 읽힌다. 화살표 글자(→ ↩)는 [구현 기본값] `aria-hidden` + `.sr-only` "to / back to"로 바꾼다. 이유: 화면 낭독기가 기호를 다르게 읽음.
 - 클래스 이름: 시안의 `.ledger`(아키텍처 표)는 홈 전체 프로젝트 원장(`.ledger`, 5.19)과 이름이 겹치고 `.n`·`.stk`·`.sum`도 여러 컴포넌트가 다르게 쓴다. 구현은 Astro 컴포넌트 범위 스타일로 분리한다.
 
 #### 5.24.5 이전·다음
@@ -1918,10 +1916,10 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 - 순서: `featured: true`이고 `caseStudy`가 있는 프로젝트, `order` 오름차순 (현재 5건). 링크 `rel="prev"`/`"next"`.
 - 접근성: 링크 이름 = "Previous" + 제목 전체(말줄임은 시각만).
 
-**케이스 스터디 모션**: 331-c 시안은 홈만 다룬다. 케이스 페이지는 등장·순서 효과 없이 hover 전환(`--dur`)과 상단 메뉴·메뉴 시트 모션(5.2, 5.3)만 둔다 [제안]. 이유: 한 장짜리 문서라 앵커 이동이 많고, 시안에 기준이 없음.
+**케이스 스터디 모션**: 331-c 시안은 홈만 다룬다. 케이스 페이지는 등장·순서 효과 없이 hover 전환(`--dur`)과 상단 메뉴·메뉴 시트 모션(5.2, 5.3)만 둔다 [구현 기본값]. 이유: 한 장짜리 문서라 앵커 이동이 많고, 시안에 기준이 없음.
 
 **미정·확인**
-- 기간 옆 "Planned / 예정" 배지: 홈과 CV는 `planned`를 "In progress / 진행 중"으로 표시한다. 케이스 기록표도 같은 문구로 맞춘다 (11장 단계 4).
+- 기간 옆 "Planned / 예정" 배지: 홈과 CV는 `planned`를 "In progress / 진행 중"으로 표시한다. 케이스 기록표도 같은 문구로 맞춘다 (11.5).
 - 시안의 UI 문구 `domain`(분야)은 정의만 있고 기록표에 쓰이지 않는다 → 기록표에 Domain을 넣지 않는다(시안 그대로).
 
 ## 6. Page Templates
@@ -2019,10 +2017,10 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 | 영역 | 내용 | 컴포넌트 (5장) |
 |---|---|---|
-| 사이드바 (기록표) | ① 작은 프로필(사진·이름·직함, 홈 `#about` 링크) ② 경로: "← Selected Work"(홈 `#work`) + 위치 `01 / 05` ③ 프로젝트 제목 `h1` ④ 기록표: Client, Organization, Period, Role, Stack ⑤ "On this page" 번호 목차 ⑥ 이전·다음 | Case study 5.24 (기록표·목차·이전·다음) |
+| 사이드바 (기록표) | ① 작은 프로필(사진·이름·직함, 홈 `#about` 링크) ② 경로: "← Selected Work / ← 대표 프로젝트"(홈 `#work`) + 위치 `01 / 05` ③ 프로젝트 제목 `h1` ④ 기록표: Client, Organization, Period, Role, Stack ⑤ "On this page" 번호 목차 ⑥ 이전·다음 | Case study 5.24 (기록표·목차·이전·다음) |
 | 상단 메뉴 | 홈과 같은 탭 6개. 링크는 홈 섹션(`/#about` 등, 국문은 `/ko/#about`). **Work 탭을 현재로 고정** (밑줄 정지, 스크롤과 무관). 오른쪽 끝 EN/KO·테마 | Top navigation 5.2 (케이스 변형) |
 | 모바일 바 | 이름 + 현재 **케이스 섹션** 이름. 이름 링크는 홈 `#work` | Mobile bar 5.3 |
-| 메뉴 시트 | 첫 줄 "← Selected Work"(홈 `#work`), 이어서 케이스 섹션 목록. 언어·테마 | Menu sheet 5.3 |
+| 메뉴 시트 | 첫 줄 "← Selected Work / ← 대표 프로젝트"(홈 `#work`), 이어서 케이스 섹션 목록. 언어·테마 | Menu sheet 5.3 |
 | 본문 | 리드 문단(프로젝트 `summary`) + 번호 붙은 섹션 | Case study 5.24 (본문 섹션·아키텍처 표) |
 | 본문 끝 | 이전·다음 한 번 더 | Case study 5.24 (이전·다음) |
 | 푸터 | 홈과 같은 Colophon [구현 기본값: 시안은 임시 한 줄] | Footer 5.5 |
@@ -2072,7 +2070,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 | 영역 | 내용 |
 |---|---|
-| 도구 막대 (`role="toolbar"`) | 용지 위 오른쪽 정렬, 버튼 3개: 반대 언어("한국어" / "English", 6.1 규칙으로 반대 언어 CV로 이동), 테마("Theme / 테마"), 인쇄("Print / Save PDF" / "인쇄 / PDF 저장", 포인트 색). 인쇄 시 숨김 |
+| 도구 막대 (`role` 없음, 10장) | 용지 위 오른쪽 정렬, 버튼 3개: 반대 언어("한국어" / "English", 6.1 규칙으로 반대 언어 CV로 이동), 테마("Theme / 테마"), 인쇄("Print / Save PDF" / "인쇄 / PDF 저장", 포인트 색). 인쇄 시 숨김 |
 | 용지 (`main`) | 머리 + 섹션 13개. 화면에서는 테두리 있는 용지 한 장, ≤720px에서 테두리 없이 1열 |
 | 머리 (`header`) | 이름 `h1`, 직함 줄(`headline · currentRole`), 연락처 열: 이메일, GitHub 호스트, LinkedIn 호스트, 사이트 주소(영문 `sguys99.github.io`, 국문 `sguys99.github.io/ko/`) |
 
@@ -2115,7 +2113,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 컴포넌트: Sidebar 5.1, Top navigation 5.2(탭 숨김 상태), Mobile bar + menu sheet 5.3, Card 5.14(404 카드), Buttons 5.6, Footer 5.5.
 
-**문구** (335-a 그대로, 용어집 등록은 5.7)
+**문구** (335-a 그대로, 용어집 등록은 tasks 5.7)
 
 | 항목 | en | ko |
 |---|---|---|
@@ -2145,7 +2143,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 ### 6.6 Head & sharing
 
-모든 페이지의 `<head>` 공통 항목. 구현 단계 5.8.
+모든 페이지의 `<head>` 공통 항목. 구현 단계 tasks 5.8.
 
 **title · description**
 
@@ -2167,9 +2165,9 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 파일 경로 | `/og-en.png`, `/og-ko.png` [구현 기본값]. 시안 원본 `g4/334/d-og-en.png`, `d-og-ko.png` |
 | 사용 | 모든 페이지가 자기 언어 이미지를 쓴다. 케이스 스터디별 이미지는 만들지 않는다 [구현 기본값: 시안이 사이트 공통 카드만 정함] |
 | 메타 | `og:title`·`og:description`(= title·description), `og:url`(= canonical), `og:image`(절대 URL), `og:image:width` 1200, `og:image:height` 630, `og:image:alt`(이름 · 직함), `og:type` `website`, `og:site_name` 이름, `og:locale` `en_US` / `ko_KR`, `og:locale:alternate` 반대 언어, `twitter:card` `summary_large_image` [구현 기본값] |
-| 생성 | 텍스트가 콘텐츠에서 오므로 이름·직함·한 줄 소개가 바뀌면 다시 만들어야 한다. 빌드 시 생성할지 수동 갱신할지는 5.8에서 정한다 (미정) |
+| 생성 | 텍스트가 콘텐츠에서 오므로 이름·직함·한 줄 소개가 바뀌면 다시 만들어야 한다. 빌드 시 생성할지 수동 갱신할지는 tasks 5.8에서 정한다 (미정) |
 
-**파비콘 세트** (3.3.4 D, 파일 생성은 5.8)
+**파비콘 세트** (3.3.4 D, 파일 생성은 tasks 5.8)
 
 | 파일 | 크기 | 내용 | `<link>` |
 |---|---|---|---|
@@ -2236,10 +2234,10 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 | 국문에서 `--font-ko`로 바꿈 (단어 라벨) | 국문에서도 `--font-meta` 유지 (숫자·날짜·짧은 표식) |
 |---|---|
-| `.sec-head h2`, `.eyebrow`, `.out .k`, `.sel-k`, `.sel-mark`, `.pl-cap`, `.fig .s`, `.yg .yh`, CV `.sec > h2`·`.row .meta`·`.note` | `.sec-head .meta`, `.traj .yrs`, `.proj-meta .num`, `.row .when`, `.pl-y`, `.idx`, `.badge`, `footer`, `.mono`, `.it .mt a`(DOI) |
+| `.sec-head h2`, `.eyebrow`, `.out .k`, `.sel-k`, `.sel-mark`, `.pl-cap`, `.fig .s`, CV `.sec > h2`·`.row .meta`·`.note` | `.sec-head .meta`, `.traj .yrs`, `.proj-meta .num`, `.row .when`, `.pl-y`, `.idx`, `.badge`, `footer`, `.mono`, `.it .mt a`(DOI), `.yg .yh`(연도) |
 
 규칙: 요소의 내용이 **단어**면 국문에서 `--font-ko`, **숫자·날짜·기호**면 `--font-meta`를 유지한다.
-- [확인] `.yg .yh`는 연도 숫자만 담는데(`b.y`) 국문에서 Pretendard로 바뀐다. 위 규칙대로면 Geist Mono 유지가 맞다. 구현 시 유지로 두고 시안과 비교한다.
+- `.yg .yh`는 연도 숫자만 담으므로 국문에서도 Geist Mono를 유지한다 (시안은 국문에서 Pretendard로 바꿨으나 위 규칙에 맞춰 고침).
 
 ### 역할별 영/국 비교
 
@@ -2350,11 +2348,11 @@ glossary를 따른다. 국문 페이지에서도 영문으로 두는 것:
 |---|---|
 | `font-display` | 세 패밀리 모두 `swap` (시안과 같음). 폴백이 바로 보이고 교체 시 흔들림은 아래 미정 항목으로 줄인다 |
 | 프리로드 | 영문 페이지는 Geist 가변(또는 400) 1개만 `preload`. 국문 페이지는 프리로드 없음 (분할 파일 중 어느 것이 필요한지 미리 알 수 없음) |
-| 국문 서브셋 | 5.2에서 결정. 후보: (a) Pretendard 배포본의 dynamic subset(유니코드 범위별 분할 파일 그대로 셀프 호스팅), (b) 빌드 시 사이트 텍스트에서 쓰인 글자만 추출한 단일 서브셋. 정적 사이트라 (b)가 작지만 콘텐츠 수정마다 재생성이 필요 |
-| 라틴 서브셋 | 5.2에서 결정. Geist·Geist Mono는 Latin만 필요 |
-| 폴백 메트릭 보정 (`size-adjust` 등) | 5.2에서 결정 |
-| 라이선스 | Geist·Geist Mono·Pretendard 모두 SIL OFL로 알려져 있음. 5.2에서 배포본 라이선스 파일로 확인하고 함께 둔다 |
-| 인쇄(CV) | `@page` 여백 상자는 웹폰트·변수를 못 쓸 수 있어 333-a가 서체명을 직접 적었다. 셀프 호스팅 후 같은 이름으로 해석되는지 5.2에서 확인 |
+| 국문 서브셋 | tasks 5.2에서 결정. 후보: (a) Pretendard 배포본의 dynamic subset(유니코드 범위별 분할 파일 그대로 셀프 호스팅), (b) 빌드 시 사이트 텍스트에서 쓰인 글자만 추출한 단일 서브셋. 정적 사이트라 (b)가 작지만 콘텐츠 수정마다 재생성이 필요 |
+| 라틴 서브셋 | tasks 5.2에서 결정. Geist·Geist Mono는 Latin만 필요 |
+| 폴백 메트릭 보정 (`size-adjust` 등) | tasks 5.2에서 결정 |
+| 라이선스 | Geist·Geist Mono·Pretendard 모두 SIL OFL로 알려져 있음. tasks 5.2에서 배포본 라이선스 파일로 확인하고 함께 둔다 |
+| 인쇄(CV) | `@page` 여백 상자는 웹폰트·변수를 못 쓸 수 있어 333-a가 서체명을 직접 적었다. 셀프 호스팅 후 같은 이름으로 해석되는지 tasks 5.2에서 확인 |
 
 ## 8. Dark Mode
 
@@ -2432,7 +2430,7 @@ glossary를 따른다. 국문 페이지에서도 영문으로 두는 것:
 
 ### 기준
 
-- **WCAG 2.2 AA**. 검수는 7.3(키보드·포커스·대비·대체 텍스트·제목·`lang`), 7.4(모션 줄이기), 7.5(Lighthouse 접근성 95 이상).
+- **WCAG 2.2 AA**. 검수는 tasks 7.3(키보드·포커스·대비·대체 텍스트·제목·`lang`), 7.4(모션 줄이기), 7.5(Lighthouse 접근성 95 이상).
 - 대비는 3장 대비비 표를 기준으로 한다. 본문 글자 4.5:1 이상(전 조합 충족), 포커스 링·선택 상태 같은 비텍스트 요소 3:1 이상. 선(`--line`, `--line-strong`)만으로 정보를 전달하지 않는다. 색을 바꿀 때는 3장 표를 다시 계산한다.
 
 ### 랜드마크
@@ -2443,7 +2441,7 @@ glossary를 따른다. 국문 페이지에서도 영문으로 두는 것:
 | `<header>` | 상단 메뉴 `.topbar` | 같음 (Work 탭 현재) | 같음 (탭 `nav` 숨김) | — |
 | `<nav>` | 탭 (`aria-label` "Sections"), 메뉴 시트 안 nav | 탭, 목차 `.toc`(`aria-label` "On this page"), 이전·다음 `.pn` | — | — |
 | `<main id="main">` | 섹션 카드 | 번호 붙은 문서 | 404 카드 | CV 본문 |
-| `<footer>` | 콜로폰 한 줄 (`main` 안, 335-a) | 같음 | 같음 | — |
+| `<footer>` | 콜로폰 한 줄 (`main` 바로 뒤, 335-a를 고침) | 같음 | 같음 | — |
 
 - 섹션은 `<section aria-labelledby="h-…">`. 404 카드는 `<article>`.
 - `nav`가 둘 이상인 페이지는 모두 `aria-label`을 단다 (국문 페이지는 국문 이름).
@@ -2453,7 +2451,7 @@ glossary를 따른다. 국문 페이지에서도 영문으로 두는 것:
 | 페이지 | h1 | h2 | h3 | h4 |
 |---|---|---|---|---|
 | 홈 | 사이드바 이름 | 섹션 제목 (About … Contact) | 대표작 제목, 전체 프로젝트 원장 제목, 궤적 단계, 경력 행, 강의 등 묶음 라벨(`.lg-label`), 개인 프로젝트 이름, Contact eyebrow 2개 | 강의·수상 행 |
-| 케이스 스터디 | 케이스 제목 (사이드바 기록표 안) | 문서 섹션 | 섹션 안 소제목 (예: Decisions) | — |
+| 케이스 스터디 | 케이스 제목 (사이드바 기록표 안) | 문서 섹션 | 섹션 안 소제목 (예: Key decisions) | — |
 | 404 | **404 제목** | 섹션 바로가기 목록 제목 (`.sr-only`) | — | — |
 | CV | 이름 | 섹션 라벨 | 행 제목 | — |
 
@@ -2469,7 +2467,7 @@ glossary를 따른다. 국문 페이지에서도 영문으로 두는 것:
 | 항목 | 규칙 |
 |---|---|
 | 위치 | `<body>` 첫 요소, `<a class="skip" href="#main">` |
-| 문구 | "Skip to content" / "본문 바로가기" (5.7에서 용어집 등록) |
+| 문구 | "Skip to content" / "본문 바로가기" (tasks 5.7에서 용어집 등록) |
 | 표시 | 평소 `.sr-only`와 같은 방식으로 숨김, `:focus-visible`이면 왼쪽 위에 보임. `z-index: var(--z-skip)`(상단 메뉴 위), 바탕 `--surface`, 테두리 `--line`, 모서리 `--radius-xs` |
 | 대상 | `<main id="main" tabindex="-1">` (포커스 이동 보장) |
 
@@ -2479,7 +2477,7 @@ DOM 순서 = 탭 순서. 시안 순서를 따른다.
 
 | 페이지 | 순서 |
 |---|---|
-| 홈 (데스크톱) | 본문 바로가기 → 사이드바(CV 다운로드, 이메일, GitHub, LinkedIn) → 탭 6개 → 언어 → 테마 → 본문 |
+| 홈 (데스크톱) | 본문 바로가기 → 사이드바(이메일, GitHub, LinkedIn, CV 다운로드는 tasks 6.12 후) → 탭 6개 → 언어 → 테마 → 본문 |
 | 홈 (≤860px) | 본문 바로가기 → 바 이름 링크 → 언어 → 메뉴 버튼 → 사이드바 → 본문 |
 | 케이스 스터디 | 본문 바로가기 → 기록표(홈 링크, 목차, 이전·다음) → 탭 → 언어 → 테마 → 본문 |
 
@@ -2497,7 +2495,7 @@ DOM 순서 = 탭 순서. 시안 순서를 따른다.
 | 선택 상자 `.sel` | `select`의 링을 끄고 감싼 `.sel:focus-within`에 링 + `border-color: var(--accent)` |
 | 마우스 클릭 | `:focus-visible`만 쓰므로 링이 나오지 않는다. `:focus`에 링을 걸지 않는다 |
 
-상단 메뉴가 고정이라 포커스된 요소가 그 밑에 가리지 않게 한다 (WCAG 2.4.11). 섹션·앵커 대상의 `scroll-margin-top`은 4장 규칙을 따른다.
+상단 메뉴가 고정이라 포커스된 요소가 그 밑에 가리지 않게 한다 (WCAG 2.4.11). 앵커 오프셋은 4장 `html { scroll-padding-top }`을 따른다.
 
 ### 메뉴 시트 (≤860px)
 
@@ -2505,7 +2503,7 @@ DOM 순서 = 탭 순서. 시안 순서를 따른다.
 |---|---|
 | 요소 | `<dialog class="sheet" aria-labelledby="sheet-title">`, `showModal()`로 연다 |
 | 포커스 가둠 | `showModal()`이 바깥을 inert로 만든다. 별도 트랩 코드 없음 |
-| 닫기 | Esc(기본 동작), 닫기 버튼(`aria-label` "Close menu" / 국문은 5.7), 바깥 backdrop 클릭, 시트 안 섹션 링크 클릭 |
+| 닫기 | Esc(기본 동작), 닫기 버튼(`aria-label` "Close menu" / 국문은 tasks 5.7), 바깥 backdrop 클릭, 시트 안 섹션 링크 클릭 |
 | 포커스 복귀 | 닫으면 메뉴 버튼으로 돌아간다 (`<dialog>` 기본 동작. 안 되는 브라우저 대비로 `close` 이벤트에서 `menuBtn.focus()`) |
 | 메뉴 버튼 | `aria-haspopup="dialog"`, `aria-controls="sheet"`, `aria-expanded`를 열고 닫을 때 갱신, `aria-label` "Open menu" |
 
@@ -2513,10 +2511,10 @@ DOM 순서 = 탭 순서. 시안 순서를 따른다.
 
 | 대상 | 값 |
 |---|---|
-| 상단 탭, 시트 섹션 링크 | 스크롤 위치의 섹션 링크에 `aria-current="true"`, 나머지 `"false"` (시안) |
+| 상단 탭, 시트 섹션 링크 | 스크롤 위치의 섹션 링크에 `aria-current="true"`, 나머지는 속성을 지운다 (시안의 `"false"`는 쓰지 않음, 5.2) |
 | 케이스 스터디 탭 | Work 탭 고정 `aria-current="true"` (332-a2-case) |
 | 케이스 목차 `.toc` | 스크롤 위치에 따라 `aria-current="true"` |
-| 언어 토글 `.seg` | 현재 언어 버튼 `aria-pressed="true"` |
+| 언어 토글 `.seg` | 현재 언어 링크 `aria-current="true"` (5.4, 아래 `lang` 속성) |
 
 색(`--text`, 밑줄 `--accent`)만이 아니라 속성으로도 현재 위치를 알린다. 탭 밑줄은 `aria-hidden` 장식.
 
@@ -2525,9 +2523,9 @@ DOM 순서 = 탭 순서. 시안 순서를 따른다.
 | 상황 | 방법 | 문구 (시안) |
 |---|---|---|
 | 전체 프로젝트 필터 | `<p class="pl-status" role="status">`에 결과 수 | "Showing n of N projects" / "전체 N건 중 n건 표시" |
-| 개인 프로젝트 상태 필터 | 시안은 알림 없음(버튼에 건수 표시). 같은 `role="status"` 한 줄 — 필터 두 곳의 동작을 맞추기 위해 | 문구는 5.7 |
+| 개인 프로젝트 상태 필터 | 시안은 알림 없음(버튼에 건수 표시). 같은 `role="status"` 한 줄 — 필터 두 곳의 동작을 맞추기 위해 | 문구는 tasks 5.7 |
 | 이메일 복사 | 버튼 글자 "Copy" → "Copied" 1800ms, 동시에 `.sr-only aria-live="polite"` 영역에 문장 → 1800ms 뒤 비움 | "Email address copied" / "이메일 주소를 복사했습니다" |
-| 복사 버튼 이름 | `aria-label` "Copy email: {주소}" (보이는 글자 "Copy"로 시작해 label-in-name 충족) | — |
+| 복사 버튼 이름 | `aria-label` "Copy email address: {주소}" (보이는 글자 "Copy"로 시작해 label-in-name 충족) | — |
 | 접힘 토글 ("모두 보기") | `aria-expanded`, `aria-controls` | — |
 | IP 서랍 | 기본 `<details>`. 펼침 상태는 브라우저가 알림 | — |
 
@@ -2575,7 +2573,7 @@ DOM 순서 = 탭 순서. 시안 순서를 따른다.
 | 섹션 등장(fade/rise)과 행 순서 등장 | 처음부터 보임 (`m-wait` 미부여) |
 | 경력 궤적 선 그리기·점 확대 | 처음부터 그려진 상태 |
 | 숫자 카운트업 | 최종값 |
-| 탭 밑줄 미끄러짐 | 탭별 고정 밑줄 (`.m-ind` 미생성) |
+| 탭 밑줄 미끄러짐 | `.ink`가 transition 없이 즉시 이동 (5.2) |
 | 테마 크로스페이드 (View Transitions) | 즉시 전환 |
 | 언어 전환 크로스페이드 (`@view-transition`) | 즉시 이동 (`@view-transition`을 `no-preference` 안에만 선언) |
 | 메뉴 시트 슬라이드·backdrop 페이드 | 즉시 표시 |
@@ -2587,8 +2585,8 @@ JS도 `matchMedia('(prefers-reduced-motion: reduce)')`가 참이면 모션 코�
 ### `.sr-only` 위치 버그 (decision-log G4)
 
 - 문제: 시안 `.sr-only`는 `position: absolute`인데 기준 요소가 없어 문서 기준으로 배치되고, 360px에서 가로 스크롤을 만들 수 있다.
-- 해결(5.1 전역 스타일): `.sr-only`를 담는 컴포넌트(카드 `.card`, 링크 행, 숫자 셀)에 `position: relative`를 주어 그 안에 머물게 한다. 정의는 시안 값 유지(`width/height: 1px; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); clip-path: inset(50%); white-space: nowrap; border: 0`).
-- 확인: 7.1에서 360px 홈·케이스·404·CV의 `document.documentElement.scrollWidth`가 화면 폭과 같은지 본다.
+- 해결(tasks 5.1 전역 스타일): `.sr-only`를 담는 컴포넌트(카드 `.card`, 링크 행, 숫자 셀)에 `position: relative`를 주어 그 안에 머물게 한다. 정의는 시안 값 유지(`width/height: 1px; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); clip-path: inset(50%); white-space: nowrap; border: 0`).
+- 확인: tasks 7.1에서 360px 홈·케이스·404·CV의 `document.documentElement.scrollWidth`가 화면 폭과 같은지 본다.
 
 ---
 
@@ -2604,7 +2602,7 @@ JS도 `matchMedia('(prefers-reduced-motion: reduce)')`가 참이면 모션 코�
 |---|---|
 | 크기 | `@page { size: A4 }` |
 | 여백 | `@page { margin: 15mm 16mm 16mm }` (`--cv-margin`. `@page`는 변수를 못 읽어 값을 직접 씀) |
-| 분량 | 영·국 각 4쪽 (시안 결과. 고정 규칙 아님, 7.10에서 확인) |
+| 분량 | 영·국 각 4쪽 (시안 결과. 고정 규칙 아님, tasks 7.10에서 확인) |
 | 쪽 하단 왼쪽 | `@bottom-left`: "{이름} · CV · sguys99.github.io" / "{이름} · 이력서 · sguys99.github.io". 7pt Geist Mono, `#5f6a78` |
 | 쪽 하단 오른쪽 | `@bottom-right`: `counter(page) " / " counter(pages)`. 같은 글꼴·색 |
 | 사진 | 없음 |
@@ -2627,7 +2625,7 @@ JS도 `matchMedia('(prefers-reduced-motion: reduce)')`가 참이면 모션 코�
 | 글자 | 기준 `--cv-base` (화면 13px, 인쇄 8.4pt), 행간 `--cv-lh` 1.5 / 국문 `--cv-lh-ko` 1.62, 국문 자간 -0.005em |
 | 링크 | 글자색 그대로, 밑줄 없음. URL은 본문에 펼치지 않는다 (연락처는 이미 주소 글자) |
 
-섹션 순서(시안): Profile → Skills → Experience → Education → Selected Projects → Other Projects → Patents → Software → Papers → Selected Reports → Teaching & Advisory → Books → Awards. 섹션 이름은 시안 UI 문구, 국문은 5.7 용어집에 맞춘다.
+섹션 순서(시안): Profile → Skills → Experience → Education → Selected Projects → Other Projects → Patents → Software → Papers → Selected Reports → Teaching & Advisory → Books → Awards. 섹션 이름은 시안 UI 문구, 국문은 tasks 5.7 용어집에 맞춘다.
 
 **쪽 나눔**
 
@@ -2641,8 +2639,8 @@ JS도 `matchMedia('(prefers-reduced-motion: reduce)')`가 참이면 모션 코�
 
 - 특허·프로그램 **등록번호를 싣지 않는다**. 상태(Registered / Filed / Pending)만 (1.1.4, 3.3 결정).
 - 상태 배지 `.st`: `--cv-fs-label` Geist Mono 500, `--text-3`, 1px `--line-strong` 테두리, `--radius-xs`. **시안의 "Planned / 예정" 배지는 홈과 같은 "In progress / 진행 중"으로 바꾼다** (decision-log 3.3).
-- 보고서는 대표 건만 싣고 끝에 "+n more reports at sguys99.github.io" 안내 한 줄 (시안 문구, 국문은 5.7).
-- 고객사 표기는 콘텐츠의 공개 여부를 따른다 (실명 3건 외 업종 표기).
+- 보고서는 대표 건만 싣고 끝에 "+n more reports at sguys99.github.io" 안내 한 줄 (시안 문구, 국문은 tasks 5.7).
+- 고객사 표기는 콘텐츠의 공개 여부를 따른다 (승인된 2곳 외 업종 표기, CLAUDE.md 규칙 3).
 
 **색**
 
@@ -2677,7 +2675,7 @@ JS도 `matchMedia('(prefers-reduced-motion: reduce)')`가 참이면 모션 코�
 
 - PDF는 **`/cv/`, `/ko/cv/`의 인쇄 결과를 그대로** 쓴다. PDF 전용 레이아웃이나 스타일을 따로 두지 않는다.
 - 빌드 후 두 페이지를 인쇄 매체로 렌더링해 영문·국문 PDF를 만들고, 사이드바 CV 다운로드 자리와 연결한다. 도구는 6.12에서 정한다 (`@page` 여백 상자와 `counter(pages)`를 지원해야 함).
-- 확인은 7.10(내용·조판), 7.11(브라우저 인쇄).
+- 확인은 tasks 7.10(내용·조판), tasks 7.11(브라우저 인쇄).
 
 ## 11. Decision Log
 
@@ -2847,3 +2845,14 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | CV의 도슨트 건 "Planned" 배지 → "In progress / 진행 중" | G6 | 5.7, 6.4, 10장 (11.5에서 케이스 스터디까지 확대) | 문서에 반영됨 → 5.7 |
 | 새 UI 문구(최종 수정, 맨 위로, 페이지를 찾을 수 없습니다 등) 용어집 등록 | G6 | tasks 5.7 (5.5 국문 문구) | 구현 대기 |
 | apple-touch-icon 180, favicon.ico 대체 파일 생성 | G6 | tasks 5.8 (6.6 파일 목록) | 구현 대기 |
+| 개인 프로젝트 `in-progress` 국문: 5.20 "개발 중" ↔ 5.7 "진행 중" | 단계 4 | tasks 1.5.6 문안 검토 (5.20, 5.7) | 결정 필요 |
+| 웹폰트 자체 호스팅 방식·국문 서브셋·폴백 메트릭 | 단계 4 | tasks 5.2 (3장 Typography, 7장 웹폰트 로딩) | 결정 필요 |
+| ≤1100px `main` 하단 패딩 64→32px, 마지막 카드→푸터 간격 56px, `100vh`/`100dvh` 단위 | 단계 4 | tasks 5.3 (4장 확인할 점) | 결정 필요 |
+| 케이스 아키텍처 표 `.flow` nowrap이 360px에서 넘칠 수 있음 | 단계 4 | tasks 7.1 (4장 360px 가로 스크롤 방지) | 구현 대기 |
+| 사이드바 CV 다운로드 활성 상태의 모양 (시안 없음) | 단계 4 | tasks 6.12 (5.1) | 결정 필요 |
+| "Selected / 대표" 표시가 원장 `.badge.f`와 IP `.sel-mark` 두 모양 | 단계 4 | tasks 5.10 (5.7) | 결정 필요 |
+| DOI 없이 `url`만 있는 논문의 표시 방법 | 단계 4 | tasks 6.6 (5.21) | 결정 필요 (해당 콘텐츠가 생길 때) |
+| CV PDF 파일 경로·이름, HTML CV(`/cv/`) 진입 링크를 둘지 | 단계 4 | tasks 6.12 (6.1, 6.4) | 결정 필요 |
+| OG 이미지를 빌드 시 생성할지 수동 갱신할지 | 단계 4 | tasks 5.8 (6.6) | 결정 필요 |
+| JSON-LD `worksFor` 회사명: `profile`에 필드 추가 또는 상수 (콘텐츠 스키마 변경) | 단계 4 | tasks 5.8 (6.6) | 결정 필요 |
+| `.cs-title`·`.d-sec h2` 행간 1.28/1.4를 기존 행간 토큰과 합칠지 | 단계 4 | tasks 6.10 (7장 역할별 영/국 비교) | 구현 대기 |
