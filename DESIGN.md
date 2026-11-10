@@ -490,3 +490,217 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 1. 같은 값이 컴포넌트 2곳 이상에 쓰이거나 테마·언어에 따라 바뀌면 토큰으로 만든다. 한 곳에만 쓰이는 값은 컴포넌트 명세에 둔다.
 2. 이 장의 표에 이름·값(라이트/다크)·용도를 먼저 적고, 디자인 값 자체가 새로 생기면 시안을 제시해 선택받는다(규칙 1). 색이면 대비비를 다시 계산한다.
 3. 그 뒤 `tokens.css`에 같은 이름·값으로 추가한다. 다크 값은 두 다크 블록에 모두 넣는다.
+
+## 4. Layout & Breakpoints
+
+출처: `g4/base.html`(홈 골격), `g4/332-a2.html`(상단 메뉴), `g4/332-a2-case.html`(케이스 스터디 골격, `case.html` 위에 얹은 변경), `g4/331-c.html`(등장 효과와 앵커), `g4/335-a.html`(404·푸터). 크기 값은 모두 3장 토큰 이름으로 적는다.
+
+### 페이지 골격 (홈)
+
+```html
+<div class="shell">
+  <aside class="sidebar">…</aside>          <!-- 왼쪽 열: 프로필 -->
+  <div class="col">                          <!-- 오른쪽 열 -->
+    <header class="topbar"><div class="bar">…</div></header>
+    <main id="main">
+      <section class="card" id="about">…</section> … <section class="card" id="contact">…</section>
+      <footer class="foot-a">…</footer>
+    </main>
+  </div>
+</div>
+<dialog class="sheet">…</dialog>             <!-- 모바일 메뉴 시트, top layer -->
+```
+
+| 요소 | 규칙 |
+|---|---|
+| `.shell` | `display: grid; grid-template-columns: var(--sidebar) minmax(0, 1fr); min-height: 100vh; max-width: calc(var(--sidebar) + var(--main)); margin: 0 auto` |
+| 중앙 정렬 | 넓은 화면에서 사이드바와 본문이 한 덩어리로 가운데 온다. 양옆 빈 곳은 `body`의 `--bg`. 최대 폭 = 320 + 960 = 1280px |
+| `aside.sidebar` | `position: sticky; top: 0; height: 100vh; overflow-y: auto; border-right: 1px solid var(--line); padding: var(--sp-7) var(--sp-6); display: flex; flex-direction: column; gap: var(--sp-5)`. 바탕은 `--bg` (카드가 아님). 내부 → 5장 |
+| `.col` | `min-width: 0` (긴 내용이 그리드 열을 넓히지 않게) |
+| `.topbar` | 오른쪽 열(`.col`) 안에 있다. 사이드바 위로 걸치지 않는다. `position: sticky; top: 0; z-index: var(--z-header); background: var(--header-bg); backdrop-filter: var(--header-blur); border-bottom: 1px solid var(--line)` |
+| `.topbar .bar` | `max-width: var(--main); height: var(--header-h); padding: 0 var(--sp-7)`. 좌우 패딩은 항상 `main`의 좌우 패딩과 같게 둔다(탭 왼쪽 끝 = 카드 왼쪽 끝). 탭·토글 내부 → 5장 |
+| `main` | `max-width: var(--main); width: 100%; padding: var(--sp-6) var(--sp-7) var(--sp-8)` |
+| 푸터 | `main` 안, 마지막 카드 다음. 별도 열·전폭 띠가 아니다 → 5장 |
+
+### 세로 리듬
+
+| 대상 | >1100px | ≤1100px | ≤860px |
+|---|---|---|---|
+| `main` 패딩 (상 / 좌우 / 하) | `--sp-6` / `--sp-7` / `--sp-8` | `--sp-6` / `--sp-6` / `--sp-6` | `--sp-4` / `--sp-4` / `--sp-7` |
+| `.topbar .bar` 좌우 패딩 | `--sp-7` | `--sp-6` | `--sp-4` |
+| 카드 안쪽 패딩 (`.card`) | `--sp-6` | `--sp-6` | `--sp-5` (상하) / `--sp-4` (좌우) |
+| 카드 사이 (`.card` `margin-bottom`) | `--sp-5` | `--sp-5` | `--sp-4` |
+| 섹션 머리 아래 (`.sec-head` `margin-bottom`) | `--sp-5` | `--sp-5` | `--sp-5` |
+| 카드 안 큰 블록 사이 (궤적·Skills·원장 등 `margin-top`) | `--sp-6` | `--sp-6` | `--sp-6` |
+| 마지막 카드 → 푸터 | 카드 `margin-bottom` + 푸터 `margin-top: var(--sp-6)` | 같음 | 같음 |
+| 사이드바 블록 사이 (`gap`) | `--sp-5` | `--sp-5` | 모바일 프로필 → 아래 표 |
+
+- 리듬은 "카드 사이 < 카드 안쪽 패딩 < 본문 좌우 여백" 순서를 지킨다(24 < 32 < 48, 모바일 16 = 16 < 20).
+- ≤1100px에서 `main` 하단이 `--sp-8`→`--sp-6`으로 줄어드는 것은 시안 그대로다(`main { padding: var(--sp-6) }`가 세 방향을 모두 덮음). 의도인지 확인 필요(아래 "확인할 점").
+
+### 카드형 섹션 컨테이너
+
+| 규칙 | 값 |
+|---|---|
+| 마크업 | 홈 섹션 하나 = `<section class="card" id="…" aria-labelledby="h-…">` 하나. 첫 자식은 `.sec-head`(h2 + 선택 meta) → 5장 |
+| 겉모양 | `background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius)`. 그림자 없음 |
+| 패딩·간격 | 위 "세로 리듬" 표 |
+| 앵커 | `scroll-margin-top: calc(var(--header-h) + var(--sp-5))` (아래 "앵커 스크롤") |
+| 중첩 | 카드 안에 카드를 두지 않는다. 카드 안 구분은 헤어라인(`--line`, 강한 구분은 `--line-strong`)과 행 패딩으로만 한다 |
+| 폭 | 카드는 `main` 폭을 꽉 채운다. 읽기 폭 제한은 카드가 아니라 안쪽 문단에 `--measure`/`--measure-sm`으로 건다 |
+| 등장 효과 대상 | `main > section.card` (331-c, 3장 Motion) |
+
+### 앵커 스크롤 오프셋
+
+| 대상 | 값 | 출처 |
+|---|---|---|
+| `.card` (홈 섹션) | `scroll-margin-top: calc(var(--header-h) + var(--sp-5))` | base |
+| `.dr` (IP 서랍, 개별 앵커) | 같은 값 | base |
+| `.d-sec` (케이스 스터디 문서 절) | 같은 값 | 332-a2-case (case.html의 `var(--sp-5)`를 덮음. 케이스에도 상단 메뉴가 생겼기 때문) |
+| `html` | `scroll-behavior: smooth`는 `prefers-reduced-motion: no-preference`에서만 | base |
+
+- 오프셋은 `--header-h`를 따라 자동으로 바뀐다: 데스크톱 56 + 24 = 80px, ≤860px 52 + 24 = 76px. 상단 메뉴가 모바일에서도 sticky이므로 같은 식을 쓴다.
+- 시안은 `html { scroll-padding-top }`을 쓰지 않고 요소별 `scroll-margin-top`을 쓴다. 구현도 요소별로 둔다. 새로 앵커가 되는 요소(`id`로 링크되는 것)는 같은 값을 반드시 붙인다.
+  - 구현: 요소별 scroll-margin 대신 `html { scroll-padding-top: calc(var(--header-h) + var(--sp-5)) }` 하나로 둔다. 결과 위치는 시안과 같고 앵커 누락을 막는다.
+- 앵커·탭으로 들어온 섹션은 등장 효과(`m-wait`)를 건너뛴다 (decision-log 3.3 "구현 시 처리할 것"). 이동 직후 카드가 비어 보이지 않게 하기 위함 → 3장 Motion.
+
+### 브레이크포인트
+
+미디어 쿼리 값은 이 표의 값만 쓴다(3장 "브레이크포인트"와 같은 이름). 수집 범위: base, case, 332-a2, 332-a2-case, 331-c, 335-a의 모든 `@media`.
+
+| 폭 | 범위 | 바뀌는 것 | 파일 |
+|---|---|---|---|
+| `min-width: 1101px` (wide) | 기본 | 기본 골격. `--sidebar` 320px (케이스 340px) | — |
+| `max-width: 1100px` (narrow-desktop) | 861–1100 | 홈 `--sidebar` 280px · `main` 패딩 `--sp-6` 사방 · `.bar` 좌우 `--sp-6` · 궤적 4열→2열(→5장) · 케이스 `.doc` 패딩 `--sp-7`→`--sp-6` | base, case |
+| `max-width: 1000px` (tight-desktop) | 861–1000 | 탭 간격 `--sp-6`→`--sp-4` · 케이스 `--sidebar` 340→280px (탭 6개 + 토글이 들어가게) | 332-a2, 332-a2-case |
+| `min-width: 861px` | 데스크톱 전체 | 사이드바 기록표형(사진 `--sb-photo-w`, 키-값 행, CV 자리) → 5장 · 케이스: 메뉴 시트 숨김, 사이드바 `top: 0` | base, case, 332-a2-case |
+| `max-width: 860px` (mobile) | ≤860 | 2열 그리드 해제(아래 "모바일 골격") · `--header-h` 52px · 탭·토글 숨김, 이름 + 메뉴·언어 버튼 · 메뉴 시트 사용 · 카드 패딩·간격 축소 · 한 줄 소개 `--fs-xl` · Contact 2단→1열 · 케이스: 기록표 축약, 문서 끝 이전·다음 표시 | base, case, 332-a2-case |
+| `max-width: 720px` (cv-screen) | ≤720 | CV 화면 보기만 1열 → 10장 | 333-a |
+| `max-width: 560px` (small) | ≤560 | 행 그리드가 1열로(경력·강의·수상 기간 열, 특허·출판 연도 열, 원장, Skills, 서랍) · 대표작·개인 프로젝트 번호 열 `--col-idx-sm`, 화살표 숨김 · 궤적 세로 · 숫자 표 2열 · 로고 ×0.85 · 필터·선택 상자 전폭 · 케이스: `.d-sec` 번호 열 해제, 표가 쌓인 기록으로 · 404 바로가기 열 140→56px · 푸터 세로 쌓기 | base, case, 331-c, 335-a |
+
+**기능 쿼리 (폭과 무관, 다른 장 담당)**
+
+| 쿼리 | 용도 | 참조 |
+|---|---|---|
+| `prefers-color-scheme: dark` | 다크 토큰 | 3장 Color |
+| `prefers-reduced-motion: reduce` / `no-preference` | 모션 끔 / smooth 스크롤·등장 효과 | 3장 Motion |
+| `hover: hover` | 대표작 행 `--row-tint` hover (331-c) | 5장 |
+| `print` | 등장 상태 강제 완성, CV | 10장 |
+
+**구현 시 삭제**: base·332-a2의 `≤860px` `.tabs { overflow-x; mask-image; padding-right }` 규칙. 같은 구간에서 `.topbar nav`가 `display: none`이라 적용될 곳이 없다.
+
+### 모바일 골격 (≤860px)
+
+| 요소 | 규칙 |
+|---|---|
+| `.shell` | `display: flex; flex-direction: column` (그리드 해제, 중앙 정렬 폭 제한은 의미 없어짐) |
+| `.col` | `display: contents` → 상단 메뉴·`main`이 `.shell`의 직접 자식처럼 배치 |
+| `.topbar` | `order: -1`로 사이드바 **위**로 올라간다. sticky 유지. 내용: `.bar-id`(이름 / 현재 섹션) + 언어 버튼 + 메뉴 버튼 → 5장 |
+| `aside.sidebar` | `position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); padding: var(--sp-4) var(--sp-4) var(--sp-4)`. `display: grid; grid-template-columns: var(--sb-photo-w-sm) minmax(0, 1fr); gap: var(--sp-2) var(--sp-4)`. 연락처는 `grid-column: 1 / -1`로 아래 한 줄 → 5장 |
+| `main` | 위 "세로 리듬" 표 |
+| 메뉴 시트 | `<dialog>` 오른쪽에서 열림, 폭 `min(var(--sheet-w), 88vw)`, 높이 `100dvh` → 5장 |
+
+### 와이어프레임
+
+데스크톱 (≥1101px, 홈)
+
+```
+        |<------------------ max 1280 (sidebar 320 + main 960), 가운데 ------------------>|
+        +---------------------+-----------------------------------------------------------+
+        | aside.sidebar       | .topbar  sticky, h 56  [About Work Exp Personal Pub Cont] [EN|KO][◐]
+        | sticky, 100vh       +-----------------------------------------------------------+
+        | pad 48 / 32         |  main  pad 32 / 48 / 64                                   |
+        |                     |  +-----------------------------------------------------+  |
+        | [photo 132]         |  | .card #about        pad 32                           |  |
+        | Name                |  |  SEC-HEAD                                            |  |
+        | AI Engineer         |  |  …                                                   |  |
+        | ─────────────────── |  +-----------------------------------------------------+  |
+        | KEY  value          |            ↕ 24                                          |
+        | KEY  value          |  +-----------------------------------------------------+  |
+        | KEY  value          |  | .card #work                                          |  |
+        | [CV]                |  +-----------------------------------------------------+  |
+        |                     |   …                                                       |
+        |                     |  ─────────────────────────────────────── (↕ 24 + 32)     |
+        |                     |  footer.foot-a  © · updated · source        top ↑         |
+        +---------------------+-----------------------------------------------------------+
+```
+
+모바일 (≤860px, 360px 기준)
+
+```
++------------------------------------+
+| .topbar sticky, h 52               |
+| Name / Work            [KO] [≡]    |
++------------------------------------+
+| aside.sidebar (static) pad 16      |
+| [64] Name                          |
+|      AI Engineer                   |
+| ✉ mail   GitHub   LinkedIn        |
++------------------------------------+
+| main pad 16 / 16 / 48              |
+| +--------------------------------+ |
+| | .card  pad 20 / 16             | |
+| | SEC-HEAD                       | |
+| | …                              | |
+| +--------------------------------+ |
+|            ↕ 16                    |
+| +--------------------------------+ |
+| | .card                          | |
+| +--------------------------------+ |
+| ────────────────────────────────── |
+| footer (≤560px 세로 쌓기)          |
++------------------------------------+
+```
+
+### 360px 가로 스크롤 방지
+
+| 규칙 | 적용 |
+|---|---|
+| 그리드 가변 열은 항상 `minmax(0, 1fr)` | `.shell`, 모든 행 그리드. `1fr` 단독 금지 |
+| 그리드·플렉스 자식 중 글이 긴 것은 `min-width: 0` | `.col`, `.body`, `.bar-id`, `.topbar nav`, `.proj-meta .org`, `.fig`, `.pidx .acts` |
+| 고정 폭 열은 ≤560px에서 해제하거나 줄인다 | `--row-when`, `--col-year`, `--col-year-wide`, Skills 180px → 1열 / `--col-idx` → `--col-idx-sm` / 404 바로가기 140 → 56px |
+| 한 줄로 두는 긴 글은 말줄임 | `.contact .lbl`, `.bar-cur`, `.pn-t`, 사이드바 `.h`: `overflow: hidden; text-overflow: ellipsis; white-space: nowrap` |
+| 국문 줄바꿈 | `html:lang(ko) body { word-break: keep-all; overflow-wrap: anywhere }` (keep-all이 긴 어절로 넘치지 않게 anywhere를 같이 둔다) |
+| 가로 스크롤을 허용하는 곳은 요소 안에서만 | 탭 목록(`.tabs`)은 자기 안에서만 넘칠 수 있다(데스크톱 `overflow: visible`은 861–1000px 간격 축소로 보장). 페이지 전체에 넘치면 안 된다 |
+| 뷰포트 폭 단위 | `100vw` 쓰지 않는다(스크롤바 폭만큼 넘침). 시트만 `88vw`를 `min()` 안에서 쓴다 |
+| 절대 배치 숨김 요소 | `.sr-only`가 위치 기준 없이 절대 배치되어 넘칠 수 있음 → 5.1 전역 스타일에서 해결 (decision-log 3.2 이후로 넘긴 것) |
+| 검사 | 구현 후 360px에서 `document.documentElement.scrollWidth <= innerWidth`를 홈·케이스·404, 영문·국문, 메뉴 시트 열림/닫힘으로 확인 |
+
+시안에서 확인이 필요한 곳: 케이스 아키텍처 표의 `.flow`(`white-space: nowrap`)는 ≤560px에서 표가 쌓인 기록으로 바뀐 뒤에도 nowrap이 남는다. 흐름 문구가 길면 360px에서 넘칠 수 있으므로 구현 시 실제 콘텐츠로 확인한다.
+
+### 케이스 스터디 페이지 골격
+
+골격(`.shell` 그리드, 중앙 정렬, sticky 사이드바, 오른쪽 열 안 상단 메뉴)은 홈과 같다. 다른 점만 적는다.
+
+| 항목 | 홈 | 케이스 스터디 (332-a2-case) |
+|---|---|---|
+| `--sidebar` | 320 / ≤1100: 280 | 340 / ≤1000: 280 (861–1000에서 탭 6개 + 토글이 들어가게) |
+| 사이드바 내용 | 프로필 기록 | 프로젝트 기록표: `.who`(작은 사진 + 이름) → 경로(`← Work` + `01 / 07`) + 제목 h1 → `.rec`(키-값) → `.toc`(번호 목차) → `.side-foot`(이전·다음, `margin-top: auto`로 바닥에 붙음). 내부 → 5장 |
+| 사이드바 패딩 | `--sp-7` `--sp-6` | `--sp-6` `--sp-6` `--sp-5` |
+| 상단 메뉴 | 홈 섹션 탭 | 같은 탭 6개, Work 표시, 링크는 홈 섹션으로. 언어·테마 토글은 상단 메뉴에만 (사이드바에 없음) |
+| `main` 내용 | 섹션별 카드 여러 개 | `article.card.doc` **하나**. 안에 요약(`.lede`) + 번호 붙은 절(`.d-sec`)들 |
+| 카드 패딩 | `--sp-6` | `.doc` `--sp-7` / ≤1100: `--sp-6` / ≤860: `--sp-5` `--sp-4` |
+| 절 구분 | 카드 사이 간격 | `.d-sec`: `padding: var(--sp-6) 0; border-top: 1px solid var(--line)`, `grid-template-columns: var(--col-idx) minmax(0, 1fr)` (≤560 1열) |
+| 앵커 | `.card` | `.d-sec` (값은 같음) |
+| ≥861px 메뉴 시트 | 숨김(메뉴 버튼 없음) | `display: none` 명시 |
+
+**케이스 모바일 (≤860px)**: 사이드바가 `display: block`이 되고 `.who`·`.toc`·`.side-foot`을 숨긴다. 경로·제목·기록표만 남고 자식 사이 `margin-top: var(--sp-4)`. 목차는 메뉴 시트로(맨 위 `← Work` + 절 목록), 이전·다음은 문서 끝 `.pn-end`로 옮긴다.
+
+### 404 골격 (335-a)
+
+| 항목 | 규칙 |
+|---|---|
+| 골격 | 홈과 같은 `.shell`. 사이드바 유지 |
+| 상단 메뉴 | 탭(`nav`) 숨김, 토글만 오른쪽(`margin-left: auto`). 모바일은 홈과 같은 바 |
+| `main` | 카드 하나(`article.card.nf`) + 푸터. 다른 섹션 없음 |
+| 카드 내용 | 코드 · 제목 · 설명(`max-width: 52ch`) · 버튼 · 섹션 바로가기 목록 → 5장 |
+| 언어 | 경로(`/ko/`)로 판별 (decision-log 3.3) |
+| 제목 단계 | 사이드바 이름이 h1, 404 제목이 h2인 시안 구조를 정리해야 한다 (decision-log 3.3). 어느 쪽을 h1로 할지 미정 → 9장 |
+
+시안의 `html[data-view="404"]`로 섹션을 숨기는 방식은 시안 전용이다. 구현은 404 페이지가 처음부터 카드 하나만 렌더한다.
+
+### 확인할 점
+
+- ≤1100px에서 `main` 하단 패딩이 `--sp-8`(64) → `--sp-6`(32)으로 줄어드는 것이 의도인지. 시안의 `main { padding: var(--sp-6) }` 한 줄이 하단까지 덮은 결과로 보인다.
+- 마지막 카드 → 푸터 간격이 카드 `margin-bottom`(24) + 푸터 `margin-top`(32) = 56px로 겹쳐 더해진다. 시안 그대로 둘지.
+- `aside.sidebar`·`.shell`은 `100vh`, 메뉴 시트는 `100dvh`. 모바일에서는 사이드바가 static이라 문제없지만 단위를 맞출지 구현 시 결정.

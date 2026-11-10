@@ -159,7 +159,7 @@
 
 - [x] 4.1 Brand & Tone, Principles — Do/Don't, UI 문구 어조 포함
 - [x] 4.2 Tokens: color(라이트/다크), type, spacing, radius, motion — 대비비 실측, 직접 쓴 값 토큰화·단계 정리(사용자 승인), z-index·CV 토큰 포함
-- [ ] 4.3 Layout & Breakpoints
+- [x] 4.3 Layout & Breakpoints — 와이어프레임, 브레이크포인트 표, 앵커 오프셋. 하단 여백 2건은 4.10에서 확인
 - [ ] 4.4 Components: 컴포넌트별 구조, 상태(hover, focus, active), 반응형 동작
 - [ ] 4.5 Page Templates: 홈, 케이스 스터디, CV, 404
 - [ ] 4.6 Bilingual Typography: 언어별 서체, 행간, 자간 조정값
