@@ -158,7 +158,7 @@
 ## 단계 4. DESIGN.md 작성
 
 - [x] 4.1 Brand & Tone, Principles — Do/Don't, UI 문구 어조 포함
-- [ ] 4.2 Tokens: color(라이트/다크), type, spacing, radius, motion
+- [x] 4.2 Tokens: color(라이트/다크), type, spacing, radius, motion — 대비비 실측, 직접 쓴 값 토큰화·단계 정리(사용자 승인), z-index·CV 토큰 포함
 - [ ] 4.3 Layout & Breakpoints
 - [ ] 4.4 Components: 컴포넌트별 구조, 상태(hover, focus, active), 반응형 동작
 - [ ] 4.5 Page Templates: 홈, 케이스 스터디, CV, 404
