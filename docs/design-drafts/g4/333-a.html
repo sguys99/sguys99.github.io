@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search);
+    var t = q.get('theme');
+    if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+    document.documentElement.lang = q.get('lang') === 'ko' ? 'ko' : 'en';
+  })();
+</script>
+<style>
+  /* =====================================================================
+     TOKENS — copied from g3/base.html. 3.3.3 adds only the CV block at the end.
+     ===================================================================== */
+  :root {
+    --font: "Geist", "Pretendard Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-ko: "Pretendard Variable", "Pretendard", system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif;
+    --font-meta: "Geist Mono", "Pretendard Variable", ui-monospace, "SFMono-Regular", monospace;
+    --fw-name: 600; --fw-title: 600; --fw-strong: 600; --fw-eyebrow: 500;
+    --ls-name: -0.02em; --ls-title: -0.012em; --ls-title-ko: -0.02em; --ls-eyebrow: 0.06em; --ls-eyebrow-ko: 0;
+
+    color-scheme: light;
+    --bg: #f3f5f8; --surface: #ffffff; --line: #dfe3ea; --line-strong: #c5ccd6;
+    --text: #141a22; --text-2: #475260; --text-3: #5f6a78; --chip: #eef1f5;
+    --accent: #2b5a8a; --accent-soft: #e6edf6; --focus: var(--accent);
+    --radius: 10px; --radius-sm: 6px; --radius-xs: 4px; --radius-pill: 999px;
+    --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px;
+    --dur: 180ms;
+
+    /* --- 3.3.3 CV (print) --- */
+    --cv-paper-w: 210mm;          /* A4 */
+    --cv-margin: 15mm 16mm 16mm;  /* @page margins; footer sits in the bottom margin */
+    --cv-pad: 15mm 16mm;          /* screen sheet padding, mirrors the page margins */
+    --cv-base: 13px;              /* screen base; print overrides to pt below */
+    --cv-fs-name: 2.1em;
+    --cv-fs-title: 1.08em;
+    --cv-fs-meta: 0.84em;
+    --cv-fs-label: 0.76em;
+    --cv-lh: 1.5; --cv-lh-ko: 1.62;
+    --cv-gutter: 24mm;            /* A: section label column */
+    --cv-date: 19mm;              /* date column inside rows */
+    --cv-gap: 5mm;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #0d1117; --surface: #151b23; --line: #252d38; --line-strong: #364150;
+      --text: #e6eaf0; --text-2: #b1bac6; --text-3: #8b95a3; --chip: #1d2530;
+      --accent: #8db3e2; --accent-soft: #1a283b;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0d1117; --surface: #151b23; --line: #252d38; --line-strong: #364150;
+    --text: #e6eaf0; --text-2: #b1bac6; --text-3: #8b95a3; --chip: #1d2530;
+    --accent: #8db3e2; --accent-soft: #1a283b;
+  }
+  /* Paper is always the light palette, whatever the screen theme. */
+  @media print {
+    :root, :root[data-theme] {
+      color-scheme: light;
+      --bg: #ffffff; --surface: #ffffff; --line: #dfe3ea; --line-strong: #c5ccd6;
+      --text: #141a22; --text-2: #475260; --text-3: #5f6a78; --chip: #eef1f5;
+      --accent: #2b5a8a; --accent-soft: #e6edf6;
+      --cv-base: 8.4pt;
+    }
+    :root:lang(ko) { --cv-base: 8.4pt; }
+  }
+
+  /* ============================ PAGE ============================ */
+  @page {
+    size: A4;
+    margin: var(--cv-margin);
+    margin: 15mm 16mm 16mm; /* custom properties are not resolved in @page in every engine */
+    @bottom-left { content: var(--cv-foot, ""); font: 7pt "Geist Mono", "Pretendard Variable", monospace; color: #5f6a78; }
+    @bottom-right { content: counter(page) " / " counter(pages); font: 7pt "Geist Mono", monospace; color: #5f6a78; }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+  html:lang(ko) body { font-family: var(--font-ko); word-break: keep-all; overflow-wrap: anywhere; }
+  a { color: inherit; text-decoration: none; overflow-wrap: anywhere; }
+  a:hover { text-decoration: underline; text-underline-offset: 2px; }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-xs); }
+  .num { font-variant-numeric: tabular-nums; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  h1, h2, h3, p { margin: 0; }
+
+  /* Screen-only toolbar */
+  .tools { display: flex; justify-content: flex-end; gap: var(--sp-2); max-width: var(--cv-paper-w); margin: var(--sp-5) auto var(--sp-3); padding: 0 var(--sp-4); font: 500 var(--fs-xs, 12px)/1 var(--font-meta); }
+  .tools button { font: inherit; color: var(--text-2); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--sp-2) var(--sp-3); cursor: pointer; }
+  .tools button:hover { color: var(--text); border-color: var(--line-strong); }
+  .tools .primary { color: var(--accent); }
+
+  /* Sheet: an A4 page on screen, plain flow on paper */
+  .cv {
+    max-width: var(--cv-paper-w); margin: 0 auto var(--sp-7);
+    padding: var(--cv-pad);
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm);
+    font-size: var(--cv-base); line-height: var(--cv-lh); color: var(--text);
+  }
+  html:lang(ko) .cv { line-height: var(--cv-lh-ko); letter-spacing: -0.005em; }
+  @media (max-width: 720px) {
+    .tools { margin-top: var(--sp-4); }
+    .cv { padding: var(--sp-5) var(--sp-4); border-left: 0; border-right: 0; border-radius: 0; }
+  }
+  @media print {
+    .tools { display: none; }
+    body { background: none; }
+    .cv { max-width: none; margin: 0; padding: 0; border: 0; border-radius: 0; }
+  }
+
+  /* ============================ A. LEDGER ============================ */
+  /* Single reading column; section labels sit in a left gutter like a ledger. */
+  .head { display: grid; grid-template-columns: 1fr auto; gap: var(--sp-2) var(--cv-gap); align-items: end; padding-bottom: 4mm; border-bottom: 1.5px solid var(--text); margin-bottom: 5mm; }
+  .head h1 { font-size: var(--cv-fs-name); font-weight: var(--fw-name); letter-spacing: var(--ls-name); line-height: 1.1; }
+  .head .role { color: var(--text-2); font-size: var(--cv-fs-title); margin-top: 1.5mm; }
+  .head .contact { text-align: right; font: 400 var(--cv-fs-meta)/1.7 var(--font-meta); color: var(--text-2); }
+  .head .contact a { color: var(--text); }
+
+  .sec { display: grid; grid-template-columns: var(--cv-gutter) minmax(0, 1fr); gap: 0 var(--cv-gap); padding: 2.6mm 0; border-top: 1px solid var(--line); }
+  .sec:first-of-type { border-top: 0; padding-top: 0; }
+  .sec > h2 { font: var(--fw-eyebrow) var(--cv-fs-label)/1.9 var(--font-meta); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--text-3); break-after: avoid; }
+  html:lang(ko) .sec > h2 { letter-spacing: var(--ls-eyebrow-ko); font-family: var(--font-ko); font-weight: 600; font-size: 0.86em; }
+  .sec > h2 small { display: block; font-size: 1em; text-transform: none; letter-spacing: 0; }
+  .body { min-width: 0; }
+  .body > * + * { margin-top: 2.4mm; }
+  .about { color: var(--text); max-width: 60em; }
+
+  .row { display: grid; grid-template-columns: var(--cv-date) minmax(0, 1fr); gap: 0 3mm; break-inside: avoid; }
+  .row .when { font: 400 var(--cv-fs-meta)/1.75 var(--font-meta); color: var(--text-3); }
+  .row h3 { font-size: 1em; font-weight: var(--fw-title); letter-spacing: var(--ls-title); }
+  html:lang(ko) .row h3 { letter-spacing: var(--ls-title-ko); }
+  .row .sub { color: var(--text-2); }
+  .row .meta { font: 400 var(--cv-fs-meta)/1.6 var(--font-meta); color: var(--text-3); }
+  html:lang(ko) .row .meta { font-family: var(--font-ko); font-size: 0.9em; }
+  .row .desc { color: var(--text-2); margin-top: 0.6mm; }
+  .row ul.hl { margin-top: 0.8mm; }
+  .row ul.hl li { position: relative; padding-left: 3.2mm; color: var(--text-2); }
+  .row ul.hl li::before { content: ""; position: absolute; left: 0.4mm; top: 0.72em; width: 1.4mm; height: 1px; background: var(--text-3); }
+  .row .stack { font: 400 var(--cv-fs-meta)/1.6 var(--font-meta); color: var(--text-3); margin-top: 0.6mm; }
+  .body > .row + .row { margin-top: 2.2mm; }
+  .tight > .row + .row { margin-top: 1mm; }
+  .tight .row h3 { font-weight: 500; display: inline; }
+  /* Compact lists: title and its source run on one line to save paper. */
+  .tight .row .meta, .tight .row .sub { display: inline; margin-left: 2mm; }
+  .st { font: 500 var(--cv-fs-label)/1 var(--font-meta); color: var(--text-3); border: 1px solid var(--line-strong); border-radius: var(--radius-xs); padding: 0.3mm 1mm; margin-left: 1.2mm; white-space: nowrap; vertical-align: 0.1em; }
+  .st.on { color: var(--accent); border-color: currentColor; }
+  .kv { display: grid; grid-template-columns: var(--cv-date) minmax(0, 1fr); gap: 0.8mm 3mm; }
+  .kv dt { font-weight: var(--fw-strong); }
+  .kv dd { margin: 0; color: var(--text-2); }
+  .kv > div { display: contents; }
+  .nw { white-space: nowrap; }
+  @media (max-width: 720px) {
+    .head { grid-template-columns: 1fr; }
+    .head .contact { text-align: left; }
+    .sec { grid-template-columns: 1fr; }
+    .sec > h2 small { display: inline; margin-left: var(--sp-2); }
+    .kv { grid-template-columns: 1fr; gap: 0; }
+    .kv dd { margin-bottom: var(--sp-2); }
+  }
+  .note { font: 400 var(--cv-fs-meta)/1.6 var(--font-meta); color: var(--text-3); }
+  html:lang(ko) .note { font-family: var(--font-ko); }
+</style>
+</head>
+<body>
+<div class="tools" role="toolbar" aria-label="CV">
+  <button type="button" id="lang-btn"></button>
+  <button type="button" id="theme-btn"></button>
+  <button type="button" class="primary" id="print-btn"></button>
+</div>
+<main class="cv" id="cv"></main>
+
+<script src="content.js"></script>
+<script>
+(function () {
+  var C = window.CONTENT, root = document.documentElement, L;
+  var UI = {
+    about: { en: 'Profile', ko: '소개' }, skills: { en: 'Skills', ko: '기술' },
+    experience: { en: 'Experience', ko: '경력' }, selected: { en: 'Selected Projects', ko: '대표 프로젝트' },
+    other: { en: 'Other Projects', ko: '기타 프로젝트' }, patents: { en: 'Patents', ko: '특허' },
+    software: { en: 'Software', ko: '프로그램 등록' }, papers: { en: 'Papers', ko: '논문' },
+    reports: { en: 'Selected Reports', ko: '주요 보고서' }, teaching: { en: 'Teaching & Advisory', ko: '강의·자문' },
+    books: { en: 'Books', ko: '저서' }, awards: { en: 'Awards', ko: '수상' }, education: { en: 'Education', ko: '학력' },
+    present: { en: 'Present', ko: '현재' }, planned: { en: 'Planned', ko: '예정' },
+    registered: { en: 'Registered', ko: '등록' }, filed: { en: 'Filed', ko: '출원' }, pending: { en: 'Pending', ko: '등록 진행 중' },
+    client: { en: 'Client', ko: '고객' }, lead: { en: 'Lead', ko: '총괄' },
+    moreReports: { en: 'more reports at', ko: '건의 보고서 전체 목록:' },
+    print: { en: 'Print / Save PDF', ko: '인쇄 / PDF 저장' }, theme: { en: 'Theme', ko: '테마' }, other_lang: { en: '한국어', ko: 'English' },
+    cv: { en: 'CV', ko: '이력서' }, updated: { en: 'Updated', ko: '갱신' }
+  };
+  var SITE = 'sguys99.github.io';
+  var t = function (o) { return o == null ? '' : (typeof o === 'string' ? o : (o[L] || o.en || '')); };
+  var u = function (k) { return UI[k][L]; };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var host = function (url) { return url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''); };
+  var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function ym(s) { if (!s) return ''; var p = s.split('-'); return L === 'ko' ? p[0] + '.' + p[1] : MON[+p[1] - 1] + ' ' + p[0]; }
+  function period(p) { return ym(p.start) + ' – ' + (p.status === 'present' ? u('present') : ym(p.end)); }
+  // Print rows: year-only ranges keep the date column narrow.
+  function yrs(p) { var a = p.start.slice(0, 4), b = p.status === 'present' ? u('present') : (p.end || '').slice(0, 4); return a === b ? a : a + ' – ' + b; }
+  function orgLine(p) {
+    var client = p.client ? t(p.client.public ? p.client.name : p.client.label) : '';
+    return [t(p.org), client].filter(Boolean).map(esc).join(' · ');
+  }
+  var byStart = function (a, b) { return b.period.start.localeCompare(a.period.start); };
+  function sec(key, inner, extra) { return '<section class="sec" aria-labelledby="h-' + key + '"><h2 id="h-' + key + '">' + u(key) + (extra ? '<small>' + extra + '</small>' : '') + '</h2><div class="body' + (/^(other|patents|software|papers|reports|teaching|books|awards|education)$/.test(key) ? ' tight' : '') + '">' + inner + '</div></section>'; }
+  function row(when, body) { return '<div class="row"><span class="when num">' + when + '</span><div>' + body + '</div></div>'; }
+
+  function render() {
+    L = root.lang;
+    var P = C.profile, c = P.contact, projects = Object.values(C.projects);
+    var feat = projects.filter(function (p) { return p.featured; }).sort(function (a, b) { return a.order - b.order; });
+    var rest = projects.filter(function (p) { return !p.featured; }).sort(byStart);
+    var pats = Object.values(C.patents).sort(function (a, b) { return b.date.localeCompare(a.date); });
+    var nReg = pats.filter(function (p) { return p.status === 'registered'; }).length;
+    var pubs = Object.values(C.publications);
+    var papers = pubs.filter(function (p) { return p.type === 'paper'; });
+    var reports = pubs.filter(function (p) { return p.type === 'report'; });
+    var selReports = reports.filter(function (p) { return p.featured; });
+    var teach = Object.values(C.teaching);
+
+    var h = '';
+    h += '<header class="head"><div><h1>' + esc(t(P.name)) + '</h1><p class="role">' + esc(t(P.headline)) + ' · ' + esc(t(P.currentRole)) + '</p></div>' +
+      '<p class="contact"><a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a><br>' +
+      '<a href="' + esc(c.github) + '">' + esc(host(c.github)) + '</a><br>' +
+      '<a href="' + esc(c.linkedin) + '">' + esc(host(c.linkedin)) + '</a><br>' +
+      '<a href="https://' + SITE + (L === 'ko' ? '/ko/' : '/') + '">' + SITE + (L === 'ko' ? '/ko/' : '') + '</a></p></header>';
+
+    h += sec('about', '<p class="about">' + esc(t(P.about)) + '</p>');
+    h += sec('skills', '<dl class="kv">' + P.skills.map(function (s) { return '<div><dt>' + esc(t(s.label)) + '</dt><dd>' + esc(t(s.summary)) + '</dd></div>'; }).join('') + '</dl>');
+    h += sec('experience', Object.values(C.experience).map(function (e) {
+      return row(yrs(e.period), '<h3>' + esc(t(e.org)) + ' <span class="sub">— ' + esc(t(e.role)) + '</span></h3><p class="desc">' + esc(t(e.summary)) + '</p>');
+    }).join(''));
+    h += sec('education', Object.values(C.education).map(function (e) {
+      return row(yrs(e.period), '<h3>' + esc(t(e.degree)) + '</h3><p class="meta">' + esc(t(e.school)) + '</p>');
+    }).join(''));
+
+    h += sec('selected', feat.map(function (p) {
+      var planned = p.period.status === 'planned' ? '<span class="st">' + u('planned') + '</span>' : '';
+      return row(yrs(p.period), '<h3>' + esc(t(p.title)) + planned + '</h3><p class="meta">' + orgLine(p) + '</p>' +
+        '<ul class="hl">' + p.highlights.map(function (x) { return '<li>' + esc(t(x)) + '</li>'; }).join('') + '</ul>' +
+        (p.stack ? '<p class="stack">' + p.stack.map(esc).join(' · ') + '</p>' : ''));
+    }).join(''));
+    h += sec('other', rest.map(function (p) {
+      var o = orgLine(p);
+      return row(yrs(p.period), '<h3>' + esc(t(p.title)) + '</h3>' + (o ? '<p class="meta">' + o + '</p>' : ''));
+    }).join(''));
+    h += sec('patents', pats.map(function (p) {
+      var r = p.status === 'registered';
+      return row(p.date.slice(0, 4), '<h3>' + esc(t(p.title)) + '</h3><p class="meta">' + u(p.status) + '</p>');
+    }).join(''), u('registered') + ' ' + nReg + ' · ' + u('filed') + ' ' + (pats.length - nReg));
+    h += sec('software', Object.values(C.software).map(function (s) {
+      return row(s.date ? s.date.slice(0, 4) : '—', '<h3>' + esc(t(s.title)) + '</h3><p class="meta">' + u(s.status) + '</p>');
+    }).join(''));
+    h += sec('papers', papers.map(function (p) {
+      return row(String(p.year), '<h3>' + esc(t(p.title)) + '</h3><p class="sub">' + esc(p.authors) + '. <i>' + esc(t(p.venue)) + '</i></p>' +
+        (p.doi ? '<p class="meta"><a href="https://doi.org/' + esc(p.doi) + '">doi.org/' + esc(p.doi) + '</a></p>' : ''));
+    }).join(''));
+    h += sec('reports', selReports.map(function (p) {
+      return row(String(p.year), '<h3>' + esc(t(p.title)) + '</h3>' + (p.publisher ? '<p class="meta">' + esc(t(p.publisher)) + '</p>' : ''));
+    }).join('') + '<p class="note">' + (L === 'ko' ? reports.length + u('moreReports') + ' ' + SITE + '/ko/' : '+' + (reports.length - selReports.length) + ' ' + u('moreReports') + ' ' + SITE) + '</p>');
+    h += sec('teaching', teach.filter(function (x) { return x.kind !== 'book'; }).map(function (x) {
+      return row(esc(x.years), '<h3>' + esc(t(x.title)) + '</h3><p class="meta">' + esc(t(x.org)) + '</p>');
+    }).join(''));
+    h += sec('books', teach.filter(function (x) { return x.kind === 'book'; }).map(function (x) {
+      return row(esc(x.years), '<h3>' + (x.url ? '<a href="' + esc(x.url) + '">' + esc(t(x.title)) + '</a>' : esc(t(x.title))) + '</h3><p class="meta">' + esc(t(x.org)) + '</p>');
+    }).join(''));
+    h += sec('awards', Object.values(C.awards).map(function (a) {
+      return row(esc(a.years), '<h3>' + esc(t(a.title)) + '</h3><p class="meta">' + esc(t(a.org)) + '</p>');
+    }).join(''));
+    document.getElementById('cv').innerHTML = h;
+    document.title = t(P.name) + ' · ' + u('cv');
+    root.style.setProperty('--cv-foot', JSON.stringify(t(P.name) + ' · ' + u('cv') + ' · ' + SITE));
+    document.getElementById('lang-btn').textContent = u('other_lang');
+    document.getElementById('lang-btn').lang = L === 'en' ? 'ko' : 'en';
+    document.getElementById('theme-btn').textContent = u('theme');
+    document.getElementById('print-btn').textContent = u('print');
+  }
+  function setParam(k, v) { var q = new URLSearchParams(location.search); q.set(k, v); history.replaceState(null, '', '?' + q); }
+  document.getElementById('lang-btn').onclick = function () { root.lang = L === 'en' ? 'ko' : 'en'; setParam('lang', root.lang); render(); };
+  document.getElementById('theme-btn').onclick = function () { var th = root.dataset.theme === 'dark' ? 'light' : 'dark'; root.dataset.theme = th; setParam('theme', th); };
+  document.getElementById('print-btn').onclick = function () { window.print(); };
+  render();
+})();
+</script>
+</body>
+</html>
