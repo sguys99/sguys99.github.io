@@ -128,21 +128,21 @@
 ### 4.1 사이트맵
 ```
 /                     Home, 영문 (단일 스크롤, 큐레이션된 요약)
-├─ #about             소개 + 경력 궤적
-├─ #work              Selected Work (대표 프로젝트 5~6건)
+├─ #about             소개 + 경력 궤적 + 숫자 요약
+├─ #work              Selected Work (대표 프로젝트 6건) + 전체 프로젝트 원장 (접힘 + 필터)
 ├─ #experience        경력 6곳
-├─ #projects          전체 프로젝트 (접힘 + 필터)
-├─ #personal          Personal Projects (개인 프로젝트, 내용 추후 제공)
-├─ #ip                Patents · Publications · Software
 ├─ #teaching          Teaching · Books · Advisory
 ├─ #awards            Awards & Education
+├─ #personal          Personal Projects (개인 프로젝트)
+├─ #ip                IP & Publications (특허, 프로그램, 논문, 보고서)
 └─ #contact           Contact (의뢰 가능 분야 포함)
 /work/<slug>/         케이스 스터디 상세 (대표 프로젝트만)
 /cv/                  인쇄 최적화 CV (PDF 다운로드 원본)
 /ko/…                 위 전체의 국문 미러 [확정]
 /404
 ```
-- 사이드바(사진, 이름, 직함, 연락처, 언어·테마 전환)는 모든 화면에서 고정. 모바일에서는 상단 요약 블록으로 전환.
+- 상단 메뉴 탭: About · Work · Experience · Personal · Publications · Contact (G6, 3.3.2). Experience 탭은 Teaching·Awards 구간을 포함.
+- 사이드바(사진, 이름, 직함, 연락처)는 고정, 언어·테마 전환은 상단 메뉴 오른쪽 끝. 모바일에서는 얇은 고정 바 + 메뉴 시트로 전환 (G3, 3.1.6).
 - 언어 전환은 **같은 위치의 반대 언어 페이지**로 이동합니다(`/work/genp/` ↔ `/ko/work/genp/`).
 - `sguys99.github.io/<저장소명>` 형태로 이미 배포된 프로젝트 페이지가 있다면 그 경로와 겹치지 않게 라우트 이름을 정합니다.
 

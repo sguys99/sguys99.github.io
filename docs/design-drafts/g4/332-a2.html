@@ -703,6 +703,8 @@
   .ink { position: absolute; left: 0; bottom: -1px; height: 2px; width: var(--ink-w, 0); transform: translateX(var(--ink-x, 0));
          background: var(--accent); border-radius: 2px 2px 0 0; pointer-events: none; }
   .ink.ready { transition: transform var(--dur) ease, width var(--dur) ease; }
+  /* narrow desktop (861-1000px): tighter tab gap so six tabs clear the toggles */
+  @media (max-width: 1000px) { .tabs { gap: var(--sp-4); } }
   /* menu sheet: groups with their sections underneath */
   .sheet-nav.grouped > li { border-bottom: 1px solid var(--line); }
   .sheet-nav.grouped a { border-bottom: 0; }
@@ -735,8 +737,8 @@
         <ul class="tabs" id="tabs" data-nav>
           <li><a href="#about" data-for="about" data-ui="tab_about"></a></li>
           <li><a href="#work" data-for="work" data-ui="tab_work"></a></li>
-          <li><a href="#personal" data-for="personal" data-ui="tab_personal"></a></li>
           <li><a href="#experience" data-for="experience teaching awards" data-ui="tab_experience"></a></li>
+          <li><a href="#personal" data-for="personal" data-ui="tab_personal"></a></li>
           <li><a href="#ip" data-for="ip" data-ui="tab_ip"></a></li>
           <li><a href="#contact" data-for="contact" data-ui="tab_contact"></a></li>
         </ul>
@@ -789,13 +791,6 @@
       </div>
     </section>
 
-    <section class="card" id="personal" aria-labelledby="h-personal">
-      <div class="sec-head"><h2 id="h-personal" data-ui="personal"></h2><a class="pp-head-link" id="pp-gh" rel="noopener"></a></div>
-      <div class="filters seg" role="group" id="pp-filter" style="display:inline-flex"></div>
-      <ol class="pidx" id="pp-list"></ol>
-      <button type="button" class="toggle-all" id="pp-toggle" aria-controls="pp-list"></button>
-    </section>
-
     <section class="card" id="experience" aria-labelledby="h-exp">
       <div class="sec-head"><h2 id="h-exp" data-ui="experience"></h2><span class="meta" id="exp-meta"></span></div>
       <div id="exp-list"></div>
@@ -809,6 +804,13 @@
     <section class="card" id="awards" aria-labelledby="h-awards">
       <div class="sec-head"><h2 id="h-awards" data-ui="awards"></h2></div>
       <div id="awards-list"></div>
+    </section>
+
+    <section class="card" id="personal" aria-labelledby="h-personal">
+      <div class="sec-head"><h2 id="h-personal" data-ui="personal"></h2><a class="pp-head-link" id="pp-gh" rel="noopener"></a></div>
+      <div class="filters seg" role="group" id="pp-filter" style="display:inline-flex"></div>
+      <ol class="pidx" id="pp-list"></ol>
+      <button type="button" class="toggle-all" id="pp-toggle" aria-controls="pp-list"></button>
     </section>
 
     <section class="card ip" id="ip" aria-labelledby="h-pat">
@@ -848,10 +850,10 @@
       <ul class="sheet-nav grouped" data-nav>
         <li><a href="#about" data-for="about" data-ui="tab_about"></a></li>
         <li><a href="#work" data-for="work" data-ui="tab_work"></a></li>
-        <li><a href="#personal" data-for="personal" data-ui="tab_personal"></a></li>
         <li><a href="#experience" data-for="experience teaching awards" data-ui="tab_experience"></a>
           <ul class="sheet-sub"><li><a href="#experience" data-ui="experience"></a></li><li><a href="#teaching" data-ui="teaching"></a></li><li><a href="#awards" data-ui="awards"></a></li></ul>
         </li>
+        <li><a href="#personal" data-for="personal" data-ui="tab_personal"></a></li>
         <li><a href="#ip" data-for="ip" data-ui="tab_ip"></a></li>
         <li><a href="#contact" data-for="contact" data-ui="tab_contact"></a></li>
       </ul>
@@ -894,7 +896,7 @@
     tab_work: { en: 'Work', ko: '대표 프로젝트' },
     tab_personal: { en: 'Personal', ko: '개인 프로젝트' },
     tab_experience: { en: 'Experience', ko: '경력' },
-    tab_ip: { en: 'IP & Pubs', ko: '지식재산' },
+    tab_ip: { en: 'Publications', ko: '지식재산 · 출판물' },
     tab_contact: { en: 'Contact', ko: '연락처' },
     outcome: { en: 'Outcome', ko: '성과' },
     inprog: { en: 'In progress', ko: '진행 중' },

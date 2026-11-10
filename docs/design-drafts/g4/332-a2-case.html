@@ -584,6 +584,8 @@
   .ink { position: absolute; left: 0; bottom: -1px; height: 2px; width: var(--ink-w, 0); transform: translateX(var(--ink-x, 0));
          background: var(--accent); border-radius: 2px 2px 0 0; pointer-events: none; }
   .ink.ready { transition: transform var(--dur) ease, width var(--dur) ease; }
+  /* narrow desktop (861-1000px): tighter tab gap so six tabs clear the toggles */
+  @media (max-width: 1000px) { .tabs { gap: var(--sp-4); } }
   /* menu sheet: groups with their sections underneath */
   .sheet-nav.grouped > li { border-bottom: 1px solid var(--line); }
   .sheet-nav.grouped a { border-bottom: 0; }
@@ -598,6 +600,8 @@
   .topbar { display: block; }
   .d-sec { scroll-margin-top: calc(var(--header-h) + var(--sp-5)); }
   @media (min-width: 861px) { aside.sidebar { top: 0; } }
+  /* 861-1000px: the case-file sidebar narrows to the home width so six tabs + toggles fit */
+  @media (max-width: 1000px) { :root { --sidebar: 280px; } }
 </style>
 </head>
 <body>
@@ -612,8 +616,8 @@
         <ul class="tabs" id="tabs">
           <li><a data-home="#about" href="332-a2.html#about" data-ui="tab_about"></a></li>
           <li><a data-home="#work" href="332-a2.html#work" data-ui="tab_work" aria-current="true"></a></li>
-          <li><a data-home="#personal" href="332-a2.html#personal" data-ui="tab_personal"></a></li>
           <li><a data-home="#experience" href="332-a2.html#experience" data-ui="tab_experience"></a></li>
+          <li><a data-home="#personal" href="332-a2.html#personal" data-ui="tab_personal"></a></li>
           <li><a data-home="#ip" href="332-a2.html#ip" data-ui="tab_ip"></a></li>
           <li><a data-home="#contact" href="332-a2.html#contact" data-ui="tab_contact"></a></li>
         </ul>
@@ -716,7 +720,7 @@
     tab_work: { en: 'Work', ko: '대표 프로젝트' },
     tab_personal: { en: 'Personal', ko: '개인 프로젝트' },
     tab_experience: { en: 'Experience', ko: '경력' },
-    tab_ip: { en: 'IP & Pubs', ko: '지식재산' },
+    tab_ip: { en: 'Publications', ko: '지식재산 · 출판물' },
     tab_contact: { en: 'Contact', ko: '연락처' }
   };
   var t = function (o) { return o == null ? '' : (typeof o === 'string' ? o : (o[L] || o.en || '')); };
