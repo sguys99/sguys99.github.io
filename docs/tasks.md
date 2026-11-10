@@ -182,7 +182,7 @@
 - [x] 5.4 상단 내비게이션, 앵커 스크롤, 현재 위치 표시 — `Topbar.astro`에 탭 6개 + 미끄러지는 `.ink`(`--m-nav` `--ease-out`, 첫 배치는 transition 없이) + 위치 기반 scroll-spy(판정선 바 아래 + 25%, 페이지 끝은 Contact, 탭·시트 클릭 후 손 스크롤 전까지 고정). 탭·시트 링크 `aria-current`, 모바일 바는 섹션 이름 표시. 케이스 변형은 `current` prop(홈 앵커 링크 + 고정 표시)만. DOM 순서를 내비게이션 먼저로 바꾸고 그리드 자리 지정으로 배치 유지(`.col` 제거, 11.7 사용자 결정). 시트 링크가 앵커 스크롤을 취소하던 5.3 버그 수정. 앵커 오프셋: 카드 위 = 바 아래 23px(데스크톱·모바일). JS 없으면 탭은 앵커, 막대 없음. 11.6 '상단 메뉴 흔적'은 반투명 바 뒤 본문으로 확인
 - [x] 5.5 테마 전환: 시스템 설정 따름 + 수동 전환 기억, 로딩 시 깜빡임 없음 — `Base.astro` head 맨 앞(charset 다음) `is:inline` 스크립트가 `localStorage.theme`(`light`/`dark`만, try/catch)을 `data-theme`에 넣음. 저장값 없으면 속성 없이 OS 설정을 따르고 OS 변경도 실시간 반영. `ThemeToggle.astro`(달/해 아이콘, `aria-pressed`, View Transitions `--m-theme` 크로스페이드 + `m-notx`, 모션 줄이기·미지원 시 즉시)를 데스크톱 `.controls`와 시트 테마 줄에 배치. 아이콘 표시 규칙은 두 다크 조건에 나란히. 언어 세그먼트 `LangSwitch.astro`(`.seg`, 링크 + `aria-current`)도 두 곳에 배치, 링크는 상대 언어 홈(5.6에서 같은 위치로). Playwright 확인: 모듈 스크립트를 빼고 인라인만 남겨도 저장값(OS 반대)대로 첫 페인트 배경·아이콘 일치, 로드 시 테마 관련 transition 0건, 저장 차단 시 오류 없음, 360px 가로 스크롤 없음
 - [ ] 5.5.1 861~약 900px 영문에서 탭 6개 + `.controls`가 겨우 들어감(Contact와 언어 세그먼트 사이 약 5px, 탭 목록이 nav 폭을 약 11px 넘음). 탭 간격·바 패딩 조정 여부 결정 필요(3.3.2 "한 줄에 들어가게")
-- [ ] 5.6 언어 전환: 같은 위치의 반대 언어 페이지로 이동
+- [x] 5.6 언어 전환: 같은 위치의 반대 언어 페이지로 이동 — `src/i18n/ui.ts` `langPath(path, to)`(`/x/` ↔ `/ko/x/`, 404는 그 언어 홈, 5.8 hreflang에서 재사용)로 세 곳(데스크톱·시트 세그먼트, 모바일 바 언어 버튼)의 `href`를 빌드 시 반대 언어 같은 경로로. 반대 언어 링크에 `data-lang-alt`, 홈 scroll-spy가 현재 섹션을 `hash`로 붙임(주소창 hash 아님, 페이지 맨 위면 없음). JS 없으면 반대 언어 페이지 맨 위. 덤: 시트를 닫을 때 메뉴 버튼 포커스 복귀가 sticky 바 때문에 페이지를 약 400px 위로 올리던 문제 수정(`focus({ preventScroll: true })`). Playwright 확인: 세 컨트롤 모두 `/#experience` ↔ `/ko/#experience` 이동·`lang`·도착 섹션 일치, 스크롤만 한 경우 spy 섹션(`#ip`), 맨 위는 앵커 없음, JS 끔 → `/ko/`·`/`, 360px 가로 스크롤 없음
 - [ ] 5.7 UI 문구 번역 파일 (`src/i18n/`) — Domain·Capability 태그 국문 표기 포함 (콘텐츠에는 영문 값만 있음, 용어집에 추가)
 - [ ] 5.8 공통 head: 메타, OG, canonical, `hreflang`, `Person` JSON-LD, 파비콘
 - [ ] 5.9 푸터: 최종 수정일 자동 표기
@@ -203,7 +203,7 @@
 - [ ] 6.7 Teaching · Books · Advisory
 - [ ] 6.8 Awards & Education
 - [ ] 6.9 Contact: 이메일(mailto), GitHub, LinkedIn, 의뢰 가능 분야
-- [ ] 6.10 케이스 스터디 템플릿과 페이지 (`/work/<slug>/`)
+- [ ] 6.10 케이스 스터디 템플릿과 페이지 (`/work/<slug>/`) — 목차 scroll-spy가 `[data-lang-alt]` 링크의 `hash`도 현재 절로 갱신해야 함 (6.1, 5.6)
 - [ ] 6.11 인쇄용 CV 페이지 (`/cv/`, `/ko/cv/`): A4 조판, 페이지 나눔
 - [ ] 6.12 PDF 자동 생성: 빌드 후 CV 페이지를 영문/국문 PDF로 출력, 다운로드 링크 연결
 - [ ] 6.13 404 페이지

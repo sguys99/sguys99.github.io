@@ -4,7 +4,7 @@ import { getEntry } from 'astro:content';
 import Icon from './Icon.astro';
 import LangSwitch from './LangSwitch.astro';
 import ThemeToggle from './ThemeToggle.astro';
-import { t, homePath, TABS, type Lang, type SectionId } from '../i18n/ui';
+import { t, homePath, langPath, TABS, type Lang, type SectionId } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -46,10 +46,10 @@ const profile = (await getEntry('profile', 'profile'))!.data;
       <LangSwitch lang={lang} />
       <ThemeToggle lang={lang} />
     </div>
-    {/* shortcut: links to the other language's home; tasks 5.6 keeps the reader's position. */}
     <a
       class="icon-btn lang-btn"
-      href={homePath(other)}
+      href={langPath(Astro.url.pathname, other)}
+      data-lang-alt
       lang={other}
       hreflang={other}
       aria-label={t(lang, 'switchLang')}
@@ -77,6 +77,7 @@ const profile = (await getEntry('profile', 'profile'))!.data;
   const ink = topbar.querySelector<HTMLElement>('.ink')!;
   const barCur = topbar.querySelector<HTMLElement>('[data-bar-cur]')!;
   const sections = [...document.querySelectorAll<HTMLElement>('main > section[id]')];
+  const langAlt = [...document.querySelectorAll<HTMLAnchorElement>('[data-lang-alt]')];
 
   function placeInk() {
     const on = tabs.querySelector('[aria-current="true"]');
@@ -95,6 +96,7 @@ const profile = (await getEntry('profile', 'profile'))!.data;
   if (topbar.hasAttribute('data-spy') && sections.length) {
     let cur = '';
     let hold = '';
+    let alt = '';
 
     const setCurrent = (id: string) => {
       cur = id;
@@ -117,6 +119,12 @@ const profile = (await getEntry('profile', 'profile'))!.data;
       if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2)
         id = sections.at(-1)!.id;
       if (hold) id = hold;
+      // Language links carry the current section (6.1), none at the page top.
+      const a = scrollY < 1 && !hold ? '' : id;
+      if (a !== alt) {
+        alt = a;
+        for (const l of langAlt) l.hash = a;
+      }
       if (id !== cur) setCurrent(id);
     };
 

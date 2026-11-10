@@ -86,7 +86,9 @@ const { email, github, linkedin } = (await getEntry('profile', 'profile'))!.data
   });
   sheet.addEventListener('close', () => {
     menuBtn.setAttribute('aria-expanded', 'false');
-    menuBtn.focus(); // <dialog> restores focus itself; this covers browsers that do not.
+    // <dialog> restores focus itself; this covers browsers that do not.
+    // preventScroll: focusing a button in the sticky bar scrolls the page back to the bar's static spot (Chromium).
+    menuBtn.focus({ preventScroll: true });
   });
   sheet.addEventListener('click', (e) => {
     const el = e.target as Element;

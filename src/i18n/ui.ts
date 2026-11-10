@@ -72,3 +72,13 @@ export const LANG_CODE: Record<Lang, string> = { en: 'EN', ko: 'KO' };
 
 /** Home URL for a language (trailingSlash: 'always'). */
 export const homePath = (lang: Lang) => (lang === 'en' ? '/' : '/ko/');
+
+/**
+ * The same page in language `to` (DESIGN.md 6.1): `/x/` ↔ `/ko/x/`. Also for hreflang (6.6).
+ * 404 goes to the language home, since the same path may not exist in the other language.
+ */
+export function langPath(path: string, to: Lang): string {
+  if (/^\/(ko\/)?404(\.html|\/)?$/.test(path)) return homePath(to);
+  const rest = path.replace(/^\/ko\//, '/');
+  return to === 'en' ? rest : `/ko${rest}`;
+}

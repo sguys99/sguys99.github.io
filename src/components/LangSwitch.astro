@@ -1,7 +1,7 @@
 ---
 // Language segment (DESIGN.md 5.4): links, current language marked with aria-current.
-// shortcut: both link to the language home; tasks 5.6 points them at the same page in the other language.
-import { t, homePath, LANG_CODE, type Lang } from '../i18n/ui';
+// Targets the same page in each language (6.1); the scroll-spy adds the current section to data-lang-alt links.
+import { t, langPath, LANG_CODE, type Lang } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -12,7 +12,13 @@ const { lang } = Astro.props;
 
 <div class="seg" role="group" aria-label={t(lang, 'language')}>
   {(['en', 'ko'] as const).map((l) => (
-    <a href={homePath(l)} lang={l} hreflang={l} aria-current={l === lang ? 'true' : undefined}>
+    <a
+      href={langPath(Astro.url.pathname, l)}
+      lang={l}
+      hreflang={l}
+      aria-current={l === lang ? 'true' : undefined}
+      data-lang-alt={l === lang ? undefined : ''}
+    >
       {LANG_CODE[l]}
     </a>
   ))}
