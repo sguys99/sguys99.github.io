@@ -102,6 +102,10 @@ a {
   border-radius: var(--radius-xs);
 }
 
+::selection {
+  background: var(--accent-soft);
+}
+
 /* Utilities */
 .num {
   font-variant-numeric: tabular-nums;
