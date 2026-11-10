@@ -1,0 +1,31 @@
+/* Shared base for OG drafts. Colors = DESIGN.md 3장 tokens (light / dark). OG is a fixed 1200x630 raster,
+   so type sizes are px for that canvas, not the site's rem scale. */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+
+:root {
+  --font: 'Geist', 'Pretendard Variable', system-ui, sans-serif;
+  --font-ko: 'Pretendard Variable', 'Pretendard', system-ui, sans-serif;
+  --font-meta: 'Geist Mono', 'Pretendard Variable', ui-monospace, monospace;
+  --bg: #f3f5f8; --surface: #ffffff; --line: #dfe3ea; --line-strong: #c5ccd6;
+  --text: #141a22; --text-2: #475260; --text-3: #5f6a78; --chip: #eef1f5;
+  --accent: #2b5a8a; --accent-soft: #e6edf6;
+  --radius: 10px; --radius-sm: 6px;
+  --ls-name: -0.02em; --ls-tagline: -0.03em; --ls-tagline-ko: -0.035em; --ls-label: 0.1em; --ls-label-ko: 0.02em;
+}
+:root[data-theme='dark'] {
+  --bg: #0d1117; --surface: #151b23; --line: #252d38; --line-strong: #364150;
+  --text: #e6eaf0; --text-2: #b1bac6; --text-3: #8b95a3; --chip: #1d2530;
+  --accent: #8db3e2; --accent-soft: #1a283b;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+:lang(ko) body { font-family: var(--font-ko); word-break: keep-all; }
+p { margin: 0; }
+.og { width: 1200px; height: 630px; position: relative; overflow: hidden; background: var(--bg); }
+.mono { font-family: var(--font-meta); }
+.km .tile { fill: var(--text); } .km .ink { fill: var(--bg); }
+.km.inv .tile { fill: var(--bg); } .km.inv .ink { fill: var(--text); }
+/* lang-only blocks */
+:root:lang(en) [lang-only='ko'], :root:lang(ko) [lang-only='en'] { display: none !important; }

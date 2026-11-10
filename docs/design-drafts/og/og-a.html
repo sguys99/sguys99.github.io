@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OG A. Card on paper</title>
+<script src="og-base.js"></script>
+<link rel="stylesheet" href="og-base.css">
+<style>
+  /* A. One business card (1.8:1, like 90x50mm) lying on the page paper. Hairline edge, no shadow. */
+  .og { display: grid; place-items: center; }
+  .card { width: 936px; height: 520px; background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius);
+    padding: 56px 64px 48px; display: flex; flex-direction: column; }
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .top .km { width: 52px; height: 52px; display: block; }
+  .top .url { font-size: 22px; color: var(--text-3); letter-spacing: 0.01em; }
+  .id { margin-top: auto; }
+  .nm { font-size: 76px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.02; }
+  :lang(ko) .nm { letter-spacing: var(--ls-tagline-ko); }
+  .nm .alt { font-family: var(--font-meta); font-size: 22px; font-weight: 400; letter-spacing: 0.02em; color: var(--text-3); margin-left: 20px; vertical-align: 0.5em; }
+  .rule { height: 1px; background: var(--line); margin: 40px 0 24px; }
+  /* No affiliation line (user decision 2026-11-11): the title takes the meta row's left slot, mirroring KM / URL above. */
+  .meta { display: flex; justify-content: space-between; align-items: baseline; }
+  .hl { font-size: 30px; font-weight: 500; color: var(--accent); letter-spacing: -0.01em; }
+  .meta .gh { font-size: 20px; color: var(--text-3); }
+</style>
+</head>
+<body>
+<div class="og">
+  <div class="card">
+    <div class="top"><span data-km></span><span class="url mono">sguys99.github.io</span></div>
+    <div class="id">
+      <p class="nm"><span data-ko="유광명">Kwang Myung Yu</span><span class="alt" lang-only="ko">Kwang Myung Yu</span></p>
+    </div>
+    <div class="rule"></div>
+    <div class="meta"><span class="hl">AI Engineer</span><span class="gh mono">github.com/sguys99</span></div>
+  </div>
+</div>
+</body>
+</html>

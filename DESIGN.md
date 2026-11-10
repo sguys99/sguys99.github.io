@@ -193,7 +193,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | favicon.svg 라이트 | 타일 / 글자 | `#141a22` / `#f3f5f8` | `--text` / `--bg` (라이트) |
 | favicon.svg 다크 (`prefers-color-scheme`) | 타일 / 글자 | `#e6eaf0` / `#0d1117` | `--text` / `--bg` (다크) |
 | apple-touch-icon | 바탕(타일) / 글자 | `#141a22` / `#f3f5f8` (다크 없음, 꽉 찬 타일) | `--text` / `--bg` (라이트) |
-| OG 1200×630 | 바탕 / 이름 / 직함 / 한 줄 소개 / URL | `#f3f5f8` / `#141a22` / `#2b5a8a` / `#475260` / `#5f6a78` | `--bg` / `--text` / `--accent` / `--text-2` / `--text-3` |
+| OG 1200×630 (명함 A, 11.7) | 바탕 / 명함 / 명함 테두리 / 가는 선 / 이름·KM 타일 / 직함 / URL·GitHub·국문 페이지 영문 이름 | `#f3f5f8` / `#ffffff` / `#c5ccd6` / `#dfe3ea` / `#141a22` / `#2b5a8a` / `#5f6a78` | `--bg` / `--surface` / `--line-strong` / `--line` / `--text` / `--accent` / `--text-3` (라이트) |
 | CV `@page` 쪽 하단 | 글자 | `#5f6a78` | `--text-3` 라이트 (`@page`에서 변수 미해석) |
 
 ### Typography
@@ -2159,22 +2159,22 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 - 구분자는 시안이 쓴 ` · ` 하나로 통일.
 - 값은 모두 콘텐츠·i18n에서 조합한다. 페이지에 문장을 직접 쓰지 않는다.
 
-**OG · 공유 카드** (3.3.4 D)
+**OG · 공유 카드** (명함형 A "Card on paper", 11.7 사용자 결정. 3.3.4 D의 OG를 대체)
 
 | 항목 | 값 |
 |---|---|
-| 이미지 | 언어별 PNG 2장 (영문·국문), 1200×630. 밝은 바탕에 KM 타일, URL `sguys99.github.io`, 이름·직함·한 줄 소개(`taglines[0]`). 사진 없음. 색은 3장 "자산 고정색" |
-| 파일 경로 | `/og-en.png`, `/og-ko.png` [구현 기본값]. 시안 원본 `g4/334/d-og-en.png`, `d-og-ko.png` |
+| 이미지 | 언어별 PNG 2장 (영문·국문), 1200×630, 라이트만. 종이색 바탕 위에 흰 명함 한 장(936×520, 1.8:1, 헤어라인 테두리, 그림자 없음). 위 줄: KM 타일(왼쪽) · `sguys99.github.io`(오른쪽, 모노). 아래: 풀네임(크게. 국문은 `유광명` 옆에 작은 모노 `Kwang Myung Yu`), 가는 선, 마지막 줄 직함 `AI Engineer`(포인트 색, 왼쪽) · `github.com/sguys99`(모노, 오른쪽). **현재 소속 줄 없음**(빠진 자리는 직함이 선 아래 줄로 내려가 위 줄의 좌우 짝과 맞춤). 사진·한 줄 소개 없음. 색은 3장 "자산 고정색" |
+| 파일 경로 | `/og-en.png`, `/og-ko.png` [구현 기본값]. 원본 HTML `docs/design-drafts/og/og-a.html` (`?lang=en\|ko&theme=light\|dark`), 비교 페이지 `og/index.html` |
 | 사용 | 모든 페이지가 자기 언어 이미지를 쓴다. 케이스 스터디별 이미지는 만들지 않는다 [구현 기본값: 시안이 사이트 공통 카드만 정함] |
 | 메타 | `og:title`·`og:description`(= title·description), `og:url`(= canonical), `og:image`(절대 URL), `og:image:width` 1200, `og:image:height` 630, `og:image:alt`(이름 · 직함), `og:type` `website`, `og:site_name` 이름, `og:locale` `en_US` / `ko_KR`, `og:locale:alternate` 반대 언어, `twitter:card` `summary_large_image` [구현 기본값] |
-| 생성 | 텍스트가 콘텐츠에서 오므로 이름·직함·한 줄 소개가 바뀌면 다시 만들어야 한다. 빌드 시 생성할지 수동 갱신할지는 tasks 5.8에서 정한다 (미정) |
+| 생성 | **수동 갱신** (11.7). 빌드 시 생성하지 않고 의존성도 추가하지 않는다. 글자는 `og-a.html`에 직접 쓰여 있으므로 이름·직함·주소가 바뀌면 HTML을 고친 뒤 다시 렌더한다: `npm i --no-save playwright && npx playwright install chromium && node docs/design-drafts/og/render.mjs --site` → `public/og-en.png`, `public/og-ko.png`, `public/favicon.ico`. 인자 없이 실행하면 시안 비교용 `og/shots/`(A·B·C × 영/국 × 라이트/다크)를 다시 만든다. 이미 받아 둔 Chromium이 있으면 `CHROME=<실행 파일 경로>`로 설치를 건너뛴다 |
 
 **파비콘 세트** (3.3.4 D, 파일 생성은 tasks 5.8)
 
 | 파일 | 크기 | 내용 | `<link>` |
 |---|---|---|---|
 | `/favicon.svg` | 16 격자 (`viewBox 0 0 16 16`) | 334-d SVG 원본 그대로. 타일 `rx 3.5`, `prefers-color-scheme: dark`에서 타일·글자 반전 (색은 3장 자산 고정색) | `<link rel="icon" href="/favicon.svg" type="image/svg+xml">` |
-| `/favicon.ico` | 32 (16 포함 권장) | 라이트 타일. SVG 미지원 브라우저용 | `<link rel="icon" href="/favicon.ico" sizes="32x32">` |
+| `/favicon.ico` | 16 + 32 (PNG 2장을 담은 ICO) | 라이트 타일. SVG 미지원 브라우저용. `favicon.svg`를 라이트로 렌더해 만든다 (위 `render.mjs --site`) | `<link rel="icon" href="/favicon.ico" sizes="32x32">` |
 | `/apple-touch-icon.png` | 180×180 | 불투명, 바탕 = 타일색 `#141a22`, 라이트 마크. 다크 버전 없음 (iOS가 모서리를 둥글게 처리). 시안 원본 `g4/334/d-apple-touch-180.png` | `<link rel="apple-touch-icon" href="/apple-touch-icon.png">` |
 
 - 파일 경로는 [구현 기본값] (루트 관례). 브라우저는 사이트의 테마 토글이 아니라 OS 설정을 따라 파비콘을 바꾼다 (SVG 미디어 쿼리 한계).
@@ -2200,14 +2200,14 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | `name` | 그 페이지 언어의 이름 (`Kwang Myung Yu` / `유광명`) |
 | `alternateName` | 반대 언어 이름 |
 | `jobTitle` | `headline` (AI Engineer) |
-| `worksFor` | `{"@type": "Organization", "name": "GenON"}` |
+| `worksFor` | `{"@type": "Organization", "name": "GenON"}`: `experience`에서 `period.status: present`인 항목의 `org.en` 쉼표 앞 회사명 (11.7) |
 | `url` | 그 페이지의 canonical |
 | `image` | `https://sguys99.github.io/images/profile.jpg` |
 | `email` | `mailto:` + `contact.email` |
 | `sameAs` | `contact.github`, `contact.linkedin` |
 
 - 전화번호·주소·생년 등 개인정보 필드는 넣지 않는다 (CLAUDE.md 규칙 3).
-- `worksFor`의 회사명은 현재 `currentRole` 문자열 안에 있어 따로 뽑을 필드가 없다. 구현 시 `profile`에 필드를 추가할지 상수로 둘지 정한다 (미정, 콘텐츠 스키마 변경이라 사용자 확인).
+- 구현: `src/components/Head.astro` (Base의 `head` 슬롯에 넣음. props `lang`·`title`·`description`, 404는 `canonical={false}`로 canonical·hreflang·`og:url` 생략, 홈은 `person`으로 JSON-LD). `<title>`은 Base가 쓴다.
 
 ## 7. Bilingual Typography
 
@@ -2411,7 +2411,7 @@ glossary를 따른다. 국문 페이지에서도 영문으로 두는 것:
 | 경력 로고 | 글자색 단색. 구현은 SVG를 `fill="currentColor"`로 정리해 인라인으로 넣고 `color: var(--text)`, `opacity: var(--logo-op)` / 현재 소속·hover `--logo-op-cur` | 3.2.7 C, decision-log G4 |
 | 경력 로고 (대안) | SVG를 인라인으로 못 넣는 로고만 `<img>` + `filter: var(--logo-filter)` 사용. 이 경우 글자색과 완전히 같지 않음을 감수 | base |
 | 파비콘 | SVG 안의 `@media (prefers-color-scheme: dark)`로 타일·글자 반전 (값은 3장 자산 고정색). **브라우저·OS 테마를 따르며 사이트의 수동 선택(`data-theme`)과 무관** | 334-d |
-| apple-touch-icon, OG | 다크 없음 (라이트 고정) | 334-d |
+| apple-touch-icon, OG | 다크 없음 (라이트 고정) | 334-d, OG는 11.7 명함 A |
 | 테마 전환 효과 | View Transitions 크로스페이드 `--m-theme` 320ms. 전환 중에는 `m-notx` 클래스로 개별 `transition`을 끈다. `document.startViewTransition`이 없거나 모션 줄이기면 즉시 전환 | 331-c |
 
 로고 처리 방식이 `currentColor`로 바뀌면 3장의 `--logo-filter`는 대안 경로에서만 쓴다.
@@ -2856,7 +2856,7 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 상단 메뉴 위쪽의 정체 모를 흔적 (시안 `332-a2` 캡처) | G6 | 5.2 (반투명 바 뒤 본문으로 추정, 구현 후 브라우저 확인) | 확인됨 (tasks 5.4): 바(`--header-bg` 90% + blur) 밑을 지나는 카드 바탕·섹션 제목이 흐리게 비친 것. 명세대로의 반투명 효과이며 버그 아님. 바꾸려면 디자인 결정 필요 |
 | CV의 도슨트 건 "Planned" 배지 → "In progress / 진행 중" | G6 | 5.7, 6.4, 10장 (11.5에서 케이스 스터디까지 확대) | 문서에 반영됨 → 5.7 |
 | 새 UI 문구(최종 수정, 맨 위로, 페이지를 찾을 수 없습니다 등) 용어집 등록 | G6 | tasks 5.7 (5.5 국문 문구) | 구현됨 → `src/i18n/ui.ts`, 용어집 7절 (tasks 5.7) |
-| apple-touch-icon 180, favicon.ico 대체 파일 생성 | G6 | tasks 5.8 (6.6 파일 목록) | 구현 대기 |
+| apple-touch-icon 180, favicon.ico 대체 파일 생성 | G6 | tasks 5.8 (6.6 파일 목록) | 구현됨 → `public/` (tasks 5.8, ICO는 16+32) |
 | 개인 프로젝트 `in-progress` 국문: 5.20 "개발 중" ↔ 5.7 "진행 중" | 단계 4 | tasks 1.5.6 문안 검토 (5.20, 5.7) | 결정 필요. `ui.ts`에는 5.20 값 "개발 중"을 `TODO(1.5.6)`과 함께 둠 (tasks 5.7) |
 | 웹폰트 자체 호스팅 방식·국문 서브셋·폴백 메트릭 | 단계 4 | tasks 5.2 (3장 Typography, 7장 웹폰트 로딩) | 구현됨 → 7장 웹폰트 로딩 (직접 `@font-face`, Pretendard 배포본 dynamic subset, Geist 폴백 보정) |
 | ≤1100px `main` 하단 패딩 64→32px, 마지막 카드→푸터 간격 56px | 단계 4 | tasks 5.3, 5.9 | 구현됨: `main` 쪽(tasks 5.3: 모든 폭 하단 `--sp-6`, 마지막 카드 `margin-bottom: 0`), 푸터 아래 `--sp-8`(tasks 5.9, `src/components/Footer.astro`). 마지막 카드 → 푸터 32px, 모든 폭 |
@@ -2866,8 +2866,8 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | "Selected / 대표" 표시가 원장 `.badge.f`와 IP `.sel-mark` 두 모양 | 단계 4 | tasks 5.10 (5.7) | 결정됨 → 5.7, 5.21 (11.5) |
 | DOI 없이 `url`만 있는 논문의 표시 방법 | 단계 4 | tasks 6.6 (5.21) | 결정 필요 (해당 콘텐츠가 생길 때) |
 | CV PDF 파일 경로·이름, HTML CV(`/cv/`) 진입 링크를 둘지 | 단계 4 | tasks 6.12 (6.1, 6.4) | 결정 필요 |
-| OG 이미지를 빌드 시 생성할지 수동 갱신할지 | 단계 4 | tasks 5.8 (6.6) | 결정됨 → 11.7 (명함형 A, 수동 PNG) |
-| JSON-LD `worksFor` 회사명: `profile`에 필드 추가 또는 상수 (콘텐츠 스키마 변경) | 단계 4 | tasks 5.8 (6.6) | 결정됨 → 11.7 (experience 현재 항목) |
+| OG 이미지를 빌드 시 생성할지 수동 갱신할지 | 단계 4 | tasks 5.8 (6.6) | 구현됨 → 11.7 (명함형 A, 수동 PNG, `og/render.mjs`) (tasks 5.8) |
+| JSON-LD `worksFor` 회사명: `profile`에 필드 추가 또는 상수 (콘텐츠 스키마 변경) | 단계 4 | tasks 5.8 (6.6) | 구현됨 → 11.7 (experience 현재 항목) (tasks 5.8) |
 | `.cs-title`·`.d-sec h2` 행간 1.28/1.4를 기존 행간 토큰과 합칠지 | 단계 4 | tasks 6.10 (7장 역할별 영/국 비교) | 구현 대기 |
 
 ### 11.7 단계 5. 구현: 기반 — 2026-11-11
@@ -2896,4 +2896,5 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 메뉴 시트의 섹션 링크는 앵커 이동이 시작된 뒤(`setTimeout`) 시트를 닫는다 (tasks 5.4) | 클릭 즉시 닫으면 Chromium에서 앵커 스크롤이 취소되어 위치가 어긋났다(5.3 버그) |
 | UI 문구는 `src/i18n/ui.ts` 한 파일의 `{ en, ko }` 사전. 값이 빠지거나 비었거나 en/ko의 `{자리}`가 다르면, 또는 `DOMAINS`·`CAPABILITIES` 값에 국문 태그가 없으면 모듈 로드 시 오류를 내 빌드가 실패한다 (tasks 5.7) | 빌드(`astro build`)는 타입 검사를 하지 않고, `astro check`는 의존성(@astrojs/check) 추가가 필요하다. 콘텐츠 스키마와 같은 "한쪽이 비면 빌드 실패" 규칙(CLAUDE.md 규칙 2) |
 | 명세에 국문이 없던 문구는 시안 사전을 따르고, 시안에도 없으면 새로 정했다: CV 보고서 끝줄 "보고서 n건 더 보기: {주소}", 아키텍처 흐름 화살표 낭독 글자 "연결 / 되돌아감", 개인 프로젝트 필터 결과 알림은 원장과 같은 "Showing n of N projects / 전체 N건 중 n건 표시" (tasks 5.7) | 문구 어조(1장)만 맞춘 기본값. 바꾸려면 용어집 7절과 `ui.ts`를 함께 고친다 |
+| OG 명함에서 현재 소속 줄을 뺀 뒤, 직함 `AI Engineer`를 이름 아래에서 선 아래 줄 왼쪽으로 옮겨 `github.com/sguys99`와 좌우 짝을 이룬다 (선 위 여백 36→40, 아래 22→24px). 렌더는 `docs/design-drafts/og/render.mjs`, 파비콘 ICO도 같은 스크립트가 PNG 16·32를 ICO 머리에 직접 싸서 만든다 (tasks 5.8) | 소속을 빼면 마지막 줄이 GitHub 하나만 오른쪽에 남아 한쪽으로 기운다. 위 줄(KM · 주소)과 아래 줄(직함 · GitHub)이 대칭이 되고 이름이 홀로 가운데 무게를 가진다. ICO는 의존성 없이 수십 줄로 충분 |
 

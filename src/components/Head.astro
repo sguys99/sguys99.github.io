@@ -1,0 +1,74 @@
+---
+// Shared <head> meta (DESIGN.md 6.6): description, canonical + hreflang, OG/Twitter card, favicons, Person JSON-LD.
+// Goes into Base's "head" slot; <title> stays in Base. URLs are absolute from Astro `site`.
+import { getCollection, getEntry } from 'astro:content';
+import { langPath, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description?: string;
+  /** false on 404: no canonical, hreflang or og:url. */
+  canonical?: boolean;
+  /** Person JSON-LD, home only. */
+  person?: boolean;
+}
+
+const { lang, title, description, canonical = true, person = false } = Astro.props;
+const other: Lang = lang === 'en' ? 'ko' : 'en';
+const profile = (await getEntry('profile', 'profile'))!.data;
+const abs = (path: string) => new URL(path, Astro.site).href;
+const path = Astro.url.pathname;
+const url = abs(path);
+const ogImage = abs(`/og-${lang}.png`);
+
+let ld: string | undefined;
+if (person) {
+  // worksFor = company of the current experience entry (11.7); org reads "Company, Unit".
+  const current = (await getCollection('experience')).find(
+    (e) => e.data.period.status === 'present',
+  );
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: profile.name[lang],
+    alternateName: profile.name[other],
+    jobTitle: profile.headline[lang],
+    ...(current && {
+      worksFor: { '@type': 'Organization', name: current.data.org.en.split(',')[0] },
+    }),
+    url,
+    image: abs('/images/profile.jpg'),
+    email: `mailto:${profile.contact.email}`,
+    sameAs: [profile.contact.github, profile.contact.linkedin],
+  };
+  // Escape "<" so the JSON can never close the <script> early.
+  ld = JSON.stringify(data).replace(/</g, '\\u003c');
+}
+---
+
+{description && <meta name="description" content={description} />}
+{canonical && (
+  <>
+    <link rel="canonical" href={url} />
+    <link rel="alternate" hreflang="en" href={abs(langPath(path, 'en'))} />
+    <link rel="alternate" hreflang="ko" href={abs(langPath(path, 'ko'))} />
+    <link rel="alternate" hreflang="x-default" href={abs(langPath(path, 'en'))} />
+    <meta property="og:url" content={url} />
+  </>
+)}
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={profile.name[lang]} />
+<meta property="og:title" content={title} />
+{description && <meta property="og:description" content={description} />}
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={`${profile.name[lang]} · ${profile.headline[lang]}`} />
+<meta property="og:locale" content={lang === 'en' ? 'en_US' : 'ko_KR'} />
+<meta property="og:locale:alternate" content={lang === 'en' ? 'ko_KR' : 'en_US'} />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+{ld && <script is:inline type="application/ld+json" set:html={ld} />}

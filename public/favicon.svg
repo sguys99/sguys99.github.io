@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <style>
+    .tile { fill: #141a22; } .ink { fill: #f3f5f8; }
+    @media (prefers-color-scheme: dark) { .tile { fill: #e6eaf0; } .ink { fill: #0d1117; } }
+  </style>
+  <rect class="tile" width="16" height="16" rx="3.5"/>
+  <!-- 16px grid: stems and caps sit on whole pixels so 16/32 render crisp; only diagonals anti-alias -->
+  <path class="ink" d="M3 4h1v8H3z M5.8 4H7.2L4 9V7z M4.7 7.9L5.6 6.8L7.3 12H5.9z
+    M8 4h1v8H8z M12 4h1v8h-1z M8.4 4H9.5L10.5 7.4L11.5 4H12.6L11.1 9.4H9.9z"/>
+</svg>

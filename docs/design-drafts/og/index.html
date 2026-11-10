@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OG 명함 시안 비교</title>
+<link rel="stylesheet" href="og-base.css">
+<style>
+  body { padding: 48px 24px; font-family: var(--font-ko); font-size: 15px; line-height: 1.6; }
+  main { max-width: 1240px; margin: 0 auto; }
+  h1 { font-size: 30px; margin: 0; letter-spacing: -0.03em; }
+  h2 { font-size: 22px; margin: 56px 0 4px; }
+  .intent { color: var(--text-2); margin: 4px 0 16px; max-width: 760px; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  figure { margin: 0; }
+  figure img { width: 100%; display: block; border: 1px solid var(--line); border-radius: 6px; }
+  figcaption, .note { font-family: var(--font-meta); font-size: 12px; color: var(--text-3); margin-top: 6px; }
+  .small { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 16px; }
+  .small img { width: 300px; border: 1px solid var(--line); border-radius: 6px; display: block; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>OG 공유 이미지 · 명함형 시안 (1200×630)</h1>
+  <p class="intent">파비콘은 KM 그대로, OG만 교체. 각 시안 HTML은 <code>?lang=en|ko&amp;theme=light|dark</code>로 전환. 아래 이미지는 shots/의 실제 렌더 PNG. 다크는 참고용이며 실제 OG는 라이트를 권장.</p>
+  <p class="note">작은 미리보기 확인: 각 시안 마지막 줄의 300px 썸네일(600×315 PNG를 50%로 표시, 채팅 미리보기 크기)</p>
+</main>
+<script>
+  var D = {
+    a: ['A. Card on paper', '종이(--bg) 위에 명함 한 장(1.8:1). KM·URL 상단, 이름 하단, 헤어라인 아래 직함·GitHub. 가장 명함다운 정석형. [채택] (현 소속 줄 제거).'],
+    b: ['B. Record sheet', '이미지 전체가 명함. 이름 크게 + 사이드바 기록표 문법의 키/값 표 + 경력 궤적 4단계. 정보량 최대, Quiet Dossier와 가장 직결.'],
+    c: ['C. Front & back', '잉크색 뒷면(KM)과 흰 앞면(이름)을 겹쳐 놓은 명함 한 쌍. 파비콘 KM과 연결되고 시각적 대비가 가장 큼.']
+  };
+  var m = document.querySelector('main');
+  Object.keys(D).forEach(function (k) {
+    var h = '<h2>' + D[k][0] + '</h2><p class="intent">' + D[k][1] + ' · <a href="og-' + k + '.html">HTML</a></p><div class="grid">';
+    ['en-light', 'ko-light', 'en-dark', 'ko-dark'].forEach(function (v) {
+      h += '<figure><img src="shots/' + k + '-' + v + '.png" alt=""><figcaption>' + k + '-' + v + '.png</figcaption></figure>';
+    });
+    h += '</div><div class="small">' + ['en-light', 'ko-light'].map(function (v) { return '<img src="shots/' + k + '-' + v + '-600.png" alt="">'; }).join('') + '</div>';
+    m.insertAdjacentHTML('beforeend', h);
+  });
+</script>
+</body>
+</html>

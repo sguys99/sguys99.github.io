@@ -1,6 +1,7 @@
 ---
 // Home page body for both languages (DESIGN.md 6.2). Sections are empty placeholders until stage 6.
 import Page from '../layouts/Page.astro';
+import Head from './Head.astro';
 import { t, SECTIONS, type Lang } from '../i18n/ui';
 import { getEntry } from 'astro:content';
 
@@ -10,9 +11,11 @@ interface Props {
 
 const { lang } = Astro.props;
 const profile = (await getEntry('profile', 'profile'))!.data;
+const title = `${profile.name[lang]} · ${profile.headline[lang]}`;
 ---
 
-<Page lang={lang} title={profile.name[lang]}>
+<Page lang={lang} title={title}>
+  <Head slot="head" lang={lang} title={title} description={profile.taglines[0][lang]} person />
   {SECTIONS.map((id) => (
     <section class="card" id={id} aria-labelledby={`h-${id}`}>
       <div class="sec-head">
