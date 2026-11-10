@@ -13,7 +13,7 @@
 |---|---|---|
 | Kwang Myung Yu | 유광명 | 논문 저자 표기는 원문 그대로 (K. M. Yu, K. Yu) |
 | AI Engineer | AI Engineer | 대표 직함. 국문 페이지에서도 영문 유지 |
-| Director, R&D Group, GenON | GenON R&D그룹 Director | 현재 소속. 사이드바는 `Director, R&D Group · GenON` |
+| Director, R&D Group, GenON | GenON R&D그룹 Director | 현재 소속. 사이드바도 같은 표기 (2026-11-11 결정) |
 
 ## 2. 기관
 
