@@ -61,7 +61,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 서체 | Geist(본문·제목) + Geist Mono(메타·숫자) + Pretendard(국문) | 3.1.1 A |
 | 로고 | 경력 6곳만 공식 로고를 글자색 단색으로. 고객사는 텍스트만 | 3.2.7 C |
 | 모노그램 | "KM" 타일 (파비콘·OG), 사진은 사이드바에만 | 3.3.4 D |
-| 모션 | 첫 등장 1회의 조용한 순서 등장, 모션 줄이기 설정이면 모두 끔 | 3.3.1 C |
+| 모션 | 세션의 첫 방문에만 재생하는 조용한 순서 등장, 모션 줄이기 설정이면 모두 끔 | 3.3.1 C, 11.5 |
 
 ### UI 문구 어조
 
@@ -99,7 +99,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 4. **Progressive disclosure**: 첫 화면은 짧게, 긴 목록은 접힘·필터·서랍으로 연다. 상세는 케이스 스터디와 CV로 보낸다 (3.2.2 B, 3.2.5 B, 3.2.3 C).
 5. **Facts only, counted from content**: 숫자는 콘텐츠에서 계산하고, 근사치·연수는 쓰지 않는다. 고객사는 승인된 2곳 외 익명이다 (3.2.8 A, G4 + G5 함께 정한 것, CLAUDE.md 규칙 3).
 6. **Bilingual and light/dark parity**: 영문·국문, 라이트·다크 네 조합 모두 1급으로 설계한다. 언어·테마 전환은 같은 위치를 유지한다 (3.1.1 A, 3.1.2 A, 3.3.2 A2).
-7. **Expressive once, then quiet**: 모션은 첫 등장에 한 번만 재생하고, 앵커 이동과 `prefers-reduced-motion`에서는 건너뛴다 (3.3.1 C).
+7. **Expressive once, then quiet**: 등장 모션(행 순서 등장, 궤적 그리기, 카운트업)은 세션의 첫 방문에만 재생한다. 같은 세션 안의 언어 전환·새로고침, 앵커 이동, `prefers-reduced-motion`에서는 건너뛰고 최종 상태를 보인다 (3.3.1 C, 11.5).
 
 ### Do
 
@@ -260,7 +260,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | `--ls-tagline-ko` | -0.035em | 한 줄 소개 국문 |
 | `--ls-title` | -0.012em | 프로젝트·케이스 제목 영문 |
 | `--ls-title-ko` | -0.02em | 같은 요소 국문 |
-| `--ls-eyebrow` | 0.06em | 영문 대문자 섹션 제목·eyebrow(12px), 선택 상자 키·`.out .k`·`.sel-mark`·표 머리(11px) |
+| `--ls-eyebrow` | 0.06em | 영문 대문자 섹션 제목·eyebrow(12px), 선택 상자 키·`.out .k`·표 머리(11px) |
 | `--ls-eyebrow-ko` | 0 | 국문 섹션 제목 |
 | `--ls-label` | 0.1em | 영문 대문자 키 라벨(11px: 사이드바 키, `.lg-label`, `.rec dt`), 메뉴 시트 제목·라벨과 케이스 소제목(12px) |
 | `--ls-label-ko` | 0.02em | 국문 키 라벨, 토글 버튼 글자 |
@@ -271,7 +271,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 |---|---|---|---|
 | `.sheet-head h2`, `.sheet-label` 자간 | 0.12em | `--ls-label` 0.1em | 대문자 라벨 자간을 두 단계로 정리 |
 | `.out .k` 자간 | 0.08em | `--ls-eyebrow` 0.06em | 〃 |
-| `.sel-mark` 자간 | 0.04em | `--ls-eyebrow` 0.06em | 〃 |
+| `.sel-mark` 자간 | 0.04em | (삭제: 대표 표시는 `.badge.f`로 통일, 11.5) | — |
 | 대표작·궤적 h3 행간 | 1.35 | `--lh-title` 1.35 | 반복값 토큰화 |
 | 행 h3/h4 행간 | 1.4 | `--lh-row` 1.45 | 1.4와 1.45를 하나로 |
 | 원장 제목·사이드바 값 행간 | 1.45 | `--lh-row` 1.45 | 반복값 토큰화 |
@@ -300,7 +300,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | `--sp-5` | 24px | 카드 사이, 섹션 머리 아래, 기간 열 간격 |
 | `--sp-6` | 32px | 카드 안쪽 패딩, 데스크톱 탭 간격(332-a2) |
 | `--sp-7` | 48px | 본문 좌우 패딩, 사이드바 상단 |
-| `--sp-8` | 64px | 본문 하단 여백 |
+| `--sp-8` | 64px | 본문 열 하단 여백 (푸터 아래, 모든 폭) |
 
 3px·5px(기준선 맞춤 `padding-top`, `.st` gap)은 정렬 보정값이라 토큰으로 만들지 않는다.
 
@@ -402,11 +402,11 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | `--ease-out` | `cubic-bezier(0.2, 0.7, 0.2, 1)` | 등장, 궤적 그리기, 탭 밑줄, 시트, 시트 backdrop |
 | `--m-rise` | 8px | 섹션 등장 이동 거리 |
 | `--m-rise-row` | 6px | 행 등장 이동 거리 |
-| `--m-reveal` | 480ms | 섹션 fade/rise, 섹션당 1회 |
+| `--m-reveal` | 480ms | 섹션 fade/rise, 섹션당 1회 (세션 첫 방문만) |
 | `--m-row` | 420ms | 행 하나의 fade/rise |
 | `--m-stagger` | 60ms | 행 사이 지연 |
 | `--m-draw-seg` | 260ms | 경력 궤적 한 구간 그리기 |
-| `--m-count` | 900ms | 숫자 4개 카운트업, 1회 |
+| `--m-count` | 900ms | 숫자 4개 카운트업, 1회 (세션 첫 방문만) |
 | `--m-nav` | 260ms | 탭 밑줄 이동 |
 | `--m-theme` | 320ms | 테마 크로스페이드 (View Transitions) |
 | `--m-lang` | 240ms | 언어 전환 크로스페이드 (cross-document `@view-transition`) |
@@ -422,9 +422,10 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 대상 행 | `.work > li`, `.lg > .lg-row`, `.pidx > li`, `.ledger > li`, `.drawers > details`, `.figs > .fig`, `.skills > div`, `.ct > *` |
 | 등장 조건 | 처음 화면 아래에 있는 섹션만 `m-wait` (JS). 첫 화면과 JS 없는 페이지는 바로 완성 상태. 관찰 `rootMargin: 0px 0px -8% 0px` |
 | 앵커 이동 | 탭·앵커로 들어온 섹션은 등장 효과를 건너뛴다 (decision-log 3.3 구현 시 처리) |
-| 궤적 그리기 | 로드 시 1회, 구간 `i`마다 `i × --m-draw-seg` 지연, 점은 같은 시점에 `scale(0.4)→1`. ≤560px는 세로(`scaleY`) |
+| 궤적 그리기 | 세션 첫 방문 로드 시 1회, 구간 `i`마다 `i × --m-draw-seg` 지연, 점은 같은 시점에 `scale(0.4)→1`. ≤560px는 세로(`scaleY`) |
 | 카운트업 | `--m-count` 동안 ease-out cubic (`1-(1-p)^3`, JS). 진행 중 숫자는 `aria-hidden`, 최종값을 읽게 함 |
 | 테마·언어 전환 | 전환 중에는 개별 색 transition을 끈다(`m-notx`) |
+| 세션 재생 | 등장 모션(섹션·행 순서 등장, 궤적 그리기, 카운트업)은 세션의 첫 방문에만 재생한다. 첫 재생 시 `sessionStorage`에 플래그(예: `motion-played`)를 쓰고, 플래그가 있으면 같은 세션의 언어 전환·새로고침·다른 페이지에서 `m-wait`·`m-draw`·카운트업 없이 최종 상태로 그린다. `sessionStorage` 접근이 실패하면(try/catch) 재생한다. 탭 밑줄·시트·테마 전환·hover 같은 조작 반응 모션은 대상 아님 (11.5) |
 | 인쇄 | 등장 상태를 강제로 완성 (`opacity: 1; transform: none`) |
 | `prefers-reduced-motion: reduce` | 모든 transition·animation 끔, View Transitions 미사용, 카운트업 없이 최종값. `scroll-behavior: smooth`는 `no-preference`에서만 |
 
@@ -519,24 +520,25 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | `.col` | `min-width: 0` (긴 내용이 그리드 열을 넓히지 않게) |
 | `.topbar` | 오른쪽 열(`.col`) 안에 있다. 사이드바 위로 걸치지 않는다. `position: sticky; top: 0; z-index: var(--z-header); background: var(--header-bg); backdrop-filter: var(--header-blur); border-bottom: 1px solid var(--line)` |
 | `.topbar .bar` | `max-width: var(--main); height: var(--header-h); padding: 0 var(--sp-7)`. 좌우 패딩은 항상 `main`의 좌우 패딩과 같게 둔다(탭 왼쪽 끝 = 카드 왼쪽 끝). 탭·토글 내부 → 5장 |
-| `main` | `max-width: var(--main); width: 100%; padding: var(--sp-6) var(--sp-7) var(--sp-8)` |
-| 푸터 | `main` 바로 뒤(오른쪽 열 `.col` 안, contentinfo 랜드마크). 폭·좌우 패딩은 `main`과 같게. 별도 열·전폭 띠가 아니다 → 5.5 |
+| `main` | `max-width: var(--main); width: 100%; padding: var(--sp-6) var(--sp-7) var(--sp-6)` (하단 `--sp-6`은 마지막 카드 → 푸터 간격) |
+| 푸터 | `main` 바로 뒤(오른쪽 열 `.col` 안, contentinfo 랜드마크). 폭·좌우 패딩은 `main`과 같게, 아래 여백 `--sp-8`(본문 열 하단 여백). 별도 열·전폭 띠가 아니다 → 5.5 |
 
 ### 세로 리듬
 
 | 대상 | >1100px | ≤1100px | ≤860px |
 |---|---|---|---|
-| `main` 패딩 (상 / 좌우 / 하) | `--sp-6` / `--sp-7` / `--sp-8` | `--sp-6` / `--sp-6` / `--sp-6` | `--sp-4` / `--sp-4` / `--sp-7` |
+| `main` 패딩 (상 / 좌우 / 하) | `--sp-6` / `--sp-7` / `--sp-6` | `--sp-6` / `--sp-6` / `--sp-6` | `--sp-4` / `--sp-4` / `--sp-6` |
+| 본문 열 하단 여백 (푸터 아래, 푸터 `padding-bottom`) | `--sp-8` | `--sp-8` | `--sp-8` |
 | `.topbar .bar` 좌우 패딩 | `--sp-7` | `--sp-6` | `--sp-4` |
 | 카드 안쪽 패딩 (`.card`) | `--sp-6` | `--sp-6` | `--sp-5` (상하) / `--sp-4` (좌우) |
 | 카드 사이 (`.card` `margin-bottom`) | `--sp-5` | `--sp-5` | `--sp-4` |
 | 섹션 머리 아래 (`.sec-head` `margin-bottom`) | `--sp-5` | `--sp-5` | `--sp-5` |
 | 카드 안 큰 블록 사이 (궤적·Skills·원장 등 `margin-top`) | `--sp-6` | `--sp-6` | `--sp-6` |
-| 마지막 카드 → 푸터 | 카드 `margin-bottom` + 푸터 `margin-top: var(--sp-6)` | 같음 | 같음 |
+| 마지막 카드 → 푸터 | `--sp-6` 한 번만: 마지막 카드 `margin-bottom: 0`, 푸터 `margin-top: 0`, 간격은 `main` 하단 패딩 | 같음 | 같음 |
 | 사이드바 블록 사이 (`gap`) | `--sp-5` | `--sp-5` | 모바일 프로필 → 아래 표 |
 
 - 리듬은 "카드 사이 < 카드 안쪽 패딩 < 본문 좌우 여백" 순서를 지킨다(24 < 32 < 48, 모바일 16 = 16 < 20).
-- ≤1100px에서 `main` 하단이 `--sp-8`→`--sp-6`으로 줄어드는 것은 시안 그대로다(`main { padding: var(--sp-6) }`가 세 방향을 모두 덮음). 의도인지 확인 필요(아래 "확인할 점", 11.6).
+- 본문 열 하단 여백은 모든 폭에서 `--sp-8`(64px), 마지막 카드 → 푸터는 `--sp-6`(32px) 한 번만 둔다. 두 여백을 겹쳐 더하지 않는다 (11.5. 시안은 ≤1100px에서 하단이 `--sp-6`으로 줄고 카드 간격 24 + 푸터 32 = 56px로 더해졌음).
 
 ### 카드형 섹션 컨테이너
 
@@ -606,7 +608,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
         +---------------------+-----------------------------------------------------------+
         | aside.sidebar       | .topbar  sticky, h 56  [About Work Exp Personal Pub Cont] [EN|KO][◐]
         | sticky, 100vh       +-----------------------------------------------------------+
-        | pad 48 / 32         |  main  pad 32 / 48 / 64                                   |
+        | pad 48 / 32         |  main  pad 32 / 48 / 32                                   |
         |                     |  +-----------------------------------------------------+  |
         | [photo 132]         |  | .card #about        pad 32                           |  |
         | Name                |  |  SEC-HEAD                                            |  |
@@ -617,8 +619,9 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
         | KEY  value          |  | .card #work                                          |  |
         | [CV]                |  +-----------------------------------------------------+  |
         |                     |   …                                                       |
-        |                     |  ─────────────────────────────────────── (↕ 24 + 32)     |
+        |                     |  ─────────────────────────────────────── (↕ 32)          |
         |                     |  footer.foot-a  © · updated · source        top ↑         |
+        |                     |   ↕ 64 (본문 열 하단 여백)                                |
         +---------------------+-----------------------------------------------------------+
 ```
 
@@ -634,7 +637,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 |      AI Engineer                   |
 | ✉ mail   GitHub   LinkedIn        |
 +------------------------------------+
-| main pad 16 / 16 / 48              |
+| main pad 16 / 16 / 32              |
 | +--------------------------------+ |
 | | .card  pad 20 / 16             | |
 | | SEC-HEAD                       | |
@@ -646,6 +649,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | +--------------------------------+ |
 | ────────────────────────────────── |
 | footer (≤560px 세로 쌓기)          |
+|            ↕ 64                    |
 +------------------------------------+
 ```
 
@@ -698,8 +702,6 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 
 ### 확인할 점
 
-- ≤1100px에서 `main` 하단 패딩이 `--sp-8`(64) → `--sp-6`(32)으로 줄어드는 것이 의도인지. 시안의 `main { padding: var(--sp-6) }` 한 줄이 하단까지 덮은 결과로 보인다.
-- 마지막 카드 → 푸터 간격이 카드 `margin-bottom`(24) + 푸터 `margin-top`(32) = 56px로 겹쳐 더해진다. 시안 그대로 둘지.
 - `aside.sidebar`·`.shell`은 `100vh`, 메뉴 시트는 `100dvh`. 모바일에서는 사이드바가 static이라 문제없지만 단위를 맞출지 구현 시 결정.
 
 ## 5. Components
@@ -1005,7 +1007,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 
 | 요소 | 속성 → 토큰 |
 |---|---|
-| `footer` | `--font-meta`, `--fs-xs`, `--text-3`. `flex-wrap`, 양 끝 정렬, `align-items: baseline`, 간격 `--sp-2` `--sp-5`, 위 여백 `--sp-6`, 패딩 `--sp-4` `--sp-1` 0, 위 헤어라인 1px `--line` |
+| `footer` | `--font-meta`, `--fs-xs`, `--text-3`. `flex-wrap`, 양 끝 정렬, `align-items: baseline`, 간격 `--sp-2` `--sp-5`, 위 여백 없음(간격은 `main` 하단 패딩 `--sp-6`), 패딩 `--sp-4` `--sp-1` `--sp-8`(아래 = 본문 열 하단 여백), 좌우는 `main`과 같게, 위 헤어라인 1px `--line` |
 | `ul` | `flex-wrap`, 간격 `--sp-2` `--sp-5`, 목록 기호 없음 |
 | 링크 | `--text-2`, 밑줄 `--line-strong`, `--underline-offset`. hover 글자·밑줄 `--accent` |
 
@@ -1071,12 +1073,11 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 역량 태그 | `.tag.k` | 콘텐츠 값 (예: LLM Agents) | 바탕 `--accent-soft`, 글자 `--accent` | 대표작 태그 둘째 칸부터 |
 | 태그 목록 | `.tags` | — | `<ul>`, `flex-wrap`, 간격 `--sp-1h` | |
 | 총괄 배지 | `.badge` | Lead / 총괄 | `--font-meta`, `--fs-2xs`, `--fw-medium`, 패딩 0 `--sp-1h`, 테두리 1px `--line-strong`, `--radius-xs`, `--text-2` | 전체 프로젝트 원장 제목 뒤 |
-| 대표 배지 | `.badge.f` | Selected / 대표 | 테두리·글자 `--accent` | 원장의 대표작 행 |
+| 대표 배지 | `.badge.f` | Selected / 대표 | 테두리·글자 `--accent` | 원장의 대표작 행, IP 보고서 대표 건 (대표 표시는 이 한 모양, 11.5) |
 | 진행 배지 | `.badge.live` | In progress / 진행 중 | 테두리·글자 `--accent`, 왼쪽 `--sp-2` | 케이스 스터디 Outcome 제목 (진행 중 건) |
 | 자리 표시 배지 | `.badge` | Placeholder / 자리 표시 | 글자 `--text-3` | 사이드바 CV 자리 |
 | 진행 상태 (점) | `.status` | In progress / 진행 중 | `--fs-xs` `--fw-medium` `--accent`, 앞 점 `--dot` `--accent` + 후광 `0 0 0 var(--halo) var(--accent-soft)`, 간격 `--sp-1h` | 대표작 메타 (현재·예정 건) |
 | 상태 점 | `.st` | 아래 표 | 앞 점 `--dot`, 테두리 1px `--text-3`, 간격 5px(정렬 보정값) | 개인 프로젝트, 특허·SW |
-| 선택 표시 | `.sel-mark` | Selected / 대표 | `--font-meta` `--fs-2xs` `--ls-eyebrow` 대문자 `--accent`. 국문 `--font-ko` `--fs-xs` 자간 0 | IP 보고서 대표 건 |
 
 **상태 점 (`.st`)**
 
@@ -1087,7 +1088,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | `.st.pen` | 빈 원 (점선) | `--text-3` | Filing in progress / 출원 진행 중, Pending / 등록 진행 중 |
 
 - 국문 배지·라벨은 3장 규칙대로 한 단계 크게(`--fs-2xs` → `--fs-xs`) 하고 대문자·자간을 끈다.
-- "Selected / 대표"가 원장(`.badge.f`, 테두리 배지)과 IP 보고서(`.sel-mark`, 글자만) 두 모양으로 나뉜다. 시안 그대로 두되 하나로 합칠지는 사용자 확인.
+- "Selected / 대표"는 `.badge.f` 한 모양으로 통일한다. 시안 IP 보고서의 글자 표시 `.sel-mark`는 쓰지 않는다 (11.5).
 - CV의 "Planned" 배지는 "In progress / 진행 중"으로 맞춘다 (decision-log 3.3).
 
 **상태**: 태그·배지는 상호작용 없음(hover·focus 없음).
@@ -1200,7 +1201,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 
 | 키 | 파일 (시안) | 배율 `--s` | 형식 |
 |---|---|---|---|
-| genon | `genon.png` | 0.9 | PNG (래스터) |
+| genon | `genon.png` | 0.9 | PNG (래스터) → CSS `mask-image` + `currentColor` |
 | pwc | `pwc.svg` | 1.5 | SVG |
 | makinarocks | `makinarocks.svg` | 0.78 | SVG |
 | semco | `semco-mono.svg` | 1.05 | SVG (흰 글자를 휘도 마스크로 뚫음) |
@@ -1212,7 +1213,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 **색 처리 (구현 규칙)**
 - 시안은 `<img>` + `filter: var(--logo-filter)`라 다크에서 글자색과 정확히 같지 않다. 구현은 **SVG를 `currentColor`로 정리**한다 (decision-log 3.2): 채움을 모두 `fill="currentColor"`로, 흰 knockout(semco·kepco)은 마스크나 `fill-rule`로 투명하게 유지. 모양은 바꾸지 않는다.
 - 색은 `color: var(--text)`, 농도는 `opacity: var(--logo-op)` / 현재 소속 `var(--logo-op-cur)`. `--logo-filter`는 SVG를 인라인으로 못 넣는 로고의 대안 경로용으로 3장에 유지한다 (8장 다크 전용 조정).
-- genon은 PNG라 `currentColor`가 안 된다. **미정**: (a) 공식 SVG를 구하거나 (b) PNG를 CSS `mask-image`로 쓰고 `background: currentColor`. 결정 필요.
+- genon은 PNG라 `currentColor`가 안 된다. 지금 있는 PNG를 CSS `mask-image`(`mask-size: contain; mask-repeat: no-repeat; mask-position: left center`)로 쓰고 `background-color: currentColor`로 글자색에 맞춘다. 요소는 `<span role="img">`(장식 위치는 `aria-hidden`)이고 크기·농도 규칙은 다른 로고와 같다 (11.5). 나머지 5곳은 `currentColor` SVG.
 - 인라인 SVG로 넣을 때 파일마다 `id`(마스크 등)가 겹치지 않게 접두어를 붙인다.
 
 | 위치 | 높이 | 최대 폭 | 농도 | 대체 텍스트 |
@@ -1316,11 +1317,12 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 상태 | 규칙 |
 |---|---|
 | 첫 화면에 걸린 카드, JS 없음 | 완성 상태 그대로. 숨기지 않는다 |
-| 첫 화면 아래 카드 | JS가 `m-wait` 부여 → `opacity: 0; transform: translateY(--m-rise)` |
+| 첫 화면 아래 카드 | 세션 첫 방문일 때만 JS가 `m-wait` 부여 → `opacity: 0; transform: translateY(--m-rise)` |
 | 화면에 들어옴 (`IntersectionObserver`, `rootMargin: 0px 0px -8% 0px`) | `m-in` 추가 → `--m-reveal` `--ease-out`로 fade/rise, 관찰 해제(1회) |
 | 안쪽 행 | 각 컴포넌트의 "대상 행"이 `--m-row`로 순서 등장. 지연 `calc(--m-reveal / 3 + --i × --m-stagger)`, `--i`는 `:nth-child`로 0~7 (8번째부터 7) |
 | 앵커·탭 이동으로 들어온 카드 | 등장 효과 없이 바로 완성 상태 (decision-log 3.3). [구현 기본값] 이동 대상 카드와 그 위의 `m-wait` 카드를 함께 `m-wait` 해제한다. 이유: 부드러운 스크롤이 지나가는 카드가 이동 직후 비어 보이는 문제가 같은 원인 |
 | 인쇄 | `opacity: 1; transform: none` 강제 |
+| 같은 세션의 재방문 (언어 전환·새로고침) | `m-wait`를 붙이지 않는다. 행도 바로 완성 상태 (3장 Motion "세션 재생") |
 | `prefers-reduced-motion: reduce` | `m-wait`를 붙이지 않는다 |
 
 대상 행 선택자(331-c): `.work > li`, `.lg > .lg-row`, `.pidx > li`, `.ledger > li`, `.drawers > details`, `.figs > .fig`, `.skills > div`, `.ct > *`. 구현에서 클래스 이름이 바뀌면 이 목록도 같이 바꾼다.
@@ -1384,7 +1386,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 - 상태: 현재 단계는 위치(마지막 항목)로 정한다. 콘텐츠에 현재 표시 필드는 없다(`trajectory`는 정확히 4개, `.length(4)`).
 - 접근성: 순서 있는 목록 `ol`. 선·점은 의사 요소라 읽히지 않는다. 현재 단계를 색만으로 표시하므로 [구현 기본값] 마지막 `li`에 `aria-current="step"`을 둔다. 이유: 색 외의 수단으로 현재를 알림.
-- 모션 (331-c): 로드 시 1회 선 그리기. 구간 `i`(0~3)마다 `animation-delay: i × --m-draw-seg`, 선은 `scaleX(0)→1` (`transform-origin: left`), 점은 같은 시점에 `scale(0.4)`·투명 → 1. ≤560px는 `scaleY` (`transform-origin: top`). 글자는 숨기지 않는다. `--i`는 `:nth-child`로 주므로 JS가 따로 넣을 필요 없음. 시안은 다시 그리기를 막으려고 4000ms 뒤 `m-draw` 클래스를 지운다 → [구현 기본값] 마지막 점의 `animationend`에서 지운다. 이유: 시안 밖 시간값을 두지 않음.
+- 모션 (331-c): 세션의 첫 방문 로드 시 1회 선 그리기 (같은 세션 재방문은 그려진 상태, 3장 Motion "세션 재생"). 구간 `i`(0~3)마다 `animation-delay: i × --m-draw-seg`, 선은 `scaleX(0)→1` (`transform-origin: left`), 점은 같은 시점에 `scale(0.4)`·투명 → 1. ≤560px는 `scaleY` (`transform-origin: top`). 글자는 숨기지 않는다. `--i`는 `:nth-child`로 주므로 JS가 따로 넣을 필요 없음. 시안은 다시 그리기를 막으려고 4000ms 뒤 `m-draw` 클래스를 지운다 → [구현 기본값] 마지막 점의 `animationend`에서 지운다. 이유: 시안 밖 시간값을 두지 않음.
 - 콘텐츠: `profile.trajectory[]` → `years`(`.yrs`), `label`(`h3`), `description`(`p`).
 
 ### 5.17 Stats table
@@ -1420,7 +1422,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 - 반응형: ≤560px 2열. 홀수 칸 왼쪽 선 없음, 3·4번째 칸은 위 `--line` + `margin-top: --sp-4`.
 - 접근성: `dl`의 `dt`가 이름, 첫 `dd`가 값. DOM 순서는 이름 → 값이고 화면 순서만 `order`로 바꾼다. **카운트업 중에는 움직이는 숫자를 `aria-hidden`으로 두고 최종값을 읽게 한다** (decision-log 3.3): 보이는 숫자 `span`은 늘 `aria-hidden="true"`, 최종값은 `.sr-only` `span`. JS가 없으면 보이는 숫자도 최종값으로 렌더된다.
-- 모션 (331-c): 처음 화면에 보일 때 1회, `--m-count` 동안 0 → 최종값, ease-out cubic `1-(1-p)^3`, 정수 반올림. `.figs > .fig`는 대상 행이라 카드가 아래에 있으면 순서 등장과 겹친다. `prefers-reduced-motion: reduce`면 카운트업 없이 최종값.
+- 모션 (331-c): 세션의 첫 방문에서 처음 화면에 보일 때 1회(같은 세션 재방문은 최종값), `--m-count` 동안 0 → 최종값, ease-out cubic `1-(1-p)^3`, 정수 반올림. `.figs > .fig`는 대상 행이라 카드가 아래에 있으면 순서 등장과 겹친다. `prefers-reduced-motion: reduce`면 카운트업 없이 최종값.
 - 문구: 칸 이름, `featured`·`registered`·`filed`·`pending` 단어는 `src/i18n/`.
 
 ### 5.18 Selected work list
@@ -1520,7 +1522,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | `.ledger` | 위 `--line` |
 | `.pl-row` | `grid: --col-year-wide minmax(0,1fr) auto`, `gap: --sp-1 --sp-4`, `padding: --sp-3 0`, 아래 `--line` |
 | `.pl-y` | `--font-meta` `--fs-xs` `--text-3`, `padding-top: --sp-0`, 줄바꿈 없음 |
-| `.pl-t` | `--fs-sm` `--fw-medium` `--lh-row`. 배지는 5.7 (`.badge.f`는 테두리·글자 `--accent`) |
+| `.pl-t` | `--fs-sm` `--fw-medium` `--lh-row`. 배지는 5.7 (`.badge.f`는 테두리·글자 `--accent`. IP 보고서 대표 건도 같은 배지) |
 | `.pl-who` | `--fs-xs` `--text-3`, `margin-top: --sp-0` |
 | `.pl-cap` | 오른쪽 정렬, `--font-meta` `--fs-2xs` `--text-3`, `padding-top: 3px`. `b`(Domain)는 블록, `--fw-medium` `--text-2` (국문 `--font-ko` `--fs-xs`) |
 | `.pl-none` | `--fs-sm` `--text-2`, `margin-top: --sp-3` |
@@ -1664,7 +1666,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | `.au` | `--fs-xs` `--text-2`, `margin-top: --sp-1`. 본인 이름 `b`는 `--fw-strong` `--text` |
 | `.mt` | flex wrap, `gap: --sp-1 --sp-3`, `--fs-xs` `--text-3`, `margin-top: --sp-1`. DOI 링크 `--accent` `--font-meta`, 밑줄은 hover 때만(`--underline-offset`), `overflow-wrap: anywhere` |
 | 상태 `.st` | `--dot` 점 + 글자. `registered` 채운 점 `--accent`·글자 `--text-2` / `filed` 빈 점 / `filing`·`pending` 점선 빈 점 |
-| `.sel-mark` | 대표 보고서 표시. `--font-meta` `--fs-2xs` 대문자 `--ls-eyebrow` `--accent` (국문 `--font-ko` `--fs-xs` 자간 0) |
+| 대표 보고서 표시 | 제목 뒤 `.badge.f` "Selected / 대표" (5.7). 시안의 `.sel-mark`는 쓰지 않는다 |
 
 | 상태 | 표현 |
 |---|---|
@@ -1681,7 +1683,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | Patents / 특허 | `patents` | `N registered · N filed` (`filed` = `filed` 전체) | `date` 내림차순, 연도 = `date` 앞 4자리 | 상태: `registered` → Registered/등록, `filed`이고 `number` 있음 → Filed/출원, `number` 없음 → Filing in progress/출원 진행 중. **`number`는 표시하지 않는다** |
 | Software / 프로그램 등록 | `software` | `N registered · N pending` | `date` 내림차순. `date` 없는 `pending`은 맨 위, 연도 칸에 "Pending / 등록 진행 중" | 상태 `registered` / `pending`. `number` 표시 안 함 |
 | Papers / 논문 | `publications` `type: paper` | `with DOI / DOI 연결` | `year` 내림차순 | `authors`(본인 이름 굵게), `venue`, `doi` → `https://doi.org/<doi>` 링크 |
-| Reports / 연구보고서 | `publications` `type: report` | `N selected / 대표 N` (`featured` 건수) | `year` 내림차순 | `publisher?`, `featured`면 `.sel-mark` Selected/대표 |
+| Reports / 연구보고서 | `publications` `type: report` | `N selected / 대표 N` (`featured` 건수) | `year` 내림차순 | `publisher?`, `featured`면 `.badge.f` Selected/대표 |
 
 - 공통: 제목 `title.en`(영문 페이지) + 원제 `title.ko`(`.og`, `lang="ko"`, 영문 페이지에서 두 값이 다를 때만). 국문 페이지는 `title.ko`만.
 - 보고서 총량("50+")은 쓰지 않는다. 콘텐츠 건수(현재 19건) 그대로.
@@ -2234,7 +2236,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 | 국문에서 `--font-ko`로 바꿈 (단어 라벨) | 국문에서도 `--font-meta` 유지 (숫자·날짜·짧은 표식) |
 |---|---|
-| `.sec-head h2`, `.eyebrow`, `.out .k`, `.sel-k`, `.sel-mark`, `.pl-cap`, `.fig .s`, CV `.sec > h2`·`.row .meta`·`.note` | `.sec-head .meta`, `.traj .yrs`, `.proj-meta .num`, `.row .when`, `.pl-y`, `.idx`, `.badge`, `footer`, `.mono`, `.it .mt a`(DOI), `.yg .yh`(연도) |
+| `.sec-head h2`, `.eyebrow`, `.out .k`, `.sel-k`, `.pl-cap`, `.fig .s`, CV `.sec > h2`·`.row .meta`·`.note` | `.sec-head .meta`, `.traj .yrs`, `.proj-meta .num`, `.row .when`, `.pl-y`, `.idx`, `.badge`, `footer`, `.mono`, `.it .mt a`(DOI), `.yg .yh`(연도) |
 
 규칙: 요소의 내용이 **단어**면 국문에서 `--font-ko`, **숫자·날짜·기호**면 `--font-meta`를 유지한다.
 - `.yg .yh`는 연도 숫자만 담으므로 국문에서도 Geist Mono를 유지한다 (시안은 국문에서 Pretendard로 바꿨으나 위 규칙에 맞춰 고침).
@@ -2257,7 +2259,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 배지 `.badge` | `--font-meta` / `--fs-2xs` / `--fw-medium` / 상속 / 0 | 같음 (`총괄`, `진행 중` 등 한글은 폴백) | 〃 |
 | 키 라벨 (사이드바 `.k`, `.lg-label`, `.rec dt`) | 상속 / `--fs-2xs` / `--fw-strong` / 상속 / `--ls-label`, 대문자 | `--fs-xs` / `--ls-label-ko`, 변환 없음 | 11px 한글은 너무 작음 |
 | 케이스 소제목 `.d-sec h3` | 상속 / `--fs-xs` / `--fw-strong` / 상속 / `--ls-label`, 대문자 | `--fs-sm` / `--ls-label-ko` | 〃 |
-| 선택 키 (`.sel-k`, `.out .k`, `.sel-mark`) | `--font-meta` / `--fs-2xs` / 상속 / 상속 / `--ls-eyebrow`, 대문자 | `--font-ko` / `--fs-xs` / `--ls-eyebrow-ko` | 〃 |
+| 선택 키 (`.sel-k`, `.out .k`) | `--font-meta` / `--fs-2xs` / 상속 / 상속 / `--ls-eyebrow`, 대문자 | `--font-ko` / `--fs-xs` / `--ls-eyebrow-ko` | 〃 |
 | 표 머리 `.tbl th`, 모바일 `td[data-l]::before` | 상속 / `--fs-2xs` / `--fw-medium`(th) / 상속 / 0.08em → `--ls-eyebrow`로 정리, 대문자 | `--fs-xs` / 0 | 〃. 0.08em은 `.out .k`와 같은 이유로 정리 대상 |
 
 정리 대상(토큰 후보): `.cs-title` 행간 1.28과 국문 1.4, `.d-sec h2` 1.4가 반복되면 `--lh-row` 또는 `--lh-tagline-ko`와 합칠지 구현 시 확인. CV(333-a)의 국문 조정(`--cv-lh-ko`, 기본 크기, `.sec > h2` 0.86em)은 "3. Tokens > Print (CV)"를 따른다.
@@ -2566,7 +2568,7 @@ DOM 순서 = 탭 순서. 시안 순서를 따른다.
 
 ### 모션 줄이기 (`prefers-reduced-motion: reduce`)
 
-331-c의 모든 모션을 끈다. 끈 상태가 완성 상태다.
+331-c의 모든 모션을 끈다. 끈 상태가 완성 상태다. 같은 세션의 재방문(언어 전환·새로고침)도 아래 표 위 세 줄(등장, 궤적, 카운트업)은 같은 완성 상태로 보인다 (3장 Motion "세션 재생"). 모션 줄이기 설정은 세션 플래그와 관계없이 늘 우선한다.
 
 | 끄는 것 | 대체 |
 |---|---|
@@ -2800,6 +2802,15 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 시안에 직접 쓰인 값을 토큰으로 정리하고 단계를 합친다: 대문자 라벨 자간 2단계(`--ls-label` 0.1em, `--ls-eyebrow` 0.06em), 컨트롤 높이 3단계(`--ctl-h-sm` 28 / `--ctl-h` 32 / `--ctl-h-lg` 36), `.chip-lnk` 아이콘 13→14px(`--icon-sm`), 행 제목 행간 1.4→1.45(`--lh-row`) | → 3장 각 하위 절의 "정리 이력" 표 |
 | 경력 궤적 마지막 구간의 그라디언트 페이드는 "그라디언트 금지" 원칙의 예외로 유지한다. 넘침 마스크와 선택 상자 화살표도 기능 요소라 예외로 둔다 | → 2장 Don't, 5.16, 5.10 |
 
+**사용자 결정 (2026-11-11)**
+
+| 결정 | 반영 |
+|---|---|
+| 등장 모션(궤적 선 그리기, 숫자 카운트업, 행 순서 등장)은 세션의 첫 방문 때만 재생한다. 같은 세션의 언어 전환·새로고침은 바로 최종 상태. `sessionStorage` 플래그, 접근 불가면 재생. 3.3.1의 "한 번만" 원칙 확장 | → 2장 원칙 7, 3장 Motion "세션 재생", 5.14, 5.16, 5.17, 9장 모션 줄이기 |
+| GenON 로고는 현재 PNG를 CSS `mask-image` + `background-color: currentColor`로 쓴다. 나머지 5곳은 `currentColor` SVG | → 5.11 |
+| 대표작 표시는 원장 배지 `.badge.f` 한 모양으로 통일하고 IP 목록의 `.sel-mark` 글자 표시는 없앤다 | → 5.7, 5.19, 5.21, 3장 Typography, 7장 |
+| 본문 열 하단 여백은 모든 폭에서 `--sp-8`(64px), 마지막 카드 → 푸터는 `--sp-6`(32px) 한 번만(겹쳐 더하지 않음) | → 4장 세로 리듬·페이지 골격·와이어프레임, 5.5 |
+
 **구현 기본값 (오케스트레이터 결정, 4.10 DESIGN.md 검토에서 사용자 확인)**
 
 | 결정 | 반영 |
@@ -2835,7 +2846,7 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 새 UI 문구(Selected, Open to, Copy, 케이스 스터디 섹션 이름, 강의·저서·자문 라벨 등) 용어집 등록 | G4 + G5 | tasks 5.7 | 구현 대기 |
 | 용어집 [확인 필요] 영문 표기가 Teaching 섹션에 그대로 노출됨 | G4 + G5 | tasks 1.2.11 (5.22 남은 일) | 콘텐츠 검토 대기 |
 | `.sr-only`가 위치 기준 요소 없이 절대 배치되어 가로 스크롤을 만들 수 있음 (G6에서 다시 지적) | G4 + G5, G6 | 9장 `.sr-only` 위치 버그, 4장 360px 가로 스크롤 방지 → tasks 5.1 | 문서에 반영됨 → 9장 |
-| 다크에서 로고 단색 처리(filter + opacity)가 글자색과 다름 → SVG를 `currentColor`로 정리. genon은 PNG라 방식 미정 | G4 + G5 | 5.11 | 문서에 반영됨 → 5.11 (genon 방식은 결정 필요) |
+| 다크에서 로고 단색 처리(filter + opacity)가 글자색과 다름 → SVG를 `currentColor`로 정리. genon은 PNG라 방식 미정 | G4 + G5 | 5.11 | 결정됨 → 5.11 (genon은 `mask-image`, 11.5) |
 | 탭으로 이동한 직후 카드가 비어 보임 → 앵커 이동으로 들어온 섹션은 등장 효과를 건너뜀 | G6 | 3장 Motion, 4장 앵커 스크롤 오프셋 | 문서에 반영됨 → 3장 Motion |
 | 카운트업 중 숫자는 `aria-hidden`, 최종값을 읽게 함 | G6 | 5.17, 9장 숫자 카운트업 | 문서에 반영됨 → 5.17 |
 | 404 언어 판별은 경로(`/ko/`) 기준 | G6 | 4장 404 골격, 6.5, 7장 `:lang()` 적용 방식 | 문서에 반영됨 → 6.5 |
@@ -2847,10 +2858,11 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | apple-touch-icon 180, favicon.ico 대체 파일 생성 | G6 | tasks 5.8 (6.6 파일 목록) | 구현 대기 |
 | 개인 프로젝트 `in-progress` 국문: 5.20 "개발 중" ↔ 5.7 "진행 중" | 단계 4 | tasks 1.5.6 문안 검토 (5.20, 5.7) | 결정 필요 |
 | 웹폰트 자체 호스팅 방식·국문 서브셋·폴백 메트릭 | 단계 4 | tasks 5.2 (3장 Typography, 7장 웹폰트 로딩) | 결정 필요 |
-| ≤1100px `main` 하단 패딩 64→32px, 마지막 카드→푸터 간격 56px, `100vh`/`100dvh` 단위 | 단계 4 | tasks 5.3 (4장 확인할 점) | 결정 필요 |
+| ≤1100px `main` 하단 패딩 64→32px, 마지막 카드→푸터 간격 56px | 단계 4 | tasks 5.3 | 결정됨 → 4장 세로 리듬, 5.5 (11.5) |
+| `100vh`/`100dvh` 단위를 맞출지 | 단계 4 | tasks 5.3 (4장 확인할 점) | 결정 필요 |
 | 케이스 아키텍처 표 `.flow` nowrap이 360px에서 넘칠 수 있음 | 단계 4 | tasks 7.1 (4장 360px 가로 스크롤 방지) | 구현 대기 |
 | 사이드바 CV 다운로드 활성 상태의 모양 (시안 없음) | 단계 4 | tasks 6.12 (5.1) | 결정 필요 |
-| "Selected / 대표" 표시가 원장 `.badge.f`와 IP `.sel-mark` 두 모양 | 단계 4 | tasks 5.10 (5.7) | 결정 필요 |
+| "Selected / 대표" 표시가 원장 `.badge.f`와 IP `.sel-mark` 두 모양 | 단계 4 | tasks 5.10 (5.7) | 결정됨 → 5.7, 5.21 (11.5) |
 | DOI 없이 `url`만 있는 논문의 표시 방법 | 단계 4 | tasks 6.6 (5.21) | 결정 필요 (해당 콘텐츠가 생길 때) |
 | CV PDF 파일 경로·이름, HTML CV(`/cv/`) 진입 링크를 둘지 | 단계 4 | tasks 6.12 (6.1, 6.4) | 결정 필요 |
 | OG 이미지를 빌드 시 생성할지 수동 갱신할지 | 단계 4 | tasks 5.8 (6.6) | 결정 필요 |
