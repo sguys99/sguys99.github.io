@@ -1,0 +1,30 @@
+/*
+ * Self-hosted webfonts (DESIGN.md 7장 웹폰트 로딩). Files and licenses: public/fonts/.
+ * Geist / Geist Mono: official `geist` 1.9.2 variable fonts, subset to Latin and cut to the weights used
+ * (fonttools varLib.instancer + subset). Pretendard: official dynamic subset CSS, linked in Base.astro.
+ */
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/fonts/geist/Geist-Latin-wght.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('/fonts/geist/GeistMono-Latin-wght.woff2') format('woff2');
+}
+
+/* Arial scaled to Geist's metrics so the swap does not shift layout (capsize formula, Geist xWidthAvg 467/1000). */
+@font-face {
+  font-family: 'Geist Fallback';
+  src: local('Arial');
+  size-adjust: 104.76%;
+  ascent-override: 95.94%;
+  descent-override: 28.16%;
+  line-gap-override: 0%;
+}

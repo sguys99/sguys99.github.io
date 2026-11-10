@@ -31,7 +31,9 @@
   --mask-solid: #000;
 
   /* Typography */
-  --font: 'Geist', 'Pretendard Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font:
+    'Geist', 'Geist Fallback', 'Pretendard Variable', system-ui, -apple-system, 'Segoe UI',
+    sans-serif;
   --font-ko:
     'Pretendard Variable', 'Pretendard', system-ui, -apple-system, 'Apple SD Gothic Neo', sans-serif;
   --font-display: var(--font);

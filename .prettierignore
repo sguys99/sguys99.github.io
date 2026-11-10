@@ -8,3 +8,4 @@ docs/references
 *.md
 .mcp.json
 skills-lock.json
+public/fonts

@@ -202,12 +202,12 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 
 | 토큰 | 값 | 용도 |
 |---|---|---|
-| `--font` | `"Geist", "Pretendard Variable", system-ui, -apple-system, "Segoe UI", sans-serif` | 영문 본문·제목 |
+| `--font` | `"Geist", "Geist Fallback", "Pretendard Variable", system-ui, -apple-system, "Segoe UI", sans-serif` | 영문 본문·제목 |
 | `--font-ko` | `"Pretendard Variable", "Pretendard", system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif` | 국문 페이지 전체 (`:lang(ko)`) |
 | `--font-display` | `var(--font)`, `html:lang(ko)`에서 `var(--font-ko)` | 이름, 한 줄 소개, 프로젝트 제목, 404 제목 |
 | `--font-meta` | `"Geist Mono", "Pretendard Variable", ui-monospace, "SFMono-Regular", monospace` | 날짜, 번호, 건수, 배지, 섹션 라벨(영문), 푸터 |
 
-시안 로드: Geist 400/500/600, Geist Mono 400/500 (Google Fonts), Pretendard Variable v1.3.9 dynamic subset (jsDelivr). Geist Mono에는 600이 없으므로 `--font-meta`에 600을 쓰지 않는다. 자체 호스팅 여부·서브셋은 미정(tasks 5.2, 11.6).
+시안 로드: Geist 400/500/600, Geist Mono 400/500 (Google Fonts), Pretendard Variable v1.3.9 dynamic subset (jsDelivr). Geist Mono에는 600이 없으므로 `--font-meta`에 600을 쓰지 않는다. 구현은 자체 호스팅(`public/fonts/`, 7장 웹폰트 로딩). `"Geist Fallback"`은 Geist 로드 전 크기를 맞춘 Arial (7장).
 
 **크기 스케일** (1rem = 16px)
 
@@ -2344,17 +2344,18 @@ glossary를 따른다. 국문 페이지에서도 영문으로 두는 것:
 | Geist Mono | 400, 500 | 메타, 배지·연도 머리·eyebrow. **600 없음** → `--font-meta`에 600을 쓰지 않는다 (3장) |
 | Pretendard Variable | 400, 500, 600 (가변 1파일) | 국문 전체. 600은 국문 한 줄 소개·섹션 제목·행 제목 |
 
-**시안의 로딩**: Google Fonts CSS(`display=swap`) + jsDelivr `pretendard@v1.3.9` variable dynamic subset. 구현은 셀프 호스팅(tasks 5.2).
+**시안의 로딩**: Google Fonts CSS(`display=swap`) + jsDelivr `pretendard@v1.3.9` variable dynamic subset. 구현은 셀프 호스팅(tasks 5.2): `src/styles/fonts.css`(Geist 계열 `@font-face`) + `public/fonts/`(파일·라이선스).
 
 | 항목 | 방침 |
 |---|---|
-| `font-display` | 세 패밀리 모두 `swap` (시안과 같음). 폴백이 바로 보이고 교체 시 흔들림은 아래 미정 항목으로 줄인다 |
-| 프리로드 | 영문 페이지는 Geist 가변(또는 400) 1개만 `preload`. 국문 페이지는 프리로드 없음 (분할 파일 중 어느 것이 필요한지 미리 알 수 없음) |
-| 국문 서브셋 | tasks 5.2에서 결정. 후보: (a) Pretendard 배포본의 dynamic subset(유니코드 범위별 분할 파일 그대로 셀프 호스팅), (b) 빌드 시 사이트 텍스트에서 쓰인 글자만 추출한 단일 서브셋. 정적 사이트라 (b)가 작지만 콘텐츠 수정마다 재생성이 필요 |
-| 라틴 서브셋 | tasks 5.2에서 결정. Geist·Geist Mono는 Latin만 필요 |
-| 폴백 메트릭 보정 (`size-adjust` 등) | tasks 5.2에서 결정 |
-| 라이선스 | Geist·Geist Mono·Pretendard 모두 SIL OFL로 알려져 있음. tasks 5.2에서 배포본 라이선스 파일로 확인하고 함께 둔다 |
-| 인쇄(CV) | `@page` 여백 상자는 웹폰트·변수를 못 쓸 수 있어 333-a가 서체명을 직접 적었다. 셀프 호스팅 후 같은 이름으로 해석되는지 tasks 5.2에서 확인 |
+| 방식 | 직접 쓴 `@font-face` + `public/fonts/`. Astro Fonts API는 패밀리 이름을 `Geist-<hash>`로 바꿔 토큰·인쇄의 서체명이 맞지 않고, Pretendard 분할 92개를 설정에 옮겨야 해서 쓰지 않음 |
+| `font-display` | 세 패밀리 모두 `swap` (시안과 같음). 교체 시 흔들림은 아래 폴백 메트릭 보정으로 줄인다 |
+| 프리로드 | 영문 페이지는 `Geist-Latin-wght.woff2` 1개만 `preload` (`Base.astro`, `lang === 'en'`). 국문 페이지는 프리로드 없음 (분할 파일 중 어느 것이 필요한지 미리 알 수 없음) |
+| 국문 서브셋 | (a) Pretendard 1.3.9 배포본의 variable dynamic subset을 그대로 둠: 분할 파일 92개(`unicode-range`) + 공식 CSS `pretendardvariable-dynamic-subset.css`를 수정 없이 `public/fonts/pretendard/`에 두고 `<link>`로 연결. 영문 페이지의 국문 조각에도 필요해 두 언어 모두 연결. 콘텐츠가 바뀌어도 재생성 불필요. (b) 빌드 시 단일 서브셋은 채택 안 함 |
+| 라틴 서브셋 | `geist` 1.9.2 가변 폰트를 fonttools로 한 번 잘라 저장: Google Fonts latin 범위 + 화살표(U+2190–21FF)·≤≥, 굵기 축 Geist 400–600 / Geist Mono 400–500. 각 약 24KB (원본 가변 약 70KB). 다시 자를 때는 같은 범위로 `fonttools varLib.instancer` → `fonttools subset --layout-features='*' --flavor=woff2` |
+| 폴백 메트릭 보정 (`size-adjust` 등) | Geist만 보정: `"Geist Fallback"` = `local('Arial')` + `size-adjust: 104.76%`, `ascent-override: 95.94%`, `descent-override: 28.16%`, `line-gap-override: 0%` (capsize 공식, Astro와 같은 Arial 메트릭). `--font`에서 Geist 바로 뒤. Geist Mono는 고정폭 0.6em이 Courier New·Menlo와 같아 보정 안 함. Pretendard는 국문 폴백(Apple SD Gothic Neo 등)과 메트릭이 달라도 보정 안 함 |
+| 라이선스 | 배포본 라이선스 파일로 SIL OFL 1.1 확인, 폰트 옆에 둠: `public/fonts/geist/LICENSE.txt`(Reserved Font Name 없음 → 서브셋도 같은 이름 사용 가능), `public/fonts/pretendard/LICENSE.txt`(RFN "Pretendard", 수정 없이 배포하므로 해당 없음) |
+| 인쇄(CV) | `@page` 여백 상자는 웹폰트·변수를 못 쓸 수 있어 333-a가 서체명을 직접 적었다. 셀프 호스팅 `@font-face` 이름이 `"Geist Mono"`, `"Pretendard Variable"` 그대로라 같은 이름으로 해석됨 (실제 인쇄 확인은 CV 구현 때) |
 
 ## 8. Dark Mode
 
@@ -2857,7 +2858,7 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 새 UI 문구(최종 수정, 맨 위로, 페이지를 찾을 수 없습니다 등) 용어집 등록 | G6 | tasks 5.7 (5.5 국문 문구) | 구현 대기 |
 | apple-touch-icon 180, favicon.ico 대체 파일 생성 | G6 | tasks 5.8 (6.6 파일 목록) | 구현 대기 |
 | 개인 프로젝트 `in-progress` 국문: 5.20 "개발 중" ↔ 5.7 "진행 중" | 단계 4 | tasks 1.5.6 문안 검토 (5.20, 5.7) | 결정 필요 |
-| 웹폰트 자체 호스팅 방식·국문 서브셋·폴백 메트릭 | 단계 4 | tasks 5.2 (3장 Typography, 7장 웹폰트 로딩) | 결정 필요 |
+| 웹폰트 자체 호스팅 방식·국문 서브셋·폴백 메트릭 | 단계 4 | tasks 5.2 (3장 Typography, 7장 웹폰트 로딩) | 구현됨 → 7장 웹폰트 로딩 (직접 `@font-face`, Pretendard 배포본 dynamic subset, Geist 폴백 보정) |
 | ≤1100px `main` 하단 패딩 64→32px, 마지막 카드→푸터 간격 56px | 단계 4 | tasks 5.3 | 결정됨 → 4장 세로 리듬, 5.5 (11.5) |
 | `100vh`/`100dvh` 단위를 맞출지 | 단계 4 | tasks 5.3 (4장 확인할 점) | 결정 필요 |
 | 케이스 아키텍처 표 `.flow` nowrap이 360px에서 넘칠 수 있음 | 단계 4 | tasks 7.1 (4장 360px 가로 스크롤 방지) | 구현 대기 |

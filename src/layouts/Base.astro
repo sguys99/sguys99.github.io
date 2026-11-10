@@ -2,6 +2,7 @@
 // Document shell shared by every page: <html lang>, token + global styles.
 // Hooks for later tasks: theme script before styles (5.5), head meta (5.8) via the "head" slot.
 import '../styles/tokens.css';
+import '../styles/fonts.css';
 import '../styles/global.css';
 
 interface Props {
@@ -17,6 +18,19 @@ const { lang, title } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>{title}</title>
+    {
+      /* Only the English page knows its font up front; Korean needs whichever subsets the text hits (DESIGN.md 7장). */
+      lang === 'en' && (
+        <link
+          rel="preload"
+          href="/fonts/geist/Geist-Latin-wght.woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
+        />
+      )
+    }
+    <link rel="stylesheet" href="/fonts/pretendard/pretendardvariable-dynamic-subset.css" />
     <slot name="head" />
   </head>
   <body>

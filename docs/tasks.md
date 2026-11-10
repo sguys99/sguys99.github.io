@@ -177,7 +177,7 @@
 각 작업의 공통 완료 기준: DESIGN.md의 해당 명세와 일치하고, 토큰 변수만 사용하며, 빌드가 통과한다.
 
 - [x] 5.1 전역 스타일과 리셋, 토큰 적용 — `src/styles/global.css` + `src/layouts/Base.astro`(lang·title, head 슬롯). 국문은 body 상속(`html:lang(ko) body`), `.sr-only`는 감싼 요소를 `:where(:has(> .sr-only))`로 기준 요소화. 360px 가로 스크롤 없음. `::selection`은 명세에 없어 브라우저 기본 유지
-- [ ] 5.2 웹폰트 셀프 호스팅 (국문 서브셋 분할, 라이선스 확인, `font-display` 설정)
+- [x] 5.2 웹폰트 셀프 호스팅 (국문 서브셋 분할, 라이선스 확인, `font-display` 설정) — `src/styles/fonts.css` + `public/fonts/`. Geist·Geist Mono는 Latin·사용 굵기로 잘라 각 약 24KB, Pretendard는 배포본 dynamic subset 그대로. 전부 `swap`, 영문만 Geist 프리로드, Geist 폴백 메트릭 보정(`Geist Fallback`). 라이선스 OFL 1.1 파일 동봉. Astro Fonts API는 패밀리 이름 해시화로 미채택
 - [ ] 5.3 기본 레이아웃: 사이드바 + 본문, 모바일 전환
 - [ ] 5.4 상단 내비게이션, 앵커 스크롤, 현재 위치 표시
 - [ ] 5.5 테마 전환: 시스템 설정 따름 + 수동 전환 기억, 로딩 시 깜빡임 없음
