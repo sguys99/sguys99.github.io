@@ -57,8 +57,9 @@ const { when, cur, logo } = Astro.props;
     padding: var(--sp-3) 0;
   }
 
+  /* Flush under the group label too, as in the approved draft (11.7). */
   :global(.lg-group) .lg-row:first-child {
-    padding-top: var(--sp-3);
+    padding-top: 0;
   }
 
   /* 3px: lines the period's baseline up with the title (5.22). */

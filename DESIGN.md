@@ -1714,7 +1714,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 | 요소 | 값 |
 |---|---|
-| `.lg-row` | `grid: --row-when minmax(0,1fr)`, `gap: --sp-5`, `padding: --sp-4 0`, 위 `--line` (첫 행 선 없음, 그룹 없는 목록의 첫 행 `padding-top: 0`) |
+| `.lg-row` | `grid: --row-when minmax(0,1fr)`, `gap: --sp-5`, `padding: --sp-4 0`, 위 `--line` (첫 행 선 없음, 첫 행 `padding-top: 0` — 그룹 머리 아래 첫 행도 같음, 11.7) |
 | 그룹 안 행 | `padding: --sp-3 0` |
 | `.lg-when` | `--font-meta` `--fs-xs` `--text-3` `tabular-nums`, `padding-top: 3px` |
 | `h3` / `h4` | `--fs-md` `--fw-strong` `--lh-row`. 그룹 안 `h4`는 `--fs-sm` 행간 1.5 |
@@ -2900,5 +2900,5 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 공통 컴포넌트는 `src/components/`에 하나씩(Card, SectionHead, Tags, Badge, Status, ExtLink, ChipLink, CopyButton, Disclosure, ToggleAll, Select, Logo, LedgerRow, LedgerGroup). 마크업이 없는 `.btn`·`.btn.pri`·`.linkish`와 여러 컴포넌트에 걸친 등장 모션 CSS는 `global.css`. 한 섹션만 쓰는 링크 모양(`.mail`, `.links a`, `.pp-head-link`, `.it .mt a`)은 그 섹션 컴포넌트에서 만든다 (tasks 5.10) | 쓰는 곳이 하나인 모양을 미리 공통화하지 않는다 |
 | 로고 파일은 `src/assets/logos/`에 두고 컴포넌트가 import한다(SVG는 `?raw`로 인라인, genon PNG는 빌드 산출 URL을 `mask-image`로). SVG 루트에서는 `viewBox`와 `fill`만 남기고 높이는 CSS, 너비는 비율로, `preserveAspectRatio="xMinYMid meet"`로 왼쪽 정렬 (tasks 5.10) | 인라인이라야 `currentColor`가 먹는다. 5.11 "public/ 또는 컴포넌트 import" 중 import |
 | 세션 플래그 `motion-played`는 모션을 재생할 수 있는 첫 페이지 로드에서 바로 쓴다(`src/scripts/motion.ts`의 `playMotion`). 해시가 붙은 주소로 처음 들어오면 대상 카드와 그 위 카드는 등장 효과 없이 시작 (tasks 5.10) | 같은 로드 안의 카드·궤적·카운트업이 한 값을 공유. 앵커 이동 규칙(5.14)을 첫 로드에도 적용 |
-| 그룹 머리(`.lg-label`) 아래 첫 행은 위 패딩 `--sp-3`을 유지한다. 5.22 "그룹 없는 목록의 첫 행 padding-top: 0"을 글자대로 따른 것. 시안 CSS는 선택자 우선순위 때문에 그룹 안 첫 행도 0이었다 (tasks 5.10) | 명세 우선. 시각 차이 12px, 확인만 받는다 |
+| ~~그룹 머리 아래 첫 행 위 패딩 `--sp-3` 유지~~ → 사용자 결정(2026-11-11): 시안대로 0. 이메일 복사 버튼은 Contact에만 두고 사이드바에는 두지 않는다 | 승인 시안 화면과 일치 |
 
