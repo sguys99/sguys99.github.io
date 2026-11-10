@@ -162,7 +162,7 @@
 - [x] 4.3 Layout & Breakpoints — 와이어프레임, 브레이크포인트 표, 앵커 오프셋. 하단 여백 2건은 4.10에서 확인
 - [x] 4.4 Components: 컴포넌트별 구조, 상태(hover, focus, active), 반응형 동작 — 24개(5.1~5.24), 콘텐츠 출처 필드·접근성·모션 포함. genon 로고 PNG 처리는 4.10에서 확인
 - [x] 4.5 Page Templates: 홈, 케이스 스터디, CV, 404 — 라우트 표, 섹션·앵커·탭 매핑, head·OG·hreflang·JSON-LD. CV 링크 위치·PDF 경로는 4.10에서 확인
-- [ ] 4.6 Bilingual Typography: 언어별 서체, 행간, 자간 조정값
+- [x] 4.6 Bilingual Typography: 언어별 서체, 행간, 자간 조정값 — 역할별 영/국 비교, 줄바꿈, 연도 범위 표기 통일, 웹폰트 방침(세부는 5.2)
 - [ ] 4.7 Dark Mode, Accessibility, Print
 - [ ] 4.8 Decision Log: Gate별 시안, 선택, 이유 (`docs/design-drafts/decision-log.md` 초안 이전)
 - [ ] 4.9 `src/styles/tokens.css`를 DESIGN.md의 토큰과 일치하게 생성

@@ -2208,3 +2208,150 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 - 전화번호·주소·생년 등 개인정보 필드는 넣지 않는다 (CLAUDE.md 규칙 3).
 - `worksFor`의 회사명은 현재 `currentRole` 문자열 안에 있어 따로 뽑을 필드가 없다. 구현 시 `profile`에 필드를 추가할지 상수로 둘지 정한다 (미정, 콘텐츠 스키마 변경이라 사용자 확인).
+
+## 7. Bilingual Typography
+
+영문(`/`)과 국문(`/ko/`)이 무엇이 다르고 왜 다른지를 정한다. 토큰 값은 "3. Tokens > Typography"를 따르고 여기서 반복하지 않는다. 출처: `g4/base.html`의 TYPE ROLES 블록과 `html:lang(ko)` 규칙, `case.html`, `335-a.html`(404), `333-a.html`(CV), `334-d.html`(OG).
+
+원칙 세 가지.
+
+- 국문은 대문자·넓은 자간으로 위계를 만들 수 없다. 그래서 **한 단계 큰 크기 + 굵기**로 대신한다.
+- 한글은 글자 면이 꽉 차 있어 같은 크기에서 더 빽빽해 보인다. 그래서 **행간은 넓히고, 큰 제목의 자간은 조금 더 좁힌다**.
+- 숫자·날짜는 언어와 관계없이 같은 모양이어야 목록이 정렬된다. 그래서 **메타는 국문에서도 Geist Mono를 유지**한다.
+
+### 서체 적용과 폴백
+
+| 상황 | 렌더 서체 | 근거 |
+|---|---|---|
+| 영문 페이지 본문·제목의 라틴 글자 | Geist | `--font` 첫 순위 |
+| 영문 페이지 안의 한글 (`lang="ko"` 원제 `.it .og`) | Pretendard | 요소에 `--font-ko` 지정 |
+| 영문 페이지에서 `lang` 없이 섞인 한글 | Pretendard (폴백) | Geist에 한글 없음 → `--font` 둘째 순위 |
+| 국문 페이지의 한글 | Pretendard | `--font-ko` |
+| 국문 페이지의 영문 단어·숫자 (본문·제목) | **Pretendard의 라틴 글리프** (Geist 아님) | `--font-ko`에 Geist가 없다. 한 줄 안에서 굵기·x높이가 어긋나지 않게 하려는 의도 |
+| 메타 (`--font-meta`)의 숫자·라틴 | Geist Mono (두 언어 모두) | 정렬·인상 유지 |
+| 메타 안의 한글 (`현재`, `총괄`, `진행 중`, 국문 푸터) | Pretendard Variable (폴백) | Geist Mono에 한글 없음 → `--font-meta` 둘째 순위. 크기·굵기는 메타 규칙 그대로 |
+| 웹폰트 로드 전·실패 | `system-ui` → Apple SD Gothic Neo 등 | 각 체인 뒤쪽 |
+
+**국문에서 서체가 바뀌는 요소와 유지되는 요소** (시안 기준)
+
+| 국문에서 `--font-ko`로 바꿈 (단어 라벨) | 국문에서도 `--font-meta` 유지 (숫자·날짜·짧은 표식) |
+|---|---|
+| `.sec-head h2`, `.eyebrow`, `.out .k`, `.sel-k`, `.sel-mark`, `.pl-cap`, `.fig .s`, `.yg .yh`, CV `.sec > h2`·`.row .meta`·`.note` | `.sec-head .meta`, `.traj .yrs`, `.proj-meta .num`, `.row .when`, `.pl-y`, `.idx`, `.badge`, `footer`, `.mono`, `.it .mt a`(DOI) |
+
+규칙: 요소의 내용이 **단어**면 국문에서 `--font-ko`, **숫자·날짜·기호**면 `--font-meta`를 유지한다.
+- [확인] `.yg .yh`는 연도 숫자만 담는데(`b.y`) 국문에서 Pretendard로 바뀐다. 위 규칙대로면 Geist Mono 유지가 맞다. 구현 시 유지로 두고 시안과 비교한다.
+
+### 역할별 영/국 비교
+
+토큰 이름으로 적는다. "같음"은 국문에서 따로 덮어쓰지 않는다는 뜻.
+
+| 역할 (선택자) | 영문: 서체 / 크기 / 굵기 / 행간 / 자간 | 국문에서 바뀌는 것 | 이유 |
+|---|---|---|---|
+| 이름 `.name` | `--font-display` / `--fs-xl` (모바일 `--fs-lg`) / `--fw-name` / 1.25 / `--ls-name` | 서체만 (`--font-display` → `--font-ko`) | 세 글자 이름이라 조정 불필요 |
+| 한 줄 소개 `.tagline`, 404 `.nf h2.ttl` | `--font-display` / `--fs-2xl` (모바일 `--fs-xl`) / `--fw-tagline` / `--lh-tagline` / `--ls-tagline`, `max-width: 30ch` | `--fw-tagline-ko` / `--lh-tagline-ko` / `--ls-tagline-ko`, `max-width: 24ch` | 한글 500은 큰 크기에서 가늘어 보임. 줄이 붙어 보여 행간을 넓힘. 한글 1ch가 넓어 폭 제한을 줄임 |
+| 프로젝트 제목 `.proj h3` | `--font-display` / `--fs-lg` / `--fw-title` / `--lh-title` / `--ls-title` | `--ls-title-ko` | 한글 제목의 느슨함 보정 |
+| 케이스 제목 `.cs-title` | `--font-display` / `--fs-xl` / `--fw-title` / 1.28 / `--ls-title` | 행간 1.4, `--ls-title-ko` | 두 줄로 넘어가는 국문 제목 대비 |
+| 케이스 본문 제목 `.d-sec h2` | 상속 / `--fs-lg` / `--fw-title` / 1.4 / `--ls-title` | `--ls-title-ko` | 〃 |
+| 섹션 제목 `.sec-head h2`, `.eyebrow` | `--font-meta` / `--fs-xs` / `--fw-eyebrow` / 상속 / `--ls-eyebrow`, 대문자 | `--font-ko` / `--fs-sm` / `--fw-strong` / `--ls-eyebrow-ko`, 변환 없음 | 대문자 위계를 크기·굵기로 대체 |
+| 본문 `body` | `--font` / `--fs-md` / 400 / `--lh-body` / `--ls-body` | `--font-ko` / `--lh-body-ko` / `--ls-body-ko`, `word-break: keep-all` | 한글 가독 행간, 어절 단위 줄바꿈 |
+| 보조 본문 (요약·설명) | 상속 / `--fs-sm` / 400 / 상속 / 상속 | 행간·자간만 body에서 상속 | 따로 덮어쓰지 않음 |
+| 메타 (날짜·번호·건수·푸터) | `--font-meta` / `--fs-xs` / 400 / 상속 / 0 | 같음 (한글만 Pretendard 폴백) | 숫자 정렬 유지 |
+| 배지 `.badge` | `--font-meta` / `--fs-2xs` / `--fw-medium` / 상속 / 0 | 같음 (`총괄`, `진행 중` 등 한글은 폴백) | 〃 |
+| 키 라벨 (사이드바 `.k`, `.lg-label`, `.rec dt`) | 상속 / `--fs-2xs` / `--fw-strong` / 상속 / `--ls-label`, 대문자 | `--fs-xs` / `--ls-label-ko`, 변환 없음 | 11px 한글은 너무 작음 |
+| 케이스 소제목 `.d-sec h3` | 상속 / `--fs-xs` / `--fw-strong` / 상속 / `--ls-label`, 대문자 | `--fs-sm` / `--ls-label-ko` | 〃 |
+| 선택 키 (`.sel-k`, `.out .k`, `.sel-mark`) | `--font-meta` / `--fs-2xs` / 상속 / 상속 / `--ls-eyebrow`, 대문자 | `--font-ko` / `--fs-xs` / `--ls-eyebrow-ko` | 〃 |
+| 표 머리 `.tbl th`, 모바일 `td[data-l]::before` | 상속 / `--fs-2xs` / `--fw-medium`(th) / 상속 / 0.08em → `--ls-eyebrow`로 정리, 대문자 | `--fs-xs` / 0 | 〃. 0.08em은 `.out .k`와 같은 이유로 정리 대상 |
+
+정리 대상(토큰 후보): `.cs-title` 행간 1.28과 국문 1.4, `.d-sec h2` 1.4가 반복되면 `--lh-row` 또는 `--lh-tagline-ko`와 합칠지 구현 시 확인. CV(333-a)의 국문 조정(`--cv-lh-ko`, 기본 크기, `.sec > h2` 0.86em)은 "3. Tokens > Print (CV)"를 따른다.
+
+### 줄바꿈
+
+| 대상 | 규칙 | 이유 |
+|---|---|---|
+| 국문 페이지 `body` | `word-break: keep-all; overflow-wrap: anywhere;` | 어절 중간에서 끊지 않음. 긴 영문·URL만 넘칠 때 끊어 360px 가로 스크롤 방지 |
+| 영문 페이지의 국문 원제 `.it .og` (`lang="ko"`) | `word-break: keep-all` | 같은 이유 |
+| 이메일 `.mail`, DOI 링크 `.it .mt a` (두 언어) | `overflow-wrap: anywhere` | 긴 문자열이 칸을 넘지 않게 |
+| 한 줄 소개 `.tagline` (두 언어), `.cs-title`, OG `.tg` | `text-wrap: balance` | G2 결정: 영문 모바일 외톨이 줄 처리. 줄 길이를 고르게 |
+| 기간·연도·건수 칸 (`.pl-y`, `.pl-cap` 데스크톱) | `white-space: nowrap` | `2024.03 – 2025.08`이 중간에서 끊기지 않게 |
+| 본문 문단 (`.about`, `.desc`, `.sum`) | `text-wrap: pretty` | 마지막 줄 한 단어 방지 (시안에 없던 보완. 미지원 브라우저는 무시) |
+
+`overflow-wrap: anywhere`는 최소 폭 계산에도 들어가므로 grid 칸이 좁아질 수 있다. 칸은 `minmax(0, 1fr)`을 유지한다.
+
+### 대문자 라벨의 국문 처리
+
+| 항목 | 영문 | 국문 |
+|---|---|---|
+| `text-transform` | `uppercase` | **`none`** (명시) |
+| 자간 | `--ls-eyebrow`(0.06em) 또는 `--ls-label`(0.1em) | 각각 `--ls-eyebrow-ko`(0), `--ls-label-ko`(0.02em) |
+| 크기 | `--fs-2xs` / `--fs-xs` | 한 단계 위 `--fs-xs` / `--fs-sm` |
+| 서체 | 일부 `--font-meta` | `--font-ko` |
+
+- **시안 버그**: base는 국문에서 `text-transform`을 풀지 않는다. 국문 사이드바 키 `GitHub`, `LinkedIn`이 `GITHUB`, `LINKEDIN`으로 보인다. 구현 시 대문자 라벨 선택자마다 `html:lang(ko) … { text-transform: none; }`를 둔다.
+
+### 숫자
+
+| 대상 | 처리 |
+|---|---|
+| `.num` (기간, 원장 연도, 번호 01–06, 섹션 건수, 필터 건수), `.mono`, 숫자 표 `.fig .n` | `font-variant-numeric: tabular-nums` |
+| 그 밖의 본문 숫자 | 기본(비례 숫자) |
+
+- `--font-meta`는 고정폭이라 tnum이 사실상 의미 없다. 실제 효과가 있는 곳은 비례 서체인 `.fig .n`(`--font-display`)과 필터 버튼 건수다.
+- **시안 버그**: `body { font-feature-settings: "tnum" 0; }`가 상속되어 자식의 `font-variant-numeric: tabular-nums`를 덮는다(`font-feature-settings`가 나중에 적용됨). 구현에서는 body의 이 선언을 뺀다. 기본값이 이미 비례 숫자라 잃는 것 없음.
+- 카운트업(331-c) 중에도 tnum이라 숫자 폭이 흔들리지 않는다.
+
+### 구두점·기호
+
+| 기호 | 용법 | 예 |
+|---|---|---|
+| en dash `–` 앞뒤 공백 | 기간 (두 언어 같음, glossary 9.1) | `Mar 2024 – Aug 2025` / `2024.03 – 2025.08`, `Jul 2026 – Present` / `2026.07 – 현재`, 궤적 `2023 – 2026` |
+| en dash `–` 공백 없음 | 쪽 범위 | `pp. 107–114` |
+| 가운뎃점 `·` 붙임 | 한 라벨 안의 병렬 (국문, glossary 9.5) | `에너지·유틸리티`, `제어·최적화` |
+| 가운뎃점 ` · ` 앞뒤 공백 | 독립 항목 구분 (두 언어) | 메타 `조직 · 고객`, `등록 n · 출원 n`, 탭 `지식재산 · 출판물`, 섹션 `Teaching · Books · Advisory`, 문서 제목 `이름 · 직함` |
+| 쉼표 | 국문 나열 | `RAG, 에이전트, Text-to-SQL` |
+
+- **연도 범위 표기**: 모든 곳에서 glossary 9.1의 `2015 – 2022`(en dash 앞뒤 공백)로 통일한다. 시안의 원장 `yrs()`, IP 서랍 `yearSpan()`, CV `--cv-date` 주석은 공백 없이 `2015–2022`로 만들고 있어 구현할 때 고친다.
+- 국문 날짜 월은 두 자리(`2024.03`), 영문은 세 글자 약어(마침표 없음).
+
+### 국문 페이지의 영문 표기
+
+glossary를 따른다. 국문 페이지에서도 영문으로 두는 것:
+
+- 대표 직함 `AI Engineer`, 직함 `Director` (glossary 1, 3)
+- 회사·조직명 `GenON`, `Digital & AI`, `PwC` 등 glossary 2에 영문으로 적힌 것
+- 약어·제품·라이브러리 (`RAG`, `LLM`, `VLA`, `PyTorch` 등, glossary 5.1)
+- 영문 원제 (논문, 저널명, glossary 9.3)
+
+렌더링: 이 영문은 `lang="en"`을 달지 않는다. 주변 국문과 같은 Pretendard로 그려 한 줄의 굵기가 맞게 한다. 영문 약어와 한글 사이는 띄운다(`RAG 기반`).
+
+### `:lang()` 적용 방식
+
+| 대상 | 방식 |
+|---|---|
+| 페이지 언어 | 레이아웃이 `<html lang="en">` / `<html lang="ko">`를 둔다. 404는 경로(`/ko/`)로 판별 (decision-log G6) |
+| 국문 차이 규칙 | `html:lang(ko) .선택자 { … }`로 덮어쓴다. 기본 규칙은 영문 |
+| `--font-display` | `:root`에서 `var(--font)`, `html:lang(ko)`에서 `var(--font-ko)`로 교체 |
+| 페이지 안 다른 언어 조각 | 요소에 `lang` 속성: 국문 원제 `<span class="og" lang="ko">`, 언어 버튼 `EN`/`KO`에 각자 `lang` |
+
+- **시안 버그**: base의 `:lang(ko) body, :lang(ko) { font-family: var(--font-ko); }`는 국문 페이지의 **모든 요소**에 (0,1,0) 명시도로 서체를 직접 건다. 이보다 앞에 있거나 명시도가 낮은 `--font-meta` 지정(예: 요소 선택자만 쓴 규칙)이 조용히 무시된다. 구현은 `html:lang(ko) body { font-family: var(--font-ko); }`로 상속시키고, 영문 페이지의 한글 조각은 `[lang="ko"] { font-family: var(--font-ko); }`로 따로 잡는다.
+
+### 웹폰트 로딩
+
+**필요한 굵기** (선택 시안 8개에서 수집. 700 이상 없음)
+
+| 패밀리 | 굵기 | 쓰는 곳 |
+|---|---|---|
+| Geist | 400, 500, 600 | 본문, 메타 강조·탭·배지·한 줄 소개, 이름·제목·키 라벨 |
+| Geist Mono | 400, 500 | 메타, 배지·연도 머리·eyebrow. **600 없음** → `--font-meta`에 600을 쓰지 않는다 (3장) |
+| Pretendard Variable | 400, 500, 600 (가변 1파일) | 국문 전체. 600은 국문 한 줄 소개·섹션 제목·행 제목 |
+
+**시안의 로딩**: Google Fonts CSS(`display=swap`) + jsDelivr `pretendard@v1.3.9` variable dynamic subset. 구현은 셀프 호스팅(tasks 5.2).
+
+| 항목 | 방침 |
+|---|---|
+| `font-display` | 세 패밀리 모두 `swap` (시안과 같음). 폴백이 바로 보이고 교체 시 흔들림은 아래 미정 항목으로 줄인다 |
+| 프리로드 | 영문 페이지는 Geist 가변(또는 400) 1개만 `preload`. 국문 페이지는 프리로드 없음 (분할 파일 중 어느 것이 필요한지 미리 알 수 없음) |
+| 국문 서브셋 | 5.2에서 결정. 후보: (a) Pretendard 배포본의 dynamic subset(유니코드 범위별 분할 파일 그대로 셀프 호스팅), (b) 빌드 시 사이트 텍스트에서 쓰인 글자만 추출한 단일 서브셋. 정적 사이트라 (b)가 작지만 콘텐츠 수정마다 재생성이 필요 |
+| 라틴 서브셋 | 5.2에서 결정. Geist·Geist Mono는 Latin만 필요 |
+| 폴백 메트릭 보정 (`size-adjust` 등) | 5.2에서 결정 |
+| 라이선스 | Geist·Geist Mono·Pretendard 모두 SIL OFL로 알려져 있음. 5.2에서 배포본 라이선스 파일로 확인하고 함께 둔다 |
+| 인쇄(CV) | `@page` 여백 상자는 웹폰트·변수를 못 쓸 수 있어 333-a가 서체명을 직접 적었다. 셀프 호스팅 후 같은 이름으로 해석되는지 5.2에서 확인 |
