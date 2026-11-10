@@ -141,3 +141,25 @@ a {
     animation: none !important;
   }
 }
+
+/* Icon button (DESIGN.md 5.6): theme, menu, sheet close, mobile language. Shared by several components. */
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: var(--ctl-h-lg);
+  height: var(--ctl-h-lg);
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--text-2);
+  cursor: pointer;
+  transition:
+    color var(--dur) ease,
+    border-color var(--dur) ease;
+}
+
+.icon-btn:hover {
+  color: var(--accent);
+  border-color: var(--line-strong);
+}

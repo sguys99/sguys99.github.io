@@ -1,0 +1,131 @@
+---
+// Top bar in the right column (DESIGN.md 5.2, 5.3). ≥861px: tabs + toggles. ≤860px: identity + language + menu button.
+import { getEntry } from 'astro:content';
+import Icon from './Icon.astro';
+import { t, homePath, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const other: Lang = lang === 'en' ? 'ko' : 'en';
+const profile = (await getEntry('profile', 'profile'))!.data;
+---
+
+<header class="topbar">
+  <div class="bar">
+    <a class="bar-id" href="#about">
+      <span class="bar-name">{profile.name[lang]}</span>
+      <span class="bar-cur" data-bar-cur>
+        {t(lang, 'about')}
+      </span>
+    </a>
+    {/* Section tabs: tasks 5.4. Language and theme toggles (.controls): tasks 5.5, 5.6. */}
+    {/* shortcut: links to the other language's home; tasks 5.6 keeps the reader's position. */}
+    <a
+      class="icon-btn lang-btn"
+      href={homePath(other)}
+      lang={other}
+      hreflang={other}
+      aria-label={t(lang, 'switchLang')}
+    >
+      {t(lang, 'otherLang')}
+    </a>
+    <button
+      type="button"
+      class="icon-btn menu-btn"
+      aria-haspopup="dialog"
+      aria-expanded="false"
+      aria-controls="sheet"
+      aria-label={t(lang, 'openMenu')}
+    >
+      <Icon name="menu" />
+    </button>
+  </div>
+</header>
+
+<style>
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    background: var(--header-bg);
+    -webkit-backdrop-filter: var(--header-blur);
+    backdrop-filter: var(--header-blur);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .bar {
+    max-width: var(--main);
+    height: var(--header-h);
+    padding: 0 var(--sp-7);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+  }
+
+  .bar-id,
+  .lang-btn,
+  .menu-btn {
+    display: none;
+  }
+
+  .lang-btn {
+    width: auto;
+    padding: 0 var(--sp-3);
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-medium);
+    letter-spacing: var(--ls-label-ko);
+    text-decoration: none;
+  }
+
+  @media (max-width: 1100px) {
+    .bar {
+      padding: 0 var(--sp-6);
+    }
+  }
+
+  @media (max-width: 860px) {
+    .bar {
+      padding: 0 var(--sp-4);
+      gap: var(--sp-3);
+    }
+
+    .bar-id {
+      display: flex;
+      align-items: baseline;
+      gap: var(--sp-2);
+      flex: 1;
+      min-width: 0;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .lang-btn,
+    .menu-btn {
+      display: inline-grid;
+    }
+  }
+
+  .bar-name {
+    font-size: var(--fs-md);
+    font-weight: var(--fw-strong);
+    letter-spacing: -0.01em;
+  }
+
+  .bar-cur {
+    min-width: 0;
+    font-size: var(--fs-sm);
+    color: var(--text-3);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .bar-cur::before {
+    content: '/';
+    margin-right: var(--sp-2);
+    color: var(--line-strong);
+  }
+</style>

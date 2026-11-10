@@ -178,7 +178,7 @@
 
 - [x] 5.1 전역 스타일과 리셋, 토큰 적용 — `src/styles/global.css` + `src/layouts/Base.astro`(lang·title, head 슬롯). 국문은 body 상속(`html:lang(ko) body`), `.sr-only`는 감싼 요소를 `:where(:has(> .sr-only))`로 기준 요소화. 360px 가로 스크롤 없음. `::selection`은 명세에 없어 브라우저 기본 유지
 - [x] 5.2 웹폰트 셀프 호스팅 (국문 서브셋 분할, 라이선스 확인, `font-display` 설정) — `src/styles/fonts.css` + `public/fonts/`. Geist·Geist Mono는 Latin·사용 굵기로 잘라 각 약 24KB, Pretendard는 배포본 dynamic subset 그대로. 전부 `swap`, 영문만 Geist 프리로드, Geist 폴백 메트릭 보정(`Geist Fallback`). 라이선스 OFL 1.1 파일 동봉. Astro Fonts API는 패밀리 이름 해시화로 미채택
-- [ ] 5.3 기본 레이아웃: 사이드바 + 본문, 모바일 전환
+- [x] 5.3 기본 레이아웃: 사이드바 + 본문, 모바일 전환 — `src/layouts/Page.astro`(본문 바로가기, `.shell`, `main#main`) + `src/components/`(Sidebar, Topbar, MenuSheet, Icon, Home) + `src/i18n/ui.ts`(최소 UI 문구, 5.7에서 확장). 홈은 섹션 8개 빈 카드. 시트는 네이티브 `<dialog>`(Esc·backdrop·링크 클릭 닫힘, 861px 이상이면 닫힘, 열린 동안 스크롤 잠금). 탭(5.4)·언어/테마 토글(5.5, 5.6)·푸터(5.9)·이메일 복사(5.10)는 자리만. 모바일 언어 버튼은 상대 언어 홈으로 가는 임시 링크. 360px 가로 스크롤 없음(시트 열림 포함)
 - [ ] 5.4 상단 내비게이션, 앵커 스크롤, 현재 위치 표시
 - [ ] 5.5 테마 전환: 시스템 설정 따름 + 수동 전환 기억, 로딩 시 깜빡임 없음
 - [ ] 5.6 언어 전환: 같은 위치의 반대 언어 페이지로 이동

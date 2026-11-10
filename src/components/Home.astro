@@ -1,0 +1,80 @@
+---
+// Home page body for both languages (DESIGN.md 6.2). Sections are empty placeholders until stage 6.
+import Page from '../layouts/Page.astro';
+import { t, SECTIONS, type Lang } from '../i18n/ui';
+import { getEntry } from 'astro:content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const profile = (await getEntry('profile', 'profile'))!.data;
+---
+
+<Page lang={lang} title={profile.name[lang]}>
+  {SECTIONS.map((id) => (
+    <section class="card" id={id} aria-labelledby={`h-${id}`}>
+      <div class="sec-head">
+        <h2 id={`h-${id}`}>{t(lang, id)}</h2>
+      </div>
+    </section>
+  ))}
+</Page>
+
+<style>
+  /* shortcut: card and section head live here until tasks 5.10 makes them shared components. */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: var(--sp-6);
+    margin-bottom: var(--sp-5);
+  }
+
+  .card:last-child {
+    margin-bottom: 0;
+  }
+
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    margin-bottom: var(--sp-5);
+  }
+
+  .sec-head h2 {
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-eyebrow);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  html:lang(ko) .sec-head h2 {
+    font-family: var(--font-ko);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-strong);
+    letter-spacing: var(--ls-eyebrow-ko);
+    text-transform: none;
+  }
+
+  @media (max-width: 860px) {
+    .card {
+      padding: var(--sp-5) var(--sp-4);
+      margin-bottom: var(--sp-4);
+    }
+
+    .card:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .sec-head {
+      flex-wrap: wrap;
+    }
+  }
+</style>
