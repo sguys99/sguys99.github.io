@@ -1,0 +1,121 @@
+---
+// Email copy button (DESIGN.md 5.8, 9장 상태 알림). Sits next to the mailto link, which stays the no-JS path:
+// the button is hidden until the script runs.
+import Icon from './Icon.astro';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  email: string;
+}
+
+const { lang, email } = Astro.props;
+---
+
+<button
+  type="button"
+  class="copy"
+  aria-label={t(lang, 'copyEmail', { email })}
+  data-copy={email}
+  data-copied={t(lang, 'copied')}
+  data-msg={t(lang, 'emailCopied')}
+  hidden
+>
+  <Icon name="copy" size="sm" class="i-copy" />
+  <Icon name="ok" size="sm" class="i-ok" />
+  <span class="copy-l">{t(lang, 'copy')}</span>
+</button>
+<span class="sr-only" aria-live="polite"></span>
+
+<script>
+  // Shown time of the "Copied" state (5.8 component value, not a motion token).
+  const SHOWN_MS = 1800;
+
+  async function write(text: string, btn: HTMLElement) {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      // Older or non-secure contexts: copy from a temporary textarea, then give focus back.
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.append(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+      btn.focus();
+    }
+  }
+
+  for (const btn of document.querySelectorAll<HTMLButtonElement>('.copy[data-copy]')) {
+    const label = btn.querySelector<HTMLElement>('.copy-l')!;
+    const status = btn.nextElementSibling as HTMLElement;
+    const idle = label.textContent ?? '';
+    let timer = 0;
+    btn.hidden = false;
+    btn.addEventListener('click', async () => {
+      await write(btn.dataset.copy!, btn);
+      btn.dataset.state = 'ok';
+      label.textContent = btn.dataset.copied!;
+      status.textContent = btn.dataset.msg!;
+      // A second click restarts the timer.
+      clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        delete btn.dataset.state;
+        label.textContent = idle;
+        status.textContent = '';
+      }, SHOWN_MS);
+    });
+  }
+</script>
+
+<style>
+  .copy {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-1h);
+    min-height: var(--ctl-h);
+    padding: var(--sp-1) var(--sp-3);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-medium);
+    color: var(--text-2);
+    cursor: pointer;
+    transition:
+      color var(--dur) ease,
+      border-color var(--dur) ease;
+  }
+
+  .copy[hidden] {
+    display: none;
+  }
+
+  .copy:hover {
+    color: var(--accent);
+    border-color: var(--line-strong);
+  }
+
+  .copy[data-state='ok'] {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .copy :global(.i-ok),
+  .copy[data-state='ok'] :global(.i-copy) {
+    display: none;
+  }
+
+  .copy[data-state='ok'] :global(.i-ok) {
+    display: block;
+  }
+
+  @media print {
+    .copy {
+      display: none;
+    }
+  }
+</style>

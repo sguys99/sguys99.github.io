@@ -1,0 +1,60 @@
+---
+// Card head line (DESIGN.md 5.13): eyebrow-style h2 on the left, optional count or link on the right (slot).
+interface Props {
+  /** Section id; the heading gets `h-{id}` for the card's aria-labelledby. */
+  id: string;
+  title: string;
+}
+
+const { id, title } = Astro.props;
+---
+
+<div class="sec-head">
+  <h2 id={`h-${id}`}>{title}</h2>
+  {Astro.slots.has('default') && (
+    <span class="meta num">
+      <slot />
+    </span>
+  )}
+</div>
+
+<style>
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    margin-bottom: var(--sp-5);
+  }
+
+  h2 {
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-eyebrow);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  html:lang(ko) h2 {
+    font-family: var(--font-ko);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-strong);
+    letter-spacing: var(--ls-eyebrow-ko);
+    text-transform: none;
+  }
+
+  .meta {
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  /* One rule for every section whose right side may not fit (5.13 구현 기본값). */
+  @media (max-width: 560px) {
+    .sec-head {
+      flex-wrap: wrap;
+      row-gap: var(--sp-1);
+    }
+  }
+</style>

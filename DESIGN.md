@@ -2863,7 +2863,7 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | `100vh`/`100dvh` 단위를 맞출지 | 단계 4 | tasks 5.3 (4장 확인할 점) | 구현됨 → 11.7 (`dvh`, `vh` 폴백. `.shell`, 사이드바, 메뉴 시트) |
 | 케이스 아키텍처 표 `.flow` nowrap이 360px에서 넘칠 수 있음 | 단계 4 | tasks 7.1 (4장 360px 가로 스크롤 방지) | 구현 대기 |
 | 사이드바 CV 다운로드 활성 상태의 모양 (시안 없음) | 단계 4 | tasks 6.12 (5.1) | 결정 필요 |
-| "Selected / 대표" 표시가 원장 `.badge.f`와 IP `.sel-mark` 두 모양 | 단계 4 | tasks 5.10 (5.7) | 결정됨 → 5.7, 5.21 (11.5) |
+| "Selected / 대표" 표시가 원장 `.badge.f`와 IP `.sel-mark` 두 모양 | 단계 4 | tasks 5.10 (5.7) | 구현됨 → `src/components/Badge.astro` `kind="selected"` 한 모양 (tasks 5.10) |
 | DOI 없이 `url`만 있는 논문의 표시 방법 | 단계 4 | tasks 6.6 (5.21) | 결정 필요 (해당 콘텐츠가 생길 때) |
 | CV PDF 파일 경로·이름, HTML CV(`/cv/`) 진입 링크를 둘지 | 단계 4 | tasks 6.12 (6.1, 6.4) | 결정 필요 |
 | OG 이미지를 빌드 시 생성할지 수동 갱신할지 | 단계 4 | tasks 5.8 (6.6) | 구현됨 → 11.7 (명함형 A, 수동 PNG, `og/render.mjs`) (tasks 5.8) |
@@ -2897,4 +2897,8 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | UI 문구는 `src/i18n/ui.ts` 한 파일의 `{ en, ko }` 사전. 값이 빠지거나 비었거나 en/ko의 `{자리}`가 다르면, 또는 `DOMAINS`·`CAPABILITIES` 값에 국문 태그가 없으면 모듈 로드 시 오류를 내 빌드가 실패한다 (tasks 5.7) | 빌드(`astro build`)는 타입 검사를 하지 않고, `astro check`는 의존성(@astrojs/check) 추가가 필요하다. 콘텐츠 스키마와 같은 "한쪽이 비면 빌드 실패" 규칙(CLAUDE.md 규칙 2) |
 | 명세에 국문이 없던 문구는 시안 사전을 따르고, 시안에도 없으면 새로 정했다: CV 보고서 끝줄 "보고서 n건 더 보기: {주소}", 아키텍처 흐름 화살표 낭독 글자 "연결 / 되돌아감", 개인 프로젝트 필터 결과 알림은 원장과 같은 "Showing n of N projects / 전체 N건 중 n건 표시" (tasks 5.7) | 문구 어조(1장)만 맞춘 기본값. 바꾸려면 용어집 7절과 `ui.ts`를 함께 고친다 |
 | OG 명함에서 현재 소속 줄을 뺀 뒤, 직함 `AI Engineer`를 이름 아래에서 선 아래 줄 왼쪽으로 옮겨 `github.com/sguys99`와 좌우 짝을 이룬다 (선 위 여백 36→40, 아래 22→24px). 렌더는 `docs/design-drafts/og/render.mjs`, 파비콘 ICO도 같은 스크립트가 PNG 16·32를 ICO 머리에 직접 싸서 만든다 (tasks 5.8) | 소속을 빼면 마지막 줄이 GitHub 하나만 오른쪽에 남아 한쪽으로 기운다. 위 줄(KM · 주소)과 아래 줄(직함 · GitHub)이 대칭이 되고 이름이 홀로 가운데 무게를 가진다. ICO는 의존성 없이 수십 줄로 충분 |
+| 공통 컴포넌트는 `src/components/`에 하나씩(Card, SectionHead, Tags, Badge, Status, ExtLink, ChipLink, CopyButton, Disclosure, ToggleAll, Select, Logo, LedgerRow, LedgerGroup). 마크업이 없는 `.btn`·`.btn.pri`·`.linkish`와 여러 컴포넌트에 걸친 등장 모션 CSS는 `global.css`. 한 섹션만 쓰는 링크 모양(`.mail`, `.links a`, `.pp-head-link`, `.it .mt a`)은 그 섹션 컴포넌트에서 만든다 (tasks 5.10) | 쓰는 곳이 하나인 모양을 미리 공통화하지 않는다 |
+| 로고 파일은 `src/assets/logos/`에 두고 컴포넌트가 import한다(SVG는 `?raw`로 인라인, genon PNG는 빌드 산출 URL을 `mask-image`로). SVG 루트에서는 `viewBox`와 `fill`만 남기고 높이는 CSS, 너비는 비율로, `preserveAspectRatio="xMinYMid meet"`로 왼쪽 정렬 (tasks 5.10) | 인라인이라야 `currentColor`가 먹는다. 5.11 "public/ 또는 컴포넌트 import" 중 import |
+| 세션 플래그 `motion-played`는 모션을 재생할 수 있는 첫 페이지 로드에서 바로 쓴다(`src/scripts/motion.ts`의 `playMotion`). 해시가 붙은 주소로 처음 들어오면 대상 카드와 그 위 카드는 등장 효과 없이 시작 (tasks 5.10) | 같은 로드 안의 카드·궤적·카운트업이 한 값을 공유. 앵커 이동 규칙(5.14)을 첫 로드에도 적용 |
+| 그룹 머리(`.lg-label`) 아래 첫 행은 위 패딩 `--sp-3`을 유지한다. 5.22 "그룹 없는 목록의 첫 행 padding-top: 0"을 글자대로 따른 것. 시안 CSS는 선택자 우선순위 때문에 그룹 안 첫 행도 0이었다 (tasks 5.10) | 명세 우선. 시각 차이 12px, 확인만 받는다 |
 

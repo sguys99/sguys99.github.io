@@ -1,0 +1,42 @@
+---
+// Domain + capability tags (DESIGN.md 5.7). Content holds English values; Korean labels come from tag().
+import { tag, type Capability, type Domain, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  domain: Domain;
+  capability: Capability[];
+}
+
+const { lang, domain, capability } = Astro.props;
+---
+
+<ul class="tags">
+  <li class="tag">{tag(lang, domain)}</li>
+  {capability.map((c) => (
+    <li class="tag k">{tag(lang, c)}</li>
+  ))}
+</ul>
+
+<style>
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-1h);
+    list-style: none;
+  }
+
+  .tag {
+    padding: var(--sp-0) var(--sp-2);
+    border-radius: var(--radius-pill);
+    background: var(--chip);
+    font-size: var(--fs-xs);
+    line-height: 1.6;
+    color: var(--text-2);
+  }
+
+  .tag.k {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+</style>

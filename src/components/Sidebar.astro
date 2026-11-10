@@ -2,6 +2,7 @@
 // Profile sidebar (DESIGN.md 5.1): record table on desktop, compact profile under the mobile bar (≤860px).
 import { getEntry } from 'astro:content';
 import Icon from './Icon.astro';
+import Badge from './Badge.astro';
 import { t, type Lang } from '../i18n/ui';
 
 interface Props {
@@ -29,7 +30,6 @@ const inShort = linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\//, '').repl
       <span class="k">{t(lang, 'now')}</span>
       <span class="v">{profile.currentRole[lang]}</span>
     </li>
-    {/* Email copy button joins this row in tasks 5.10 (DESIGN.md 5.8). */}
     <li class="em">
       <span class="k" aria-hidden="true">
         {t(lang, 'email')}
@@ -62,7 +62,7 @@ const inShort = linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\//, '').repl
   </ul>
   {/* Disabled until the PDF exists (tasks 6.12): no href, so it is not focusable. */}
   <a class="cv" role="link" aria-disabled="true">
-    {t(lang, 'cv')} <span class="badge">{t(lang, 'placeholder')}</span>
+    {t(lang, 'cv')} <Badge lang={lang} kind="placeholder" />
   </a>
 </aside>
 
@@ -186,21 +186,6 @@ const inShort = linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\//, '').repl
     color: var(--text-2);
     text-decoration: none;
     cursor: not-allowed;
-  }
-
-  /* Badge look from DESIGN.md 5.7; the shared .badge arrives with tasks 5.10. */
-  .badge {
-    font-family: var(--font-meta);
-    font-size: var(--fs-2xs);
-    font-weight: var(--fw-medium);
-    padding: 0 var(--sp-1h);
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius-xs);
-    color: var(--text-3);
-  }
-
-  html:lang(ko) .badge {
-    font-size: var(--fs-xs);
   }
 
   /* Mobile: compact profile below the bar (DESIGN.md 4장 모바일 골격, 5.1 반응형) */

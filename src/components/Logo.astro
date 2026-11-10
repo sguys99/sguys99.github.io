@@ -1,0 +1,83 @@
+---
+// Employer logo in one ink (DESIGN.md 5.11): five currentColor SVGs inline, genon PNG as a CSS mask.
+// Decorative by default (the row heading names the company); pass `label` where the logo stands in for the name.
+import genon from '../assets/logos/genon.png';
+import pwc from '../assets/logos/pwc.svg?raw';
+import makinarocks from '../assets/logos/makinarocks.svg?raw';
+import semco from '../assets/logos/semco.svg?raw';
+import kepco from '../assets/logos/kepco.svg?raw';
+import poscoEnc from '../assets/logos/posco-enc.svg?raw';
+
+// `s`: per-logo scale matched by eye, since each artwork has different padding (5.11 table).
+const logos = {
+  genon: { s: 0.9 },
+  pwc: { s: 1.5, svg: pwc },
+  makinarocks: { s: 0.78, svg: makinarocks },
+  semco: { s: 1.05, svg: semco },
+  kepco: { s: 0.95, svg: kepco },
+  'posco-enc': { s: 1.45, svg: poscoEnc },
+};
+
+export type LogoKey = keyof typeof logos;
+
+interface Props {
+  name: LogoKey;
+  /** Accessible name; omit when the company name is already in text next to it. */
+  label?: string;
+  /** Small size for the selected-work meta line (5.18); default is the ledger-row size. */
+  small?: boolean;
+}
+
+const { name, label, small } = Astro.props;
+const { s, svg } = logos[name] as { s: number; svg?: string };
+const a11y = label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': 'true' };
+// Root <svg> keeps its viewBox and fill only: CSS sets the height, the width follows the aspect ratio.
+const inner = svg?.replace(/<svg[^>]*?(viewBox="[^"]*")[^>]*>/, '').replace(/<\/svg>\s*$/, '');
+const viewBox = svg?.match(/viewBox="([^"]*)"/)?.[1];
+// Root fill (currentColor, or none where every shape sets its own) is inherited by the paths.
+const fill = svg?.match(/<svg[^>]*?\sfill="([^"]*)"/)?.[1];
+---
+
+{svg ? (
+  <svg
+    class:list={['logo', { sm: small }]}
+    style={`--s: ${s}`}
+    viewBox={viewBox}
+    fill={fill}
+    preserveAspectRatio="xMinYMid meet"
+    focusable="false"
+    {...a11y}
+    set:html={inner}
+  />
+) : (
+  <span
+    class:list={['logo', 'logo-mask', { sm: small }]}
+    style={`--s: ${s}; --src: url(${genon.src}); aspect-ratio: ${genon.width} / ${genon.height}`}
+    {...a11y}
+  />
+)}
+
+<style>
+  .logo {
+    display: block;
+    width: auto;
+    max-width: var(--logo-w);
+    height: calc(var(--logo-h) * var(--s));
+    color: var(--text);
+    opacity: var(--logo-op);
+    transition: opacity var(--dur) ease;
+  }
+
+  .logo.sm {
+    display: inline-block;
+    height: calc(var(--logo-h-sm) * var(--s));
+    opacity: var(--logo-op-cur);
+  }
+
+  /* Raster logo tinted to the text colour (5.11, 11.5). */
+  .logo-mask {
+    background-color: currentColor;
+    -webkit-mask: var(--src) left center / contain no-repeat;
+    mask: var(--src) left center / contain no-repeat;
+  }
+</style>

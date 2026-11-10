@@ -1,0 +1,82 @@
+---
+// "Show all (N)" for a list whose first rows always show (DESIGN.md 5.9 B). Rows past `visible` get `hidden`.
+// Without JS every row shows and the button stays hidden.
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  /** id of the list (<ul>/<ol>) whose children are the rows. */
+  controls: string;
+  /** Rows shown while collapsed. */
+  visible: number;
+}
+
+const { lang, controls, visible } = Astro.props;
+---
+
+<button
+  type="button"
+  class="toggle-all"
+  aria-expanded="false"
+  aria-controls={controls}
+  data-visible={visible}
+  data-more={t(lang, 'showAll', { n: '{n}' })}
+  data-less={t(lang, 'showLess')}
+  hidden
+></button>
+
+<script>
+  // shortcut: counts every child row; the project filters (tasks 6.x) will pass only matching rows.
+  for (const btn of document.querySelectorAll<HTMLButtonElement>('.toggle-all[aria-controls]')) {
+    const list = document.getElementById(btn.getAttribute('aria-controls')!);
+    if (!list) continue;
+    const rows = [...list.children] as HTMLElement[];
+    const n = Number(btn.dataset.visible);
+    if (rows.length <= n) continue;
+
+    const set = (open: boolean) => {
+      rows.forEach((r, i) => (r.hidden = !open && i >= n));
+      btn.setAttribute('aria-expanded', String(open));
+      btn.textContent = open
+        ? btn.dataset.less!
+        : btn.dataset.more!.replace('{n}', String(rows.length));
+    };
+    set(false);
+    btn.hidden = false;
+    btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+  }
+</script>
+
+<style>
+  /* min-height + side padding keep it on the control height scale (5.6 구현 기본값). */
+  .toggle-all {
+    min-height: var(--ctl-h);
+    margin-top: var(--sp-4);
+    padding: 0 var(--sp-4);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    background: none;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--text-2);
+    cursor: pointer;
+    transition:
+      color var(--dur) ease,
+      border-color var(--dur) ease;
+  }
+
+  .toggle-all[hidden] {
+    display: none;
+  }
+
+  .toggle-all:hover {
+    color: var(--accent);
+    border-color: var(--line-strong);
+  }
+
+  @media print {
+    .toggle-all {
+      display: none;
+    }
+  }
+</style>

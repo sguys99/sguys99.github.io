@@ -1,0 +1,61 @@
+---
+// Drawer (DESIGN.md 5.9 A): native <details>, so it works without JS and announces its state.
+// The summary's own layout belongs to the content component (e.g. IP drawers, 5.21); this adds the chevron.
+import Icon from './Icon.astro';
+
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+---
+
+<details class="dr" id={id}>
+  <summary>
+    <slot name="summary" />
+    <Icon name="chev" size="sm" class="chev" />
+  </summary>
+  <slot />
+</details>
+
+<style>
+  summary {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+    list-style: none;
+    cursor: pointer;
+    color: var(--text-2);
+    transition: color var(--dur) ease;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary:hover {
+    color: var(--text);
+  }
+
+  /* Ring inside, so the hairlines around the drawer do not clip it (9장). */
+  summary:focus-visible {
+    outline-offset: calc(-1 * var(--focus-offset));
+  }
+
+  summary :global(.chev) {
+    margin-left: auto;
+    color: var(--text-3);
+    transition:
+      transform var(--dur) ease,
+      color var(--dur) ease;
+  }
+
+  summary:hover :global(.chev),
+  details[open] > summary :global(.chev) {
+    color: var(--accent);
+  }
+
+  details[open] > summary :global(.chev) {
+    transform: rotate(180deg);
+  }
+</style>

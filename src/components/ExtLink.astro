@@ -1,0 +1,38 @@
+---
+// External text link with a trailing ↗ (DESIGN.md 5.6 `.ext`). Same tab, rel="noopener".
+import Icon from './Icon.astro';
+
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+---
+
+<a class="ext" href={href} rel="noopener">
+  <slot />
+  <Icon name="ext" size="xs" class="ext-i" />
+</a>
+
+<style>
+  .ext {
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+    text-underline-offset: var(--underline-offset);
+    transition:
+      color var(--dur) ease,
+      text-decoration-color var(--dur) ease;
+  }
+
+  .ext:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+
+  /* Inline with the text, not a flex child. */
+  .ext :global(.ext-i) {
+    display: inline;
+    margin-left: var(--sp-1);
+    vertical-align: -1px;
+  }
+</style>

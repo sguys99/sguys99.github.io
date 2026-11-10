@@ -1,0 +1,92 @@
+---
+// Section container (DESIGN.md 5.14): home sections, 404, case-study body. No card inside a card.
+// Entrance motion (5.14, 3장 Motion): cards below the first screen fade/rise in once per session.
+interface Props {
+  id?: string;
+  /** id of the heading that names the section (aria-labelledby). */
+  labelledby?: string;
+}
+
+const { id, labelledby } = Astro.props;
+---
+
+<section class="card" id={id} aria-labelledby={labelledby}>
+  <slot />
+</section>
+
+<script>
+  import { playMotion } from '../scripts/motion';
+
+  // Cards that start below the first screen wait, then reveal when they scroll in (331-c).
+  // No JS, a replay in the same session, or reduced motion: everything is drawn complete.
+  if (playMotion && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (es) => {
+        for (const e of es) {
+          if (!e.isIntersecting) continue;
+          io.unobserve(e.target);
+          e.target.classList.add('m-in');
+        }
+      },
+      { rootMargin: '0px 0px -8% 0px' },
+    );
+
+    // A card reached by an anchor or tab, and every waiting card above it, shows at once (decision-log 3.3).
+    const release = (hash: string) => {
+      const target = hash.length > 1 && document.getElementById(decodeURIComponent(hash.slice(1)));
+      if (!target) return;
+      for (const c of document.querySelectorAll<HTMLElement>('.card.m-wait:not(.m-in)')) {
+        if (
+          c === target ||
+          c.contains(target) ||
+          c.compareDocumentPosition(target) & Node.DOCUMENT_POSITION_FOLLOWING
+        ) {
+          c.classList.remove('m-wait');
+          io.unobserve(c);
+        }
+      }
+    };
+
+    for (const c of document.querySelectorAll<HTMLElement>('.card')) {
+      if (c.getBoundingClientRect().top < innerHeight) continue;
+      c.classList.add('m-wait');
+      io.observe(c);
+    }
+    release(location.hash);
+
+    document.addEventListener(
+      'click',
+      (e) => {
+        const a = (e.target as Element).closest<HTMLAnchorElement>('a[href*="#"]');
+        if (a && a.pathname === location.pathname) release(a.hash);
+      },
+      true,
+    );
+    addEventListener('hashchange', () => release(location.hash));
+  }
+</script>
+
+<style>
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: var(--sp-6);
+    margin-bottom: var(--sp-5);
+  }
+
+  .card:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 860px) {
+    .card {
+      padding: var(--sp-5) var(--sp-4);
+      margin-bottom: var(--sp-4);
+    }
+
+    .card:last-child {
+      margin-bottom: 0;
+    }
+  }
+</style>

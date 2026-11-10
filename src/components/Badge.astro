@@ -1,0 +1,52 @@
+---
+// Small outlined label after a title (DESIGN.md 5.7). "Selected" has this one look everywhere (11.5).
+import { t, type Lang } from '../i18n/ui';
+
+const kinds = {
+  lead: { key: 'lead', cls: '' },
+  selected: { key: 'selected', cls: 'f' },
+  'in-progress': { key: 'inProgress', cls: 'live' },
+  placeholder: { key: 'placeholder', cls: 'ph' },
+} as const;
+
+interface Props {
+  lang: Lang;
+  kind: keyof typeof kinds;
+}
+
+const { lang, kind } = Astro.props;
+const { key, cls } = kinds[kind];
+---
+
+<span class:list={['badge', cls]}>{t(lang, key)}</span>
+
+<style>
+  .badge {
+    font-family: var(--font-meta);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-medium);
+    padding: 0 var(--sp-1h);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-xs);
+    color: var(--text-2);
+    white-space: nowrap;
+  }
+
+  html:lang(ko) .badge {
+    font-size: var(--fs-xs);
+  }
+
+  .f,
+  .live {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .live {
+    margin-left: var(--sp-2);
+  }
+
+  .ph {
+    color: var(--text-3);
+  }
+</style>

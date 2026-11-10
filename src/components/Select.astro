@@ -1,0 +1,103 @@
+---
+// Filter select box (DESIGN.md 5.10): the wrapping label names the native <select>. Options come in the slot.
+// Filtering itself, the `.on` state and the Clear button (`.linkish`) belong to the list that uses it (tasks 6.x).
+interface Props {
+  label: string;
+  id: string;
+}
+
+const { label, id } = Astro.props;
+---
+
+<label class="sel">
+  <span class="sel-k">{label}</span>
+  <select id={id}>
+    <slot />
+  </select>
+</label>
+
+<style>
+  .sel {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    transition: border-color var(--dur) ease;
+  }
+
+  .sel:hover {
+    border-color: var(--line-strong);
+  }
+
+  /* The ring sits on the wrapper, not on the select (9장 포커스 표시). */
+  .sel:focus-within {
+    border-color: var(--accent);
+    outline: var(--focus-w) solid var(--focus);
+    outline-offset: var(--focus-offset);
+  }
+
+  .sel-k {
+    padding-left: var(--sp-3);
+    font-family: var(--font-meta);
+    font-size: var(--fs-2xs);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+    color: var(--text-3);
+    pointer-events: none;
+  }
+
+  html:lang(ko) .sel-k {
+    font-family: var(--font-ko);
+    font-size: var(--fs-xs);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  /* 5px padding, 14px arrow room, 220px cap, 5px chevron: component values from the drafts (5.10). */
+  select {
+    appearance: none;
+    min-height: var(--ctl-h);
+    max-width: 220px;
+    padding: 5px calc(var(--sp-3) + 14px) 5px var(--sp-2);
+    border: 0;
+    font-size: var(--fs-sm);
+    color: var(--text);
+    text-overflow: ellipsis;
+    cursor: pointer;
+    background:
+      linear-gradient(45deg, transparent 50%, var(--text-3) 50%) calc(100% - var(--sp-3) - 5px)
+        55% / 5px 5px no-repeat,
+      linear-gradient(135deg, var(--text-3) 50%, transparent 50%) calc(100% - var(--sp-3)) 55% / 5px
+        5px no-repeat;
+  }
+
+  select:focus-visible {
+    outline: 0;
+  }
+
+  select :global(option) {
+    color: var(--text);
+    background: var(--surface);
+  }
+
+  .sel.on {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .sel.on select {
+    color: var(--accent);
+  }
+
+  @media (max-width: 560px) {
+    .sel {
+      width: 100%;
+    }
+
+    select {
+      flex: 1;
+      max-width: none;
+    }
+  }
+</style>

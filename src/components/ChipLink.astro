@@ -1,0 +1,47 @@
+---
+// Pill link for a repository or demo (DESIGN.md 5.6 `.chip-lnk`). The same words repeat per project,
+// so `name` is appended for screen readers ("Repository: Pyroad").
+import Icon from './Icon.astro';
+
+interface Props {
+  href: string;
+  icon: 'gh' | 'ext';
+  /** Project name, read after the visible words. */
+  name: string;
+}
+
+const { href, icon, name } = Astro.props;
+---
+
+<a class="chip-lnk" href={href} rel="noopener">
+  <Icon name={icon} size="sm" />
+  <span>
+    <slot />
+    <span class="sr-only">: {name}</span>
+  </span>
+</a>
+
+<style>
+  .chip-lnk {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-1h);
+    min-height: var(--ctl-h);
+    padding: 0 var(--sp-3);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    color: var(--text-2);
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      color var(--dur) ease,
+      border-color var(--dur) ease;
+  }
+
+  .chip-lnk:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+</style>

@@ -1,0 +1,151 @@
+---
+// "Period | entry" row shared by Experience, Teaching and Awards & Education (DESIGN.md 5.22).
+// Goes in an <ol class="lg"> (directly, or inside LedgerGroup). The entry (h3/h4, .lg-sub, .lg-desc,
+// .dl-list) comes in the slot; the section decides its heading level and fields.
+import Logo, { type LogoKey } from './Logo.astro';
+
+interface Props {
+  when: string;
+  /** Current position (experience `period.status: present`). */
+  cur?: boolean;
+  /** Employer logo under the period, Experience only (3.2.7 C). */
+  logo?: LogoKey;
+}
+
+const { when, cur, logo } = Astro.props;
+---
+
+<li class:list={['lg-row', { cur }]}>
+  <span class="lg-when num">
+    {logo ? (
+      <span class="when-cell">
+        <span>{when}</span>
+        <Logo name={logo} />
+      </span>
+    ) : (
+      when
+    )}
+  </span>
+  <div class="lg-body">
+    <slot />
+  </div>
+</li>
+
+<style>
+  :global(.lg) {
+    list-style: none;
+  }
+
+  .lg-row {
+    display: grid;
+    grid-template-columns: var(--row-when) minmax(0, 1fr);
+    gap: var(--sp-5);
+    padding: var(--sp-4) 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .lg-row:first-child {
+    border-top: 0;
+  }
+
+  /* No group head above: the list starts flush with the card head. */
+  :global(.lg) > .lg-row:first-child {
+    padding-top: 0;
+  }
+
+  :global(.lg-group) .lg-row {
+    padding: var(--sp-3) 0;
+  }
+
+  :global(.lg-group) .lg-row:first-child {
+    padding-top: var(--sp-3);
+  }
+
+  /* 3px: lines the period's baseline up with the title (5.22). */
+  .lg-when {
+    padding-top: 3px;
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  .cur .lg-when {
+    color: var(--accent);
+  }
+
+  .when-cell :global(.logo) {
+    margin-top: var(--sp-3);
+  }
+
+  .cur :global(.logo),
+  .lg-row:hover :global(.logo) {
+    opacity: var(--logo-op-cur);
+  }
+
+  .lg-body :global(:is(h3, h4)) {
+    font-size: var(--fs-md);
+    font-weight: var(--fw-strong);
+    line-height: var(--lh-row);
+  }
+
+  :global(.lg-group) .lg-body :global(h4) {
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+  }
+
+  .lg-body :global(.lg-sub) {
+    margin-top: var(--sp-0);
+    font-size: var(--fs-sm);
+    color: var(--text-2);
+  }
+
+  :global(.lg-group) .lg-body :global(.lg-sub) {
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  .lg-body :global(:is(.lg-desc, .dl-list)) {
+    max-width: var(--measure);
+    margin-top: var(--sp-2);
+    font-size: var(--fs-sm);
+    color: var(--text-2);
+  }
+
+  .lg-body :global(.dl-list) {
+    padding-left: var(--sp-4);
+  }
+
+  .lg-body :global(.dl-list li + li) {
+    margin-top: var(--sp-0);
+  }
+
+  .lg-body :global(.dl-list li::marker) {
+    color: var(--text-3);
+  }
+
+  @media (max-width: 560px) {
+    .lg-row {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--sp-0);
+    }
+
+    .lg-when {
+      padding-top: 0;
+    }
+
+    /* Logo left, period right, above the entry. */
+    .when-cell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sp-3);
+      margin-bottom: var(--sp-2);
+    }
+
+    .when-cell :global(.logo) {
+      order: -1;
+      margin-top: 0;
+      height: calc(var(--logo-h) * var(--s) * 0.85);
+    }
+  }
+</style>

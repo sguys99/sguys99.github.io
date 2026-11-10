@@ -1,0 +1,51 @@
+---
+// Labelled group of ledger rows (DESIGN.md 5.22): Books / Teaching / Advisory, Awards / Education.
+// Rows (LedgerRow) come in the slot; their titles are h4 under this h3.
+interface Props {
+  label: string;
+  count: number;
+}
+
+const { label, count } = Astro.props;
+---
+
+<div class="lg-group">
+  <h3 class="lg-label">
+    <span>{label}</span>
+    <span class="n num">{count}</span>
+  </h3>
+  <ol class="lg">
+    <slot />
+  </ol>
+</div>
+
+<style>
+  .lg-group + .lg-group {
+    margin-top: var(--sp-6);
+  }
+
+  .lg-label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-1);
+    padding-bottom: var(--sp-2);
+    border-bottom: 1px solid var(--line-strong);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-strong);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  html:lang(ko) .lg-label {
+    font-size: var(--fs-xs);
+    letter-spacing: var(--ls-label-ko);
+  }
+
+  .n {
+    font-family: var(--font-meta);
+    font-weight: var(--fw-regular);
+  }
+</style>

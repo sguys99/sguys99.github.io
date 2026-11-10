@@ -235,3 +235,127 @@ a {
     animation-duration: var(--m-theme);
   }
 }
+
+/*
+ * Entrance motion (DESIGN.md 5.14, 3장 Motion 331-c). Card.astro adds .m-wait only to cards below the
+ * first screen on the session's first visit, then .m-in when one scrolls in. Rows follow one by one.
+ * Row selectors are the 5.14 list; keep them in step with the section components' class names.
+ */
+.m-wait {
+  opacity: 0;
+  transform: translateY(var(--m-rise));
+}
+
+.m-wait.m-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--m-reveal) var(--ease-out),
+    transform var(--m-reveal) var(--ease-out);
+}
+
+.m-wait
+  :is(
+    .work > li,
+    .lg > .lg-row,
+    .pidx > li,
+    .ledger > li,
+    .drawers > details,
+    .figs > .fig,
+    .skills > div,
+    .ct > *
+  ) {
+  opacity: 0;
+  transform: translateY(var(--m-rise-row));
+}
+
+.m-wait.m-in
+  :is(
+    .work > li,
+    .lg > .lg-row,
+    .pidx > li,
+    .ledger > li,
+    .drawers > details,
+    .figs > .fig,
+    .skills > div,
+    .ct > *
+  ) {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--m-row) var(--ease-out),
+    transform var(--m-row) var(--ease-out);
+  transition-delay: calc(var(--m-reveal) / 3 + var(--i, 0) * var(--m-stagger));
+}
+
+/* Row order 0–7; the 8th row onward shares the last step. Restarts in every list (each group). */
+:is(.work, .lg, .pidx, .ledger, .drawers, .figs, .skills, .ct) > :nth-child(2) {
+  --i: 1;
+}
+:is(.work, .lg, .pidx, .ledger, .drawers, .figs, .skills, .ct) > :nth-child(3) {
+  --i: 2;
+}
+:is(.work, .lg, .pidx, .ledger, .drawers, .figs, .skills, .ct) > :nth-child(4) {
+  --i: 3;
+}
+:is(.work, .lg, .pidx, .ledger, .drawers, .figs, .skills, .ct) > :nth-child(5) {
+  --i: 4;
+}
+:is(.work, .lg, .pidx, .ledger, .drawers, .figs, .skills, .ct) > :nth-child(6) {
+  --i: 5;
+}
+:is(.work, .lg, .pidx, .ledger, .drawers, .figs, .skills, .ct) > :nth-child(7) {
+  --i: 6;
+}
+:is(.work, .lg, .pidx, .ledger, .drawers, .figs, .skills, .ct) > :nth-child(n + 8) {
+  --i: 7;
+}
+
+@media print {
+  .m-wait,
+  .m-wait * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Plain buttons and links (DESIGN.md 5.6) with no markup of their own. */
+.linkish {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: var(--fs-sm);
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: var(--underline-offset);
+  cursor: pointer;
+}
+
+/* 404 buttons (6.5); .pri is the main action with a trailing arrow icon (<Icon size="sm">). */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1h);
+  min-height: var(--ctl-h-lg);
+  padding: 0 var(--sp-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-2);
+  text-decoration: none;
+  transition:
+    color var(--dur) ease,
+    border-color var(--dur) ease;
+}
+
+.btn:hover {
+  color: var(--accent);
+  border-color: var(--line-strong);
+}
+
+.btn.pri {
+  background: var(--accent-soft);
+  border-color: transparent;
+  color: var(--accent);
+}

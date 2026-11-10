@@ -21,8 +21,8 @@
 | 2 | 디자인 콘셉트 선정 (G1) | 완료 (A + 상단 메뉴 + 중앙 정렬) |
 | 3 | 세부 디자인 (G2~G6) | 완료 |
 | 4 | DESIGN.md 작성 | 완료 |
-| 5 | 구현: 기반 | 다음 작업 (DESIGN.md 기준) |
-| 6 | 구현: 섹션과 페이지 | 대기 |
+| 5 | 구현: 기반 | 완료 |
+| 6 | 구현: 섹션과 페이지 | 다음 작업 |
 | 7 | 검수 | 대기 |
 | 8 | 배포와 공개 | 대기 |
 | 9 | 운영 준비 | 대기 |
@@ -186,7 +186,7 @@
 - [x] 5.7 UI 문구 번역 파일 (`src/i18n/`) — Domain·Capability 태그 국문 표기 포함 (콘텐츠에는 영문 값만 있음, 용어집에 추가) — `src/i18n/ui.ts`에 사이트 전체 UI 문구(5장 컴포넌트, 6장 케이스·CV·404, 9장 보조 기술·알림)를 `{ en, ko }` 사전으로 모음. `{n}` 같은 자리는 `t(lang, key, vars)`가 채움. 태그는 `tag(lang, value)`(영문은 콘텐츠 값 그대로, 국문은 용어집 6절), 이를 위해 `content.config.ts`의 `DOMAINS`·`CAPABILITIES`를 export. 빌드는 타입 검사를 안 하므로 값 누락·빈 값·en/ko 자리 불일치·태그 국문 누락이면 모듈 로드 시 오류로 빌드 실패(확인함). `astro check`는 의존성 추가가 필요해 쓰지 않음. 용어집 7절을 절별로 재정리하고 "Show all" 국문을 DESIGN.md대로 "모두 보기"로 고침. 개인 프로젝트 `in-progress` 국문은 5.20 값 "개발 중"에 `TODO(1.5.6)`
 - [x] 5.8 공통 head: 메타, OG, canonical, `hreflang`, `Person` JSON-LD, 파비콘 — `src/components/Head.astro`(Base `head` 슬롯: description, canonical·hreflang en/ko/x-default·`og:url`, OG·`twitter:card`, 파비콘 링크, 홈만 JSON-LD `Person`. 404는 `canonical={false}`로 생략). 홈 `<title>` = `이름 · 직함`, description = `taglines[0]`. `worksFor`는 `experience`의 `status: present` 항목 회사명(GenON). OG는 명함 A에서 현 소속 줄을 빼고 직함을 선 아래로 옮겨 다시 렌더(`public/og-en.png`·`og-ko.png`, 라이트, 수동 갱신 `docs/design-drafts/og/render.mjs --site`, 명령은 DESIGN.md 6.6). 파비콘 `favicon.svg`(334-d 그대로)·`favicon.ico`(16+32)·`apple-touch-icon.png`(180). 확인: 빌드 후 `dist/index.html`·`dist/ko/index.html` head 검사(JSON-LD 파싱, hreflang 쌍, og:image 절대 URL), 자산 7개 200. 케이스 스터디·CV·404 연결은 각 페이지 작업(6.x, 7.x)에서
 - [x] 5.9 푸터: 최종 수정일 자동 표기 — `src/components/Footer.astro`(335-a 콜로폰: © 연도·이름, 최종 수정 `<time>`, 사이트 소스, 맨 위로 → `#main`). 날짜는 빌드 시 `git log -1 --format=%cs -- src/content`, 실패 시 빌드 날짜로 대체. 1440/1100/390/360 × 라이트/다크 × en/ko 확인
-- [ ] 5.10 공통 컴포넌트: 카드, 항목 행, 태그, 배지, 접힘, 버튼·링크
+- [x] 5.10 공통 컴포넌트: 카드, 항목 행, 태그, 배지, 접힘, 버튼·링크 — `src/components/`에 Card(+ 등장 모션), SectionHead, Tags(`tag()` 국문), Badge(lead·selected·in-progress·placeholder), Status(`.status`·`.st` 점), ExtLink, ChipLink(`sr-only` 프로젝트 이름), CopyButton(클립보드 → 실패 시 textarea, 1800ms, 라이브 영역, JS 없으면 숨김), Disclosure(`<details>` + chev), ToggleAll(앞 N행 + 모두 보기/접기, JS 없으면 전체 표시·버튼 숨김), Select(`.sel`, `.on` 모양만), Logo, LedgerRow·LedgerGroup(5.22 공통 행). Icon에 arrow·back·ext·chev·copy·ok와 `size`(xs/sm/lg) 추가. `.btn`·`.btn.pri`·`.linkish`와 등장 모션 CSS(`.m-wait`/`.m-in`, 5.14 대상 행 `--i` 0~7, 인쇄 강제 완성)는 `global.css`. 등장 모션: 첫 화면 아래 카드만 `m-wait`, `IntersectionObserver`(-8%)로 1회, 앵커·탭 클릭과 해시 로드 시 대상 카드와 그 위 카드 즉시 완성, 세션 플래그 `sessionStorage.motion-played`(`src/scripts/motion.ts`, 6.1 궤적·카운트업도 이 값을 씀), 모션 줄이기면 없음. 로고: 시안 SVG 5개를 채움 `currentColor`로 정리(semco·kepco는 휘도 마스크 유지, id 접두어), genon PNG는 `mask-image` — `src/assets/logos/`(SOURCES.txt 승인 문구 갱신). Home·Sidebar의 임시 `.card`·`.sec-head`·`.badge` 스타일을 공통 컴포넌트로 교체. 임시 쇼케이스(커밋 안 함)로 1440/360 × 라이트/다크 × en/ko, hover·키보드 포커스·서랍 열림·모두 보기·복사됨·JS 끔 확인, 홈 1440/390/360 회귀 없음, 360px 가로 스크롤 없음. 복사 버튼은 명세상 Contact(5.23)에만 있어 사이드바에는 넣지 않음(질문 남김)
 
 **완료 기준**: 빈 섹션으로 구성된 홈이 영문/국문, 라이트/다크, 데스크톱/모바일에서 명세대로 보인다.
 
@@ -196,13 +196,13 @@
 
 - [ ] 6.1 About: 소개, 경력 궤적, 숫자 요약
 - [ ] 6.2 Selected Work: 대표작 카드, 케이스 스터디 링크
-- [ ] 6.3 Experience
-- [ ] 6.4 Projects: 전체 목록, 접힘, Domain/Capability 필터 (JS가 꺼져 있어도 전체 목록이 보여야 함)
+- [ ] 6.3 Experience — 경력 → 로고 키(`Logo` `name`) 대응을 콘텐츠(`experience` 키가 곧 로고 키: genon·pwc·makinarocks·semco·kepco·posco-enc) 또는 필드로 정함. 행은 `LedgerRow`(`cur`, `logo`), 직함 `.lg-sub`는 경력만 `--accent` `--fw-medium` (5.22)
+- [ ] 6.4 Projects: 전체 목록, 접힘, Domain/Capability 필터 (JS가 꺼져 있어도 전체 목록이 보여야 함) — `ToggleAll`은 지금 목록의 모든 자식 행을 셈(shortcut 주석). 필터와 연동(걸러진 행 제외, 필터 변경 시 접힘 복귀)과 `Select`의 `.on`·옵션 disabled·`.linkish` 해제 버튼 동작은 여기서
 - [ ] 6.5 Personal Projects
 - [ ] 6.6 IP: Patents, Software, Publications, Reports
 - [ ] 6.7 Teaching · Books · Advisory
 - [ ] 6.8 Awards & Education
-- [ ] 6.9 Contact: 이메일(mailto), GitHub, LinkedIn, 의뢰 가능 분야
+- [ ] 6.9 Contact: 이메일(mailto), GitHub, LinkedIn, 의뢰 가능 분야 — `.mail-row`에 `CopyButton`, `.mail`·`.links a` 링크 모양(5.6)은 Contact 컴포넌트 몫
 - [ ] 6.10 케이스 스터디 템플릿과 페이지 (`/work/<slug>/`) — 목차 scroll-spy가 `[data-lang-alt]` 링크의 `hash`도 현재 절로 갱신해야 함 (6.1, 5.6)
 - [ ] 6.11 인쇄용 CV 페이지 (`/cv/`, `/ko/cv/`): A4 조판, 페이지 나눔
 - [ ] 6.12 PDF 자동 생성: 빌드 후 CV 페이지를 영문/국문 PDF로 출력, 다운로드 링크 연결

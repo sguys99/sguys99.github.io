@@ -1,0 +1,78 @@
+---
+// Status word with a dot (DESIGN.md 5.7). The word is always shown: the dot is decoration (9장).
+// `live`: featured-project meta (accent dot with halo). Others: record status (filled, hollow or dashed dot).
+import { t, type Lang, type UiKey } from '../i18n/ui';
+
+const values = {
+  live: { key: 'inProgress', cls: 'status' },
+  registered: { key: 'registered', cls: 'st reg' },
+  active: { key: 'status_active', cls: 'st reg' },
+  filed: { key: 'filed', cls: 'st' },
+  'in-progress': { key: 'status_in-progress', cls: 'st' },
+  archived: { key: 'status_archived', cls: 'st' },
+  filing: { key: 'filing', cls: 'st pen' },
+  pending: { key: 'pending', cls: 'st pen' },
+} satisfies Record<string, { key: UiKey; cls: string }>;
+
+interface Props {
+  lang: Lang;
+  value: keyof typeof values;
+}
+
+const { lang, value } = Astro.props;
+const { key, cls } = values[value];
+---
+
+<span class={cls}>{t(lang, key)}</span>
+
+<style>
+  .status,
+  .st {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .status::before,
+  .st::before {
+    content: '';
+    flex: none;
+    width: var(--dot);
+    height: var(--dot);
+    border-radius: 50%;
+  }
+
+  .status {
+    gap: var(--sp-1h);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-medium);
+    color: var(--accent);
+  }
+
+  .status::before {
+    background: var(--accent);
+    box-shadow: 0 0 0 var(--halo) var(--accent-soft);
+  }
+
+  /* 5px: optical alignment value from the drafts (5.7). */
+  .st {
+    gap: 5px;
+    color: var(--text-3);
+  }
+
+  .st::before {
+    border: 1px solid var(--text-3);
+  }
+
+  .st.reg {
+    color: var(--text-2);
+  }
+
+  .st.reg::before {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .st.pen::before {
+    border-style: dashed;
+  }
+</style>
