@@ -7,13 +7,11 @@ contact:
   linkedin: https://www.linkedin.com/in/kmyu99/
 about:
   en: >-
-    AI engineer who builds industrial AI end to end, from control algorithms to humanoid robots.
     Started in power plant automation and model predictive control, then developed anomaly detection,
     forecasting, and computer vision models for energy and manufacturing. Led RAG, agent, and
     Text-to-SQL services for enterprise clients, and now leads GenON's Physical AI humanoid product,
     GenP, from product definition to VLA training pipelines.
   ko: >-
-    제어 알고리즘부터 휴머노이드 로봇까지, 산업 AI를 처음부터 끝까지 구현해 온 AI Engineer.
     발전 플랜트 자동화와 모델 기반 예측 제어(MPC)로 출발해 에너지·제조 분야의 이상탐지, 예측, 컴퓨터 비전 모델 개발.
     이후 기업 고객 대상 RAG, 에이전트, Text-to-SQL 서비스 총괄.
     현재 GenON에서 Physical AI 휴머노이드 제품 GenP를 제품 정의부터 VLA 학습 파이프라인까지 총괄.
