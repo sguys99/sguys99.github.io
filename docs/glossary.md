@@ -229,7 +229,7 @@
 | Role | PM·PO | PM·PO |
 | Role | Architect | 아키텍트 |
 | Role | ML Engineer | ML 엔지니어 |
-| Badge | Lead | 책임 (이력서의 `*` 표시) |
+| Badge | Lead | 총괄 (이력서의 `*` 표시) |
 
 ## 7. 섹션·UI 이름
 

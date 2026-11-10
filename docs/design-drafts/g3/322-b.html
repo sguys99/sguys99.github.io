@@ -482,11 +482,9 @@
   .lg-cap { margin: 0; font-family: var(--font-meta); font-size: var(--fs-2xs); color: var(--text-3); text-align: right; padding-top: 3px; white-space: nowrap; }
   html:lang(ko) .lg-cap { font-family: var(--font-ko); font-size: var(--fs-xs); }
   .lg-cap b { display: block; font-weight: 500; color: var(--text-2); }
-  .lg.feat::before { content: ""; position: absolute; left: calc(-1 * var(--sp-3)); top: var(--sp-3); bottom: var(--sp-3); width: 2px; border-radius: 2px; background: var(--accent); }
   .badge.f { border-color: var(--accent); color: var(--accent); }
   .pl-none { margin: var(--sp-3) 0 0; font-size: var(--fs-sm); color: var(--text-2); }
   .linkish { font: inherit; font-size: var(--fs-sm); background: none; border: 0; padding: 0; color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
-  @media (max-width: 860px) { .lg.feat::before { left: calc(-1 * var(--sp-2)); } }
   @media (max-width: 560px) {
     .pl-tools { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr); }
     .sel { width: 100%; }

@@ -777,7 +777,6 @@
     showLess: { en: 'Show less', ko: '접기' },
     selected: { en: 'Selected', ko: '대표' },
     withDoi: { en: 'with DOI', ko: 'DOI 연결' },
-    total50: { en: '50+ in total', ko: '전체 50여 편' }
   });
   var CHEV = '<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
 
@@ -801,7 +800,7 @@
     if (k === 'pat') return cnt(n('registered'), 'registered') + ' · ' + cnt(n('filed') + n('filing'), 'filed');
     if (k === 'sw') return cnt(n('registered'), 'registered') + ' · ' + cnt(n('pending'), 'pending');
     if (k === 'paper') return u('withDoi');
-    return cnt(xs.filter(function (x) { return x.f; }).length, 'selected') + ' · ' + u('total50');
+    return cnt(xs.filter(function (x) { return x.f; }).length, 'selected');
   }
   // One record: English title + Korean original (en page only, lang="ko"), then meta.
   function item(x, o) {
@@ -842,7 +841,6 @@
         '<span class="dn">' + u(k) + '</span><span class="dc">' + D[k].length + '</span>' +
         '<span class="db">' + breakdown(k, D[k]) + '</span><span class="dy">' + span(D[k]) + '</span>' + CHEV +
         '</summary><div class="dbody">' + byYear(D[k]) +
-        (k === 'report' ? '<p class="note">' + (L === 'ko' ? '사내외 보고서 50여 편 중 ' + D[k].length + '편 수록' : D[k].length + ' listed of 50+ internal and external technical reports') + '</p>' : '') +
         '</div></details>';
     }).join('') + '</div>';
     reopen(keep);
