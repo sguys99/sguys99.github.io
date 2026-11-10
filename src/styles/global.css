@@ -163,3 +163,75 @@ a {
   color: var(--accent);
   border-color: var(--line-strong);
 }
+
+/* Language segment (DESIGN.md 5.4). Also used by the personal-projects status filter (aria-pressed). */
+.seg {
+  display: inline-flex;
+  padding: 2px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+}
+
+.seg > * {
+  display: inline-grid;
+  place-items: center;
+  min-height: var(--ctl-h-sm);
+  padding: var(--sp-1) 10px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label-ko);
+  color: var(--text-3);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--dur) ease,
+    color var(--dur) ease;
+}
+
+.seg > [aria-current='true'],
+.seg > [aria-pressed='true'] {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* Theme icon: the theme a click switches to (DESIGN.md 8장). Same two dark conditions as tokens.css. */
+.i-sun {
+  display: none;
+}
+
+:root[data-theme='dark'] .i-sun {
+  display: block;
+}
+
+:root[data-theme='dark'] .i-moon {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .i-sun {
+    display: block;
+  }
+
+  :root:not([data-theme='light']) .i-moon {
+    display: none;
+  }
+}
+
+/* Theme switch: one cross-fade of the page, individual transitions off meanwhile (DESIGN.md 3장 Motion). */
+.m-notx,
+.m-notx *,
+.m-notx *::before,
+.m-notx *::after {
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html[data-vt='theme']::view-transition-old(root),
+  html[data-vt='theme']::view-transition-new(root) {
+    animation-duration: var(--m-theme);
+  }
+}

@@ -2,6 +2,8 @@
 // Top bar in the right column (DESIGN.md 5.2, 5.3). ≥861px: tabs + toggles. ≤860px: identity + language + menu button.
 import { getEntry } from 'astro:content';
 import Icon from './Icon.astro';
+import LangSwitch from './LangSwitch.astro';
+import ThemeToggle from './ThemeToggle.astro';
 import { t, homePath, TABS, type Lang, type SectionId } from '../i18n/ui';
 
 interface Props {
@@ -40,7 +42,10 @@ const profile = (await getEntry('profile', 'profile'))!.data;
       </ul>
       <span class="ink" aria-hidden="true"></span>
     </nav>
-    {/* Language and theme toggles (.controls): tasks 5.5, 5.6. */}
+    <div class="controls">
+      <LangSwitch lang={lang} />
+      <ThemeToggle lang={lang} />
+    </div>
     {/* shortcut: links to the other language's home; tasks 5.6 keeps the reader's position. */}
     <a
       class="icon-btn lang-btn"
@@ -241,6 +246,13 @@ const profile = (await getEntry('profile', 'profile'))!.data;
       width var(--m-nav) var(--ease-out);
   }
 
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    flex: none;
+  }
+
   .bar-id,
   .lang-btn,
   .menu-btn {
@@ -270,7 +282,8 @@ const profile = (await getEntry('profile', 'profile'))!.data;
   }
 
   @media (max-width: 860px) {
-    nav {
+    nav,
+    .controls {
       display: none;
     }
 

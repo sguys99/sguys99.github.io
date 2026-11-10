@@ -2,6 +2,8 @@
 // Mobile menu sheet (DESIGN.md 5.3, 9장 메뉴 시트). Native modal <dialog>: inert background, focus inside, Esc closes.
 import { getEntry } from 'astro:content';
 import Icon from './Icon.astro';
+import LangSwitch from './LangSwitch.astro';
+import ThemeToggle from './ThemeToggle.astro';
 import { t, TABS, type Lang } from '../i18n/ui';
 
 interface Props {
@@ -64,11 +66,11 @@ const { email, github, linkedin } = (await getEntry('profile', 'profile'))!.data
     <div class="sheet-prefs">
       <div>
         <span class="sheet-label">{t(lang, 'language')}</span>
-        {/* tasks 5.6 */}
+        <LangSwitch lang={lang} />
       </div>
       <div>
         <span class="sheet-label">{t(lang, 'theme')}</span>
-        {/* tasks 5.5 */}
+        <ThemeToggle lang={lang} />
       </div>
     </div>
   </div>

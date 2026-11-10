@@ -1,0 +1,58 @@
+---
+// Theme toggle (DESIGN.md 5.4, 8장). Shows the theme it switches to: moon in light, sun in dark.
+// aria-pressed is filled in by the script below (the effective theme is unknown at build time).
+import Icon from './Icon.astro';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<button type="button" class="icon-btn" data-theme-btn aria-label={t(lang, 'toggleTheme')}>
+  <Icon name="moon" class="i-moon" />
+  <Icon name="sun" class="i-sun" />
+</button>
+
+<script>
+  // Initial data-theme is set by the inline script in Base.astro before first paint.
+  const root = document.documentElement;
+  const osDark = matchMedia('(prefers-color-scheme: dark)');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const btns = document.querySelectorAll<HTMLButtonElement>('[data-theme-btn]');
+
+  // Effective theme: manual choice, else the OS (no data-theme means "follow the OS", 8장).
+  const isDark = () => (root.dataset.theme ?? (osDark.matches ? 'dark' : 'light')) === 'dark';
+  const sync = () => btns.forEach((b) => b.setAttribute('aria-pressed', String(isDark())));
+  osDark.addEventListener('change', sync);
+  sync();
+
+  const apply = (next: string) => {
+    root.classList.add('m-notx');
+    root.dataset.theme = next;
+    sync();
+  };
+  const done = () => {
+    delete root.dataset.vt;
+    requestAnimationFrame(() => root.classList.remove('m-notx'));
+  };
+
+  for (const b of btns)
+    b.addEventListener('click', () => {
+      const next = isDark() ? 'light' : 'dark';
+      try {
+        localStorage.setItem('theme', next);
+      } catch {
+        // Storage blocked: the choice lasts for this page only (8장).
+      }
+      if (reduce.matches || !document.startViewTransition) {
+        apply(next);
+        void root.offsetWidth; // commit styles with transitions off before re-enabling them
+        return done();
+      }
+      root.dataset.vt = 'theme';
+      document.startViewTransition(() => apply(next)).finished.then(done, done);
+    });
+</script>

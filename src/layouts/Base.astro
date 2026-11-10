@@ -1,6 +1,6 @@
 ---
 // Document shell shared by every page: <html lang>, token + global styles.
-// Hooks for later tasks: theme script before styles (5.5), head meta (5.8) via the "head" slot.
+// Hooks for later tasks: head meta (5.8) via the "head" slot.
 import '../styles/tokens.css';
 import '../styles/fonts.css';
 import '../styles/global.css';
@@ -16,6 +16,13 @@ const { lang, title } = Astro.props;
 <html lang={lang}>
   <head>
     <meta charset="utf-8" />
+    {/* Stored theme before any style or paint (DESIGN.md 8장). Inline: an external file would flash. */}
+    <script is:inline>
+      try {
+        const t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
     <meta name="viewport" content="width=device-width" />
     <title>{title}</title>
     {

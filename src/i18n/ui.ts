@@ -19,6 +19,7 @@ const ui = {
   // Language link shows and reads the *other* language (DESIGN.md 5.3).
   otherLang: { en: 'KO', ko: 'EN' },
   switchLang: { en: '한국어로 보기', ko: 'View in English' },
+  toggleTheme: { en: 'Toggle dark mode', ko: '다크 모드 전환' },
 
   // Section names (DESIGN.md 6.2)
   about: { en: 'About', ko: '소개' },
@@ -65,6 +66,9 @@ export const TABS: { id: SectionId; covers: SectionId[] }[] = [
   { id: 'ip', covers: ['ip'] },
   { id: 'contact', covers: ['contact'] },
 ];
+
+/** Language codes as shown in the switch (DESIGN.md 5.4); the same on both pages. */
+export const LANG_CODE: Record<Lang, string> = { en: 'EN', ko: 'KO' };
 
 /** Home URL for a language (trailingSlash: 'always'). */
 export const homePath = (lang: Lang) => (lang === 'en' ? '/' : '/ko/');
