@@ -59,7 +59,8 @@ const opt = (label: string, n: number) => `${label} (${n})`;
   <ol class="ledger" id="pl-list" aria-labelledby="pl-title">
     {projects.map(({ data: p }) => {
       const client = p.client && (p.client.public ? p.client.name[lang] : p.client.label[lang]);
-      const who = [p.org?.[lang], client].filter(Boolean).join(' · ');
+      // NBSP keeps the dot off the start of a line.
+      const who = [p.org?.[lang], client].filter(Boolean).join('\u00a0· ');
       return (
         <li class="pl-row" data-d={p.domain} data-c={p.capability.join('|')}>
           <span class="pl-y num">{fmtYears(lang, p.period)}</span>

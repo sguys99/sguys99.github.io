@@ -127,7 +127,15 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
       )}
       <div>
         <dt>{t(lang, 'stack')}</dt>
-        <dd class="stk">{p.stack.join(' · ')}</dd>
+        {/* Break only between names, not inside "Unitree SDK". */}
+        <dd class="stk">
+          {p.stack.map((s, i) => (
+            <>
+              {i > 0 && '\u00a0· '}
+              <span>{s}</span>
+            </>
+          ))}
+        </dd>
       </div>
     </dl>
     <nav class="toc" aria-label={t(lang, 'onThisPage')}>
@@ -371,6 +379,11 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
   dd {
     font-size: var(--fs-sm);
     line-height: var(--lh-row);
+  }
+
+  /* Lines break between names only, not inside "GitHub Pages" or "FAST-LIO2". */
+  .stk span {
+    white-space: nowrap;
   }
 
   .stk {

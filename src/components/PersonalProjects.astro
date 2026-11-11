@@ -60,7 +60,14 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
             <Status lang={lang} value={p.status} />
           </div>
           <p class="sum">{p.summary[lang]}</p>
-          <p class="stk">{p.stack.join(' / ')}</p>
+          <p class="stk">
+            {p.stack.map((s, i) => (
+              <>
+                {i > 0 && '\u00a0/ '}
+                <span>{s}</span>
+              </>
+            ))}
+          </p>
         </div>
         <div class="acts">
           <ChipLink href={p.repo} icon="gh" name={p.name}>
@@ -181,6 +188,11 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
     margin-top: var(--sp-1);
     font-size: var(--fs-sm);
     color: var(--text-2);
+  }
+
+  /* Lines break between names only, not inside "GitHub Pages" or "FAST-LIO2". */
+  .stk span {
+    white-space: nowrap;
   }
 
   .stk {

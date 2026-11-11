@@ -51,7 +51,7 @@ type Row = {
   metaHref?: string;
   desc?: string;
   hl?: string[];
-  stack?: string;
+  stack?: string[];
 };
 type Sec = {
   key: string;
@@ -65,7 +65,8 @@ type Sec = {
 const projects = await getCollection('projects');
 const who = (p: (typeof projects)[number]['data']) => {
   const client = p.client && (p.client.public ? p.client.name[lang] : p.client.label[lang]);
-  return [p.org?.[lang], client].filter(Boolean).join(' · ');
+  // NBSP keeps the dot off the start of a line.
+  return [p.org?.[lang], client].filter(Boolean).join('\u00a0· ');
 };
 const projRow = ({ data: p }: (typeof projects)[number]): Row => ({
   when: fmtYears(lang, p.period),
@@ -126,7 +127,7 @@ const sections: Sec[] = [
         // "Present" already says ongoing; planned work gets the badge (decision-log 3.3).
         badge: e.data.period.status === 'planned' ? t(lang, 'inProgress') : undefined,
         hl: e.data.highlights.map((h) => h[lang]),
-        stack: e.data.stack.join(' · ') || undefined,
+        stack: e.data.stack.length ? e.data.stack : undefined,
       })),
   },
   {
@@ -299,7 +300,16 @@ const thin = (s: string) => s.replace(/\s*–\s*/g, ' – ');
                         ))}
                       </ul>
                     )}
-                    {r.stack && <p class="stack">{r.stack}</p>}
+                    {r.stack && (
+                      <p class="stack">
+                        {r.stack.map((s, i) => (
+                          <>
+                            {i > 0 && '\u00a0· '}
+                            <span>{s}</span>
+                          </>
+                        ))}
+                      </p>
+                    )}
                   </div>
                 </li>
               ))}
@@ -542,6 +552,10 @@ const thin = (s: string) => s.replace(/\s*–\s*/g, ' – ');
   }
   .stack {
     margin-top: 0.6mm;
+  }
+  /* Break between names only, not inside "FAST-LIO2" or "Hugging Face". */
+  .stack span {
+    white-space: nowrap;
   }
   /* Compact lists: title and source run on one line (10장). */
   .tight .row h3 {
