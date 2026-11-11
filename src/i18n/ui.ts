@@ -83,8 +83,7 @@ const ui = {
   pending: { en: 'Pending', ko: '등록 진행 중' },
   // Personal project status (5.20)
   status_active: { en: 'Active', ko: '운영 중' },
-  // TODO(1.5.6): 5.20 "개발 중" vs 5.7 "진행 중" is undecided (DESIGN.md 11.6); this keeps the current 5.20 value.
-  'status_in-progress': { en: 'In progress', ko: '개발 중' },
+  'status_in-progress': { en: 'In progress', ko: '진행 중' },
   status_archived: { en: 'Archived', ko: '보관' },
 
   // Selected work and ledger (5.18, 5.19)

@@ -1610,7 +1610,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 상태 값 | 영문 / 국문 (시안) |
 |---|---|
 | `active` | Active / 운영 중 |
-| `in-progress` | In progress / 개발 중 |
+| `in-progress` | In progress / 진행 중 (시안 "개발 중"을 사이트 전체 "진행 중"으로 통일, 11.8) |
 | `archived` | Archived / 보관 |
 
 - 콘텐츠: `personal` 컬렉션 → `name`(h3, 언어 공통), `summary`(`.sum`), `stack[]`(`.stk`), `status`, `repo`, `demo?`. 머리 링크는 `profile.contact.github`.
@@ -2857,7 +2857,7 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | CV의 도슨트 건 "Planned" 배지 → "In progress / 진행 중" | G6 | 5.7, 6.4, 10장 (11.5에서 케이스 스터디까지 확대) | 문서에 반영됨 → 5.7 |
 | 새 UI 문구(최종 수정, 맨 위로, 페이지를 찾을 수 없습니다 등) 용어집 등록 | G6 | tasks 5.7 (5.5 국문 문구) | 구현됨 → `src/i18n/ui.ts`, 용어집 7절 (tasks 5.7) |
 | apple-touch-icon 180, favicon.ico 대체 파일 생성 | G6 | tasks 5.8 (6.6 파일 목록) | 구현됨 → `public/` (tasks 5.8, ICO는 16+32) |
-| 개인 프로젝트 `in-progress` 국문: 5.20 "개발 중" ↔ 5.7 "진행 중" | 단계 4 | tasks 1.5.6 문안 검토 (5.20, 5.7) | 결정 필요. `ui.ts`에는 5.20 값 "개발 중"을 `TODO(1.5.6)`과 함께 둠 (tasks 5.7) |
+| 개인 프로젝트 `in-progress` 국문: 5.20 "개발 중" ↔ 5.7 "진행 중" | 단계 4 | tasks 1.5.6 문안 검토 (5.20, 5.7) | 결정됨 → 11.8 ("진행 중"으로 통일, `ui.ts`·용어집 7절·5.20 반영) |
 | 웹폰트 자체 호스팅 방식·국문 서브셋·폴백 메트릭 | 단계 4 | tasks 5.2 (3장 Typography, 7장 웹폰트 로딩) | 구현됨 → 7장 웹폰트 로딩 (직접 `@font-face`, Pretendard 배포본 dynamic subset, Geist 폴백 보정) |
 | ≤1100px `main` 하단 패딩 64→32px, 마지막 카드→푸터 간격 56px | 단계 4 | tasks 5.3, 5.9 | 구현됨: `main` 쪽(tasks 5.3: 모든 폭 하단 `--sp-6`, 마지막 카드 `margin-bottom: 0`), 푸터 아래 `--sp-8`(tasks 5.9, `src/components/Footer.astro`). 마지막 카드 → 푸터 32px, 모든 폭 |
 | `100vh`/`100dvh` 단위를 맞출지 | 단계 4 | tasks 5.3 (4장 확인할 점) | 구현됨 → 11.7 (`dvh`, `vh` 폴백. `.shell`, 사이드바, 메뉴 시트) |
@@ -2865,7 +2865,7 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 사이드바 CV 다운로드 활성 상태의 모양 (시안 없음) | 단계 4 | tasks 6.12 (5.1) | 결정 필요 |
 | "Selected / 대표" 표시가 원장 `.badge.f`와 IP `.sel-mark` 두 모양 | 단계 4 | tasks 5.10 (5.7) | 구현됨 → `src/components/Badge.astro` `kind="selected"` 한 모양 (tasks 5.10) |
 | DOI 없이 `url`만 있는 논문의 표시 방법 | 단계 4 | tasks 6.6 (5.21) | 결정 필요 (해당 콘텐츠가 생길 때) |
-| CV PDF 파일 경로·이름, HTML CV(`/cv/`) 진입 링크를 둘지 | 단계 4 | tasks 6.12 (6.1, 6.4) | 결정 필요 |
+| CV PDF 파일 경로·이름, HTML CV(`/cv/`) 진입 링크를 둘지 | 단계 4 | tasks 6.12 (6.1, 6.4) | 일부 결정 → 11.8 (PDF만 노출, HTML CV는 링크 없음. 파일 이름은 6.12) |
 | OG 이미지를 빌드 시 생성할지 수동 갱신할지 | 단계 4 | tasks 5.8 (6.6) | 구현됨 → 11.7 (명함형 A, 수동 PNG, `og/render.mjs`) (tasks 5.8) |
 | JSON-LD `worksFor` 회사명: `profile`에 필드 추가 또는 상수 (콘텐츠 스키마 변경) | 단계 4 | tasks 5.8 (6.6) | 구현됨 → 11.7 (experience 현재 항목) (tasks 5.8) |
 | `.cs-title`·`.d-sec h2` 행간 1.28/1.4를 기존 행간 토큰과 합칠지 | 단계 4 | tasks 6.10 (7장 역할별 영/국 비교) | 구현 대기 |
@@ -2902,3 +2902,12 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 세션 플래그 `motion-played`는 모션을 재생할 수 있는 첫 페이지 로드에서 바로 쓴다(`src/scripts/motion.ts`의 `playMotion`). 해시가 붙은 주소로 처음 들어오면 대상 카드와 그 위 카드는 등장 효과 없이 시작 (tasks 5.10) | 같은 로드 안의 카드·궤적·카운트업이 한 값을 공유. 앵커 이동 규칙(5.14)을 첫 로드에도 적용 |
 | ~~그룹 머리 아래 첫 행 위 패딩 `--sp-3` 유지~~ → 사용자 결정(2026-11-11): 시안대로 0. 이메일 복사 버튼은 Contact에만 두고 사이드바에는 두지 않는다 | 승인 시안 화면과 일치 |
 
+### 11.8 단계 6. 구현: 섹션과 페이지 — 2026-11-11
+
+**사용자 결정**
+
+| 결정 | 반영 |
+|---|---|
+| CV PDF는 Playwright를 devDependency로 추가해 빌드 후 `/cv/`, `/ko/cv/`를 PDF로 출력한다 | → tasks 6.12, 10장 PDF |
+| PDF만 노출한다: 사이드바 Download CV → 현재 언어 PDF. HTML CV는 링크 없이 주소로만 접근. 파일 이름은 6.12에서 확정 | → tasks 6.12, 5.1, 6.4 |
+| 개인 프로젝트 `in-progress` 국문은 "진행 중"으로 사이트 전체 통일 (5.20 시안의 "개발 중" 대신) | → 5.20, `src/i18n/ui.ts`, 용어집 7절 |

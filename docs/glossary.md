@@ -284,7 +284,7 @@ UI 문구의 원본은 `src/i18n/ui.ts`다. 이 표는 표기 기준이며, 문�
 | Lead | 총괄 | 6절 Badge와 같음 |
 | In progress | 진행 중 | 진행 중·예정 프로젝트 배지. 개인 프로젝트 상태는 아래 |
 | Present | 현재 | 기간 끝 (9.1) |
-| Active / In progress / Archived | 운영 중 / 개발 중 / 보관 | 개인 프로젝트 상태. `in-progress` 국문은 [확인 필요]: "개발 중"과 "진행 중" 중 결정 (tasks 1.5.6) |
+| Active / In progress / Archived | 운영 중 / 진행 중 / 보관 | 개인 프로젝트 상태. `in-progress` 국문은 사이트 전체 "진행 중"으로 통일 (사용자 결정 2026-11-11, DESIGN.md 11.8) |
 | Outcome | 성과 | |
 | Repository / Live demo | 저장소 / 데모 | 개인 프로젝트 링크 |
 | Open to | 의뢰 가능 분야 | Contact |
