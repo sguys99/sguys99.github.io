@@ -1,0 +1,129 @@
+---
+// 404 card (DESIGN.md 6.5, 335-a): code, title (the page's h1), one-line body, two buttons, section shortcuts.
+import Card from './Card.astro';
+import Icon from './Icon.astro';
+import { t, homePath, type Lang, type SectionId } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const other: Lang = lang === 'en' ? 'ko' : 'en';
+const home = homePath(lang);
+const SHORTCUTS: SectionId[] = ['about', 'work', 'experience', 'ip'];
+---
+
+<Card as="article" labelledby="nf-h">
+  <div class="nf">
+    <p class="code">404</p>
+    <h1 class="ttl" id="nf-h">
+      {t(lang, 'nf_title')}
+    </h1>
+    <p class="body">{t(lang, 'nf_body')}</p>
+    <div class="acts">
+      <a class="btn pri" href={home}>
+        {t(lang, 'nf_home')}
+        <Icon name="arrow" size="sm" />
+      </a>
+      <a class="btn" href={homePath(other)} lang={other} hreflang={other}>
+        {t(lang, 'nf_other')}
+      </a>
+    </div>
+    <h2 class="sr-only" id="nf-sh">
+      {t(lang, 'nf_sections')}
+    </h2>
+    <ol class="rows" aria-labelledby="nf-sh">
+      {SHORTCUTS.map((id, i) => (
+        <li>
+          <a href={`${home}#${id}`}>
+            <span class="n num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="l">{t(lang, id)}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Card>
+
+<style>
+  .code {
+    margin-bottom: var(--sp-4);
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  .ttl {
+    max-width: 30ch;
+    margin-bottom: var(--sp-3);
+    font-family: var(--font-display);
+    font-size: var(--fs-2xl);
+    font-weight: var(--fw-tagline);
+    letter-spacing: var(--ls-tagline);
+    line-height: var(--lh-tagline);
+  }
+
+  html:lang(ko) .ttl {
+    max-width: 24ch;
+    font-weight: var(--fw-tagline-ko);
+    letter-spacing: var(--ls-tagline-ko);
+    line-height: var(--lh-tagline-ko);
+  }
+
+  .body {
+    max-width: 52ch;
+    color: var(--text-2);
+  }
+
+  .acts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    margin: var(--sp-5) 0 var(--sp-6);
+  }
+
+  .rows {
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .rows a {
+    display: grid;
+    grid-template-columns: 140px minmax(0, 1fr);
+    align-items: baseline;
+    gap: var(--sp-5);
+    padding: var(--sp-3) 0;
+    font-weight: var(--fw-medium);
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .n {
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-regular);
+    color: var(--text-3);
+  }
+
+  .l {
+    transition: color var(--dur) ease;
+  }
+
+  .rows a:hover .l {
+    color: var(--accent);
+  }
+
+  @media (max-width: 860px) {
+    .ttl {
+      font-size: var(--fs-xl);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .rows a {
+      grid-template-columns: 56px minmax(0, 1fr);
+      gap: var(--sp-3);
+    }
+  }
+</style>

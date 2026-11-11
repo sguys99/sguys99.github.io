@@ -1,147 +1,24 @@
 ---
-// Page frame shared by home, case study and 404 (DESIGN.md 4장): skip link, top bar, sidebar, main, mobile menu sheet.
-// DOM order is navigation first (9장 키보드 순서); grid placement keeps the sidebar visually on the left.
+// Page frame for home and case study: Base document + site Shell (DESIGN.md 4장).
 import Base from './Base.astro';
-import Sidebar from '../components/Sidebar.astro';
-import Topbar from '../components/Topbar.astro';
-import MenuSheet from '../components/MenuSheet.astro';
-import Footer from '../components/Footer.astro';
-import { t, type Lang, type SectionId } from '../i18n/ui';
+import Shell from './Shell.astro';
+import type { Lang, SectionId } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
   title: string;
-  /** Case study (DESIGN.md 6.3): home tab kept current, case sidebar from the "sidebar" slot. */
   current?: SectionId;
-  /** Mobile bar section name before the scroll-spy runs. */
   curLabel?: string;
-  /** Menu sheet links replacing the home tabs (case study). */
   sheet?: { href: string; label: string; back?: boolean }[];
 }
 
-const { lang, title, current, curLabel, sheet } = Astro.props;
+const { title, ...shell } = Astro.props;
 ---
 
-<Base lang={lang} title={title}>
+<Base lang={shell.lang} title={title}>
   <slot name="head" slot="head" />
-  <a class="skip" href="#main">
-    {t(lang, 'skip')}
-  </a>
-  <div class:list={['shell', { case: current }]}>
-    <Topbar lang={lang} current={current} curLabel={curLabel} />
-    {Astro.slots.has('sidebar') ? <slot name="sidebar" /> : <Sidebar lang={lang} />}
-    <main id="main" tabindex="-1">
-      <slot />
-    </main>
-    <Footer lang={lang} />
-  </div>
-  <MenuSheet lang={lang} links={sheet} />
+  <Shell {...shell}>
+    <slot name="sidebar" slot="sidebar" />
+    <slot />
+  </Shell>
 </Base>
-
-<style>
-  /* Hidden like .sr-only until focused, then shown top-left above the top bar (DESIGN.md 9장). */
-  .skip {
-    position: absolute;
-    top: var(--sp-2);
-    left: var(--sp-2);
-    z-index: var(--z-skip);
-    padding: var(--sp-2) var(--sp-3);
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-xs);
-    font-size: var(--fs-sm);
-  }
-
-  .skip:not(:focus-visible) {
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  .shell {
-    display: grid;
-    grid-template-columns: var(--sidebar) minmax(0, 1fr);
-    /* Row 1 reserves the bar (+1px bottom line), row 3 is the footer; the bar spans every row so it can stay sticky. */
-    grid-template-rows: calc(var(--header-h) + 1px) 1fr auto;
-    min-height: 100vh;
-    min-height: 100dvh;
-    max-width: calc(var(--sidebar) + var(--main));
-    margin: 0 auto;
-  }
-
-  .shell > :global(.topbar) {
-    grid-column: 2;
-    grid-row: 1 / -1;
-    align-self: start;
-    min-width: 0;
-  }
-
-  .shell > :global(.sidebar) {
-    grid-column: 1;
-    grid-row: 1 / -1;
-  }
-
-  main {
-    grid-column: 2;
-    grid-row: 2;
-    min-width: 0;
-    max-width: var(--main);
-    width: 100%;
-    padding: var(--sp-6) var(--sp-7);
-  }
-
-  .shell > :global(.foot) {
-    grid-column: 2;
-    grid-row: 3;
-  }
-
-  /* Case file sidebar is wider (DESIGN.md 4장 케이스 스터디 골격). */
-  .shell.case {
-    --sidebar: 340px;
-  }
-
-  main:focus {
-    outline: none;
-  }
-
-  @media (max-width: 1100px) {
-    :global(:root) {
-      --sidebar: 280px;
-    }
-
-    main {
-      padding: var(--sp-6);
-    }
-  }
-
-  /* ≤1100px (spec 1000px): at 340px six tabs + toggles overflowed the bar by up to 11px at 1001px (3.3.2, 11.8). */
-  @media (max-width: 1100px) {
-    .shell.case {
-      --sidebar: 280px;
-    }
-  }
-
-  @media (max-width: 860px) {
-    :global(:root) {
-      --header-h: 52px;
-    }
-
-    .shell {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .shell > :global(.topbar) {
-      align-self: stretch;
-    }
-
-    main {
-      padding: var(--sp-4) var(--sp-4) var(--sp-6);
-    }
-  }
-</style>

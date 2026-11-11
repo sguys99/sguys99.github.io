@@ -1,0 +1,55 @@
+---
+// 404 (DESIGN.md 6.5). GitHub Pages serves this one file for every missing path, so it carries both languages:
+// the English shell, plus the Korean shell in a <template> that replaces it when the path starts with /ko.
+// Without JS the English page shows; its secondary button leads to the Korean home.
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Shell from '../layouts/Shell.astro';
+import Head from '../components/Head.astro';
+import NotFound from '../components/NotFound.astro';
+import { t } from '../i18n/ui';
+
+const name = (await getEntry('profile', 'profile'))!.data.name;
+const title = `${t('en', 'nf_title')} · ${name.en}`;
+const titleKo = `${t('ko', 'nf_title')} · ${name.ko}`;
+---
+
+<Base lang="en" title={title}>
+  <Fragment slot="head">
+    <Head lang="en" title={title} canonical={false} />
+    {/* Before first paint (next to the theme script): language and title from the path; the English shell stays hidden. */}
+    <script is:inline define:vars={{ titleKo }}>
+      if (/^\/ko(\/|$)/.test(location.pathname)) {
+        document.documentElement.lang = 'ko';
+        document.title = titleKo;
+      }
+    </script>
+    <style is:inline>
+      #nf-en {
+        display: contents;
+      }
+      html:lang(ko) #nf-en {
+        display: none;
+      }
+    </style>
+  </Fragment>
+  <div id="nf-en">
+    <Shell lang="en" notFound>
+      <NotFound lang="en" />
+    </Shell>
+  </div>
+  <template id="nf-ko">
+    <Shell lang="ko" notFound>
+      <NotFound lang="ko" />
+    </Shell>
+  </template>
+  {/* Runs before the deferred module scripts, so they bind to whichever shell stays. The English shell's
+       scripts are already queued by the parser; the template's copies are dropped so nothing runs twice. */}
+  <script is:inline>
+    if (document.documentElement.lang === 'ko') {
+      const ko = document.getElementById('nf-ko').content;
+      for (const s of ko.querySelectorAll('script')) s.remove();
+      document.getElementById('nf-en').replaceWith(ko);
+    }
+  </script>
+</Base>

@@ -12,10 +12,13 @@ interface Props {
   current?: SectionId;
   /** Mobile bar section name before the scroll-spy runs (case study: its first section). */
   curLabel?: string;
+  /** 404 (6.5): no tab list, controls at the right end, bar name links to the language home and reads "404". */
+  notFound?: boolean;
 }
 
-const { lang, current, curLabel } = Astro.props;
+const { lang, current, curLabel, notFound } = Astro.props;
 const base = current ? homePath(lang) : '';
+const idHref = notFound ? homePath(lang) : current ? `${base}#${current}` : '#about';
 const other: Lang = lang === 'en' ? 'ko' : 'en';
 const profile = (await getEntry('profile', 'profile'))!.data;
 ---
@@ -23,30 +26,32 @@ const profile = (await getEntry('profile', 'profile'))!.data;
 {/* data-spy = judgment line as a share of the viewport: home 25% (5.2), case study 20% (6.3). */}
 <header class="topbar" data-spy={current ? '0.2' : '0.25'}>
   <div class="bar">
-    <a class="bar-id" href={current ? `${base}#${current}` : '#about'}>
+    <a class="bar-id" href={idHref}>
       <span class="bar-name">{profile.name[lang]}</span>
       <span class="bar-cur" data-bar-cur>
-        {curLabel ?? t(lang, 'about')}
+        {notFound ? '404' : (curLabel ?? t(lang, 'about'))}
       </span>
     </a>
-    <nav aria-label={t(lang, 'sections')}>
-      {/* Case study: tabs stay out of the spy ([data-nav]), Work stays current. */}
-      <ul class="tabs" data-nav={current ? undefined : ''}>
-        {TABS.map((tab) => (
-          <li>
-            <a
-              href={`${base}#${tab.id}`}
-              data-for={tab.covers.join(' ')}
-              aria-current={tab.id === current ? 'true' : undefined}
-            >
-              {t(lang, `tab_${tab.id}`)}
-            </a>
-          </li>
-        ))}
-      </ul>
-      <span class="ink" aria-hidden="true"></span>
-    </nav>
-    <div class="controls">
+    {!notFound && (
+      <nav aria-label={t(lang, 'sections')}>
+        {/* Case study: tabs stay out of the spy ([data-nav]), Work stays current. */}
+        <ul class="tabs" data-nav={current ? undefined : ''}>
+          {TABS.map((tab) => (
+            <li>
+              <a
+                href={`${base}#${tab.id}`}
+                data-for={tab.covers.join(' ')}
+                aria-current={tab.id === current ? 'true' : undefined}
+              >
+                {t(lang, `tab_${tab.id}`)}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <span class="ink" aria-hidden="true"></span>
+      </nav>
+    )}
+    <div class:list={['controls', { end: notFound }]}>
       <LangSwitch lang={lang} />
       <ThemeToggle lang={lang} />
     </div>
@@ -77,13 +82,15 @@ const profile = (await getEntry('profile', 'profile'))!.data;
   // Current section (DESIGN.md 5.2, 6.2, 6.3): tabs and sheet links (case study: contents and sheet links)
   // get aria-current, the ink slides under the current tab, and the mobile bar shows the section name.
   const topbar = document.querySelector<HTMLElement>('.topbar')!;
-  const tabs = topbar.querySelector<HTMLElement>('.tabs')!;
+  // No tab list on 404 (6.5).
+  const tabs = topbar.querySelector<HTMLElement>('.tabs');
   const ink = topbar.querySelector<HTMLElement>('.ink')!;
   const barCur = topbar.querySelector<HTMLElement>('[data-bar-cur]')!;
   const sections = [...document.querySelectorAll<HTMLElement>('main > section[id], .d-sec[id]')];
   const langAlt = [...document.querySelectorAll<HTMLAnchorElement>('[data-lang-alt]')];
 
   function placeInk() {
+    if (!tabs) return;
     const on = tabs.querySelector('[aria-current="true"]');
     if (!on) return ink.style.setProperty('--ink-w', '0px');
     const n = ink.parentElement!.getBoundingClientRect();
@@ -92,10 +99,12 @@ const profile = (await getEntry('profile', 'profile'))!.data;
     ink.style.setProperty('--ink-w', `${r.width}px`);
   }
 
-  new ResizeObserver(placeInk).observe(tabs);
-  document.fonts.ready.then(placeInk);
-  // First placement without transition.
-  requestAnimationFrame(() => requestAnimationFrame(() => ink.classList.add('ready')));
+  if (tabs) {
+    new ResizeObserver(placeInk).observe(tabs);
+    document.fonts.ready.then(placeInk);
+    // First placement without transition.
+    requestAnimationFrame(() => requestAnimationFrame(() => ink.classList.add('ready')));
+  }
 
   if (sections.length) {
     const share = Number(topbar.dataset.spy);
@@ -264,6 +273,10 @@ const profile = (await getEntry('profile', 'profile'))!.data;
     align-items: center;
     gap: var(--sp-2);
     flex: none;
+  }
+
+  .controls.end {
+    margin-left: auto;
   }
 
   .bar-id,

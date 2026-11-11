@@ -5,14 +5,16 @@ interface Props {
   id?: string;
   /** id of the heading that names the section (aria-labelledby). */
   labelledby?: string;
+  /** Element; the 404 card is an <article> (DESIGN.md 9장 랜드마크). */
+  as?: 'section' | 'article';
 }
 
-const { id, labelledby } = Astro.props;
+const { id, labelledby, as: Tag = 'section' } = Astro.props;
 ---
 
-<section class="card" id={id} aria-labelledby={labelledby}>
+<Tag class="card" id={id} aria-labelledby={labelledby}>
   <slot />
-</section>
+</Tag>
 
 <script>
   import { playMotion } from '../scripts/motion';
