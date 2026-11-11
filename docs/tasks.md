@@ -211,9 +211,10 @@
 - [x] 6.15 이미지 최적화 (프로필 사진, 프로젝트 이미지: AVIF/WebP, 크기별 제공) — 프로젝트 이미지는 없음. 사진 원본을 `src/assets/profile.jpg`로 복사하고 `Sidebar`(132/64px, `widths`·`sizes`, eager·`fetchpriority=high`)와 `CaseStudy` `.who`(28px 정사각, 1x–3x)를 `astro:assets` `<Picture>`(AVIF·WebP·JPEG 폴백, `width`/`height`)로, genon 로고 마스크는 `getImage` 320px. `public/images/profile.jpg`는 JSON-LD용으로 유지. 첫 화면 사진 204KB → AVIF 4.6KB(데스크톱 2x)·1.5KB(모바일 2x)·0.6KB(케이스), 로고 11.4→6.5KB. 구현 기본값 3건 DESIGN.md 11.8. 홈·케이스 en/ko 1440/390/360 × 라이트/다크에서 응답 `image/avif`, 표시 132×165·64×80·28×28, 다크 `brightness(0.86)`, CLS 0, 가로 스크롤·콘솔 오류 없음
 - [x] 6.16 sitemap, robots.txt — 의존성 없이 `src/pages/sitemap.xml.ts`·`robots.txt.ts` 엔드포인트. 홈 + `caseList()` × en/ko = 12 URL, 각각 en/ko/x-default `xhtml:link`(Head와 같은 `langPath`), `lastmod`는 푸터와 같은 git 날짜(`Footer.astro`에서 `contentDate()`로 꺼내 공유, 실패 시 생략). CV(HTML)·PDF·404 제외, CV `noindex`는 걸지 않음(DESIGN.md 11.8에 2건 기록, 6.11 행 갱신). `xmllint` 통과, 모든 loc·href가 `dist/`에 존재, 케이스 head hreflang과 일치, robots.txt `Sitemap: https://sguys99.github.io/sitemap.xml`
 - [ ] 6.17 **[확인]** 로컬 미리보기로 중간 검토
-  - 국문 고정폭 글자의 넓은 공백: 배지 "진행 중", 푸터 "최종 수정" (6.5·6.10은 `--font-ko`로 처리, 공통 컴포넌트는 미처리. 6.10 보고)
+  - ~~국문 고정폭 글자의 넓은 공백: 배지 "진행 중", 푸터 "최종 수정" (6.5·6.10은 `--font-ko`로 처리, 공통 컴포넌트는 미처리. 6.10 보고)~~ → 해소(2026-11-11): 홈·케이스 5건·CV·404 국문 DOM 전수 조사, 한글 단어를 담은 고정폭 요소 8종을 `global.css` 공통 규칙 하나(`html:lang(ko) :is(.badge, .st, .chip-lnk, .pn-k, .foot, .pl-status, .flow, .yh.word)`)로 `--font-ko`, 개별 규칙 4건 흡수. 남은 고정폭 한글은 숫자에 붙은 `현재`·`건`·`곳`뿐(7장 규칙대로 유지). DESIGN.md 7장 표·11.8
   - 6.10이 명세 값을 바꾼 2건 사용자 확인: 케이스 사이드바 폭 경계 ≤1000→≤1100, 아키텍처 표 쌓기 기준을 뷰포트 → 칸 폭(container query). 승인되면 DESIGN.md 4장·5.24 본문 반영
-  - 콘텐츠가 들어간 뒤 scroll-spy 초기 판정(맨 위에서 About이 아닌 Work로 잡힘, 5.5 보고)과 페이지 끝 Contact 규칙 재확인
+  - ~~콘텐츠가 들어간 뒤 scroll-spy 초기 판정(맨 위에서 About이 아닌 Work로 잡힘, 5.5 보고)과 페이지 끝 Contact 규칙 재확인~~ → 6.1·6.9에서 확인, 2026-11-11 재확인: en/ko × 1440×900·1440×1400·390×844에서 맨 위 About/소개, 맨 끝 Contact/연락처(탭·모바일 바)
+  - 마감 점검(2026-11-11): 홈·케이스·CV·404 × 1440/1100/900/390/360 × 라이트/다크 × en/ko 가로 스크롤 0·콘솔 오류 없음, 다크 대비 최소 5.71:1. 고침: 본문 `text-wrap: pretty` 누락(명세 위반)·제목 외톨이 단어 `balance`, 기술 스택 이름 중간 줄바꿈·줄 첫머리 구분자(DESIGN.md 11.8). 사용자 결정 대기: 국문 가운뎃점(`·`) 앞뒤 줄바꿈, 강의·저서·자문 제목과 그룹 순서 불일치, 직함 구분자 영 ` / `·국 ` · `, IP 서랍 내역과 숫자 표 보조줄의 서체 차이, 404 바로 가기 번호 칸 140px, `6 / 20 건`·`6 곳`의 고정폭 공백
 
 **완료 기준**: 모든 섹션과 페이지가 실제 콘텐츠로 채워져 있고 두 언어에서 동작한다.
 

@@ -2226,14 +2226,14 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 국문 페이지의 한글 | Pretendard | `--font-ko` |
 | 국문 페이지의 영문 단어·숫자 (본문·제목) | **Pretendard의 라틴 글리프** (Geist 아님) | `--font-ko`에 Geist가 없다. 한 줄 안에서 굵기·x높이가 어긋나지 않게 하려는 의도 |
 | 메타 (`--font-meta`)의 숫자·라틴 | Geist Mono (두 언어 모두) | 정렬·인상 유지 |
-| 메타 안의 한글 (`현재`, `총괄`, `진행 중`, 국문 푸터) | Pretendard Variable (폴백) | Geist Mono에 한글 없음 → `--font-meta` 둘째 순위. 크기·굵기는 메타 규칙 그대로 |
+| 메타 안의 한글 (`현재`, `건`, `곳` 등 숫자·날짜에 붙은 말) | Pretendard Variable (폴백) | Geist Mono에 한글 없음 → `--font-meta` 둘째 순위. 크기·굵기는 메타 규칙 그대로. 단어 라벨(배지·상태·푸터 등)은 아래 표처럼 `--font-ko`로 바꾼다 (11.8, tasks 6.17) |
 | 웹폰트 로드 전·실패 | `system-ui` → Apple SD Gothic Neo 등 | 각 체인 뒤쪽 |
 
 **국문에서 서체가 바뀌는 요소와 유지되는 요소** (시안 기준)
 
 | 국문에서 `--font-ko`로 바꿈 (단어 라벨) | 국문에서도 `--font-meta` 유지 (숫자·날짜·짧은 표식) |
 |---|---|
-| `.sec-head h2`, `.eyebrow`, `.out .k`, `.sel-k`, `.pl-cap`, `.fig .s`, CV `.sec > h2`·`.row .meta`·`.note` | `.sec-head .meta`, `.traj .yrs`, `.proj-meta .num`, `.row .when`, `.pl-y`, `.idx`, `.badge`, `footer`, `.mono`, `.it .mt a`(DOI), `.yg .yh`(연도) |
+| `.sec-head h2`, `.eyebrow`, `.out .k`, `.sel-k`, `.pl-cap`, `.fig .s`, CV `.sec > h2`·`.row .meta`·`.note`, 그리고 공통 규칙(`global.css`)의 `.badge`·`.st`(상태)·`.chip-lnk`·`.pn-k`·`.foot`(연·날짜 `.num` 제외)·`.pl-status`·`.flow`·`.yh.word` | `.sec-head .meta`, `.traj .yrs`, `.proj-meta .num`, `.row .when`, `.pl-y`, `.idx`, footer의 연·날짜, `.mono`, `.it .mt a`(DOI), `.yg .yh`(연도) |
 
 규칙: 요소의 내용이 **단어**면 국문에서 `--font-ko`, **숫자·날짜·기호**면 `--font-meta`를 유지한다.
 - `.yg .yh`는 연도 숫자만 담으므로 국문에서도 Geist Mono를 유지한다 (시안은 국문에서 Pretendard로 바꿨으나 위 규칙에 맞춰 고침).
@@ -2253,7 +2253,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 본문 `body` | `--font` / `--fs-md` / 400 / `--lh-body` / `--ls-body` | `--font-ko` / `--lh-body-ko` / `--ls-body-ko`, `word-break: keep-all` | 한글 가독 행간, 어절 단위 줄바꿈 |
 | 보조 본문 (요약·설명) | 상속 / `--fs-sm` / 400 / 상속 / 상속 | 행간·자간만 body에서 상속 | 따로 덮어쓰지 않음 |
 | 메타 (날짜·번호·건수·푸터) | `--font-meta` / `--fs-xs` / 400 / 상속 / 0 | 같음 (한글만 Pretendard 폴백) | 숫자 정렬 유지 |
-| 배지 `.badge` | `--font-meta` / `--fs-2xs` / `--fw-medium` / 상속 / 0 | 같음 (`총괄`, `진행 중` 등 한글은 폴백) | 〃 |
+| 배지 `.badge` | `--font-meta` / `--fs-2xs` / `--fw-medium` / 상속 / 0 | `--font-ko` / `--fs-xs` | 고정폭 공백이 `진행  중`처럼 벌어짐 (11.8, tasks 6.17) |
 | 키 라벨 (사이드바 `.k`, `.lg-label`, `.rec dt`) | 상속 / `--fs-2xs` / `--fw-strong` / 상속 / `--ls-label`, 대문자 | `--fs-xs` / `--ls-label-ko`, 변환 없음 | 11px 한글은 너무 작음 |
 | 케이스 소제목 `.d-sec h3` | 상속 / `--fs-xs` / `--fw-strong` / 상속 / `--ls-label`, 대문자 | `--fs-sm` / `--ls-label-ko` | 〃 |
 | 선택 키 (`.sel-k`, `.out .k`) | `--font-meta` / `--fs-2xs` / 상속 / 상속 / `--ls-eyebrow`, 대문자 | `--font-ko` / `--fs-xs` / `--ls-eyebrow-ko` | 〃 |
@@ -2971,3 +2971,6 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | genon 로고 마스크는 `getImage` 폭 320px(WebP)로 줄인다 (tasks 6.15) | 표시 최대 약 99×20px, 3x까지 덮음. 1024px PNG 11.4KB → 6.5KB, 마스크 모양 라이트/다크 확인 |
 | sitemap·robots는 의존성 없이 Astro 엔드포인트(`src/pages/sitemap.xml.ts`, `robots.txt.ts`)로 만든다. URL 목록은 홈 + `caseList()`(6.3) × `LANGS`, 각 URL에 en/ko/x-default `xhtml:link`(Head와 같은 `langPath`). `lastmod`는 푸터와 같은 `src/content` 마지막 커밋 날짜(`Footer.astro` `contentDate()`), git이 없으면 생략. robots.txt는 전체 허용 + `Sitemap:` (tasks 6.16) | 페이지가 12개라 `@astrojs/sitemap`이 필요 없다. 콘텐츠에서 만들어 케이스가 늘면 자동 포함. 페이지별 날짜는 콘텐츠 파일·컴포넌트 변경을 다 따라가기 어려워 사이트 하나의 날짜로 통일 |
 | sitemap에 HTML CV(`/cv/`, `/ko/cv/`)·PDF·404를 넣지 않는다. CV에 `noindex`는 걸지 않는다(6.11 그대로) (tasks 6.16) | 공개 진입점은 사이드바의 PDF이고 HTML CV는 링크 없는 인쇄 원본(사용자 결정). 링크가 없어 검색엔진이 찾을 길이 거의 없으므로 `noindex`까지 걸 필요는 없고, 걸면 6.6 canonical·hreflang 규칙과 어긋난다 |
+| 국문 페이지에서 한글 **단어**를 담는 고정폭 라벨은 공통 규칙 하나로 `--font-ko`: `html:lang(ko) :is(.badge, .st, .chip-lnk, .pn-k, .foot, .pl-status, .flow, .yh.word)` (`global.css`). 푸터의 연·날짜(`.num`)는 `--font-meta` 유지. 6.5 `.st`·6.6 `.yh.word`·6.10 `.flow`·6.11 CV `.st`의 개별 규칙은 이 규칙으로 흡수 (tasks 6.17) | Geist Mono에 한글이 없어 한글은 Pretendard로 폴백되지만 공백은 Geist Mono의 넓은 공백이라 `진행  중`·`최종  수정`처럼 벌어졌다. 7장 규칙 "단어면 `--font-ko`, 숫자·날짜면 `--font-meta`"를 배지·푸터에도 적용(7장 표 갱신). 크기까지 바뀌는 라벨(`.sel-k`, `.pl-cap`, `.eyebrow` 등)은 각 컴포넌트에 남김. 숫자에 붙은 `현재`·`건`·`곳`은 영문과 같은 메타 모양을 위해 고정폭 유지 |
+| 줄바꿈 기본: `:where(p, li, dd) { text-wrap: pretty }`, `:where(h2, h3) { text-wrap: balance }` (`global.css`, 명시도 0이라 컴포넌트 규칙이 이김). 숫자 표 보조줄 `.fig .s`도 `balance` (tasks 6.17) | 7장 줄바꿈 표의 본문 문단 `pretty`가 구현에 빠져 있었다(명세 누락 수정). 360px 국문 소개 마지막 줄 `총괄.`, 대표작 제목 `…(GenP) / 개발`·`…로봇 / 구축`처럼 외톨이 단어가 남았다. Chromium `pretty`는 두 줄 제목의 외톨이를 고치지 못해 제목은 `.tagline`·`.cs-title`과 같은 `balance`. 900px 숫자 표 `등록 진행 / 중 2` → `등록 8 · 등록 / 진행 중 2` |
+| 기술 스택은 이름마다 `<span>` + `white-space: nowrap`, 구분자 앞은 NBSP(`\u00a0· `, `\u00a0/ `): 케이스 사이드바, 개인 프로젝트, CV. 원장·CV의 `조직 · 고객`도 NBSP 구분자 (tasks 6.17) | `Unitree / SDK`, `FAST- / LIO2`, `GitHub / Pages`, `Hugging / Face`처럼 이름 안에서 줄이 끊기고, 줄이 `· Power generation company`처럼 구분자로 시작했다. 줄은 이름 사이에서만 끊기고 구분자는 앞 이름에 붙는다 |
