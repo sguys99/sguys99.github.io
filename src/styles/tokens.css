@@ -221,8 +221,10 @@ html:lang(ko) {
 
 /* Print: light palette regardless of theme, white page (DESIGN.md 10장) */
 @media print {
+  /* Same specificity as the dark blocks above, so this later block wins in every theme state. */
   :root,
-  :root[data-theme] {
+  :root[data-theme],
+  :root:not([data-theme='light']) {
     color-scheme: light;
     --bg: #ffffff;
     --surface: #ffffff;
@@ -241,5 +243,6 @@ html:lang(ko) {
     --logo-filter: brightness(0);
     --logo-op: 0.62;
     --logo-op-cur: 0.92;
+    --cv-base: 8.4pt;
   }
 }

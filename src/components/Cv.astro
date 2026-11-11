@@ -1,0 +1,632 @@
+---
+// Print CV for both languages (DESIGN.md 6.4, 10장; 333-a ledger): screen toolbar + one A4 sheet.
+// Pages: src/pages/cv.astro, src/pages/ko/cv.astro. This page's print result is the PDF (6.12).
+// No sidebar, top bar or footer; nothing on the site links here (11.8).
+import { getCollection, getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Head from './Head.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { t, fmtYears, langPath, homePath, type Lang, type UiKey } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const other: Lang = lang === 'en' ? 'ko' : 'en';
+const P = (await getEntry('profile', 'profile'))!.data;
+const name = P.name[lang];
+const site = new URL(homePath(lang), Astro.site);
+const siteText = site.host + (lang === 'en' ? '' : site.pathname); // sguys99.github.io, sguys99.github.io/ko/
+const host = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+// Footer in the @page margin box: margin boxes cannot read custom properties, so write the string per route (10장).
+const foot = `${name} · ${t(lang, 'cvTitle')} · ${new URL(Astro.site!).host}`;
+const pageCss = `@page { @bottom-left { content: ${JSON.stringify(foot)}; } }`;
+
+// Sort orders match the home sections: the data loader does not keep YAML order (11.8).
+const byStart = (a: { id: string; data: { period: { start: string } } }, b: typeof a) =>
+  b.data.period.start.localeCompare(a.data.period.start) || a.id.localeCompare(b.id);
+const yrs = (s: string) => s.match(/\d{4}/g) ?? [''];
+const byYearsText = (a: { id: string; data: { years: string } }, b: typeof a) => {
+  const [ya, yb] = [yrs(a.data.years), yrs(b.data.years)];
+  return (
+    yb.at(-1)!.localeCompare(ya.at(-1)!) || yb[0].localeCompare(ya[0]) || a.id.localeCompare(b.id)
+  );
+};
+// Newest first, undated (pending) on top, then id (IpIndex 5.21).
+const byDate =
+  <T extends { id: string }>(key: (x: T) => string) =>
+  (a: T, b: T) =>
+    (key(b) || '9999').localeCompare(key(a) || '9999') || a.id.localeCompare(b.id);
+
+type Row = {
+  when: string;
+  title: string;
+  href?: string;
+  badge?: string;
+  role?: string; // " — role" after the title
+  sub?: string;
+  venue?: string;
+  meta?: string;
+  metaHref?: string;
+  desc?: string;
+  hl?: string[];
+  stack?: string;
+};
+type Sec = {
+  key: string;
+  label: string;
+  small?: string;
+  rows?: Row[];
+  tight?: boolean;
+  note?: string;
+};
+
+const projects = await getCollection('projects');
+const who = (p: (typeof projects)[number]['data']) => {
+  const client = p.client && (p.client.public ? p.client.name[lang] : p.client.label[lang]);
+  return [p.org?.[lang], client].filter(Boolean).join(' · ');
+};
+const projRow = ({ data: p }: (typeof projects)[number]): Row => ({
+  when: fmtYears(lang, p.period),
+  title: p.title[lang],
+  meta: who(p) || undefined,
+});
+
+const patents = (await getCollection('patents')).sort(byDate((x) => x.data.date));
+const nReg = patents.filter((p) => p.data.status === 'registered').length;
+const pubs = await getCollection('publications');
+const papers = pubs
+  .flatMap((p) => (p.data.type === 'paper' ? [{ id: p.id, data: p.data }] : []))
+  .sort(byDate((x) => String(x.data.year)));
+const reports = pubs
+  .flatMap((p) => (p.data.type === 'report' ? [{ id: p.id, data: p.data }] : []))
+  .sort(byDate((x) => String(x.data.year)));
+const selReports = reports.filter((r) => r.data.featured);
+const teaching = (await getCollection('teaching')).sort(byYearsText);
+const titled = (e: {
+  data: { title: Record<Lang, string>; org: Record<Lang, string>; years: string };
+}) => ({
+  when: e.data.years,
+  title: e.data.title[lang],
+  meta: e.data.org[lang],
+});
+
+const sections: Sec[] = [
+  { key: 'profile', label: t(lang, 'cv_profile') },
+  { key: 'skills', label: t(lang, 'cv_skills') },
+  {
+    key: 'experience',
+    label: t(lang, 'experience'),
+    rows: (await getCollection('experience')).sort(byStart).map(({ data: e }) => ({
+      when: fmtYears(lang, e.period),
+      title: e.org[lang],
+      role: e.role[lang],
+      desc: e.summary[lang],
+    })),
+  },
+  {
+    key: 'education',
+    label: t(lang, 'education'),
+    tight: true,
+    rows: (await getCollection('education')).sort(byStart).map(({ data: e }) => ({
+      when: fmtYears(lang, e.period),
+      title: e.degree[lang],
+      meta: e.school[lang],
+    })),
+  },
+  {
+    key: 'selected',
+    label: t(lang, 'cv_selected'),
+    rows: projects
+      .filter((p) => p.data.featured)
+      .sort((a, b) => (a.data.order ?? Infinity) - (b.data.order ?? Infinity))
+      .map((e) => ({
+        ...projRow(e),
+        // "Present" already says ongoing; planned work gets the badge (decision-log 3.3).
+        badge: e.data.period.status === 'planned' ? t(lang, 'inProgress') : undefined,
+        hl: e.data.highlights.map((h) => h[lang]),
+        stack: e.data.stack.join(' · ') || undefined,
+      })),
+  },
+  {
+    key: 'other',
+    label: t(lang, 'cv_other'),
+    tight: true,
+    rows: projects
+      .filter((p) => !p.data.featured)
+      .sort(byStart)
+      .map(projRow),
+  },
+  {
+    key: 'patents',
+    label: t(lang, 'patents'),
+    small: t(lang, 'regFiled', { reg: nReg, filed: patents.length - nReg }),
+    tight: true,
+    // No numbers (10장); a filing without a number yet reads "Filing in progress" as on home (5.21).
+    rows: patents.map(({ data: p }) => ({
+      when: p.date.slice(0, 4),
+      title: p.title[lang],
+      meta: t(lang, p.status === 'registered' ? 'registered' : p.number ? 'filed' : 'filing'),
+    })),
+  },
+  {
+    key: 'software',
+    label: t(lang, 'software'),
+    tight: true,
+    rows: (await getCollection('software'))
+      .sort(byDate((x) => x.data.date ?? ''))
+      .map(({ data: s }) => ({
+        when: s.date?.slice(0, 4) ?? '—',
+        title: s.title[lang],
+        meta: t(lang, s.status as UiKey),
+      })),
+  },
+  {
+    key: 'papers',
+    label: t(lang, 'papers'),
+    tight: true,
+    rows: papers.map(({ data: p }) => ({
+      when: String(p.year),
+      title: p.title[lang],
+      sub: `${p.authors}.`,
+      venue: p.venue[lang],
+      meta: p.doi && `doi.org/${p.doi}`,
+      metaHref: p.doi && `https://doi.org/${p.doi}`,
+    })),
+  },
+  {
+    key: 'reports',
+    label: t(lang, 'cv_reports'),
+    tight: true,
+    rows: selReports.map(({ data: r }) => ({
+      when: String(r.year),
+      title: r.title[lang],
+      meta: r.publisher?.[lang],
+    })),
+    // Remaining count only; never a total like "50+" (G4).
+    note: t(lang, 'cv_moreReports', { n: reports.length - selReports.length, site: siteText }),
+  },
+  {
+    key: 'teaching',
+    label: t(lang, 'cv_teaching'),
+    tight: true,
+    rows: teaching.filter((e) => e.data.kind !== 'book').map(titled),
+  },
+  {
+    key: 'books',
+    label: t(lang, 'books'),
+    tight: true,
+    rows: teaching
+      .filter((e) => e.data.kind === 'book')
+      .map((e) => ({ ...titled(e), href: e.data.url })),
+  },
+  {
+    key: 'awards',
+    label: t(lang, 'awardsGroup'),
+    tight: true,
+    rows: (await getCollection('awards')).sort(byYearsText).map(titled),
+  },
+];
+
+// Year ranges keep thin spaces around the dash so the date column stays on one line (10장).
+const thin = (s: string) => s.replace(/\s*–\s*/g, ' – ');
+---
+
+<Base lang={lang} title={`${name} · ${t(lang, 'cvTitle')}`}>
+  <Fragment slot="head">
+    <Head
+      lang={lang}
+      title={`${name} · ${t(lang, 'cvTitle')}`}
+      description={`${name} · ${P.headline[lang]} · ${P.currentRole[lang]}`}
+    />
+    <style is:inline set:html={pageCss} />
+  </Fragment>
+
+  <div class="tools">
+    <a class="tb" href={langPath(Astro.url.pathname, other)} lang={other} hreflang={other}>
+      {t(lang, 'otherLangName')}
+    </a>
+    <ThemeToggle lang={lang} class="tb">
+      {t(lang, 'theme')}
+    </ThemeToggle>
+    <button type="button" class="tb pri" data-print hidden>
+      {t(lang, 'print')}
+    </button>
+  </div>
+
+  <main class="cv">
+    <header class="head">
+      <div>
+        <h1>{name}</h1>
+        <p class="role">
+          {P.headline[lang]} · {P.currentRole[lang]}
+        </p>
+      </div>
+      <p class="contact">
+        <a href={`mailto:${P.contact.email}`}>{P.contact.email}</a>
+        <br />
+        <a href={P.contact.github}>{host(P.contact.github)}</a>
+        <br />
+        <a href={P.contact.linkedin}>{host(P.contact.linkedin)}</a>
+        <br />
+        <a href={site.href}>{siteText}</a>
+      </p>
+    </header>
+
+    {sections.map((s) => (
+      <section class="sec" aria-labelledby={`h-${s.key}`}>
+        <h2 id={`h-${s.key}`}>
+          {s.label}
+          {s.small && <small>{s.small}</small>}
+        </h2>
+        <div class:list={['body', { tight: s.tight }]}>
+          {s.key === 'profile' && <p class="about">{P.about[lang]}</p>}
+          {s.key === 'skills' && (
+            <dl class="kv">
+              {P.skills.map((k) => (
+                <div>
+                  <dt>{k.label[lang]}</dt>
+                  <dd>{k.summary[lang]}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
+          {s.rows && (
+            <ul class="rows">
+              {s.rows.map((r) => (
+                <li class="row">
+                  <span class="when num">{thin(r.when)}</span>
+                  <div>
+                    <h3>
+                      {r.href ? <a href={r.href}>{r.title}</a> : r.title}
+                      {r.badge && <span class="st">{r.badge}</span>}
+                      {r.role && <span class="sub"> — {r.role}</span>}
+                    </h3>
+                    {r.sub && (
+                      <p class="sub">
+                        {r.sub} <i>{r.venue}</i>
+                      </p>
+                    )}
+                    {r.meta && (
+                      <p class="meta">{r.metaHref ? <a href={r.metaHref}>{r.meta}</a> : r.meta}</p>
+                    )}
+                    {r.desc && <p class="desc">{r.desc}</p>}
+                    {r.hl && (
+                      <ul class="hl">
+                        {r.hl.map((h) => (
+                          <li>{h}</li>
+                        ))}
+                      </ul>
+                    )}
+                    {r.stack && <p class="stack">{r.stack}</p>}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+          {s.note && <p class="note">{s.note}</p>}
+        </div>
+      </section>
+    ))}
+  </main>
+</Base>
+
+<script>
+  // Print needs JS; without it the button stays hidden (browser print still works).
+  const b = document.querySelector<HTMLButtonElement>('[data-print]')!;
+  b.hidden = false;
+  b.addEventListener('click', () => window.print());
+</script>
+
+<style>
+  @page {
+    size: A4;
+    margin: 15mm 16mm 16mm; /* = --cv-margin; @page cannot read custom properties */
+    @bottom-left {
+      font:
+        7pt 'Geist Mono',
+        'Pretendard Variable',
+        monospace;
+      color: #5f6a78; /* = --text-3 light (3장 Print) */
+    }
+    @bottom-right {
+      content: counter(page) ' / ' counter(pages);
+      font:
+        7pt 'Geist Mono',
+        monospace;
+      color: #5f6a78;
+    }
+  }
+
+  /* Screen-only toolbar (6.4): language link, theme, print. */
+  .tools {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    max-width: var(--cv-paper-w);
+    margin: var(--sp-5) auto var(--sp-3);
+    padding: 0 var(--sp-4);
+  }
+  .tools :global(.tb) {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--ctl-h);
+    padding: 0 var(--sp-3);
+    font: var(--fw-medium) var(--fs-xs) / 1 var(--font-meta);
+    letter-spacing: 0;
+    color: var(--text-2);
+    text-decoration: none;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition:
+      color var(--dur) ease,
+      border-color var(--dur) ease;
+  }
+  .tools :global(.tb:hover) {
+    color: var(--text);
+    border-color: var(--line-strong);
+  }
+  .tools :global(.tb.pri) {
+    color: var(--accent);
+  }
+  .tools :global(.tb[hidden]) {
+    display: none;
+  }
+  .tools :global(.tb:lang(ko)) {
+    font-family: var(--font-ko);
+  }
+
+  /* Sheet: one A4 page on screen, plain flow on paper. */
+  .cv {
+    max-width: var(--cv-paper-w);
+    margin: 0 auto var(--sp-7);
+    padding: var(--cv-pad);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-size: var(--cv-base);
+    line-height: var(--cv-lh);
+    color: var(--text);
+  }
+  html:lang(ko) .cv {
+    line-height: var(--cv-lh-ko);
+    letter-spacing: -0.005em;
+  }
+  .cv a {
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+  .cv a:hover {
+    text-decoration: underline;
+  }
+
+  .head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--sp-2) var(--cv-gap);
+    align-items: end;
+    padding-bottom: 4mm;
+    border-bottom: 1.5px solid var(--text);
+    margin-bottom: 5mm;
+  }
+  .head h1 {
+    font-size: var(--cv-fs-name);
+    font-weight: var(--fw-name);
+    letter-spacing: var(--ls-name);
+    line-height: 1.1;
+  }
+  .head .role {
+    color: var(--text-2);
+    font-size: var(--cv-fs-title);
+    margin-top: 1.5mm;
+  }
+  .head .contact {
+    text-align: right;
+    font: var(--fw-regular) var(--cv-fs-meta) / 1.7 var(--font-meta);
+    letter-spacing: 0;
+    color: var(--text);
+  }
+
+  .sec {
+    display: grid;
+    grid-template-columns: var(--cv-gutter) minmax(0, 1fr);
+    gap: 0 var(--cv-gap);
+    padding: 2.6mm 0;
+    border-top: 1px solid var(--line);
+  }
+  .head + .sec {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .sec > h2 {
+    font: var(--fw-eyebrow) var(--cv-fs-label) / 1.9 var(--font-meta);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+    color: var(--text-3);
+    /* No break-after: avoid here (10장 asks for it): label and body share one grid row, so Chromium
+       already moves the label with the first row, and the hint made whole sections jump a page (11.8). */
+  }
+  html:lang(ko) .sec > h2 {
+    font-family: var(--font-ko);
+    font-weight: 600;
+    font-size: 0.86em;
+    letter-spacing: var(--ls-eyebrow-ko);
+  }
+  .sec > h2 small {
+    display: block;
+    font-size: 1em;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .body {
+    min-width: 0;
+  }
+  .body > * + * {
+    margin-top: 2.4mm;
+  }
+  .about {
+    max-width: 60em;
+  }
+
+  .rows {
+    list-style: none;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: var(--cv-date) minmax(0, 1fr);
+    gap: 0 3mm;
+    break-inside: avoid;
+  }
+  .row + .row {
+    margin-top: 2.2mm;
+  }
+  .tight .row + .row {
+    margin-top: 1mm;
+  }
+  .when {
+    font: var(--fw-regular) var(--cv-fs-meta) / 1.75 var(--font-meta);
+    letter-spacing: 0;
+    color: var(--text-3);
+    white-space: nowrap;
+  }
+  .row h3 {
+    font-size: 1em;
+    font-weight: var(--fw-title);
+    letter-spacing: var(--ls-title);
+  }
+  html:lang(ko) .row h3 {
+    letter-spacing: var(--ls-title-ko);
+  }
+  .sub {
+    color: var(--text-2);
+    font-weight: var(--fw-regular);
+  }
+  .meta,
+  .stack,
+  .note {
+    font: var(--fw-regular) var(--cv-fs-meta) / 1.6 var(--font-meta);
+    letter-spacing: 0;
+    color: var(--text-3);
+  }
+  html:lang(ko) .meta {
+    font-family: var(--font-ko);
+    font-size: 0.9em;
+  }
+  html:lang(ko) .note {
+    font-family: var(--font-ko);
+  }
+  .desc {
+    color: var(--text-2);
+    margin-top: 0.6mm;
+  }
+  .hl {
+    list-style: none;
+    margin-top: 0.8mm;
+  }
+  .hl li {
+    position: relative;
+    padding-left: 3.2mm;
+    color: var(--text-2);
+  }
+  .hl li::before {
+    content: '';
+    position: absolute;
+    left: 0.4mm;
+    top: 0.72em;
+    width: 1.4mm;
+    border-top: 1px solid var(--text-3); /* a border, not a background: PDFs skip backgrounds (10장) */
+  }
+  .stack {
+    margin-top: 0.6mm;
+  }
+  /* Compact lists: title and source run on one line (10장). */
+  .tight .row h3 {
+    font-weight: var(--fw-medium);
+    display: inline;
+  }
+  .tight .row :is(.meta, .sub) {
+    display: inline;
+    margin-left: 2mm;
+  }
+  .st {
+    font: var(--fw-medium) var(--cv-fs-label) / 1 var(--font-meta);
+    letter-spacing: 0;
+    color: var(--text-3);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-xs);
+    padding: 0.3mm 1mm;
+    margin-left: 1.2mm;
+    white-space: nowrap;
+    vertical-align: 0.1em;
+  }
+  html:lang(ko) .st {
+    font-family: var(--font-ko);
+  }
+
+  .kv {
+    display: grid;
+    grid-template-columns: var(--cv-key) minmax(0, 1fr);
+    gap: 0.8mm 3mm;
+  }
+  .kv > div {
+    display: contents;
+  }
+  .kv dt {
+    font-weight: var(--fw-strong);
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+  .kv dd {
+    color: var(--text-2);
+  }
+
+  @media (max-width: 720px) {
+    .tools {
+      margin-top: var(--sp-4);
+    }
+    .cv {
+      padding: var(--sp-5) var(--sp-4);
+      border-left: 0;
+      border-right: 0;
+      border-radius: 0;
+    }
+    .head,
+    .sec,
+    .kv {
+      grid-template-columns: 1fr;
+    }
+    .head .contact {
+      text-align: left;
+    }
+    .sec > h2 small {
+      display: inline;
+      margin-left: var(--sp-2);
+    }
+    .kv {
+      gap: 0;
+    }
+    .kv dd {
+      margin-bottom: var(--sp-2);
+    }
+  }
+
+  @media print {
+    .tools {
+      display: none;
+    }
+    :global(body) {
+      background: none;
+    }
+    .cv {
+      max-width: none;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+    }
+  }
+</style>

@@ -1,20 +1,29 @@
 ---
 // Theme toggle (DESIGN.md 5.4, 8장). Shows the theme it switches to: moon in light, sun in dark.
 // aria-pressed is filled in by the script below (the effective theme is unknown at build time).
+// With slot text (CV toolbar, 6.4) it is a text button: the visible word is the name, so no aria-label.
 import Icon from './Icon.astro';
 import { t, type Lang } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
+  class?: string;
 }
 
-const { lang } = Astro.props;
+const { lang, class: cls } = Astro.props;
+const text = Astro.slots.has('default');
 ---
 
-<button type="button" class="icon-btn" data-theme-btn aria-label={t(lang, 'toggleTheme')}>
-  <Icon name="moon" class="i-moon" />
-  <Icon name="sun" class="i-sun" />
-</button>
+{text ? (
+  <button type="button" class={cls} data-theme-btn>
+    <slot />
+  </button>
+) : (
+  <button type="button" class="icon-btn" data-theme-btn aria-label={t(lang, 'toggleTheme')}>
+    <Icon name="moon" class="i-moon" />
+    <Icon name="sun" class="i-sun" />
+  </button>
+)}
 
 <script>
   // Initial data-theme is set by the inline script in Base.astro before first paint.
