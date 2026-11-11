@@ -176,11 +176,6 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
     font-size: var(--fs-xs);
   }
 
-  /* Hangul has no mono face; the meta font's wide space split "운영 중" (same switch as .pl-cap). */
-  html:lang(ko) .ttl :global(.st) {
-    font-family: var(--font-ko);
-  }
-
   .sum {
     max-width: var(--measure-sm);
     margin-top: var(--sp-1);

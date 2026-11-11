@@ -272,9 +272,8 @@ const authorParts = (s: string) => s.split(/(K\.(?:[ -]M\.)? Yu)/);
     color: var(--text-3);
   }
 
-  /* A word, not a year: Hangul has no mono face (same switch as the status words, 11.8). */
+  /* A word, not a year: the face switches in global.css (11.8); balance keeps "진행 중" together. */
   html:lang(ko) .yh.word {
-    font-family: var(--font-ko);
     text-wrap: balance;
   }
 

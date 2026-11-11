@@ -85,6 +85,12 @@ html:lang(ko) body {
   overflow-wrap: anywhere;
 }
 
+/* Words set in the meta face: Geist Mono has no Hangul, and its wide space splits "진행  중".
+   Korean pages draw these word labels in --font-ko; numbers and dates stay mono (DESIGN.md 7장, 11.8). */
+html:lang(ko) :is(.badge, .st, .chip-lnk, .pn-k, .foot, .pl-status, .flow, .yh.word) {
+  font-family: var(--font-ko);
+}
+
 /* Korean fragments on English pages (e.g. original titles). */
 [lang='ko'] {
   font-family: var(--font-ko);

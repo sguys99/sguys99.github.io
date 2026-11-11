@@ -605,11 +605,6 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
     white-space: nowrap;
   }
 
-  /* Korean names in the mono face get wide spaces (11.8, same as .st in 6.5). */
-  html:lang(ko) .flow {
-    font-family: var(--font-ko);
-  }
-
   .flow.back {
     color: var(--text-3);
   }
