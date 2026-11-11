@@ -20,6 +20,16 @@ const logos = {
 
 export type LogoKey = keyof typeof logos;
 
+/** Project `org.en` → employer logo (5.11, 5.18). Orgs not listed here are shown as text. */
+export const ORG_LOGO: Record<string, LogoKey> = {
+  GenON: 'genon',
+  'PwC Consulting': 'pwc',
+  MakinaRocks: 'makinarocks',
+  'Samsung Electro-Mechanics': 'semco',
+  KEPCO: 'kepco',
+  'POSCO E&C': 'posco-enc',
+};
+
 interface Props {
   name: LogoKey;
   /** Accessible name; omit when the company name is already in text next to it. */

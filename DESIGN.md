@@ -2919,3 +2919,7 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 숫자 카운트업은 카드가 아니라 `.figs`를 `IntersectionObserver`로 보고 처음 보일 때 시작한다. 재생할 세션이면 스크립트 실행 시 보이는 숫자를 0으로 두고, `beforeprint`에서 최종값으로 채운다 (tasks 6.1) | About은 첫 화면이라 `m-wait`가 없지만 모바일에서는 숫자 표가 첫 화면 아래에 있다. 인쇄는 완성 상태(3장 Motion) |
 | 카운트업 시간은 `--m-count`를 읽되 단위를 함께 해석한다(`ms`가 아니면 초). 시작 시각은 첫 rAF 프레임 시각 (tasks 6.1) | 빌드 CSS 압축이 `900ms`를 `.9s`로 바꿔 `parseFloat`만 쓰면 0.9ms가 되어 즉시 끝났다 |
 | 궤적 구간 번호 `--i`는 About 컴포넌트 안에서 `:nth-child`로 준다(전역 대상 행 목록에 `.traj`를 넣지 않음) (tasks 6.1) | 궤적은 순서 등장 대상 행이 아니라 그리기 지연에만 `--i`를 쓴다 |
+| 대표작 행 hover 동안 Capability 태그(`.tag.k`) 바탕을 `--surface`로 바꾼다 (tasks 6.2) | `.tag.k` 바탕(`--accent-soft`)과 `--row-tint`가 같은 색이라 hover 때 태그 모양이 사라졌다(승인 시안 331-c도 같음). 글자색·모양은 그대로 |
+| 기간 표기는 `src/i18n/ui.ts`의 `fmtPeriod(lang, period)` 하나로 만든다: `start` – `end`, `present`면 `Present / 현재`, `end`가 없거나 `start`와 같으면 한 달만 (tasks 6.2) | 7장 구두점 규칙(en dash 앞뒤 공백, 국문 `2024.03`, 영문 `Mar 2024`)을 경력·원장·케이스가 같이 쓰게 |
+| 프로젝트 `org.en` → 로고 키 대응은 `Logo.astro`의 `ORG_LOGO`에 둔다. 없는 소속(예: GIVita)은 글자 (tasks 6.2) | 프로젝트의 `org`는 짧은 회사 이름이라 `experience`의 `org`(부서 포함)와 글자로 맞지 않는다. 5.11 "로고 데이터 파일" 쪽 |
+| 케이스 스터디가 없는 대표작은 배지 없이 링크·화살표·hover만 뺀다 (tasks 6.2) | 5.18 "케이스 없음" 행 그대로. Placeholder 배지는 사이드바 CV 자리 전용(5.7) |

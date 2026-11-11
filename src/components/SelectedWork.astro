@@ -1,0 +1,248 @@
+---
+// Selected Work card (DESIGN.md 5.18, 6.2): numbered list of featured projects in `order`.
+// Rows with a case study link to /work/<slug>/; the project ledger (5.19, tasks 6.4) goes after the list in this card.
+import Card from './Card.astro';
+import SectionHead from './SectionHead.astro';
+import Logo, { ORG_LOGO } from './Logo.astro';
+import Status from './Status.astro';
+import Tags from './Tags.astro';
+import Icon from './Icon.astro';
+import { t, fmtPeriod, homePath, type Lang } from '../i18n/ui';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const projects = await getCollection('projects');
+const featured = projects
+  .filter((p) => p.data.featured)
+  .sort((a, b) => (a.data.order ?? Infinity) - (b.data.order ?? Infinity));
+---
+
+<Card id="work" labelledby="h-work">
+  <SectionHead id="work" title={t(lang, 'work')}>
+    {t(lang, 'workCount', { n: featured.length, total: projects.length })}
+  </SectionHead>
+
+  <ol class="work">
+    {featured.map(({ id, data: p }, i) => {
+      const live = p.period.status === 'present' || p.period.status === 'planned';
+      const logo = ORG_LOGO[p.org.en];
+      const client = p.client && (p.client.public ? p.client.name[lang] : p.client.label[lang]);
+      const out = !live && p.caseStudy?.outcome[0][lang];
+      const href = p.caseStudy && `${homePath(lang)}work/${id}/`;
+      return (
+        <li class:list={['proj', { link: href }]}>
+          <span class="idx num" aria-hidden="true">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <div class="body">
+            <p class="proj-meta">
+              <span class="org">
+                {logo ? <Logo name={logo} label={p.org[lang]} small /> : <span>{p.org[lang]}</span>}
+                {client && <span>· {client}</span>}
+              </span>
+              <span class="num">{fmtPeriod(lang, p.period)}</span>
+              {live && <Status lang={lang} value="live" />}
+            </p>
+            <h3>{href ? <a href={href}>{p.title[lang]}</a> : p.title[lang]}</h3>
+            <p class="sum">{p.summary[lang]}</p>
+            {out && (
+              <p class="out">
+                <span class="k">{t(lang, 'outcome')}</span>
+                {out}
+              </p>
+            )}
+            <Tags lang={lang} domain={p.domain} capability={p.capability} />
+          </div>
+          {href && (
+            <span class="go" aria-hidden="true">
+              <Icon name="arrow" size="lg" />
+            </span>
+          )}
+        </li>
+      );
+    })}
+  </ol>
+</Card>
+
+<style>
+  .work {
+    list-style: none;
+  }
+
+  .proj {
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--col-idx) minmax(0, 1fr) 24px;
+    gap: 0 var(--sp-4);
+    padding: var(--sp-5) 0;
+    border-top: 1px solid var(--line);
+    transition:
+      background-color var(--dur) ease,
+      box-shadow var(--dur) ease;
+  }
+
+  .proj:first-child {
+    border-top: 0;
+    padding-top: var(--sp-1);
+  }
+
+  .proj:last-child {
+    padding-bottom: 0;
+  }
+
+  .idx {
+    padding-top: var(--sp-0);
+    font-family: var(--font-meta);
+    font-size: var(--fs-sm);
+    color: var(--text-3);
+    transition: color var(--dur) ease;
+  }
+
+  .body {
+    display: grid;
+    gap: var(--sp-1h);
+    min-width: 0;
+  }
+
+  .proj-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-1) var(--sp-3);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  .proj-meta .num {
+    font-family: var(--font-meta);
+  }
+
+  .org {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    min-width: 0;
+    font-weight: var(--fw-medium);
+    color: var(--text-2);
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-title);
+    line-height: var(--lh-title);
+    letter-spacing: var(--ls-title);
+    transition: color var(--dur) ease;
+  }
+
+  html:lang(ko) h3 {
+    letter-spacing: var(--ls-title-ko);
+  }
+
+  h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* The title link covers the whole row: one tab stop, a row-sized hit area (5.18). */
+  h3 a::after {
+    content: '';
+    position: absolute;
+    inset: 0 calc(-1 * var(--sp-2));
+    border-radius: var(--radius-sm);
+  }
+
+  h3 a:focus-visible {
+    outline: none;
+  }
+
+  h3 a:focus-visible::after {
+    outline: var(--focus-w) solid var(--focus);
+  }
+
+  .sum,
+  .out {
+    max-width: var(--measure-sm);
+    font-size: var(--fs-sm);
+  }
+
+  .sum {
+    color: var(--text-2);
+  }
+
+  .out {
+    color: var(--text);
+  }
+
+  .k {
+    margin-right: var(--sp-2);
+    font-family: var(--font-meta);
+    font-size: var(--fs-2xs);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-eyebrow);
+    color: var(--text-3);
+  }
+
+  html:lang(ko) .k {
+    font-family: var(--font-ko);
+    font-size: var(--fs-xs);
+    letter-spacing: 0;
+  }
+
+  .body > :global(.tags) {
+    margin-top: var(--sp-1);
+  }
+
+  .go {
+    padding-top: var(--sp-1);
+    color: var(--text-3);
+    transition:
+      color var(--dur) ease,
+      transform var(--dur) ease;
+  }
+
+  .go :global(.icon) {
+    display: block;
+  }
+
+  @media (hover: hover) {
+    .link:hover {
+      background: var(--row-tint);
+      box-shadow:
+        calc(-1 * var(--sp-3)) 0 0 var(--row-tint),
+        var(--sp-3) 0 0 var(--row-tint);
+    }
+
+    .link:hover :is(h3, .idx, .go) {
+      color: var(--accent);
+    }
+
+    .link:hover .go {
+      transform: translateX(3px);
+    }
+
+    /* Capability tags share the tint colour; lift them onto the surface so they stay visible. */
+    .link:hover :global(.tag.k) {
+      background: var(--surface);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .proj {
+      grid-template-columns: var(--col-idx-sm) minmax(0, 1fr);
+    }
+
+    .idx {
+      font-size: var(--fs-xs);
+      padding-top: 3px;
+    }
+
+    .go {
+      display: none;
+    }
+  }
+</style>

@@ -5,6 +5,7 @@ import Head from './Head.astro';
 import Card from './Card.astro';
 import SectionHead from './SectionHead.astro';
 import About from './About.astro';
+import SelectedWork from './SelectedWork.astro';
 import { t, SECTIONS, type Lang } from '../i18n/ui';
 import { getEntry } from 'astro:content';
 
@@ -20,7 +21,8 @@ const title = `${profile.name[lang]} · ${profile.headline[lang]}`;
 <Page lang={lang} title={title}>
   <Head slot="head" lang={lang} title={title} description={profile.taglines[0][lang]} person />
   <About lang={lang} />
-  {SECTIONS.filter((id) => id !== 'about').map((id) => (
+  <SelectedWork lang={lang} />
+  {SECTIONS.filter((id) => id !== 'about' && id !== 'work').map((id) => (
     <Card id={id} labelledby={`h-${id}`}>
       <SectionHead id={id} title={t(lang, id)} />
     </Card>

@@ -208,6 +208,20 @@ for (const v of [...DOMAINS, ...CAPABILITIES])
   if (!(TAG_KO as Record<string, string>)[v]?.trim())
     throw new Error(`src/i18n/ui.ts: tag "${v}" needs a Korean label`);
 
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const ym = (lang: Lang, s: string) => {
+  const [y, m] = s.split('-');
+  return lang === 'ko' ? `${y}.${m}` : `${MON[+m - 1]} ${y}`;
+};
+
+/** Period as shown on the page (DESIGN.md 6.2, 7장): `Mar 2024 – Jan 2025` / `2024.03 – 2025.01`, `– Present` / `– 현재`. */
+export const fmtPeriod = (lang: Lang, p: { start: string; end?: string; status?: string }) =>
+  p.status === 'present'
+    ? `${ym(lang, p.start)} – ${t(lang, 'present')}`
+    : p.end && p.end !== p.start
+      ? `${ym(lang, p.start)} – ${ym(lang, p.end)}`
+      : ym(lang, p.start);
+
 /** Home sections in page order (DESIGN.md 6.2). */
 export const SECTIONS = [
   'about',
