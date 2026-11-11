@@ -319,7 +319,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 토큰 | 값 | 바뀌는 조건 | 용도 |
 |---|---|---|---|
 | `--sidebar` | 320px | 홈 ≤1100px: 280px | 사이드바 폭 |
-| `--sidebar` (케이스 스터디) | 340px | ≤1000px: 280px (332-a2-case) | 케이스 기록표 사이드바 |
+| `--sidebar` (케이스 스터디) | 340px | ≤1100px: 280px (332-a2-case는 ≤1000, 11.8에서 넓힘) | 케이스 기록표 사이드바 |
 | `--main` | 960px | — | 본문 최대 폭 (`.shell` 최대 = sidebar + main) |
 | `--header-h` | 56px | ≤860px: 52px | 상단 메뉴·모바일 바 높이, `scroll-padding-top` 계산 |
 | `--header-blur` | `saturate(1.2) blur(8px)` | — | 상단 메뉴 `backdrop-filter` |
@@ -675,7 +675,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 
 | 항목 | 홈 | 케이스 스터디 (332-a2-case) |
 |---|---|---|
-| `--sidebar` | 320 / ≤1100: 280 | 340 / ≤1000: 280 (861–1000에서 탭 6개 + 토글이 들어가게) |
+| `--sidebar` | 320 / ≤1100: 280 | 340 / ≤1100: 280 (탭 6개 + 토글이 들어가게, 11.8) |
 | 사이드바 내용 | 프로필 기록 | 프로젝트 기록표: `.who`(작은 사진 + 이름) → 경로(`← Selected Work` / `← 대표 프로젝트` + `01 / 05`) + 제목 h1 → `.rec`(키-값) → `.toc`(번호 목차) → `.side-foot`(이전·다음, `margin-top: auto`로 바닥에 붙음). 내부 → 5장 |
 | 사이드바 패딩 | `--sp-7` `--sp-6` | `--sp-6` `--sp-6` `--sp-5` |
 | 상단 메뉴 | 홈 섹션 탭 | 같은 탭 6개, Work 표시, 링크는 홈 섹션으로. 언어·테마 토글은 상단 메뉴에만 (사이드바에 없음) |
@@ -874,7 +874,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 탭 링크 | 홈 섹션으로 이동: 영문 `/#about`…, 국문 `/ko/#about`… |
 | current | 항상 Work에 `aria-current="true"` 고정, `.ink`는 Work 아래 정지 (scroll-spy 없음, 재측정만) |
 | 전환 버튼 | 언어·테마를 상단 메뉴 `.controls`로 (기록표 하단 `.side-foot`에서 뺌) |
-| 사이드바 | 케이스 기록표 `--sidebar` 340px, ≤1000에서 280px (3장 Layout) |
+| 사이드바 | 케이스 기록표 `--sidebar` 340px, ≤1100에서 280px (3장 Layout, 11.8) |
 | 모바일 바 | `.bar-id`는 홈 `#work`로, `.bar-cur`는 현재 케이스 섹션 이름 |
 | 메뉴 시트 | 그룹 없음. 첫 행 "← Selected Work / ← 대표 프로젝트"(홈 `#work`) + 케이스 섹션 목록 |
 
@@ -1806,8 +1806,8 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 | 폭 | 사이드바 | 본문 |
 |---|---|---|
-| >1000px | `--sidebar` 340px, sticky `top: 0`, `padding: --sp-6 --sp-6 --sp-5`, `gap: --sp-5` | `.doc` `padding: --sp-7` (≤1100px `--sp-6`) |
-| 861–1000px | 280px (탭 6개 + 토글이 들어가도록, 3.3.2) | 같음 |
+| >1100px | `--sidebar` 340px, sticky `top: 0`, `padding: --sp-6 --sp-6 --sp-5`, `gap: --sp-5` | `.doc` `padding: --sp-7` (≤1100px `--sp-6`) |
+| 861–1100px | 280px (탭 6개 + 토글이 들어가도록, 3.3.2. 1000→1100은 11.8) | 같음 |
 | ≤860px | 상단 블록(`display: block`, `padding: --sp-5 --sp-4 --sp-4`, 자식 간 `--sp-4`). `.who`·`.toc`·`.side-foot` 숨김 → 이동 경로·제목·기록표만 | `.doc` `padding: --sp-5 --sp-4`. 끝에 `.pn-end`. 섹션 이동은 메뉴 시트(5.3)의 "← Selected Work / ← 대표 프로젝트" + 목차 |
 
 #### 5.24.1 기록표 사이드바
@@ -2910,6 +2910,8 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 개인 프로젝트 `in-progress` 국문은 "진행 중"으로 사이트 전체 통일 (5.20 시안의 "개발 중" 대신) | → 5.20, `src/i18n/ui.ts`, 용어집 7절 |
 | 사이드바 CV는 **B안(기록표 행 `CV │ Download PDF ↓`)**. 대신 기록표에서 현재 소속(Now) 행을 뺀다 → 기록표 = Email · GitHub · LinkedIn · CV (2026-11-11). 시안 `docs/design-drafts/g5/cv-button/`. 현재 소속은 홈 Experience와 JSON-LD `worksFor`에 남고, CV 인쇄 머리(`headline · currentRole`)와 케이스 스터디 기록표는 그대로 | → 5.1, 6.2, 4장 와이어프레임, `ui.ts`(`now`·`placeholder` 키, `Badge` `placeholder` 종류 삭제), 용어집 7.3 |
 | 모바일(≤860px)은 메뉴 시트 연락처 줄 끝에 "Download CV (PDF) / CV 다운로드 (PDF)" 한 줄(현재 언어 PDF, `download`) (2026-11-11) | → 5.3, 9장 키보드 순서 |
+
+| 6.17 중간 검토(2026-11-12): 현재 구현 그대로 유지. 케이스 사이드바 경계 ≤1100px와 아키텍처 표의 칸 폭(container query, ≤560px) 쌓기, 국문 단어 라벨 `--font-ko`, 모바일 소속 줄 제거를 승인. 제안했던 다듬기(국문 CV 키, HTML CV `noindex`, `order` 필드, `·` 줄바꿈 금지, 섹션 제목·직함 구분자 통일, 404 간격, 국문 건수 붙여쓰기)는 적용하지 않음 | → 3장, 5.24, 7장 |
 
 **구현 기본값**
 
