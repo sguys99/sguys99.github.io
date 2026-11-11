@@ -1,0 +1,229 @@
+---
+// Personal projects index (DESIGN.md 5.20, 3.2.4 B): numbered list, status filter, repository and demo links.
+// The build HTML holds every row; without JS all rows show and the filter and toggle stay hidden. The script
+// marks filtered-out rows `data-out` and renumbers; ToggleAll folds whatever is left (same as 5.19).
+import Card from './Card.astro';
+import SectionHead from './SectionHead.astro';
+import Status from './Status.astro';
+import ChipLink from './ChipLink.astro';
+import ToggleAll from './ToggleAll.astro';
+import { t, type Lang } from '../i18n/ui';
+import { getCollection, getEntry } from 'astro:content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const STATUSES = ['active', 'in-progress', 'archived'] as const;
+// Status order, then content order (glob loader = file name; sorted by id so it does not depend on the loader).
+const items = (await getCollection('personal')).sort(
+  (a, b) =>
+    STATUSES.indexOf(a.data.status) - STATUSES.indexOf(b.data.status) || a.id.localeCompare(b.id),
+);
+const github = (await getEntry('profile', 'profile'))!.data.contact.github;
+const filters = [
+  { key: 'all', label: t(lang, 'all'), n: items.length },
+  ...STATUSES.map((s) => ({
+    key: s,
+    label: t(lang, `status_${s}`),
+    n: items.filter((p) => p.data.status === s).length,
+  })),
+].filter((f) => f.n > 0);
+const num = (i: number) => String(i + 1).padStart(2, '0');
+---
+
+<Card id="personal" labelledby="h-personal">
+  <SectionHead id="personal" title={t(lang, 'personal')}>
+    <a class="pp-head-link" href={github} rel="noopener">
+      {github.replace(/^https?:\/\//, '').replace(/\/$/, '')}
+    </a>
+  </SectionHead>
+
+  <div class="filters seg" role="group" aria-label={t(lang, 'personal')} hidden>
+    {filters.map((f) => (
+      <button type="button" data-pf={f.key} aria-pressed={String(f.key === 'all')}>
+        {f.label} <span class="num">{f.n}</span>
+      </button>
+    ))}
+  </div>
+
+  <ol class="pidx" id="pp-list">
+    {items.map(({ data: p }, i) => (
+      <li data-st={p.status}>
+        <span class="n num" aria-hidden="true">
+          {num(i)}
+        </span>
+        <div>
+          <div class="ttl">
+            <h3>{p.name}</h3>
+            <Status lang={lang} value={p.status} />
+          </div>
+          <p class="sum">{p.summary[lang]}</p>
+          <p class="stk">{p.stack.join(' / ')}</p>
+        </div>
+        <div class="acts">
+          <ChipLink href={p.repo} icon="gh" name={p.name}>
+            {t(lang, 'repository')}
+          </ChipLink>
+          {p.demo && (
+            <ChipLink href={p.demo} icon="ext" name={p.name}>
+              {t(lang, 'liveDemo')}
+            </ChipLink>
+          )}
+        </div>
+      </li>
+    ))}
+  </ol>
+  <ToggleAll lang={lang} controls="pp-list" visible={5} />
+</Card>
+
+<script>
+  // Status filter (5.20). Focus stays on the pressed button; numbers restart at 01; the list folds again.
+  const group = document.querySelector<HTMLElement>('#personal .filters');
+  const list = document.getElementById('pp-list');
+  if (group && list) {
+    const rows = [...list.children] as HTMLElement[];
+    group.addEventListener('click', (e) => {
+      const btn = (e.target as Element).closest<HTMLButtonElement>('button[data-pf]');
+      if (!btn) return;
+      const key = btn.dataset.pf!;
+      for (const b of group.querySelectorAll('button'))
+        b.setAttribute('aria-pressed', String(b === btn));
+      let i = 0;
+      for (const r of rows) {
+        const out = key !== 'all' && r.dataset.st !== key;
+        r.toggleAttribute('data-out', out);
+        if (!out) r.querySelector('.n')!.textContent = String(++i).padStart(2, '0');
+      }
+      list.dispatchEvent(new CustomEvent('rows-change'));
+    });
+    group.hidden = false;
+  }
+</script>
+
+<style>
+  .pp-head-link {
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+    text-underline-offset: var(--underline-offset);
+    transition:
+      color var(--dur) ease,
+      text-decoration-color var(--dur) ease;
+  }
+
+  .pp-head-link:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+
+  .filters {
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-4);
+  }
+
+  /* .seg items are grids (one cell per child); keep the label and its count on one line. */
+  .filters > button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-1);
+  }
+
+  .filters[hidden],
+  .pidx > li[hidden] {
+    display: none;
+  }
+
+  .pidx {
+    list-style: none;
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .pidx > li {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    gap: var(--sp-4);
+    padding: var(--sp-4) 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .n {
+    padding-top: 3px;
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  .ttl {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--sp-1) var(--sp-3);
+  }
+
+  h3 {
+    font-size: var(--fs-md);
+    font-weight: var(--fw-strong);
+    line-height: var(--lh-row);
+  }
+
+  .ttl :global(.st) {
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+  }
+
+  /* Hangul has no mono face; the meta font's wide space split "운영 중" (same switch as .pl-cap). */
+  html:lang(ko) .ttl :global(.st) {
+    font-family: var(--font-ko);
+  }
+
+  .sum {
+    max-width: var(--measure-sm);
+    margin-top: var(--sp-1);
+    font-size: var(--fs-sm);
+    color: var(--text-2);
+  }
+
+  .stk {
+    margin-top: var(--sp-2);
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  .acts {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--sp-2);
+    min-width: 112px;
+  }
+
+  @media (max-width: 560px) {
+    /* No gap and tighter sides keep the four buttons on one pill line at 360px (11.8). */
+    .filters {
+      gap: 0;
+    }
+
+    .filters > button {
+      padding-inline: var(--sp-2);
+    }
+
+    .pidx > li {
+      grid-template-columns: var(--col-idx-sm) minmax(0, 1fr);
+      gap: var(--sp-1) var(--sp-3);
+    }
+
+    .acts {
+      grid-column: 2;
+      flex-direction: row;
+      flex-wrap: wrap;
+      min-width: 0;
+      margin-top: var(--sp-2);
+    }
+  }
+</style>
