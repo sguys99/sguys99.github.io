@@ -1,0 +1,60 @@
+---
+// Teaching · Books · Advisory (DESIGN.md 5.22, 3.2.6 A): period-ledger rows grouped by kind (book → teaching → advisory).
+import Card from './Card.astro';
+import SectionHead from './SectionHead.astro';
+import LedgerGroup from './LedgerGroup.astro';
+import LedgerRow from './LedgerRow.astro';
+import ExtLink from './ExtLink.astro';
+import { t, type Lang } from '../i18n/ui';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+// `years` is free text ("2014 – 2023", "2023, 2024"): sort by last year desc, then first year desc, then id (5.22).
+const yrs = (s: string) => s.match(/\d{4}/g) ?? [''];
+const items = (await getCollection('teaching')).sort((a, b) => {
+  const [ya, yb] = [yrs(a.data.years), yrs(b.data.years)];
+  return (
+    yb.at(-1)!.localeCompare(ya.at(-1)!) || yb[0].localeCompare(ya[0]) || a.id.localeCompare(b.id)
+  );
+});
+
+const groups = (
+  [
+    ['book', 'books'],
+    ['teaching', 'teachingKind'],
+    ['advisory', 'advisory'],
+  ] as const
+).map(([kind, label]) => ({
+  label: t(lang, label),
+  rows: items.filter((i) => i.data.kind === kind),
+}));
+---
+
+<Card id="teaching" labelledby="h-teaching">
+  <SectionHead id="teaching" title={t(lang, 'teaching')}>
+    {groups.map((g) => `${g.label} ${g.rows.length}`).join(' · ')}
+  </SectionHead>
+
+  {groups.map((g) => (
+    <LedgerGroup label={g.label} count={g.rows.length}>
+      {g.rows.map(({ data: e }) => (
+        <LedgerRow when={e.years}>
+          <h4>{e.url ? <ExtLink href={e.url}>{e.title[lang]}</ExtLink> : e.title[lang]}</h4>
+          <p class="lg-sub">{e.org[lang]}</p>
+          {e.details && (
+            <ul class="dl-list">
+              {e.details.map((d) => (
+                <li>{d[lang]}</li>
+              ))}
+            </ul>
+          )}
+        </LedgerRow>
+      ))}
+    </LedgerGroup>
+  ))}
+</Card>
