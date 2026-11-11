@@ -9,10 +9,10 @@ const ui = {
   // Shell (DESIGN.md 5.1–5.4, 9장)
   skip: { en: 'Skip to content', ko: '본문 바로가기' },
   profile: { en: 'Profile', ko: '프로필' },
-  now: { en: 'Now', ko: '현재' },
   email: { en: 'Email', ko: '이메일' },
-  cv: { en: 'Download CV', ko: 'CV 다운로드' },
-  placeholder: { en: 'Placeholder', ko: '자리 표시' },
+  cv: { en: 'Download CV (PDF)', ko: 'CV 다운로드 (PDF)' },
+  cvKey: { en: 'CV', ko: 'CV' },
+  cvPdf: { en: 'Download PDF', ko: 'PDF 다운로드' },
   menu: { en: 'Menu', ko: '메뉴' },
   openMenu: { en: 'Open menu', ko: '메뉴 열기' },
   closeMenu: { en: 'Close menu', ko: '메뉴 닫기' },

@@ -3,6 +3,7 @@
 // Usage: npm run build && npx astro preview --port 4410, then
 //   node docs/design-drafts/g5/cv-button/shots.mjs http://localhost:4410
 // A = outline button (the provisional implementation), B = fifth record row, C = soft accent block.
+// Chosen (2026-11-11): B, with the Now row removed; mobile gets a CV line in the menu sheet (DESIGN.md 11.8).
 // Mobile (≤860): the spec hides the CV link; every variant adds it to the end of the compact contact row.
 import { chromium } from 'playwright';
 import { readFileSync } from 'node:fs';

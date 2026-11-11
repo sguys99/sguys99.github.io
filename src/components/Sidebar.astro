@@ -7,9 +7,11 @@ import { CV_PDF } from '../cv-pdf.mjs';
 
 interface Props {
   lang: Lang;
+  /** 404 lowers the name to a paragraph: its card title is the page's h1 (DESIGN.md 6.5, 9장). */
+  nameTag?: 'h1' | 'p';
 }
 
-const { lang } = Astro.props;
+const { lang, nameTag: Name = 'h1' } = Astro.props;
 const profile = (await getEntry('profile', 'profile'))!.data;
 const { email, github, linkedin } = profile.contact;
 // Short addresses shown in the record (computed from the URLs, DESIGN.md 5.1).
@@ -21,15 +23,10 @@ const inShort = linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\//, '').repl
   {/* shortcut: 1200×1500 original served as-is; responsive sizes come with tasks 6.15. */}
   <img class="photo" src="/images/profile.jpg" alt="" width="132" height="165" />
   <div>
-    <h1 class="name">{profile.name[lang]}</h1>
+    <Name class="name">{profile.name[lang]}</Name>
     <p class="headline">{profile.headline[lang]}</p>
-    <p class="role">{profile.currentRole[lang]}</p>
   </div>
   <ul class="contact" id="side-contact">
-    <li class="now">
-      <span class="k">{t(lang, 'now')}</span>
-      <span class="v">{profile.currentRole[lang]}</span>
-    </li>
     <li class="em">
       <span class="k" aria-hidden="true">
         {t(lang, 'email')}
@@ -59,12 +56,17 @@ const inShort = linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\//, '').repl
         <span class="h">{inShort}</span>
       </a>
     </li>
+    {/* PDF is written into dist/ by scripts/cv-pdf.mjs (tasks 6.12). Desktop only; mobile has it in the menu sheet (11.8). */}
+    <li class="cv">
+      <span class="k" aria-hidden="true">
+        {t(lang, 'cvKey')}
+      </span>
+      <a class="v" href={CV_PDF[lang]} download aria-label={t(lang, 'cv')}>
+        {t(lang, 'cvPdf')}
+        <Icon name="download" size="sm" />
+      </a>
+    </li>
   </ul>
-  {/* PDF is written into dist/ by scripts/cv-pdf.mjs (tasks 6.12). Look is provisional (DESIGN.md 11.8). */}
-  <a class="cv" href={CV_PDF[lang]} download>
-    {t(lang, 'cv')}
-    <Icon name="download" size="sm" />
-  </a>
 </aside>
 
 <style>
@@ -103,11 +105,6 @@ const inShort = linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\//, '').repl
     margin-top: var(--sp-1);
     color: var(--accent);
     font-weight: var(--fw-medium);
-  }
-
-  /* The record's Now row carries the role on desktop. */
-  .role {
-    display: none;
   }
 
   /* Record table */
@@ -162,9 +159,15 @@ const inShort = linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\//, '').repl
   }
 
   /* Desktop shows short addresses only: icons and link names are for the mobile row. */
-  .contact :global(.icon),
+  .contact li:not(.cv) :global(.icon),
   li:not(.em) .lbl {
     display: none;
+  }
+
+  .cv a.v {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-1);
   }
 
   .h {
@@ -172,28 +175,6 @@ const inShort = linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\//, '').repl
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
-
-  .cv {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--sp-2);
-    padding: var(--sp-2) var(--sp-3);
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius-sm);
-    font-size: var(--fs-sm);
-    font-weight: var(--fw-medium);
-    color: var(--text);
-    text-decoration: none;
-    transition:
-      color var(--dur) ease,
-      border-color var(--dur) ease;
-  }
-
-  .cv:hover {
-    color: var(--accent);
-    border-color: var(--accent);
   }
 
   /* Mobile: compact profile below the bar (DESIGN.md 4장 모바일 골격, 5.1 반응형) */
@@ -225,12 +206,6 @@ const inShort = linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\//, '').repl
       font-size: var(--fs-sm);
     }
 
-    .role {
-      display: block;
-      font-size: var(--fs-xs);
-      color: var(--text-2);
-    }
-
     .contact {
       grid-column: 1 / -1;
       display: flex;
@@ -248,14 +223,13 @@ const inShort = linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\//, '').repl
       max-width: 100%;
     }
 
-    .contact .now,
+    .contact .cv,
     .k,
-    .h,
-    .cv {
+    .h {
       display: none;
     }
 
-    .contact :global(.icon),
+    .contact li:not(.cv) :global(.icon),
     li:not(.em) .lbl {
       display: block;
     }

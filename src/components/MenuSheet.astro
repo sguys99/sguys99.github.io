@@ -5,6 +5,7 @@ import Icon from './Icon.astro';
 import LangSwitch from './LangSwitch.astro';
 import ThemeToggle from './ThemeToggle.astro';
 import { t, TABS, type Lang } from '../i18n/ui';
+import { CV_PDF } from '../cv-pdf.mjs';
 
 interface Props {
   lang: Lang;
@@ -77,6 +78,13 @@ const { email, github, linkedin } = (await getEntry('profile', 'profile'))!.data
         <a href={linkedin} rel="noopener">
           <Icon name="in" />
           <span class="lbl">LinkedIn</span>
+        </a>
+      </li>
+      {/* Mobile home for the sidebar's CV row, which ≤860 hides (11.8). */}
+      <li>
+        <a href={CV_PDF[lang]} download>
+          <Icon name="download" />
+          <span class="lbl">{t(lang, 'cv')}</span>
         </a>
       </li>
     </ul>

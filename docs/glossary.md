@@ -13,7 +13,7 @@
 |---|---|---|
 | Kwang Myung Yu | 유광명 | 논문 저자 표기는 원문 그대로 (K. M. Yu, K. Yu) |
 | AI Engineer | AI Engineer | 대표 직함. 국문 페이지에서도 영문 유지 |
-| Director, R&D Group, GenON | GenON R&D그룹 Director | 현재 소속. 사이드바도 같은 표기 (2026-11-11 결정) |
+| Director, R&D Group, GenON | GenON R&D그룹 Director | 현재 소속 (경력·CV 머리). 사이드바에는 싣지 않음 (2026-11-11 결정) |
 
 ## 2. 기관
 
@@ -276,9 +276,8 @@ UI 문구의 원본은 `src/i18n/ui.ts`다. 이 표는 표기 기준이며, 문�
 | All (filter) | 전체 | 개인 프로젝트 상태 필터 |
 | All domains / All capabilities | 모든 도메인 / 모든 역량 | 원장 선택 상자 첫 항목 |
 | Clear filters | 필터 해제 | |
-| Download CV | CV 다운로드 | |
-| Placeholder | 자리 표시 | 준비 중인 항목 배지 |
-| Now | 현재 | 사이드바 기록표 키 |
+| Download CV (PDF) | CV 다운로드 (PDF) | 모바일 메뉴 시트 줄, 사이드바 CV 링크의 읽힘 이름 |
+| CV · Download PDF | CV · PDF 다운로드 | 사이드바 기록표 CV 행의 키 · 값 (키는 국문도 `CV`, 페이지 제목 "이력서"와 별개) |
 | Email | 이메일 | |
 | Selected | 대표 | 대표작·대표 보고서 배지 |
 | Lead | 총괄 | 6절 Badge와 같음 |

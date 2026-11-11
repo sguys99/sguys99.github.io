@@ -6,7 +6,6 @@ const kinds = {
   lead: { key: 'lead', cls: '' },
   selected: { key: 'selected', cls: 'f' },
   'in-progress': { key: 'inProgress', cls: 'live' },
-  placeholder: { key: 'placeholder', cls: 'ph' },
 } as const;
 
 interface Props {
@@ -44,9 +43,5 @@ const { key, cls } = kinds[kind];
 
   .live {
     margin-left: var(--sp-2);
-  }
-
-  .ph {
-    color: var(--text-3);
   }
 </style>

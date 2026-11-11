@@ -35,7 +35,7 @@ const side = Astro.slots.has('sidebar') && (await Astro.slots.render('sidebar'))
 </a>
 <div class:list={['shell', { case: current }]}>
   <Topbar lang={lang} current={current} curLabel={curLabel} notFound={notFound} />
-  {side ? <Fragment set:html={side} /> : <Sidebar lang={lang} />}
+  {side ? <Fragment set:html={side} /> : <Sidebar lang={lang} nameTag={notFound ? 'p' : 'h1'} />}
   <main id="main" tabindex="-1">
     <slot />
   </main>

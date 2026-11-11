@@ -617,7 +617,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
         | KEY  value          |            ↕ 24                                          |
         | KEY  value          |  +-----------------------------------------------------+  |
         | KEY  value          |  | .card #work                                          |  |
-        | [CV]                |  +-----------------------------------------------------+  |
+        | CV   Download PDF ↓ |  +-----------------------------------------------------+  |
         |                     |   …                                                       |
         |                     |  ─────────────────────────────────────── (↕ 32)          |
         |                     |  footer.foot-a  © · updated · source        top ↑         |
@@ -728,17 +728,15 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 <aside class="sidebar" aria-label="Profile">
   <img class="photo" src="/images/profile.jpg" alt="" width="132" height="165">
   <div>
-    <h1 class="name">Kwang Myung Yu</h1>
+    <h1 class="name">Kwang Myung Yu</h1>                    <!-- 404는 <p class="name"> (nameTag="p", 6.5) -->
     <p class="headline">AI Engineer</p>
-    <p class="role">Director, R&D Group, GenON</p>        <!-- ≤860에서만 보임 -->
   </div>
   <ul class="contact" id="side-contact">                    <!-- id: Contact 섹션(#contact)과 충돌 방지 -->
-    <li class="now"><span class="k">Now</span><span class="v">Director, R&D Group, GenON</span></li>
     <li class="em"><span class="k" aria-hidden="true">Email</span><a class="v" href="mailto:…">{icon mail}<span class="lbl">sguys99@naver.com</span></a></li>
     <li><span class="k" aria-hidden="true">GitHub</span><a class="v" href="…">{icon gh}<span class="lbl">GitHub</span><span class="h">github.com/sguys99</span></a></li>
     <li><span class="k" aria-hidden="true">LinkedIn</span><a class="v" href="…">{icon in}<span class="lbl">LinkedIn</span><span class="h">in/kmyu99</span></a></li>
+    <li class="cv"><span class="k" aria-hidden="true">CV</span><a class="v" href="/cv/kwang-myung-yu-cv.pdf" download aria-label="Download CV (PDF)">Download PDF {icon download sm}</a></li>   <!-- ≤860 숨김, 메뉴 시트(5.3)가 대신 -->
   </ul>
-  <a class="cv" href="/cv/kwang-myung-yu-cv.pdf" download>Download CV {icon download}</a>   <!-- 6.12. 모양 임시 -->
 </aside>
 ```
 
@@ -750,12 +748,12 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | `.photo` | 폭 `--sb-photo-w`, `aspect-ratio: 4/5; object-fit: cover`, 모서리 `--radius-sm`, 테두리 1px `--photo-ring`, 바탕 `--chip`, `filter: var(--photo-filter)` |
 | `.name` | `--font-display`, `--fs-xl`, `--fw-name`, `--ls-name`, 행간 1.25(컴포넌트 값) |
 | `.headline` | `--accent`, `--fw-medium`, `--fs-md`, 위 여백 `--sp-1` |
-| `.role` | 숨김 (기록표의 Now 행이 대신함) |
 | 기록표 `ul` | 위 선 1px `--line-strong`, 행 `grid: var(--sb-key) 1fr`, 열 간격 `--sp-3`, 행 패딩 `--sp-3` 0, 행 아래 선 1px `--line`, `align-items: baseline` |
 | `.k` | `--fs-2xs`, `--fw-strong`, `--ls-label`, 대문자, `--text-3`. 국문 `--fs-xs` + `--ls-label-ko` |
 | `.v` | `--fs-sm`, `--text`, `--lh-row`. GitHub·LinkedIn은 `.h`(주소 축약)만 보이고 넘치면 말줄임 |
 | 기록표 링크 | 밑줄 `--line-strong`, `text-underline-offset: var(--underline-offset)` |
-| `.cv` | 6.12 전 자리: 1px **dashed** `--line-strong`, 모서리 `--radius-sm`, 패딩 `--sp-2` `--sp-3`, `--fs-sm` `--fw-medium` `--text-2`, 배지 `--text-3`. 6.12 활성 모양(임시)은 아래 상태 표 "CV 링크" |
+| CV 행 `li.cv` | 기록표의 마지막 행(B안, 11.8 사용자 결정). 키 `CV`, 값 링크 "Download PDF / PDF 다운로드" + 다운로드 아이콘 `sm`(`inline-flex`, 간격 `--sp-1`). 모양은 다른 기록표 링크와 같음(밑줄 `--line-strong`, hover `--accent`) |
+| 행 구성 | Email · GitHub · LinkedIn · CV. 현재 소속(Now) 행과 `.role`은 두지 않는다(11.8 사용자 결정). 현재 소속은 홈 Experience(현재 표시)와 JSON-LD `worksFor`에 남는다 |
 
 **상태**
 
@@ -763,24 +761,24 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 |---|---|
 | 링크 hover | 글자·밑줄 `--accent` |
 | focus-visible | 전역 링 |
-| CV 링크 | 6.12에서 활성: 현재 언어 PDF(6.1)로 `href` + `download`. 활성 모양은 **임시**(테두리 실선 `--line-strong`, 글자 `--text`, 오른쪽 다운로드 아이콘 `sm`, hover 글자·테두리 `--accent`). 시안 `docs/design-drafts/g5/cv-button/` A·B·C 중 사용자 선택 대기 (11.8) |
+| CV 링크 | 현재 언어 PDF(6.1)로 `href` + `download`. 키가 `aria-hidden`이라 링크 이름은 `aria-label` "Download CV (PDF) / CV 다운로드 (PDF)". 모양은 기록표 행(B안, 시안 `docs/design-drafts/g5/cv-button/`, 11.8 사용자 결정) |
 
 **반응형**
 
 | 폭 | 동작 |
 |---|---|
 | ≤1100 | `--sidebar` 280px |
-| ≤860 | 고정 해제(`position: static; height: auto`), 상단 프로필로 전환: 모바일 바(5.3) 아래, 아래 선 1px `--line`, 패딩 `--sp-4`, `grid: var(--sb-photo-w-sm) 1fr`, 간격 `--sp-2` `--sp-4`. 사진 `--sb-photo-w-sm`·모서리 `--radius`. 이름 `--fs-lg`, 직함 `--fs-sm`, `.role` 보임(`--fs-xs` `--text-2`). 기록표 대신 아이콘 + 글자 한 줄(`flex-wrap`, 간격 `--sp-2` `--sp-4`, 위 선 `--line`, 패딩 위 `--sp-3`), 글자 `--fs-sm` `--text-2`, hover `--accent`. Now 행·키·CV 자리 숨김 |
+| ≤860 | 고정 해제(`position: static; height: auto`), 상단 프로필로 전환: 모바일 바(5.3) 아래, 아래 선 1px `--line`, 패딩 `--sp-4`, `grid: var(--sb-photo-w-sm) 1fr`, 간격 `--sp-2` `--sp-4`. 사진 `--sb-photo-w-sm`·모서리 `--radius`. 이름 `--fs-lg`, 직함 `--fs-sm`. 기록표 대신 아이콘 + 글자 한 줄(`flex-wrap`, 간격 `--sp-2` `--sp-4`, 위 선 `--line`, 패딩 위 `--sp-3`), 글자 `--fs-sm` `--text-2`, hover `--accent`. 키·CV 행 숨김(CV는 메뉴 시트 5.3에 있음). 소속 줄(`.role`) 없음(11.8 사용자 결정) |
 | ≤560 | 이메일 라벨 `max-width: 100%` (긴 주소 줄바꿈 대비) |
 
 **접근성**
-- 이름 `h1`은 홈의 유일한 h1. 사이드바는 `aside` + `aria-label`(국문 "프로필").
+- 이름 `h1`은 홈의 유일한 h1. 404는 `nameTag="p"`로 `p`(6.5 제목 단계, `Shell.astro`가 넘김). 사이드바는 `aside` + `aria-label`(국문 "프로필").
 - **시안 버그**: ≥861에서 GitHub·LinkedIn 링크의 이름이 사라진다(`.lbl`은 `display: none`, `.h`·`.k`는 `aria-hidden`). 구현 시 `.h`의 `aria-hidden`을 빼거나 링크에 `aria-label="GitHub: github.com/sguys99"`를 준다.
 - 사진은 바로 옆에 이름 h1이 있어 시안대로 `alt=""`(장식)로 둔다. [구현 기본값] 사진이 단독으로 쓰이는 곳(OG 등)은 해당 없음.
 - 외부 링크는 시안대로 같은 탭에서 열고 `rel="noopener"`.
 
 **모션**: hover 색만 (`--dur`). 등장 효과 없음 (첫 화면).
-**콘텐츠 출처**: 이름·직함·현재 소속·연락처 = `src/content/profile`. 키 라벨(Now/Email)·CV 문구 = `src/i18n`. GitHub·LinkedIn 축약 주소는 URL에서 계산.
+**콘텐츠 출처**: 이름·직함·연락처 = `src/content/profile`. 키 라벨(Email/CV)·CV 문구 = `src/i18n`. GitHub·LinkedIn 축약 주소는 URL에서 계산.
 
 ### 5.2 Top navigation (332-a2, 케이스 변형 332-a2-case)
 
@@ -899,7 +897,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
         <ul class="sheet-sub"><li><a href="#experience">Experience</a></li><li><a href="#teaching">Teaching · Books · Advisory</a></li><li><a href="#awards">Awards & Education</a></li></ul></li>
       …
     </ul></nav>
-    <ul class="contact">{mail, GitHub, LinkedIn: 아이콘 + 글자}</ul>
+    <ul class="contact">{mail, GitHub, LinkedIn, CV: 아이콘 + 글자}</ul>   <!-- CV = "Download CV (PDF)", 현재 언어 PDF, download -->
     <div class="sheet-prefs">
       <div><span class="sheet-label">Language</span>{5.4 언어 전환}</div>
       <div><span class="sheet-label">Theme</span>{5.4 테마 전환}</div>
@@ -924,7 +922,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 그룹 행 `> li > a` | `--fs-lg`, `--fw-medium`, `--text-2`, 패딩 `--sp-3` 0, 오른쪽 끝에 현재 점 `--dot` |
 | `.sheet-sub` | 왼쪽 선 1px `--line`, 패딩 0 0 `--sp-3` `--sp-4`, 위 여백 `calc(-1 * var(--sp-2))` |
 | 하위 행 `a` | `--fs-sm`, `--fw-regular`, 자간 0, `--text-3`, 패딩 `--sp-1` 0 |
-| `.contact` (시트) | 아이콘 + 글자, 세로 간격 `--sp-3` |
+| `.contact` (시트) | 아이콘 + 글자, 세로 간격 `--sp-3`. 마지막 줄 CV: 다운로드 아이콘 + "Download CV (PDF) / CV 다운로드 (PDF)", 현재 언어 PDF(6.1) `download` (11.8 사용자 결정. ≤860에서 사이드바 CV 행을 숨기므로 모바일의 CV 자리). 공통 영역이라 404·케이스 스터디 시트에도 같이 나온다(연락처와 같은 사이트 공통 항목) |
 | `.sheet-prefs` | `margin-top: auto`(바닥 고정), 위 선 1px `--line`, 패딩 위 `--sp-4`, 행 간격 `--sp-3`, 행은 라벨 ↔ 컨트롤 양 끝 정렬 |
 
 - base의 평면 목록은 시트 항목에 `--fs-xl`을 썼다. 확정안 332-a2는 그룹 목록이라 그룹 행 `--fs-lg`, 하위 행 `--fs-sm`을 쓴다 (3장 Typography `--fs-xl` 주석과 같음).
@@ -1075,7 +1073,6 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 총괄 배지 | `.badge` | Lead / 총괄 | `--font-meta`, `--fs-2xs`, `--fw-medium`, 패딩 0 `--sp-1h`, 테두리 1px `--line-strong`, `--radius-xs`, `--text-2` | 전체 프로젝트 원장 제목 뒤 |
 | 대표 배지 | `.badge.f` | Selected / 대표 | 테두리·글자 `--accent` | 원장의 대표작 행, IP 보고서 대표 건 (대표 표시는 이 한 모양, 11.5) |
 | 진행 배지 | `.badge.live` | In progress / 진행 중 | 테두리·글자 `--accent`, 왼쪽 `--sp-2` | 케이스 스터디 Outcome 제목 (진행 중 건) |
-| 자리 표시 배지 | `.badge` | Placeholder / 자리 표시 | 글자 `--text-3` | 사이드바 CV 자리(6.12에서 걷음, 지금 쓰는 곳 없음) |
 | 진행 상태 (점) | `.status` | In progress / 진행 중 | `--fs-xs` `--fw-medium` `--accent`, 앞 점 `--dot` `--accent` + 후광 `0 0 0 var(--halo) var(--accent-soft)`, 간격 `--sp-1h` | 대표작 메타 (현재·예정 건) |
 | 상태 점 | `.st` | 아래 표 | 앞 점 `--dot`, 테두리 1px `--text-3`, 간격 5px(정렬 보정값) | 개인 프로젝트, 특허·SW |
 
@@ -1974,7 +1971,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 | 순서 | 섹션 (en / ko 제목) | 앵커 id | 상단 탭 | 사용 컴포넌트 (5장) | 콘텐츠 출처 |
 |---|---|---|---|---|---|
-| — | 사이드바 | — | — | Sidebar 5.1 (Dossier Record: 사진, 이름 `h1`, 직함, 키/값 표 Now·Email·GitHub·LinkedIn, CV 다운로드 자리) | `profile` (name, headline, currentRole, contact) |
+| — | 사이드바 | — | — | Sidebar 5.1 (Dossier Record: 사진, 이름 `h1`, 직함, 키/값 표 Email·GitHub·LinkedIn·CV) | `profile` (name, headline, contact) |
 | — | 상단 메뉴 / 모바일 바 | — | — | Top navigation 5.2, Mobile bar + menu sheet 5.3 | `src/i18n/` |
 | 1 | About / 소개 | `about` | About / 소개 | Card 5.14, Hero 5.15, Career trajectory 5.16, Stats table 5.17(숫자 표 4칸), Skills(5.15) | `profile` (taglines[0], about, trajectory, skills). Figures는 `projects`·`patents`·`software`·`teaching`(book) 건수를 빌드 시 계산 |
 | 2 | Selected Work / 대표 프로젝트 | `work` | Work / 대표 프로젝트 | Card 5.14, Selected work list 5.18(번호 목록 01–06), Project ledger 5.19(전체 원장 + Domain·Capability 선택 상자 + 모두 보기) | `projects` (대표작: `featured`, `order` 순. 원장: 전체 20건) |
@@ -2481,7 +2478,7 @@ DOM 순서 = 탭 순서. **내비게이션 먼저**: 본문 바로가기 → 상
 | 페이지 | 순서 |
 |---|---|
 | 홈 (데스크톱) | 본문 바로가기 → 탭 6개 → 언어 → 테마 → 사이드바(이메일, GitHub, LinkedIn, CV 다운로드) → 본문 |
-| 홈 (≤860px) | 본문 바로가기 → 바 이름 링크 → 언어 → 메뉴 버튼 → 사이드바(이메일, GitHub, LinkedIn) → 본문 |
+| 홈 (≤860px) | 본문 바로가기 → 바 이름 링크 → 언어 → 메뉴 버튼 → 사이드바(이메일, GitHub, LinkedIn) → 본문. CV는 메뉴 시트 안(섹션 → 연락처 → CV → 언어 → 테마) |
 | 케이스 스터디 | 본문 바로가기 → 탭 → 언어 → 테마 → 기록표(홈 링크, 목차, 이전·다음) → 본문 |
 
 - `tabindex` 양수 금지. 숨긴 요소(`hidden`, 접힌 행)는 포커스되지 않아야 한다.
@@ -2840,7 +2837,7 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 분야·역량 태그에 국문 값이 없어 국문 화면에서도 영문으로 표시됨 | G1 | tasks 5.7 (5.7 Tags & badges: 국문 표기는 `src/i18n/`) | 구현됨 → `src/i18n/ui.ts` `tag()` (용어집 6절 표기, tasks 5.7) |
 | 한 줄 소개 A와 About 첫 문장의 구조·단어 중복 | G2 + G3 | tasks 1.2.11 (5.15 남은 일) | 콘텐츠 검토 대기 |
 | 한 줄 소개 영문 모바일 외톨이 줄 → `text-wrap: balance` | G2 + G3 | 5.15 | 문서에 반영됨 → 5.15 |
-| 사이드바 CV 다운로드 연결 (그 전까지 비활성 자리 표시) | G2 + G3 | tasks 6.12 (5.1 CV disabled) | 구현 대기 |
+| 사이드바 CV 다운로드 연결 (그 전까지 비활성 자리 표시) | G2 + G3 | tasks 6.12 (5.1 CV disabled) | 구현됨 → 5.1 (현재 언어 PDF, tasks 6.12) |
 | 상단 메뉴 구성: Personal Projects, Teaching, Awards, Contact 탭을 어디까지 둘지 | G4 + G5 | G6 3.3.2 → 5.2 | 문서에 반영됨 → 5.2 |
 | 특허 섹션 이름("Patents & Publications"는 좁음)과 앵커 `#ip` | G4 + G5 | G6 함께 정한 것 → 5.21, 5.2 | 문서에 반영됨 → 5.21 |
 | 개인 프로젝트 상태 문구("Active / In progress / Archived")와 정렬 순서(콘텐츠에 순서 필드 없음) | G4 + G5 | tasks 1.5.6 (5.20 남은 일) | 콘텐츠 검토 대기 |
@@ -2862,7 +2859,7 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | ≤1100px `main` 하단 패딩 64→32px, 마지막 카드→푸터 간격 56px | 단계 4 | tasks 5.3, 5.9 | 구현됨: `main` 쪽(tasks 5.3: 모든 폭 하단 `--sp-6`, 마지막 카드 `margin-bottom: 0`), 푸터 아래 `--sp-8`(tasks 5.9, `src/components/Footer.astro`). 마지막 카드 → 푸터 32px, 모든 폭 |
 | `100vh`/`100dvh` 단위를 맞출지 | 단계 4 | tasks 5.3 (4장 확인할 점) | 구현됨 → 11.7 (`dvh`, `vh` 폴백. `.shell`, 사이드바, 메뉴 시트) |
 | 케이스 아키텍처 표 `.flow` nowrap이 360px에서 넘칠 수 있음 | 단계 4 | tasks 7.1 (4장 360px 가로 스크롤 방지) | 해결 → 11.8 (tasks 6.10: 대상·라벨만 nowrap, 좁은 칸은 쌓인 표. 360–1440px 넘침 0) |
-| 사이드바 CV 다운로드 활성 상태의 모양 (시안 없음) | 단계 4 | tasks 6.12 (5.1) | 결정 필요 |
+| 사이드바 CV 다운로드 활성 상태의 모양 (시안 없음) | 단계 4 | tasks 6.12 (5.1) | 결정됨 → 11.8 (B안 기록표 행, 현재 소속 행 제거, 모바일은 메뉴 시트 CV 줄. 5.1, 5.3) |
 | "Selected / 대표" 표시가 원장 `.badge.f`와 IP `.sel-mark` 두 모양 | 단계 4 | tasks 5.10 (5.7) | 구현됨 → `src/components/Badge.astro` `kind="selected"` 한 모양 (tasks 5.10) |
 | DOI 없이 `url`만 있는 논문의 표시 방법 | 단계 4 | tasks 6.6 (5.21) | 결정 필요 (해당 콘텐츠가 생길 때) |
 | CV PDF 파일 경로·이름, HTML CV(`/cv/`) 진입 링크를 둘지 | 단계 4 | tasks 6.12 (6.1, 6.4) | 일부 결정 → 11.8 (PDF만 노출, HTML CV는 링크 없음. 파일 이름은 6.12) |
@@ -2911,6 +2908,8 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | CV PDF는 Playwright를 devDependency로 추가해 빌드 후 `/cv/`, `/ko/cv/`를 PDF로 출력한다 | → tasks 6.12, 10장 PDF |
 | PDF만 노출한다: 사이드바 Download CV → 현재 언어 PDF. HTML CV는 링크 없이 주소로만 접근. 파일 이름은 6.12에서 확정 | → tasks 6.12, 5.1, 6.4 |
 | 개인 프로젝트 `in-progress` 국문은 "진행 중"으로 사이트 전체 통일 (5.20 시안의 "개발 중" 대신) | → 5.20, `src/i18n/ui.ts`, 용어집 7절 |
+| 사이드바 CV는 **B안(기록표 행 `CV │ Download PDF ↓`)**. 대신 기록표에서 현재 소속(Now) 행을 뺀다 → 기록표 = Email · GitHub · LinkedIn · CV (2026-11-11). 시안 `docs/design-drafts/g5/cv-button/`. 현재 소속은 홈 Experience와 JSON-LD `worksFor`에 남고, CV 인쇄 머리(`headline · currentRole`)와 케이스 스터디 기록표는 그대로 | → 5.1, 6.2, 4장 와이어프레임, `ui.ts`(`now`·`placeholder` 키, `Badge` `placeholder` 종류 삭제), 용어집 7.3 |
+| 모바일(≤860px)은 메뉴 시트 연락처 줄 끝에 "Download CV (PDF) / CV 다운로드 (PDF)" 한 줄(현재 언어 PDF, `download`) (2026-11-11) | → 5.3, 9장 키보드 순서 |
 
 **구현 기본값**
 
@@ -2962,8 +2961,8 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | `npm run build` = `astro build && node scripts/cv-pdf.mjs`. 별도 `build:pdf`를 두지 않는다. Chromium이 없으면 `npx playwright install chromium` 안내와 함께 실패 (tasks 6.12) | 배포 산출물에 PDF가 늘 함께 있어야 사이드바 링크가 깨지지 않는다. 따로 두면 PDF 없는 빌드를 배포할 수 있다. CI는 `npx playwright install --with-deps chromium` 필요(tasks 8.1) |
 | PDF 파일은 CV 페이지 폴더에 둔다: `/cv/kwang-myung-yu-cv.pdf`, `/ko/cv/yu-kwang-myung-cv-ko.pdf`. 경로는 `src/cv-pdf.mjs` 한 곳에서 사이드바와 스크립트가 같이 읽는다 (tasks 6.12) | 사용자 결정 파일 이름. `public/`에 두지 않아 커밋되지 않는다(`dist/` 무시) |
 | PDF 메타데이터는 Chromium이 넣는 Title(`<title>` = `Kwang Myung Yu · CV` / `유광명 · 이력서`)만. Author는 비어 있음 (tasks 6.12) | Chromium `page.pdf`는 Author를 쓰지 않는다. 넣으려면 PDF 후처리 의존성이 필요해 넣지 않음 |
-| 사이드바 CV 링크 활성 모양은 **임시**: 기존 자리 모양에서 Placeholder 배지와 disabled 스타일(점선, `--text-2`, `not-allowed`)만 걷고 실선 테두리 + 오른쪽 다운로드 아이콘(`Icon` `download`, `sm`), hover 글자·테두리 `--accent`. **사용자 선택 대기**: 시안 `docs/design-drafts/g5/cv-button/` A(외곽선 버튼, 지금 구현)·B(기록표 5번째 행 `CV`)·C(`--accent-soft` 바탕 + `PDF` 표기) (tasks 6.12) | 5.1·11.6에서 활성 모양이 미정이고 시안이 없다. 규칙 1에 따라 시안을 내고 명세에 가장 가까운 안을 임시로 둠 |
-| ≤860px에서는 CV 링크를 그대로 숨긴다(5.1 반응형). 메뉴 시트에도 CV 링크가 없다 (tasks 6.12) | 명세대로. 시안은 모바일 연락처 줄 끝에 `CV (PDF)`를 더한 모양을 함께 보여 줌 — 모바일 노출 여부도 사용자 선택과 함께 결정 |
+| ~~사이드바 CV 링크 활성 모양은 **임시**: 기존 자리 모양에서 Placeholder 배지와 disabled 스타일(점선, `--text-2`, `not-allowed`)만 걷고 실선 테두리 + 오른쪽 다운로드 아이콘(`Icon` `download`, `sm`), hover 글자·테두리 `--accent`. **사용자 선택 대기**: 시안 `docs/design-drafts/g5/cv-button/` A(외곽선 버튼, 지금 구현)·B(기록표 5번째 행 `CV`)·C(`--accent-soft` 바탕 + `PDF` 표기) (tasks 6.12)~~ → 사용자 결정(2026-11-11): B안 기록표 행 + 현재 소속 행 제거 (위 사용자 결정 표) | 5.1·11.6에서 활성 모양이 미정이고 시안이 없다. 규칙 1에 따라 시안을 내고 명세에 가장 가까운 안을 임시로 둠 |
+| ~~≤860px에서는 CV 링크를 그대로 숨긴다(5.1 반응형). 메뉴 시트에도 CV 링크가 없다 (tasks 6.12)~~ → 사용자 결정(2026-11-11): 사이드바 CV 행은 숨기고 메뉴 시트 연락처 끝에 CV 줄 | 명세대로. 시안은 모바일 연락처 줄 끝에 `CV (PDF)`를 더한 모양을 함께 보여 줌 — 모바일 노출 여부도 사용자 선택과 함께 결정 |
 | 404의 국문 전환은 영문 셸 + `<template>` 안의 국문 셸을 함께 빌드해 두고, `head` 인라인 스크립트가 경로 `/ko`이면 `lang`·`<title>`을 바꾸고 영문 셸을 숨기며(`html:lang(ko) #nf-en`), `body` 끝 인라인 스크립트가 영문 셸을 국문 셸로 바꾼다. 템플릿 안 스크립트는 지우고 영문 셸의 모듈 스크립트(파서가 이미 예약)가 바뀐 DOM에 붙는다. 이를 위해 `Page.astro`를 `Base` + `Shell.astro`(셸 본체)로 나눔 (tasks 6.13) | 6.5 "문구·링크 대상을 국문으로 바꾼다"를 문자열 교체 대신 같은 컴포넌트로 만든 국문 마크업으로 처리해 문구가 `ui.ts`·콘텐츠에만 남는다. 첫 그리기 전에 숨겨 깜빡임 없음. JS 꺼짐이면 영문 그대로(6.5) |
 | 404 `<title>`은 `Page not found · Kwang Myung Yu` / `페이지를 찾을 수 없습니다 · 유광명` (tasks 6.13) | 6.6 "6.5 참조"이고 6.5에 값이 없음. 시안 335-a 그대로(케이스 `제목 · 이름`과 같은 꼴) |
 | 404 메뉴 시트는 탭 6개를 그 언어 홈 앵커(`/#about`, `/ko/#about` …)로 두고 하위 섹션 링크·현재 표시는 없다 (tasks 6.13) | 5.3 시트는 홈 탭을 쓰지만 404에는 섹션이 없어 같은 페이지 앵커가 깨진다. 6.5 바로 가기 목록과 같은 "그 언어 홈 기준" |
