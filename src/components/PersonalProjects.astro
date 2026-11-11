@@ -40,13 +40,21 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
     </a>
   </SectionHead>
 
-  <div class="filters seg" role="group" aria-label={t(lang, 'personal')} hidden>
+  <div
+    class="filters seg"
+    role="group"
+    aria-label={t(lang, 'personal')}
+    data-showing={t(lang, 'showing', { total: items.length })}
+    hidden
+  >
     {filters.map((f) => (
       <button type="button" data-pf={f.key} aria-pressed={String(f.key === 'all')}>
         {f.label} <span class="num">{f.n}</span>
       </button>
     ))}
   </div>
+  {/* Filled only on a filter change, so nothing is announced on load (9장 상태 알림). */}
+  <p class="sr-only" role="status"></p>
 
   <ol class="pidx" id="pp-list">
     {items.map(({ data: p }, i) => (
@@ -91,6 +99,7 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
   const list = document.getElementById('pp-list');
   if (group && list) {
     const rows = [...list.children] as HTMLElement[];
+    const status = group.nextElementSibling!;
     group.addEventListener('click', (e) => {
       const btn = (e.target as Element).closest<HTMLButtonElement>('button[data-pf]');
       if (!btn) return;
@@ -103,6 +112,7 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
         r.toggleAttribute('data-out', out);
         if (!out) r.querySelector('.n')!.textContent = String(++i).padStart(2, '0');
       }
+      status.textContent = group.dataset.showing!.replace('{n}', String(i));
       list.dispatchEvent(new CustomEvent('rows-change'));
     });
     group.hidden = false;

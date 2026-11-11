@@ -440,6 +440,15 @@ const thin = (s: string) => s.replace(/\s*–\s*/g, ' – ');
     letter-spacing: 0;
     color: var(--text);
   }
+  /* Screen only: each link a 28px line box, ≥24px target (WCAG 2.5.8, 9장 터치 대상). Print keeps 1.7. */
+  @media screen {
+    .head .contact {
+      line-height: var(--ctl-h-sm);
+    }
+    .head .contact a {
+      display: inline-block;
+    }
+  }
 
   .sec {
     display: grid;

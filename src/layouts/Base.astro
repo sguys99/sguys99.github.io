@@ -22,6 +22,15 @@ const { lang, title } = Astro.props;
         const t = localStorage.getItem('theme');
         if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
       } catch {}
+      // Cross-fade only when the language changes (global.css @view-transition, DESIGN.md 5.4).
+      // No Navigation API → no source URL → no fade (instant, like unsupported browsers).
+      addEventListener('pagereveal', (e) => {
+        const vt = e.viewTransition;
+        if (!vt) return;
+        const from = self.navigation?.activation?.from?.url;
+        const ko = (p) => /^\/ko(\/|$)/.test(p);
+        if (!from || ko(new URL(from).pathname) === ko(location.pathname)) vt.skipTransition();
+      });
     </script>
     <meta name="viewport" content="width=device-width" />
     <title>{title}</title>

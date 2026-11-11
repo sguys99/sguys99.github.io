@@ -967,7 +967,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 |---|---|
 | `.seg` | `inline-flex`, 테두리 1px `--line`, 모서리 `--radius-pill`, 안쪽 여백 2px(컴포넌트 값), 바탕 `--surface` |
 | 항목 | `--fs-xs`, `--fw-medium`, `--ls-label-ko`, `--text-3`, 패딩 `--sp-1` 10px(컴포넌트 값), 최소 높이 `--ctl-h-sm`, 모서리 `--radius-pill` |
-| 선택됨 (`aria-current` / `aria-pressed="true"`) | 바탕 `--accent-soft`, 글자 `--accent` |
+| 선택됨 (`aria-current` / `aria-pressed="true"`) | 바탕 `--accent-soft`, 글자 `--accent`, 안쪽 테두리 1px `--accent`(`box-shadow: inset 0 0 0 1px`, 색만으로 구분하지 않게, 11.8 2026-11-12) |
 
 **테마 전환**
 
@@ -985,7 +985,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 모양 | `.icon-btn` (5.6) |
 
 **접근성**: 세그먼트 `role="group"` + `aria-label`("Language / 언어"). 각 언어 항목에 `lang`(EN은 `en`, KO는 `ko`) — 화면 읽기 프로그램이 올바른 발음으로 읽게. 키보드는 Tab으로 각 항목.
-**모션 (331-c)**: 테마 = View Transitions 크로스페이드 `--m-theme`(`data-vt="theme"`), 언어 = 문서 간 `@view-transition { navigation: auto }` `--m-lang`. 지원하지 않는 브라우저와 모션 줄이기에서는 즉시 바뀜. 세그먼트 바탕·글자 `--dur`.
+**모션 (331-c)**: 테마 = View Transitions 크로스페이드 `--m-theme`(`data-vt="theme"`), 언어 = 문서 간 `@view-transition { navigation: auto }` `--m-lang`(`global.css`, `no-preference` 안). 크로스페이드는 **언어가 바뀌는 이동에만**: `Base.astro` 머리 인라인 스크립트가 `pagereveal`에서 이전 주소(`navigation.activation.from`)와 현재 주소의 언어(`/ko/` 시작 여부)가 같으면 `skipTransition()` — 홈 → 케이스 같은 같은 언어 이동은 즉시. 뒤로 가기로 언어가 바뀌어도 크로스페이드. 지원하지 않는 브라우저(Navigation API 없음 포함)와 모션 줄이기에서는 즉시 바뀜. 세그먼트 바탕·글자·안쪽 테두리 `--dur`.
 **콘텐츠 출처**: 라벨·aria-label = `src/i18n`.
 
 ### 5.5 Footer (335-a 콜로폰 한 줄)
@@ -1581,7 +1581,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 요소 | 값 |
 |---|---|
 | `.pp-head-link` | `--font-meta` `--fs-xs` `--text-3`, 밑줄 `--line-strong` `--underline-offset`. hover 글자·밑줄 `--accent` |
-| 필터 | 세그먼트 토글 → 5.4와 같은 `.seg` 모양, `margin-bottom: --sp-4`, 버튼 사이 `gap: --sp-2`. 선택은 `aria-pressed="true"` (바탕 `--accent-soft`, 글자 `--accent`) |
+| 필터 | 세그먼트 토글 → 5.4와 같은 `.seg` 모양, `margin-bottom: --sp-4`, 버튼 사이 `gap: --sp-2`. 선택은 `aria-pressed="true"` (바탕 `--accent-soft`, 글자 `--accent`, 안쪽 테두리 1px `--accent`) |
 | `.pidx` | 위 `--line-strong` |
 | `li` | `grid: 40px minmax(0,1fr) auto`, `gap: --sp-4`, `padding: --sp-4 0`, 아래 `--line` |
 | `.n` | `--font-meta` `--fs-xs` `--text-3`, `padding-top: 3px` |
@@ -1599,7 +1599,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 |---|---|
 | 정렬 | `active` → `in-progress` → `archived`, 같은 상태 안은 콘텐츠 순서 |
 | 필터 | `All` + 건수가 1 이상인 상태만 버튼으로. 버튼 글자에 건수 |
-| 필터 변경 | 접힘을 다시 닫고(처음 5행), 번호는 걸러진 목록 기준으로 01부터 다시 매긴다. 포커스는 누른 버튼에 남는다 |
+| 필터 변경 | 접힘을 다시 닫고(처음 5행), 번호는 걸러진 목록 기준으로 01부터 다시 매긴다. 포커스는 누른 버튼에 남는다. 필터 바로 뒤 `.sr-only` `role="status"`에 결과 수(`ui.ts` `showing`, 5.19와 같은 문구). 로드 때는 비워 두어 알리지 않는다 (9장 상태 알림) |
 | 접힘 | 처음 5행. 넘치면 `Show all (n)` / `Show less`, `aria-expanded` |
 | JS 없음 | 필터·모두 보기 버튼 숨김, 전체 행 표시 |
 | 데모 없음 | 저장소 버튼만 |
@@ -2525,7 +2525,7 @@ DOM 순서 = 탭 순서. **내비게이션 먼저**: 본문 바로가기 → 상
 | 상황 | 방법 | 문구 (시안) |
 |---|---|---|
 | 전체 프로젝트 필터 | `<p class="pl-status" role="status">`에 결과 수 | "Showing n of N projects" / "전체 N건 중 n건 표시" |
-| 개인 프로젝트 상태 필터 | 시안은 알림 없음(버튼에 건수 표시). 같은 `role="status"` 한 줄 — 필터 두 곳의 동작을 맞추기 위해 | 문구는 tasks 5.7 |
+| 개인 프로젝트 상태 필터 | 시안은 알림 없음(버튼에 건수 표시). 같은 `role="status"` 한 줄을 `.sr-only`로 둔다(보이는 건수는 버튼에 이미 있음). 필터를 바꿀 때만 채우고 로드 때는 비워 둔다 (11.8 2026-11-12) | 전체 프로젝트 필터와 같은 `showing` 키: "Showing n of N projects" / "전체 N건 중 n건 표시" |
 | 이메일 복사 | 버튼 글자 "Copy" → "Copied" 1800ms, 동시에 `.sr-only aria-live="polite"` 영역에 문장 → 1800ms 뒤 비움 | "Email address copied" / "이메일 주소를 복사했습니다" |
 | 복사 버튼 이름 | `aria-label` "Copy email address: {주소}" (보이는 글자 "Copy"로 시작해 label-in-name 충족) | — |
 | 접힘 토글 ("모두 보기") | `aria-expanded`, `aria-controls` | — |
@@ -2565,6 +2565,7 @@ DOM 순서 = 탭 순서. **내비게이션 먼저**: 본문 바로가기 → 상
 
 - 최소 24×24px (WCAG 2.2 2.5.8). 컨트롤 높이 토큰 `--ctl-h-sm` 28 / `--ctl-h` 32 / `--ctl-h-lg` 36이 모두 충족(3장).
 - 문장 안 링크(사이드바 연락처, 본문 링크)는 예외 대상. 아이콘만 있는 버튼은 `--ctl-h-lg` 정사각.
+- CV 머리 연락처 링크 4개(줄마다 하나, 문장 아님)는 **화면에서만** `line-height: --ctl-h-sm` + 링크 `inline-block`으로 한 줄 28px 대상(`@media screen`). 인쇄·PDF는 `1.7` 그대로 (11.8 2026-11-12)
 
 ### 모션 줄이기 (`prefers-reduced-motion: reduce`)
 
@@ -2912,6 +2913,10 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 개인 프로젝트 `in-progress` 국문은 "진행 중"으로 사이트 전체 통일 (5.20 시안의 "개발 중" 대신) | → 5.20, `src/i18n/ui.ts`, 용어집 7절 |
 | 사이드바 CV는 **B안(기록표 행 `CV │ Download PDF ↓`)**. 대신 기록표에서 현재 소속(Now) 행을 뺀다 → 기록표 = Email · GitHub · LinkedIn · CV (2026-11-11). 시안 `docs/design-drafts/g5/cv-button/`. 현재 소속은 홈 Experience와 JSON-LD `worksFor`에 남고, CV 인쇄 머리(`headline · currentRole`)와 케이스 스터디 기록표는 그대로 | → 5.1, 6.2, 4장 와이어프레임, `ui.ts`(`now`·`placeholder` 키, `Badge` `placeholder` 종류 삭제), 용어집 7.3 |
 | 모바일(≤860px)은 메뉴 시트 연락처 줄 끝에 "Download CV (PDF) / CV 다운로드 (PDF)" 한 줄(현재 언어 PDF, `download`) (2026-11-11) | → 5.3, 9장 키보드 순서 |
+| 선택 상태를 색만으로 구분하지 않는다 (WCAG 1.4.1): 언어 세그먼트·개인 프로젝트 상태 필터(`.seg`)의 선택 항목에 `--accent` 1px 안쪽 테두리(`inset` `box-shadow`)를 더하고 바탕 `--accent-soft`는 유지. 밑줄과 안쪽 테두리 중 안쪽 테두리를 고름 (2026-11-12) | → 5.4 선택됨, 5.20, `global.css`. 알약 모양에 밑줄은 어색하고, 원장 선택 상자 `.sel.on`(테두리 `--accent`)과 같은 표현이며 크기가 변하지 않음. 대비: 테두리 대 선택 바탕 라이트 6.07·다크 6.86, 대 세그먼트 바탕 7.16·7.98 |
+| CV 머리 연락처 링크는 화면에서만 줄 간격을 넓혀 대상 높이 24px 이상 (WCAG 2.5.8). 인쇄·PDF 조판은 그대로 (2026-11-12) | → 9장 터치 대상, `Cv.astro` `@media screen`. 줄 높이 `--ctl-h-sm`(28px), 링크 `inline-block`. PDF 영·국 4쪽 그대로, 전 쪽 렌더링 픽셀 동일 |
+| 개인 프로젝트 상태 필터에 `.sr-only` `role="status"` 결과 알림. 문구는 전체 프로젝트 원장과 같은 `showing` 키, 필터를 바꿀 때만 (2026-11-12) | → 5.20, 9장 상태 알림. 9장 표(같은 `role="status"`)와 5.20(알림 없음)의 불일치를 9장 쪽으로 맞춤. 보이는 건수는 버튼에 이미 있어 화면에는 숨김 |
+| 언어 전환 크로스페이드(3장 `--m-lang`, 5.4, 9장)를 명세대로 구현: `no-preference` 안 `@view-transition { navigation: auto }` + `::view-transition-old/new(root)` `--m-lang`(테마 전환 중 `data-vt="theme"`과 겹치지 않게 `html:not([data-vt])`). 명세 이름("언어 전환 크로스페이드")과 331-c 모션 목록(테마·언어만)에 따라 언어가 바뀌는 이동에만 적용하고 같은 언어 이동은 `pagereveal`에서 건너뜀 (2026-11-12) | → 5.4 모션, `global.css`, `Base.astro`. `navigation: auto`만 두면 홈 → 케이스 같은 모든 같은 사이트 이동에 크로스페이드가 걸려 명세에 없는 모션이 생긴다 |
 
 | 6.17 중간 검토(2026-11-12): 현재 구현 그대로 유지. 케이스 사이드바 경계 ≤1100px와 아키텍처 표의 칸 폭(container query, ≤560px) 쌓기, 국문 단어 라벨 `--font-ko`, 모바일 소속 줄 제거를 승인. 제안했던 다듬기(국문 CV 키, HTML CV `noindex`, `order` 필드, `·` 줄바꿈 금지, 섹션 제목·직함 구분자 통일, 404 간격, 국문 건수 붙여쓰기)는 적용하지 않음 | → 3장, 5.24, 7장 |
 
