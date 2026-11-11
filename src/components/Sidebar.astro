@@ -1,6 +1,8 @@
 ---
 // Profile sidebar (DESIGN.md 5.1): record table on desktop, compact profile under the mobile bar (≤860px).
 import { getEntry } from 'astro:content';
+import { Picture } from 'astro:assets';
+import photo from '../assets/profile.jpg';
 import Icon from './Icon.astro';
 import { t, type Lang } from '../i18n/ui';
 import { CV_PDF } from '../cv-pdf.mjs';
@@ -20,8 +22,19 @@ const inShort = linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\//, '').repl
 ---
 
 <aside class="sidebar" aria-label={t(lang, 'profile')}>
-  {/* shortcut: 1200×1500 original served as-is; responsive sizes come with tasks 6.15. */}
-  <img class="photo" src="/images/profile.jpg" alt="" width="132" height="165" />
+  {/* 132px desktop / 64px mobile at 1x–3x (tasks 6.15). First-screen image, so eager + high priority. */}
+  <Picture
+    class="photo"
+    src={photo}
+    alt=""
+    width={132}
+    height={165}
+    widths={[64, 128, 132, 192, 264, 396]}
+    sizes="(max-width: 860px) 64px, 132px"
+    formats={['avif', 'webp']}
+    loading="eager"
+    fetchpriority="high"
+  />
   <div>
     <Name class="name">{profile.name[lang]}</Name>
     <p class="headline">{profile.headline[lang]}</p>
@@ -84,6 +97,7 @@ const inShort = linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\//, '').repl
   }
 
   .photo {
+    display: block;
     width: var(--sb-photo-w);
     aspect-ratio: 4 / 5;
     object-fit: cover;

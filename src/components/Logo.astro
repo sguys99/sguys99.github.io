@@ -1,6 +1,7 @@
 ---
 // Employer logo in one ink (DESIGN.md 5.11): five currentColor SVGs inline, genon PNG as a CSS mask.
 // Decorative by default (the row heading names the company); pass `label` where the logo stands in for the name.
+import { getImage } from 'astro:assets';
 import genon from '../assets/logos/genon.png';
 import pwc from '../assets/logos/pwc.svg?raw';
 import makinarocks from '../assets/logos/makinarocks.svg?raw';
@@ -41,6 +42,8 @@ interface Props {
 }
 
 const { name, label, small } = Astro.props;
+// Mask drawn at most ~100px wide (22px × 0.9 tall); 320px covers 3x screens (tasks 6.15).
+const mask = await getImage({ src: genon, width: 320 });
 const { s, dy = 0, svg } = logos[name] as { s: number; dy?: number; svg?: string };
 const a11y = label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': 'true' };
 // Root <svg> keeps its viewBox and fill only: CSS sets the height, the width follows the aspect ratio.
@@ -64,7 +67,7 @@ const fill = svg?.match(/<svg[^>]*?\sfill="([^"]*)"/)?.[1];
 ) : (
   <span
     class:list={['logo', 'logo-mask', { sm: small }]}
-    style={`--s: ${s}; --src: url(${genon.src}); aspect-ratio: ${genon.width} / ${genon.height}`}
+    style={`--s: ${s}; --src: url(${mask.src}); aspect-ratio: ${genon.width} / ${genon.height}`}
     {...a11y}
   />
 )}

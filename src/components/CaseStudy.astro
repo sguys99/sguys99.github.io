@@ -2,6 +2,8 @@
 // Case study page for both languages (DESIGN.md 5.24, 6.3; 323-c case file): project record sidebar + one numbered document.
 // Pages: src/pages/work/[slug].astro, src/pages/ko/work/[slug].astro. No entrance motion on this page (5.24).
 import { getCollection, getEntry } from 'astro:content';
+import { Picture } from 'astro:assets';
+import photo from '../assets/profile.jpg';
 import Page from '../layouts/Page.astro';
 import Head from './Head.astro';
 import Badge from './Badge.astro';
@@ -68,7 +70,17 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
   <aside class="sidebar" slot="sidebar" aria-label={t(lang, 'projectFacts')}>
     <div class="who">
       <a href={`${home}#about`}>
-        <img src="/images/profile.jpg" alt="" width="28" height="28" />
+        <Picture
+          src={photo}
+          alt=""
+          width={28}
+          height={28}
+          fit="cover"
+          position="top"
+          densities={[1, 2, 3]}
+          formats={['avif', 'webp']}
+          loading="eager"
+        />
         {/* One text box, so name and title wrap as words instead of shrinking side by side. */}
         <span>
           {profile.name[lang]} <span class="hl">{profile.headline[lang]}</span>
@@ -274,6 +286,7 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
   }
 
   .who img {
+    display: block;
     flex: none;
     width: 28px;
     height: 28px;
