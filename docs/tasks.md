@@ -205,7 +205,7 @@
 - [x] 6.9 Contact: 이메일(mailto), GitHub, LinkedIn, 의뢰 가능 분야 — `Contact.astro`: 2단(의뢰 가능 분야 01–05 | 이메일·`CopyButton`·GitHub·LinkedIn), `.mail`·`.links a`·`.eyebrow`는 컴포넌트 안. 모든 섹션이 채워져 `Home.astro`는 섹션을 순서대로 나열(빈 카드 분기 삭제). 복사(허용·권한 거부 시 textarea 대체 + 포커스 복귀), "Copied"·라이브 알림 1.8초 뒤 복귀, JS 꺼짐 버튼 숨김·mailto 동작, 페이지 끝 Contact 탭(1440×900/1400, 390), 마지막 카드→푸터 32px, 1440/390/360 × 라이트/다크 × en/ko 가로 스크롤·콘솔 오류 없음
 - [x] 6.10 케이스 스터디 템플릿과 페이지 (`/work/<slug>/`) — 목차 scroll-spy가 `[data-lang-alt]` 링크의 `hash`도 현재 절로 갱신해야 함 (6.1, 5.6) — `CaseStudy.astro`(기록표 사이드바·번호 문서·결정 표·아키텍처 표) + `CasePager.astro`, 라우트 `src/pages/work/[slug].astro`·`ko/work/[slug].astro`(`caseList()`: `featured` + `caseStudy`, `order` 순 5건 × en/ko, 그린소재 없음). `Page`에 `current`·`sidebar` 슬롯·`sheet` 링크, `Topbar`는 케이스에서 탭을 spy에서 빼고 Work 고정, 홈 spy를 판정선 20%로 재사용(목차·시트·모바일 바·언어 링크 hash), `MenuSheet` `links`(← 대표 프로젝트 + 절). head는 `Head` 재사용(제목 · 이름, `summary`, canonical·hreflang). 11.6 두 건 해결(행간 토큰 병합, `.flow` 넘침 → 대상만 nowrap + 칸 폭 container query로 쌓인 표), 사이드바 280px 경계 ≤1100 등 구현 기본값 8건 11.8. 360–1440px 13개 폭 × en/ko × 5건 카드·가로 넘침 0, 1440/900/390/360 × 라이트/다크 스크린샷, 콘솔 오류 없음, 홈 링크 → 케이스 → `← Selected Work`(`/#work`)·탭 복귀, 목차 클릭·스크롤·페이지 끝 Outcome, 언어 전환 `#problem` 유지, 키보드 순서, JS 꺼짐(탭 Work 표시·앵커·이전/다음) 확인. 홈 spy 회귀 없음
 - [x] 6.11 인쇄용 CV 페이지 (`/cv/`, `/ko/cv/`): A4 조판, 페이지 나눔 — `src/components/Cv.astro`(Base 직접, 사이드바·메뉴·푸터 없음, 사이트 링크 없음) + `src/pages/cv.astro`·`ko/cv.astro`: 도구 막대(반대 언어 링크, `ThemeToggle` 글자 모드, 인쇄 버튼은 JS 있을 때만), 머리, 섹션 13개(333-a 순서, 연도만, 등록번호·"50+" 없음, 진행 중 배지), `@page` A4 여백·하단 이름/쪽 번호(`counter(pages)`, 하단 왼쪽 글자는 라우트별 인라인). 구현 기본값 8건 DESIGN.md 11.8(라벨 `break-after` 제거, 인쇄 팔레트 선택자 버그 수정 등). 1440/390/360 × 라이트/다크 × en/ko 가로 스크롤 0·콘솔 오류 없음, Playwright `page.pdf` A4로 영·국 각 4쪽, 쪽 번호 n / 4, 라벨만 남는 쪽 끝·행 쪼개짐 없음 확인
-- [ ] 6.12 PDF 자동 생성: 빌드 후 CV 페이지를 영문/국문 PDF로 출력, 다운로드 링크 연결
+- [x] 6.12 PDF 자동 생성: 빌드 후 CV 페이지를 영문/국문 PDF로 출력, 다운로드 링크 연결 — devDependency `playwright` 추가, `scripts/cv-pdf.mjs`(`dist/`를 `node:http`로 띄워 `/cv/`·`/ko/cv/`를 `page.pdf` A4·`preferCSSPageSize`·배경 없음·라이트로 출력), `npm run build` = `astro build && node scripts/cv-pdf.mjs`. 파일 `/cv/kwang-myung-yu-cv.pdf`·`/ko/cv/yu-kwang-myung-cv-ko.pdf`(`dist/`에만, 경로는 `src/cv-pdf.mjs`). 사이드바 Download CV → 현재 언어 PDF(`download`), Placeholder 배지 제거. 활성 모양은 임시, 시안 A·B·C `docs/design-drafts/g5/cv-button/` 사용자 선택 대기(DESIGN.md 11.8). 깨끗한 빌드로 영·국 각 4쪽(약 210KB·730KB), Title 메타 확인(Author 없음), 링크 200·국문 페이지는 국문 PDF, 키보드 포커스, 360px 가로 스크롤 없음, `git status`에 PDF 없음
 - [ ] 6.13 404 페이지
 - [ ] 6.14 국문 라우트 전체 (`/ko/…`)가 영문과 같은 구성인지 확인
 - [ ] 6.15 이미지 최적화 (프로필 사진, 프로젝트 이미지: AVIF/WebP, 크기별 제공)
@@ -241,7 +241,7 @@
 
 ## 단계 8. 배포와 공개
 
-- [ ] 8.1 GitHub Actions 워크플로 작성: 빌드 → PDF 생성 → Pages 배포 (`master` 대상) — `actions/checkout`에 `fetch-depth: 0` 필요 (얕은 복제면 푸터 최종 수정일이 매 배포 날짜로 바뀜, 5.9)
+- [ ] 8.1 GitHub Actions 워크플로 작성: 빌드 → PDF 생성 → Pages 배포 (`master` 대상) — `actions/checkout`에 `fetch-depth: 0` 필요 (얕은 복제면 푸터 최종 수정일이 매 배포 날짜로 바뀜, 5.9). `npm run build`가 PDF까지 만드므로 빌드 전에 `npx playwright install --with-deps chromium` 필요(6.12)
 - [ ] 8.2 **[확인]** 저장소 Settings → Pages의 Source를 GitHub Actions로 설정 (사용자가 직접)
 - [ ] 8.3 **[확인]** GoatCounter 계정 생성 후 사이트 코드 전달 (사용자가 직접), 집계 스크립트 적용
 - [ ] 8.4 README 작성, 라이선스 표기 결정 (코드와 콘텐츠의 권리 범위) **[확인]**

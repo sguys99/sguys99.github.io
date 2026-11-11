@@ -2,8 +2,8 @@
 // Profile sidebar (DESIGN.md 5.1): record table on desktop, compact profile under the mobile bar (≤860px).
 import { getEntry } from 'astro:content';
 import Icon from './Icon.astro';
-import Badge from './Badge.astro';
 import { t, type Lang } from '../i18n/ui';
+import { CV_PDF } from '../cv-pdf.mjs';
 
 interface Props {
   lang: Lang;
@@ -60,9 +60,10 @@ const inShort = linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\//, '').repl
       </a>
     </li>
   </ul>
-  {/* Disabled until the PDF exists (tasks 6.12): no href, so it is not focusable. */}
-  <a class="cv" role="link" aria-disabled="true">
-    {t(lang, 'cv')} <Badge lang={lang} kind="placeholder" />
+  {/* PDF is written into dist/ by scripts/cv-pdf.mjs (tasks 6.12). Look is provisional (DESIGN.md 11.8). */}
+  <a class="cv" href={CV_PDF[lang]} download>
+    {t(lang, 'cv')}
+    <Icon name="download" size="sm" />
   </a>
 </aside>
 
@@ -179,13 +180,20 @@ const inShort = linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\//, '').repl
     justify-content: space-between;
     gap: var(--sp-2);
     padding: var(--sp-2) var(--sp-3);
-    border: 1px dashed var(--line-strong);
+    border: 1px solid var(--line-strong);
     border-radius: var(--radius-sm);
     font-size: var(--fs-sm);
     font-weight: var(--fw-medium);
-    color: var(--text-2);
+    color: var(--text);
     text-decoration: none;
-    cursor: not-allowed;
+    transition:
+      color var(--dur) ease,
+      border-color var(--dur) ease;
+  }
+
+  .cv:hover {
+    color: var(--accent);
+    border-color: var(--accent);
   }
 
   /* Mobile: compact profile below the bar (DESIGN.md 4장 모바일 골격, 5.1 반응형) */

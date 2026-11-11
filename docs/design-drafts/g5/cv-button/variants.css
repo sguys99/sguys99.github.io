@@ -1,0 +1,49 @@
+/* CV button drafts, injected over the built site by shots.mjs. Tokens only (tokens.css). */
+
+/* A. Outline button: the provisional implementation as built (Sidebar.astro). No overrides on desktop. */
+
+/* B. Fifth record row: hide the button, the row reuses the record's key/value styles. */
+html[data-cv='b'] .sidebar .cv {
+  display: none;
+}
+html[data-cv='b'] .sidebar .cv-row a.v {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+html[data-cv='b'] .sidebar .cv-row .icon {
+  display: block;
+}
+
+/* C. Soft accent block: icon left, format label right, accent-soft fill. */
+html[data-cv='c'] .sidebar .cv {
+  justify-content: flex-start;
+  border-color: transparent;
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: var(--sp-3);
+}
+html[data-cv='c'] .sidebar .cv .fmt {
+  margin-left: auto;
+  font-family: var(--font-meta);
+  font-size: var(--fs-2xs);
+  letter-spacing: var(--ls-label);
+  color: var(--text-3);
+}
+html[data-cv='c'] .sidebar .cv:hover {
+  border-color: var(--accent);
+}
+
+/* Mobile (all variants): CV as the last item of the compact contact row. Desktop hides it. */
+/* !important: beats the sidebar's scoped `.contact li` grid rule (drafts only). */
+html .sidebar li.cv-m {
+  display: none !important;
+}
+@media (max-width: 860px) {
+  html .sidebar li.cv-m {
+    display: block !important;
+  }
+  html[data-cv='b'] .sidebar .cv-row {
+    display: none !important;
+  }
+}
