@@ -10,6 +10,7 @@ import Experience from './Experience.astro';
 import PersonalProjects from './PersonalProjects.astro';
 import IpIndex from './IpIndex.astro';
 import Teaching from './Teaching.astro';
+import Awards from './Awards.astro';
 import { t, SECTIONS, type Lang } from '../i18n/ui';
 import { getEntry } from 'astro:content';
 
@@ -30,6 +31,8 @@ const title = `${profile.name[lang]} · ${profile.headline[lang]}`;
   {SECTIONS.filter((id) => !['about', 'work', 'experience'].includes(id)).map((id) =>
     id === 'teaching' ? (
       <Teaching lang={lang} />
+    ) : id === 'awards' ? (
+      <Awards lang={lang} />
     ) : id === 'personal' ? (
       <PersonalProjects lang={lang} />
     ) : id === 'ip' ? (
