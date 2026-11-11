@@ -1,0 +1,11 @@
+---
+import CaseStudy, { caseList } from '../../components/CaseStudy.astro';
+
+export async function getStaticPaths() {
+  return (await caseList()).map((p) => ({ params: { slug: p.id } }));
+}
+
+const { slug } = Astro.params;
+---
+
+<CaseStudy lang="en" slug={slug} />

@@ -1,0 +1,91 @@
+---
+// Previous / next case study (DESIGN.md 5.24.5): sidebar foot on desktop, `end` at the document end on ≤860px.
+// The first case has no Previous, the last no Next (no wrap). Link name = label + full title; ellipsis is visual only.
+import Icon from './Icon.astro';
+import { t, type Lang } from '../i18n/ui';
+
+type Link = { href: string; title: string };
+
+interface Props {
+  lang: Lang;
+  prev?: Link;
+  next?: Link;
+  end?: boolean;
+}
+
+const { lang, prev, next, end = false } = Astro.props;
+---
+
+<nav class:list={['pn', { end }]} aria-label={t(lang, 'caseStudies')}>
+  {prev && (
+    <a class="pn-a" href={prev.href} rel="prev">
+      <span class="pn-k">
+        <Icon name="back" size="xs" />
+        {t(lang, 'previous')}
+      </span>
+      <span class="pn-t">{prev.title}</span>
+    </a>
+  )}
+  {next && (
+    <a class="pn-a" href={next.href} rel="next">
+      <span class="pn-k">
+        {t(lang, 'next')}
+        <Icon name="arrow" size="xs" />
+      </span>
+      <span class="pn-t">{next.title}</span>
+    </a>
+  )}
+</nav>
+
+<style>
+  .pn {
+    display: grid;
+    gap: var(--sp-1);
+  }
+
+  .pn-a {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--sp-2);
+    align-items: baseline;
+    padding: 3px 0;
+    font-size: var(--fs-sm);
+    color: var(--text-2);
+    text-decoration: none;
+    transition: color var(--dur) ease;
+  }
+
+  .pn-a:hover {
+    color: var(--accent);
+  }
+
+  .pn-k {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-1);
+    min-width: 64px;
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  .pn-t {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Document end on ≤860px: full-width rows, titles wrap. */
+  .end {
+    gap: 0;
+  }
+
+  .end .pn-a {
+    padding: var(--sp-3) 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .end .pn-t {
+    white-space: normal;
+  }
+</style>

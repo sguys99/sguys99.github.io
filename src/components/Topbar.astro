@@ -10,24 +10,28 @@ interface Props {
   lang: Lang;
   /** Case study variant (332-a2-case): tabs link to home sections and this tab stays current, no scroll-spy. */
   current?: SectionId;
+  /** Mobile bar section name before the scroll-spy runs (case study: its first section). */
+  curLabel?: string;
 }
 
-const { lang, current } = Astro.props;
+const { lang, current, curLabel } = Astro.props;
 const base = current ? homePath(lang) : '';
 const other: Lang = lang === 'en' ? 'ko' : 'en';
 const profile = (await getEntry('profile', 'profile'))!.data;
 ---
 
-<header class="topbar" data-spy={current ? undefined : ''}>
+{/* data-spy = judgment line as a share of the viewport: home 25% (5.2), case study 20% (6.3). */}
+<header class="topbar" data-spy={current ? '0.2' : '0.25'}>
   <div class="bar">
-    <a class="bar-id" href="#about">
+    <a class="bar-id" href={current ? `${base}#${current}` : '#about'}>
       <span class="bar-name">{profile.name[lang]}</span>
       <span class="bar-cur" data-bar-cur>
-        {t(lang, 'about')}
+        {curLabel ?? t(lang, 'about')}
       </span>
     </a>
     <nav aria-label={t(lang, 'sections')}>
-      <ul class="tabs" data-nav>
+      {/* Case study: tabs stay out of the spy ([data-nav]), Work stays current. */}
+      <ul class="tabs" data-nav={current ? undefined : ''}>
         {TABS.map((tab) => (
           <li>
             <a
@@ -70,13 +74,13 @@ const profile = (await getEntry('profile', 'profile'))!.data;
 </header>
 
 <script>
-  // Current section (DESIGN.md 5.2, 6.2): tabs and sheet links get aria-current, the ink slides
-  // under the current tab, and the mobile bar shows the section name.
+  // Current section (DESIGN.md 5.2, 6.2, 6.3): tabs and sheet links (case study: contents and sheet links)
+  // get aria-current, the ink slides under the current tab, and the mobile bar shows the section name.
   const topbar = document.querySelector<HTMLElement>('.topbar')!;
   const tabs = topbar.querySelector<HTMLElement>('.tabs')!;
   const ink = topbar.querySelector<HTMLElement>('.ink')!;
   const barCur = topbar.querySelector<HTMLElement>('[data-bar-cur]')!;
-  const sections = [...document.querySelectorAll<HTMLElement>('main > section[id]')];
+  const sections = [...document.querySelectorAll<HTMLElement>('main > section[id], .d-sec[id]')];
   const langAlt = [...document.querySelectorAll<HTMLAnchorElement>('[data-lang-alt]')];
 
   function placeInk() {
@@ -93,7 +97,8 @@ const profile = (await getEntry('profile', 'profile'))!.data;
   // First placement without transition.
   requestAnimationFrame(() => requestAnimationFrame(() => ink.classList.add('ready')));
 
-  if (topbar.hasAttribute('data-spy') && sections.length) {
+  if (sections.length) {
+    const share = Number(topbar.dataset.spy);
     let cur = '';
     let hold = '';
     let alt = '';
@@ -111,9 +116,9 @@ const profile = (await getEntry('profile', 'profile'))!.data;
       placeInk();
     };
 
-    // Last section whose top passed the line (bar bottom + 25% of the viewport); the last one at page end.
+    // Last section whose top passed the line (bar bottom + 25% / 20% of the viewport); the last one at page end.
     const spy = () => {
-      const line = topbar.getBoundingClientRect().bottom + innerHeight * 0.25;
+      const line = topbar.getBoundingClientRect().bottom + innerHeight * share;
       let id = sections[0].id;
       for (const s of sections) if (s.getBoundingClientRect().top <= line) id = s.id;
       if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2)
@@ -148,7 +153,7 @@ const profile = (await getEntry('profile', 'profile'))!.data;
       addEventListener(ev, () => (hold = ''), { passive: true });
     document.addEventListener('click', (e) => {
       const a = (e.target as Element).closest<HTMLAnchorElement>('[data-nav] a, .bar-id');
-      if (!a?.hash) return;
+      if (!a?.hash || a.pathname !== location.pathname) return;
       hold = a.hash.slice(1);
       setCurrent(hold);
     });

@@ -1,0 +1,721 @@
+---
+// Case study page for both languages (DESIGN.md 5.24, 6.3; 323-c case file): project record sidebar + one numbered document.
+// Pages: src/pages/work/[slug].astro, src/pages/ko/work/[slug].astro. No entrance motion on this page (5.24).
+import { getCollection, getEntry } from 'astro:content';
+import Page from '../layouts/Page.astro';
+import Head from './Head.astro';
+import Badge from './Badge.astro';
+import Icon from './Icon.astro';
+import CasePager from './CasePager.astro';
+import { t, fmtPeriod, homePath, type Lang } from '../i18n/ui';
+
+/** Featured projects with a case study, in `order` (6.3): page list, pager order and the `01 / 05` position. */
+export async function caseList() {
+  return (await getCollection('projects', (p) => p.data.featured && !!p.data.caseStudy)).sort(
+    (a, b) => (a.data.order ?? Infinity) - (b.data.order ?? Infinity),
+  );
+}
+
+interface Props {
+  lang: Lang;
+  slug: string;
+}
+
+const { lang, slug } = Astro.props;
+const list = await caseList();
+const i = list.findIndex((p) => p.id === slug);
+const p = list[i].data;
+const cs = p.caseStudy!;
+const profile = (await getEntry('profile', 'profile'))!.data;
+const home = homePath(lang);
+const pad = (n: number) => String(n).padStart(2, '0');
+const href = (id: string) => `${home}work/${id}/`;
+const link = (e?: (typeof list)[number]) => e && { href: href(e.id), title: e.data.title[lang] };
+const title = `${p.title[lang]} · ${profile.name[lang]}`;
+const live = p.period.status === 'present' || p.period.status === 'planned';
+const client = p.client && (p.client.public ? p.client.name[lang] : p.client.label[lang]);
+
+// Numbered sections (5.24.3); Architecture only when present, so later numbers move up.
+const secs = (
+  [
+    ['context', cs.context],
+    ['problem', cs.problem],
+    ['role', cs.role],
+    ['approach', cs.approach],
+    ['arch', []],
+    ['outcome', cs.outcome],
+  ] as const
+)
+  .filter(([id]) => id !== 'arch' || cs.architecture)
+  .map(([id, items]) => ({ id, items, label: t(lang, `cs_${id}`) }));
+
+const arch = cs.architecture;
+const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
+---
+
+<Page
+  lang={lang}
+  title={title}
+  current="work"
+  curLabel={secs[0].label}
+  sheet={[
+    { href: `${home}#work`, label: t(lang, 'work'), back: true },
+    ...secs.map((s) => ({ href: `#${s.id}`, label: s.label })),
+  ]}
+>
+  <Head slot="head" lang={lang} title={title} description={p.summary[lang]} />
+
+  <aside class="sidebar" slot="sidebar" aria-label={t(lang, 'projectFacts')}>
+    <div class="who">
+      <a href={`${home}#about`}>
+        <img src="/images/profile.jpg" alt="" width="28" height="28" />
+        {/* One text box, so name and title wrap as words instead of shrinking side by side. */}
+        <span>
+          {profile.name[lang]} <span class="hl">{profile.headline[lang]}</span>
+        </span>
+      </a>
+    </div>
+    <div>
+      <p class="crumb">
+        <a href={`${home}#work`}>
+          <Icon name="back" size="sm" />
+          {t(lang, 'work')}
+        </a>
+        <span class="pos num">
+          {pad(i + 1)} / {pad(list.length)}
+        </span>
+      </p>
+      <h1 class="cs-title">{p.title[lang]}</h1>
+    </div>
+    <dl class="rec">
+      {client && (
+        <div>
+          <dt>{t(lang, 'client')}</dt>
+          <dd>{client}</dd>
+        </div>
+      )}
+      {p.org && (
+        <div>
+          <dt>{t(lang, 'organization')}</dt>
+          <dd>{p.org[lang]}</dd>
+        </div>
+      )}
+      <div>
+        <dt>{t(lang, 'period')}</dt>
+        <dd>
+          <span class="num">{fmtPeriod(lang, p.period)}</span>
+          {p.period.status === 'planned' && <Badge lang={lang} kind="in-progress" />}
+        </dd>
+      </div>
+      {p.lead && (
+        <div>
+          <dt>{t(lang, 'role')}</dt>
+          <dd>{t(lang, 'lead')}</dd>
+        </div>
+      )}
+      <div>
+        <dt>{t(lang, 'stack')}</dt>
+        <dd class="stk">{p.stack.join(' · ')}</dd>
+      </div>
+    </dl>
+    <nav class="toc" aria-label={t(lang, 'onThisPage')}>
+      {/* aria-current is set by the scroll-spy in Topbar.astro. */}
+      <ol data-nav>
+        {secs.map((s) => (
+          <li>
+            <a href={`#${s.id}`}>{s.label}</a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+    <div class="side-foot">
+      <CasePager lang={lang} prev={link(list[i - 1])} next={link(list[i + 1])} />
+    </div>
+  </aside>
+
+  <article class="doc">
+    <p class="lede">{p.summary[lang]}</p>
+    {secs.map((s, n) => (
+      <section class="d-sec" id={s.id} aria-labelledby={`h-${s.id}`}>
+        <span class="no num" aria-hidden="true">
+          {pad(n + 1)}
+        </span>
+        <div>
+          <div class="hd">
+            <h2 id={`h-${s.id}`}>{s.label}</h2>
+            {s.id === 'outcome' && live && <Badge lang={lang} kind="in-progress" />}
+          </div>
+          {s.id === 'arch' && arch ? (
+            <table class="tbl arch">
+              <thead>
+                <tr>
+                  <th scope="col">{t(lang, 'layer')}</th>
+                  <th scope="col">{t(lang, 'components')}</th>
+                  <th scope="col">{t(lang, 'flows')}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {arch.layers.map((l, j) => {
+                  const outs = (arch.flows ?? []).filter((f) => f.from === l.id);
+                  return (
+                    <tr>
+                      <td>
+                        <span class="n num">{pad(j + 1)}</span> {l.label[lang]}
+                      </td>
+                      <td data-l={t(lang, 'components')}>
+                        <ul>
+                          {l.nodes.map((node) => (
+                            <li>{node[lang]}</li>
+                          ))}
+                        </ul>
+                      </td>
+                      <td data-l={outs.length ? t(lang, 'flows') : undefined}>
+                        {outs.length > 0 && (
+                          <span class="flow-col">
+                            {outs.map((f) => {
+                              const k = layerNo.get(f.to)!;
+                              const back = k < j;
+                              return (
+                                <span class:list={['flow', { back }]}>
+                                  <span class="tgt">
+                                    <span aria-hidden="true">{back ? '↩' : '→'}</span>
+                                    <span class="sr-only">
+                                      {t(lang, back ? 'flowBack' : 'flowTo')}
+                                    </span>{' '}
+                                    <span class="num">{pad(k + 1)}</span>{' '}
+                                    {arch.layers[k].label[lang]}
+                                  </span>
+                                  {f.label && [' ', <em>· {f.label[lang]}</em>]}
+                                </span>
+                              );
+                            })}
+                          </span>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          ) : (
+            <ul class:list={['bl', { oc: s.id === 'outcome' }]}>
+              {s.items.map((b) => (
+                <li>{b[lang]}</li>
+              ))}
+            </ul>
+          )}
+          {s.id === 'approach' && cs.decisions && (
+            <>
+              <h3>{t(lang, 'keyDecisions')}</h3>
+              <table class="tbl">
+                <thead>
+                  <tr>
+                    <th scope="col">{t(lang, 'decision')}</th>
+                    <th scope="col">{t(lang, 'why')}</th>
+                    <th scope="col">{t(lang, 'tradeoff')}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {cs.decisions.map((d) => (
+                    <tr>
+                      <td>{d.title[lang]}</td>
+                      <td data-l={t(lang, 'why')}>{d.rationale[lang]}</td>
+                      <td class="to" data-l={t(lang, 'tradeoff')}>
+                        {d.tradeoff[lang]}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </>
+          )}
+        </div>
+      </section>
+    ))}
+  </article>
+  <div class="pn-end">
+    <CasePager lang={lang} prev={link(list[i - 1])} next={link(list[i + 1])} end />
+  </div>
+</Page>
+
+<style>
+  /* Record sidebar (5.24.1) */
+  .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100dvh;
+    overflow-y: auto;
+    padding: var(--sp-6) var(--sp-6) var(--sp-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-5);
+    border-right: 1px solid var(--line);
+  }
+
+  .who a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    min-width: 0;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-strong);
+    text-decoration: none;
+    transition: color var(--dur) ease;
+  }
+
+  .who .hl {
+    color: var(--text-3);
+    font-weight: var(--fw-regular);
+  }
+
+  .who a:hover {
+    color: var(--accent);
+  }
+
+  .who img {
+    flex: none;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--photo-ring);
+    object-fit: cover;
+    object-position: top;
+    filter: var(--photo-filter);
+  }
+
+  .crumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-1) var(--sp-3);
+    margin-bottom: var(--sp-3);
+    font-size: var(--fs-sm);
+  }
+
+  .crumb a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-1h);
+    color: var(--text-2);
+    font-weight: var(--fw-medium);
+    text-decoration: none;
+    transition: color var(--dur) ease;
+  }
+
+  .crumb a:hover {
+    color: var(--accent);
+  }
+
+  .pos {
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  /* Line heights merged into existing tokens (7장, 11.8). */
+  .cs-title {
+    font-family: var(--font-display);
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-title);
+    line-height: var(--lh-title);
+    letter-spacing: var(--ls-title);
+    text-wrap: balance;
+  }
+
+  html:lang(ko) .cs-title {
+    line-height: var(--lh-tagline-ko);
+    letter-spacing: var(--ls-title-ko);
+  }
+
+  .rec {
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .rec > div {
+    display: grid;
+    grid-template-columns: 96px minmax(0, 1fr);
+    gap: var(--sp-3);
+    align-items: baseline;
+    padding: var(--sp-2) 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  dt {
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-strong);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  html:lang(ko) dt {
+    font-size: var(--fs-xs);
+    letter-spacing: var(--ls-label-ko);
+    text-transform: none;
+  }
+
+  dd {
+    font-size: var(--fs-sm);
+    line-height: var(--lh-row);
+  }
+
+  .stk {
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    line-height: 1.7;
+    color: var(--text-2);
+  }
+
+  /* Numbered contents (5.24.2) */
+  .toc ol {
+    list-style: none;
+    counter-reset: s;
+  }
+
+  .toc a {
+    display: flex;
+    gap: var(--sp-3);
+    padding: 3px 0;
+    font-size: var(--fs-sm);
+    color: var(--text-3);
+    text-decoration: none;
+    transition: color var(--dur) ease;
+  }
+
+  /* Number in --text-3, not the draft's --line-strong (1.62:1, 5.24.2). */
+  .toc a::before {
+    counter-increment: s;
+    content: counter(s, decimal-leading-zero);
+    padding-top: 1px;
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    font-variant-numeric: tabular-nums;
+    color: var(--text-3);
+    transition: color var(--dur) ease;
+  }
+
+  .toc a:hover,
+  .toc a[aria-current='true'] {
+    color: var(--text);
+  }
+
+  .toc a[aria-current='true'] {
+    font-weight: var(--fw-medium);
+  }
+
+  .toc a[aria-current='true']::before {
+    color: var(--accent);
+  }
+
+  .side-foot {
+    margin-top: auto;
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--line);
+  }
+
+  /* Document (5.24.3): one card, no entrance motion. */
+  .doc {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: var(--sp-7);
+  }
+
+  .lede {
+    max-width: 60ch;
+    margin-bottom: var(--sp-6);
+    font-size: var(--fs-lg);
+    line-height: 1.55;
+  }
+
+  .d-sec {
+    display: grid;
+    grid-template-columns: var(--col-idx) minmax(0, 1fr);
+    gap: 0 var(--sp-3);
+    padding: var(--sp-6) 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .no {
+    font-family: var(--font-meta);
+    font-size: var(--fs-sm);
+    line-height: 1.75;
+    color: var(--accent);
+  }
+
+  .hd {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: var(--sp-3);
+  }
+
+  h2 {
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-title);
+    line-height: var(--lh-row);
+    letter-spacing: var(--ls-title);
+  }
+
+  html:lang(ko) h2 {
+    letter-spacing: var(--ls-title-ko);
+  }
+
+  h3 {
+    margin: var(--sp-5) 0 var(--sp-2);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-strong);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  html:lang(ko) h3 {
+    font-size: var(--fs-sm);
+    letter-spacing: var(--ls-label-ko);
+    text-transform: none;
+  }
+
+  .bl {
+    list-style: none;
+    display: grid;
+    gap: var(--sp-2);
+  }
+
+  .bl li {
+    position: relative;
+    max-width: var(--measure);
+    padding-left: var(--sp-4);
+    color: var(--text-2);
+  }
+
+  .bl li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.8em;
+    width: 7px;
+    height: 1px;
+    background: var(--text-3);
+  }
+
+  .oc li {
+    color: var(--text);
+    font-weight: var(--fw-medium);
+  }
+
+  .oc li::before {
+    top: 0.6em;
+    width: var(--dot);
+    height: var(--dot);
+    border-radius: 1px;
+    background: var(--accent);
+  }
+
+  /* Decision and architecture tables (5.24.4) */
+  .tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-sm);
+  }
+
+  th {
+    padding: 0 var(--sp-3) var(--sp-2) 0;
+    border-bottom: 1px solid var(--line-strong);
+    text-align: left;
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-medium);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  html:lang(ko) th {
+    font-size: var(--fs-xs);
+    letter-spacing: 0;
+  }
+
+  td {
+    vertical-align: top;
+    padding: var(--sp-3) var(--sp-3) var(--sp-3) 0;
+    border-bottom: 1px solid var(--line);
+    line-height: 1.5;
+    color: var(--text-2);
+  }
+
+  tr:last-child td {
+    border-bottom: 0;
+  }
+
+  td:first-child {
+    color: var(--text);
+    font-weight: var(--fw-medium);
+  }
+
+  .arch td:first-child {
+    width: 1%;
+    white-space: nowrap;
+  }
+
+  .to {
+    color: var(--text-3);
+  }
+
+  .n {
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-regular);
+    color: var(--accent);
+  }
+
+  td ul {
+    list-style: none;
+    display: grid;
+    gap: var(--sp-0);
+  }
+
+  .flow-col {
+    display: grid;
+    gap: var(--sp-0);
+  }
+
+  .flow {
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    color: var(--text-2);
+  }
+
+  /* Whole flows on one line overflowed the card at 360–1100px (11.6, 11.8): only the target and the label keep together. */
+  .tgt,
+  .flow em {
+    white-space: nowrap;
+  }
+
+  /* Korean names in the mono face get wide spaces (11.8, same as .st in 6.5). */
+  html:lang(ko) .flow {
+    font-family: var(--font-ko);
+  }
+
+  .flow.back {
+    color: var(--text-3);
+  }
+
+  .flow em {
+    font-style: normal;
+    color: var(--text-3);
+  }
+
+  .pn-end {
+    display: none;
+  }
+
+  @media (max-width: 1100px) {
+    .doc {
+      padding: var(--sp-6);
+    }
+  }
+
+  /* Mobile: path, title and record only; contents go to the menu sheet, prev/next to the document end. */
+  @media (max-width: 860px) {
+    .sidebar {
+      position: static;
+      display: block;
+      height: auto;
+      overflow: visible;
+      padding: var(--sp-5) var(--sp-4) var(--sp-4);
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .sidebar > * + * {
+      margin-top: var(--sp-4);
+    }
+
+    .who,
+    .toc,
+    .side-foot {
+      display: none;
+    }
+
+    .doc {
+      padding: var(--sp-5) var(--sp-4);
+    }
+
+    .pn-end {
+      display: block;
+      margin-top: var(--sp-2);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .d-sec {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .no {
+      line-height: 1.4;
+    }
+  }
+
+  /* Tables become stacked records when their column is narrow, not only at ≤560px viewports: the architecture
+     table needs up to ~480px and overflowed the card at 561–1000px (11.6, 11.8). thead stays for screen readers. */
+  .d-sec > div {
+    container-type: inline-size;
+  }
+
+  @container (max-width: 560px) {
+    .tbl,
+    tbody,
+    tr,
+    td {
+      display: block;
+      width: auto;
+    }
+
+    thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    tr {
+      padding: var(--sp-3) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    tr:last-child {
+      border-bottom: 0;
+    }
+
+    td {
+      padding: 0 0 var(--sp-1);
+      border: 0;
+    }
+
+    td[data-l]::before {
+      content: attr(data-l);
+      display: block;
+      margin-top: var(--sp-1);
+      font-size: var(--fs-2xs);
+      font-weight: var(--fw-regular);
+      letter-spacing: var(--ls-eyebrow);
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    html:lang(ko) td[data-l]::before {
+      font-size: var(--fs-xs);
+      letter-spacing: 0;
+    }
+
+    .arch td:first-child {
+      width: auto;
+      white-space: normal;
+    }
+  }
+</style>

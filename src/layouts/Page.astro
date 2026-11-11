@@ -6,14 +6,20 @@ import Sidebar from '../components/Sidebar.astro';
 import Topbar from '../components/Topbar.astro';
 import MenuSheet from '../components/MenuSheet.astro';
 import Footer from '../components/Footer.astro';
-import { t, type Lang } from '../i18n/ui';
+import { t, type Lang, type SectionId } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
   title: string;
+  /** Case study (DESIGN.md 6.3): home tab kept current, case sidebar from the "sidebar" slot. */
+  current?: SectionId;
+  /** Mobile bar section name before the scroll-spy runs. */
+  curLabel?: string;
+  /** Menu sheet links replacing the home tabs (case study). */
+  sheet?: { href: string; label: string; back?: boolean }[];
 }
 
-const { lang, title } = Astro.props;
+const { lang, title, current, curLabel, sheet } = Astro.props;
 ---
 
 <Base lang={lang} title={title}>
@@ -21,15 +27,15 @@ const { lang, title } = Astro.props;
   <a class="skip" href="#main">
     {t(lang, 'skip')}
   </a>
-  <div class="shell">
-    <Topbar lang={lang} />
-    <Sidebar lang={lang} />
+  <div class:list={['shell', { case: current }]}>
+    <Topbar lang={lang} current={current} curLabel={curLabel} />
+    {Astro.slots.has('sidebar') ? <slot name="sidebar" /> : <Sidebar lang={lang} />}
     <main id="main" tabindex="-1">
       <slot />
     </main>
     <Footer lang={lang} />
   </div>
-  <MenuSheet lang={lang} />
+  <MenuSheet lang={lang} links={sheet} />
 </Base>
 
 <style>
@@ -94,6 +100,11 @@ const { lang, title } = Astro.props;
     grid-row: 3;
   }
 
+  /* Case file sidebar is wider (DESIGN.md 4장 케이스 스터디 골격). */
+  .shell.case {
+    --sidebar: 340px;
+  }
+
   main:focus {
     outline: none;
   }
@@ -105,6 +116,13 @@ const { lang, title } = Astro.props;
 
     main {
       padding: var(--sp-6);
+    }
+  }
+
+  /* ≤1100px (spec 1000px): at 340px six tabs + toggles overflowed the bar by up to 11px at 1001px (3.3.2, 11.8). */
+  @media (max-width: 1100px) {
+    .shell.case {
+      --sidebar: 280px;
     }
   }
 

@@ -8,9 +8,11 @@ import { t, TABS, type Lang } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
+  /** Case study (5.2 케이스 변형): "← Selected Work" + its sections instead of the home tabs. */
+  links?: { href: string; label: string; back?: boolean }[];
 }
 
-const { lang } = Astro.props;
+const { lang, links } = Astro.props;
 const { email, github, linkedin } = (await getEntry('profile', 'profile'))!.data.contact;
 ---
 
@@ -25,22 +27,37 @@ const { email, github, linkedin } = (await getEntry('profile', 'profile'))!.data
     <nav aria-label={t(lang, 'sections')}>
       {/* aria-current is set by the scroll-spy in Topbar.astro. */}
       <ul class="sheet-nav" data-nav>
-        {TABS.map((tab) => (
+        {links?.map((l) => (
           <li>
-            <a href={`#${tab.id}`} data-for={tab.covers.join(' ')}>
-              {t(lang, `tab_${tab.id}`)}
+            <a href={l.href}>
+              {l.back ? (
+                <span class="back">
+                  <Icon name="back" size="sm" />
+                  {l.label}
+                </span>
+              ) : (
+                l.label
+              )}
             </a>
-            {tab.covers.length > 1 && (
-              <ul class="sheet-sub">
-                {tab.covers.map((id) => (
-                  <li>
-                    <a href={`#${id}`}>{t(lang, id)}</a>
-                  </li>
-                ))}
-              </ul>
-            )}
           </li>
         ))}
+        {!links &&
+          TABS.map((tab) => (
+            <li>
+              <a href={`#${tab.id}`} data-for={tab.covers.join(' ')}>
+                {t(lang, `tab_${tab.id}`)}
+              </a>
+              {tab.covers.length > 1 && (
+                <ul class="sheet-sub">
+                  {tab.covers.map((id) => (
+                    <li>
+                      <a href={`#${id}`}>{t(lang, id)}</a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
       </ul>
     </nav>
     <ul class="contact">
@@ -229,6 +246,12 @@ const { email, github, linkedin } = (await getEntry('profile', 'profile'))!.data
 
   .sheet-nav > li:has(.sheet-sub) > a[aria-current='true']::after {
     background: transparent;
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-1h);
   }
 
   .sheet-sub {
