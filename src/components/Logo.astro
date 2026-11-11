@@ -9,9 +9,11 @@ import kepco from '../assets/logos/kepco.svg?raw';
 import poscoEnc from '../assets/logos/posco-enc.svg?raw';
 
 // `s`: per-logo scale matched by eye, since each artwork has different padding (5.11 table).
+// `dy`: vertical nudge (% of the logo's own height) that centres the ink in its box. pwc's artwork
+// has 16/53 empty units on top, so its ink sat 2.5–3.4px below the text beside it (tasks 6.3).
 const logos = {
   genon: { s: 0.9 },
-  pwc: { s: 1.5, svg: pwc },
+  pwc: { s: 1.5, dy: -12, svg: pwc },
   makinarocks: { s: 0.78, svg: makinarocks },
   semco: { s: 1.05, svg: semco },
   kepco: { s: 0.95, svg: kepco },
@@ -39,7 +41,7 @@ interface Props {
 }
 
 const { name, label, small } = Astro.props;
-const { s, svg } = logos[name] as { s: number; svg?: string };
+const { s, dy = 0, svg } = logos[name] as { s: number; dy?: number; svg?: string };
 const a11y = label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': 'true' };
 // Root <svg> keeps its viewBox and fill only: CSS sets the height, the width follows the aspect ratio.
 const inner = svg?.replace(/<svg[^>]*?(viewBox="[^"]*")[^>]*>/, '').replace(/<\/svg>\s*$/, '');
@@ -51,7 +53,7 @@ const fill = svg?.match(/<svg[^>]*?\sfill="([^"]*)"/)?.[1];
 {svg ? (
   <svg
     class:list={['logo', { sm: small }]}
-    style={`--s: ${s}`}
+    style={`--s: ${s}; --dy: ${dy}%`}
     viewBox={viewBox}
     fill={fill}
     preserveAspectRatio="xMinYMid meet"
@@ -74,6 +76,7 @@ const fill = svg?.match(/<svg[^>]*?\sfill="([^"]*)"/)?.[1];
     max-width: var(--logo-w);
     height: calc(var(--logo-h) * var(--s));
     color: var(--text);
+    translate: 0 var(--dy, 0%);
     opacity: var(--logo-op);
     transition: opacity var(--dur) ease;
   }

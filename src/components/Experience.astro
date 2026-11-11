@@ -1,0 +1,48 @@
+---
+// Experience card (DESIGN.md 5.22, 6.2): one period-ledger row per employer, latest start first.
+// The `experience` entry key is the logo key (5.11): genon, pwc, makinarocks, semco, kepco, posco-enc.
+import Card from './Card.astro';
+import SectionHead from './SectionHead.astro';
+import LedgerRow from './LedgerRow.astro';
+import type { LogoKey } from './Logo.astro';
+import { t, fmtPeriod, type Lang } from '../i18n/ui';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+// The data loader returns entries by key, not file order; sort by start (YYYY-MM sorts as text).
+const jobs = (await getCollection('experience')).sort((a, b) =>
+  b.data.period.start.localeCompare(a.data.period.start),
+);
+---
+
+<Card id="experience" labelledby="h-experience">
+  <SectionHead id="experience" title={t(lang, 'experience')}>
+    {t(lang, 'orgCount', { n: jobs.length })}
+  </SectionHead>
+
+  <ol class="lg exp">
+    {jobs.map(({ id, data: e }) => (
+      <LedgerRow
+        when={fmtPeriod(lang, e.period)}
+        cur={e.period.status === 'present'}
+        logo={id as LogoKey}
+      >
+        <h3>{e.org[lang]}</h3>
+        <p class="lg-sub">{e.role[lang]}</p>
+        <p class="lg-desc">{e.summary[lang]}</p>
+      </LedgerRow>
+    ))}
+  </ol>
+</Card>
+
+<style>
+  /* Experience only: the role reads as the title line (5.22). */
+  .exp :global(.lg-sub) {
+    color: var(--accent);
+    font-weight: var(--fw-medium);
+  }
+</style>
