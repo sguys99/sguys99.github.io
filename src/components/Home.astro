@@ -1,9 +1,7 @@
 ---
-// Home page body for both languages (DESIGN.md 6.2). Sections without a component yet are empty placeholders (stage 6).
+// Home page body for both languages (DESIGN.md 6.2): sections in SECTIONS order.
 import Page from '../layouts/Page.astro';
 import Head from './Head.astro';
-import Card from './Card.astro';
-import SectionHead from './SectionHead.astro';
 import About from './About.astro';
 import SelectedWork from './SelectedWork.astro';
 import Experience from './Experience.astro';
@@ -11,7 +9,8 @@ import PersonalProjects from './PersonalProjects.astro';
 import IpIndex from './IpIndex.astro';
 import Teaching from './Teaching.astro';
 import Awards from './Awards.astro';
-import { t, SECTIONS, type Lang } from '../i18n/ui';
+import Contact from './Contact.astro';
+import type { Lang } from '../i18n/ui';
 import { getEntry } from 'astro:content';
 
 interface Props {
@@ -28,19 +27,9 @@ const title = `${profile.name[lang]} · ${profile.headline[lang]}`;
   <About lang={lang} />
   <SelectedWork lang={lang} />
   <Experience lang={lang} />
-  {SECTIONS.filter((id) => !['about', 'work', 'experience'].includes(id)).map((id) =>
-    id === 'teaching' ? (
-      <Teaching lang={lang} />
-    ) : id === 'awards' ? (
-      <Awards lang={lang} />
-    ) : id === 'personal' ? (
-      <PersonalProjects lang={lang} />
-    ) : id === 'ip' ? (
-      <IpIndex lang={lang} />
-    ) : (
-      <Card id={id} labelledby={`h-${id}`}>
-        <SectionHead id={id} title={t(lang, id)} />
-      </Card>
-    ),
-  )}
+  <Teaching lang={lang} />
+  <Awards lang={lang} />
+  <PersonalProjects lang={lang} />
+  <IpIndex lang={lang} />
+  <Contact lang={lang} />
 </Page>
