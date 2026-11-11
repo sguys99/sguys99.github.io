@@ -209,7 +209,7 @@
 - [x] 6.13 404 페이지 — `src/pages/404.astro` → `dist/404.html` 하나(국문 404 파일 없음). `NotFound.astro`(335-a 카드: 코드·h1 제목·설명 52ch·주/보조 버튼·sr-only h2 + 섹션 바로 가기 01–04 `/#ip`·`/ko/#ip`), `Card`에 `as="article"`, `Topbar` `notFound`(탭 `nav` 없음, 토글 오른쪽 끝, 모바일 바 `이름 / 404` → 그 언어 홈, spy 없음). `Page.astro` = `Base` + 새 `Shell.astro`로 나누고 404는 영문 셸 + 국문 셸 `<template>`을 경로 `/ko`로 바꿔 끼움(첫 그리기 전 `lang`·`title`, JS 꺼짐은 영문). `Head` `canonical={false}`. 구현 기본값 3건 DESIGN.md 11.8. 확인: preview(4400, 없는 주소 404 응답 + 404.html)에서 `/nope/`·`/ko/nope/`·`/ko/work/old/` 1440/390/360 × 라이트/다크, 가로 스크롤 0, 콘솔 오류 없음, 키보드 순서(건너뛰기 → 언어 → 테마 → 사이드바 → 버튼 → 바로 가기), 테마 토글·메뉴 시트 열고 닫기(국문 교체 후에도 동작), JS 꺼짐 영문, 홈·케이스 회귀 없음. ~~**남음**: 사이드바 이름이 404에서도 `h1`(h1 두 개)~~ → 해소(2026-11-11): `Sidebar` `nameTag?: 'h1' | 'p'`(기본 h1), `Shell.astro`가 404면 `'p'`. 404 영·국 모두 h1 1개(카드 제목) 확인
 - [x] 6.14 국문 라우트 전체 (`/ko/…`)가 영문과 같은 구성인지 확인 — 빌드 결과 7쌍(홈, CV, 케이스 스터디 5)과 PDF 2개, 404를 일회성 스크립트로 비교. id·제목 단계·섹션별 행/링크/이미지 수, lang·title·description·canonical·hreflang(x-default)·og:locale/url/image, 언어 전환 대상, 내부 링크의 언어 경계 모두 일치. 고칠 것 없음. ui.ts 영문 문구가 국문 페이지에 섞인 경우 없음(의심 항목은 기술명 "Next.js"와 수상명 "Best People Awards"뿐). 영문 페이지에만 Geist 폰트 preload가 있는 것은 의도된 차이로 봄
 - [x] 6.15 이미지 최적화 (프로필 사진, 프로젝트 이미지: AVIF/WebP, 크기별 제공) — 프로젝트 이미지는 없음. 사진 원본을 `src/assets/profile.jpg`로 복사하고 `Sidebar`(132/64px, `widths`·`sizes`, eager·`fetchpriority=high`)와 `CaseStudy` `.who`(28px 정사각, 1x–3x)를 `astro:assets` `<Picture>`(AVIF·WebP·JPEG 폴백, `width`/`height`)로, genon 로고 마스크는 `getImage` 320px. `public/images/profile.jpg`는 JSON-LD용으로 유지. 첫 화면 사진 204KB → AVIF 4.6KB(데스크톱 2x)·1.5KB(모바일 2x)·0.6KB(케이스), 로고 11.4→6.5KB. 구현 기본값 3건 DESIGN.md 11.8. 홈·케이스 en/ko 1440/390/360 × 라이트/다크에서 응답 `image/avif`, 표시 132×165·64×80·28×28, 다크 `brightness(0.86)`, CLS 0, 가로 스크롤·콘솔 오류 없음
-- [ ] 6.16 sitemap, robots.txt
+- [x] 6.16 sitemap, robots.txt — 의존성 없이 `src/pages/sitemap.xml.ts`·`robots.txt.ts` 엔드포인트. 홈 + `caseList()` × en/ko = 12 URL, 각각 en/ko/x-default `xhtml:link`(Head와 같은 `langPath`), `lastmod`는 푸터와 같은 git 날짜(`Footer.astro`에서 `contentDate()`로 꺼내 공유, 실패 시 생략). CV(HTML)·PDF·404 제외, CV `noindex`는 걸지 않음(DESIGN.md 11.8에 2건 기록, 6.11 행 갱신). `xmllint` 통과, 모든 loc·href가 `dist/`에 존재, 케이스 head hreflang과 일치, robots.txt `Sitemap: https://sguys99.github.io/sitemap.xml`
 - [ ] 6.17 **[확인]** 로컬 미리보기로 중간 검토
   - 국문 고정폭 글자의 넓은 공백: 배지 "진행 중", 푸터 "최종 수정" (6.5·6.10은 `--font-ko`로 처리, 공통 컴포넌트는 미처리. 6.10 보고)
   - 6.10이 명세 값을 바꾼 2건 사용자 확인: 케이스 사이드바 폭 경계 ≤1000→≤1100, 아키텍처 표 쌓기 기준을 뷰포트 → 칸 폭(container query). 승인되면 DESIGN.md 4장·5.24 본문 반영
@@ -247,7 +247,7 @@
 - [ ] 8.4 README 작성, 라이선스 표기 결정 (코드와 콘텐츠의 권리 범위) **[확인]**
 - [ ] 8.5 **[확인]** `master` push 승인
 - [ ] 8.6 배포 확인: `https://sguys99.github.io`, `/ko/`, 케이스 스터디, CV PDF, 404
-- [ ] 8.7 공개 후 확인: 실제 주소에서 OG 미리보기, `hreflang`, sitemap, 집계 동작
+- [ ] 8.7 공개 후 확인: 실제 주소에서 OG 미리보기, `hreflang`, sitemap, 집계 동작 — sitemap: `/robots.txt`·`/sitemap.xml` 응답 확인 후 Google Search Console에 사이트 등록·sitemap 제출(사용자 계정 필요), 색인 범위에 `/cv/`가 잡히는지 확인
 - [ ] 8.8 (선택) Google Search Console 등록, GitHub·LinkedIn 프로필에 주소 추가 (사용자가 직접)
 
 **완료 기준**: 실제 주소에서 사이트 전체가 정상 동작한다.

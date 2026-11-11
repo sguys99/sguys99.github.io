@@ -12,8 +12,8 @@ const { lang } = Astro.props;
 const profile = (await getEntry('profile', 'profile'))!.data;
 const REPO = 'https://github.com/sguys99/sguys99.github.io';
 
-// Date of the last commit touching src/content (YYYY-MM-DD); build date when git or its history is unavailable.
-function lastUpdated(): string {
+/** Date of the last commit touching src/content (YYYY-MM-DD), or undefined without git or its history. Also sitemap `lastmod`. */
+export function contentDate(): string | undefined {
   try {
     const out = execFileSync('git', ['log', '-1', '--format=%cs', '--', 'src/content'], {
       encoding: 'utf8',
@@ -21,10 +21,10 @@ function lastUpdated(): string {
     }).trim();
     if (/^\d{4}-\d{2}-\d{2}$/.test(out)) return out;
   } catch {}
-  return new Date().toISOString().slice(0, 10);
 }
 
-const iso = lastUpdated();
+// Build date when git is unavailable.
+const iso = contentDate() ?? new Date().toISOString().slice(0, 10);
 const [y, m, d] = iso.split('-');
 // en `Nov 10, 2026`, ko `2026.11.10` (DESIGN.md 5.5, 7장).
 const shown =
