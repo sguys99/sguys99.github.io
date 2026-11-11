@@ -463,7 +463,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | `--cv-fs-name` / `--cv-fs-title` / `--cv-fs-meta` / `--cv-fs-label` | 2.1em / 1.08em / 0.84em / 0.76em | 이름 / 직함 / 메타 / 섹션 라벨 |
 | `--cv-lh` / `--cv-lh-ko` | 1.5 / 1.62 | 행간 영문 / 국문 |
 | `--cv-gutter` | 24mm | 섹션 라벨 열 |
-| `--cv-date` | 24mm | 행 안 기간 열 |
+| `--cv-date` | 28mm (인쇄 24mm) | 행 안 기간 열. 화면 13px에서 `2000, 2003 – 2006`이 한 줄에 들어가는 폭 (11.8) |
 | `--cv-key` | 31mm | Skills 키 열 |
 | `--cv-gap` | 5mm | 열 간격 |
 
@@ -2618,7 +2618,7 @@ JS도 `matchMedia('(prefers-reduced-motion: reduce)')`가 참이면 모션 코�
 | 라벨 칸 | 영문 `--font-meta` 대문자, `--cv-fs-label`, `--ls-eyebrow`, `--text-3`. 국문 `--font-ko` 600, 0.86em, 자간 0. 보조 줄(`small`, 예: 특허 "Registered n · Filed n")은 라벨 아래 줄 |
 | 라벨 칸 겹침 해소 | 라벨 보조 줄은 `display: block`으로 라벨 아래에 두고, Skills 키는 `min-width: 0; overflow-wrap: break-word`로 31mm 칸 안에서 줄바꿈해 본문을 덮지 않는다 (3.3.3 사용자 요청) |
 | 행 `.row` | 2열: 기간 `--cv-date` 24mm + 내용, 간격 3mm. 행 사이 2.2mm, 촘촘한 목록(`.tight`) 1mm |
-| 기간 | **한 줄** (`white-space: nowrap`), 연도만 (`2019 – 2023`, 같은 해면 하나, 진행 중이면 "Present / 현재"). 대시 양옆 thin space. 24mm는 "2000, 2003–2006"이 한 줄에 들어가는 폭 |
+| 기간 | **한 줄** (`white-space: nowrap`), 연도만 (`2019 – 2023`, 같은 해면 하나, 진행 중이면 "Present / 현재"). 대시 양옆 thin space. `--cv-date`는 "2000, 2003 – 2006"(thin space 포함)이 한 줄에 들어가는 폭: 화면 28mm, 인쇄 24mm (11.8) |
 | 행 내용 | 제목(`--fw-title`) + 부제(` — 직무`, `--text-2`) / 메타(회사 · 고객, `--font-meta`) / 요약·성과(짧은 선 글머리, `--text-2`) / 스택(`--font-meta`, `--text-3`) |
 | 촘촘한 목록 | 기타 프로젝트, 특허, 프로그램, 논문, 보고서, 강의·자문, 저서, 수상, 학력: 제목과 메타를 한 줄로 이어 씀 |
 | Skills | `<dl>` 2열, 키 `--cv-key` 31mm |
@@ -2976,3 +2976,7 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 국문 페이지에서 한글 **단어**를 담는 고정폭 라벨은 공통 규칙 하나로 `--font-ko`: `html:lang(ko) :is(.badge, .st, .chip-lnk, .pn-k, .foot, .pl-status, .flow, .yh.word)` (`global.css`). 푸터의 연·날짜(`.num`)는 `--font-meta` 유지. 6.5 `.st`·6.6 `.yh.word`·6.10 `.flow`·6.11 CV `.st`의 개별 규칙은 이 규칙으로 흡수 (tasks 6.17) | Geist Mono에 한글이 없어 한글은 Pretendard로 폴백되지만 공백은 Geist Mono의 넓은 공백이라 `진행  중`·`최종  수정`처럼 벌어졌다. 7장 규칙 "단어면 `--font-ko`, 숫자·날짜면 `--font-meta`"를 배지·푸터에도 적용(7장 표 갱신). 크기까지 바뀌는 라벨(`.sel-k`, `.pl-cap`, `.eyebrow` 등)은 각 컴포넌트에 남김. 숫자에 붙은 `현재`·`건`·`곳`은 영문과 같은 메타 모양을 위해 고정폭 유지 |
 | 줄바꿈 기본: `:where(p, li, dd) { text-wrap: pretty }`, `:where(h2, h3) { text-wrap: balance }` (`global.css`, 명시도 0이라 컴포넌트 규칙이 이김). 숫자 표 보조줄 `.fig .s`도 `balance` (tasks 6.17) | 7장 줄바꿈 표의 본문 문단 `pretty`가 구현에 빠져 있었다(명세 누락 수정). 360px 국문 소개 마지막 줄 `총괄.`, 대표작 제목 `…(GenP) / 개발`·`…로봇 / 구축`처럼 외톨이 단어가 남았다. Chromium `pretty`는 두 줄 제목의 외톨이를 고치지 못해 제목은 `.tagline`·`.cs-title`과 같은 `balance`. 900px 숫자 표 `등록 진행 / 중 2` → `등록 8 · 등록 / 진행 중 2` |
 | 기술 스택은 이름마다 `<span>` + `white-space: nowrap`, 구분자 앞은 NBSP(`\u00a0· `, `\u00a0/ `): 케이스 사이드바, 개인 프로젝트, CV. 원장·CV의 `조직 · 고객`도 NBSP 구분자 (tasks 6.17) | `Unitree / SDK`, `FAST- / LIO2`, `GitHub / Pages`, `Hugging / Face`처럼 이름 안에서 줄이 끊기고, 줄이 `· Power generation company`처럼 구분자로 시작했다. 줄은 이름 사이에서만 끊기고 구분자는 앞 이름에 붙는다 |
+| CV 기간 열 `--cv-date`를 화면 28mm, 인쇄 24mm로 나눈다 (`tokens.css`, tasks 7.1) | 대시 양옆 thin space가 Geist Mono에서 한 칸 폭이라 화면(13px)에서 `2000, 2003 – 2006`이 24mm(91px)를 넘어 제목과 겹쳤다(103px). 인쇄(8.4pt)는 24mm 안에 들어가 PDF 조판은 그대로 |
+| 기술 스택 항목은 `nowrap` 대신 `inline-block; max-width: 100%; vertical-align: top`, 구분자 `\u00a0·`는 앞 이름의 `<span>` 안에 둔다 (케이스 사이드바, tasks 7.1). 개인 프로젝트·CV는 6.17 그대로 | 861–1100px(사이드바 280px)에서 `Qwen 8B (fine-tuned)`, `AgiBot X2 Ultra`가 값 열(107px)보다 길어 사이드바 밖으로 넘쳤다. 열보다 긴 이름만 안에서 줄을 바꾸고, 구분자가 줄 머리에 오지 않는 6.17 규칙은 유지 |
+| 케이스 기간 뒤 `In progress` 배지 앞에 `<wbr>` (tasks 7.1) | 기간과 배지 사이에 줄바꿈 자리가 없어 280px 사이드바에서 배지가 넘쳤다 |
+| 영문 월·연 사이 NBSP(`Oct\u00a02026`, `ui.ts` `ym`), 숫자 표·서랍의 `등록 n · 출원 n` 구분자 앞 NBSP (`regFiled`, `regPending`, tasks 7.1) | `Oct 2026 – Jan / 2027`처럼 날짜 안에서 끊기고, `7 registered / · 8 filed`처럼 줄이 구분자로 시작했다(6.17 규칙 누락) |

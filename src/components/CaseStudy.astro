@@ -116,7 +116,8 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
         <dt>{t(lang, 'period')}</dt>
         <dd>
           <span class="num">{fmtPeriod(lang, p.period)}</span>
-          {p.period.status === 'planned' && <Badge lang={lang} kind="in-progress" />}
+          {/* <wbr>: the badge may drop to the next line in the narrow sidebar (7.1). */}
+          {p.period.status === 'planned' && [<wbr />, <Badge lang={lang} kind="in-progress" />]}
         </dd>
       </div>
       {p.lead && (
@@ -127,12 +128,15 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
       )}
       <div>
         <dt>{t(lang, 'stack')}</dt>
-        {/* Break only between names, not inside "Unitree SDK". */}
+        {/* Break only between names, not inside "Unitree SDK"; the "·" rides with its name so no line starts with it. */}
         <dd class="stk">
           {p.stack.map((s, i) => (
             <>
-              {i > 0 && '\u00a0· '}
-              <span>{s}</span>
+              {i > 0 && ' '}
+              <span>
+                {s}
+                {i < p.stack.length - 1 && '\u00a0·'}
+              </span>
             </>
           ))}
         </dd>
@@ -381,9 +385,12 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
     line-height: var(--lh-row);
   }
 
-  /* Lines break between names only, not inside "GitHub Pages" or "FAST-LIO2". */
+  /* Lines break between names only, not inside "GitHub Pages" or "FAST-LIO2";
+     inline-block (not nowrap) lets a name wider than the column wrap inside instead of overflowing (7.1). */
   .stk span {
-    white-space: nowrap;
+    display: inline-block;
+    max-width: 100%;
+    vertical-align: top; /* a wrapped name keeps the row's first line on the dt baseline */
   }
 
   .stk {

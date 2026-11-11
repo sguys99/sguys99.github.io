@@ -64,10 +64,11 @@ const ui = {
   // Stats table (5.17) and drawer summaries (5.21)
   atAGlance: { en: 'At a glance', ko: '숫자로 보기' },
   featuredCount: { en: '{n} featured', ko: '대표 {n}건' },
-  regFiled: { en: '{reg} registered · {filed} filed', ko: '등록 {reg} · 출원 {filed}' },
+  // NBSP before "·": a wrapped line never starts with the separator (6.17, 7.1).
+  regFiled: { en: '{reg} registered\u00a0· {filed} filed', ko: '등록 {reg}\u00a0· 출원 {filed}' },
   regPending: {
-    en: '{reg} registered · {pending} pending',
-    ko: '등록 {reg} · 등록 진행 중 {pending}',
+    en: '{reg} registered\u00a0· {pending} pending',
+    ko: '등록 {reg}\u00a0· 등록 진행 중 {pending}',
   },
   selectedCount: { en: '{n} selected', ko: '대표 {n}' },
   withDoi: { en: 'with DOI', ko: 'DOI 연결' },
@@ -211,7 +212,8 @@ for (const v of [...DOMAINS, ...CAPABILITIES])
 const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const ym = (lang: Lang, s: string) => {
   const [y, m] = s.split('-');
-  return lang === 'ko' ? `${y}.${m}` : `${MON[+m - 1]} ${y}`;
+  // NBSP: "Oct 2026" never splits across lines (7.1).
+  return lang === 'ko' ? `${y}.${m}` : `${MON[+m - 1]}\u00a0${y}`;
 };
 
 /** Period as shown on the page (DESIGN.md 6.2, 7장): `Mar 2024 – Jan 2025` / `2024.03 – 2025.01`, `– Present` / `– 현재`. */

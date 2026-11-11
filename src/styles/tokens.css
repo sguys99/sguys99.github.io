@@ -163,7 +163,7 @@
   --cv-lh: 1.5;
   --cv-lh-ko: 1.62;
   --cv-gutter: 24mm;
-  --cv-date: 24mm;
+  --cv-date: 28mm; /* screen 13px: fits `2000, 2003 – 2006` (tasks 7.1); print 24mm below */
   --cv-key: 31mm;
   --cv-gap: 5mm;
 }
@@ -244,5 +244,6 @@ html:lang(ko) {
     --logo-op: 0.62;
     --logo-op-cur: 0.92;
     --cv-base: 8.4pt;
+    --cv-date: 24mm;
   }
 }
