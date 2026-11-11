@@ -33,10 +33,9 @@ const { id, labelledby, as: Tag = 'section' } = Astro.props;
       { rootMargin: '0px 0px -8% 0px' },
     );
 
-    // A card reached by an anchor or tab, and every waiting card above it, shows at once (decision-log 3.3).
-    const release = (hash: string) => {
-      const target = hash.length > 1 && document.getElementById(decodeURIComponent(hash.slice(1)));
-      if (!target) return;
+    // A card reached by an anchor, tab or keyboard focus, and every waiting card above it, shows at once
+    // (decision-log 3.3; focus: 7.3, a focused control must not sit in a transparent card).
+    const reveal = (target: Element) => {
       for (const c of document.querySelectorAll<HTMLElement>('.card.m-wait:not(.m-in)')) {
         if (
           c === target ||
@@ -47,6 +46,10 @@ const { id, labelledby, as: Tag = 'section' } = Astro.props;
           io.unobserve(c);
         }
       }
+    };
+    const release = (hash: string) => {
+      const target = hash.length > 1 && document.getElementById(decodeURIComponent(hash.slice(1)));
+      if (target) reveal(target);
     };
 
     for (const c of document.querySelectorAll<HTMLElement>('.card')) {
@@ -65,6 +68,7 @@ const { id, labelledby, as: Tag = 'section' } = Astro.props;
       true,
     );
     addEventListener('hashchange', () => release(location.hash));
+    document.addEventListener('focusin', (e) => reveal(e.target as Element));
   }
 </script>
 

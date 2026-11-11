@@ -224,7 +224,7 @@ const thin = (s: string) => s.replace(/\s*–\s*/g, ' – ');
     <style is:inline set:html={pageCss} />
   </Fragment>
 
-  <div class="tools">
+  <header class="tools">
     <a class="tb" href={langPath(Astro.url.pathname, other)} lang={other} hreflang={other}>
       {t(lang, 'otherLangName')}
     </a>
@@ -234,7 +234,7 @@ const thin = (s: string) => s.replace(/\s*–\s*/g, ' – ');
     <button type="button" class="tb pri" data-print hidden>
       {t(lang, 'print')}
     </button>
-  </div>
+  </header>
 
   <main class="cv">
     <header class="head">
