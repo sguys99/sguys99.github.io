@@ -194,7 +194,7 @@
 
 ## 단계 6. 구현: 섹션과 페이지
 
-- [ ] 6.1 About: 소개, 경력 궤적, 숫자 요약
+- [x] 6.1 About: 소개, 경력 궤적, 숫자 요약 — `src/components/About.astro`(Home에 끼움): 한 줄 소개·About 문단, 4단계 궤적(마지막 `aria-current="step"`, 세션 첫 방문만 선 그리기, 마지막 점 `animationend`에서 `m-draw` 제거, ≤1100 2열·≤560 세로), 숫자 표 4칸(프로젝트·특허·프로그램·저서 건수와 보조줄을 빌드 시 콘텐츠에서 셈, 연수 없음, 보이는 숫자 `aria-hidden` + `.sr-only` 최종값, 세션 첫 방문만 카운트업, 모션 줄이기·JS 없음·재방문은 최종값, 인쇄 시 완성), 역량 표. 구현 기본값 3건은 DESIGN.md 11.8. 1440/1000/390/360 × 라이트/다크 × en/ko 확인, 360px 가로 스크롤 없음, 콘솔 오류 없음. 맨 위에서 현재 탭이 About으로 잡힘(6.17 메모 해소, Topbar 수정 불필요)
 - [ ] 6.2 Selected Work: 대표작 카드, 케이스 스터디 링크
 - [ ] 6.3 Experience — 경력 → 로고 키(`Logo` `name`) 대응을 콘텐츠(`experience` 키가 곧 로고 키: genon·pwc·makinarocks·semco·kepco·posco-enc) 또는 필드로 정함. 행은 `LedgerRow`(`cur`, `logo`), 직함 `.lg-sub`는 경력만 `--accent` `--fw-medium` (5.22)
 - [ ] 6.4 Projects: 전체 목록, 접힘, Domain/Capability 필터 (JS가 꺼져 있어도 전체 목록이 보여야 함) — `ToggleAll`은 지금 목록의 모든 자식 행을 셈(shortcut 주석). 필터와 연동(걸러진 행 제외, 필터 변경 시 접힘 복귀)과 `Select`의 `.on`·옵션 disabled·`.linkish` 해제 버튼 동작은 여기서

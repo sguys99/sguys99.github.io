@@ -1,0 +1,430 @@
+---
+// About card (DESIGN.md 5.15–5.17): tagline, about text, career trajectory, figures, skills.
+// Figures are counted from content at build time; years of experience are never shown (tasks 1.1.4).
+import Card from './Card.astro';
+import SectionHead from './SectionHead.astro';
+import { t, type Lang } from '../i18n/ui';
+import { getCollection, getEntry } from 'astro:content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const profile = (await getEntry('profile', 'profile'))!.data;
+const [projects, patents, software, teaching] = await Promise.all([
+  getCollection('projects'),
+  getCollection('patents'),
+  getCollection('software'),
+  getCollection('teaching'),
+]);
+const patReg = patents.filter((p) => p.data.status === 'registered').length;
+const swReg = software.filter((p) => p.data.status === 'registered').length;
+
+const figs = [
+  {
+    label: t(lang, 'projects'),
+    n: projects.length,
+    sub: t(lang, 'featuredCount', { n: projects.filter((p) => p.data.featured).length }),
+  },
+  {
+    label: t(lang, 'patents'),
+    n: patents.length,
+    sub: t(lang, 'regFiled', { reg: patReg, filed: patents.length - patReg }),
+  },
+  {
+    label: t(lang, 'software'),
+    n: software.length,
+    sub: t(lang, 'regPending', { reg: swReg, pending: software.length - swReg }),
+  },
+  { label: t(lang, 'books'), n: teaching.filter((x) => x.data.kind === 'book').length },
+];
+const last = profile.trajectory.length - 1;
+---
+
+<Card id="about" labelledby="h-about">
+  <SectionHead id="about" title={t(lang, 'about')} />
+  <p class="tagline">{profile.taglines[0][lang]}</p>
+  <p class="about">{profile.about[lang]}</p>
+
+  <ol class="traj">
+    {profile.trajectory.map((s, i) => (
+      <li aria-current={i === last ? 'step' : undefined}>
+        <span class="yrs num">{s.years}</span>
+        <h3>{s.label[lang]}</h3>
+        <p>{s.description[lang]}</p>
+      </li>
+    ))}
+  </ol>
+
+  <dl class="figs" aria-label={t(lang, 'atAGlance')}>
+    {figs.map((f) => (
+      <div class="fig">
+        <dt>{f.label}</dt>
+        <dd class="n">
+          <span aria-hidden="true" data-n={f.n}>
+            {f.n}
+          </span>
+          <span class="sr-only">{f.n}</span>
+        </dd>
+        {f.sub && <dd class="s num">{f.sub}</dd>}
+      </div>
+    ))}
+  </dl>
+
+  <dl class="skills">
+    {profile.skills.map((s) => (
+      <div>
+        <dt>{s.label[lang]}</dt>
+        <dd>{s.summary[lang]}</dd>
+      </div>
+    ))}
+  </dl>
+</Card>
+
+<script>
+  import { playMotion } from '../scripts/motion';
+
+  // Trajectory draws in once on the session's first visit (5.16); the class goes when the last dot lands.
+  const traj = document.querySelector<HTMLElement>('#about .traj');
+  if (playMotion && traj) {
+    traj.classList.add('m-draw');
+    traj.lastElementChild!.addEventListener('animationend', (e) => {
+      if ((e as AnimationEvent).pseudoElement === '::after') traj.classList.remove('m-draw');
+    });
+  }
+
+  // Figures count up once when first seen (5.17). Only the aria-hidden copy moves; readers get the final value.
+  const figs = document.querySelector('#about .figs');
+  if (playMotion && figs && 'IntersectionObserver' in window) {
+    const ns = [...figs.querySelectorAll<HTMLElement>('[data-n]')];
+    // The CSS minifier may turn 900ms into .9s.
+    const m = getComputedStyle(figs).getPropertyValue('--m-count').trim();
+    const dur = parseFloat(m) * (m.endsWith('ms') ? 1 : 1000);
+    let done = false;
+    const show = (e: number) => {
+      for (const n of ns) n.textContent = String(Math.round(Number(n.dataset.n) * e));
+    };
+    const io = new IntersectionObserver((es) => {
+      if (!es[0].isIntersecting) return;
+      io.disconnect();
+      let t0 = 0;
+      const tick = (now: number) => {
+        if (done) return;
+        t0 ||= now; // frame clock, not performance.now(): the first frame time can be earlier
+        const p = Math.min(1, (now - t0) / dur);
+        show(1 - (1 - p) ** 3);
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+    show(0);
+    io.observe(figs);
+    // Print shows the finished state (3장 Motion).
+    addEventListener('beforeprint', () => {
+      done = true;
+      io.disconnect();
+      show(1);
+    });
+  }
+</script>
+
+<style>
+  .tagline {
+    max-width: 30ch;
+    margin: 0 0 var(--sp-4);
+    font-family: var(--font-display);
+    font-size: var(--fs-2xl);
+    font-weight: var(--fw-tagline);
+    line-height: var(--lh-tagline);
+    letter-spacing: var(--ls-tagline);
+    text-wrap: balance;
+  }
+
+  html:lang(ko) .tagline {
+    max-width: 24ch;
+    font-weight: var(--fw-tagline-ko);
+    line-height: var(--lh-tagline-ko);
+    letter-spacing: var(--ls-tagline-ko);
+  }
+
+  .about {
+    max-width: var(--measure);
+    color: var(--text-2);
+  }
+
+  /* Career trajectory (5.16): dot + line per stage, the last one is current. */
+  .traj {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--sp-4);
+    margin-top: var(--sp-6);
+  }
+
+  .traj li {
+    position: relative;
+    padding-top: var(--sp-5);
+  }
+
+  .traj li::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 0;
+    right: calc(-1 * var(--sp-4));
+    height: 1px;
+    background: var(--line-strong);
+  }
+
+  /* Approved gradient exception (2장 Don't): the current stage carries on. */
+  .traj li:last-child::before {
+    right: 0;
+    background: linear-gradient(to right, var(--accent), transparent);
+  }
+
+  .traj li::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--dot-lg);
+    height: var(--dot-lg);
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+  }
+
+  .traj li:last-child::after {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 var(--halo-lg) var(--accent-soft);
+  }
+
+  .yrs {
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  .traj h3 {
+    margin: var(--sp-0) 0 var(--sp-1);
+    font-size: var(--fs-md);
+    font-weight: var(--fw-strong);
+    line-height: var(--lh-title);
+  }
+
+  .traj li:last-child h3 {
+    color: var(--accent);
+  }
+
+  .traj p {
+    font-size: var(--fs-sm);
+    color: var(--text-2);
+    line-height: 1.55;
+  }
+
+  /* Draw: segment i starts at i × --m-draw-seg (331-c). Text is never hidden. */
+  .traj > :nth-child(2) {
+    --i: 1;
+  }
+  .traj > :nth-child(3) {
+    --i: 2;
+  }
+  .traj > :nth-child(4) {
+    --i: 3;
+  }
+
+  .m-draw li::before {
+    transform-origin: left center;
+    animation: m-draw-x var(--m-draw-seg) var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * var(--m-draw-seg));
+  }
+
+  .m-draw li::after {
+    animation: m-dot var(--m-draw-seg) var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * var(--m-draw-seg));
+  }
+
+  @keyframes m-draw-x {
+    from {
+      transform: scaleX(0);
+    }
+  }
+
+  @keyframes m-draw-y {
+    from {
+      transform: scaleY(0);
+    }
+  }
+
+  @keyframes m-dot {
+    from {
+      transform: scale(0.4);
+      opacity: 0;
+    }
+  }
+
+  @media print {
+    .m-draw li::before,
+    .m-draw li::after {
+      animation: none;
+    }
+  }
+
+  /* Figures (5.17): number above name above sub line; DOM order stays name → value. */
+  .figs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: var(--sp-6);
+    border-top: 1px solid var(--line);
+  }
+
+  .fig {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: var(--sp-4) var(--sp-4) 0;
+    border-left: 1px solid var(--line);
+  }
+
+  .fig:first-child {
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .fig dt {
+    order: 2;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--text-2);
+  }
+
+  .n {
+    order: 1;
+    font-family: var(--font-display);
+    font-size: var(--fs-2xl);
+    font-weight: var(--fw-medium);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+    letter-spacing: var(--ls-name);
+    color: var(--text);
+  }
+
+  .s {
+    order: 3;
+    margin-top: var(--sp-0);
+    font-family: var(--font-meta);
+    font-size: var(--fs-2xs);
+    color: var(--text-3);
+  }
+
+  html:lang(ko) .s {
+    font-family: var(--font-ko);
+    font-size: var(--fs-xs);
+  }
+
+  /* Skills (5.15) */
+  .skills {
+    margin-top: var(--sp-6);
+    border-top: 1px solid var(--line);
+  }
+
+  .figs + .skills {
+    margin-top: var(--sp-5);
+  }
+
+  .skills > div {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: var(--sp-4);
+    padding: var(--sp-3) 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .skills > div:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .skills dt {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-strong);
+  }
+
+  .skills dd {
+    font-size: var(--fs-sm);
+    color: var(--text-2);
+  }
+
+  @media (max-width: 1100px) {
+    .traj {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      row-gap: var(--sp-5);
+    }
+
+    .traj li:nth-child(2)::before {
+      right: 0;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .tagline {
+      font-size: var(--fs-xl);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .traj {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+      margin-left: var(--sp-1);
+    }
+
+    .traj li {
+      padding: 0 0 var(--sp-4) var(--sp-5);
+    }
+
+    .traj li::before,
+    .traj li:nth-child(2)::before {
+      top: 4px;
+      bottom: 0;
+      left: 4px;
+      right: auto;
+      width: 1px;
+      height: auto;
+    }
+
+    .traj li:last-child::before {
+      display: none;
+    }
+
+    .m-draw li::before {
+      transform-origin: center top;
+      animation-name: m-draw-y;
+    }
+
+    .figs {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .fig:nth-child(odd) {
+      border-left: 0;
+      padding-left: 0;
+    }
+
+    .fig:nth-child(n + 3) {
+      border-top: 1px solid var(--line);
+      margin-top: var(--sp-4);
+    }
+
+    .n {
+      font-size: var(--fs-xl);
+    }
+
+    .skills > div {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--sp-0);
+    }
+  }
+</style>

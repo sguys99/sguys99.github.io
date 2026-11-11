@@ -1,9 +1,10 @@
 ---
-// Home page body for both languages (DESIGN.md 6.2). Sections are empty placeholders until stage 6.
+// Home page body for both languages (DESIGN.md 6.2). Sections without a component yet are empty placeholders (stage 6).
 import Page from '../layouts/Page.astro';
 import Head from './Head.astro';
 import Card from './Card.astro';
 import SectionHead from './SectionHead.astro';
+import About from './About.astro';
 import { t, SECTIONS, type Lang } from '../i18n/ui';
 import { getEntry } from 'astro:content';
 
@@ -18,7 +19,8 @@ const title = `${profile.name[lang]} · ${profile.headline[lang]}`;
 
 <Page lang={lang} title={title}>
   <Head slot="head" lang={lang} title={title} description={profile.taglines[0][lang]} person />
-  {SECTIONS.map((id) => (
+  <About lang={lang} />
+  {SECTIONS.filter((id) => id !== 'about').map((id) => (
     <Card id={id} labelledby={`h-${id}`}>
       <SectionHead id={id} title={t(lang, id)} />
     </Card>
