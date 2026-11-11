@@ -317,6 +317,8 @@ const last = profile.trajectory.length - 1;
     font-family: var(--font-meta);
     font-size: var(--fs-2xs);
     color: var(--text-3);
+    /* Two even lines, not "등록 진행 / 중 2" in a narrow cell. */
+    text-wrap: balance;
   }
 
   html:lang(ko) .s {

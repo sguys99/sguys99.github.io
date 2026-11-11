@@ -76,6 +76,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* No lone last word (DESIGN.md 7장 줄바꿈): paragraphs pretty, short titles balanced like .tagline. Component rules win. */
+:where(p, li, dd) {
+  text-wrap: pretty;
+}
+
+:where(h2, h3) {
+  text-wrap: balance;
+}
+
 /* Korean pages inherit from body only, so --font-meta set on descendants still wins (DESIGN.md 7장). */
 html:lang(ko) body {
   font-family: var(--font-ko);
