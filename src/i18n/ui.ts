@@ -222,6 +222,13 @@ export const fmtPeriod = (lang: Lang, p: { start: string; end?: string; status?:
       ? `${ym(lang, p.start)} – ${ym(lang, p.end)}`
       : ym(lang, p.start);
 
+/** Year span for the project ledger (DESIGN.md 5.19, 7장): `2024 – 2025`, one year when equal, `2026 – Present` / `2026 – 현재`. */
+export const fmtYears = (lang: Lang, p: { start: string; end?: string; status?: string }) => {
+  const s = p.start.slice(0, 4);
+  const e = p.status === 'present' ? t(lang, 'present') : p.end?.slice(0, 4);
+  return e && e !== s ? `${s} – ${e}` : s;
+};
+
 /** Home sections in page order (DESIGN.md 6.2). */
 export const SECTIONS = [
   'about',

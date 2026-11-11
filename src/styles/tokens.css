@@ -107,7 +107,7 @@
   --col-idx: 48px;
   --col-idx-sm: 28px;
   --col-year: 56px;
-  --col-year-wide: 88px;
+  --col-year-wide: 104px; /* fits `2026 – Present` (tasks 6.4, DESIGN.md 11.8) */
   --measure: 68ch;
   --measure-sm: 64ch;
   --logo-h: 22px;

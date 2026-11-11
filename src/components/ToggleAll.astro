@@ -26,24 +26,25 @@ const { lang, controls, visible } = Astro.props;
 ></button>
 
 <script>
-  // shortcut: counts every child row; the project filters (tasks 6.x) will pass only matching rows.
+  // Rows a filter has taken out carry `data-out`: always hidden and not counted. A filter re-folds the list by
+  // sending `rows-change` to it; `detail.all` shows every matching row instead (project ledger, 5.19).
   for (const btn of document.querySelectorAll<HTMLButtonElement>('.toggle-all[aria-controls]')) {
     const list = document.getElementById(btn.getAttribute('aria-controls')!);
     if (!list) continue;
     const rows = [...list.children] as HTMLElement[];
     const n = Number(btn.dataset.visible);
-    if (rows.length <= n) continue;
 
-    const set = (open: boolean) => {
-      rows.forEach((r, i) => (r.hidden = !open && i >= n));
+    const set = (open: boolean, all = false) => {
+      let i = 0;
+      for (const r of rows) r.hidden = r.hasAttribute('data-out') || (!open && !all && i++ >= n);
+      const shown = rows.filter((r) => !r.hasAttribute('data-out')).length;
+      btn.hidden = all || shown <= n;
       btn.setAttribute('aria-expanded', String(open));
-      btn.textContent = open
-        ? btn.dataset.less!
-        : btn.dataset.more!.replace('{n}', String(rows.length));
+      btn.textContent = open ? btn.dataset.less! : btn.dataset.more!.replace('{n}', String(shown));
     };
     set(false);
-    btn.hidden = false;
     btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+    list.addEventListener('rows-change', (e) => set(false, (e as CustomEvent).detail?.all));
   }
 </script>
 

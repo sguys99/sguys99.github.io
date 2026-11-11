@@ -1,0 +1,278 @@
+---
+// All-projects ledger under the featured list, inside the Selected Work card (DESIGN.md 5.19, 3.2.2 B).
+// The build HTML holds every row; without JS all rows show and the tools stay hidden. The script below
+// filters by marking rows `data-out`; ToggleAll folds whatever is left (5.9 B).
+import Badge from './Badge.astro';
+import Select from './Select.astro';
+import ToggleAll from './ToggleAll.astro';
+import { t, tag, fmtYears, type Lang } from '../i18n/ui';
+import { CAPABILITIES, DOMAINS } from '../content.config';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const projects = (await getCollection('projects')).sort(
+  (a, b) => b.data.period.start.localeCompare(a.data.period.start) || a.id.localeCompare(b.id),
+);
+const total = projects.length;
+// Option counts before any filter; the script recounts against the other select (5.19).
+const nD = (d: string) => projects.filter((p) => p.data.domain === d).length;
+const nC = (c: string) => projects.filter((p) => p.data.capability.includes(c as never)).length;
+const opt = (label: string, n: number) => `${label} (${n})`;
+---
+
+<div class="pl" data-total={total} data-showing={t(lang, 'showing', { total })}>
+  <div class="pl-head">
+    <h3 class="pl-title" id="pl-title">
+      {t(lang, 'allProjects')} <span class="num">{total}</span>
+    </h3>
+    <div class="pl-tools" hidden>
+      <Select label={t(lang, 'domain')} id="pl-d">
+        <option value="" data-label={t(lang, 'allDomains')}>
+          {opt(t(lang, 'allDomains'), total)}
+        </option>
+        {DOMAINS.map((d) => (
+          <option value={d} data-label={tag(lang, d)} disabled={!nD(d)}>
+            {opt(tag(lang, d), nD(d))}
+          </option>
+        ))}
+      </Select>
+      <Select label={t(lang, 'capability')} id="pl-c">
+        <option value="" data-label={t(lang, 'allCapabilities')}>
+          {opt(t(lang, 'allCapabilities'), total)}
+        </option>
+        {CAPABILITIES.map((c) => (
+          <option value={c} data-label={tag(lang, c)} disabled={!nC(c)}>
+            {opt(tag(lang, c), nC(c))}
+          </option>
+        ))}
+      </Select>
+      <button type="button" class="linkish" hidden>
+        {t(lang, 'clearFilters')}
+      </button>
+    </div>
+  </div>
+  <p class="pl-status num" role="status"></p>
+  <ol class="ledger" id="pl-list" aria-labelledby="pl-title">
+    {projects.map(({ data: p }) => {
+      const client = p.client && (p.client.public ? p.client.name[lang] : p.client.label[lang]);
+      const who = [p.org?.[lang], client].filter(Boolean).join(' · ');
+      return (
+        <li class="pl-row" data-d={p.domain} data-c={p.capability.join('|')}>
+          <span class="pl-y num">{fmtYears(lang, p.period)}</span>
+          <div>
+            <p class="pl-t">
+              {p.title[lang]}
+              {p.lead && [' ', <Badge lang={lang} kind="lead" />]}
+              {p.featured && [' ', <Badge lang={lang} kind="selected" />]}
+            </p>
+            {who && <p class="pl-who">{who}</p>}
+          </div>
+          <p class="pl-cap">
+            <b>{tag(lang, p.domain)}</b>
+            {p.capability.map((c) => tag(lang, c)).join(' · ')}
+          </p>
+        </li>
+      );
+    })}
+  </ol>
+  <p class="pl-none" hidden>
+    {t(lang, 'noMatch')}
+  </p>
+  <ToggleAll lang={lang} controls="pl-list" visible={6} />
+</div>
+
+<script>
+  // Domain × Capability filter (5.19). Only `hidden`/`data-out` change, so the selects keep focus.
+  const root = document.querySelector<HTMLElement>('.pl');
+  if (root) {
+    const rows = [...root.querySelectorAll<HTMLElement>('.pl-row')];
+    const [sd, sc] = root.querySelectorAll('select');
+    const clear = root.querySelector<HTMLButtonElement>('.linkish')!;
+    const status = root.querySelector('.pl-status')!;
+    const none = root.querySelector<HTMLElement>('.pl-none')!;
+    const list = root.querySelector('.ledger')!;
+
+    const hit = (r: HTMLElement, d: string, c: string) =>
+      (!d || r.dataset.d === d) && (!c || r.dataset.c!.split('|').includes(c));
+    const count = (d: string, c: string) => rows.filter((r) => hit(r, d, c)).length;
+    // Each option counts the rows it would leave with the other select's current value; 0 → disabled.
+    const recount = (sel: HTMLSelectElement, n: (v: string) => number) => {
+      for (const o of sel.options) {
+        const k = n(o.value);
+        o.text = `${o.dataset.label} (${k})`;
+        o.disabled = !k;
+      }
+    };
+
+    const update = () => {
+      const d = sd.value;
+      const c = sc.value;
+      recount(sd, (v) => count(v, c));
+      recount(sc, (v) => count(d, v));
+      for (const r of rows) r.toggleAttribute('data-out', !hit(r, d, c));
+      const n = count(d, c);
+      sd.parentElement!.classList.toggle('on', !!d);
+      sc.parentElement!.classList.toggle('on', !!c);
+      clear.hidden = !d && !c;
+      status.textContent = root.dataset.showing!.replace('{n}', String(n));
+      none.hidden = n > 0;
+      // Any filter shows every match; clearing folds back to the first rows (5.9 B, 5.19).
+      list.dispatchEvent(new CustomEvent('rows-change', { detail: { all: !!(d || c) } }));
+    };
+
+    root.addEventListener('change', update);
+    clear.addEventListener('click', () => {
+      sd.value = sc.value = '';
+      update();
+      sd.focus();
+    });
+    status.textContent = root.dataset.showing!.replace('{n}', root.dataset.total!);
+    root.querySelector<HTMLElement>('.pl-tools')!.hidden = false;
+  }
+</script>
+
+<style>
+  .pl {
+    margin-top: var(--sp-6);
+    padding-top: var(--sp-5);
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .pl-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-3) var(--sp-4);
+    margin-bottom: var(--sp-3);
+  }
+
+  .pl-title {
+    font-size: var(--fs-md);
+    font-weight: var(--fw-strong);
+  }
+
+  .pl-title .num {
+    margin-left: var(--sp-1);
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-regular);
+    color: var(--text-3);
+  }
+
+  .pl-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-2) var(--sp-3);
+  }
+
+  .pl-status {
+    margin: 0 0 var(--sp-2);
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  .pl-status:empty,
+  .pl-tools[hidden],
+  .pl-row[hidden] {
+    display: none;
+  }
+
+  .ledger {
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .pl-row {
+    display: grid;
+    grid-template-columns: var(--col-year-wide) minmax(0, 1fr) auto;
+    gap: var(--sp-1) var(--sp-4);
+    padding: var(--sp-3) 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .pl-y {
+    padding-top: var(--sp-0);
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+    white-space: nowrap;
+  }
+
+  .pl-t {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-row);
+  }
+
+  .pl-who {
+    margin-top: var(--sp-0);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  .pl-cap {
+    padding-top: 3px;
+    font-family: var(--font-meta);
+    font-size: var(--fs-2xs);
+    color: var(--text-3);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  html:lang(ko) .pl-cap {
+    font-family: var(--font-ko);
+    font-size: var(--fs-xs);
+  }
+
+  .pl-cap b {
+    display: block;
+    font-weight: var(--fw-medium);
+    color: var(--text-2);
+  }
+
+  .pl-none {
+    margin-top: var(--sp-3);
+    font-size: var(--fs-sm);
+    color: var(--text-2);
+  }
+
+  @media (max-width: 560px) {
+    .pl-tools {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      width: 100%;
+    }
+
+    .pl-tools .linkish {
+      justify-self: start;
+    }
+
+    .pl-row {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--sp-0);
+    }
+
+    .pl-cap {
+      padding-top: var(--sp-1);
+      text-align: left;
+      white-space: normal;
+    }
+
+    .pl-cap b {
+      display: inline;
+    }
+
+    .pl-cap b::after {
+      content: ' · ';
+      font-weight: var(--fw-regular);
+      color: var(--text-3);
+    }
+  }
+</style>
