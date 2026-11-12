@@ -12,16 +12,18 @@ import { t } from '../i18n/ui';
 const name = (await getEntry('profile', 'profile'))!.data.name;
 const title = `${t('en', 'nf_title')} · ${name.en}`;
 const titleKo = `${t('ko', 'nf_title')} · ${name.ko}`;
+const descKo = t('ko', 'nf_body');
 ---
 
 <Base lang="en" title={title}>
   <Fragment slot="head">
-    <Head lang="en" title={title} canonical={false} />
+    <Head lang="en" title={title} description={t('en', 'nf_body')} canonical={false} />
     {/* Before first paint (next to the theme script): language and title from the path; the English shell stays hidden. */}
-    <script is:inline define:vars={{ titleKo }}>
+    <script is:inline define:vars={{ titleKo, descKo }}>
       if (/^\/ko(\/|$)/.test(location.pathname)) {
         document.documentElement.lang = 'ko';
         document.title = titleKo;
+        document.querySelector('meta[name="description"]')?.setAttribute('content', descKo);
       }
     </script>
     <style is:inline>

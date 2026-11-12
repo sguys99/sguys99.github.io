@@ -2151,7 +2151,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 홈 | `Kwang Myung Yu · AI Engineer` / `유광명 · AI Engineer` [구현 기본값: `name · headline`] | `profile.taglines[0]` [구현 기본값] |
 | 케이스 스터디 | `<프로젝트 제목> · Kwang Myung Yu` / `<프로젝트 제목> · 유광명` (시안 그대로) | 프로젝트 `summary` [구현 기본값] |
 | CV | `Kwang Myung Yu · CV` / `유광명 · 이력서` (시안 그대로) | `name · headline · currentRole` [구현 기본값] |
-| 404 | 6.5 | 없음 |
+| 404 | 6.5 | `nf_body` (본문 문구 그대로, 국문 경로면 머리 스크립트가 국문으로 바꿈. 11.8, tasks 7.5) |
 
 - 구분자는 시안이 쓴 ` · ` 하나로 통일.
 - 값은 모두 콘텐츠·i18n에서 조합한다. 페이지에 문장을 직접 쓰지 않는다.
@@ -2989,3 +2989,4 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 영문 월·연 사이 NBSP(`Oct\u00a02026`, `ui.ts` `ym`), 숫자 표·서랍의 `등록 n · 출원 n` 구분자 앞 NBSP (`regFiled`, `regPending`, tasks 7.1) | `Oct 2026 – Jan / 2027`처럼 날짜 안에서 끊기고, `7 registered / · 8 filed`처럼 줄이 구분자로 시작했다(6.17 규칙 누락) |
 | CV 도구 막대 `.tools`를 `<div>`에서 `<header>`로 (banner 랜드마크). 모양 그대로 (tasks 7.3) | axe `region`: 언어·테마·인쇄 링크·버튼이 어느 랜드마크에도 없었다. 9장 랜드마크 표 CV 열 갱신 |
 | 등장 모션 대기 카드(`.m-wait`) 안에 `focusin`이 오면 앵커 이동과 같은 `reveal`로 그 카드와 위 카드를 즉시 완성 (`Card.astro`, tasks 7.3) | Tab으로 첫 화면 아래 카드에 들어가면 포커스된 링크가 400ms 뒤에도 투명(390px 대표작 행 불투명도 0, 1440px 저서 링크 0.05)이라 포커스 링이 보이지 않았다(WCAG 2.4.7). 스크롤 등장은 그대로 |
+| 404에 `meta description` = i18n `nf_body` (영문 기본, `/ko` 경로면 제목과 함께 국문으로 교체, `404.astro`, tasks 7.5). 6.6 표의 "없음"을 바꿈 | Lighthouse SEO 92(`meta-description` 실패)로 7.5 기준 95 미달. 새 문구 없이 본문 문구를 재사용 |
