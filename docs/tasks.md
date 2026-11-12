@@ -23,7 +23,7 @@
 | 4 | DESIGN.md 작성 | 완료 |
 | 5 | 구현: 기반 | 완료 |
 | 6 | 구현: 섹션과 페이지 | 완료 (2026-11-12) |
-| 7 | 검수 | 대기 |
+| 7 | 검수 | 완료 (2026-11-12) |
 | 8 | 배포와 공개 | 대기 |
 | 9 | 운영 준비 | 대기 |
 
@@ -234,7 +234,7 @@
 - [x] 7.10 PDF 확인: 영문/국문 CV의 내용과 조판 — 깨끗한 빌드 PDF를 `pdftoppm`으로 전 쪽 렌더링해 확인(2026-11-12). 영·국 각 4쪽 A4(594.96×841.92pt), 쪽마다 하단 이름·`n / 4`, 여백 정상, 라벨만 남는 쪽 끝·행 쪼개짐·한 줄 과부 없음(섹션은 행 단위로 다음 쪽). 글꼴 전부 내장(Geist·Geist Mono·Pretendard 서브셋, Chromium이 Type 3로 씀), 국문 두부(tofu) 없음. 링크 주석 9개(이메일·GitHub·LinkedIn·사이트·DOI 3·책 2)가 CV HTML 링크와 일치(도구 막대 언어 링크 제외). `pdftotext` 추출 순서 정상, HTML 본문 글자 전부 PDF에 있음(인쇄에서 숨긴 도구 막대 제외), 섹션 13개 같음. Title 있음, Author·`/Lang` 없음·태그 없는 PDF(Chromium 기본). 크기 약 212KB·727KB. 고친 것 없음
 - [x] 7.11 인쇄 확인, 링크 공유 미리보기(OG) 확인 — 인쇄: Playwright 인쇄 에뮬레이션 + `page.pdf` A4 세로·가로로 홈·케이스(`samsung-scm-agent`, 국문 `docent-humanoid`·`genp-humanoid`)·404 × en/ko, 저장 테마 다크 포함. 배경 흰색·라이트 팔레트, 가로 넘침 없음. 고친 것(10장 "일반 페이지 인쇄" 규칙 중 빠진 것 적용): 상단 메뉴(언어·테마·메뉴 버튼)·원장 필터·상태 문구·개인 프로젝트 필터·푸터 "맨 위로" 숨김, 카드 머리·제목 `break-after: avoid`(`global.css`), 가로 인쇄에서도 1열(사이드바 고정 해제, `Shell`·`Sidebar`·`CaseStudy` 860px 쿼리에 `print` 추가). 남은 것: 국문 홈 "개인 프로젝트" 머리가 5쪽 끝에 홀로 남음(Chromium이 그리드 행 앞 나눔에서 avoid를 무시, 여러 방법 시험 실패). CV PDF는 영향 없음(전 쪽 픽셀 동일). OG: 12쪽 전부 `og:title`·`description`(= title·description)·`og:url`(= canonical, 404 제외)·`og:image` 절대 URL(`og-en/ko.png` 1200×630, 27KB·25KB, 화면 확인)·`og:locale`+alternate·`og:type`·`summary_large_image`·hreflang 정상. 영문 케이스 `<title>` 3건 60자 초과(68·73·77), 미리보기 모형(Slack·카카오톡·LinkedIn 크기)에서 잘리는 것은 끝의 " · Kwang Myung Yu"뿐. 실제 크롤러 확인은 8.7 **후속(2026-11-12, 사용자 결정)**: CV PDF `page.pdf`에 `tagged: true`(`scripts/cv-pdf.mjs`) — 영·국 모두 Tagged yes·`/Lang` 생김, 4쪽 그대로, 60dpi 렌더 8쪽 픽셀 동일, 크기 212→285KB·727→801KB. 영문 케이스 `<title>` 60자 초과 3건과 국문 홈 인쇄 시 "개인 프로젝트" 머리 홀로 남음은 현행 유지
 - [x] 7.12 사실 대조: 사이트의 기간·건수·직함이 원본 자료와 일치하는지 확인 — 이력서(docx)·basic-plan·경력기술서(pdf·pptx, 참고용)와 `src/content/**`·dist 홈/CV HTML·CV PDF(`pdftotext`) 대조(읽기 전용, 2026-11-12). 일치: 경력 6곳 기간·직함 6/6, 프로젝트 20건 기간 20/20·이력서 책임자 14건 lead, 케이스 수치 전부(MAPE 5.9→1.3% 등), 특허 15(등록 7·출원 8)·SW 10(등록 8·진행 2)·논문 3·보고서 19 = 47, 강의 6·자문 2·저서 2·수상 4·학력, About 숫자와 `6 / 20`. 원본끼리 어긋난 항목은 사용자 확인으로 현행 유지: SCM "95%+ 달성"(달성 확인), SCM 스택 Qwen 8B·Llama 3.1 70B, LOTTE PoC 구성(원자재 가격 예측)과 고객 귀속. 현행 유지(사용자가 고르지 않음): 가격 예측 `lead`, 학위 영문명, 보고서 "50+" 미표기. 외부 링크 3개(LinkedIn, wikidocs, MDPI)는 봇 차단으로 자동 확인 불가 → 7.13에서 사용자 직접 확인
-- [ ] 7.13 **[확인]** 최종 검토와 공개 승인
+- [x] 7.13 **[확인]** 최종 검토와 공개 승인 — 2026-11-12 사용자 승인(로컬 미리보기 확인). 봇 차단으로 자동 확인 못 한 외부 링크 3개(LinkedIn, wikidocs, MDPI) 사용자 직접 확인 정상. 교정 뒤 dist 재대조: 전화번호 0건, 고객사 실명은 허용 2곳(Samsung Electronics, LOTTE Fine Chemical)과 경력 삼성전기뿐
 
 **완료 기준**: 위 항목이 모두 통과했고 사용자가 공개를 승인했다.
 
