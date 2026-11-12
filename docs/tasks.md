@@ -75,3 +75,4 @@
 - [ ] Search Console 재확인: sitemap 발견 페이지 12건, 예전 블로그 주소 색인 정리, `/cv/` 색인 여부
 - [ ] 저장소 About 설명 "personal blog" 교체 (문구 미정)
 - [ ] Lighthouse를 실제 GitHub Pages 주소에서 재측정 (지금 값은 로컬, basic-plan 1.2)
+- [ ] Lighthouse 정기 측정 자동화: GitHub Actions로 라이브 주소(`/`, `/ko/`, `/cv/`)를 매달 측정하고 95 미만이면 실패 처리 (현재 측정 스크립트 없음)
