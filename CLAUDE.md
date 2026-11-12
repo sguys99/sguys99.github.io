@@ -111,6 +111,38 @@ docs/private/         원본 자료: 이력서, 경력기술서, 사진 원본 (
 아직 받지 못한 자료: 대표 프로젝트 확정, 개인 프로젝트(Personal Projects) 목록.
 받기 전에는 자리 표시로 두고, 임의의 내용으로 채우지 않는다.
 
+## 콘텐츠 갱신 절차
+
+필드와 허용값은 `src/content.config.ts`가 기준이다. 아래는 위치 안내이며, 기존 항목 하나를 본떠 쓴다.
+
+| 추가 대상 | 수정할 파일 | 함께 볼 것 |
+|---|---|---|
+| 경력 | `src/content/experience.yaml` (키 = id) | 6곳 외 추가는 사용자 확인 (규칙 3) |
+| 프로젝트 | `src/content/projects/<slug>.md` (frontmatter) | `client` 기본 익명 (`public: false` + `label`). `domain`·`capability`는 config의 `DOMAINS`·`CAPABILITIES` 값만 |
+| 대표 프로젝트 | 위 파일의 `featured: true`, `order`, `caseStudy` | `featured` + `caseStudy`가 있어야 `/work/<slug>/` 생성. 지정은 사용자 승인 |
+| 개인 프로젝트 | `src/content/personal/<slug>.md` | `repo` 필수, `status`는 `in-progress`·`active`·`archived` |
+| 특허 | `src/content/patents.yaml` | `status` `filed`·`registered`. 파일 머리 주석의 건수 |
+| SW 등록 | `src/content/software.yaml` | 파일 머리 주석의 건수 |
+| 논문·보고서 | `src/content/publications.yaml` | `type: paper` / `report` |
+| 강의·자문·저서 | `src/content/teaching.yaml` | `kind`: `teaching`·`advisory`·`book` |
+| 수상 | `src/content/awards.yaml` | |
+| 학력 | `src/content/education.yaml` | |
+
+- 실명 고객사는 `src/content.config.ts`의 `APPROVED_CLIENTS`에 있어야 빌드된다. 추가는 사용자 승인 후에만, 규칙 3 표도 함께 고친다.
+- 홈 숫자(프로젝트·특허·SW·저서 건수, 등록/출원 구분)와 CV 집계는 컬렉션에서 자동 계산된다. `profile.yaml`에는 건수를 쓰지 않는다.
+- 이미지는 `public/images/`에 두고 대체 텍스트를 단다. 회사 로고는 승인 없이 쓰지 않는다 (규칙 3).
+- 안내형 추가: `.claude/commands/add-project.md` (프로젝트), `.claude/commands/add-entry.md` (그 외 항목).
+
+확인 순서:
+
+1. 영문 원본 작성 (규칙 2: 동사로 시작, 결과 중심, 자료에 있는 사실만)
+2. 국문을 영문에 맞춰 작성
+3. 익명·실명 확인: 승인된 고객사 외에는 업종 표기 (규칙 3)
+4. 새 용어는 `docs/glossary.md`에 먼저 추가
+5. `npm run build`: 스키마 검사 → CV PDF 재생성(`scripts/cv-pdf.mjs`) → 내부 링크 검사(`scripts/check-links.mjs`)
+6. 브라우저 확인: `/`와 `/ko/`, 해당 섹션과 `/work/<slug>/`, `/cv/`
+7. 커밋. push는 사용자가 요청할 때만
+
 ## 구현 기준
 
 - 색, 서체, 간격, 모서리, 전환 시간은 `tokens.css`의 변수만 쓴다. 값을 직접 쓰지 않는다.
