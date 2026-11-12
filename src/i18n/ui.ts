@@ -13,6 +13,8 @@ const ui = {
   cv: { en: 'Download CV (PDF)', ko: 'CV 다운로드 (PDF)' },
   cvKey: { en: 'CV', ko: 'CV' },
   cvPdf: { en: 'Download PDF', ko: 'PDF 다운로드' },
+  // Sidebar CV link name: visible words first, then what the PDF is (label in name, 9장).
+  cvPdfName: { en: 'Download PDF (CV)', ko: 'PDF 다운로드 (CV)' },
   menu: { en: 'Menu', ko: '메뉴' },
   openMenu: { en: 'Open menu', ko: '메뉴 열기' },
   closeMenu: { en: 'Close menu', ko: '메뉴 닫기' },
@@ -21,7 +23,8 @@ const ui = {
   theme: { en: 'Theme', ko: '테마' },
   // Language link shows and reads the *other* language (DESIGN.md 5.3).
   otherLang: { en: 'KO', ko: 'EN' },
-  switchLang: { en: '한국어로 보기', ko: 'View in English' },
+  // aria-label starts with the visible code (label in name, WCAG 2.5.3).
+  switchLang: { en: 'KO, 한국어로 보기', ko: 'EN, View in English' },
   // Other language's name, in that language (CV toolbar, 6.4).
   otherLangName: { en: '한국어', ko: 'English' },
   toggleTheme: { en: 'Toggle dark mode', ko: '다크 모드 전환' },

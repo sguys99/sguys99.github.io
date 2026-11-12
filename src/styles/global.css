@@ -208,6 +208,11 @@ a {
     box-shadow var(--dur) ease;
 }
 
+/* Language items: one meta face for EN and KO, like the mobile .lang-btn; beats [lang='ko'] above (11.8 2026-11-12). */
+.seg > [hreflang] {
+  font-family: var(--font-meta);
+}
+
 /* Inner 1px ring so the selection is not shown by color alone (WCAG 1.4.1, 11.8 2026-11-12). */
 .seg > [aria-current='true'],
 .seg > [aria-pressed='true'] {

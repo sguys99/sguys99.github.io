@@ -735,7 +735,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
     <li class="em"><span class="k" aria-hidden="true">Email</span><a class="v" href="mailto:…">{icon mail}<span class="lbl">sguys99@naver.com</span></a></li>
     <li><span class="k" aria-hidden="true">GitHub</span><a class="v" href="…">{icon gh}<span class="lbl">GitHub</span><span class="h">github.com/sguys99</span></a></li>
     <li><span class="k" aria-hidden="true">LinkedIn</span><a class="v" href="…">{icon in}<span class="lbl">LinkedIn</span><span class="h">in/kmyu99</span></a></li>
-    <li class="cv"><span class="k" aria-hidden="true">CV</span><a class="v" href="/cv/kwang-myung-yu-cv.pdf" download aria-label="Download CV (PDF)">Download PDF {icon download sm}</a></li>   <!-- ≤860 숨김, 메뉴 시트(5.3)가 대신 -->
+    <li class="cv"><span class="k" aria-hidden="true">CV</span><a class="v" href="/cv/kwang-myung-yu-cv.pdf" download aria-label="Download PDF (CV)">Download PDF {icon download sm}</a></li>   <!-- ≤860 숨김, 메뉴 시트(5.3)가 대신 -->
   </ul>
 </aside>
 ```
@@ -761,7 +761,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 |---|---|
 | 링크 hover | 글자·밑줄 `--accent` |
 | focus-visible | 전역 링 |
-| CV 링크 | 현재 언어 PDF(6.1)로 `href` + `download`. 키가 `aria-hidden`이라 링크 이름은 `aria-label` "Download CV (PDF) / CV 다운로드 (PDF)". 모양은 기록표 행(B안, 시안 `docs/design-drafts/g5/cv-button/`, 11.8 사용자 결정) |
+| CV 링크 | 현재 언어 PDF(6.1)로 `href` + `download`. 키가 `aria-hidden`이라 링크 이름은 `aria-label` "Download PDF (CV) / PDF 다운로드 (CV)" (보이는 글자를 앞에, WCAG 2.5.3, 11.8 2026-11-12). 모양은 기록표 행(B안, 시안 `docs/design-drafts/g5/cv-button/`, 11.8 사용자 결정) |
 
 **반응형**
 
@@ -885,7 +885,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 ```html
 <!-- .topbar .bar 안 (5.2와 같은 header) -->
 <a class="bar-id" href="#about"><span class="bar-name">Kwang Myung Yu</span><span class="bar-cur">Experience</span></a>
-<a class="icon-btn lang-btn" href="/ko/" lang="ko" hreflang="ko" aria-label="한국어로 보기">KO</a>
+<a class="icon-btn lang-btn" href="/ko/" lang="ko" hreflang="ko" aria-label="KO, 한국어로 보기">KO</a>
 <button class="icon-btn menu-btn" aria-haspopup="dialog" aria-expanded="false" aria-controls="sheet" aria-label="Open menu">{icon menu}</button>
 
 <dialog class="sheet" id="sheet" aria-labelledby="sheet-title">
@@ -913,7 +913,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | `.bar-id` | `flex: 1; min-width: 0; white-space: nowrap`, 간격 `--sp-2`, 밑줄 없음 |
 | `.bar-name` | `--fs-md`, `--fw-strong`, 자간 -0.01em(컴포넌트 값) |
 | `.bar-cur` | `--fs-sm`, `--text-3`, 말줄임. 앞에 `/` 구분자(`--line-strong`, 오른쪽 `--sp-2`) |
-| `.lang-btn` | `.icon-btn`(5.6)에 폭 auto, 좌우 패딩 `--sp-3`, `--font-meta` `--fs-xs` `--fw-medium` `--ls-label-ko` |
+| `.lang-btn` | `.icon-btn`(5.6)에 폭 auto, 좌우 패딩 `--sp-3`, `--font-meta` `--fs-xs` `--fw-medium` `--ls-label-ko`. 이름 `aria-label`은 보이는 글자를 앞에 "KO, 한국어로 보기" / "EN, View in English" (WCAG 2.5.3, 11.8 2026-11-12) |
 | `.sheet` | 오른쪽 붙임(`margin-left: auto`), 폭 `min(var(--sheet-w), 88vw)`, 높이 `100dvh`, 바탕 `--surface`, 왼쪽 선 1px `--line`, `::backdrop` `--scrim` |
 | `.sheet-in` | 세로 flex, 간격 `--sp-6`, 패딩 `--sp-3` `--sp-5` `--sp-6` |
 | `.sheet-head` | 높이 `--header-h`, 양 끝 정렬 |
@@ -966,7 +966,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 요소 | 속성 → 토큰 |
 |---|---|
 | `.seg` | `inline-flex`, 테두리 1px `--line`, 모서리 `--radius-pill`, 안쪽 여백 2px(컴포넌트 값), 바탕 `--surface` |
-| 항목 | `--fs-xs`, `--fw-medium`, `--ls-label-ko`, `--text-3`, 패딩 `--sp-1` 10px(컴포넌트 값), 최소 높이 `--ctl-h-sm`, 모서리 `--radius-pill` |
+| 항목 | `--fs-xs`, `--fw-medium`, `--ls-label-ko`, `--text-3`, 언어 링크(`[hreflang]`)는 `--font-meta`(EN·KO 같은 서체, 모바일 `.lang-btn`과 같음, 11.8 2026-11-12), 패딩 `--sp-1` 10px(컴포넌트 값), 최소 높이 `--ctl-h-sm`, 모서리 `--radius-pill` |
 | 선택됨 (`aria-current` / `aria-pressed="true"`) | 바탕 `--accent-soft`, 글자 `--accent`, 안쪽 테두리 1px `--accent`(`box-shadow: inset 0 0 0 1px`, 색만으로 구분하지 않게, 11.8 2026-11-12) |
 
 **테마 전환**
@@ -2328,7 +2328,7 @@ glossary를 따른다. 국문 페이지에서도 영문으로 두는 것:
 | 페이지 언어 | 레이아웃이 `<html lang="en">` / `<html lang="ko">`를 둔다. 404는 경로(`/ko/`)로 판별 (decision-log G6) |
 | 국문 차이 규칙 | `html:lang(ko) .선택자 { … }`로 덮어쓴다. 기본 규칙은 영문 |
 | `--font-display` | `:root`에서 `var(--font)`, `html:lang(ko)`에서 `var(--font-ko)`로 교체 |
-| 페이지 안 다른 언어 조각 | 요소에 `lang` 속성: 국문 원제 `<span class="og" lang="ko">`, 언어 버튼 `EN`/`KO`에 각자 `lang` |
+| 페이지 안 다른 언어 조각 | 요소에 `lang` 속성: 국문 원제 `<span class="og" lang="ko">`, 언어 버튼 `EN`/`KO`에 각자 `lang`. 단 언어 세그먼트 항목은 `[lang="ko"]` 규칙을 이기는 `.seg > [hreflang]`로 `--font-meta` 고정 (11.8 2026-11-12) |
 
 - **시안 버그**: base의 `:lang(ko) body, :lang(ko) { font-family: var(--font-ko); }`는 국문 페이지의 **모든 요소**에 (0,1,0) 명시도로 서체를 직접 건다. 이보다 앞에 있거나 명시도가 낮은 `--font-meta` 지정(예: 요소 선택자만 쓴 규칙)이 조용히 무시된다. 구현은 `html:lang(ko) body { font-family: var(--font-ko); }`로 상속시키고, 영문 페이지의 한글 조각은 `[lang="ko"] { font-family: var(--font-ko); }`로 따로 잡는다.
 
@@ -2923,6 +2923,8 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | ③ 모바일 이전·다음 **B안** — 라벨을 제목 위 작은 대문자로, 제목은 본문색·한 단계 크게(`--fs-md`) | → 5.24.5, `CasePager.astro` `.end`. 글 끝의 다음 행동이라 탭 대상이 분명하고, 언어와 무관하게 제목 시작이 맞음. 넓은 폭 사이드바 이전·다음은 그대로 |
 | ④ 진행 배지 줄바꿈 **A안** — 배지 여백을 앞 요소로 옮김 | → 5.7, 5.24.3, `Badge.astro`·`CaseStudy.astro`. 줄이 바뀐 배지가 8px 들여 써지던 정렬 문제. 한 줄일 때 모양은 그대로(영·국) |
 | ⑤ 메뉴 시트 하위 목차 현재 항목에 그룹 행과 같은 점(`--dot` `--accent`)을 더함 (2026-11-12) | → 5.3, `MenuSheet.astro`. 위 "선택 상태를 색만으로 구분하지 않는다"와 같은 원칙(7.3 후속에서 남겨 둔 건). 새 모양 없이 시트 그룹 행의 점을 재사용, 점은 그룹 행 점과 같은 세로 줄 |
+| 언어 세그먼트 `EN`·`KO`를 같은 `--font-meta`로 그린다(모바일 `.lang-btn`과 같음). `lang`·`hreflang` 속성은 유지 (2026-11-12, 사용자 결정) | → 5.4 항목, 7장 다른 언어 조각, `global.css` `.seg > [hreflang]`. 전에는 `KO`만 `[lang="ko"]` → `--font-ko`라 두 항목 서체가 달랐고, 영문 데스크톱이 `KO` 두 글자 때문에 Pretendard 라틴 분할(38KB)을 받았다 (tasks 7.5) |
+| 보이는 글자와 접근 이름을 맞춘다 (WCAG 2.5.3 label in name): 모바일 `.lang-btn` "KO, 한국어로 보기" / "EN, View in English", 사이드바 CV 링크 "Download PDF (CV)" / "PDF 다운로드 (CV)". 보이는 모양은 그대로 (2026-11-12, 사용자 결정) | → 5.1 CV 링크, 5.3 `.lang-btn`, `ui.ts` `switchLang`·`cvPdfName`. 데스크톱 세그먼트는 `aria-label` 없이 보이는 글자가 이름이라 해당 없음. 다른 `aria-label`(GitHub·LinkedIn·이메일 복사)은 이미 보이는 글자를 담고, 테마·메뉴는 아이콘 버튼 |
 
 | 6.17 중간 검토(2026-11-12): 현재 구현 그대로 유지. 케이스 사이드바 경계 ≤1100px와 아키텍처 표의 칸 폭(container query, ≤560px) 쌓기, 국문 단어 라벨 `--font-ko`, 모바일 소속 줄 제거를 승인. 제안했던 다듬기(국문 CV 키, HTML CV `noindex`, `order` 필드, `·` 줄바꿈 금지, 섹션 제목·직함 구분자 통일, 404 간격, 국문 건수 붙여쓰기)는 적용하지 않음 | → 3장, 5.24, 7장 |
 
