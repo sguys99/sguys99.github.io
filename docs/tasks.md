@@ -248,7 +248,7 @@
 - [x] 8.4 README 작성, 라이선스 표기 결정 (코드와 콘텐츠의 권리 범위) **[확인]** — 코드·콘텐츠 전체 All rights reserved(사용자 결정 2026-11-12), LICENSE 파일 없음
 - [x] 8.5 **[확인]** `master` push 승인 — 항목별 완료마다 push 승인, 문안 검토(1.2.11·1.3.2·1.5.6) 전 공개 승인(2026-11-12)
 - [x] 8.6 배포 확인: `https://sguys99.github.io`, `/ko/`, 케이스 스터디, CV PDF, 404 — 실제 주소에서 전 페이지 200·`lang`, PDF 2건, 404 상태, 끝 `/` 리다이렉트, 에셋 124건, 1440·360/라이트·다크/영·국 렌더링(콘솔 오류·가로 스크롤 0) 확인(2026-11-12)
-- [ ] 8.7 공개 후 확인: 실제 주소에서 OG 미리보기, `hreflang`, sitemap, 집계 동작 — sitemap: `/robots.txt`·`/sitemap.xml` 응답 확인 후 Google Search Console에 사이트 등록·sitemap 제출(사용자 계정 필요), 색인 범위에 `/cv/`가 잡히는지 확인 — 코드 측 확인 완료(2026-11-12): robots·sitemap(12개 주소, `/cv/`는 설계대로 제외), `hreflang`·canonical, OG 이미지 2종 1200×630. 남은 것: 메신저 실제 미리보기, Search Console, 집계(8.3 코드 수령 후)
+- [ ] 8.7 공개 후 확인: 실제 주소에서 OG 미리보기, `hreflang`, sitemap, 집계 동작 — sitemap: `/robots.txt`·`/sitemap.xml` 응답 확인 후 Google Search Console에 사이트 등록·sitemap 제출(사용자 계정 필요), 색인 범위에 `/cv/`가 잡히는지 확인 — 코드 측 확인 완료(2026-11-12): robots·sitemap(12개 주소, `/cv/`는 설계대로 제외), `hreflang`·canonical, OG 이미지 2종 1200×630. 메신저 미리보기(카카오톡·LinkedIn) 사용자 확인, 집계 동작 확인. Search Console은 예전 블로그 때 확인된 속성이 남아 있어, 삭제됐던 확인 파일 `public/googlee85bfe6a00318f16.html`을 복원(2026-11-12). 남은 것: sitemap 제출
 - [ ] 8.8 (선택) Google Search Console 등록, GitHub·LinkedIn 프로필에 주소 추가 (사용자가 직접)
 
 **완료 기준**: 실제 주소에서 사이트 전체가 정상 동작한다.

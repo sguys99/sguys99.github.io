@@ -10,3 +10,5 @@ docs/design-drafts
 .mcp.json
 skills-lock.json
 public/fonts
+# Google Search Console verification file: content must stay byte-exact
+public/google*.html
