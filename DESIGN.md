@@ -8,6 +8,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 기준 시안 | 홈 `docs/design-drafts/g4/base.html`, 케이스 스터디 `g4/case.html` + 3차 확정안 `331-c`·`332-a2`·`333-a`·`334-d`·`335-a` |
 | 토큰 파일 | `src/styles/tokens.css` (이 문서의 3장과 값이 같아야 함) |
 | 결정 기록 | 11장 Decision Log |
+| 작업 번호 | 본문의 `tasks N.N`은 공개 전 구축 기록 `docs/tasks-archive.md`의 번호 |
 
 시안과 이 문서가 다르면 이 문서가 우선한다. 이 문서가 비어 있거나 모호하면 구현 전에 사용자에게 묻는다.
 
