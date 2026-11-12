@@ -85,7 +85,33 @@ const { lang, prev, next, end = false } = Astro.props;
     border-top: 1px solid var(--line);
   }
 
+  /* Label above the title as an eyebrow; the title takes the full width, one step up, in body colour (11.8). */
+  .end .pn-a {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-1);
+  }
+
+  .end .pn-k {
+    min-width: 0;
+    font-size: var(--fs-2xs);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+  }
+
+  html:lang(ko) .end .pn-k {
+    font-size: var(--fs-xs);
+    letter-spacing: var(--ls-label-ko);
+    text-transform: none;
+  }
+
   .end .pn-t {
     white-space: normal;
+    font-size: var(--fs-md);
+    font-weight: var(--fw-medium);
+    color: var(--text);
+  }
+
+  .end .pn-a:hover .pn-t {
+    color: var(--accent);
   }
 </style>

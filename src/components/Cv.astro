@@ -634,6 +634,28 @@ const thin = (s: string) => s.replace(/\s*–\s*/g, ' – ');
     }
   }
 
+  /* Screen ≤720px: the date floats to the right end of the title line and the text below runs full width
+     (11.8). Screen only, so the print/PDF grid stays as it is. */
+  @media screen and (max-width: 720px) {
+    .row {
+      display: block;
+    }
+    .row::after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+    .when {
+      float: right;
+      margin-left: var(--sp-3);
+    }
+    /* The role takes its own line, so only the organisation shares the line with the date
+       (the "—" stays in one text run with the role: splitting it shifted the PDF glyphs by sub-pixels). */
+    .row h3 > .sub {
+      display: block;
+    }
+  }
+
   @media print {
     .tools {
       display: none;

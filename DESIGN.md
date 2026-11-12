@@ -921,7 +921,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | `.sheet-nav` | 위 선 1px `--line`, 그룹 행마다 아래 선 1px `--line` |
 | 그룹 행 `> li > a` | `--fs-lg`, `--fw-medium`, `--text-2`, 패딩 `--sp-3` 0, 오른쪽 끝에 현재 점 `--dot` |
 | `.sheet-sub` | 왼쪽 선 1px `--line`, 패딩 0 0 `--sp-3` `--sp-4`, 위 여백 `calc(-1 * var(--sp-2))` |
-| 하위 행 `a` | `--fs-sm`, `--fw-regular`, 자간 0, `--text-3`, 패딩 `--sp-1` 0 |
+| 하위 행 `a` | `--fs-sm`, `--fw-regular`, 자간 0, `--text-3`, 패딩 `--sp-1` 0, 오른쪽 끝에 현재 점 `--dot` (그룹 행 점과 같은 세로 줄) |
 | `.contact` (시트) | 아이콘 + 글자, 세로 간격 `--sp-3`. 마지막 줄 CV: 다운로드 아이콘 + "Download CV (PDF) / CV 다운로드 (PDF)", 현재 언어 PDF(6.1) `download` (11.8 사용자 결정. ≤860에서 사이드바 CV 행을 숨기므로 모바일의 CV 자리). 공통 영역이라 404·케이스 스터디 시트에도 같이 나온다(연락처와 같은 사이트 공통 항목) |
 | `.sheet-prefs` | `margin-top: auto`(바닥 고정), 위 선 1px `--line`, 패딩 위 `--sp-4`, 행 간격 `--sp-3`, 행은 라벨 ↔ 컨트롤 양 끝 정렬 |
 
@@ -933,7 +933,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 |---|---|---|
 | 그룹 행 | current | `aria-current="true"`, 글자 `--text`, 오른쪽 점 `--accent` (`--radius-pill`) |
 | 그룹 행 (하위 있음) | current | 글자만 `--text`, 점은 하위 행이 대신하므로 투명 |
-| 하위 행 | current | 글자 `--accent` |
+| 하위 행 | current | 글자 `--accent` + 오른쪽 점 `--accent` (색만으로 구분하지 않게, 11.8 2026-11-12) |
 | `.bar-cur` | — | 현재 섹션 이름(탭 이름이 아니라 섹션 이름: "Teaching · Books · Advisory" 등) |
 | `menu-btn` | open | `aria-expanded="true"`, 닫히면 `false` (`close` 이벤트) |
 | 시트 행 | hover / focus-visible | hover 색 규칙 없음(시안). 포커스는 전역 링 |
@@ -1072,7 +1072,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 태그 목록 | `.tags` | — | `<ul>`, `flex-wrap`, 간격 `--sp-1h` | |
 | 총괄 배지 | `.badge` | Lead / 총괄 | `--font-meta`, `--fs-2xs`, `--fw-medium`, 패딩 0 `--sp-1h`, 테두리 1px `--line-strong`, `--radius-xs`, `--text-2` | 전체 프로젝트 원장 제목 뒤 |
 | 대표 배지 | `.badge.f` | Selected / 대표 | 테두리·글자 `--accent` | 원장의 대표작 행, IP 보고서 대표 건 (대표 표시는 이 한 모양, 11.5) |
-| 진행 배지 | `.badge.live` | In progress / 진행 중 | 테두리·글자 `--accent`, 왼쪽 `--sp-2` | 케이스 스터디 Outcome 제목 (진행 중 건) |
+| 진행 배지 | `.badge.live` | In progress / 진행 중 | 테두리·글자 `--accent`. 배지 자체 여백 없음: 간격은 앞 요소가 가진다(성과 제목 `.hd` `gap: --sp-1 --sp-2`, 기록표 기간 `.num` `margin-right: --sp-2`), 줄이 바뀌면 배지가 왼쪽 끝에 맞음 (11.8 2026-11-12) | 케이스 스터디 Outcome 제목 (진행 중 건) |
 | 진행 상태 (점) | `.status` | In progress / 진행 중 | `--fs-xs` `--fw-medium` `--accent`, 앞 점 `--dot` `--accent` + 후광 `0 0 0 var(--halo) var(--accent-soft)`, 간격 `--sp-1h` | 대표작 메타 (현재·예정 건) |
 | 상태 점 | `.st` | 아래 표 | 앞 점 `--dot`, 테두리 1px `--text-3`, 간격 5px(정렬 보정값) | 개인 프로젝트, 특허·SW |
 
@@ -1821,6 +1821,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | `.rec > div` | `grid: 96px minmax(0,1fr)`, `gap: --sp-3`, baseline, `padding: --sp-2 0`, 아래 `--line` |
 | `dt` | `--fs-2xs` `--fw-strong` `--ls-label` 대문자 `--text-3` (국문 `--fs-xs` `--ls-label-ko`) |
 | `dd` | `--fs-sm` `--lh-row`. 스택은 `--font-meta` `--fs-xs` `--text-2` 행간 1.7 |
+| 861–1100px 스택 행 | 스택 행만 키 위·값 아래 (`grid: minmax(0,1fr)`, `gap: --sp-1`). 다른 행은 키 열 96px 그대로 (11.8 2026-11-12) |
 | `.side-foot` | `margin-top: auto` (사이드바 바닥), `padding-top: --sp-4`, 위 `--line`, grid `gap: --sp-3` |
 
 | 기록 행 | 필드 | 조건 |
@@ -1857,7 +1858,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | `h3` (Key decisions) | `margin: --sp-5 0 --sp-2`, `--fs-xs` `--fw-strong` `--ls-label` 대문자 `--text-3` (국문 `--fs-sm` `--ls-label-ko`) |
 | `.bl` 목록 | grid `gap: --sp-2`. `li` `padding-left: --sp-4` `--text-2` `--measure`. 표식 `::before` 가로선 7×1px `--text-3`, `top: 0.8em` |
 | 성과 `.oc` | `li` `--text` `--fw-medium`. 표식 `--dot` 정사각 `--accent`, 모서리 1px, `top: 0.6em` |
-| 진행 중 배지 | 성과 제목 옆 `.badge.live`(테두리·글자 `--accent`, `margin-left: --sp-2`) "In progress / 진행 중" → 5.7 |
+| 진행 중 배지 | 성과 제목 옆 `.badge.live`(테두리·글자 `--accent`, 간격은 `.hd` `gap: --sp-1 --sp-2`) "In progress / 진행 중" → 5.7 |
 
 | 순서 | id | 제목 영문 / 국문 | 필드 | 조건 |
 |---|---|---|---|---|
@@ -1910,7 +1911,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | `.pn-k` | 인라인 flex `gap: --sp-1`, `--font-meta` `--fs-xs` `--text-3`, `min-width: 64px`. 아이콘 `--icon-xs` `--icon-stroke-sm`: Previous 앞에 ←, Next 뒤에 → |
 | `.pn-t` | 제목 한 줄 말줄임 (`ellipsis`) |
 | 끝 항목 | 첫 케이스는 Previous, 마지막은 Next를 그리지 않는다 (순환 없음) |
-| ≤860px `.pn-end` | 본문 아래, `margin-top: --sp-2`. 링크마다 `padding: --sp-3 0` + 위 `--line`, 제목 줄바꿈 허용 |
+| ≤860px `.pn-end` | 본문 아래, `margin-top: --sp-2`. 링크마다 `padding: --sp-3 0` + 위 `--line`, 1열 `gap: --sp-1`: 라벨 `.pn-k`를 제목 위에 `--fs-2xs` 대문자 `--ls-label`(국문 `--fs-xs` `--ls-label-ko`, 대문자 없음), `min-width` 없음. 제목 `.pn-t` `--fs-md` `--fw-medium` `--text`, 줄바꿈 허용, 링크 hover 때 `--accent` (11.8 2026-11-12) |
 
 - 순서: `featured: true`이고 `caseStudy`가 있는 프로젝트, `order` 오름차순 (현재 5건). 링크 `rel="prev"`/`"next"`.
 - 접근성: 링크 이름 = "Previous" + 제목 전체(말줄임은 시각만).
@@ -2070,7 +2071,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 영역 | 내용 |
 |---|---|
 | 도구 막대 (`role` 없음, 10장) | 용지 위 오른쪽 정렬, 버튼 3개: 반대 언어("한국어" / "English", 6.1 규칙으로 반대 언어 CV로 이동), 테마("Theme / 테마"), 인쇄("Print / Save PDF" / "인쇄 / PDF 저장", 포인트 색). 인쇄 시 숨김 |
-| 용지 (`main`) | 머리 + 섹션 13개. 화면에서는 테두리 있는 용지 한 장, ≤720px에서 테두리 없이 1열 |
+| 용지 (`main`) | 머리 + 섹션 13개. 화면에서는 테두리 있는 용지 한 장, ≤720px에서 테두리 없이 1열. 이때 행은 기간을 제목 줄 오른쪽 끝에 띄우고(`float: right`, 왼쪽 `--sp-3`) 본문은 전체 폭, 직함(`h3 > .sub`, "— 직함")은 제목 아래 한 줄 (`@media screen`만, 11.8 2026-11-12) |
 | 머리 (`header`) | 이름 `h1`, 직함 줄(`headline · currentRole`), 연락처 열: 이메일, GitHub 호스트, LinkedIn 호스트, 사이트 주소(영문 `sguys99.github.io`, 국문 `sguys99.github.io/ko/`) |
 
 사이드바·상단 메뉴·모바일 바·푸터 없음. 사진 없음 (3.3.3 A).
@@ -2656,7 +2657,7 @@ JS도 `matchMedia('(prefers-reduced-motion: reduce)')`가 참이면 모션 코�
 |---|---|---|
 | 도구 줄 `.tools` (언어, 테마, "Print / Save PDF") | 종이 위 오른쪽 | `display: none` |
 | 종이 `.cv` | `--cv-paper-w`, `--cv-pad`, `--surface` 바탕, `--line` 테두리, `--radius-sm` | 여백·테두리·모서리 없음, 쪽 흐름 |
-| ≤720px | 라벨 칸·연락처·Skills를 1열로, 좌우 테두리 없음 | — |
+| ≤720px | 라벨 칸·연락처·Skills를 1열로, 좌우 테두리 없음. 행: 기간은 제목 줄 오른쪽 끝(`float`), 직함은 제목 아래 줄 (`screen`만) | — (기간 열 그대로) |
 
 - 도구 줄은 시안의 `role="toolbar"`를 쓰지 않는다 [구현 기본값]: toolbar 역할은 화살표 키 이동을 요구하는데 버튼 3개라 일반 Tab 이동이 맞다.
 - 도구 줄의 언어 전환은 `/cv/` ↔ `/ko/cv/` 링크, 테마는 8장 버튼과 같은 동작.
@@ -2917,6 +2918,11 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | CV 머리 연락처 링크는 화면에서만 줄 간격을 넓혀 대상 높이 24px 이상 (WCAG 2.5.8). 인쇄·PDF 조판은 그대로 (2026-11-12) | → 9장 터치 대상, `Cv.astro` `@media screen`. 줄 높이 `--ctl-h-sm`(28px), 링크 `inline-block`. PDF 영·국 4쪽 그대로, 전 쪽 렌더링 픽셀 동일 |
 | 개인 프로젝트 상태 필터에 `.sr-only` `role="status"` 결과 알림. 문구는 전체 프로젝트 원장과 같은 `showing` 키, 필터를 바꿀 때만 (2026-11-12) | → 5.20, 9장 상태 알림. 9장 표(같은 `role="status"`)와 5.20(알림 없음)의 불일치를 9장 쪽으로 맞춤. 보이는 건수는 버튼에 이미 있어 화면에는 숨김 |
 | 언어 전환 크로스페이드(3장 `--m-lang`, 5.4, 9장)를 명세대로 구현: `no-preference` 안 `@view-transition { navigation: auto }` + `::view-transition-old/new(root)` `--m-lang`(테마 전환 중 `data-vt="theme"`과 겹치지 않게 `html:not([data-vt])`). 명세 이름("언어 전환 크로스페이드")과 331-c 모션 목록(테마·언어만)에 따라 언어가 바뀌는 이동에만 적용하고 같은 언어 이동은 `pagereveal`에서 건너뜀 (2026-11-12) | → 5.4 모션, `global.css`, `Base.astro`. `navigation: auto`만 두면 홈 → 케이스 같은 모든 같은 사이트 이동에 크로스페이드가 걸려 명세에 없는 모션이 생긴다 |
+| 7.1 반응형 후속 시안 4건 선택 (2026-11-12, 시안 `docs/design-drafts/g7/responsive/`): ① CV 화면 ≤720px **B안** — 기간을 제목 줄 오른쪽 끝에 띄우고 본문은 전체 폭. 시안을 다듬어 직함("— 직함")은 제목 아래 한 줄로 내림 | → 6.4, 10장 화면 전용, `Cv.astro` `@media screen and (max-width: 720px)`. 이력서다운 모양에 본문 폭 최대. 시안 그대로는 기간 옆에서 `PwC Consulting, Digital / & AI`처럼 이름이 일찍 꺾였는데, 직함을 내리면 기간 옆에는 조직 이름만 남아 360px에서도 대부분 한 줄. 대시를 별도 `<span>`으로 감추는 방법은 PDF 글자 위치가 0.002pt 바뀌어(국문 1쪽 픽셀 차이) 버리고 마크업은 그대로 둠. PDF 영·국 4쪽, 전 쪽 픽셀 동일 |
+| ② 케이스 기록표 861–1100px **B안** — 스택 행만 키 위·값 아래 | → 5.24.1, `CaseStudy.astro`. 바뀌는 곳이 가장 적고, 값 열 약 107px에서 이름 하나에 한 줄씩 늘어지던 스택만 풀림 |
+| ③ 모바일 이전·다음 **B안** — 라벨을 제목 위 작은 대문자로, 제목은 본문색·한 단계 크게(`--fs-md`) | → 5.24.5, `CasePager.astro` `.end`. 글 끝의 다음 행동이라 탭 대상이 분명하고, 언어와 무관하게 제목 시작이 맞음. 넓은 폭 사이드바 이전·다음은 그대로 |
+| ④ 진행 배지 줄바꿈 **A안** — 배지 여백을 앞 요소로 옮김 | → 5.7, 5.24.3, `Badge.astro`·`CaseStudy.astro`. 줄이 바뀐 배지가 8px 들여 써지던 정렬 문제. 한 줄일 때 모양은 그대로(영·국) |
+| ⑤ 메뉴 시트 하위 목차 현재 항목에 그룹 행과 같은 점(`--dot` `--accent`)을 더함 (2026-11-12) | → 5.3, `MenuSheet.astro`. 위 "선택 상태를 색만으로 구분하지 않는다"와 같은 원칙(7.3 후속에서 남겨 둔 건). 새 모양 없이 시트 그룹 행의 점을 재사용, 점은 그룹 행 점과 같은 세로 줄 |
 
 | 6.17 중간 검토(2026-11-12): 현재 구현 그대로 유지. 케이스 사이드바 경계 ≤1100px와 아키텍처 표의 칸 폭(container query, ≤560px) 쌓기, 국문 단어 라벨 `--font-ko`, 모바일 소속 줄 제거를 승인. 제안했던 다듬기(국문 CV 키, HTML CV `noindex`, `order` 필드, `·` 줄바꿈 금지, 섹션 제목·직함 구분자 통일, 404 간격, 국문 건수 붙여쓰기)는 적용하지 않음 | → 3장, 5.24, 7장 |
 

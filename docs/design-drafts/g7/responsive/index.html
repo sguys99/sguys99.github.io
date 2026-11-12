@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>7.1 반응형 후속 시안</title>
+    <style>
+      body { margin: 0; padding: 24px; font: 14px/1.5 system-ui, sans-serif; background: #f4f5f7; color: #1a1f27; }
+      h1 { font-size: 20px; margin: 0 0 4px; }
+      h2 { font-size: 16px; margin: 40px 0 4px; }
+      p.k { margin: 0 0 12px; color: #5f6a78; }
+      .grid { display: flex; gap: 16px; align-items: flex-start; overflow-x: auto; padding-bottom: 8px; }
+      figure { margin: 0; flex: none; }
+      figcaption { font: 12px/1.4 ui-monospace, monospace; margin-bottom: 6px; color: #5f6a78; }
+      figcaption b { color: #1a1f27; font-family: system-ui, sans-serif; }
+      img { display: block; border: 1px solid #d5dae1; background: #fff; }
+      .cv img { width: 300px; height: 900px; object-fit: cover; object-position: top; }
+    </style>
+  </head>
+  <body>
+    <h1>7.1 반응형 후속 시안</h1>
+    <p class="k">실제 빌드 화면에 variants.css를 얹어 찍은 것. 설명과 추천은 README.md. 파일 이름: 제안-안-언어-테마-폭.</p>
+    <div id="out"></div>
+    <script>
+      const sets = [
+        ['cv', 'CV 화면 ≤720px (경력·대표 프로젝트 위쪽만 잘라 보임)', ['cur', 'a', 'b', 'c'], 360, 'cv'],
+        ['rec', '케이스 기록표 861–1100px (사이드바 280px)', ['cur', 'a', 'b', 'c'], 1000, ''],
+        ['pn', '모바일 이전·다음', ['cur', 'a', 'b', 'c'], 390, ''],
+        ['badge', '배지 줄바꿈 들여쓰기 (기록표 기간 행, 1000px)', ['cur', 'a'], 1000, ''],
+      ];
+      const names = { cur: '현재', a: 'A', b: 'B', c: 'C' };
+      const out = document.getElementById('out');
+      for (const [key, title, vs, w, cls] of sets)
+        for (const [lang, theme] of [['en', 'light'], ['ko', 'light'], ['en', 'dark']]) {
+          out.insertAdjacentHTML('beforeend', `<h2>${title} · ${lang} / ${theme}</h2>`);
+          const g = document.createElement('div');
+          g.className = 'grid ' + cls;
+          for (const v of vs) {
+            const f = `shots/${key}-${v}-${lang}-${theme}-${w}.png`;
+            g.insertAdjacentHTML('beforeend', `<figure><figcaption><b>${names[v]}</b> ${f}</figcaption><a href="${f}"><img src="${f}" alt="${key} ${names[v]} ${lang} ${theme}"></a></figure>`);
+          }
+          out.append(g);
+        }
+    </script>
+  </body>
+</html>

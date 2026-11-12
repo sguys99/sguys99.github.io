@@ -235,8 +235,9 @@ const { email, github, linkedin } = (await getEntry('profile', 'profile'))!.data
     color: var(--text-2);
   }
 
-  /* Current-section dot; filled by aria-current. */
-  .sheet-nav > li > a::after {
+  /* Current-section dot; filled by aria-current. Sub-contents links share it, so the current item is not
+     marked by colour alone (9장, 11.8). */
+  .sheet-nav a::after {
     content: '';
     width: var(--dot);
     height: var(--dot);
@@ -248,7 +249,7 @@ const { email, github, linkedin } = (await getEntry('profile', 'profile'))!.data
     color: var(--text);
   }
 
-  .sheet-nav > li > a[aria-current='true']::after {
+  .sheet-nav a[aria-current='true']::after {
     background: var(--accent);
   }
 

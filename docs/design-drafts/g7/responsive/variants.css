@@ -1,0 +1,139 @@
+/* Responsive QA follow-ups (tasks 7.1), injected over the built site by shots.mjs. Tokens only.
+   Each proposal is switched by a data attribute on <html>: data-cv, data-rec, data-pn, data-badge.
+   No attribute = current build. */
+
+/* ── 1. CV on screen ≤720px (print is untouched: every rule sits in a screen media query) ── */
+@media screen and (width <= 720px) {
+  /* A. One column: the date becomes a small label above the title. */
+  html[data-cv='a'] .cv .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  html[data-cv='a'] .cv .tight .row + .row {
+    margin-top: var(--sp-2);
+  }
+
+  /* B. Date floats to the top-right of the title; text runs full width underneath. */
+  html[data-cv='b'] .cv .row {
+    display: block;
+  }
+  html[data-cv='b'] .cv .row .when {
+    float: right;
+    margin-left: var(--sp-3);
+  }
+  html[data-cv='b'] .cv .row::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  /* C. Keep two columns, but a narrow date column that wraps (2026 – / Present). */
+  html[data-cv='c'] .cv {
+    --cv-date: 15mm;
+  }
+  html[data-cv='c'] .cv .row .when {
+    white-space: normal;
+    line-height: 1.5;
+    padding-top: 0.15em;
+  }
+}
+
+/* ── 2. Case record table at 861–1100px (sidebar 280px) ── */
+@media (861px <= width <= 1100px) {
+  /* A. Every row stacks: key above value. */
+  html[data-rec='a'] .sidebar .rec > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-0);
+  }
+
+  /* B and C. Only the Stack row stacks; the short rows keep the key column. */
+  html:is([data-rec='b'], [data-rec='c']) .rec > div:has(.stk) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-1);
+  }
+
+  /* C. Stack as chips (the domain-tag look, DESIGN.md 5.7). shots.mjs drops the " ·" separators. */
+  html[data-rec='c'] .rec .stk {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-1);
+    line-height: 1.6;
+  }
+  html[data-rec='c'] .rec .stk span {
+    padding: var(--sp-0) var(--sp-2);
+    border-radius: var(--radius-pill);
+    background: var(--chip);
+    color: var(--text-2);
+  }
+}
+
+/* ── 3. Previous / Next at the end of a case study (≤860px) ── */
+@media (width <= 860px) {
+  /* A. One shared label column sized to the longer label (subgrid), so both titles start together. */
+  html[data-pn='a'] .pn.end {
+    grid-template-columns: max-content minmax(0, 1fr);
+    column-gap: var(--sp-3);
+  }
+  html[data-pn='a'] .pn.end .pn-a {
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+  }
+  html[data-pn='a'] .pn.end .pn-k {
+    min-width: 0;
+  }
+
+  /* B. Label above the title (eyebrow); the title gets the full width and body colour. */
+  html[data-pn='b'] .pn.end .pn-a {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-1);
+  }
+  html[data-pn='b'] .pn.end .pn-k {
+    min-width: 0;
+    text-transform: uppercase;
+    letter-spacing: var(--ls-label);
+    font-size: var(--fs-2xs);
+  }
+  html[data-pn='b'][lang='ko'] .pn.end .pn-k {
+    text-transform: none;
+    letter-spacing: var(--ls-label-ko);
+    font-size: var(--fs-xs);
+  }
+  html[data-pn='b'] .pn.end .pn-t {
+    color: var(--text);
+    font-size: var(--fs-md);
+    font-weight: var(--fw-medium);
+  }
+  html[data-pn='b'] .pn.end .pn-a:hover .pn-t {
+    color: var(--accent);
+  }
+
+  /* C. Arrows only: the words move to .sr-only (shots.mjs), arrows share one narrow column. */
+  html[data-pn='c'] .pn.end .pn-a {
+    grid-template-columns: var(--icon-sm) minmax(0, 1fr);
+    gap: var(--sp-3);
+    align-items: center;
+  }
+  html[data-pn='c'] .pn.end .pn-k {
+    min-width: 0;
+    color: var(--text-2);
+  }
+  html[data-pn='c'] .pn.end .pn-k .icon {
+    width: var(--icon-sm);
+    height: var(--icon-sm);
+  }
+}
+
+/* ── 4. "In progress" badge when it wraps ── */
+/* A. No margin on the badge; the gap lives on the line it sits in, so a wrapped badge starts flush left. */
+html[data-badge='a'] .badge.live {
+  margin-left: 0;
+}
+html[data-badge='a'] .hd {
+  column-gap: var(--sp-2);
+  row-gap: var(--sp-1);
+}
+/* In the record's Period row the text stays inline (so ko still fits on one line); the space moves to the
+   end of the date, where it disappears into the line end when the badge wraps. */
+html[data-badge='a'] .rec dd:has(.badge) .num {
+  margin-right: var(--sp-2);
+}
+/* B. Keep: current build (margin-left: --sp-2 on the badge). */
