@@ -242,11 +242,11 @@
 
 ## 단계 8. 배포와 공개
 
-- [ ] 8.1 GitHub Actions 워크플로 작성: 빌드 → PDF 생성 → Pages 배포 (`master` 대상) — `actions/checkout`에 `fetch-depth: 0` 필요 (얕은 복제면 푸터 최종 수정일이 매 배포 날짜로 바뀜, 5.9). `npm run build`가 PDF까지 만드므로 빌드 전에 `npx playwright install --with-deps chromium` 필요(6.12)
-- [ ] 8.2 **[확인]** 저장소 Settings → Pages의 Source를 GitHub Actions로 설정 (사용자가 직접)
+- [x] 8.1 GitHub Actions 워크플로 작성: 빌드 → PDF 생성 → Pages 배포 (`master` 대상) — `actions/checkout`에 `fetch-depth: 0` 필요 (얕은 복제면 푸터 최종 수정일이 매 배포 날짜로 바뀜, 5.9). `npm run build`가 PDF까지 만드므로 빌드 전에 `npx playwright install --with-deps chromium` 필요(6.12) — `.github/workflows/deploy.yml`, 깨끗한 복제본 빌드 통과
+- [x] 8.2 **[확인]** 저장소 Settings → Pages의 Source를 GitHub Actions로 설정 — 사용자 승인으로 `gh api`로 변경(legacy → workflow, 2026-11-12)
 - [ ] 8.3 **[확인]** GoatCounter 계정 생성 후 사이트 코드 전달 (사용자가 직접), 집계 스크립트 적용
 - [ ] 8.4 README 작성, 라이선스 표기 결정 (코드와 콘텐츠의 권리 범위) **[확인]**
-- [ ] 8.5 **[확인]** `master` push 승인
+- [x] 8.5 **[확인]** `master` push 승인 — 항목별 완료마다 push 승인, 문안 검토(1.2.11·1.3.2·1.5.6) 전 공개 승인(2026-11-12)
 - [ ] 8.6 배포 확인: `https://sguys99.github.io`, `/ko/`, 케이스 스터디, CV PDF, 404
 - [ ] 8.7 공개 후 확인: 실제 주소에서 OG 미리보기, `hreflang`, sitemap, 집계 동작 — sitemap: `/robots.txt`·`/sitemap.xml` 응답 확인 후 Google Search Console에 사이트 등록·sitemap 제출(사용자 계정 필요), 색인 범위에 `/cv/`가 잡히는지 확인
 - [ ] 8.8 (선택) Google Search Console 등록, GitHub·LinkedIn 프로필에 주소 추가 (사용자가 직접)
