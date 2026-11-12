@@ -131,7 +131,7 @@ const side = Astro.slots.has('sidebar') && (await Astro.slots.render('sidebar'))
     }
   }
 
-  @media (max-width: 860px) {
+  @media (max-width: 860px), print {
     :global(:root) {
       --header-h: 52px;
     }

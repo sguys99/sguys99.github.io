@@ -350,6 +350,21 @@ a {
     opacity: 1 !important;
     transform: none !important;
   }
+
+  /* Screen-only controls (DESIGN.md 10장 일반 페이지 인쇄; copy button and "show all" hide in their own components). */
+  .topbar,
+  .pl-tools,
+  .pl-status,
+  .filters,
+  .foot li:has(> a[href='#main']) {
+    display: none !important;
+  }
+
+  /* Keep card head lines and headings with what follows (7.11). Not the CV: its pages are set in Cv.astro. */
+  .sec-head,
+  .shell :is(h2, h3, h4) {
+    break-after: avoid;
+  }
 }
 
 /* Plain buttons and links (DESIGN.md 5.6) with no markup of their own. */

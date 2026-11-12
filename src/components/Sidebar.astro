@@ -192,7 +192,7 @@ const inShort = linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\//, '').repl
   }
 
   /* Mobile: compact profile below the bar (DESIGN.md 4장 모바일 골격, 5.1 반응형) */
-  @media (max-width: 860px) {
+  @media (max-width: 860px), print {
     .sidebar {
       position: static;
       height: auto;

@@ -660,7 +660,7 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
   }
 
   /* Mobile: path, title and record only; contents go to the menu sheet, prev/next to the document end. */
-  @media (max-width: 860px) {
+  @media (max-width: 860px), print {
     .sidebar {
       position: static;
       display: block;
