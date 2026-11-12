@@ -53,7 +53,12 @@ try {
     if (!res?.ok()) throw new Error(`${route} returned ${res?.status()}`);
     await page.evaluate(() => document.fonts.ready);
     // @page in the CV CSS sets size and margins; backgrounds are not printed (10장).
-    await page.pdf({ path: join(DIST, file), preferCSSPageSize: true, printBackground: false });
+    await page.pdf({
+      path: join(DIST, file),
+      preferCSSPageSize: true,
+      printBackground: false,
+      tagged: true,
+    });
     console.log(`[cv-pdf] ${lang}: ${file}`);
   }
 } finally {
