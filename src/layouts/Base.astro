@@ -11,6 +11,8 @@ interface Props {
 }
 
 const { lang, title } = Astro.props;
+// GoatCounter site code (cookie-free visit count, tasks 8.3). Set e.g. 'sguys99' to enable; '' emits nothing.
+const GOATCOUNTER = '';
 ---
 
 <html lang={lang}>
@@ -48,6 +50,16 @@ const { lang, title } = Astro.props;
     }
     <link rel="stylesheet" href="/fonts/pretendard/pretendardvariable-dynamic-subset.css" />
     <slot name="head" />
+    {
+      GOATCOUNTER && (
+        <script
+          is:inline
+          data-goatcounter={`https://${GOATCOUNTER}.goatcounter.com/count`}
+          async
+          src="https://gc.zgo.at/count.js"
+        />
+      )
+    }
   </head>
   <body>
     <slot />
