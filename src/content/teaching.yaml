@@ -9,11 +9,11 @@ incheon-visiting-researcher:
   years: 2020 – 2026
   details:
     - en: Advised on LLM application development, including RAG, vector DB, agent system, and workflow design
-      ko: 'LLM 활용 어플리케이션 개발 방안 지원: RAG, 벡터 DB, 에이전트 시스템, 워크플로우 설계'
+      ko: 'LLM 활용 애플리케이션 개발 방안 지원: RAG, 벡터 DB, 에이전트 시스템, 워크플로우 설계'
     - en: Supported development of combustion-state diagnosis models from flame image sequences (ResNet, autoencoder, LSTM-CNN)
       ko: '화염 이미지 시퀀스를 활용한 연소 상태 진단 모델 개발 지원: ResNet, Autoencoder, LSTM-CNN'
-    - en: Developed industrial boiler anomaly detection models and built their deployment environment with Scikit-learn, LightGBM, FastAPI, and AWS EC2
-      ko: '산업용 보일러 이상탐지 모델 개발 및 배포환경 구축: Scikit-learn, LightGBM, FastAPI, AWS EC2 활용'
+    - en: Developed industrial boiler anomaly detection models and built their deployment environment with scikit-learn, LightGBM, FastAPI, and AWS EC2
+      ko: '산업용 보일러 이상탐지 모델 개발 및 배포 환경 구축: scikit-learn, LightGBM, FastAPI, AWS EC2 활용'
     - en: Supported development of an LSTM autoencoder anomaly detection model using dynamic pressure sensors on power plant combustors
       ko: '발전용 연소설비 동압 센서를 활용한 이상탐지 모델 개발 지원: LSTM Autoencoder'
 incheon-llm-agent-lectures:
@@ -64,7 +64,7 @@ kepco-ict-data-science:
   kind: teaching
   title:
     en: Data science lectures for new ICT employees
-    ko: ICT 신입직원 대상 데이터사이언스 강의
+    ko: ICT 신입직원 대상 데이터 사이언스 강의
   org:
     en: KEPCO Human Resources Development Institute
     ko: 한국전력 인재개발원

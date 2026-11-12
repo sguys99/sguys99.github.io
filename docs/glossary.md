@@ -205,6 +205,48 @@
 | credit scoring model | 신용평가 모형 | |
 | industrial automation | 산업용 자동화 | |
 | commissioning | 시운전 | |
+| data science | 데이터 사이언스 | 일반 개념어는 띄어 씀. 기관명 데이터사이언스연구소는 붙여 씀 |
+| orchestrator | 오케스트레이터 | |
+| guardrail | 가드레일 | |
+| reranking | 재순위화 | |
+| query rewrite | 질의 재작성 | |
+| fine-tuning / fine-tuned | 파인튜닝 | |
+| evaluation set | 평가셋 | |
+| entity extraction / code mapping | 엔티티 추출 / 코드 매핑 | |
+| pseudo query | Pseudo Query | 국문은 영문 표기 유지 |
+| view (DB) | View | 국문은 영문 표기 유지 (`View 식별`, `View 스키마`) |
+| lag feature | lag 피처 | |
+| autoencoder | Autoencoder | 영문 문장은 소문자 일반명사, 국문은 영문 표기 |
+| knowledge base | 지식 베이스 | |
+| inference server | 추론 서버 | |
+| traceability / reproducibility | 추적성 / 재현성 | |
+| data labeling | 데이터 레이블링 | |
+| product definition | 제품 정의(서) | 문서를 가리킬 때 제품 정의서 |
+| commercialization roadmap | 상용화 로드맵 | |
+| technology tree | 기술트리 | |
+| scope / acceptance criteria | 과업 범위 / 검수 기준 | |
+| kickoff / interim review | 착수 / 중간 보고 | |
+| tour scenario | 안내 시나리오 | 도슨트 로봇 |
+| collision avoidance | 충돌 방지 | |
+| emergency stop | 비상정지 | 기능 이름으로 쓸 때는 E-Stop (5.1) |
+| task (robot) | 태스크 | |
+| business users | 현업 | |
+| curation | 큐레이션 | 개인 프로젝트 |
+| wiki | 위키 | |
+
+### 5.3 영문 표기만 쓰는 제품·약어 (7.8 추가)
+
+| English | 한국어 | note |
+|---|---|---|
+| sLLM | sLLM | 소형 LLM. 소문자 s |
+| A2A | A2A | 에이전트 간 연계 프로토콜 |
+| end-to-end / E2E | E2E | 영문 형용사는 하이픈(`end-to-end product`), 부사는 하이픈 없음(`end to end`). 국문은 E2E |
+| PO / PM | PO / PM | 3절 참고 |
+| WBS | WBS | |
+| scikit-learn | scikit-learn | 소문자. 원제(보고서·저서 국문 제목)의 `Scikit-learn`은 원문 유지 |
+| pandas | pandas | 소문자 |
+| MATLAB | MATLAB | 대문자. 국문 원제의 `Matlab`은 원문 유지 |
+| PyTorch / TensorFlow / LangChain / LangGraph / LiteLLM / FastAPI / FastMCP / vLLM / MLflow / Qdrant / Milvus | (같음) | 대소문자 이대로 |
 
 이력서에 digital twin은 나오지 않는다. 쓰기 전에 사용자 확인을 받는다.
 

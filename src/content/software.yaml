@@ -13,7 +13,7 @@ anomaly-detection-preprocessing:
   status: pending
 ess-control-simulation:
   title:
-    en: ESS control algorithm simulation program (Matlab Simulink)
+    en: ESS control algorithm simulation program (MATLAB Simulink)
     ko: ESS 제어알고리즘 시뮬레이션 프로그램(Matlab Simulink)
   status: registered
   number: C-2018-029345
@@ -27,7 +27,7 @@ gas-turbine-combined-cycle-simulator:
   date: '2018-10-29'
 pid-loop-frequency-analysis:
   title:
-    en: Frequency analysis program for proportional-integral-derivative control loops (Matlab)
+    en: Frequency analysis program for proportional-integral-derivative control loops (MATLAB)
     ko: 비례, 적분, 미분 제어루프 주파수 분석 프로그램(Matlab)
   status: registered
   number: C-2015-019326
@@ -41,7 +41,7 @@ pid-auto-tuning:
   date: '2015-08-17'
 pid-process-identification:
   title:
-    en: Process identification program for proportional-integral-derivative controller design (Matlab)
+    en: Process identification program for proportional-integral-derivative controller design (MATLAB)
     ko: 비례, 적분, 미분 제어기 설계용 공정식별 프로그램(Matlab)
   status: registered
   number: C-2015-019309
@@ -55,7 +55,7 @@ dmc-controller-simulator:
   date: '2015-08-17'
 pid-tuning-gui:
   title:
-    en: PID controller tuning parameter calculation program (Matlab GUI)
+    en: PID controller tuning parameter calculation program (MATLAB GUI)
     ko: PID 제어기 튜닝 파라미터 연산 프로그램(Matlab GUI)
   status: registered
   number: C-2014-027714

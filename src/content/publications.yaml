@@ -173,7 +173,7 @@ substation-ess-performance-analysis:
 scikit-learn-statistical-ml:
   type: report
   title:
-    en: Developing statistical machine learning models with Scikit-learn
+    en: Developing statistical machine learning models with scikit-learn
     ko: Scikit-learn을 활용한 통계기반 머신러닝 모델 개발방안
   publisher: { en: KEPCO Research Institute (KEPRI), ko: 한전 전력연구원 }
   year: 2016

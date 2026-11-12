@@ -15,6 +15,6 @@ org: { en: GIVita, ko: 지아이비타 }
 lead: true
 domain: Healthcare
 capability: [Forecasting]
-stack: [AWS SageMaker, AWS EC2, AWS S3, Python, scikit-learn, TensorFlow, Pandas]
+stack: [AWS SageMaker, AWS EC2, AWS S3, Python, scikit-learn, TensorFlow, pandas]
 featured: false
 ---

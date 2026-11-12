@@ -8,7 +8,7 @@ summary:
 highlights:
   - en: Implemented matrix computation and convex optimization programs (gradient descent, quadratic programming) for model training and optimal control.
     ko: 모델 학습과 최적제어를 위한 행렬 연산, 볼록 최적화 프로그램 구현 (경사하강법, 이차계획법)
-  - en: Developed a Model Predictive Control (MPC) program that runs on an ARM Cortex-M3 microcontroller.
+  - en: Developed a model predictive control (MPC) program that runs on an ARM Cortex-M3 microcontroller.
     ko: ARM Cortex-M3 마이크로컨트롤러에서 구동하는 모델 기반 예측 제어(MPC) 프로그램 개발
 period: { start: 2013-11, end: 2014-11 }
 org: { en: KEPCO, ko: 한국전력 }
