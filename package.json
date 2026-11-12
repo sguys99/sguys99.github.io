@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node scripts/cv-pdf.mjs",
+    "build": "astro build && node scripts/cv-pdf.mjs && node scripts/check-links.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write .",

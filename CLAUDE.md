@@ -23,7 +23,7 @@ Kwang Myung Yu(유광명)의 경력·프로젝트 실적을 소개하는 개인 
 
 ```bash
 npm run dev       # 개발 서버
-npm run build     # 정적 빌드 + CV PDF 생성 (콘텐츠 스키마 검사 포함. 링크 검사는 단계 7.7에서 추가)
+npm run build     # 정적 빌드 + CV PDF 생성 + 내부 링크 검사 (콘텐츠 스키마 검사 포함)
                   # 처음 한 번: npx playwright install chromium (PDF 생성에 필요)
 npm run preview   # 빌드 결과 확인
 npm run format    # Prettier 정리 (format:check는 검사만)
