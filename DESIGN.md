@@ -407,7 +407,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | `--m-row` | 420ms | 행 하나의 fade/rise |
 | `--m-stagger` | 60ms | 행 사이 지연 |
 | `--m-draw-seg` | 260ms | 경력 궤적 한 구간 그리기 |
-| `--m-count` | 900ms | 숫자 4개 카운트업, 1회 (세션 첫 방문만) |
+| ~~`--m-count`~~ | — | 삭제 (5.17 삭제, 11.9) |
 | `--m-nav` | 260ms | 탭 밑줄 이동 |
 | `--m-theme` | 320ms | 테마 크로스페이드 (View Transitions) |
 | `--m-lang` | 240ms | 언어 전환 크로스페이드 (cross-document `@view-transition`) |
@@ -1327,7 +1327,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 
 ### 5.15 Hero / About intro
 
-About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 궤적(5.16), 숫자 표(5.17), 역량 표가 이어진다. 이름·직함은 사이드바(5.1)에 있고 About 카드는 반복하지 않는다.
+About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 궤적(5.16), 역량 표가 이어진다. 이름·직함은 사이드바(5.1)에 있고 About 카드는 반복하지 않는다.
 
 ```html
 <section class="card" id="about" aria-labelledby="h-about">
@@ -1335,7 +1335,6 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
   <p class="tagline">Building industrial AI, from control rooms to humanoid robots.</p>
   <p class="about">…</p>
   <ol class="traj">…</ol>      <!-- 5.16 -->
-  <dl class="figs">…</dl>      <!-- 5.17 -->
   <dl class="skills">…</dl>
 </section>
 ```
@@ -1388,6 +1387,8 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 - 콘텐츠: `profile.trajectory[]` → `years`(`.yrs`), `label`(`h3`), `description`(`p`).
 
 ### 5.17 Stats table
+
+> **삭제됨 (2026-11-13, 11.9).** 아래 명세는 기록용. 구현과 `--m-count` 토큰은 제거됨.
 
 궤적 아래 4칸 숫자 표 (3.2.8 A). 모든 숫자는 빌드 시 콘텐츠에서 센다. 손으로 쓰지 않는다. 연수(경력 년수)는 싣지 않는다.
 
@@ -1975,7 +1976,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 |---|---|---|---|---|---|
 | — | 사이드바 | — | — | Sidebar 5.1 (Dossier Record: 사진, 이름 `h1`, 직함, 키/값 표 Email·GitHub·LinkedIn·CV) | `profile` (name, headline, contact) |
 | — | 상단 메뉴 / 모바일 바 | — | — | Top navigation 5.2, Mobile bar + menu sheet 5.3 | `src/i18n/` |
-| 1 | About / 소개 | `about` | About / 소개 | Card 5.14, Hero 5.15, Career trajectory 5.16, Stats table 5.17(숫자 표 4칸), Skills(5.15) | `profile` (taglines[0], about, trajectory, skills). Figures는 `projects`·`patents`·`software`·`teaching`(book) 건수를 빌드 시 계산 |
+| 1 | About / 소개 | `about` | About / 소개 | Card 5.14, Hero 5.15, Career trajectory 5.16, Skills(5.15) | `profile` (taglines[0], about, trajectory, skills) |
 | 2 | Selected Work / 대표 프로젝트 | `work` | Work / 대표 프로젝트 | Card 5.14, Selected work list 5.18(번호 목록 01–06), Project ledger 5.19(전체 원장 + Domain·Capability 선택 상자 + 모두 보기) | `projects` (대표작: `featured`, `order` 순. 원장: 전체 20건) |
 | 3 | Experience / 경력 | `experience` | Experience / 경력 | Card 5.14, Period ledger row 5.22(기간 열 + 단색 로고) | `experience` (6곳) + `public/` 로고 |
 | 4 | Teaching · Books · Advisory / 강의 · 저서 · 자문 | `teaching` | Experience / 경력 | Card 5.14, Period ledger row 5.22 (Books · Teaching · Advisory 묶음) | `teaching` (`kind` 순서: book, teaching, advisory) |
@@ -3000,3 +3001,9 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 등장 모션 대기 카드(`.m-wait`) 안에 `focusin`이 오면 앵커 이동과 같은 `reveal`로 그 카드와 위 카드를 즉시 완성 (`Card.astro`, tasks 7.3) | Tab으로 첫 화면 아래 카드에 들어가면 포커스된 링크가 400ms 뒤에도 투명(390px 대표작 행 불투명도 0, 1440px 저서 링크 0.05)이라 포커스 링이 보이지 않았다(WCAG 2.4.7). 스크롤 등장은 그대로 |
 | 404에 `meta description` = i18n `nf_body` (영문 기본, `/ko` 경로면 제목과 함께 국문으로 교체, `404.astro`, tasks 7.5). 6.6 표의 "없음"을 바꿈 | Lighthouse SEO 92(`meta-description` 실패)로 7.5 기준 95 미달. 새 문구 없이 본문 문구를 재사용 |
 | 일반 페이지 인쇄(10장)에서 빠졌던 숨김을 적용: `.topbar`(언어·테마·메뉴 버튼), 원장 필터 `.pl-tools`·상태 `.pl-status`, 개인 프로젝트 `.filters`, 푸터 "맨 위로". 카드 머리 `.sec-head`와 셸 안 `h2–h4`는 `break-after: avoid` (CV는 제외, 10장 CV 주석). 셸·사이드바·케이스 사이드바의 `max-width: 860px` 쿼리에 `print`를 더해 종이 폭과 관계없이 1열 (`global.css`·`Shell`·`Sidebar`·`CaseStudy`, tasks 7.11) | 상단 메뉴와 필터가 인쇄되고, 카드 머리만 쪽 끝에 남았으며, A4 가로 인쇄에서는 고정 사이드바가 첫 쪽에만 나오고 이후 쪽 왼쪽 1/4이 비었다. 10장 "사이드바 고정 해제, 2열 격자 해제"와 숨김 목록을 그대로 따름 |
+
+### 11.9 운영 변경 — 2026-11-13
+
+| 결정 | 이유 |
+|---|---|
+| About 카드의 숫자 표(5.17: 프로젝트·특허·SW·저서 건수 4칸)와 카운트업 모션, `--m-count` 토큰을 삭제. 대체 요소는 두지 않고 궤적 다음에 역량 표가 바로 온다 | 사용자 요청. 건수는 IP 서랍(5.21)과 CV에 그대로 남는다 |

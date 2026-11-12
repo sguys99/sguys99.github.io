@@ -52,7 +52,7 @@ const ui = {
   orgCount: { en: '{n} organizations', ko: '{n} 곳' },
   recordCount: { en: '{n} records', ko: '총 {n}건' },
 
-  // Record kinds: stats labels (5.17), IP drawers (5.21), group labels (5.22), CV sections (6.4)
+  // Record kinds: IP drawers (5.21), group labels (5.22), CV sections (6.4)
   projects: { en: 'Projects', ko: '프로젝트' },
   patents: { en: 'Patents', ko: '특허' },
   software: { en: 'Software', ko: '프로그램 등록' },
@@ -64,9 +64,7 @@ const ui = {
   awardsGroup: { en: 'Awards', ko: '수상' },
   education: { en: 'Education', ko: '학력' },
 
-  // Stats table (5.17) and drawer summaries (5.21)
-  atAGlance: { en: 'At a glance', ko: '숫자로 보기' },
-  featuredCount: { en: '{n} featured', ko: '대표 {n}건' },
+  // Drawer summaries (5.21)
   // NBSP before "·": a wrapped line never starts with the separator (6.17, 7.1).
   regFiled: { en: '{reg} registered\u00a0· {filed} filed', ko: '등록 {reg}\u00a0· 출원 {filed}' },
   regPending: {
