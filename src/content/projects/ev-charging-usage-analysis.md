@@ -1,10 +1,10 @@
 ---
 title:
   en: Power Usage Pattern Analysis of EV Charging Stations in Jeju
-  ko: 제주지역 전기차 충전소 전력사용 패턴 분석
+  ko: 제주 지역 전기차 충전소 전력사용 패턴 분석
 summary:
   en: Led an analysis of EV charging station power usage and its relationship with distribution line load in Jeju.
-  ko: 제주지역 전기차 충전소 전력사용량과 배전선로 부하 간 관계 분석 총괄
+  ko: 제주 지역 전기차 충전소 전력사용량과 배전선로 부하 간 관계 분석 총괄
 highlights:
   - en: Developed code to merge and preprocess charging-station customer data and metered power usage data.
     ko: 충전소 고객정보와 전력사용 계량 데이터 병합·전처리 코드 개발

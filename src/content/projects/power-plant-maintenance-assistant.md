@@ -18,6 +18,6 @@ client:
 lead: true
 domain: Energy & Utilities
 capability: [LLM Agents & RAG]
-stack: [OpenAI API, Llama 3.1, LangChain, LangGraph, vLLM, pgVector, LiteLLM, Braintrust]
+stack: [OpenAI API, Llama 3.1, LangChain, LangGraph, vLLM, pgvector, LiteLLM, Braintrust]
 featured: false
 ---

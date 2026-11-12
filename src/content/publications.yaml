@@ -56,14 +56,14 @@ humanoid-docent-market-research:
   type: report
   title:
     en: Market research on humanoid docent and promotional robots
-    ko: 휴머노이드 도슨트/ 홍보 로봇 시장 조사
+    ko: 휴머노이드 도슨트/홍보 로봇 시장 조사
   publisher: { en: GenON, ko: GenON }
   year: 2026
 llm-apps-with-claude-code:
   type: report
   title:
     en: LLM application development with Claude Code
-    ko: LLM 어플리케이션 개발(클로드코드 활용)
+    ko: LLM 애플리케이션 개발(클로드코드 활용)
   year: 2026 # no publisher on the resume
 genai-core-tech-ecosystem:
   type: report
@@ -83,8 +83,8 @@ petrochemical-ai-masterplan-poc:
 transformer-ltsf-survey:
   type: report
   title:
-    en: A survey of Transformer-based long-term time-series forecasting (LTFS) methods
-    ko: 트랜스포머를 활용한 LTFS(Long-term Timeseries Forecasting) 기법 조사
+    en: A survey of Transformer-based long-term time-series forecasting (LTSF) methods
+    ko: 트랜스포머를 활용한 LTSF(Long-term Timeseries Forecasting) 기법 조사
   publisher: { en: MakinaRocks, ko: 마키나락스 }
   year: 2023
   featured: true
@@ -99,7 +99,7 @@ cgm-personalized-diet-case-study:
   type: report
   title:
     en: Case study of a personalized diet management service using CGM data
-    ko: CGM데이터를 활용한 개인화 식단관리 서비스 사례 연구
+    ko: CGM 데이터를 활용한 개인화 식단관리 서비스 사례 연구
   publisher: { en: GIVita, ko: 지아이비타 }
   year: 2022
   featured: true
@@ -107,7 +107,7 @@ cgm-time-series-analysis:
   type: report
   title:
     en: Time-series analysis of CGM data
-    ko: CGM데이터를 활용한 시계열데이터 분석
+    ko: CGM 데이터를 활용한 시계열데이터 분석
   publisher: { en: GIVita / Kyung Hee University Medical Center, ko: 지아이비타 / 경희의료원 }
   year: 2022
 smartphone-lifelog-walking:

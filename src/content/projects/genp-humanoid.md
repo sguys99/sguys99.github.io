@@ -35,11 +35,11 @@ caseStudy:
   approach:
     - en: Defined the product as a common core plus domain profiles, so customer-specific end-to-end products are composed from shared modules.
       ko: 공통 코어 + 도메인 프로파일 구조로 제품을 정의해 공통 모듈 조합으로 고객 맞춤형 E2E 제품 구성
-    - en: Designed an architecture that integrates voice conversation, VLA manipulation, SLAM navigation, and whole-body control into a single workflow.
+    - en: Designing an architecture that integrates voice conversation, VLA manipulation, SLAM navigation, and whole-body control into a single workflow.
       ko: 음성 대화, VLA 조작, SLAM 기반 자율주행, 전신 제어를 단일 워크플로우로 통합하는 아키텍처 설계
-    - en: Designed and built a control panel for robot registration, status monitoring, logs and alarms, task execution, and emergency stop.
+    - en: Designing and building a control panel for robot registration, status monitoring, logs and alarms, task execution, and emergency stop.
       ko: 로봇 등록, 상태 모니터링, 로그·알람, 태스크 실행, 비상정지 기능을 갖춘 관제시스템 설계 및 개발
-    - en: Set up the data and model pipeline, from Teleop data collection to VLA training and evaluation and a simulation environment for validation.
+    - en: Setting up the data and model pipeline, from Teleop data collection to VLA training and evaluation and a simulation environment for validation.
       ko: Teleop 조작 데이터 수집부터 VLA 학습·평가, 시뮬레이션 검증 환경까지 데이터·모델 파이프라인 구축
   outcome:
     - en: In progress. The product definition and the phased commercialization roadmap are written; the architecture, control panel, and pipeline are under development.

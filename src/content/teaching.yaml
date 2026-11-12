@@ -8,7 +8,7 @@ incheon-visiting-researcher:
     ko: 인천대학교 안전공학과
   years: 2020 – 2026
   details:
-    - en: Advised on LLM application development, including RAG, vector DB, agent system, and workflow design
+    - en: Advised on LLM application development, including RAG, vector databases, agent systems, and workflow design
       ko: 'LLM 활용 애플리케이션 개발 방안 지원: RAG, 벡터 DB, 에이전트 시스템, 워크플로우 설계'
     - en: Supported development of combustion-state diagnosis models from flame image sequences (ResNet, autoencoder, LSTM-CNN)
       ko: '화염 이미지 시퀀스를 활용한 연소 상태 진단 모델 개발 지원: ResNet, Autoencoder, LSTM-CNN'
@@ -36,14 +36,14 @@ control-data-analysis-course:
   kind: teaching
   title:
     en: Hands-on course on control systems and data analysis
-    ko: 제어시스템 및 데이터분석 기술 실무 과정 강의
+    ko: 제어 시스템 및 데이터 분석 기술 실무 과정 강의
   org:
     en: Korea Measurement & Control Technology Education Center
     ko: (재)한국계측제어기술교육센터
   years: 2014 – 2023
 tacademy-big-data-analyst:
   kind: teaching
-  title: { en: Big data analyst training program, ko: 빅데이터분석가 교육과정 }
+  title: { en: Big data analyst training program, ko: 빅데이터 분석가 교육과정 }
   org: { en: SK planet Tacademy, ko: SK planet Tacademy }
   years: '2023'
 koscom-git-github:

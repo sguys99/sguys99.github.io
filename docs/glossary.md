@@ -172,7 +172,7 @@
 | semi-supervised learning | 준지도학습 | |
 | feature engineering | 피처 엔지니어링 | |
 | hybrid search | 하이브리드 검색 | |
-| vector DB | 벡터 DB | 제품명(pgVector, Qdrant, Milvus)은 원문 |
+| vector DB | 벡터 DB | 제품명(pgvector, Qdrant, Milvus)은 원문 |
 | control optimization | 제어 최적화 | |
 | optimal control | 최적제어 | |
 | guidance model | 가이던스 모델 | |
@@ -246,6 +246,9 @@
 | scikit-learn | scikit-learn | 소문자. 원제(보고서·저서 국문 제목)의 `Scikit-learn`은 원문 유지 |
 | pandas | pandas | 소문자 |
 | MATLAB | MATLAB | 대문자. 국문 원제의 `Matlab`은 원문 유지 |
+| pgvector | pgvector | 소문자 (공식 표기) |
+| Ragas | Ragas | 첫 글자만 대문자 (공식 표기) |
+| predefined answer | Predefined 답변 | 하이픈 없음 (`pre-defined` 쓰지 않음) |
 | PyTorch / TensorFlow / LangChain / LangGraph / LiteLLM / FastAPI / FastMCP / vLLM / MLflow / Qdrant / Milvus | (같음) | 대소문자 이대로 |
 
 이력서에 digital twin은 나오지 않는다. 쓰기 전에 사용자 확인을 받는다.

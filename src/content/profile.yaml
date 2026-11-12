@@ -58,8 +58,8 @@ skills:
       ko: Unitree G1·AgiBot X2 SDK 기반 휴머노이드 개발, VLA 학습, Isaac Lab·MuJoCo 시뮬레이션, SLAM 기반 자율주행
   - label: { en: Serving & Infrastructure, ko: 서빙·인프라 }
     summary:
-      en: Model and LLM serving with FastAPI, vLLM, and Ollama on Docker and AWS, with MLflow, PostgreSQL, and vector databases (pgVector, Qdrant).
-      ko: Docker·AWS 환경의 모델·LLM 서빙(FastAPI, vLLM, Ollama), MLflow, PostgreSQL, 벡터 DB(pgVector, Qdrant)
+      en: Model and LLM serving with FastAPI, vLLM, and Ollama on Docker and AWS, with MLflow, PostgreSQL, and vector databases (pgvector, Qdrant).
+      ko: Docker·AWS 환경의 모델·LLM 서빙(FastAPI, vLLM, Ollama), MLflow, PostgreSQL, 벡터 DB(pgvector, Qdrant)
   - label: { en: Domains, ko: 도메인 }
     summary:
       en: Energy and utilities (thermal power, renewables, ESS), petrochemical and steel processes, manufacturing, healthcare, and industrial automation (PLC, DCS).

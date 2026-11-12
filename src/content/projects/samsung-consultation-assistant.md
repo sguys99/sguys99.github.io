@@ -18,7 +18,7 @@ client:
 lead: true
 domain: Manufacturing
 capability: [LLM Agents & RAG]
-stack: [Microsoft Azure, Azure AI Search, Python, LangChain, RAGAS]
+stack: [Microsoft Azure, Azure AI Search, Python, LangChain, Ragas]
 featured: true
 order: 4
 caseStudy:
@@ -35,8 +35,8 @@ caseStudy:
   role:
     - en: Held overall project responsibility and led architecture design and core module development in a team of about 30.
       ko: 약 30명 규모 프로젝트의 총괄 책임, 아키텍처 설계와 핵심 모듈 개발 리드
-    - en: Defined the platform architecture, 18 response scenarios, data model, and admin requirements, and built the orchestrator pipeline, pre-defined answer and guardrail modules, and prompt templates hands-on.
-      ko: 플랫폼 아키텍처, 18개 응대 시나리오, 데이터 모델, Admin 요구사항 정의, 오케스트레이터 파이프라인, Pre-defined 답변·가드레일 모듈, 프롬프트 템플릿 직접 개발
+    - en: Defined the platform architecture, 18 response scenarios, data model, and admin requirements, and built the orchestrator pipeline, predefined answer and guardrail modules, and prompt templates hands-on.
+      ko: 플랫폼 아키텍처, 18개 응대 시나리오, 데이터 모델, Admin 요구사항 정의, 오케스트레이터 파이프라인, Predefined 답변·가드레일 모듈, 프롬프트 템플릿 직접 개발
   approach:
     - en: Built a channel-independent platform behind an API gateway, so new channels and features reuse the same modules.
       ko: API 게이트웨이 뒤에 채널 독립적 플랫폼을 두어 채널·기능 추가 시 같은 모듈을 재사용하는 구조로 설계
@@ -44,15 +44,15 @@ caseStudy:
       ko: 단일 파이프라인 MVP에서 정형·비정형 조회 분리와 재순위화·가드레일 추가를 거쳐 병렬 구조로 3차에 걸쳐 아키텍처 개선
     - en: In the final version, split queries into sub-queries, ran structured, unstructured, and web search in parallel, and branched simple and informative questions.
       ko: 최종 버전에서 질의를 하위 질의로 분해해 정형·비정형·웹 검색을 병렬 실행하고 단순·정보형 질문을 분기 처리
-    - en: Established an evaluation framework for the RAG service and automated evaluation with RAGAS.
-      ko: RAG 서비스 평가 체계 수립 및 RAGAS 기반 평가 자동화
+    - en: Established an evaluation framework for the RAG service and automated evaluation with Ragas.
+      ko: RAG 서비스 평가 체계 수립 및 Ragas 기반 평가 자동화
   outcome:
     - en: Automated answers for 18 customer scenarios previously handled one by one by agents, and handed the service over to operations for online and offline stores.
       ko: 상담원이 개별 대응하던 문의를 18개 시나리오 자동 답변으로 전환, 온·오프라인 매장 운영 이관 완료
     - en: Halved average response time from 10 s to 5 s between versions 2 and 3.
       ko: 2차에서 3차 버전으로 평균 응답 시간을 10초에서 5초로 단축
-    - en: Cut LLM call cost by 50% by serving frequent questions with pre-defined answers.
-      ko: 자주 묻는 질문을 Pre-defined 답변으로 처리해 LLM 호출 비용 50% 절감
+    - en: Cut LLM call cost by 50% by serving frequent questions with predefined answers.
+      ko: 자주 묻는 질문을 Predefined 답변으로 처리해 LLM 호출 비용 50% 절감
   decisions:
     - title:
         en: A modular platform, not a single chatbot
@@ -73,8 +73,8 @@ caseStudy:
         en: Mapping tables must be maintained for each new query type.
         ko: 신규 질의 유형마다 매핑 테이블 관리 필요
     - title:
-        en: Pre-defined answers that bypass the LLM
-        ko: LLM을 거치지 않는 Pre-defined 답변
+        en: Predefined answers that bypass the LLM
+        ko: LLM을 거치지 않는 Predefined 답변
       rationale:
         en: Greetings, FAQs, and policy-restricted answers come from a table, cutting cost and latency.
         ko: 인사, FAQ, 정책상 제한 답변을 테이블로 처리해 비용과 지연 절감
@@ -99,7 +99,7 @@ caseStudy:
           - { en: Query rewrite, ko: 질의 재작성 }
           - { en: Intent triage, ko: 의도 분류 }
           - { en: "Entity extraction, code mapping, and pseudo query", ko: "엔티티 추출, 코드 매핑, Pseudo Query" }
-          - { en: "Pre-defined answers and guardrails", ko: "Pre-defined 답변, 가드레일" }
+          - { en: "Predefined answers and guardrails", ko: "Predefined 답변, 가드레일" }
           - { en: "Merge and response layout", ko: "결과 병합, 답변 구성" }
       - id: retrieval
         label: { en: Retrieval and storage, ko: 검색·저장소 }
