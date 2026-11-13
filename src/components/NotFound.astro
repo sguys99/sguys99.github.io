@@ -11,7 +11,7 @@ interface Props {
 const { lang } = Astro.props;
 const other: Lang = lang === 'en' ? 'ko' : 'en';
 const home = homePath(lang);
-const SHORTCUTS: SectionId[] = ['about', 'work', 'experience', 'ip'];
+const SHORTCUTS: SectionId[] = ['about', 'experience', 'work', 'ip'];
 ---
 
 <Card as="article" labelledby="nf-h">

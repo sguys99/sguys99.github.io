@@ -235,10 +235,10 @@ export const fmtYears = (lang: Lang, p: { start: string; end?: string; status?: 
 /** Home sections in page order (DESIGN.md 6.2). */
 export const SECTIONS = [
   'about',
-  'work',
   'experience',
   'teaching',
   'awards',
+  'work',
   'personal',
   'ip',
   'contact',
@@ -248,8 +248,8 @@ export type SectionId = (typeof SECTIONS)[number];
 /** Tabs and the sections each one covers (DESIGN.md 6.2 "탭과 섹션 매핑 규칙"). */
 export const TABS: { id: SectionId; covers: SectionId[] }[] = [
   { id: 'about', covers: ['about'] },
-  { id: 'work', covers: ['work'] },
   { id: 'experience', covers: ['experience', 'teaching', 'awards'] },
+  { id: 'work', covers: ['work'] },
   { id: 'personal', covers: ['personal'] },
   { id: 'ip', covers: ['ip'] },
   { id: 'contact', covers: ['contact'] },

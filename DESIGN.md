@@ -1308,7 +1308,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 앵커 위치 | `html { scroll-padding-top }` (4장 앵커 스크롤 오프셋) |
 | 안쪽 구분선 | 목록 머리 `--line-strong`, 행 사이 `--line` |
 
-**섹션 순서와 앵커** (3.3 결정): `#about` → `#work` → `#experience` → `#teaching` → `#awards` → `#personal` → `#ip` → `#contact`. 상단 메뉴 탭과의 대응은 5.2 참조.
+**섹션 순서와 앵커** (3.3 결정, 11.9에서 변경): `#about` → `#experience` → `#teaching` → `#awards` → `#work` → `#personal` → `#ip` → `#contact`. 상단 메뉴 탭과의 대응은 5.2 참조.
 
 **모션 (331-c)**
 
@@ -1970,17 +1970,17 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 ### 6.2 Home
 
-**섹션 순서** (decision-log G6 "함께 정한 것")
+**섹션 순서** (decision-log G6 "함께 정한 것", 11.9에서 Experience 묶음을 Work 앞으로)
 
 | 순서 | 섹션 (en / ko 제목) | 앵커 id | 상단 탭 | 사용 컴포넌트 (5장) | 콘텐츠 출처 |
 |---|---|---|---|---|---|
 | — | 사이드바 | — | — | Sidebar 5.1 (Dossier Record: 사진, 이름 `h1`, 직함, 키/값 표 Email·GitHub·LinkedIn·CV) | `profile` (name, headline, contact) |
 | — | 상단 메뉴 / 모바일 바 | — | — | Top navigation 5.2, Mobile bar + menu sheet 5.3 | `src/i18n/` |
 | 1 | About / 소개 | `about` | About / 소개 | Card 5.14, Hero 5.15, Career trajectory 5.16, Education(11.9), Skills(5.15) | `profile` (taglines[0], about, trajectory, skills), `education` |
-| 2 | Selected Work / 대표 프로젝트 | `work` | Work / 대표 프로젝트 | Card 5.14, Selected work list 5.18(번호 목록 01–06), Project ledger 5.19(전체 원장 + Domain·Capability 선택 상자 + 모두 보기) | `projects` (대표작: `featured`, `order` 순. 원장: 전체 20건) |
-| 3 | Experience / 경력 | `experience` | Experience / 경력 | Card 5.14, Period ledger row 5.22(기간 열 + 단색 로고) | `experience` (6곳) + `public/` 로고 |
-| 4 | Teaching · Books · Advisory / 강의 · 저서 · 자문 | `teaching` | Experience / 경력 | Card 5.14, Period ledger row 5.22 (Books · Teaching · Advisory 묶음) | `teaching` (`kind` 순서: book, teaching, advisory) |
-| 5 | Awards / 수상 | `awards` | Experience / 경력 | Card 5.14, Period ledger row 5.22 | `awards` |
+| 2 | Experience / 경력 | `experience` | Experience / 경력 | Card 5.14, Period ledger row 5.22(기간 열 + 단색 로고) | `experience` (6곳) + `public/` 로고 |
+| 3 | Teaching · Books · Advisory / 강의 · 저서 · 자문 | `teaching` | Experience / 경력 | Card 5.14, Period ledger row 5.22 (Books · Teaching · Advisory 묶음) | `teaching` (`kind` 순서: book, teaching, advisory) |
+| 4 | Awards / 수상 | `awards` | Experience / 경력 | Card 5.14, Period ledger row 5.22 | `awards` |
+| 5 | Selected Work / 대표 프로젝트 | `work` | Work / 대표 프로젝트 | Card 5.14, Selected work list 5.18(번호 목록 01–06), Project ledger 5.19(전체 원장 + Domain·Capability 선택 상자 + 모두 보기) | `projects` (대표작: `featured`, `order` 순. 원장: 전체 20건) |
 | 6 | Personal Projects / 개인 프로젝트 | `personal` | Personal / 개인 프로젝트 | Card 5.14, Personal projects index 5.20(번호 목록 + 상태 필터 + 저장소·데모 링크) | `personal` |
 | 7 | IP & Publications / 지식재산 · 출판물 | `ip` | Publications / 지식재산 · 출판물 | Card 5.14, Index drawer 5.21(유형별 서랍: 특허·프로그램·논문·보고서, 서랍 id `ip-<유형>`) | `patents`, `software`, `publications` |
 | 8 | Contact / 연락처 | `contact` | Contact / 연락처 | Card 5.14, Contact 5.23(의뢰 가능 분야 \| 이메일·복사·링크) | `profile` (availability, contact) |
@@ -2125,7 +2125,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 보조 버튼 → 반대 언어 홈 (`lang` 속성 표시) | 한국어 홈 | English home |
 | 바로 가기 목록 이름 (화면에는 숨김) | Sections | 섹션 바로 가기 |
 
-**섹션 바로 가기**: 01 About `#about`, 02 Selected Work `#work`, 03 Experience `#experience`, 04 IP & Publications `#ip`. 링크는 그 언어의 홈 기준 (`/#ip`, `/ko/#ip`). 시안의 네 번째 항목 `patents`는 G6 이전 이름이므로 `ip`로 바꾼다.
+**섹션 바로 가기**: 01 About `#about`, 02 Experience `#experience`, 03 Selected Work `#work`, 04 IP & Publications `#ip`. 링크는 그 언어의 홈 기준 (`/#ip`, `/ko/#ip`). 시안의 네 번째 항목 `patents`는 G6 이전 이름이므로 `ip`로 바꾼다.
 
 **언어 판별** (decision-log G6 구현 시 처리)
 - 경로 기준: `location.pathname`이 `/ko/` 또는 `/ko`로 시작하면 국문, 아니면 영문.
@@ -3009,3 +3009,5 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | About 카드의 숫자 표(5.17: 프로젝트·특허·SW·저서 건수 4칸)와 카운트업 모션, `--m-count` 토큰을 삭제. 대체 요소는 두지 않고 궤적 다음에 역량 표가 바로 온다 | 사용자 요청. 건수는 IP 서랍(5.21)과 CV에 그대로 남는다 |
 | About 궤적과 역량 표 사이에 학력을 넣는다 (시안 C 작은 원장, `docs/design-drafts/g8/`). 머리표 `Education`/`학력`(카드 머리 h2와 같은 eyebrow 모양, h3) + 행마다 연도(`fmtYears`) \| **학교** 학위 · 세부전공 \| `GPA n / n` 3열, 560px 이하 1열. 데이터는 `education` 컬렉션(`focus`·`gpa` 선택 필드 추가). Awards & Education 카드는 `Awards`/`수상`으로 바꾸고 학력 묶음을 뺀다. 시안 A(2칸 띠)·B(역량 표 첫 행)는 고르지 않음 | 사용자 선택. 숫자 표를 뺀 자리를 학력으로 채우고, 같은 내용이 두 번 나오지 않게 Awards 카드에서 뺐다. GPA는 이력서 값 그대로 |
 | Awards 카드는 그룹 머리(`수상 4`)를 빼고 행을 `<ol class="lg">`에 바로 둔다(Experience와 같은 구조, 행 제목 h3). 건수는 카드 머리 오른쪽 `recordCount`(`4 records`/`총 4건`) | 학력을 빼서 묶음이 하나만 남아 카드 제목과 그룹 이름이 `수상 / 수상`으로 겹쳤다 |
+| 홈 섹션 순서를 About → Experience → Teaching → Awards → Selected Work → Personal → IP → Contact로, 상단 탭을 About · Experience · Work · Personal · Publications · Contact로 바꾼다 (`SECTIONS`·`TABS`, 404 바로 가기도 같은 순서). G6 결정(Work가 About 다음)을 바꿈 | 사용자 요청. About이 궤적·학력으로 끝나 경력이 바로 이어지는 흐름이 자연스럽다. Experience 탭이 Teaching·Awards까지 덮으므로 셋을 붙여서 옮겼다. 대표작은 세 카드 아래로 내려간다 |
+| About의 학력과 역량 표 사이 여백 `--sp-4` → `--sp-6` (궤적과 학력 사이와 같음) | 사용자 요청. 두 표가 붙어 한 덩어리로 보였다 |
