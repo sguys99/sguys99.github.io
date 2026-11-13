@@ -1,8 +1,7 @@
 ---
-// Awards (DESIGN.md 5.22, 6.2): period ledger, no head meta (5.14 table). Education moved to About (11.9).
+// Awards (DESIGN.md 5.22, 6.2): period ledger with a record count in the head (11.9). Education moved to About (11.9).
 import Card from './Card.astro';
 import SectionHead from './SectionHead.astro';
-import LedgerGroup from './LedgerGroup.astro';
 import LedgerRow from './LedgerRow.astro';
 import { t, type Lang } from '../i18n/ui';
 import { getCollection } from 'astro:content';
@@ -24,14 +23,16 @@ const awards = (await getCollection('awards')).sort((a, b) => {
 ---
 
 <Card id="awards" labelledby="h-awards">
-  <SectionHead id="awards" title={t(lang, 'awards')} />
+  <SectionHead id="awards" title={t(lang, 'awards')}>
+    {t(lang, 'recordCount', { n: awards.length })}
+  </SectionHead>
 
-  <LedgerGroup label={t(lang, 'awardsGroup')} count={awards.length}>
+  <ol class="lg">
     {awards.map(({ data: e }) => (
       <LedgerRow when={e.years}>
-        <h4>{e.title[lang]}</h4>
+        <h3>{e.title[lang]}</h3>
         <p class="lg-sub">{e.org[lang]}</p>
       </LedgerRow>
     ))}
-  </LedgerGroup>
+  </ol>
 </Card>

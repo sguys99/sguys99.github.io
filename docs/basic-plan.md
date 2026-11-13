@@ -125,6 +125,7 @@
 
 ### 3.3 숫자 요약 스트립 **[확정]**
 > 결과: 5칸 스트립 대신 4칸 숫자 표로 구현 (G5 3.2.8 A, DESIGN.md 5.17). 칸은 Projects 20 · Patents 15 · Software 10 · Books 2이며, 숫자는 빌드 때 콘텐츠에서 셈. 연수와 `50+ technical reports`는 싣지 않음 (보고서는 IP 목록에 19건).
+> **2026-11-13 삭제**: 사용자 요청으로 숫자 표를 빼고 그 자리에 학력을 둠 (DESIGN.md 11.9).
 
 ~~`16+ years in AI & data`~~ (연수 표기 안 함 [확정]) · `20 projects` · `15 patents` · ~~`50+ technical reports`~~ · `2 books`
 
@@ -135,11 +136,11 @@
 ### 4.1 사이트맵
 ```
 /                     Home, 영문 (단일 스크롤, 큐레이션된 요약)
-├─ #about             소개 + 경력 궤적 + 숫자 요약
+├─ #about             소개 + 경력 궤적 + 학력 (GPA 포함)
 ├─ #work              Selected Work (대표 프로젝트 6건) + 전체 프로젝트 원장 (접힘 + 필터)
 ├─ #experience        경력 6곳
 ├─ #teaching          Teaching · Books · Advisory
-├─ #awards            Awards & Education
+├─ #awards            Awards
 ├─ #personal          Personal Projects (개인 프로젝트)
 ├─ #ip                IP & Publications (특허, 프로그램, 논문, 보고서)
 └─ #contact           Contact (의뢰 가능 분야 포함)
@@ -156,7 +157,7 @@
 ### 4.2 밀도 조절 원칙 (점진적 공개) [확정]
 | 층 | 내용 | 표현 |
 |---|---|---|
-| 1층 (첫 화면) | 이름, 한 줄 포지셔닝, 현재 역할, 궤적 4단계, 숫자 요약 | 사이드바 + 첫 카드 |
+| 1층 (첫 화면) | 이름, 한 줄 포지셔닝, 현재 역할, 궤적 4단계, 학력 | 사이드바 + 첫 카드 |
 | 2층 (스크롤) | 대표 프로젝트 5~6건, 경력 6곳 요약 | 카드 |
 | 3층 (펼침/필터) | 프로젝트 20건, 특허 15건, 프로그램 10건, 보고서 목록 | 접힌 목록 + "Show all", 도메인/기술 필터 |
 | 4층 (별도 페이지) | 케이스 스터디, 전체 CV | 상세 페이지, PDF |
@@ -194,7 +195,7 @@
 ### 5.1 원본 → 사이트 매핑
 | 이력서 섹션 | 건수 | 사이트 섹션 | 처리 |
 |---|---|---|---|
-| 학력 | 2 | Awards & Education | KAIST M.S., Pusan National Univ. B.S. |
+| 학력 | 2 | About | KAIST M.S., Pusan National Univ. B.S. (세부전공·GPA 포함) |
 | 기술스택 | 5개 군 | About 하단 또는 Skills | 태그 나열 대신 군별 한 줄 요약 |
 | 경력사항 | 6 | Experience | 회사·직함·기간·역할 2~3줄. 이력서에 없는 소속·구간은 표기하지 않음 [확정] |
 | 프로젝트 | 20 (이력서 18 + 롯데 PoC 2건 분리) | Selected Work + Projects | 대표 5~6건 상세(추후 지정), 나머지 목록 |
