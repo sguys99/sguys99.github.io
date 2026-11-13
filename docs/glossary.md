@@ -290,7 +290,7 @@ UI 문구의 원본은 `src/i18n/ui.ts`다. 이 표는 표기 기준이며, 문�
 | Selected Work | 대표 프로젝트 | 탭은 Work / 대표 프로젝트 |
 | Experience | 경력 | |
 | Teaching · Books · Advisory | 강의 · 저서 · 자문 | |
-| Awards & Education | 수상 · 학력 | |
+| Awards | 수상 | 카드 제목 (학력은 About으로 이동, 2026-11-13) |
 | Personal Projects | 개인 프로젝트 | 탭은 Personal / 개인 프로젝트 |
 | IP & Publications | 지식재산 · 출판물 | 탭은 Publications / 지식재산 · 출판물 |
 | Contact | 연락처 | |

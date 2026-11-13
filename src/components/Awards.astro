@@ -1,10 +1,10 @@
 ---
-// Awards & Education (DESIGN.md 5.22, 6.2): two period-ledger groups in one card, no head meta (5.14 table).
+// Awards (DESIGN.md 5.22, 6.2): period ledger, no head meta (5.14 table). Education moved to About (11.9).
 import Card from './Card.astro';
 import SectionHead from './SectionHead.astro';
 import LedgerGroup from './LedgerGroup.astro';
 import LedgerRow from './LedgerRow.astro';
-import { t, fmtPeriod, type Lang } from '../i18n/ui';
+import { t, type Lang } from '../i18n/ui';
 import { getCollection } from 'astro:content';
 
 interface Props {
@@ -21,10 +21,6 @@ const awards = (await getCollection('awards')).sort((a, b) => {
     yb.at(-1)!.localeCompare(ya.at(-1)!) || yb[0].localeCompare(ya[0]) || a.id.localeCompare(b.id)
   );
 });
-// "Content order" (latest first); the loader does not keep YAML order, so sort by start (11.8).
-const education = (await getCollection('education')).sort((a, b) =>
-  b.data.period.start.localeCompare(a.data.period.start),
-);
 ---
 
 <Card id="awards" labelledby="h-awards">
@@ -35,15 +31,6 @@ const education = (await getCollection('education')).sort((a, b) =>
       <LedgerRow when={e.years}>
         <h4>{e.title[lang]}</h4>
         <p class="lg-sub">{e.org[lang]}</p>
-      </LedgerRow>
-    ))}
-  </LedgerGroup>
-
-  <LedgerGroup label={t(lang, 'education')} count={education.length}>
-    {education.map(({ data: e }) => (
-      <LedgerRow when={fmtPeriod(lang, e.period)}>
-        <h4>{e.school[lang]}</h4>
-        <p class="lg-sub">{e.degree[lang]}</p>
       </LedgerRow>
     ))}
   </LedgerGroup>

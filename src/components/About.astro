@@ -1,10 +1,10 @@
 ---
-// About card (DESIGN.md 5.15–5.16): tagline, about text, career trajectory, skills.
+// About card (DESIGN.md 5.15–5.16): tagline, about text, career trajectory, education, skills.
 // Years of experience are never shown (tasks 1.1.4).
 import Card from './Card.astro';
 import SectionHead from './SectionHead.astro';
-import { t, type Lang } from '../i18n/ui';
-import { getEntry } from 'astro:content';
+import { t, fmtYears, type Lang } from '../i18n/ui';
+import { getCollection, getEntry } from 'astro:content';
 
 interface Props {
   lang: Lang;
@@ -12,6 +12,10 @@ interface Props {
 
 const { lang } = Astro.props;
 const profile = (await getEntry('profile', 'profile'))!.data;
+// Latest first; the loader does not keep YAML order (11.8).
+const education = (await getCollection('education')).sort((a, b) =>
+  b.data.period.start.localeCompare(a.data.period.start),
+);
 const last = profile.trajectory.length - 1;
 ---
 
@@ -29,6 +33,24 @@ const last = profile.trajectory.length - 1;
       </li>
     ))}
   </ol>
+
+  <section class="edu" aria-labelledby="h-edu">
+    <h3 id="h-edu" class="eb">
+      {t(lang, 'education')}
+    </h3>
+    <ul>
+      {education.map(({ data: e }) => (
+        <li>
+          <span class="y num">{fmtYears(lang, e.period)}</span>
+          <p>
+            <b>{e.school[lang]}</b> {e.degree[lang]}
+            {e.focus && ` · ${e.focus[lang]}`}
+          </p>
+          {e.gpa && <span class="g num">GPA {e.gpa}</span>}
+        </li>
+      ))}
+    </ul>
+  </section>
 
   <dl class="skills">
     {profile.skills.map((s) => (
@@ -196,6 +218,70 @@ const last = profile.trajectory.length - 1;
     }
   }
 
+  /* Education (11.9 C): small eyebrow + year | school·degree | GPA ledger. */
+  .edu {
+    margin-top: var(--sp-6);
+  }
+
+  .eb {
+    margin-bottom: var(--sp-2);
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-eyebrow);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  html:lang(ko) .eb {
+    font-family: var(--font-ko);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-strong);
+    letter-spacing: var(--ls-eyebrow-ko);
+    text-transform: none;
+  }
+
+  .edu ul {
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .edu li {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr) auto;
+    gap: var(--sp-4);
+    align-items: baseline;
+    padding: var(--sp-3) 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .edu li:last-child {
+    border-bottom: 0;
+  }
+
+  .edu .y,
+  .edu .g {
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+    white-space: nowrap;
+  }
+
+  .edu p {
+    font-size: var(--fs-sm);
+    color: var(--text-2);
+  }
+
+  .edu b {
+    margin-right: var(--sp-1);
+    font-weight: var(--fw-strong);
+    color: var(--text);
+  }
+
+  .edu + .skills {
+    margin-top: var(--sp-4);
+  }
+
   /* Skills (5.15) */
   .skills {
     margin-top: var(--sp-6);
@@ -272,7 +358,8 @@ const last = profile.trajectory.length - 1;
       animation-name: m-draw-y;
     }
 
-    .skills > div {
+    .skills > div,
+    .edu li {
       grid-template-columns: minmax(0, 1fr);
       gap: var(--sp-0);
     }

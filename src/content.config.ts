@@ -243,7 +243,16 @@ const awards = defineCollection({
 
 const education = defineCollection({
   loader: data('education'),
-  schema: z.strictObject({ school: localized, degree: localized, period }),
+  schema: z.strictObject({
+    school: localized,
+    degree: localized,
+    focus: localized.optional(),
+    gpa: z
+      .string()
+      .regex(/^\d\.\d{2} \/ \d\.\d$/, 'Use "3.83 / 4.3"')
+      .optional(),
+    period,
+  }),
 });
 
 export const collections = {

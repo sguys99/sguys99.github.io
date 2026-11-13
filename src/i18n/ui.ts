@@ -34,7 +34,7 @@ const ui = {
   work: { en: 'Selected Work', ko: '대표 프로젝트' },
   experience: { en: 'Experience', ko: '경력' },
   teaching: { en: 'Teaching · Books · Advisory', ko: '강의 · 저서 · 자문' },
-  awards: { en: 'Awards & Education', ko: '수상 · 학력' },
+  awards: { en: 'Awards', ko: '수상' },
   personal: { en: 'Personal Projects', ko: '개인 프로젝트' },
   ip: { en: 'IP & Publications', ko: '지식재산 · 출판물' },
   contact: { en: 'Contact', ko: '연락처' },

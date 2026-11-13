@@ -895,7 +895,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
     <nav aria-label="Sections"><ul class="sheet-nav grouped" data-nav>
       <li><a href="#about" data-for="about">About</a></li> …
       <li><a href="#experience" data-for="experience teaching awards">Experience</a>
-        <ul class="sheet-sub"><li><a href="#experience">Experience</a></li><li><a href="#teaching">Teaching · Books · Advisory</a></li><li><a href="#awards">Awards & Education</a></li></ul></li>
+        <ul class="sheet-sub"><li><a href="#experience">Experience</a></li><li><a href="#teaching">Teaching · Books · Advisory</a></li><li><a href="#awards">Awards</a></li></ul></li>
       …
     </ul></nav>
     <ul class="contact">{mail, GitHub, LinkedIn, CV: 아이콘 + 글자}</ul>   <!-- CV = "Download CV (PDF)", 현재 언어 PDF, download -->
@@ -1277,7 +1277,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 
 | 섹션 | 오른쪽 내용 (콘텐츠에서 계산) | 영문 / 국문 |
 |---|---|---|
-| About, Awards & Education, Contact | 없음 | — |
+| About, Awards, Contact | 없음 | — |
 | Selected Work | `featured` 건수 / `projects` 전체 건수 | `6 / 20 projects` / `6 / 20 건` |
 | Experience | `experience` 항목 수 | `6 organizations` / `6 곳` |
 | Teaching · Books · Advisory | `teaching.kind`별 건수 (book, teaching, advisory 순) | `Books 2 · Teaching 6 · Advisory 2` |
@@ -1327,7 +1327,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 
 ### 5.15 Hero / About intro
 
-About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 궤적(5.16), 역량 표가 이어진다. 이름·직함은 사이드바(5.1)에 있고 About 카드는 반복하지 않는다.
+About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 궤적(5.16), 학력(11.9), 역량 표가 이어진다. 이름·직함은 사이드바(5.1)에 있고 About 카드는 반복하지 않는다.
 
 ```html
 <section class="card" id="about" aria-labelledby="h-about">
@@ -1335,6 +1335,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
   <p class="tagline">Building industrial AI, from control rooms to humanoid robots.</p>
   <p class="about">…</p>
   <ol class="traj">…</ol>      <!-- 5.16 -->
+  <section class="edu">…</section>  <!-- 11.9 -->
   <dl class="skills">…</dl>
 </section>
 ```
@@ -1703,7 +1704,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
     <div><h3>GenON, R&D Group</h3><p class="lg-sub">Director / AI Product Engineer</p><p class="lg-desc">…</p></div>
   </li>
 </ol>
-<!-- Teaching, Awards & Education: 그룹 머리 + 행 -->
+<!-- Teaching, Awards: 그룹 머리 + 행 -->
 <div class="lg-group">
   <h3 class="lg-label"><span>Books</span><span class="mono">2</span></h3>
   <ol class="lg"><li class="lg-row"><span class="lg-when mono">2023, 2024</span>
@@ -1735,8 +1736,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 |---|---|---|---|---|---|---|
 | Experience | 없음 (`h3`) | 콘텐츠 순서 (최신 먼저) | `experience.period` + 로고 | `org` | `role` | `summary` |
 | Teaching · Books · Advisory | `teaching.kind`: book → teaching → advisory | `years`의 마지막 연도 내림차순, 같으면 첫 연도 | `years` (자유 표기 그대로) | `title` (`url` 있으면 `.ext` 링크) | `org` | `details[]` → `.dl-list` |
-| Awards & Education — Awards | `awards` | `years` 같은 규칙 | `years` | `title` | `org` | — |
-| Awards & Education — Education | `education` | 콘텐츠 순서 | `period` | `school` | `degree` | — |
+| Awards | `awards` | `years` 같은 규칙 | `years` | `title` | `org` | — |
 
 - 그룹 머리 건수는 그룹 항목 수. 그룹 이름(Books/Teaching/Advisory/Awards/Education)은 `src/i18n/`.
 - 반응형: ≤560px 1열(`gap: --sp-0`), `.lg-when` `padding-top: 0`. 로고가 있는 칸(`.when-cell`)은 가로 flex `space-between`, `gap: --sp-3`, `margin-bottom: --sp-2`, 로고가 왼쪽(`order: -1`)·`margin-top: 0`·높이 ×0.85, 기간은 오른쪽.
@@ -1976,11 +1976,11 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 |---|---|---|---|---|---|
 | — | 사이드바 | — | — | Sidebar 5.1 (Dossier Record: 사진, 이름 `h1`, 직함, 키/값 표 Email·GitHub·LinkedIn·CV) | `profile` (name, headline, contact) |
 | — | 상단 메뉴 / 모바일 바 | — | — | Top navigation 5.2, Mobile bar + menu sheet 5.3 | `src/i18n/` |
-| 1 | About / 소개 | `about` | About / 소개 | Card 5.14, Hero 5.15, Career trajectory 5.16, Skills(5.15) | `profile` (taglines[0], about, trajectory, skills) |
+| 1 | About / 소개 | `about` | About / 소개 | Card 5.14, Hero 5.15, Career trajectory 5.16, Education(11.9), Skills(5.15) | `profile` (taglines[0], about, trajectory, skills), `education` |
 | 2 | Selected Work / 대표 프로젝트 | `work` | Work / 대표 프로젝트 | Card 5.14, Selected work list 5.18(번호 목록 01–06), Project ledger 5.19(전체 원장 + Domain·Capability 선택 상자 + 모두 보기) | `projects` (대표작: `featured`, `order` 순. 원장: 전체 20건) |
 | 3 | Experience / 경력 | `experience` | Experience / 경력 | Card 5.14, Period ledger row 5.22(기간 열 + 단색 로고) | `experience` (6곳) + `public/` 로고 |
 | 4 | Teaching · Books · Advisory / 강의 · 저서 · 자문 | `teaching` | Experience / 경력 | Card 5.14, Period ledger row 5.22 (Books · Teaching · Advisory 묶음) | `teaching` (`kind` 순서: book, teaching, advisory) |
-| 5 | Awards & Education / 수상 · 학력 | `awards` | Experience / 경력 | Card 5.14, Period ledger row 5.22 (Awards, Education 두 묶음) | `awards`, `education` |
+| 5 | Awards / 수상 | `awards` | Experience / 경력 | Card 5.14, Period ledger row 5.22 | `awards` |
 | 6 | Personal Projects / 개인 프로젝트 | `personal` | Personal / 개인 프로젝트 | Card 5.14, Personal projects index 5.20(번호 목록 + 상태 필터 + 저장소·데모 링크) | `personal` |
 | 7 | IP & Publications / 지식재산 · 출판물 | `ip` | Publications / 지식재산 · 출판물 | Card 5.14, Index drawer 5.21(유형별 서랍: 특허·프로그램·논문·보고서, 서랍 id `ip-<유형>`) | `patents`, `software`, `publications` |
 | 8 | Contact / 연락처 | `contact` | Contact / 연락처 | Card 5.14, Contact 5.23(의뢰 가능 분야 \| 이메일·복사·링크) | `profile` (availability, contact) |
@@ -2005,7 +2005,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 - 현재 섹션 판정 (시안 그대로): 상단 메뉴 아래 끝 + 화면 높이 25% 선을 지난 마지막 섹션. 페이지 끝에 닿으면 마지막 섹션(Contact). 탭·앵커를 눌러 이동하면 사용자가 직접 스크롤(wheel, touchstart, keydown)할 때까지 누른 섹션을 유지한다 (짧은 Awards가 다음 섹션에 덮이지 않게).
 - 현재 탭: `aria-current="true"` + 미끄러지는 밑줄(5.2, 모션은 3장 Motion).
 - 모바일 바의 현재 섹션 이름은 탭 이름이 아니라 **섹션** 이름을 보인다 (예: Teaching 구간에서 "Teaching · Books · Advisory").
-- 메뉴 시트: 탭 6개, Experience 아래 하위 링크 3개(Experience, Teaching · Books · Advisory, Awards & Education). 하위 링크는 자기 섹션일 때만 현재 표시.
+- 메뉴 시트: 탭 6개, Experience 아래 하위 링크 3개(Experience, Teaching · Books · Advisory, Awards). 하위 링크는 자기 섹션일 때만 현재 표시.
 - 앵커 이동으로 들어온 섹션은 등장 효과를 건너뛴다 (decision-log G6, 3장 Motion).
 
 **영문/국문 차이**
@@ -3007,3 +3007,4 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 결정 | 이유 |
 |---|---|
 | About 카드의 숫자 표(5.17: 프로젝트·특허·SW·저서 건수 4칸)와 카운트업 모션, `--m-count` 토큰을 삭제. 대체 요소는 두지 않고 궤적 다음에 역량 표가 바로 온다 | 사용자 요청. 건수는 IP 서랍(5.21)과 CV에 그대로 남는다 |
+| About 궤적과 역량 표 사이에 학력을 넣는다 (시안 C 작은 원장, `docs/design-drafts/g8/`). 머리표 `Education`/`학력`(카드 머리 h2와 같은 eyebrow 모양, h3) + 행마다 연도(`fmtYears`) \| **학교** 학위 · 세부전공 \| `GPA n / n` 3열, 560px 이하 1열. 데이터는 `education` 컬렉션(`focus`·`gpa` 선택 필드 추가). Awards & Education 카드는 `Awards`/`수상`으로 바꾸고 학력 묶음을 뺀다. 시안 A(2칸 띠)·B(역량 표 첫 행)는 고르지 않음 | 사용자 선택. 숫자 표를 뺀 자리를 학력으로 채우고, 같은 내용이 두 번 나오지 않게 Awards 카드에서 뺐다. GPA는 이력서 값 그대로 |
