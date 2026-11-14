@@ -34,16 +34,27 @@ npm run dev
 
 ```
 src/content/      Content source (profile, experience, projects, personal, patents, ...)
+src/content.config.ts  Content schema (build fails on missing or invalid fields)
 src/components/   UI components
 src/layouts/      Page layouts
-src/pages/        English routes; Korean routes under pages/ko/
+src/pages/        English routes (home, /cv/, /work/<slug>/, 404, sitemap, robots); Korean under pages/ko/
 src/i18n/         UI strings (menus, buttons)
 src/styles/       Design tokens and global styles
-public/           Images, favicons, OG images, fonts
-scripts/          Build steps: CV PDF generation, link check
+src/assets/       Optimized images: profile photo, employer logos
+public/           Favicons, OG images, fonts
+scripts/          Post-build steps: CV PDF generation, internal link check
 docs/             Plan, tasks, design drafts, glossary
 DESIGN.md         Design tokens, component specs, decision log
 ```
+
+## Pages
+
+- Home (`/`, `/ko/`): About, Experience, Teaching, Awards, Selected Work, Personal Projects,
+  IP & Publications, Contact
+- Case studies (`/work/<slug>/`): generated for featured projects that have a case study
+- CV (`/cv/`, `/ko/cv/`): print layout, also exported as PDF at build time
+
+Visits are counted with [GoatCounter](https://www.goatcounter.com) (cookie-free).
 
 ## Editing content
 

@@ -3,6 +3,8 @@
 Kwang Myung Yu(유광명)의 경력·프로젝트 실적을 소개하는 개인 웹사이트.
 영문 주력 + 국문 전체 전환, Astro 정적 사이트, GitHub Pages(`https://sguys99.github.io`) 배포.
 
+현재 상태: 2026-11-12 공개, 운영 단계. 구축(단계 0~9)은 끝났고 이후 작업은 `docs/tasks.md`의 대기 중·Backlog에서 고른다.
+
 ## 문서
 
 | 문서 | 역할 | 규칙 |
@@ -36,12 +38,19 @@ Node 24 LTS (`.nvmrc`). URL은 끝에 `/`를 붙인다 (`trailingSlash: 'always'
 
 ```
 src/content/      콘텐츠 원본 (profile, experience, projects, personal, patents, ...)
+src/content.config.ts  콘텐츠 스키마, DOMAINS·CAPABILITIES·APPROVED_CLIENTS
 src/components/   UI 컴포넌트
-src/layouts/      페이지 레이아웃
-src/pages/        영문 라우트, pages/ko/ 국문 라우트
+src/layouts/      페이지 레이아웃 (Base: head·GoatCounter, Shell, Page)
+src/pages/        영문 라우트(/, /cv/, /work/[slug]/, 404, sitemap.xml, robots.txt), pages/ko/ 국문 라우트
 src/i18n/         메뉴·버튼 등 UI 문구
-src/styles/       tokens.css (디자인 토큰), 전역 스타일
-public/           사진, 파비콘, OG 이미지, CV PDF
+src/styles/       tokens.css (디자인 토큰), fonts.css, global.css
+src/assets/       프로필 사진(astro:assets로 AVIF/WebP), 경력 6곳 로고(logos/)
+src/scripts/      클라이언트 모션
+src/cv-pdf.mjs    CV PDF 경로 상수 (사이드바 링크와 scripts/cv-pdf.mjs가 공유)
+public/           OG·JSON-LD용 사진, 파비콘, OG 이미지, 글꼴, Search Console 확인 파일
+scripts/          빌드 후처리: cv-pdf.mjs (CV PDF → dist/), check-links.mjs (내부 링크 검사)
+.github/workflows/deploy.yml  master push → GitHub Pages 배포
+.claude/commands/ 안내형 콘텐츠 추가 명령 (add-project, add-entry)
 docs/design-drafts/   Gate별 시안 보관
 docs/glossary.md      영문/국문 용어집
 docs/references/      외부 참고 자료 (형식 예시 등, 규칙 아님)
@@ -92,7 +101,7 @@ docs/private/         원본 자료: 이력서, 경력기술서, 사진 원본 (
 - 새 프로젝트를 추가할 때 기본은 익명이다. 실명은 건별로 사용자 승인을 받는다.
 - **전화번호**는 싣지 않는다. 원본 자료(이력서, 경력기술서, 사진 원본)는 `docs/private/`에만 두고 커밋하지 않는다.
 - **경력**은 사용자가 제공한 6곳만 싣는다. 그 사이 구간이나 다른 소속은 표기하지 않는다.
-- 회사 로고는 사용자 승인 없이 쓰지 않는다 (기본은 텍스트 표기).
+- 회사 로고는 사용자 승인 없이 쓰지 않는다 (기본은 텍스트 표기). 경력 6곳 로고만 승인됨(`src/assets/logos/`, DESIGN.md 5.11). 고객사 로고는 쓰지 않는다.
 
 ## 확정된 프로필 정보
 
@@ -105,11 +114,12 @@ docs/private/         원본 자료: 이력서, 경력기술서, 사진 원본 (
 | GitHub | https://github.com/sguys99 |
 | LinkedIn | https://www.linkedin.com/in/kmyu99/ |
 
-프로필 사진: `public/images/profile.jpg` (원본을 4:5, 1200×1500으로 자름. 원본은 `docs/private/`).
+프로필 사진: 원본을 4:5, 1200×1500으로 자른 파일. 화면 표시는 `src/assets/profile.jpg`(astro:assets), OG·JSON-LD는 같은 파일의 사본 `public/images/profile.jpg`. 바꿀 때는 둘 다 교체한다. 원본은 `docs/private/`.
 
 실적 건수의 기준은 이력서(`docs/private/resume_ko_20261018.docx`)와 `docs/basic-plan.md`다. `work_experience*` 파일은 케이스 스터디 내용 참고용이며, 그 안의 건수(특허 14, SW 9 등)는 이전 버전이라 쓰지 않는다.
 
-아직 받지 못한 자료: 대표 프로젝트 확정, 개인 프로젝트(Personal Projects) 목록.
+반영된 자료: 프로젝트 20건(대표 6건, 케이스 스터디 5건), 개인 프로젝트 10건.
+아직 받지 못한 자료: 그린소재 재고 조합 최적화(`lotte-inventory-blend-optimization`)의 케이스 스터디 자료, 영문·국문 문안 전체 검토 (`docs/tasks.md` "대기 중").
 받기 전에는 자리 표시로 두고, 임의의 내용으로 채우지 않는다.
 
 ## 콘텐츠 갱신 절차
@@ -130,8 +140,8 @@ docs/private/         원본 자료: 이력서, 경력기술서, 사진 원본 (
 | 학력 | `src/content/education.yaml` | |
 
 - 실명 고객사는 `src/content.config.ts`의 `APPROVED_CLIENTS`에 있어야 빌드된다. 추가는 사용자 승인 후에만, 규칙 3 표도 함께 고친다.
-- 홈 숫자(프로젝트·특허·SW·저서 건수, 등록/출원 구분)와 CV 집계는 컬렉션에서 자동 계산된다. `profile.yaml`에는 건수를 쓰지 않는다.
-- 이미지는 `public/images/`에 두고 대체 텍스트를 단다. 회사 로고는 승인 없이 쓰지 않는다 (규칙 3).
+- 건수(IP 서랍의 특허·SW·논문 건수, 등록/출원 구분, 카드 머리 `총 n건`)와 CV 집계는 컬렉션에서 자동 계산된다. `profile.yaml`에는 건수를 쓰지 않는다.
+- 이미지는 `public/images/`(또는 최적화가 필요하면 `src/assets/`)에 두고 대체 텍스트를 단다. 회사 로고는 승인 없이 쓰지 않는다 (규칙 3).
 - 안내형 추가: `.claude/commands/add-project.md` (프로젝트), `.claude/commands/add-entry.md` (그 외 항목).
 
 확인 순서:
