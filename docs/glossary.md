@@ -87,7 +87,7 @@
 | English | 한국어 | 적용 프로젝트 |
 |---|---|---|
 | Samsung Electronics | 삼성전자 | SCM 데이터 분석·업무 지원 서비스, 온라인 상담 지원·제품 추천 어시스턴트 (PwC) |
-| LOTTE Fine Chemical | 롯데정밀화학 | AI 프로젝트 마스터플랜 및 LLM 서비스 PoC, 원자재 가격 예측, 그린소재 재고 조합 최적화 (PwC), 관련 보고서 1건 |
+| LOTTE Fine Chemical | 롯데정밀화학 | AI 과제 추진 로드맵 수립 컨설팅 및 PoC 수행, 원자재 가격 예측, 그린소재 재고 조합 최적화 (PwC), 관련 보고서 1건 |
 
 ### 4.2 익명 업종 표기
 
@@ -230,6 +230,15 @@
 | simulation environment | 시뮬레이션 환경 | |
 | master plan | 마스터플랜 | |
 | roadmap | 로드맵 | |
+| AI task force | AI 추진 TF | 고객사 조직. 국문은 띄어 씀 |
+| task idea / in-house task idea | 과제 / 자체 발굴 과제 | 로드맵 이전 단계의 과제 후보 |
+| strategic importance / feasibility | 전략적 중요성 / 수행 용이성 | 과제 평가 두 축 |
+| business impact / technology maturity | 사업 영향도 / 기술 성숙도 | 과제 분류 매트릭스 두 축 |
+| proven solution / development prep / technology monitoring | 솔루션 도입 / 개발 준비 / 기술 동향 모니터링 | 매트릭스 사분면의 추진 방식 (나머지 하나는 PoC) |
+| task definition sheet | 과제 정의서 | 기간·비용·기대효과를 담은 과제별 문서 |
+| enabling task | 기반 과제 | 다른 과제를 받치는 과제 (데이터 거버넌스, 데이터 레이크) |
+| data governance / data lake | 데이터 거버넌스 / 데이터 레이크 | |
+| employee productivity / business competitiveness / data-driven decisions | 직원 생산성 강화 / 사업 경쟁력 강화 / 데이터 기반 의사결정 | AI 추진 방향 3가지 |
 | lifetime prediction / condition diagnosis | 수명 예측 / 상태진단 | |
 | maintenance history | 정비이력 | |
 | sintering process | 소결 공정 | |

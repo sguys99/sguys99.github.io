@@ -19,6 +19,9 @@ import EpisodeLoop from './EpisodeLoop.astro';
 import StandardSet from './StandardSet.astro';
 import RepoMap from './RepoMap.astro';
 import Screens from './Screens.astro';
+import TaskSelection from './TaskSelection.astro';
+import Quadrant from './Quadrant.astro';
+import RoadmapGantt from './RoadmapGantt.astro';
 import { t, fmtPeriod, homePath, type Lang } from '../i18n/ui';
 
 /** Featured projects with a case study, in `order` (6.3): page list, pager order and the `01 / 05` position. */
@@ -49,8 +52,8 @@ const client = p.client && (p.client.public ? p.client.name[lang] : p.client.lab
 // getCollection, not getEntry: most case studies have no diagram file, and getEntry warns on a miss.
 const dg = (await getCollection('diagrams')).find((d) => d.id === slug)?.data;
 
-// Numbered sections (5.24.3); System prompt, layer stack, Visitor journey, Architecture, Service flow, Safety and
-// Learning loop only when present, so later numbers move up. Architecture is a diagram when src/content/diagrams/<slug>.yaml has `arch`,
+// Numbered sections (5.24.3); System prompt, layer stack, Visitor journey, Architecture, Service flow, Safety,
+// Learning loop and Roadmap only when present, so later numbers move up. Architecture is a diagram when src/content/diagrams/<slug>.yaml has `arch`,
 // else the layer table.
 const show = {
   prompt: !!(dg?.prompt || dg?.repomap),
@@ -60,6 +63,7 @@ const show = {
   flow: !!dg?.flow,
   safety: !!(dg?.safety || cs.safety),
   loop: !!dg?.episode,
+  roadmap: !!dg?.gantt,
 };
 const secs = (
   [
@@ -74,6 +78,7 @@ const secs = (
     ['flow', []],
     ['safety', cs.safety ?? []],
     ['loop', cs.loop ?? []],
+    ['roadmap', []],
     ['outcome', cs.outcome],
   ] as const
 )
@@ -328,6 +333,23 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
                 uid="approach"
               />
             </div>
+          )}
+          {s.id === 'approach' && dg?.selection && (
+            <div class="fig-post">
+              <TaskSelection lang={lang} data={dg.selection} label={s.label} />
+            </div>
+          )}
+          {s.id === 'approach' && dg?.matrix && (
+            <div class="fig-post">
+              <Quadrant
+                lang={lang}
+                data={dg.matrix}
+                label={`${dg.matrix.x[lang]} × ${dg.matrix.y[lang]}`}
+              />
+            </div>
+          )}
+          {s.id === 'roadmap' && dg?.gantt && (
+            <RoadmapGantt lang={lang} data={dg.gantt} label={s.label} />
           )}
           {s.id === 'approach' && cs.domains && (
             <>

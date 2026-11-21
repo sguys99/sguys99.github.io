@@ -1868,7 +1868,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 01 | `context` | Context / 배경 | `caseStudy.context[]` + `caseStudy.screens` 실서비스 화면(목록 아래, 5.24.17) | 항상. 화면은 있을 때만 (11.16) |
 | 02 | `problem` | Problem / 문제 | `caseStudy.problem[]` | 항상 |
 | 03 | `role` | My role / 역할 | `caseStudy.role[]` | 항상 |
-| 04 | `approach` | Approach / 접근 | `caseStudy.approach[]` + (`diagrams/<slug>.yaml`의 `approach` 그림, `caseStudy.domains` 도메인 표, `results` 실험 결과 차트) + `decisions[]` 표 + `caseStudy.compare` 비교 | 그림·표·차트·결정 표·비교는 각각 있을 때만 (5.24.4, 5.24.11, 5.24.6, 5.24.7) |
+| 04 | `approach` | Approach / 접근 | `caseStudy.approach[]` + (`diagrams/<slug>.yaml`의 `approach` 그림, `selection` 선별 단위 격자, `matrix` 분류 매트릭스, `caseStudy.domains` 도메인 표, `results` 실험 결과 차트) + `decisions[]` 표 + `caseStudy.compare` 비교 | 그림·표·차트·결정 표·비교는 각각 있을 때만 (5.24.4, 5.24.14, 5.24.15, 5.24.11, 5.24.6, 5.24.7) |
 | 05 | `prompt` | System prompt / 시스템 프롬프트 | `diagrams/<slug>.yaml`의 `prompt`(회로도) + `repomap`(저장소 지도, 그림 아래 `--sp-5`, 5.24.13) | 둘 중 하나가 있을 때만 (11.16) |
 | 06 | `stack` | From command to torque / 명령에서 토크까지 | `diagrams/<slug>.yaml`의 `stack`(계층 계단) | 있을 때만 (5.24.9, 11.15) |
 | 07 | `journey` | Visitor journey / 관람 동선 | `diagrams/<slug>.yaml`의 `journey`(평면 개념도) + `caseStudy.journey`(도입 문장, 단계 목록) | 그림이 있을 때만 (11.13) |
@@ -1876,7 +1876,8 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 09 | `flow` | Service flow / 서비스 흐름 | `diagrams/<slug>.yaml`의 `flow`(회로도) | 있을 때만 (11.10) |
 | 10 | `safety` | Safety / 안전 체계 | `diagrams/<slug>.yaml`의 `safety` 그림 + `caseStudy.safety[]` 목록(그림 아래, 위 `--sp-5`) | 둘 중 하나가 있을 때만 (11.13) |
 | 11 | `loop` | Learning loop / 학습 루프 | `diagrams/<slug>.yaml`의 `episode`(에피소드 해부 + 루프) + `caseStudy.loop[]` 목록(그림 아래) | 그림이 있을 때만 (5.24.10, 11.15) |
-| 12 | `outcome` | Outcome / 성과 | `caseStudy.outcome[]` + `caseStudy.roadmap` 역할 분담 | 항상. `period.status`가 `present`/`planned`면 진행 중 배지. 역할 분담은 있을 때만 (5.24.8) |
+| 12 | `roadmap` | Roadmap / 로드맵 | `diagrams/<slug>.yaml`의 `gantt`(로드맵 Gantt) | 있을 때만 (5.24.16, 11.17) |
+| 13 | `outcome` | Outcome / 성과 | `caseStudy.outcome[]` + `caseStudy.roadmap` 역할 분담 | 항상. `period.status`가 `present`/`planned`면 진행 중 배지. 역할 분담은 있을 때만 (5.24.8) |
 
 결정 표(`.tbl`): 열 Decision / Why / Trade-off (결정 / 이유 / 트레이드오프) ← `decisions[].title` / `.rationale` / `.tradeoff`. 시안은 "Decision"·"Why"를 코드에 직접 썼다 → `src/i18n/`로.
 
@@ -2074,6 +2075,52 @@ System prompt 섹션에서 프롬프트 그림 아래(위 `--sp-5`). `src/compon
 
 - 파일 줄은 저장소 원문(국문) 그대로 두고 영문 페이지에서도 옮기지 않는다. 설명과 라벨만 언어별.
 - 접근성: SVG `aria-hidden`, 스크롤 상자 `role="region"` + `aria-label`(섹션 제목). `.sr-only`: 트리 이름 목록, 메모, 파일 경로, 설명마다 해당 줄, 커밋 규약.
+
+#### 5.24.14 과제 선별 단위 격자 (selection)
+
+Approach 목록 아래(위 `--sp-5`, `approach` 그림이 있으면 그 아래). `src/components/TaskSelection.astro`, g16 시안 ① B (11.17). 현재 AI 과제 추진 로드맵 1건.
+
+| 요소 | 값 |
+|---|---|
+| 콘텐츠 | `diagrams/<slug>.yaml`의 `selection`: `stages[]`(2–5개: `count`, `name`, `sub`, `grid` 또는 `units`, 마지막을 뺀 단계마다 `step`), `legend[]`(종류·라벨). `grid`는 `of`칸 중 `picked`칸을 진하게(`split`: 꽉 찬 격자에서 앞 n칸만 한 단계 진하게, 예: 1차 수집). `units`는 종류별 네모(`kind`, `n`), 이름이 있으면 한 줄에 하나. 스키마가 단계 건수 = 진한 칸 수 또는 네모 수, 이름은 모두 있거나 없음(최대 4), 이름 없는 네모 36개 이하를 검사 |
+| 배치 (SVG 720) | 단계 판 폭 112, 사이 간격 (720 − 112 × 단계 수) ÷ (단계 수 − 1). 머리: 건수 24px `--fw-strong` 고정폭 숫자(y 28), 이름 12px `--fw-strong`(y 48), 부제 9px mono `--text-3`(y 62). 칸은 y 76부터: 작은 칸 6px(8 간격, 14열), 네모 12px(16 간격, 6열), 이름 붙은 네모는 24 간격 + 오른쪽 이름 9px mono `--text-2` |
+| 칸 | 꽉 찬 격자 `--line-strong`(`split` 뒤 칸은 투명도 0.6). 일부만 고른 격자는 나머지 `--line`, 고른 칸 `--text-2`. 고른 칸 위치는 고정 시드로 정한 임의 배치(점수 아님) |
+| 단계 사이 | 화살표 `--text-3` 1.2(칸 영역 가운데 높이), 라벨 8px mono 자간 0.06em(가림 바탕 `--surface`) |
+| 포인트 색 | 모든 네모가 `own`인 단계(수행팀 PoC)의 건수와 네모만 |
+| 범례·폭 | 그림 아래 가는 선(`--line`) + 견본 16×12, 라벨 폭에 맞춰 배치. `min-width: 640px`, 좁은 열에서 그림 안 가로 스크롤 + `dgScroll` |
+
+과제 종류 (5.24.14–16 공통): `own` 수행팀 PoC 바탕 `--accent-soft` + 선 `--accent` 1.2 / `poc` PoC 바탕 `--surface` + 선 `--text-2` 1.2 / `sol` 솔루션 도입 바탕 `--chip` + 선 `--line-strong` 0.8 / `dev` 개발 준비 바탕 `--surface` + 점선 `--text-3` `4 3` / `add` 수행팀 제안 과제 바탕 `--bg` + 선 `--text-3` 1.
+
+- 접근성: SVG `aria-hidden`, 스크롤 상자 `role="region"` + `aria-label`(섹션 제목) + `tabindex="0"`. `.sr-only` 번호 목록: 단계마다 "이름: 건수 (부제). 종류 라벨 n, …"(이름 붙은 네모는 이름).
+
+#### 5.24.15 분류 매트릭스 (matrix)
+
+선별 그림 아래(위 `--sp-5`). `src/components/Quadrant.astro`, g16 시안 ② A (11.17). 현재 AI 과제 추진 로드맵 1건.
+
+| 요소 | 값 |
+|---|---|
+| 콘텐츠 | `diagrams/<slug>.yaml`의 `matrix`: `x`·`y`(축 이름), `cells[4]`(`at` tl·tr·bl·br, `name`, `count`, `body` 두 줄(`\n`), `note`, `focus`). 가로는 왼쪽 낮음 → 오른쪽 높음, 세로는 아래 낮음 → 위 높음. 스키마가 모서리마다 1칸, `focus` 1개 이하를 검사 |
+| 배치 (SVG 720 × 364) | 축 x 48·y 332, 화살표 `--text-2` 1.2. 칸 316 × 144, 간격 16, x 64·y 24부터. 축 이름 9px mono `--text-2`(세로축은 화살표 끝 오른쪽 위, 가로축은 아래 가운데), 끝 표시 `mxLow`·`mxHigh` 9px mono `--text-3` |
+| 칸 | 바탕 `--bg` + 선 `--line-strong` 0.8, 모서리 8. `focus`는 바탕 `--accent-soft` + 선 `--accent` 1.2(포인트 색은 여기에만), 건수 0이면 바탕 없음 + 점선 `2 3` |
+| 글자 | 이름 16px `--fw-strong`(x+16, y+32), 건수 28px `--fw-strong` 오른쪽 정렬(`focus` `--accent`, 0은 `--text-3`), 설명 12px `--text-2` 18 간격(y+62), 아래 메모 9px mono `--text-3`(바닥 −18) |
+| 폭 | `min-width: 640px`, 좁은 열에서 그림 안 가로 스크롤 + `dgScroll` |
+
+- 접근성: 스크롤 상자 `aria-label`은 "가로축 × 세로축" 이름(같은 섹션의 두 번째 그림이라 섹션 제목과 구분). `.sr-only` 목록: 칸마다 "이름 (세로축 높음/낮음, 가로축 높음/낮음): n건. 설명 메모"(`nTasks`).
+
+#### 5.24.16 로드맵 Gantt (gantt)
+
+새 섹션 Roadmap / 로드맵(Outcome 앞). `src/components/RoadmapGantt.astro`, g16 시안 ③ C (11.17). 현재 AI 과제 추진 로드맵 1건.
+
+| 요소 | 값 |
+|---|---|
+| 콘텐츠 | `diagrams/<slug>.yaml`의 `gantt`: `start`(첫 해), `years`(1–3), `lanes[]`(`id`, `label`, `\n`으로 2줄), `tasks[]`(`lane`, `kind`, `from`·`to`: 첫 해 1분기 = 0인 분기 단위, 반 분기까지), `notes[]`(`lane`, `at` 분기, `anchor` start·end, `text`), `legend[]`. 스키마가 레인 id 중복·참조, 기간(`from` < `to` ≤ 해 × 4), 메모 레인을 검사 |
+| 배치 (SVG 728) | 레인 머리 0–128, 기간 600(3년이면 분기 50). 위: 해 12px `--fw-strong` `--text-2`(y 16), 반기 9px mono `--text-3`(y 34, `half1`·`half2`). 세로선은 반기 `--line`, 해 경계 `--line-strong` |
+| 레인 | 바탕 `--bg` 모서리 8, 사이 8. 높이 = 행 수 × 40 + 8(최소 76). 막대는 시작 순으로 비어 있는 첫 행에 들어간다(컴포넌트가 배치). 이름 12px `--fw-strong` `--text-2`, 아래 건수 9px mono `--text-3`(`nTasks`) |
+| 막대 | 높이 32, 모서리 4, 양 끝 2씩 띄움. 모양은 과제 종류(5.24.14). 이름 11px `--fw-medium` `--text`, 왼쪽 6, 두 줄이면 12 간격 |
+| 메모 | 레인 첫 행 높이에 9px mono `--text-3`, 가림 바탕 `--bg`(격자선을 가림) |
+| 범례·폭 | 5.24.14와 같음 |
+
+- 접근성: SVG `aria-hidden`, 스크롤 상자 `aria-label`(섹션 제목). `.sr-only`: 레인마다 "레인 (n건)" + 목록 "과제 (종류): 2024 Q1 – 2024 Q4"(`quarter`) + 메모 문장.
 
 #### 5.24.17 실서비스 화면 (screens)
 
@@ -3289,3 +3336,22 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 순서 3번째(GenP, 도슨트 다음). 뒤 프로젝트를 한 칸씩 밀고, 같은 날 다른 작업에서 AI 마스터플랜이 6번에 들어와 원자재 가격 예측 7, 그린소재 8 | 사용자 선택(기간순). 번호 겹침 방지 |
 | 실서비스 캡처: 예시 질문 6회 사용. 헤드리스 브라우저에 한자 글꼴이 없어 Noto Sans KR을 보조 글꼴로만 덧붙임. 같은 질문인데 데스크톱·모바일 답변의 절차 표가 3·4단계로 다름(LLM 답변 차이) | 화면 내용은 바꾸지 않음 |
 | 노드 수 예산(9개) 초과(흐름 17, 아키텍처 15)는 그대로 둠 | SCM(11.10)과 같은 이유: 한 장에 전체 구조를 보임 |
+
+### 11.17 AI 과제 추진 로드맵 케이스 스터디 — 2026-11-22
+
+시안: `docs/design-drafts/g16/` (① 과제 선별 A 단계 원장 막대 / B 단위 격자 / C 2개월 타임라인 흐름, ② 분류 매트릭스 A 컨설팅 2×2 / B 표형 2×2 + 단위 네모 / C ①+② 합본, ③ 3개년 로드맵 A 추진 방향별 Gantt / B 착수 시점 점도표 / C 추진 방식별 Gantt + 배치 원칙. 비교 페이지 `index.html`(`make.mjs`), 캡처 `shots/`, 구현 확인 `shots/impl/`(`verify.mjs`)). 자료: `docs/project-references/ai-roadmap/`(AI 과제 추진 Roadmap 2024-05, 수행사례 2025-01, 수행계획서 2024-02).
+
+| 결정 | 이유 |
+|---|---|
+| 새 항목을 만들지 않고 기존 `lotte-ai-masterplan`을 대표 프로젝트(순서 6, 원자재 가격 예측 바로 위)로 올려 케이스 스터디를 붙임 | 사용자 결정. 이미 로드맵과 PoC 3건을 묶은 항목이라 전체 목록에 같은 과제가 두 번 나오지 않게. 롯데 3건이 로드맵 → 가격 예측 → 그린소재 순으로 이어짐 |
+| 제목을 "AI Roadmap Consulting and PoC Delivery / AI 과제 추진 로드맵 수립 컨설팅 및 PoC 수행"으로 바꿈. 주소는 그대로 | 사용자 선택. 컨설팅 경험을 드러내기 위해 |
+| 그림 3개: ① B(Approach 목록 아래), ② A(① 아래), ③ C(새 섹션 Roadmap / 로드맵, Outcome 앞) | 사용자 선택. ③의 자리는 제안대로 |
+| 새 필드 `selection`·`matrix`·`gantt`와 컴포넌트 `TaskSelection`·`Quadrant`·`RoadmapGantt`(5.24.14–16). 세 그림이 과제 종류 5개(`own`·`poc`·`sol`·`dev`·`add`)를 같은 모양으로 씀. 파일 기본 `legend`는 노드 그림이 없으면 생략 가능(빈 목록) | 노드·연결선 형식으로는 단위 격자·사분면·Gantt를 그릴 수 없음. 기존 필드는 바꾸지 않고 추가만 |
+| 자체 LLM 플랫폼 PoC는 Outcome 한 줄만. 아키텍처·평가 그림은 넣지 않음 | 사용자 결정 |
+| 역할은 PM 총괄 + PoC 3건 리드. 로드맵 트랙은 컨설턴트 1명이 맡았으므로(수행계획서) "로드맵을 직접 수립"으로 쓰지 않음 | 사용자 답변 |
+| 로드맵은 2024-05 최종본 26건. 과제명은 일반 명칭으로 바꾸고 공장·제품·부서명, 재무 효과(억 원), 임원 인용은 싣지 않음. 막대 위치는 장표 도형 좌표를 반 분기 단위로 환산 | 사용자 선택(일반 명칭 + 건수). CLAUDE.md 규칙 3 |
+| LLM 플랫폼은 2024-05 로드맵에 없고 이후 추가된 과제라 ①의 마지막 단 부제를 "2 planned + 1 added / 계획 2 + 추가 1"로 구분 | 규칙 2(없는 사실을 만들지 않음) |
+| 매트릭스 축은 자료(6장) 배치 그대로 가로 사업 영향도, 세로 기술 성숙도. 건수는 7장 분류 결과(PoC 12, 솔루션 8, 개발 준비 4, 모니터링 0) | 자료와 어긋나지 않게 |
+| 데이터 거버넌스·데이터 레이크(수행팀 제안 2건)는 ③에서 별도 레인 + `add` 모양 | ①의 "+2"와 같은 모양으로 이어지게 |
+| 포인트 색: ①은 수행팀 PoC 3건, ②는 PoC 칸, ③은 수행팀 PoC 막대 2건 | 포인트 색 1개 원칙(2장) |
+| 복잡도 예산(Gantt 12개) 초과(26개)는 그대로 둠 | 로드맵의 규모 자체가 결과물. SCM(11.10)과 같은 이유 |

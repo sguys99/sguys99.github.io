@@ -1,0 +1,300 @@
+---
+// Roadmap Gantt (DESIGN.md 5.24.16; g16 시안 ③ C): lanes over half-years, one bar per task shaped by its kind,
+// short notes in empty stretches. Drawn from `gantt` in src/content/diagrams/<slug>.yaml; bars in a lane are
+// packed into rows here. The SVG is hidden from screen readers; the tasks are in the .sr-only lists below it.
+import type { CollectionEntry } from 'astro:content';
+import { t, type Lang } from '../i18n/ui';
+
+type Gantt = NonNullable<CollectionEntry<'diagrams'>['data']['gantt']>;
+
+interface Props {
+  lang: Lang;
+  data: Gantt;
+  label: string; // accessible name of the scroll region
+}
+
+const { lang, data, label } = Astro.props;
+const { start, years, lanes, tasks, notes, legend } = data;
+
+// Lane heads 0–128, then the years across 600 (50 a quarter for three years). Rows 40, bars 32.
+const W = 728;
+const X0 = 128;
+const Q = 600 / (years * 4);
+const TOP = 48;
+const ROW = 40;
+const PAD = 8;
+const GAP = 8;
+const qx = (q: number) => X0 + q * Q;
+
+// Pack each lane: by start, into the first row that is free (a bar ends where the next may begin).
+const placed = (() => {
+  let y = TOP;
+  return lanes.map((ln) => {
+    const list = tasks.filter((k) => k.lane === ln.id).sort((a, b) => a.from - b.from);
+    const ends: number[] = [];
+    const bars = list.map((k) => {
+      let r = ends.findIndex((e) => e <= k.from);
+      if (r < 0) r = ends.push(0) - 1;
+      ends[r] = k.to;
+      return { k, r };
+    });
+    const h = Math.max(ends.length * ROW + PAD, 76);
+    const o = { ln, y, h, bars, n: list.length };
+    y += h + GAP;
+    return o;
+  });
+})();
+const bottom = placed.at(-1)!.y + placed.at(-1)!.h;
+const H = bottom + 56;
+const LG = H - 12;
+
+const kindLabel = new Map(legend.map((l) => [l.kind, l.label[lang]]));
+const est = (s: string, px = 12) =>
+  [...s].reduce((n, c) => n + (/[ㄱ-힝]/.test(c) ? px : px * 0.56), 0);
+const lgX = legend.reduce<number[]>(
+  (xs, l, i) => [...xs, i ? xs[i - 1] + 24 + est(legend[i - 1].label[lang]) + 28 : 0],
+  [],
+);
+const qText = (q: number) =>
+  t(lang, 'quarter', { y: start + Math.floor(q / 4), q: (Math.floor(q) % 4) + 1 });
+const span = (from: number, to: number) => `${qText(from)} – ${qText(Math.ceil(to) - 1)}`;
+const one = (s: string) => s.replace(/\n/g, ' ');
+---
+
+<figure class="gt">
+  <div class="gt-scroll" tabindex="0" role="region" aria-label={label}>
+    <svg viewBox={`0 0 ${W} ${H}`} aria-hidden="true" focusable="false">
+      {Array.from({ length: years }, (_, i) => (
+        <text class="yr" x={X0 + (i + 0.5) * 4 * Q} y="16" text-anchor="middle">
+          {start + i}
+        </text>
+      ))}
+      {Array.from({ length: years * 2 }, (_, i) => (
+        <text class="hf" x={X0 + (i + 0.5) * 2 * Q} y="34" text-anchor="middle">
+          {t(lang, i % 2 ? 'half2' : 'half1')}
+        </text>
+      ))}
+      {placed.map((p) => (
+        <rect class="lane" x="0" y={p.y} width={W} height={p.h} rx="8" />
+      ))}
+      {Array.from({ length: years * 2 + 1 }, (_, i) => (
+        <line
+          class:list={['gl', { yb: i % 2 === 0 }]}
+          x1={X0 + i * 2 * Q}
+          y1={TOP - 4}
+          x2={X0 + i * 2 * Q}
+          y2={bottom}
+        />
+      ))}
+      {placed.map((p) => {
+        const ls = p.ln.label[lang].split('\n');
+        return (
+          <>
+            {ls.map((s, i) => (
+              <text class="ll" x="12" y={p.y + 22 + i * 14}>
+                {s}
+              </text>
+            ))}
+            <text class="lc" x="12" y={p.y + 24 + ls.length * 14}>
+              {t(lang, 'nTasks', { n: p.n })}
+            </text>
+            {p.bars.map(({ k, r }) => {
+              const x = qx(k.from) + 2;
+              const y = p.y + PAD + r * ROW;
+              const lines = k.name[lang].split('\n');
+              const y0 = y + 20 - (lines.length - 1) * 6;
+              return (
+                <>
+                  <rect
+                    class={`k-${k.kind}`}
+                    x={x}
+                    y={y}
+                    width={(k.to - k.from) * Q - 4}
+                    height="32"
+                    rx="4"
+                  />
+                  {lines.map((s, i) => (
+                    <text class="bn" x={x + 6} y={y0 + i * 12}>
+                      {s}
+                    </text>
+                  ))}
+                </>
+              );
+            })}
+          </>
+        );
+      })}
+      {notes.map((n) => {
+        const p = placed.find((o) => o.ln.id === n.lane)!;
+        const lines = n.text[lang].split('\n');
+        const end = n.anchor === 'end';
+        const x = qx(n.at) + (end ? -8 : 8);
+        const w = Math.max(...lines.map((s) => est(s, 9) * 1.1)) + 8;
+        const y0 = p.y + PAD + 19 - (lines.length - 1) * 6;
+        return (
+          <>
+            <rect
+              class="nm"
+              x={end ? x - w + 4 : x - 4}
+              y={y0 - 11}
+              width={w}
+              height={lines.length * 12 + 6}
+              rx="2"
+            />
+            {lines.map((s, i) => (
+              <text class="nt" x={x} y={y0 + i * 12} text-anchor={end ? 'end' : 'start'}>
+                {s}
+              </text>
+            ))}
+          </>
+        );
+      })}
+      <line class="rule" x1="0" y1={LG - 20} x2={W} y2={LG - 20}></line>
+      {legend.map((l, i) => (
+        <>
+          <rect class={`k-${l.kind}`} x={lgX[i]} y={LG - 10} width="16" height="12" rx="3" />
+          <text class="lg" x={lgX[i] + 24} y={LG}>
+            {l.label[lang]}
+          </text>
+        </>
+      ))}
+    </svg>
+  </div>
+  <p class="hint">{t(lang, 'dgScroll')}</p>
+  <div class="sr-only">
+    {placed.map((p) => (
+      <>
+        <p>
+          {one(p.ln.label[lang])} ({t(lang, 'nTasks', { n: p.n })})
+        </p>
+        <ul>
+          {p.bars.map(({ k }) => (
+            <li>
+              {one(k.name[lang])} ({kindLabel.get(k.kind)}): {span(k.from, k.to)}
+            </li>
+          ))}
+        </ul>
+      </>
+    ))}
+    {notes.map((n) => (
+      <p>{one(n.text[lang])}</p>
+    ))}
+  </div>
+</figure>
+
+<style>
+  .gt {
+    container-type: inline-size;
+  }
+
+  /* Narrower than the drawing (≤640px column): scroll inside the figure, as diagrams do (5.24.4). */
+  .gt-scroll {
+    overflow-x: auto;
+  }
+
+  .gt-scroll:focus-visible {
+    outline: var(--focus-w) solid var(--focus);
+    outline-offset: var(--focus-offset);
+    border-radius: var(--radius-xs);
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    min-width: 640px;
+    height: auto;
+    font-family: inherit;
+  }
+
+  .hint {
+    display: none;
+    margin-top: var(--sp-2);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  @container (max-width: 639px) {
+    .hint {
+      display: block;
+    }
+  }
+
+  /* Time heads: years like zone names, halves like sublabels; half-year lines faint, year lines a step darker. */
+  .yr,
+  .ll {
+    fill: var(--text-2);
+    font-size: 12px;
+    font-weight: var(--fw-strong);
+  }
+
+  .hf,
+  .lc,
+  .nt {
+    fill: var(--text-3);
+    font-family: var(--font-meta);
+    font-size: 9px;
+  }
+
+  .lane {
+    fill: var(--bg);
+  }
+
+  .nm {
+    fill: var(--bg);
+  }
+
+  .gl {
+    stroke: var(--line);
+  }
+
+  .gl.yb {
+    stroke: var(--line-strong);
+  }
+
+  .bn {
+    fill: var(--text);
+    font-size: 11px;
+    font-weight: var(--fw-medium);
+  }
+
+  /* Task kinds, shared with TaskSelection and Quadrant: our PoCs the one accent. */
+  .k-own {
+    fill: var(--accent-soft);
+    stroke: var(--accent);
+    stroke-width: 1.2;
+  }
+
+  .k-poc {
+    fill: var(--surface);
+    stroke: var(--text-2);
+    stroke-width: 1.2;
+  }
+
+  .k-sol {
+    fill: var(--chip);
+    stroke: var(--line-strong);
+    stroke-width: 0.8;
+  }
+
+  .k-dev {
+    fill: var(--surface);
+    stroke: var(--text-3);
+    stroke-width: 1;
+    stroke-dasharray: 4 3;
+  }
+
+  .k-add {
+    fill: var(--bg);
+    stroke: var(--text-3);
+    stroke-width: 1;
+  }
+
+  .rule {
+    stroke: var(--line);
+  }
+
+  .lg {
+    fill: var(--text-2);
+    font-size: 12px;
+  }
+</style>

@@ -142,6 +142,7 @@ const ui = {
   cs_safety: { en: 'Safety', ko: '안전 체계' },
   cs_stack: { en: 'From command to torque', ko: '명령에서 토크까지' },
   cs_loop: { en: 'Learning loop', ko: '학습 루프' },
+  cs_roadmap: { en: 'Roadmap', ko: '로드맵' },
   cs_outcome: { en: 'Outcome', ko: '성과' },
   // Diagrams (5.24.4): hint shown when the diagram is wider than its column; the rest is screen-reader text.
   dgScroll: { en: 'Scroll sideways to see the whole diagram', ko: '옆으로 밀어 전체 보기' },
@@ -163,6 +164,13 @@ const ui = {
   resConfig: { en: 'Configuration', ko: '구성' },
   resUsed: { en: 'used', ko: '사용' },
   resUnused: { en: 'not used', ko: '미사용' },
+  // Roadmap figures (5.24.14–16): matrix axis ends, lane task counts, and screen-reader quarters.
+  mxLow: { en: 'Low', ko: '낮음' },
+  mxHigh: { en: 'High', ko: '높음' },
+  nTasks: { en: '{n} tasks', ko: '{n}건' },
+  quarter: { en: '{y} Q{q}', ko: '{y}년 {q}분기' },
+  half1: { en: 'H1', ko: '상반기' },
+  half2: { en: 'H2', ko: '하반기' },
   keyDecisions: { en: 'Key decisions', ko: '주요 결정' },
   decision: { en: 'Decision', ko: '결정' },
   why: { en: 'Why', ko: '이유' },

@@ -452,10 +452,143 @@ const repomap = z
         ctx.addIssue({ code: 'custom', message: `repomap: bad note range ${n.from}-${n.to}` });
   });
 
+// Roadmap figures (DESIGN.md 5.24.14–16) share task kinds: own = a task our team ran (the one accent),
+// poc / sol / dev = how a task is run (PoC, proven solution, development prep), add = a task we added.
+const TASK_KINDS = ['own', 'poc', 'sol', 'dev', 'add'] as const;
+const kindLegend = z.array(z.strictObject({ kind: z.enum(TASK_KINDS), label: localized })).min(1);
+
+// Task selection as unit grids (DESIGN.md 5.24.14): one panel per stage, one square per task.
+// grid: small cells, `of` in all with `picked` dark (split: the first n of a full grid a shade darker, e.g. round 1);
+// units: larger squares by kind, named ones listed one per row. step: label on the arrow to the next stage.
+const selection = z
+  .strictObject({
+    stages: z
+      .array(
+        z.strictObject({
+          count: z.number().int().positive(),
+          name: localized,
+          sub: localized,
+          grid: z
+            .strictObject({
+              of: z.number().int().positive().max(168),
+              picked: z.number().int().positive(),
+              split: z.number().int().positive().optional(),
+            })
+            .optional(),
+          units: z
+            .array(
+              z.strictObject({
+                kind: z.enum(TASK_KINDS),
+                n: z.number().int().positive().default(1),
+                name: localized.optional(),
+              }),
+            )
+            .optional(),
+          step: localized.optional(),
+        }),
+      )
+      .min(2)
+      .max(5),
+    legend: kindLegend,
+  })
+  .superRefine((s, ctx) => {
+    s.stages.forEach((st, i) => {
+      const at = `selection stage ${i + 1}`;
+      if (!st.grid === !st.units) ctx.addIssue({ code: 'custom', message: `${at}: grid or units` });
+      const n = st.grid ? st.grid.picked : (st.units ?? []).reduce((a, u) => a + u.n, 0);
+      if (n !== st.count)
+        ctx.addIssue({ code: 'custom', message: `${at}: count ${st.count} ≠ ${n}` });
+      if (st.grid && st.grid.picked > st.grid.of)
+        ctx.addIssue({ code: 'custom', message: `${at}: picked > of` });
+      const named = (st.units ?? []).filter((u) => u.name);
+      if (named.length && (named.length !== st.units!.length || named.length > 4))
+        ctx.addIssue({ code: 'custom', message: `${at}: name all units (≤4) or none` });
+      if (st.units && !named.length && n > 36)
+        ctx.addIssue({ code: 'custom', message: `${at}: ≤36 units` });
+      if (!st.step !== (i === s.stages.length - 1))
+        ctx.addIssue({ code: 'custom', message: `${at}: step on every stage but the last` });
+    });
+  });
+
+// Quadrant matrix (DESIGN.md 5.24.15): four named cells on two axes (x low→high left to right, y low→high
+// bottom to top), at most one focus cell. body is two lines split by \n; note is the mono line at the bottom (e.g. examples).
+const matrix = z
+  .strictObject({
+    x: localized,
+    y: localized,
+    cells: z
+      .array(
+        z.strictObject({
+          at: z.enum(['tl', 'tr', 'bl', 'br']),
+          name: localized,
+          count: z.number().int().nonnegative(),
+          body: localized,
+          note: localized,
+          focus: z.boolean().default(false),
+        }),
+      )
+      .length(4),
+  })
+  .superRefine((m, ctx) => {
+    if (new Set(m.cells.map((c) => c.at)).size !== 4)
+      ctx.addIssue({ code: 'custom', message: 'matrix: one cell per corner' });
+    if (m.cells.filter((c) => c.focus).length > 1)
+      ctx.addIssue({ code: 'custom', message: 'matrix: at most one focus cell' });
+  });
+
+// Roadmap Gantt (DESIGN.md 5.24.16): lanes over quarters from January of `start` (from/to in quarters, half steps);
+// the component packs bars into rows. notes: a short caption in a lane's empty stretch, at a quarter mark.
+const gantt = z
+  .strictObject({
+    start: z.number().int(),
+    years: z.number().int().min(1).max(3),
+    lanes: z
+      .array(z.strictObject({ id: text, label: localized }))
+      .min(1)
+      .max(6),
+    tasks: z
+      .array(
+        z.strictObject({
+          lane: text,
+          kind: z.enum(TASK_KINDS),
+          from: z.number().nonnegative().multipleOf(0.5),
+          to: z.number().positive().multipleOf(0.5),
+          name: localized,
+        }),
+      )
+      .min(1),
+    notes: z
+      .array(
+        z.strictObject({
+          lane: text,
+          at: z.number().nonnegative(),
+          anchor: z.enum(['start', 'end']).default('start'),
+          text: localized,
+        }),
+      )
+      .default([]),
+    legend: kindLegend,
+  })
+  .superRefine((g, ctx) => {
+    const ids = new Set(g.lanes.map((l) => l.id));
+    if (ids.size !== g.lanes.length)
+      ctx.addIssue({ code: 'custom', message: 'gantt: duplicate lane id' });
+    for (const k of g.tasks) {
+      if (!ids.has(k.lane))
+        ctx.addIssue({ code: 'custom', message: `gantt: unknown lane "${k.lane}"` });
+      if (k.from >= k.to || k.to > g.years * 4)
+        ctx.addIssue({ code: 'custom', message: `gantt: bad span for "${k.name.en}"` });
+    }
+    for (const n of g.notes)
+      if (!ids.has(n.lane) || n.at > g.years * 4)
+        ctx.addIssue({ code: 'custom', message: `gantt: bad note "${n.text.en}"` });
+  });
+
 const diagrams = defineCollection({
   loader: glob({ pattern: '*.yaml', base: './src/content/diagrams' }),
   schema: z.strictObject({
-    legend: DG_LEGEND, // default legend; a diagram's own `legend` replaces it
+    // Default legend; a diagram's own `legend` replaces it. A file with only charts (results, selection, gantt) has none.
+    legend: DG_LEGEND.default([]),
     problem: diagram.optional(), // above the Problem bullets (e.g. customer journey)
     approach: diagram.optional(), // below the Approach bullets (e.g. architecture versions)
     arch: diagram.optional(), // Architecture section; replaces the caseStudy.architecture table
@@ -467,6 +600,9 @@ const diagrams = defineCollection({
     episode: episode.optional(), // Learning loop section before Outcome (5.24.10)
     prompt: diagram.optional(), // System prompt section after Approach (5.24.3)
     repomap: repomap.optional(), // System prompt section, under the prompt diagram (5.24.13)
+    selection: selection.optional(), // task selection under the Approach bullets (5.24.14)
+    matrix: matrix.optional(), // under the selection (5.24.15)
+    gantt: gantt.optional(), // Roadmap section before Outcome (5.24.16)
   }),
 });
 

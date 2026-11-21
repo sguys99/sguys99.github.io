@@ -1,0 +1,227 @@
+---
+// Quadrant matrix (DESIGN.md 5.24.15; g16 시안 ② A): two axes, four named cells with a count, two lines of
+// description and a mono note; one focus cell carries the accent. Drawn from `matrix` in
+// src/content/diagrams/<slug>.yaml. The SVG is hidden from screen readers; the cells are in the .sr-only list.
+import type { CollectionEntry } from 'astro:content';
+import { t, type Lang } from '../i18n/ui';
+
+type Matrix = NonNullable<CollectionEntry<'diagrams'>['data']['matrix']>;
+
+interface Props {
+  lang: Lang;
+  data: Matrix;
+  label: string; // accessible name of the scroll region
+}
+
+const { lang, data, label } = Astro.props;
+const { x, y, cells } = data;
+
+// Cells 316 × 144 with a 16 gap, right of the y axis (x = 48) and above the x axis (y = 332).
+const W = 720;
+const H = 364;
+const X0 = 64;
+const Y0 = 24;
+const CW = 316;
+const CH = 144;
+const G = 16;
+const AX = 48;
+const AY = 332;
+const pos = { tl: [0, 0], tr: [1, 0], bl: [0, 1], br: [1, 1] } as const;
+const low = t(lang, 'mxLow');
+const high = t(lang, 'mxHigh');
+const where = (at: keyof typeof pos) =>
+  `${y[lang]} ${at[0] === 't' ? high : low}, ${x[lang]} ${at[1] === 'r' ? high : low}`;
+---
+
+<figure class="qd">
+  <div class="qd-scroll" tabindex="0" role="region" aria-label={label}>
+    <svg viewBox={`0 0 ${W} ${H}`} aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="qd-mk" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon class="mk" points="0 0, 8 3, 0 6"></polygon>
+        </marker>
+      </defs>
+      <path class="ax" d={`M${AX},${AY} L${AX},${Y0 - 4}`} marker-end="url(#qd-mk)" />
+      <path class="ax" d={`M${AX},${AY} L${W - 4},${AY}`} marker-end="url(#qd-mk)" />
+      <text class="an" x={AX + 8} y="12">
+        {y[lang]}
+      </text>
+      <text class="ae" x={AX - 8} y={Y0 + 12} text-anchor="end">
+        {high}
+      </text>
+      <text class="ae" x={AX - 8} y={AY - 12} text-anchor="end">
+        {low}
+      </text>
+      <text class="ae" x={X0} y={AY + 20}>
+        {low}
+      </text>
+      <text class="an" x={X0 + CW + G / 2} y={AY + 20} text-anchor="middle">
+        {x[lang]}
+      </text>
+      <text class="ae" x={W - 8} y={AY + 20} text-anchor="end">
+        {high}
+      </text>
+      {cells.map((c) => {
+        const [col, row] = pos[c.at];
+        const cx = X0 + col * (CW + G);
+        const cy = Y0 + row * (CH + G);
+        const empty = c.count === 0;
+        return (
+          <>
+            <rect
+              class:list={['cell', { focus: c.focus, empty }]}
+              x={cx}
+              y={cy}
+              width={CW}
+              height={CH}
+              rx="8"
+            />
+            <text class="nm" x={cx + 16} y={cy + 32}>
+              {c.name[lang]}
+            </text>
+            <text
+              class:list={['ct', { acc: c.focus, mut: empty }]}
+              x={cx + CW - 16}
+              y={cy + 36}
+              text-anchor="end"
+            >
+              {c.count}
+            </text>
+            {c.body[lang].split('\n').map((line, k) => (
+              <text class="bd" x={cx + 16} y={cy + 62 + k * 18}>
+                {line}
+              </text>
+            ))}
+            <text class="nt" x={cx + 16} y={cy + CH - 18}>
+              {c.note[lang]}
+            </text>
+          </>
+        );
+      })}
+    </svg>
+  </div>
+  <p class="hint">{t(lang, 'dgScroll')}</p>
+  <div class="sr-only">
+    <ul>
+      {cells.map((c) => (
+        <li>
+          {c.name[lang]} ({where(c.at)}): {t(lang, 'nTasks', { n: c.count })}.{' '}
+          {c.body[lang].replace(/\n/g, ' ')} {c.note[lang]}
+        </li>
+      ))}
+    </ul>
+  </div>
+</figure>
+
+<style>
+  .qd {
+    container-type: inline-size;
+  }
+
+  /* Narrower than the drawing (≤640px column): scroll inside the figure, as diagrams do (5.24.4). */
+  .qd-scroll {
+    overflow-x: auto;
+  }
+
+  .qd-scroll:focus-visible {
+    outline: var(--focus-w) solid var(--focus);
+    outline-offset: var(--focus-offset);
+    border-radius: var(--radius-xs);
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    min-width: 640px;
+    height: auto;
+    font-family: inherit;
+  }
+
+  .hint {
+    display: none;
+    margin-top: var(--sp-2);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  @container (max-width: 639px) {
+    .hint {
+      display: block;
+    }
+  }
+
+  .ax {
+    fill: none;
+    stroke: var(--text-2);
+    stroke-width: 1.2;
+  }
+
+  .mk {
+    fill: var(--text-2);
+  }
+
+  /* Axis names and ends: mono sublabels; names a step darker. */
+  .an,
+  .ae {
+    font-family: var(--font-meta);
+    font-size: 9px;
+  }
+
+  .an {
+    fill: var(--text-2);
+  }
+
+  .ae {
+    fill: var(--text-3);
+  }
+
+  /* Cells: quiet wash; the focus cell the one accent; an empty cell only a dotted outline. */
+  .cell {
+    fill: var(--bg);
+    stroke: var(--line-strong);
+    stroke-width: 0.8;
+  }
+
+  .cell.focus {
+    fill: var(--accent-soft);
+    stroke: var(--accent);
+    stroke-width: 1.2;
+  }
+
+  .cell.empty {
+    fill: none;
+    stroke-dasharray: 2 3;
+  }
+
+  .nm {
+    fill: var(--text);
+    font-size: 16px;
+    font-weight: var(--fw-strong);
+  }
+
+  .ct {
+    fill: var(--text);
+    font-size: 28px;
+    font-weight: var(--fw-strong);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ct.acc {
+    fill: var(--accent);
+  }
+
+  .ct.mut {
+    fill: var(--text-3);
+  }
+
+  .bd {
+    fill: var(--text-2);
+    font-size: 12px;
+  }
+
+  .nt {
+    fill: var(--text-3);
+    font-family: var(--font-meta);
+    font-size: 9px;
+  }
+</style>

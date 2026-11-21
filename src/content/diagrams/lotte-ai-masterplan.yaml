@@ -1,0 +1,295 @@
+# AI 과제 추진 로드맵 케이스 스터디 그림 (DESIGN.md 5.24.14–16, 11.17). 시안: docs/design-drafts/g16/ (① B, ② A, ③ C).
+# 자료: docs/project-references/ai-roadmap/ — AI 과제 추진 Roadmap(2024-05) 5·6·7·9·10장, 수행사례(2025-01) 5장.
+# 과제명은 일반 명칭(공장·제품·부서명, 재무 효과 제외). 막대 위치는 로드맵 장표(10장) 도형 좌표를 분기로 환산(반 분기 단위).
+# LLM 플랫폼 PoC는 2024-05 로드맵 26건에 없고 이후 추가된 과제라 선별 마지막 단의 부제에서 구분한다.
+
+selection:
+  stages:
+    - count: 163
+      name: { en: Ideas collected, ko: 자체 발굴 과제 }
+      sub: { en: 56 + 107 in 2 rounds, ko: 1차 56 + 2차 107 }
+      grid: { of: 163, picked: 163, split: 56 }
+      step: { en: score, ko: 평가 }
+    - count: 24
+      name: { en: Shortlisted, ko: 우선순위 선별 }
+      sub: { en: top 15% by score, ko: 평가 상위 15% }
+      grid: { of: 163, picked: 24 }
+      step: { en: matrix, ko: 분류 }
+    - count: 24
+      name: { en: Classified, ko: 추진 방식 분류 }
+      sub: { en: impact × maturity, ko: 영향도 × 성숙도 }
+      units:
+        - { kind: poc, n: 12 }
+        - { kind: sol, n: 8 }
+        - { kind: dev, n: 4 }
+      step: { en: plan, ko: 일정 }
+    - count: 26
+      name: { en: On the roadmap, ko: 로드맵 반영 }
+      sub: { en: +2 we proposed, ko: +2 수행팀 제안 }
+      units:
+        - { kind: poc, n: 12 }
+        - { kind: sol, n: 8 }
+        - { kind: dev, n: 4 }
+        - { kind: add, n: 2 }
+      step: { en: run, ko: 수행 }
+    - count: 3
+      name: { en: PoCs delivered, ko: PoC 수행 }
+      sub: { en: 2 planned + 1 added, ko: 계획 2 + 추가 1 }
+      units:
+        - { kind: own, name: { en: Green mixing, ko: 그린소재 믹싱 } }
+        - { kind: own, name: { en: Pulp price, ko: 면 펄프 단가 } }
+        - { kind: own, name: { en: LLM platform, ko: LLM 플랫폼 } }
+  legend:
+    - { kind: poc, label: { en: PoC, ko: PoC 수행 } }
+    - { kind: sol, label: { en: Proven solution, ko: 솔루션 도입 } }
+    - { kind: dev, label: { en: Development prep, ko: 개발 준비 } }
+    - { kind: add, label: { en: Task we added, ko: 수행팀 제안 과제 } }
+    - { kind: own, label: { en: PoC our team ran, ko: 수행팀 PoC } }
+
+# 자료 6장 배치: 가로 = 사업 영향도, 세로 = 기술 성숙도. 건수는 7장(상위 24건 분류 결과).
+matrix:
+  x: { en: Business impact, ko: 사업 영향도 }
+  y: { en: Technology maturity, ko: 기술 성숙도 }
+  cells:
+    - at: tl
+      name: { en: Adopt a proven solution, ko: 검증된 솔루션 도입 }
+      count: 8
+      body:
+        en: "Easy to do, but lower impact.\nBring in a commercial tool for early wins."
+        ko: "수행은 쉽지만 영향이 작은 영역.\n상용 솔루션을 도입해 작은 성공부터."
+      note: { en: 'e.g. smart CCTV, drawing recognition', ko: '예: 지능형 CCTV, 도면 인식' }
+    - at: tr
+      focus: true
+      name: { en: Run a PoC first, ko: PoC로 먼저 검증 }
+      count: 12
+      body:
+        en: "High impact, with proven use cases.\nTest the value before building the system."
+        ko: "영향이 크고 적용 사례가 있는 영역.\n시스템 구축 전에 효과를 먼저 검증."
+      note:
+        {
+          en: 'e.g. mixing optimization, cotton-pulp price',
+          ko: '예: 그린소재 믹싱 최적화, 면 펄프 단가 예측',
+        }
+    - at: bl
+      name: { en: Monitor the technology, ko: 기술 동향 모니터링 }
+      count: 0
+      body:
+        en: "Lower impact and immature technology.\nWatch for an opening."
+        ko: "영향도 작고 기술도 성숙하지 않은 영역.\n동향을 지켜보며 기회를 포착."
+      note: { en: No task fell here, ko: 해당 과제 없음 }
+    - at: br
+      name: { en: 'Prepare, then build', ko: 기반을 갖춘 뒤 추진 }
+      count: 4
+      body:
+        en: "High impact, but the groundwork is missing.\nReady the data and infrastructure first."
+        ko: "영향은 크지만 수행 기반이 부족한 영역.\n데이터와 인프라를 먼저 준비."
+      note:
+        {
+          en: 'e.g. demand forecast, profit simulation',
+          ko: '예: 고객사 수요 예측, 손익 시뮬레이션',
+        }
+
+# 레인 = 추진 방식(시안 ③ C). from/to: 2024년 1분기 시작 = 0, 분기 단위.
+gantt:
+  start: 2024
+  years: 3
+  lanes:
+    - { id: sol, label: { en: "Proven\nsolution", ko: "솔루션\n도입" } }
+    - { id: poc, label: { en: PoC, ko: PoC 수행 } }
+    - { id: data, label: { en: "Data and\ngovernance", ko: "데이터·\n거버넌스" } }
+    - { id: dev, label: { en: "Development\nprep", ko: "개발\n준비" } }
+  tasks:
+    # 솔루션 도입 8건
+    - {
+        lane: sol,
+        kind: sol,
+        from: 0,
+        to: 4,
+        name: { en: Forklift person detection, ko: 지게차 인체 감지 카메라 },
+      }
+    - { lane: sol, kind: sol, from: 2, to: 4, name: { en: Smart CCTV, ko: 지능형 CCTV } }
+    - {
+        lane: sol,
+        kind: sol,
+        from: 2,
+        to: 3.5,
+        name: { en: "Driverless\nforklift", ko: "자율주행\n지게차" },
+      }
+    - {
+        lane: sol,
+        kind: sol,
+        from: 2,
+        to: 3.5,
+        name: { en: "Survey\ninsights", ko: "고객 조사\n분석" },
+      }
+    - {
+        lane: sol,
+        kind: sol,
+        from: 3.5,
+        to: 5.5,
+        name: { en: "Construction\ncost estimate", ko: 공사비 예측 },
+      }
+    - { lane: sol, kind: sol, from: 4, to: 6, name: { en: "Drawing\nrecognition", ko: 도면 인식 } }
+    - {
+        lane: sol,
+        kind: sol,
+        from: 4,
+        to: 6,
+        name: { en: "Patentability\ncheck", ko: 특허성 검증 },
+      }
+    - {
+        lane: sol,
+        kind: sol,
+        from: 6,
+        to: 8,
+        name: { en: "Research\ntrend search", ko: "학술 동향\n검색" },
+      }
+    # PoC 12건 (수행팀 PoC 2건 포함)
+    - {
+        lane: poc,
+        kind: own,
+        from: 0,
+        to: 2,
+        name: { en: "Green-material\nmixing", ko: "그린소재\n믹싱 최적화" },
+      }
+    - {
+        lane: poc,
+        kind: poc,
+        from: 0,
+        to: 2,
+        name: { en: "Predictive\nmaintenance", ko: 설비 예지보전 },
+      }
+    - {
+        lane: poc,
+        kind: own,
+        from: 1,
+        to: 3,
+        name: { en: "Cotton-pulp\nprice forecast", ko: "면 펄프\n단가 예측" },
+      }
+    - {
+        lane: poc,
+        kind: poc,
+        from: 2,
+        to: 4,
+        name: { en: "Column\nautomation", ko: "칼럼 운전\n자동화" },
+      }
+    - {
+        lane: poc,
+        kind: poc,
+        from: 3,
+        to: 5,
+        name: { en: "Raw-material\nprice forecast", ko: "주원료\n단가 예측" },
+      }
+    - {
+        lane: poc,
+        kind: poc,
+        from: 3.5,
+        to: 5.5,
+        name: { en: "Visual quality\ngrading", ko: "정성 품질\n판정" },
+      }
+    - {
+        lane: poc,
+        kind: poc,
+        from: 4,
+        to: 6,
+        name: { en: "Dosing\nautomation", ko: "케미컬 조제\n자동화" },
+      }
+    - {
+        lane: poc,
+        kind: poc,
+        from: 5,
+        to: 7,
+        name: { en: "Wood-pulp\nsupply chain", ko: "목재 펄프\n공급망 관리" },
+      }
+    - {
+        lane: poc,
+        kind: poc,
+        from: 5.5,
+        to: 7.5,
+        name: { en: "Viscosity\nprediction", ko: "반제품\n점도 예측" },
+      }
+    - {
+        lane: poc,
+        kind: poc,
+        from: 6,
+        to: 8,
+        name: { en: "Water yield\noptimization", ko: "초순수 채수\n최적화" },
+      }
+    - {
+        lane: poc,
+        kind: poc,
+        from: 7.5,
+        to: 9.5,
+        name: { en: "Reaction-time\nsetting", ko: "반응 시간\n자동 설정" },
+      }
+    - { lane: poc, kind: poc, from: 8, to: 10, name: { en: "Motor\ndiagnostics", ko: 모터 진단 } }
+    # 수행팀 제안 2건
+    - {
+        lane: data,
+        kind: add,
+        from: 2,
+        to: 4,
+        name: { en: "Data\ngovernance", ko: "데이터\n거버넌스" },
+      }
+    - {
+        lane: data,
+        kind: add,
+        from: 4,
+        to: 8,
+        name: { en: Data lake and platform, ko: 데이터 레이크·분석 플랫폼 },
+      }
+    # 개발 준비 4건
+    - {
+        lane: dev,
+        kind: dev,
+        from: 5.5,
+        to: 9.5,
+        name: { en: Profit by utilization rate, ko: 가동률별 손익 시뮬레이션 },
+      }
+    - {
+        lane: dev,
+        kind: dev,
+        from: 6,
+        to: 8,
+        name: { en: "Market news\ndigest", ko: "시장 동향\n요약 메일링" },
+      }
+    - {
+        lane: dev,
+        kind: dev,
+        from: 7,
+        to: 9,
+        name: { en: "Demand\nforecast", ko: "고객사\n수요 예측" },
+      }
+    - {
+        lane: dev,
+        kind: dev,
+        from: 8,
+        to: 10,
+        name: { en: "Competitor\nmonitoring", ko: "고객·기술\n동향 모니터링" },
+      }
+  notes:
+    - lane: sol
+      at: 8
+      text:
+        {
+          en: "Proven solutions go\nfirst for early wins",
+          ko: "검증된 솔루션을\n앞에 배치해 빠른 성과",
+        }
+    - lane: data
+      at: 8
+      text:
+        { en: "Data platform comes\nbefore development", ko: "데이터 플랫폼을\n개발 과제보다 먼저" }
+    - lane: dev
+      at: 5.5
+      anchor: end
+      text:
+        {
+          en: "Starts once data and\ninfrastructure are ready",
+          ko: "인프라·거버넌스를\n갖춘 뒤 착수",
+        }
+  legend:
+    - { kind: own, label: { en: PoC our team ran, ko: 수행팀 PoC } }
+    - { kind: poc, label: { en: PoC, ko: PoC 수행 } }
+    - { kind: sol, label: { en: Proven solution, ko: 솔루션 도입 } }
+    - { kind: dev, label: { en: Development prep, ko: 개발 준비 } }
+    - { kind: add, label: { en: Task we added, ko: 수행팀 제안 과제 } }

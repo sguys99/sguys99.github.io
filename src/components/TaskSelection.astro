@@ -1,0 +1,313 @@
+---
+// Task selection as unit grids (DESIGN.md 5.24.14; g16 시안 ① B): one panel per stage, one square per task,
+// arrows between stages. Drawn from `selection` in src/content/diagrams/<slug>.yaml. The SVG is hidden from
+// screen readers; the same stages are in the .sr-only list below it.
+import type { CollectionEntry } from 'astro:content';
+import { t, type Lang } from '../i18n/ui';
+
+type Selection = NonNullable<CollectionEntry<'diagrams'>['data']['selection']>;
+
+interface Props {
+  lang: Lang;
+  data: Selection;
+  label: string; // accessible name of the scroll region
+}
+
+const { lang, data, label } = Astro.props;
+const { stages, legend } = data;
+
+// Panels 112 wide across 720; small grid 14 × 12 cells (8 pitch), units 6 a row (16 pitch), named units 24 apart.
+const W = 720;
+const PW = 112;
+const GAP = (W - stages.length * PW) / (stages.length - 1);
+const px = (i: number) => i * (PW + GAP);
+const GY = 76;
+const AY = GY + 44;
+const H = GY + 96 + 64;
+const LG = H - 12;
+
+// Which cells of a partial grid are dark is arbitrary (not a score): a fixed-seed pick, so builds are stable.
+function pick(of: number, n: number) {
+  const set = new Set<number>();
+  let seed = 7;
+  while (set.size < n) {
+    seed = (seed * 1103515245 + 12345) % 2147483648;
+    set.add(seed % of);
+  }
+  return set;
+}
+
+const flat = (st: (typeof stages)[number]) =>
+  (st.units ?? []).flatMap((u) => Array(u.n).fill(u.kind));
+const kindLabel = new Map(legend.map((l) => [l.kind, l.label[lang]]));
+// Legend items laid out by label width (12px: Hangul 1em, Latin about 0.56em) so long labels never collide.
+const est = (s: string) => [...s].reduce((n, c) => n + (/[ㄱ-힝]/.test(c) ? 12 : 6.8), 0);
+const lgX = legend.reduce<number[]>(
+  (xs, l, i) => [...xs, i ? xs[i - 1] + 24 + est(legend[i - 1].label[lang]) + 28 : 0],
+  [],
+);
+const lw = (s: string) => [...s].reduce((n, c) => n + (/[ㄱ-힝]/.test(c) ? 8 : 4.8), 0) + 8;
+const unitsText = (st: (typeof stages)[number]) =>
+  (st.units ?? [])
+    .map((u) => (u.name ? u.name[lang] : `${kindLabel.get(u.kind)} ${u.n}`))
+    .join(', ');
+---
+
+<figure class="ts">
+  <div class="ts-scroll" tabindex="0" role="region" aria-label={label}>
+    <svg viewBox={`0 0 ${W} ${H}`} aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ts-mk" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon class="mk" points="0 0, 8 3, 0 6"></polygon>
+        </marker>
+      </defs>
+      {stages.slice(0, -1).map((st, i) => {
+        const x1 = px(i) + PW + 6;
+        const x2 = px(i + 1) - 6;
+        const mx = (x1 + x2) / 2;
+        const w = lw(st.step![lang]);
+        return (
+          <>
+            <path class="ln" d={`M${x1},${AY} L${x2},${AY}`} marker-end="url(#ts-mk)" />
+            <rect class="em" x={mx - w / 2} y={AY - 16} width={w} height="11" rx="2" />
+            <text class="el" x={mx} y={AY - 8} text-anchor="middle">
+              {st.step![lang]}
+            </text>
+          </>
+        );
+      })}
+      {stages.map((st, i) => {
+        const x = px(i);
+        const own = !!st.units?.every((u) => u.kind === 'own');
+        const named = !!st.units?.some((u) => u.name);
+        const dark =
+          st.grid && st.grid.picked < st.grid.of ? pick(st.grid.of, st.grid.picked) : null;
+        return (
+          <>
+            <text class:list={['ct', { acc: own }]} x={x} y="28">
+              {st.count}
+            </text>
+            <text class="nm" x={x} y="48">
+              {st.name[lang]}
+            </text>
+            <text class="sb" x={x} y="62">
+              {st.sub[lang]}
+            </text>
+            {st.grid &&
+              Array.from({ length: st.grid.of }, (_, k) => (
+                <rect
+                  class:list={[
+                    'cell',
+                    dark
+                      ? dark.has(k)
+                        ? 'on'
+                        : 'off'
+                      : st.grid!.split && k >= st.grid!.split
+                        ? 'later'
+                        : 'all',
+                  ]}
+                  x={x + (k % 14) * 8}
+                  y={GY + Math.floor(k / 14) * 8}
+                  width="6"
+                  height="6"
+                  rx="1"
+                />
+              ))}
+            {st.units &&
+              (named
+                ? st.units.map((u, k) => (
+                    <>
+                      <rect
+                        class={`k-${u.kind}`}
+                        x={x}
+                        y={GY + k * 24}
+                        width="12"
+                        height="12"
+                        rx="2"
+                      />
+                      <text class="sb dk" x={x + 20} y={GY + k * 24 + 10}>
+                        {u.name![lang]}
+                      </text>
+                    </>
+                  ))
+                : flat(st).map((kind, k) => (
+                    <rect
+                      class={`k-${kind}`}
+                      x={x + (k % 6) * 16}
+                      y={GY + Math.floor(k / 6) * 16}
+                      width="12"
+                      height="12"
+                      rx="2"
+                    />
+                  )))}
+          </>
+        );
+      })}
+      <line class="rule" x1="0" y1={LG - 20} x2={W} y2={LG - 20}></line>
+      {legend.map((l, i) => (
+        <>
+          <rect class={`k-${l.kind}`} x={lgX[i]} y={LG - 10} width="16" height="12" rx="3" />
+          <text class="lg" x={lgX[i] + 24} y={LG}>
+            {l.label[lang]}
+          </text>
+        </>
+      ))}
+    </svg>
+  </div>
+  <p class="hint">{t(lang, 'dgScroll')}</p>
+  <div class="sr-only">
+    <ol>
+      {stages.map((st) => (
+        <li>
+          {st.name[lang]}: {st.count} ({st.sub[lang]}){st.units && `. ${unitsText(st)}`}
+        </li>
+      ))}
+    </ol>
+  </div>
+</figure>
+
+<style>
+  .ts {
+    container-type: inline-size;
+  }
+
+  /* Narrower than the drawing (≤640px column): scroll inside the figure, as diagrams do (5.24.4). */
+  .ts-scroll {
+    overflow-x: auto;
+  }
+
+  .ts-scroll:focus-visible {
+    outline: var(--focus-w) solid var(--focus);
+    outline-offset: var(--focus-offset);
+    border-radius: var(--radius-xs);
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    min-width: 640px;
+    height: auto;
+    font-family: inherit;
+  }
+
+  .hint {
+    display: none;
+    margin-top: var(--sp-2);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  @container (max-width: 639px) {
+    .hint {
+      display: block;
+    }
+  }
+
+  /* Stage head: the count is the figure's numeral, the name a node name, the sub a mono sublabel. */
+  .ct {
+    fill: var(--text);
+    font-size: 24px;
+    font-weight: var(--fw-strong);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ct.acc {
+    fill: var(--accent);
+  }
+
+  .nm {
+    fill: var(--text);
+    font-size: 12px;
+    font-weight: var(--fw-strong);
+  }
+
+  .sb {
+    fill: var(--text-3);
+    font-family: var(--font-meta);
+    font-size: 9px;
+  }
+
+  .sb.dk {
+    fill: var(--text-2);
+  }
+
+  .el {
+    fill: var(--text-3);
+    font-family: var(--font-meta);
+    font-size: 8px;
+    letter-spacing: 0.06em;
+  }
+
+  .em {
+    fill: var(--surface);
+  }
+
+  .ln {
+    fill: none;
+    stroke: var(--text-3);
+    stroke-width: 1.2;
+  }
+
+  .mk {
+    fill: var(--text-3);
+  }
+
+  /* Small cells: the full pool (round 1 a shade darker), then the picked few dark on a faint pool. */
+  .cell.all {
+    fill: var(--line-strong);
+  }
+
+  .cell.later {
+    fill: var(--line-strong);
+    opacity: 0.6;
+  }
+
+  .cell.off {
+    fill: var(--line);
+  }
+
+  .cell.on {
+    fill: var(--text-2);
+  }
+
+  /* Task kinds, shared with Quadrant and RoadmapGantt: our PoCs the one accent. */
+  .k-own {
+    fill: var(--accent-soft);
+    stroke: var(--accent);
+    stroke-width: 1.2;
+  }
+
+  .k-poc {
+    fill: var(--surface);
+    stroke: var(--text-2);
+    stroke-width: 1.2;
+  }
+
+  .k-sol {
+    fill: var(--chip);
+    stroke: var(--line-strong);
+    stroke-width: 0.8;
+  }
+
+  .k-dev {
+    fill: var(--surface);
+    stroke: var(--text-3);
+    stroke-width: 1;
+    stroke-dasharray: 4 3;
+  }
+
+  .k-add {
+    fill: var(--bg);
+    stroke: var(--text-3);
+    stroke-width: 1;
+  }
+
+  .rule {
+    stroke: var(--line);
+  }
+
+  .lg {
+    fill: var(--text-2);
+    font-size: 12px;
+  }
+</style>
