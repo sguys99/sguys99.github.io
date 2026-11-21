@@ -1,7 +1,7 @@
 # SCM 케이스 스터디 다이어그램 (DESIGN.md 5.24.4, 11.10).
 # arch: 서비스 구성도, flow: 서비스 흐름도. 출처는 프로젝트 service flow 자료(구성도, 흐름도 G-Matrix 2.0판).
 # 고객 내부 명칭(시스템·플랫폼·제품명)과 인프라 사양은 일반 명칭으로 바꿨다. 모델은 사이트 확정 기준(Qwen 8B 파인튜닝 2역할, Llama 3.1 70B).
-# 좌표는 SVG 단위(4px 격자). 연결선 d는 직각 + 모서리 반지름 8.
+# 좌표는 SVG 단위(4px 격자). 연결선 d는 직각 + 모서리 반지름 8, 한 변에서 나가는 선은 연결 지점을 따로 두고 겹치지 않게 (diagram-design 규칙 3·4).
 
 legend:
   - kind: sllm
@@ -83,7 +83,7 @@ arch:
       label: { en: Data query, ko: 데이터 조회 }
       sub: { en: Text-to-SQL, ko: Text-to-SQL }
       x: 200
-      y: 192
+      y: 196
       w: 104
       h: 44
     - id: advisor
@@ -91,14 +91,14 @@ arch:
       label: { en: AI Advisor, ko: AI Advisor }
       sub: { en: work support, ko: 업무 지원 }
       x: 312
-      y: 192
+      y: 196
       w: 104
       h: 44
     - id: external
       kind: plain
       label: { en: "External\ninformation", ko: 외부 정보 조회 }
       x: 424
-      y: 192
+      y: 196
       w: 104
       h: 44
     - {
@@ -182,18 +182,20 @@ arch:
     - { from: rewrite, to: router, d: 'M348,140 H380' }
     - from: router
       to: data
-      d: 'M454,156 V164 Q454,172 446,172 H260 Q252,172 252,180 V192'
-      label: { text: { en: A2A, ko: A2A }, x: 492, y: 176 }
-    - { from: router, to: advisor, d: 'M364,172 V192' }
-    - { from: router, to: external, d: 'M454,172 H468 Q476,172 476,180 V192' }
-    - { from: data, to: layout, d: 'M252,236 V252' }
-    - { from: advisor, to: layout, d: 'M364,236 V252' }
-    - { from: external, to: layout, d: 'M476,236 V252' }
+      d: 'M392,156 Q392,164 384,164 H260 Q252,164 252,172 V196'
+    - { from: router, to: advisor, d: 'M416,156 V168 Q416,176 408,176 H372 Q364,176 364,184 V196' }
+    - from: router
+      to: external
+      d: 'M476,156 V196'
+      label: { text: { en: A2A, ko: A2A }, x: 488, y: 180, anchor: start }
+    - { from: data, to: layout, d: 'M252,240 V252' }
+    - { from: advisor, to: layout, d: 'M364,240 V252' }
+    - { from: external, to: layout, d: 'M476,240 V252' }
     - { from: layout, to: bi, d: 'M200,268 H152' }
     - from: bi
       to: scmdb
       d: 'M76,292 V336'
-      label: { text: { en: SQL, ko: SQL }, x: 84, y: 318 }
+      label: { text: { en: SQL, ko: SQL }, x: 88, y: 318, anchor: start }
     - { from: bi, to: portal, d: 'M116,244 V160', style: back }
     - { from: pipeline, to: vdb, d: 'M430,376 V356' }
     - { from: train, to: infer, d: 'M644,172 V196' }
@@ -391,9 +393,8 @@ flow:
     - { from: embed, to: router, d: 'M520,60 H564' }
     - from: router
       to: view
-      d: 'M636,80 V108 Q636,116 628,116 H268 Q260,116 260,124 V176'
-      label: { text: { en: A2A, ko: A2A }, x: 348, y: 105, mask: true }
-    - { from: router, to: retrieve, d: 'M448,116 V176' }
+      d: 'M588,80 V96 Q588,104 580,104 H268 Q260,104 260,112 V176'
+    - { from: router, to: retrieve, d: 'M612,80 V108 Q612,116 604,116 H456 Q448,116 448,124 V176' }
     - { from: router, to: search, d: 'M636,80 V176' }
     - { from: view, to: entity, d: 'M260,216 V232' }
     - { from: entity, to: code, d: 'M260,272 V288' }

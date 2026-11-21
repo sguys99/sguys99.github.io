@@ -176,7 +176,7 @@ const diagram = z
               text: localized,
               x: z.number(),
               y: z.number(),
-              mask: z.boolean().default(false),
+              anchor: z.enum(['start', 'middle']).default('middle'), // every edge label sits on a mask
             })
             .optional(),
         }),

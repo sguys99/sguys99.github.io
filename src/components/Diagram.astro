@@ -25,6 +25,15 @@ type Box = { x: number; y: number; w: number; h: number };
 const within = (a: Box, b: Box) =>
   a !== b && a.x >= b.x && a.y >= b.y && a.x + a.w <= b.x + b.w && a.y + a.h <= b.y + b.h;
 const nested = new Set(zones.filter((z) => zones.some((o) => within(z, o))).map((z) => z.id));
+// Edge labels (8px mono, ~4.8px per Latin glyph) always sit on a mask matching what is under them:
+// the zone wash when the label is inside an outer zone, else the card surface.
+const lw = (s: string) => [...s].reduce((n, c) => n + (/[ㄱ-힝]/.test(c) ? 8 : 4.8), 0);
+const onWash = (p: { x: number; y: number }) => {
+  const z = zones
+    .filter((z) => p.x >= z.x && p.y >= z.y && p.x <= z.x + z.w && p.y <= z.y + z.h)
+    .sort((a, b) => a.w * a.h - b.w * b.h)[0];
+  return !!z && !nested.has(z.id);
+};
 
 // Legend strip under the drawing: hairline, then one item per kind.
 const LG = H - 12;
@@ -121,23 +130,25 @@ const linkText = (e: Spec['edges'][number]) =>
         })}
       {edges
         .filter((e) => e.label)
-        .map(({ label: l }) => (
-          <>
-            {l!.mask && (
+        .map(({ label: l }) => {
+          const w = lw(l!.text[lang]) + 8;
+          const x = l!.anchor === 'start' ? l!.x - 4 : l!.x - w / 2;
+          return (
+            <>
               <rect
-                class="em"
-                x={l!.x - est(l!.text[lang]) / 2 - 4}
-                y={l!.y - 9}
-                width={est(l!.text[lang]) + 8}
-                height="12"
+                class:list={['em', { wash: onWash(l!) }]}
+                x={x}
+                y={l!.y - 8}
+                width={w}
+                height="11"
                 rx="2"
               />
-            )}
-            <text class="el" x={l!.x} y={l!.y} text-anchor={l!.mask ? 'middle' : 'start'}>
-              {l!.text[lang]}
-            </text>
-          </>
-        ))}
+              <text class="el" x={l!.x} y={l!.y} text-anchor={l!.anchor}>
+                {l!.text[lang]}
+              </text>
+            </>
+          );
+        })}
       {nodes.map((n) => {
         const ls = lines(n.label[lang]);
         const rows = ls.length + (n.sub ? 1 : 0);
@@ -264,17 +275,26 @@ const linkText = (e: Spec['edges'][number]) =>
     stroke-dasharray: 4 3;
   }
 
+  /* Sizes follow diagram-design: name 12px semibold, sublabel 9px mono, edge label 8px mono. */
   .nt {
     fill: var(--text);
     font-size: 12px;
-    font-weight: var(--fw-medium);
+    font-weight: var(--fw-strong);
   }
 
   .ns,
   .el {
     fill: var(--text-3);
-    font-size: 10px;
     font-family: var(--font-meta);
+  }
+
+  .ns {
+    font-size: 9px;
+  }
+
+  .el {
+    font-size: 8px;
+    letter-spacing: 0.06em;
   }
 
   .zone {
@@ -303,6 +323,10 @@ const linkText = (e: Spec['edges'][number]) =>
 
   .em {
     fill: var(--surface);
+  }
+
+  .em.wash {
+    fill: var(--bg);
   }
 
   .ln {
