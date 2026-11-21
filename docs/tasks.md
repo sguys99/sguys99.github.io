@@ -57,7 +57,7 @@
 - [ ] 1.3.2 **[확인]** 국문 전체 검토
 - [ ] 1.5.2 **[확인]** 대표 프로젝트별 질문 (배경, 문제, 본인 역할, 접근, 성과, 공개 가능 범위). 자료에 없는 수치는 만들지 않음
   - 답변(2026-11-09): SCM SQL 정확도 "95% 이상 달성" 표기 / SCM 모델은 경력기술서 기준(Text-to-SQL Qwen 8B 파인튜닝 + 생성 Llama 3.1 70B) / 공개 범위: 성과 수치와 개념 아키텍처는 싣고, 고객 내부 용어·인프라 사양·운영 정책은 일반화 / 그린소재 재고 조합 최적화는 자료 대기(자리만) / GenP·도슨트는 진행 중이라 성과 없이 작성
-- [ ] 1.5.3 케이스 스터디 영문·국문 작성 (Context → Problem → My role → Approach & Architecture → Stack → Outcome) — 5건 작성(`caseStudy` 필드), 그린소재 재고 조합 최적화만 자료 대기
+- [ ] 1.5.3 케이스 스터디 영문·국문 작성 (Context → Problem → My role → Approach & Architecture → Stack → Outcome) — 6건 작성(`caseStudy` 필드). 그린소재 재고 조합 최적화는 2026-11-21 자료 받아 작성(11.14)
 - [ ] 1.5.6 **[확인]** 케이스 스터디, 개인 프로젝트 문안 검토 — 사실 확인 3건 모두 맞음(2026-11-09), 개인 프로젝트 oathkeeper·lunchmate 추가와 데모 링크 3건 추가 요청. 문안 전체 검토는 1.2.11·1.3.2와 함께 나중에. 개인 프로젝트 `in-progress` 국문은 "진행 중"으로 통일(사용자 결정 2026-11-11, DESIGN.md 11.8)
 
 ---
@@ -67,6 +67,7 @@
 - [x] SCM 케이스 스터디 다이어그램 (2026-11-21, DESIGN.md 11.10): 시안 3개(g9) 중 A 회로도 선택. Architecture에 서비스 구성도, 새 섹션 Service flow에 흐름도. 공통 컴포넌트 `Diagram.astro` + `src/content/diagrams/<slug>.yaml`
 - [x] 고객 상담 어시스턴트 케이스 스터디 다이어그램 (2026-11-21, DESIGN.md 11.11): 시안 g11에서 여정 B·진화 A·아키텍처 B·흐름 A 조합. 영문 제목 "AI Assistant for Customer Service". `Diagram.astro`에 `focus`·`new` 종류, 단계 띠·경로·접점·고충 말풍선·영역 메모, 자리 `problem`·`approach` 추가
 - [x] 원자재 가격 예측 케이스 스터디 다이어그램 (2026-11-21, DESIGN.md 11.12): 시안 g10에서 아키텍처 A·서비스 흐름 C·실험 B 조합. 실험 결과 차트 `ResultsChart.astro` + `results` 필드(5.24.6). 영문 제목 "Raw-Material Price Forecasting and Market Dashboard", 결정 2 벤치마크 문구를 자료에 맞춤
+- [x] 그린소재 재고 조합 최적화 케이스 스터디 + 다이어그램 (2026-11-21, DESIGN.md 11.14): 자료 3건으로 `caseStudy` 영문·국문 작성(기간 2024-03 – 09, Lead, 파일럿 완료). 시안 g12에서 Before → After A(Problem)·아키텍처 A·서비스 흐름 A. `Diagram.astro`에 `step`·`decision` 종류 추가
 - [ ] 다른 케이스 스터디 다이어그램 (genp-humanoid, docent-humanoid): 건별 자료 확인 후 `src/content/diagrams/<slug>.yaml` 추가. 없으면 지금처럼 표
 - [ ] 국문 글꼴 빌드 서브셋 검토 (국문 홈 Pretendard 분할 441KB, 7.5)
 - [ ] WebKit 글꼴 중복 요청: 영문 페이지에서 Geist를 preload(cors)와 `@font-face`로 두 번 받음(24.5KB), Pretendard 라틴 분할 1개 추가 요청(원인 미확인) (7.6)

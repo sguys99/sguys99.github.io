@@ -211,7 +211,13 @@ const linkText = (e: Spec['edges'][number]) =>
         const cx = n.x + n.w / 2;
         return (
           <g class={`k-${n.kind}`}>
-            <rect x={n.x} y={n.y} width={n.w} height={n.h} rx="6" />
+            {n.kind === 'decision' ? (
+              <polygon
+                points={`${cx},${n.y} ${n.x + n.w},${n.y + n.h / 2} ${cx},${n.y + n.h} ${n.x},${n.y + n.h / 2}`}
+              />
+            ) : (
+              <rect x={n.x} y={n.y} width={n.w} height={n.h} rx="6" />
+            )}
             {ls.map((s, i) => (
               <text class="nt" x={cx} y={y0 + i * 14} text-anchor="middle">
                 {s}
@@ -381,6 +387,14 @@ const linkText = (e: Spec['edges'][number]) =>
   .k-new rect {
     fill: var(--surface);
     stroke: var(--accent);
+    stroke-width: 1.2;
+  }
+
+  /* Non-LLM automated steps share the LLM outline; a yes/no check is a diamond with the same stroke. */
+  .k-step rect,
+  .k-decision polygon {
+    fill: var(--surface);
+    stroke: var(--text-2);
     stroke-width: 1.2;
   }
 

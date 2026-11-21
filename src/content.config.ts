@@ -139,8 +139,19 @@ const architecture = z
 // --- Case study diagrams (DESIGN.md 5.24.4) --------------------------------
 // One file per case study: src/content/diagrams/<slug>.yaml. Coordinates are SVG units on a 4px grid.
 // kind: sllm = fine-tuned small model (accent), llm = general LLM, logic = search/DB/rules, plain = component, input = user end,
-// focus = the one accented step when there is no sLLM (accent fill), new = added in this version (accent outline).
-const DG_KINDS = ['sllm', 'llm', 'logic', 'plain', 'input', 'focus', 'new'] as const;
+// focus = the one accented step when there is no sLLM (accent fill), new = added in this version (accent outline),
+// step = an automated step that is not an LLM (strong outline, like llm), decision = a yes/no check (diamond).
+const DG_KINDS = [
+  'sllm',
+  'llm',
+  'logic',
+  'plain',
+  'input',
+  'focus',
+  'new',
+  'step',
+  'decision',
+] as const;
 // Legend swatches: a node kind, a pain-point mark, or a journey touchpoint dot.
 const DG_LEGEND = z
   .array(

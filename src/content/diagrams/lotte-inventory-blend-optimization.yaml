@@ -1,0 +1,746 @@
+# 그린소재 재고 조합 최적화 케이스 스터디 다이어그램 (DESIGN.md 5.24.4, 11.14). 시안 g12에서 고른 조합:
+# problem = A(현행·개선 두 줄), arch = A(학습 프로그램 | MixPlanner 엔진, 바닥에 데이터 원천), flow = A(담당자·자동화 스윔레인, 4단계 열).
+# 출처: docs/project-references/green-material/ 최종보고(9, 10, 15–21, 31–34, 41, 43장).
+# 고객 내부 명칭은 일반화(믹싱 계획 시스템), 제품 브랜드·제품 코드는 싣지 않는다. MixPlanner와 함수명은 수행팀이 만든 패키지 이름.
+# 포인트 색(focus)은 점도 예측 모델에만. 좌표는 SVG 단위(4px 격자), 연결선은 직각 + 모서리 반지름 8.
+# d 경로는 시안 생성기(docs/design-drafts/g12/specs.mjs의 poly)가 만든 값이다.
+
+legend:
+  - kind: focus
+    label:
+      en: ML model
+      ko: ML 모델
+  - kind: step
+    label:
+      en: MixPlanner step
+      ko: MixPlanner 단계
+  - kind: logic
+    label:
+      en: Data and rules
+      ko: 데이터·규칙
+  - kind: input
+    label:
+      en: Planner input
+      ko: 담당자 입력
+problem:
+  width: 720
+  height: 416
+  legend:
+    - kind: plain
+      label:
+        en: Manual step
+        ko: 수작업 단계
+    - kind: step
+      label:
+        en: Automated step
+        ko: 자동화 단계
+    - kind: focus
+      label:
+        en: ML model
+        ko: ML 모델
+    - kind: logic
+      label:
+        en: Offline training
+        ko: 오프라인 학습
+    - kind: input
+      label:
+        en: Planner input
+        ko: 담당자 입력
+  zones:
+    - id: before
+      label:
+        en: Before · manual
+        ko: 현행 · 수작업
+      x: 0
+      y: 0
+      w: 720
+      h: 128
+      note:
+        text:
+          en: ≈20 min per plan
+          ko: 건당 약 20분
+    - id: after
+      label:
+        en: After · automated
+        ko: 개선 · 자동화
+      x: 0
+      y: 152
+      w: 720
+      h: 204
+      note:
+        text:
+          en: ≈10 s per plan
+          ko: 건당 약 10초
+        accent: true
+  nodes:
+    - id: b0
+      kind: input
+      label: &a1
+        en: Mix plan input
+        ko: 믹싱 계획 입력
+      x: 16
+      y: 44
+      w: 112
+      h: 44
+    - id: b1
+      kind: plain
+      label:
+        en: Check recipe
+        ko: 레시피 확인
+      sub:
+        en: additive ratios
+        ko: 첨가제 투입비
+      x: 152
+      y: 44
+      w: 128
+      h: 44
+    - id: b2
+      kind: plain
+      label:
+        en: Draft combination
+        ko: 조합 수기 작성
+      sub:
+        en: stock by hand
+        ko: 재고 수기 검토
+      x: 304
+      y: 44
+      w: 128
+      h: 44
+    - id: b3
+      kind: plain
+      label:
+        en: Viscosity map
+        ko: 점도맵 추정
+      sub:
+        en: lab lookup table
+        ko: 실험 기반 표
+      x: 456
+      y: 44
+      w: 128
+      h: 44
+    - id: b4
+      kind: plain
+      label:
+        en: Confirm plan
+        ko: 계획 확정
+      x: 608
+      y: 44
+      w: 104
+      h: 44
+    - id: a0
+      kind: input
+      label: *a1
+      sub:
+        en: + preferences
+        ko: + 선호 설정
+      x: 16
+      y: 196
+      w: 112
+      h: 44
+    - id: a1
+      kind: step
+      label:
+        en: Filter inventory
+        ko: 재고 선별
+      sub:
+        en: rules applied
+        ko: 규칙 적용
+      x: 152
+      y: 196
+      w: 128
+      h: 44
+    - id: a2
+      kind: step
+      label:
+        en: Search space
+        ko: 탐색 공간
+      sub:
+        en: candidate stock list
+        ko: 조합 후보 재고
+      x: 304
+      y: 196
+      w: 128
+      h: 44
+    - id: a3
+      kind: step
+      label:
+        en: Recommend mix
+        ko: 조합 추천
+      sub:
+        en: sort + grid search
+        ko: 정렬 + 격자 탐색
+      x: 456
+      y: 196
+      w: 128
+      h: 44
+    - id: a4
+      kind: plain
+      label:
+        en: Confirm plan
+        ko: 계획 확정
+      x: 608
+      y: 196
+      w: 104
+      h: 44
+    - id: a6
+      kind: logic
+      label:
+        en: Model training
+        ko: 모델 학습
+      sub:
+        en: 2018–23 records
+        ko: 2018–23 실적
+      x: 304
+      y: 296
+      w: 128
+      h: 44
+    - id: a5
+      kind: focus
+      label:
+        en: Viscosity model
+        ko: 점도 예측 모델
+      sub:
+        en: MAPE 3.4% (map 6.5%)
+        ko: MAPE 3.4% (점도맵 6.5%)
+      x: 456
+      y: 296
+      w: 128
+      h: 44
+  edges:
+    - from: b0
+      to: b1
+      d: M128,66 L152,66
+    - from: b1
+      to: b2
+      d: M280,66 L304,66
+    - from: b2
+      to: b3
+      d: M432,66 L456,66
+    - from: b3
+      to: b4
+      d: M584,66 L608,66
+    - from: b3
+      to: b2
+      d: M520,88 L520,96 Q520,104 512,104 L376,104 Q368,104 368,96 L368,88
+      style: back
+      label:
+        text:
+          en: off spec · retry
+          ko: 기준 미달 · 재시도
+        x: 444
+        y: 120
+    - from: a0
+      to: a1
+      d: M128,218 L152,218
+    - from: a1
+      to: a2
+      d: M280,218 L304,218
+    - from: a2
+      to: a3
+      d: M432,218 L456,218
+    - from: a3
+      to: a4
+      d: M584,218 L608,218
+    - from: a3
+      to: a5
+      d: M508,240 L508,296
+    - from: a5
+      to: a3
+      d: M532,296 L532,240
+      style: back
+    - from: a6
+      to: a5
+      d: M432,318 L456,318
+arch:
+  width: 720
+  height: 476
+  legend:
+    - kind: focus
+      label:
+        en: ML model
+        ko: ML 모델
+    - kind: step
+      label:
+        en: MixPlanner step
+        ko: MixPlanner 단계
+    - kind: plain
+      label:
+        en: Training step
+        ko: 학습 단계
+    - kind: logic
+      label:
+        en: Data
+        ko: 데이터
+    - kind: input
+      label:
+        en: Planner input
+        ko: 담당자 입력
+  zones:
+    - id: train
+      label:
+        en: Training program · offline
+        ko: 학습 프로그램 · 오프라인
+      x: 0
+      y: 64
+      w: 232
+      h: 272
+    - id: engine
+      label:
+        en: MixPlanner engine
+        ko: MixPlanner 엔진
+      x: 256
+      y: 64
+      w: 464
+      h: 272
+      note:
+        text:
+          en: pilot server
+          ko: 파일럿 서버
+    - id: loop
+      label:
+        en: Combination search
+        ko: 조합 탐색
+      x: 272
+      y: 156
+      w: 440
+      h: 164
+  nodes:
+    - id: ui
+      kind: input
+      label:
+        en: Planning screen
+        ko: 계획 화면
+      sub:
+        en: settings in · recommended mix out
+        ko: 설정 입력·추천 조합 출력
+      x: 280
+      y: 0
+      w: 424
+      h: 44
+    - id: dataset
+      kind: plain
+      label:
+        en: Labeled dataset
+        ko: 학습 데이터셋
+      sub:
+        en: ≈22k mixes
+        ko: 약 2.2만 건
+      x: 16
+      y: 96
+      w: 200
+      h: 44
+    - id: dataPipe
+      kind: plain
+      label:
+        en: Data pipeline
+        ko: 데이터 파이프라인
+      sub:
+        en: grade · outliers · gaps
+        ko: 등급·이상치·결측치
+      x: 16
+      y: 156
+      w: 200
+      h: 44
+    - id: modelPipe
+      kind: plain
+      label:
+        en: Model pipeline
+        ko: 모델 파이프라인
+      sub:
+        en: select · scale · encode
+        ko: 선별·정규화·인코딩
+      x: 16
+      y: 216
+      w: 200
+      h: 44
+    - id: model
+      kind: focus
+      label:
+        en: Viscosity model
+        ko: 점도 예측 모델
+      sub:
+        en: Random Forest · MAPE 3.4%
+        ko: Random Forest · MAPE 3.4%
+      x: 16
+      y: 276
+      w: 200
+      h: 44
+    - id: init
+      kind: step
+      label:
+        en: Initialize
+        ko: 초기화
+      sub:
+        en: recipes · inventory
+        ko: 레시피·재고
+      x: 280
+      y: 96
+      w: 176
+      h: 44
+    - id: filter
+      kind: step
+      label:
+        en: Filter inventory
+        ko: 재고 선별
+      sub:
+        en: filter_search_space
+        ko: filter_search_space
+      x: 504
+      y: 96
+      w: 200
+      h: 44
+    - id: base
+      kind: step
+      label:
+        en: Base combination
+        ko: 기본 조합
+      sub:
+        en: find_base_combination
+        ko: find_base_combination
+      x: 504
+      y: 180
+      w: 200
+      h: 44
+    - id: predict
+      kind: step
+      label:
+        en: Viscosity prediction
+        ko: 점도 예측
+      sub:
+        en: predict_viscosity
+        ko: predict_viscosity
+      x: 288
+      y: 256
+      w: 168
+      h: 44
+    - id: adjust
+      kind: step
+      label:
+        en: Adjust combination
+        ko: 조합 조정
+      sub:
+        en: adjust_mix_plan
+        ko: adjust_mix_plan
+      x: 504
+      y: 256
+      w: 200
+      h: 44
+    - id: lab
+      kind: logic
+      label:
+        en: Lab quality data
+        ko: 품질 측정 데이터
+      sub:
+        en: LIMS · viscosity
+        ko: LIMS·점도
+      x: 0
+      y: 376
+      w: 152
+      h: 44
+    - id: mixDb
+      kind: logic
+      label:
+        en: Mixing-plan DB
+        ko: 믹싱 계획 DB
+      sub:
+        en: recipes · past plans
+        ko: 레시피·과거 실적
+      x: 184
+      y: 376
+      w: 176
+      h: 44
+    - id: invDb
+      kind: logic
+      label:
+        en: Inventory DB
+        ko: 재고 DB
+      sub:
+        en: WMS · MES
+        ko: WMS·MES
+      x: 528
+      y: 376
+      w: 176
+      h: 44
+  edges:
+    - from: ui
+      to: init
+      d: M432,44 L432,96
+      style: both
+    - from: dataset
+      to: dataPipe
+      d: M116,140 L116,156
+    - from: dataPipe
+      to: modelPipe
+      d: M116,200 L116,216
+    - from: modelPipe
+      to: model
+      d: M116,260 L116,276
+    - from: model
+      to: predict
+      d: M216,292 L288,292
+      label:
+        text:
+          en: load
+          ko: 탑재
+        x: 244
+        y: 282
+    - from: init
+      to: filter
+      d: M456,118 L504,118
+    - from: filter
+      to: base
+      d: M604,140 L604,180
+    - from: base
+      to: predict
+      d: M504,202 L380,202 Q372,202 372,210 L372,256
+    - from: predict
+      to: adjust
+      d: M456,270 L504,270
+    - from: adjust
+      to: predict
+      d: M504,286 L456,286
+      style: back
+    - from: lab
+      to: train
+      d: M76,376 L76,336
+    - from: mixDb
+      to: train
+      d: M208,376 L208,336
+    - from: mixDb
+      to: engine
+      d: M336,376 L336,336
+    - from: invDb
+      to: engine
+      d: M616,376 L616,336
+flow:
+  width: 720
+  height: 420
+  zones:
+    - id: lanePlanner
+      label:
+        en: Planner
+        ko: 계획 담당자
+      x: 0
+      y: 28
+      w: 720
+      h: 92
+    - id: laneAuto
+      label:
+        en: Automation
+        ko: 자동화 프로세스
+      x: 0
+      y: 144
+      w: 720
+      h: 216
+    - id: c1
+      label:
+        en: 1 New run
+        ko: 1 신규 실행
+      center: true
+      x: 16
+      y: 176
+      w: 152
+      h: 168
+    - id: c2
+      label:
+        en: 2 Load data
+        ko: 2 데이터 추출
+      center: true
+      x: 192
+      y: 176
+      w: 152
+      h: 168
+    - id: c3
+      label:
+        en: 3 Narrow stock
+        ko: 3 재고 범위
+      center: true
+      x: 368
+      y: 176
+      w: 152
+      h: 168
+    - id: c4
+      label:
+        en: 4 Recommend
+        ko: 4 조합 추천
+      center: true
+      x: 544
+      y: 176
+      w: 152
+      h: 168
+  nodes:
+    - id: mixInput
+      kind: input
+      label:
+        en: Mix plan input
+        ko: 믹싱 계획 입력
+      sub:
+        en: grade · quantity · batch
+        ko: 등급·수량·차수
+      x: 24
+      y: 56
+      w: 136
+      h: 48
+    - id: start
+      kind: plain
+      label:
+        en: Start mixing
+        ko: 믹싱 진행
+      x: 376
+      y: 56
+      w: 136
+      h: 40
+    - id: meets
+      kind: decision
+      label:
+        en: |-
+          Optimal and
+          in spec?
+        ko: |-
+          최적해·
+          기준 만족?
+      x: 552
+      y: 44
+      w: 136
+      h: 64
+    - id: prefs
+      kind: logic
+      label:
+        en: Preferences
+        ko: 선호 설정
+      sub:
+        en: stock age · re-feed ratio
+        ko: 장기재고·재투입 비율
+      x: 24
+      y: 212
+      w: 136
+      h: 44
+    - id: rules
+      kind: logic
+      label:
+        en: Mixing rules
+        ko: 믹싱 규칙
+      sub:
+        en: planner know-how
+        ko: 숙련자 노하우
+      x: 24
+      y: 284
+      w: 136
+      h: 44
+    - id: mixDb
+      kind: logic
+      label:
+        en: Mixing-plan DB
+        ko: 믹싱 계획 DB
+      sub:
+        en: recipes · past plans
+        ko: 레시피·과거 실적
+      x: 200
+      y: 212
+      w: 136
+      h: 44
+    - id: invDb
+      kind: logic
+      label:
+        en: Inventory DB
+        ko: 재고 DB
+      sub:
+        en: WMS · MES
+        ko: WMS·MES
+      x: 200
+      y: 284
+      w: 136
+      h: 44
+    - id: filter
+      kind: step
+      label:
+        en: Filter inventory
+        ko: 재고 선별
+      sub:
+        en: drop unfit stock
+        ko: 부적정 재고 제외
+      x: 376
+      y: 212
+      w: 136
+      h: 44
+    - id: space
+      kind: logic
+      label:
+        en: Search space
+        ko: 탐색 공간
+      sub:
+        en: candidate stock list
+        ko: 조합 후보 재고
+      x: 376
+      y: 284
+      w: 136
+      h: 44
+    - id: search
+      kind: step
+      label:
+        en: Combination search
+        ko: 조합 검색
+      sub:
+        en: sort + grid search
+        ko: 정렬 + 격자 탐색
+      x: 552
+      y: 212
+      w: 136
+      h: 44
+    - id: predict
+      kind: focus
+      label:
+        en: Viscosity prediction
+        ko: 점도 예측
+      sub:
+        en: ML model
+        ko: ML 모델
+      x: 552
+      y: 284
+      w: 136
+      h: 44
+  edges:
+    - from: mixInput
+      to: prefs
+      d: M92,104 L92,212
+    - from: c1
+      to: c2
+      d: M168,270 L192,270
+    - from: c2
+      to: c3
+      d: M344,270 L368,270
+    - from: c3
+      to: c4
+      d: M520,270 L544,270
+    - from: filter
+      to: space
+      d: M444,256 L444,284
+    - from: search
+      to: predict
+      d: M608,256 L608,284
+    - from: predict
+      to: search
+      d: M632,284 L632,256
+      style: back
+    - from: search
+      to: meets
+      d: M620,212 L620,108
+    - from: meets
+      to: start
+      d: M552,76 L512,76
+      label:
+        text:
+          en: yes
+          ko: 예
+        x: 532
+        y: 66
+    - from: meets
+      to: prefs
+      d: M620,44 L620,16 Q620,8 612,8 L188,8 Q180,8 180,16 L180,226 Q180,234 172,234 L160,234
+      style: back
+      label:
+        text:
+          en: change settings
+          ko: 설정 변경
+        x: 400
+        y: 24

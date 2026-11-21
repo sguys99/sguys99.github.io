@@ -172,6 +172,12 @@
 | training pipeline | 학습 파이프라인 | 다이어그램 영역 이름 |
 | green material | 그린소재 | |
 | inventory blend optimization | 재고 조합 최적화 | |
+| viscosity / viscosity map | 점도 / 점도맵 | 점도맵은 실험으로 만든 현행 추정표 |
+| mix plan / mixing rules | 믹싱 계획 / 믹싱 규칙 | |
+| semi-finished lot / re-fed material | 반제품 / 재투입 | |
+| sorting + grid search | 정렬 + 격자 탐색 | 그린소재 조합 탐색 방식 |
+| pilot | 파일럿 | PoC 다음 단계 (운영 DB 연계 시범적용) |
+| MixPlanner | MixPlanner | 수행팀이 만든 조합 산출 패키지 이름. 국문도 영문 유지 |
 | demand forecasting / price forecasting | 수요 예측 / 가격 예측 | |
 | predictive maintenance | 예지보전 | |
 | object detection | 객체 탐지 | 이력서의 "사물인식", "설비인식"은 이 표기로 통일 |

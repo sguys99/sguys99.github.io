@@ -1876,14 +1876,14 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 #### 5.24.4 아키텍처: 회로도 (diagrams) 또는 표 (layers / flows)
 
-케이스마다 `src/content/diagrams/<slug>.yaml`이 있으면 회로도를, 없으면 아래 표를 쓴다 (3.2.3 C의 "그림 대신 표"를 11.10에서 바꿈). 현재 회로도는 SCM, 고객 상담 어시스턴트, 원자재 가격 예측 3건, 나머지는 표.
+케이스마다 `src/content/diagrams/<slug>.yaml`이 있으면 회로도를, 없으면 아래 표를 쓴다 (3.2.3 C의 "그림 대신 표"를 11.10에서 바꿈). 현재 회로도는 SCM, 고객 상담 어시스턴트, 원자재 가격 예측, 그린소재 재고 조합 최적화 4건, 나머지는 표.
 
 **회로도** (`src/components/Diagram.astro`, g9 시안 A)
 
 | 요소 | 값 |
 |---|---|
 | 파일 | `legend[]`(종류·라벨, 기본 범례) + 자리별 다이어그램: `problem`(Problem 목록 위), `approach`(Approach 목록 아래, 결정 표 앞), `arch`(Architecture 섹션), `flow`(Service flow 섹션). 각 다이어그램은 `width`·`height`(SVG 단위), `zones[]`, `nodes[]`, `edges[]`, 선택으로 자기 `legend`(기본 범례를 대신함). 좌표는 4px 격자, 스키마가 id 중복과 연결·말풍선 대상 id를 검사 (11.11). 같은 파일의 `results`는 그림이 아닌 실험 결과 차트(5.24.6, 11.12) |
-| 노드 종류 `kind` | `sllm` 바탕 `--accent-soft` + 선 `--accent` (포인트 색은 여기에만) / `llm` 바탕 `--surface` + 선 `--text-2` 1.2 / `logic` 바탕 `--chip` + 선 `--line-strong` 0.8 / `plain` 바탕 `--surface` + 선 `--line-strong` / `input` 같은 바탕 + 점선 `4 3`. sLLM이 없는 케이스는 `focus`(바탕 `--accent-soft` + 선 `--accent`, 그림의 초점 1곳)와 `new`(바탕 `--surface` + 선 `--accent` 1.2, 버전별로 추가된 것)를 쓴다 (11.11). 모서리 6 |
+| 노드 종류 `kind` | `sllm` 바탕 `--accent-soft` + 선 `--accent` (포인트 색은 여기에만) / `llm` 바탕 `--surface` + 선 `--text-2` 1.2 / `logic` 바탕 `--chip` + 선 `--line-strong` 0.8 / `plain` 바탕 `--surface` + 선 `--line-strong` / `input` 같은 바탕 + 점선 `4 3`. sLLM이 없는 케이스는 `focus`(바탕 `--accent-soft` + 선 `--accent`, 그림의 초점 1곳)와 `new`(바탕 `--surface` + 선 `--accent` 1.2, 버전별로 추가된 것)를 쓴다 (11.11). LLM이 아닌 자동화 단계는 `step`(`llm`과 같은 모양), 예/아니오 판정은 `decision`(마름모, 바탕 `--surface` + 선 `--text-2` 1.2, 이름은 `\n`으로 2줄) (11.14). 모서리 6 |
 | 글자 | 이름 12px `--fw-strong` `--text` (`\n`으로 줄바꿈, 14px 간격), 부제 9px `--font-meta` `--text-3`. 서체는 페이지 상속(국문 Pretendard). 크기는 diagram-design 기준 |
 | 영역 `zones` | 바탕 `--bg`, 모서리 8, 이름 12px `--fw-strong` `--text-2` 왼쪽 위. 다른 영역 안의 영역은 바탕 `--surface` + 선 `--line-strong`. `center: true`면 위에서 내려오는 연결선 위에 이름을 가운데 두고 바탕색으로 가린다 |
 | 연결선 `edges` | `d`에 직각 경로(모서리 반지름 8), 선 `--text-3` 1.2, 화살촉 같은 색. `style: back`은 점선(돌아가는 길), `both`는 양쪽 화살촉. 선끼리 경로를 공유하지 않고, 한 변에서 여러 선이 나가면 연결 지점을 12px 이상 띄운다 (diagram-design 규칙 3·4). 라벨 8px `--font-meta` `--text-3` 자간 0.06em, 선과 6~10px 띄우고(`anchor: start`는 세로선 옆) 항상 가림 바탕을 깐다: 바깥 영역 안이면 `--bg`, 그 밖은 `--surface` |
@@ -1939,7 +1939,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 끝 항목 | 첫 케이스는 Previous, 마지막은 Next를 그리지 않는다 (순환 없음) |
 | ≤860px `.pn-end` | 본문 아래, `margin-top: --sp-2`. 링크마다 `padding: --sp-3 0` + 위 `--line`, 1열 `gap: --sp-1`: 라벨 `.pn-k`를 제목 위에 `--fs-2xs` 대문자 `--ls-label`(국문 `--fs-xs` `--ls-label-ko`, 대문자 없음), `min-width` 없음. 제목 `.pn-t` `--fs-md` `--fw-medium` `--text`, 줄바꿈 허용, 링크 hover 때 `--accent` (11.8 2026-11-12) |
 
-- 순서: `featured: true`이고 `caseStudy`가 있는 프로젝트, `order` 오름차순 (현재 5건). 링크 `rel="prev"`/`"next"`.
+- 순서: `featured: true`이고 `caseStudy`가 있는 프로젝트, `order` 오름차순 (현재 6건). 링크 `rel="prev"`/`"next"`.
 - 접근성: 링크 이름 = "Previous" + 제목 전체(말줄임은 시각만).
 
 **케이스 스터디 모션**: 331-c 시안은 홈만 다룬다. 케이스 페이지는 등장·순서 효과 없이 hover 전환(`--dur`)과 상단 메뉴·메뉴 시트 모션(5.2, 5.3)만 둔다 [구현 기본값]. 이유: 한 장짜리 문서라 앵커 이동이 많고, 시안에 기준이 없음.
@@ -1987,7 +1987,7 @@ Approach 목록 아래(그림 `approach`가 있으면 그 아래), 결정 표 �
 | 페이지 | 영문 | 국문 | 레이아웃 | 비고 |
 |---|---|---|---|---|
 | 홈 | `/` | `/ko/` | 사이트 셸: 프로필 사이드바 + 상단 메뉴 + 본문 + 푸터 | 단일 스크롤, 섹션 앵커는 6.2 |
-| 케이스 스터디 | `/work/<slug>/` | `/ko/work/<slug>/` | 케이스 셸: 기록표 사이드바 + 상단 메뉴(Work 표시) + 문서 + 푸터 | `featured: true`이고 `caseStudy`가 있는 프로젝트만 생성. 현재 5건 (6.3) |
+| 케이스 스터디 | `/work/<slug>/` | `/ko/work/<slug>/` | 케이스 셸: 기록표 사이드바 + 상단 메뉴(Work 표시) + 문서 + 푸터 | `featured: true`이고 `caseStudy`가 있는 프로젝트만 생성. 현재 6건 (6.3) |
 | CV (화면·인쇄) | `/cv/` | `/ko/cv/` | 종이 셸: 도구 막대 + A4 용지 한 장 | 사이드바·상단 메뉴 없음 (6.4) |
 | CV PDF | `/cv/kwang-myung-yu-cv.pdf` | `/ko/cv/yu-kwang-myung-cv-ko.pdf` | — | 빌드 때 `scripts/cv-pdf.mjs`가 `dist/`에 생성(커밋 안 함). 사이드바 "Download CV"가 현재 언어 PDF로 연결. 경로는 `src/cv-pdf.mjs` 한 곳 |
 | 404 | `/404.html` (모든 없는 경로) | 같은 파일 | 사이트 셸에서 섹션 대신 카드 하나 | GitHub Pages는 루트 `404.html` 하나만 쓴다. 국문 404 파일은 따로 만들지 않는다 (6.5) |
@@ -3097,3 +3097,17 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 포인트 색은 예측 모델 노드(`focus`)와 최종 모델 막대·설정 원에만 | 포인트 색 1개 원칙(2장). sLLM이 없는 케이스의 `focus` 규칙(11.11)을 따름 |
 | 기존 계층 표(`caseStudy.architecture`)는 이 케이스에서 삭제 (SCM과 같음). 결정 2의 벤치마크 문구를 자료에 맞춤(Persistence·린터 가격 규칙·선형 회귀, 지수평활 삭제). 영문 제목을 "Raw-Material Price Forecasting and Market Dashboard"로 줄임 | 회로도가 표를 대신함. 문구는 자료와 어긋나 사용자 확인. 제목은 사용자 요청 |
 | 노드 수 예산(9개) 초과(아키텍처 14개)는 그대로 둠 | SCM(11.10)과 같은 이유: 한 장에 전체 구조를 보임 |
+
+### 11.14 그린소재 재고 조합 최적화 케이스 스터디 — 2026-11-21
+
+시안: `docs/design-drafts/g12/` (아키텍처 A 학습 | 엔진 나란히 / B 엔진 중심 / C 배치 관점, 서비스 흐름 A 스윔레인 / B 세로 척추 / C 루프 중심, Before → After A 위아래 두 줄 / B 좌우 기둥 + 지표 / C 바뀐 단계만, 학습 파이프라인 A·B. 비교 페이지 `index.html`(`make.mjs`), 캡처 `shots/`, 구현 확인 `shots/impl/`). 자료: 수행계획서·점도예측 결과·최종보고(`docs/project-references/green-material/`).
+
+| 결정 | 이유 |
+|---|---|
+| Problem에 Before → After A(현행·개선 두 줄, 영역 메모에 건당 소요 시간), Architecture에 A(오프라인 학습 프로그램과 MixPlanner 엔진을 나란히, 데이터 원천은 바닥), Service flow에 A(담당자·자동화 스윔레인, 4단계 열)를 고름. 학습 파이프라인 그림은 넣지 않음 | 사용자 선택. 학습 단계는 아키텍처 왼쪽 구역에 이미 있음 |
+| 새 노드 종류 `step`(LLM이 아닌 자동화 단계, `llm`과 같은 모양)과 `decision`(판정 마름모) | 탐색 알고리즘 단계를 `llm`으로 적으면 의미가 어긋남. 판정은 흐름의 분기점이라 상자와 구분 |
+| 포인트 색(`focus`)은 점도 예측 모델 1곳(흐름에서는 점도 예측 단계) | 포인트 색 1개 원칙(2장), 11.11의 `focus` 규칙 |
+| 고객 내부 명칭은 일반화(OIS → 믹싱 계획 시스템, 제품 브랜드·제품 코드 제외). WMS·MES·LIMS는 시스템 종류라 그대로. MixPlanner와 함수명은 수행팀이 만든 패키지라 표기 | CLAUDE.md 규칙 3, tasks 1.5.2 공개 범위 |
+| 아키텍처 엔진 영역 이름의 "파일럿 서버"는 영역 메모(오른쪽)로 옮김 | 계획 화면 ↔ 초기화 연결선이 영역 이름을 가르지 않게 |
+| 기간 2024-03 – 2024-09(PoC + 파일럿), 역할 Lead, 성과 마지막 줄은 파일럿 완료와 인계 | 사용자 답변(2026-11-21) |
+| 노드 수 예산(9개) 초과(아키텍처 13, 흐름 11, 문제 12)는 그대로 둠 | SCM(11.10)과 같은 이유: 한 장에 전체 구조를 보임 |
