@@ -200,6 +200,14 @@
 | humanoid robot | 휴머노이드 로봇 | |
 | docent robot | 도슨트 로봇 | |
 | common core + domain profiles | 공통 코어 + 도메인 프로파일 | GenP 제품 구조 |
+| task pack (basic / option) | 태스크 팩 (기본 팩 / 옵션 팩) | GenP 도메인별 태스크 묶음 |
+| local server / on-board | 로컬 서버 / 온보드 | 오프보드(off-board) 서버와 로봇 탑재 컴퓨터 |
+| standard set | 표준 구성 1식 | 로봇 1대 + 로컬 서버 1대 |
+| export gateway | 반출 게이트웨이 | 현장 데이터를 비식별화 후 내보내는 옵션 모듈 |
+| planner | 플래너 | Phase 2·3에서 태스크를 계획·조합하는 모듈 |
+| action chunk | 액션 청크 | VLA가 한 번에 내는 여러 스텝의 관절 목표 |
+| episode / episode schema | 에피소드 / 에피소드 스키마 | 시연 한 번의 기록. 스키마 이름은 EpisodeSchema |
+| supervised mode | 감독 모드 | 운영자가 감시·개입 권한을 가진 운영 |
 | simulation environment | 시뮬레이션 환경 | |
 | master plan | 마스터플랜 | |
 | roadmap | 로드맵 | |

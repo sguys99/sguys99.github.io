@@ -1,0 +1,290 @@
+---
+// Layer stack (DESIGN.md 5.24.9; g14 시안 A): one command stepping down through layers as a staircase of boxes,
+// each paired with a drawing of the data it hands on (a point, an action-chunk grid, joint ticks, the control law).
+// Data: diagrams/<slug>.yaml `stack`. The SVG is hidden from screen readers; the same steps are in the .sr-only list.
+import type { CollectionEntry } from 'astro:content';
+import { t, type Lang } from '../i18n/ui';
+
+type Stack = NonNullable<CollectionEntry<'diagrams'>['data']['stack']>;
+
+interface Props {
+  lang: Lang;
+  data: Stack;
+  label: string; // accessible name, the section title
+}
+
+const { lang, data, label } = Astro.props;
+const { command, descent, layers, note } = data;
+
+// SVG units: command box 0–40, then one row of RH per layer every 104, each box 24 further right (the staircase).
+// Sample panels start at PX on the right.
+const W = 720;
+const RH = 80;
+const STEP = 104;
+const BW = 280;
+const PX = 360;
+const rowY = (k: number) => 72 + k * STEP;
+const H = rowY(layers.length - 1) + RH + 16;
+const marker = `ls-ar-${lang}`;
+
+// Illustrative sample drawings: smooth deterministic patterns, not real data (the note says "Illustrative").
+const chunk = (x: number, y: number) =>
+  Array.from({ length: 16 * 29 }, (_, i) => {
+    const r = Math.floor(i / 29);
+    const c = i % 29;
+    const v = 0.5 + 0.5 * Math.sin(c * 0.55 + r * 0.32) * Math.cos(c * 0.21 - r * 0.18);
+    return { x: x + c * 7, y: y + r * 4, o: (0.15 + 0.85 * v).toFixed(2) };
+  });
+const ticks = (x: number, y: number, h = 36) =>
+  Array.from({ length: 29 }, (_, c) => {
+    const v = Math.sin(c * 0.9) * 0.6 + Math.sin(c * 0.23 + 1) * 0.4;
+    return { x: x + c * 7, y0: y + h / 2, y1: +(y + h / 2 - (v * h) / 2.2).toFixed(1) };
+  });
+---
+
+<figure class="ls">
+  <div class="ls-scroll" tabindex="0" role="region" aria-label={label}>
+    <svg viewBox={`0 0 ${W} ${H}`} aria-hidden="true" focusable="false">
+      <defs>
+        <marker id={marker} markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon class="mk" points="0 0, 8 3, 0 6"></polygon>
+        </marker>
+      </defs>
+      <text class="lab" x={W} y="20" text-anchor="end">
+        {descent[lang]}
+      </text>
+      <rect class="cmd" x="0" y="0" width={BW} height="40" rx="6" />
+      <text class="nt" x={BW / 2} y="25" text-anchor="middle">
+        {command[lang]}
+      </text>
+      <path class="ln" d={`M${BW / 2},40 V${rowY(0)}`} marker-end={`url(#${marker})`} />
+      {layers.map((l, k) => {
+        const x = 24 * k;
+        const y = rowY(k);
+        return (
+          <>
+            {k < layers.length - 1 && (
+              <path
+                class="ln"
+                d={`M${x + 160},${y + RH} V${rowY(k + 1)}`}
+                marker-end={`url(#${marker})`}
+              />
+            )}
+            <path class="ptr" d={`M${x + BW},${y + RH / 2} H${PX}`} />
+            <rect
+              class:list={['box', { focus: l.focus }]}
+              x={x}
+              y={y}
+              width={BW}
+              height={RH}
+              rx="6"
+            />
+            <text class="ns" x={x + 12} y={y + 20}>
+              L{k + 1}
+            </text>
+            <text class="nt" x={x + 36} y={y + 20}>
+              {l.name[lang]}
+            </text>
+            <text class="tx" x={x + 12} y={y + 44}>
+              {l.does[lang]}
+            </text>
+            <text class="ns" x={x + 12} y={y + 64}>
+              {l.where[lang]}
+            </text>
+            <rect class="pan" x={PX} y={y} width={W - PX} height={RH} rx="6" />
+            <text class:list={['lab', { acc: l.focus }]} x={PX + 12} y={y + 16}>
+              {l.out[lang]}
+            </text>
+            {l.sample === 'coords' && (
+              <>
+                <path
+                  class="ax"
+                  d={`M${PX + 16},${y + 56} H${PX + 44} M${PX + 16},${y + 56} V${y + 28} M${PX + 16},${y + 56} L${PX + 30},${y + 66}`}
+                />
+                <circle class="pt" cx={PX + 38} cy={y + 38} r="4" />
+                <text class="val" x={PX + 64} y={y + 52}>
+                  {l.value}
+                </text>
+              </>
+            )}
+            {l.sample === 'chunk' &&
+              chunk(PX + 16, y + 24).map((c) => (
+                <rect class="cell" x={c.x} y={c.y} width="6" height="3" opacity={c.o} />
+              ))}
+            {l.sample === 'joints' && (
+              <>
+                <path class="rule" d={`M${PX + 18},${y + 48} H${PX + 22 + 28 * 7}`} />
+                {ticks(PX + 20, y + 30).map((s) => (
+                  <path class="tk" d={`M${s.x},${s.y0} V${s.y1}`} />
+                ))}
+              </>
+            )}
+            {l.sample === 'torque' && (
+              <text class="val sm" x={PX + 16} y={y + 52}>
+                {l.value}
+              </text>
+            )}
+          </>
+        );
+      })}
+    </svg>
+  </div>
+  <p class="hint">{t(lang, 'dgScroll')}</p>
+  <div class="sr-only">
+    <ol>
+      <li>{command[lang]}</li>
+      {layers.map((l) => (
+        <li>
+          {l.name[lang]}: {l.does[lang]} ({l.where[lang]}). {l.out[lang]}
+          {l.value && `: ${l.value}`}
+        </li>
+      ))}
+    </ol>
+    <p>{descent[lang]}</p>
+  </div>
+  <p class="note">{note[lang]}</p>
+</figure>
+
+<style>
+  .ls {
+    container-type: inline-size;
+  }
+
+  /* Same narrow-column rule as the diagrams (5.24.4): keep 12px text, scroll inside the figure. */
+  .ls-scroll {
+    overflow-x: auto;
+  }
+
+  .ls-scroll:focus-visible {
+    outline: var(--focus-w) solid var(--focus);
+    outline-offset: var(--focus-offset);
+    border-radius: var(--radius-xs);
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    min-width: 640px;
+    height: auto;
+    font-family: inherit;
+  }
+
+  .hint {
+    display: none;
+    margin-top: var(--sp-2);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  @container (max-width: 639px) {
+    .hint {
+      display: block;
+    }
+  }
+
+  /* Sizes follow the diagrams: name 12px semibold, sublabel 9px mono, labels 8px mono. */
+  .nt {
+    fill: var(--text);
+    font-size: 12px;
+    font-weight: var(--fw-strong);
+  }
+
+  .tx {
+    fill: var(--text-2);
+    font-size: 12px;
+  }
+
+  .ns {
+    fill: var(--text-3);
+    font-family: var(--font-meta);
+    font-size: 9px;
+  }
+
+  .lab {
+    fill: var(--text-3);
+    font-family: var(--font-meta);
+    font-size: 8px;
+    letter-spacing: 0.06em;
+  }
+
+  .lab.acc {
+    fill: var(--accent);
+  }
+
+  .cmd {
+    fill: var(--surface);
+    stroke: var(--line-strong);
+    stroke-dasharray: 4 3;
+  }
+
+  .box {
+    fill: var(--surface);
+    stroke: var(--line-strong);
+  }
+
+  /* The one accented layer (the VLA policy): same treatment as a focus node. */
+  .box.focus {
+    fill: var(--accent-soft);
+    stroke: var(--accent);
+  }
+
+  .pan {
+    fill: var(--bg);
+  }
+
+  .ln {
+    fill: none;
+    stroke: var(--text-3);
+    stroke-width: 1.2;
+  }
+
+  .mk {
+    fill: var(--text-3);
+  }
+
+  .ptr {
+    fill: none;
+    stroke: var(--text-3);
+    stroke-dasharray: 2 3;
+  }
+
+  .ax {
+    fill: none;
+    stroke: var(--text-3);
+  }
+
+  .pt {
+    fill: var(--text-2);
+  }
+
+  .val {
+    fill: var(--text);
+    font-family: var(--font-meta);
+    font-size: 16px;
+  }
+
+  .val.sm {
+    font-size: 12px;
+  }
+
+  .cell {
+    fill: var(--accent);
+  }
+
+  .rule {
+    stroke: var(--line);
+  }
+
+  .tk {
+    stroke: var(--text-2);
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  .note {
+    margin-top: var(--sp-3);
+    max-width: var(--measure);
+    font-size: var(--fs-sm);
+    color: var(--text-2);
+  }
+</style>

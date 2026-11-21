@@ -1868,29 +1868,31 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 01 | `context` | Context / 배경 | `caseStudy.context[]` | 항상 |
 | 02 | `problem` | Problem / 문제 | `caseStudy.problem[]` | 항상 |
 | 03 | `role` | My role / 역할 | `caseStudy.role[]` | 항상 |
-| 04 | `approach` | Approach / 접근 | `caseStudy.approach[]` + (`diagrams/<slug>.yaml`의 `approach` 그림, `results` 실험 결과 차트) + `decisions[]` 표 + `caseStudy.compare` 비교 | 그림·차트·결정 표·비교는 각각 있을 때만 (5.24.4, 5.24.6, 5.24.7) |
-| 05 | `journey` | Visitor journey / 관람 동선 | `diagrams/<slug>.yaml`의 `journey`(평면 개념도) + `caseStudy.journey`(도입 문장, 단계 목록) | 그림이 있을 때만 (11.13) |
-| 06 | `arch` | Architecture / 아키텍처 | `diagrams/<slug>.yaml`의 `arch`(회로도), 없으면 `caseStudy.architecture`(표) | 둘 중 하나가 있을 때만. 없으면 번호가 당겨진다 |
-| 07 | `flow` | Service flow / 서비스 흐름 | `diagrams/<slug>.yaml`의 `flow`(회로도) | 있을 때만 (11.10) |
-| 08 | `safety` | Safety / 안전 체계 | `diagrams/<slug>.yaml`의 `safety` 그림 + `caseStudy.safety[]` 목록(그림 아래, 위 `--sp-5`) | 둘 중 하나가 있을 때만 (11.13) |
-| 09 | `outcome` | Outcome / 성과 | `caseStudy.outcome[]` + `caseStudy.roadmap` 역할 분담 | 항상. `period.status`가 `present`/`planned`면 진행 중 배지. 역할 분담은 있을 때만 (5.24.8) |
+| 04 | `approach` | Approach / 접근 | `caseStudy.approach[]` + (`diagrams/<slug>.yaml`의 `approach` 그림, `caseStudy.domains` 도메인 표, `results` 실험 결과 차트) + `decisions[]` 표 + `caseStudy.compare` 비교 | 그림·표·차트·결정 표·비교는 각각 있을 때만 (5.24.4, 5.24.11, 5.24.6, 5.24.7) |
+| 05 | `stack` | From command to torque / 명령에서 토크까지 | `diagrams/<slug>.yaml`의 `stack`(계층 계단) | 있을 때만 (5.24.9, 11.15) |
+| 06 | `journey` | Visitor journey / 관람 동선 | `diagrams/<slug>.yaml`의 `journey`(평면 개념도) + `caseStudy.journey`(도입 문장, 단계 목록) | 그림이 있을 때만 (11.13) |
+| 07 | `arch` | Architecture / 아키텍처 | `diagrams/<slug>.yaml`의 `arch`(회로도), 없으면 `caseStudy.architecture`(표). 그 아래 `caseStudy.archNote`(한 줄)와 `caseStudy.hardware`(표준 구성, 5.24.12) | 둘 중 하나가 있을 때만. 없으면 번호가 당겨진다 |
+| 08 | `flow` | Service flow / 서비스 흐름 | `diagrams/<slug>.yaml`의 `flow`(회로도) | 있을 때만 (11.10) |
+| 09 | `safety` | Safety / 안전 체계 | `diagrams/<slug>.yaml`의 `safety` 그림 + `caseStudy.safety[]` 목록(그림 아래, 위 `--sp-5`) | 둘 중 하나가 있을 때만 (11.13) |
+| 10 | `loop` | Learning loop / 학습 루프 | `diagrams/<slug>.yaml`의 `episode`(에피소드 해부 + 루프) + `caseStudy.loop[]` 목록(그림 아래) | 그림이 있을 때만 (5.24.10, 11.15) |
+| 11 | `outcome` | Outcome / 성과 | `caseStudy.outcome[]` + `caseStudy.roadmap` 역할 분담 | 항상. `period.status`가 `present`/`planned`면 진행 중 배지. 역할 분담은 있을 때만 (5.24.8) |
 
 결정 표(`.tbl`): 열 Decision / Why / Trade-off (결정 / 이유 / 트레이드오프) ← `decisions[].title` / `.rationale` / `.tradeoff`. 시안은 "Decision"·"Why"를 코드에 직접 썼다 → `src/i18n/`로.
 
 #### 5.24.4 아키텍처: 회로도 (diagrams) 또는 표 (layers / flows)
 
-케이스마다 `src/content/diagrams/<slug>.yaml`이 있으면 회로도를, 없으면 아래 표를 쓴다 (3.2.3 C의 "그림 대신 표"를 11.10에서 바꿈). 현재 회로도는 SCM, 고객 상담 어시스턴트, 원자재 가격 예측, 그린소재 재고 조합 최적화, 도슨트 휴머노이드 5건, 나머지는 표.
+케이스마다 `src/content/diagrams/<slug>.yaml`이 있으면 회로도를, 없으면 아래 표를 쓴다 (3.2.3 C의 "그림 대신 표"를 11.10에서 바꿈). 현재 회로도는 SCM, 고객 상담 어시스턴트, 원자재 가격 예측, 그린소재 재고 조합 최적화, 도슨트 휴머노이드, GenP 휴머노이드 제품 6건, 나머지는 표.
 
 **회로도** (`src/components/Diagram.astro`, g9 시안 A)
 
 | 요소 | 값 |
 |---|---|
-| 파일 | `legend[]`(종류·라벨, 기본 범례) + 자리별 다이어그램: `problem`(Problem 목록 위), `approach`(Approach 목록 아래, 결정 표 앞), `arch`(Architecture 섹션), `flow`(Service flow 섹션), `journey`(Visitor journey 섹션), `safety`(Safety 섹션) (11.13). 각 다이어그램은 `width`·`height`(SVG 단위), `zones[]`, `nodes[]`, `edges[]`, 선택으로 자기 `legend`(기본 범례를 대신함). 좌표는 4px 격자, 스키마가 id 중복과 연결·말풍선 대상 id를 검사 (11.11). 같은 파일의 `results`는 그림이 아닌 실험 결과 차트(5.24.6, 11.12) |
+| 파일 | `legend[]`(종류·라벨, 기본 범례) + 자리별 다이어그램: `problem`(Problem 목록 위), `approach`(Approach 목록 아래, 결정 표 앞), `arch`(Architecture 섹션), `flow`(Service flow 섹션), `journey`(Visitor journey 섹션), `safety`(Safety 섹션) (11.13). 각 다이어그램은 `width`·`height`(SVG 단위), `zones[]`, `nodes[]`, `edges[]`, 선택으로 자기 `legend`(기본 범례를 대신함). 좌표는 4px 격자, 스키마가 id 중복과 연결·말풍선 대상 id를 검사 (11.11). 같은 파일의 `results`는 그림이 아닌 실험 결과 차트(5.24.6, 11.12), `stack`·`episode`는 전용 그림(5.24.9, 5.24.10, 11.15). 선택으로 `divider`: 그림을 가로지르는 포인트 색 점선(`y`) + 가림 바탕 위 라벨(`x` 가운데, 8px `--font-meta` `--accent`). 그림마다 1개, 예: 맞춤 경계 (11.15) |
 | 노드 종류 `kind` | `sllm` 바탕 `--accent-soft` + 선 `--accent` (포인트 색은 여기에만) / `llm` 바탕 `--surface` + 선 `--text-2` 1.2 / `logic` 바탕 `--chip` + 선 `--line-strong` 0.8 / `plain` 바탕 `--surface` + 선 `--line-strong` / `input` 같은 바탕 + 점선 `4 3`. sLLM이 없는 케이스는 `focus`(바탕 `--accent-soft` + 선 `--accent`, 그림의 초점 1곳)와 `new`(바탕 `--surface` + 선 `--accent` 1.2, 버전별로 추가된 것)를 쓴다 (11.11). LLM이 아닌 자동화 단계는 `step`(`llm`과 같은 모양), 예/아니오 판정은 `decision`(마름모, 바탕 `--surface` + 선 `--text-2` 1.2, 이름은 `\n`으로 2줄) (11.14). 경로가 거치지 않는 계층이나 연동하지 않는 시스템은 `ghost`(바탕 없음 + 점선 `2 3` `--line-strong`, 이름 `--text-3`) (11.13). 모서리 6 |
 | 글자 | 이름 12px `--fw-strong` `--text` (`\n`으로 줄바꿈, 14px 간격), 부제 9px `--font-meta` `--text-3`. 서체는 페이지 상속(국문 Pretendard). 크기는 diagram-design 기준 |
 | 영역 `zones` | 바탕 `--bg`, 모서리 8, 이름 12px `--fw-strong` `--text-2` 왼쪽 위. 다른 영역 안의 영역은 바탕 `--surface` + 선 `--line-strong`. `center: true`면 위에서 내려오는 연결선 위에 이름을 가운데 두고 바탕색으로 가린다 |
-| 연결선 `edges` | `d`에 직각 경로(모서리 반지름 8), 선 `--text-3` 1.2, 화살촉 같은 색. `style: back`은 점선(돌아가는 길), `both`는 양쪽 화살촉, `acc`는 포인트 색 경로(선 `--accent` 1.6, 화살촉·라벨도 `--accent`. 그림마다 1개, 예: 안전 채널) (11.13). 선끼리 경로를 공유하지 않고, 한 변에서 여러 선이 나가면 연결 지점을 12px 이상 띄운다 (diagram-design 규칙 3·4). 라벨 8px `--font-meta` `--text-3` 자간 0.06em, 선과 6~10px 띄우고(`anchor: start`는 세로선 옆) 항상 가림 바탕을 깐다: 바깥 영역 안이면 `--bg`, 그 밖은 `--surface` |
-| 범례 | 그림 아래 가는 선(`--line`) + 종류별 견본 16×12. 고충 번호·정차 지점은 `mark`(포인트 색 원), 여정 접점은 `dot-own`·`dot-out`, `acc` 연결선은 `acc-line`(포인트 색 짧은 선) |
+| 연결선 `edges` | `d`에 직각 경로(모서리 반지름 8), 선 `--text-3` 1.2, 화살촉 같은 색. `style: back`은 점선(돌아가는 길), `both`는 양쪽 화살촉, `acc`는 포인트 색 경로(선 `--accent` 1.6, 화살촉·라벨도 `--accent`. 그림마다 1개, 예: 안전 채널) (11.13), `dash`는 점선 한 방향(옵션·원격 연결), `remote`는 점선 양방향 (11.15). 라벨 `anchor`는 `start`·`middle`·`end`. 선끼리 경로를 공유하지 않고, 한 변에서 여러 선이 나가면 연결 지점을 12px 이상 띄운다 (diagram-design 규칙 3·4). 라벨 8px `--font-meta` `--text-3` 자간 0.06em, 선과 6~10px 띄우고(`anchor: start`는 세로선 옆) 항상 가림 바탕을 깐다: 바깥 영역 안이면 `--bg`, 그 밖은 `--surface` |
+| 범례 | 그림 아래 가는 선(`--line`) + 종류별 견본 16×12. 고충 번호·정차 지점은 `mark`(포인트 색 원), 여정 접점은 `dot-own`·`dot-out`, `acc` 연결선은 `acc-line`(포인트 색 짧은 선), 점선 연결선은 `dash-line`, `divider`는 `acc-dash`(포인트 색 짧은 점선) (11.15) |
 | 영역 메모 `zones[].note` | 영역 이름 줄 오른쪽 끝에 짧은 글(지표 등), 12px `--font-meta` `--text-2`. `accent: true`는 `--accent` `--fw-strong` (11.11) |
 | 고객 여정 (11.11) | `stages`: 위쪽 단계 띠(`--chip` 갈매기형, 12px `--fw-medium` `--text-2`). `curve`: 접점을 잇는 경로(`--text-2` 1.4, 연결선이 아닌 경로라 직각 규칙의 예외). `dots`: 접점 r5, `own` 채움 `--text`·이름 아래 / `out` 빈 원·이름 위. `callouts`: 고충 말풍선(바탕 `--surface` + 선 `--line-strong`, 글 12px `--text-2` 두 줄) + 왼쪽 위 번호 원 r8 `--accent`(숫자 9px `--surface`) + 점선 지시선(`2 2`)이 `px`·`py`까지 |
 | 평면도·안전 (11.13) | `zones[].dash`: 평면 위에 표시한 구역(바탕 없음 + 점선 `4 3` `--line-strong`). `marks`: 정차 지점 번호(높이 24 `--accent`, 한 글자면 원, "1 · 2"처럼 길면 알약형, 숫자 9px `--surface`) + 이름·부제를 `lx`·`ly`에(`anchor` start·middle·end). 연결선은 mark id를 끝점으로 쓸 수 있다. `route`: 걷는 구간을 굵은 선(`--text-2` 4, 둥근 끝)으로, 연결선 아래. `rings`: 한 점 둘레의 거리 원(점선 `--text-3` 1.2, `accent: true`는 바탕 `--accent-soft` + 실선 `--accent`), 원 위쪽에 라벨 12px `--fw-strong`(가림 바탕 `--bg`), 가운데 점 r9 `--text` + 이름 9px. `texts`: 그림 안 짧은 설명 9px `--font-meta` `--text-3` |
@@ -1998,6 +2000,61 @@ Outcome 목록 아래 소제목(h3, 제목은 콘텐츠 `roadmap.title`). `src/c
 | 폭 | 회로도와 같이 `min-width: 640px`, 좁은 열에서 그림 안 가로 스크롤 + `dgScroll` 안내 |
 
 - 접근성: SVG는 `aria-hidden`, 스크롤 상자는 `role="region"` + `aria-label`(소제목) + `tabindex="0"`. 같은 내용을 `.sr-only` 안의 진짜 표로(`caption` 소제목, 열 Task / 업무(`rsTask`)와 단계, 칸 로봇·직원). 표는 감싸는 `div`에 `.sr-only`를 둔다(5.24.6과 같은 이유).
+
+#### 5.24.9 명령에서 토크까지 (stack)
+
+Approach 다음 섹션 "From command to torque / 명령에서 토크까지"(`cs_stack`). `src/components/LayerStack.astro`, g14 시안 A (11.15). 현재 GenP 1건.
+
+| 요소 | 값 |
+|---|---|
+| 콘텐츠 | `diagrams/<slug>.yaml`의 `stack`: `command`(맨 위 명령), `descent`(오른쪽 위 한 줄), `layers[2–5]`(`name`, `does`, `where`, `out` 표본 라벨, `sample` `coords`·`chunk`·`joints`·`torque`, `value` 좌표·식 글자, `focus`), `note`(그림 아래) |
+| 배치 (SVG 720 단위) | 명령 상자 0–40(점선, `input`과 같은 모양). 계층 행 높이 80, 104 간격, 상자 폭 280을 행마다 24씩 오른쪽으로(계단). 표본 칸 360–720, 바탕 `--bg`, 왼쪽 위 라벨 8px `--font-meta`. 상자와 표본 칸 사이 점선(`2 3`) |
+| 상자 | 바탕 `--surface` + 선 `--line-strong`. `focus` 1곳은 `--accent-soft` + `--accent`(표본 라벨도 `--accent`). 안 글자: `L1`(9px mono) + 이름 12px `--fw-strong`, 하는 일 12px `--text-2`, 위치 9px mono `--text-3` |
+| 표본 | `coords` 3축 + 점 + 값 16px mono. `chunk` 16×29 칸(6×3, 간격 1) `--accent` 농도 변화. `joints` 29개 눈금(`--text-2` 2px). `torque` 식 12px mono. 모두 예시 모양이며 실측값이 아님(`note`에 "예시") |
+| 폭 | 회로도와 같이 `min-width: 640px`, 좁은 열에서 그림 안 가로 스크롤 + `dgScroll` |
+
+- 접근성: SVG는 `aria-hidden`, 스크롤 상자 `role="region"` + `aria-label`(섹션 제목). `.sr-only` 순서 목록: 명령, 계층마다 "이름: 하는 일 (위치). 출력: 값", 그리고 `descent`.
+
+#### 5.24.10 에피소드 해부와 학습 루프 (episode)
+
+Outcome 앞 섹션 "Learning loop / 학습 루프"(`cs_loop`). `src/components/EpisodeLoop.astro`, g14 시안 C (11.15). 현재 GenP 1건.
+
+| 요소 | 값 |
+|---|---|
+| 콘텐츠 | `diagrams/<slug>.yaml`의 `episode`: `segments[2–5]`(구간 이름), `tracks[5]`(`name`, `key` 한 글자: 언어·영상·상태·행동·결과), `instruction`, `result`, `steps[4]`(`name`, `sub`, `focus`), `back`(되돌림 라벨), `metrics`, `note`. 아래 글은 `caseStudy.loop[]` 목록(위 `--sp-5`) |
+| 배치 (SVG 720 단위) | 트랙 이름 0–104, 시간축 120–680, 구간 이름 위, 구간 경계 점선. 트랙 36 간격: 언어 막대(지시문), 영상 프레임 14칸(`--chip`), 상태 곡선(`--text-2`), 행동 35칸(`--accent` 농도), 결과 선 + 알약(`--accent-soft` + `--accent`). 232에 가는 선, 252부터 4단계 상자(폭 140, 48 간격, 화살표) |
+| 되돌림 | 마지막 상자 아래에서 첫 상자 아래로 포인트 색 경로(1.6, 모서리 8) + 가운데 라벨 8px mono `--accent` 가림 바탕. 포인트 색은 이 경로, `focus` 단계, 행동 칸, 결과 알약 |
+| 아래 | `note`, `metrics` 각 `--fs-sm` `--text-2` |
+| 폭 | `min-width: 640px`, 좁은 열에서 그림 안 가로 스크롤 + `dgScroll` |
+
+- 접근성: SVG `aria-hidden`. `.sr-only`: 지시문과 구간 순서·결과, 트랙 이름, 4단계 순서 목록, 되돌림 라벨.
+
+#### 5.24.11 도메인 표 (domains)
+
+Approach 그림 아래 소제목(h3, 제목은 `domains.title`). `src/components/DomainTable.astro`, g14 시안 B (11.15). 현재 GenP 1건.
+
+| 요소 | 값 |
+|---|---|
+| 콘텐츠 | `caseStudy.domains`: `title`, `heads`(`domain`·`basic`·`tech`·`measure` 열 머리), `items[2–4]`(`name`, `focus`, `status`(`kind` `done`·`draft`·`todo` + `label`), `basic`, `option`, `tech`, `measure`), `note` |
+| 표 | 5.24.4 `.tbl`과 같은 값, 첫 열 22%. 행 머리(`th scope="row"`) 안에 이름(`--text` `--fw-medium`) · 성격(`--fs-xs` `--text-3`) · 상태 배지를 쌓는다(그리드는 칸 안 `span`에 둬서 행 선이 어긋나지 않게). 기본 팩 칸 아래 "+ 옵션 팩"(`--fs-xs` `--text-3`) |
+| 상태 배지 | `--fs-2xs`(국문 `--fs-xs`), 테두리 `--line-strong`. `done` 테두리·글자 `--accent`, `todo` 점선 + `--text-3` |
+| 아래 | `note` `--fs-xs` `--text-3` |
+| 좁은 열 (≤560px 컨테이너) | 쌓인 기록(5.24.4 표와 같은 규칙), 값마다 `data-l`로 열 머리 |
+
+#### 5.24.12 표준 구성 (hardware)
+
+Architecture 그림 아래 소제목(h3, 제목은 `hardware.title`). 그 위에 `caseStudy.archNote` 한 줄(`.fig-note`, `--fs-sm` `--text-2`, 위 `--sp-3`). `src/components/StandardSet.astro`, g14 시안 C + 시안 A의 사양 띠 (11.15). 현재 GenP 1건.
+
+| 요소 | 값 |
+|---|---|
+| 콘텐츠 | `caseStudy.hardware`: `title`, `image`(`src/assets/`, 콘텐츠 기준 상대 경로), `alt`, `robot`·`server`·`external`(`name`, `sub`, `items[]` 이름·값), `links`(`robotServer` 두 줄, `serverExternal`), `specsTitle`, `specs[]`(라벨·값), `credit` |
+| 그림 (SVG 720 × 216) | 제품 사진 0–216(흰 바탕 + `--line` 테두리, `getImage` 400w WebP), 서버 선화 296–448(`--surface` + 슬롯 4칸), 외부 상자 556–712(점선). 연결선 y 108: 로봇↔서버 실선 양방향 + 위·아래 라벨, 서버↔외부 점선 양방향 + 라벨. 라벨 8px mono `--text-3`. `min-width: 640px` + 가로 스크롤 |
+| 목록 | 3열 grid `30% 34% 24%`(`space-between`): 이름 `--fs-sm` `--fw-strong`, 부제 mono `--fs-xs` `--text-3`, 항목 행마다 위 `--line`, 이름 `--text-2` / 값 mono `--fs-xs` `--text-3` 오른쪽 정렬 |
+| 로봇 사양 | 소제목(h4) 아래 굵은 선(`--line-strong`) + 3열 grid(`gap: --sp-3 --sp-4`): 라벨 `--fs-2xs` 대문자 `--text-3`(국문 `--fs-xs`), 값 `--fs-sm` `--text-2` |
+| 좁은 열 (≤560px 컨테이너) | 목록·사양 1열 |
+
+- 접근성: SVG `aria-hidden`, 스크롤 상자 `role="region"` + `aria-label`(소제목). `.sr-only` 한 줄: 사진 설명, 로봇 — 연결 — 서버 — 연결 — 외부. 목록·사양은 진짜 `dl`.
+- 제품 사진은 제조사 이미지라 `credit`으로 출처를 표기한다 (11.13과 같음).
 
 ## 6. Page Templates
 
@@ -3160,3 +3217,20 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 아키텍처 엔진 영역 이름의 "파일럿 서버"는 영역 메모(오른쪽)로 옮김 | 계획 화면 ↔ 초기화 연결선이 영역 이름을 가르지 않게 |
 | 기간 2024-03 – 2024-09(PoC + 파일럿), 역할 Lead, 성과 마지막 줄은 파일럿 완료와 인계 | 사용자 답변(2026-11-21) |
 | 노드 수 예산(9개) 초과(아키텍처 13, 흐름 11, 문제 12)는 그대로 둠 | SCM(11.10)과 같은 이유: 한 장에 전체 구조를 보임 |
+
+### 11.15 GenP 휴머노이드 제품 케이스 스터디 — 2026-11-21
+
+시안: `docs/design-drafts/g14/` (공통 코어 + 프로파일 A 교체 경계선 / B 기능 행렬 / C 슬롯, 도메인 표 A 항목×도메인 / B 도메인×항목, 아키텍처 A 4구역 회로도 / B 계층 띠 / C 배치와 경계, 명령에서 토크까지 A 계단 / B 깔때기 / C 가로 릴레이, 학습 루프 A 고리 / B 파이프라인 / C 에피소드 해부, 하드웨어 A 사진 + 지시선 / B 사양 카드 / C 표준 구성 1식. 비교 페이지 `review.html`(`make.mjs`·`shoot.mjs`·`review.mjs`), 캡처 `shots/`). 자료: 제품 정의서 v0.3, 제품 사양서 v0.1, 아키텍처 rev0.6, 상용화 로드맵 v0.2, 회사소개서(고객 대상), 생활 지원 시연 시나리오 (`docs/project-references/genp/`).
+
+| 결정 | 이유 |
+|---|---|
+| 코어 + 프로파일 A, 도메인 표 B, 아키텍처 C, 명령에서 토크까지 A, 학습 루프 C, 하드웨어 C를 고름. 하드웨어 C에 A의 로봇 사양(머리 센서·컴퓨터·관절·팔·크기·배터리·오디오·속도·통신)을 띠로 더함 | 사용자 선택(2026-11-21). C에는 로봇 사양이 없다는 사용자 지적 |
+| 아키텍처는 Agentic 버전(Phase 2·3, To-Be)만 그리고, 그림 아래 "Phase 2·3 목표 구조" 한 줄(`archNote`)을 둠 | 사용자 결정. 아직 구현되지 않은 구조임을 명시 |
+| 새 섹션 2개: From command to torque / 명령에서 토크까지(Approach 다음), Learning loop / 학습 루프(Outcome 앞). 도메인 표는 Approach 그림 아래, 표준 구성은 Architecture 그림 아래 소제목 | 사용자 결정(추천 순서). 다른 케이스에도 쓸 수 있게 일반 필드로 만듦 |
+| 새 컴포넌트 `LayerStack`·`EpisodeLoop`·`DomainTable`·`StandardSet`(5.24.9–5.24.12). `Diagram.astro`에 `divider`(포인트 색 점선 경계), 연결선 `dash`·`remote`, 라벨 `anchor: end`, 범례 `dash-line`·`acc-dash` 추가 | 교체 경계선과 원격·옵션 연결을 기존 문법으로 그릴 수 없음. 모두 추가만 하고 기존 필드는 바꾸지 않음 |
+| 포인트 색: 코어 그림은 맞춤 경계선, 아키텍처는 현장 밖으로 나가는 유일한 길(반출 게이트웨이), 계단은 VLA 계층과 액션 청크, 학습 루프는 평가 단계와 되돌림 경로 | 그림마다 제품의 핵심 설계 하나가 드러나게. 포인트 색 1개 원칙(2장) |
+| 회사소개서 그림·Ops 콘솔 캡처는 쓰지 않고 내용만 다시 그림. 계단의 좌표·액션 청크·관절 눈금은 예시 모양이며 그림 아래 "예시"로 표기 | 사용자 결정. 회사소개서 원본도 "Illustrative" |
+| 기술 스택을 사양서 기준으로 교체(GR00T N1.7, GEAR-SONIC, Nav2, FAST-LIO2, FSR-VLN, ROS 2, ZMQ, Whisper, FastAPI, Next.js) | 사용자 결정. 이전의 LeRobot·Isaac Lab·MuJoCo는 사양서에 없음 |
+| 시장 진단·경쟁사·가격·트랙 포트폴리오·고객/기관 이름·담당자 이름, 사양서의 TBD 값(서버 GPU 등)은 싣지 않음 | CLAUDE.md 규칙 3, 대외비 자료. 공개 범위는 제품·기술과 회사소개서(고객 대상)에 있는 내용 |
+| 도슨트 사례는 번호 대신 "별도 사례 / own case study"로 가리킴 | 대표 프로젝트 순서가 바뀌면 번호가 어긋남 |
+| G1 제품 사진은 도슨트 기종 비교와 같은 파일(`src/assets/robots/unitree-g1.jpg`) | 이용 조건 확인 과제(tasks.md)를 한 곳에서 관리 |

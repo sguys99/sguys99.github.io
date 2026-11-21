@@ -1,0 +1,213 @@
+---
+// Domain profiles under the Approach diagram (DESIGN.md 5.24.11; g14 시안 B): one row per domain with its focus and a
+// status badge, then basic pack (option pack after "+"), key technology and how it is measured. Data: caseStudy.domains.
+import type { CollectionEntry } from 'astro:content';
+import type { Lang } from '../i18n/ui';
+
+type Domains = NonNullable<
+  NonNullable<CollectionEntry<'projects'>['data']['caseStudy']>['domains']
+>;
+
+interface Props {
+  lang: Lang;
+  data: Domains;
+}
+
+const { lang, data } = Astro.props;
+const { heads, items, note } = data;
+---
+
+<div class="dom">
+  <table class="tbl">
+    <colgroup>
+      <col class="c0" />
+      <col />
+      <col />
+      <col />
+    </colgroup>
+    <thead>
+      <tr>
+        <th scope="col">{heads.domain[lang]}</th>
+        <th scope="col">{heads.basic[lang]}</th>
+        <th scope="col">{heads.tech[lang]}</th>
+        <th scope="col">{heads.measure[lang]}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {items.map((d) => (
+        <tr>
+          <th scope="row">
+            <span class="dh">
+              <span class="dn">{d.name[lang]}</span>
+              <span class="df">{d.focus[lang]}</span>
+              <span class={`st ${d.status.kind}`}>{d.status.label[lang]}</span>
+            </span>
+          </th>
+          <td data-l={heads.basic[lang]}>
+            {d.basic[lang]}
+            <span class="op">+ {d.option[lang]}</span>
+          </td>
+          <td data-l={heads.tech[lang]}>{d.tech[lang]}</td>
+          <td data-l={heads.measure[lang]}>{d.measure[lang]}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <p class="note">{note[lang]}</p>
+</div>
+
+<style>
+  .dom {
+    container-type: inline-size;
+  }
+
+  .tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-sm);
+  }
+
+  .c0 {
+    width: 22%;
+  }
+
+  th,
+  td {
+    vertical-align: top;
+    text-align: left;
+    padding: var(--sp-3) var(--sp-3) var(--sp-3) 0;
+    border-bottom: 1px solid var(--line);
+    line-height: 1.5;
+    color: var(--text-2);
+  }
+
+  /* Column heads as in the decision table (5.24.4): small uppercase labels. */
+  thead th {
+    padding-top: 0;
+    padding-bottom: var(--sp-2);
+    border-bottom-color: var(--line-strong);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-medium);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  html:lang(ko) thead th {
+    font-size: var(--fs-xs);
+    letter-spacing: 0;
+  }
+
+  tbody tr:last-child > * {
+    border-bottom: 0;
+  }
+
+  /* Row head: name, focus, status badge stacked. The grid sits inside the cell so row rules stay aligned. */
+  .dh {
+    display: grid;
+    gap: var(--sp-1);
+    justify-items: start;
+  }
+
+  .dn {
+    color: var(--text);
+    font-weight: var(--fw-medium);
+  }
+
+  .df {
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-regular);
+    color: var(--text-3);
+  }
+
+  /* Status: done in accent, draft plain, todo dashed. */
+  .st {
+    margin-top: var(--sp-1);
+    padding: 0 var(--sp-1h);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-xs);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-regular);
+    line-height: 1.6;
+    color: var(--text-2);
+  }
+
+  html:lang(ko) .st {
+    font-size: var(--fs-xs);
+  }
+
+  .st.done {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .st.todo {
+    border-style: dashed;
+    color: var(--text-3);
+  }
+
+  .op {
+    display: block;
+    margin-top: var(--sp-1);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  .note {
+    margin-top: var(--sp-3);
+    max-width: var(--measure);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  /* Narrow column: stacked records, one per domain (same rule as the 5.24.4 tables). */
+  @container (max-width: 560px) {
+    table,
+    tbody,
+    tr,
+    td,
+    tbody th {
+      display: block;
+    }
+
+    thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    tr {
+      padding: var(--sp-3) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    tbody tr:last-child {
+      border-bottom: 0;
+    }
+
+    td,
+    tbody th {
+      padding: 0 0 var(--sp-1);
+      border: 0;
+    }
+
+    td[data-l]::before {
+      content: attr(data-l);
+      display: block;
+      margin-top: var(--sp-2);
+      font-size: var(--fs-2xs);
+      letter-spacing: var(--ls-eyebrow);
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    html:lang(ko) td[data-l]::before {
+      font-size: var(--fs-xs);
+      letter-spacing: 0;
+    }
+  }
+</style>

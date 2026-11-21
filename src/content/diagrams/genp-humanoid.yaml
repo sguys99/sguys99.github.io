@@ -1,0 +1,452 @@
+# GenP 휴머노이드 제품 케이스 스터디 다이어그램 (DESIGN.md 5.24.4, 5.24.9, 5.24.10, 11.15).
+# approach: 공통 코어 + 도메인 프로파일 (교체 경계선), arch: Phase 2·3 목표 아키텍처의 배치와 경계,
+# stack: 명령에서 토크까지 (계단), episode: 에피소드 해부 + 학습 루프.
+# 출처: 제품 정의서 v0.3, 제품 사양서 v0.1, 아키텍처 rev0.6(Agentic 버전), 회사소개서(지능 계층·VLA 학습), 상용화 로드맵 v0.2(기술트리).
+# 시안: docs/design-drafts/g14/ (core A, arch C, stack A, loop C). 시장·경쟁·가격·고객·기관 이름은 넣지 않는다 (CLAUDE.md 규칙 3).
+# 좌표는 SVG 단위(4px 격자). 연결선 d는 직각 + 모서리 반지름 8 (diagram-design 규칙 3·4).
+
+legend:
+  - kind: acc-line
+    label: { en: Data leaving the site, ko: 현장 밖으로 나가는 데이터 }
+  - kind: dash-line
+    label: { en: Remote link, ko: 원격 연결 }
+  - kind: plain
+    label: { en: Software module, ko: 소프트웨어 모듈 }
+  - kind: logic
+    label: { en: 'Hardware, platform, API', ko: 하드웨어·플랫폼·API }
+approach:
+  width: 720
+  height: 492
+  legend:
+    - kind: input
+      label: { en: 'Task pack, per domain', ko: 도메인별 태스크 팩 }
+    - kind: ghost
+      label: { en: Option pack, ko: 옵션 팩 }
+    - kind: plain
+      label: { en: Shared module, ko: 공통 모듈 }
+    - kind: acc-dash
+      label: { en: Customization line, ko: 맞춤 경계 }
+  zones:
+    - id: z-life
+      label: { en: Living support, ko: 생활 지원 }
+      x: 0
+      y: 0
+      w: 224
+      h: 212
+    - id: z-docent
+      label: { en: Docent, ko: 홍보관 도슨트 }
+      note: { text: { en: own case study, ko: 별도 사례 } }
+      x: 248
+      y: 0
+      w: 224
+      h: 212
+    - id: z-insp
+      label: { en: Site inspection, ko: 현장 감시 }
+      x: 496
+      y: 0
+      w: 224
+      h: 212
+    - id: core
+      label: { en: 'Common core · domain-neutral', ko: 공통 코어 · 도메인 중립 }
+      x: 0
+      y: 264
+      w: 720
+      h: 120
+  nodes:
+    - id: life-0
+      kind: input
+      label: { en: Deliver items and drinks, ko: 물품·음료 전달 }
+      x: 12
+      y: 36
+      w: 200
+      h: 32
+    - id: life-1
+      kind: input
+      label: { en: Take out trash, ko: 쓰레기 배출 }
+      x: 12
+      y: 76
+      w: 200
+      h: 32
+    - id: life-2
+      kind: input
+      label: { en: Move small objects, ko: 작은 물건 이동 }
+      x: 12
+      y: 116
+      w: 200
+      h: 32
+    - id: life-opt
+      kind: ghost
+      label: { en: Option pack, ko: 옵션 팩 }
+      sub: { en: laundry · recycling · tables, ko: 세탁물·분리수거·식탁 정리 }
+      x: 12
+      y: 156
+      w: 200
+      h: 44
+    - id: docent-0
+      kind: input
+      label: { en: Guide route and stops, ko: 안내 동선·정위치 }
+      x: 260
+      y: 36
+      w: 200
+      h: 32
+    - id: docent-1
+      kind: input
+      label: { en: Greetings, ko: 안내 인사 }
+      x: 260
+      y: 76
+      w: 200
+      h: 32
+    - id: docent-2
+      kind: input
+      label: { en: 'Visitor Q&A', ko: '관람객 Q&A' }
+      x: 260
+      y: 116
+      w: 200
+      h: 32
+    - id: docent-opt
+      kind: ghost
+      label: { en: Option pack, ko: 옵션 팩 }
+      sub: { en: 'photo poses · exhibits · follow-me', ko: 포토 모션·전시 안내·추종 안내 }
+      x: 260
+      y: 156
+      w: 200
+      h: 44
+    - id: insp-0
+      kind: input
+      label: { en: Patrol route and return, ko: 순찰 동선·복귀 }
+      x: 508
+      y: 36
+      w: 200
+      h: 32
+    - id: insp-1
+      kind: input
+      label: { en: 'Photograph, read status', ko: 지점 촬영·상태 판독 }
+      x: 508
+      y: 76
+      w: 200
+      h: 32
+    - id: insp-2
+      kind: input
+      label: { en: 'Detect anomalies, alert', ko: 이상 탐지·알림 }
+      x: 508
+      y: 116
+      w: 200
+      h: 32
+    - id: insp-opt
+      kind: ghost
+      label: { en: Option pack, ko: 옵션 팩 }
+      sub: { en: reports · night patrol · thermal, ko: 리포트·야간 순찰·열화상 }
+      x: 508
+      y: 156
+      w: 200
+      h: 44
+    - id: voice
+      kind: plain
+      label: { en: Voice, ko: 음성 대화 }
+      sub: { en: call · interrupt, ko: 호출·끼어들기 }
+      x: 16
+      y: 296
+      w: 108
+      h: 72
+    - id: scn
+      kind: plain
+      label: { en: Scenarios, ko: 시나리오 실행 }
+      sub: { en: run · recover, ko: 실행·복구 }
+      x: 132
+      y: 296
+      w: 108
+      h: 72
+    - id: nav
+      kind: plain
+      label: { en: Navigation, ko: 자율주행 }
+      sub: { en: localize · avoid, ko: 위치추정·회피 }
+      x: 248
+      y: 296
+      w: 108
+      h: 72
+    - id: body
+      kind: plain
+      label: { en: Body control, ko: 전신 제어 }
+      sub: { en: walk · balance, ko: 보행·균형 }
+      x: 364
+      y: 296
+      w: 108
+      h: 72
+    - id: panel
+      kind: plain
+      label: { en: Control panel, ko: 관제시스템 }
+      sub: { en: monitor · alarms, ko: 모니터링·알람 }
+      x: 480
+      y: 296
+      w: 108
+      h: 72
+    - id: safe
+      kind: plain
+      label: { en: Safety frame, ko: 안전 프레임 }
+      sub: { en: '3-path E-Stop', ko: 비상정지 3경로 }
+      x: 596
+      y: 296
+      w: 108
+      h: 72
+    - id: hw
+      kind: logic
+      label:
+        {
+          en: 'Robot hardware · G1 today, other robots through a hardware abstraction layer',
+          ko: '로봇 하드웨어 · 현재 G1, HAL로 다른 기체 확장',
+        }
+      x: 0
+      y: 400
+      w: 720
+      h: 40
+  divider:
+    y: 236
+    x: 236
+    label: { en: CUSTOMIZED ABOVE · SHARED BELOW, ko: 위는 도메인별 교체 · 아래는 공통 }
+  edges:
+    - from: z-life
+      to: core
+      d: 'M112,212 L112,264'
+    - from: z-docent
+      to: core
+      d: 'M360,212 L360,264'
+    - from: z-insp
+      to: core
+      d: 'M608,212 L608,264'
+arch:
+  width: 720
+  height: 568
+  zones:
+    - id: site
+      label: { en: 'Customer site · on-prem', ko: 고객 현장 · 온프렘 }
+      x: 0
+      y: 76
+      w: 476
+      h: 420
+    - id: robot
+      label: { en: 'Robot · on-board', ko: 로봇 · 온보드 }
+      x: 12
+      y: 108
+      w: 216
+      h: 268
+    - id: server
+      label: { en: Local server, ko: 로컬 서버 }
+      x: 248
+      y: 108
+      w: 216
+      h: 268
+    - id: ops
+      label: { en: 'Ops · on-prem or SaaS', ko: Ops · 온프렘 또는 SaaS }
+      x: 500
+      y: 76
+      w: 220
+      h: 420
+  nodes:
+    - id: api
+      kind: logic
+      label: { en: LLM · STT · TTS, ko: LLM · STT · TTS }
+      sub: { en: commercial APIs, ko: 상용 API }
+      x: 96
+      y: 8
+      w: 192
+      h: 40
+    - id: agent
+      kind: plain
+      label: { en: Voice · Planner · Memory, ko: 음성 · 플래너 · 메모리 }
+      sub: { en: understand and plan, ko: 이해와 계획 }
+      x: 24
+      y: 140
+      w: 192
+      h: 56
+    - id: ctrl
+      kind: plain
+      label: { en: Navigation · Motion, ko: 주행 · 모션 제어 }
+      sub: { en: 'Nav2 + FAST-LIO2 · SONIC WBC', ko: 'Nav2 + FAST-LIO2 · SONIC WBC' }
+      x: 24
+      y: 224
+      w: 192
+      h: 56
+    - id: hw
+      kind: logic
+      label: { en: Unitree G1, ko: Unitree G1 }
+      sub: { en: 'RGB-D · LiDAR · joints', ko: 'RGB-D · LiDAR · 관절' }
+      x: 24
+      y: 308
+      w: 192
+      h: 56
+    - id: cp
+      kind: plain
+      label: { en: Control panel, ko: 관제시스템 }
+      sub: { en: 'run · monitor · E-Stop', ko: '실행·모니터링·E-Stop' }
+      x: 260
+      y: 140
+      w: 192
+      h: 56
+    - id: models
+      kind: plain
+      label: { en: VLA · VLN serving, ko: VLA · VLN 서빙 }
+      sub: { en: 'GR00T N1.7 · FSR-VLN', ko: 'GR00T N1.7 · FSR-VLN' }
+      x: 260
+      y: 224
+      w: 192
+      h: 56
+    - id: db
+      kind: plain
+      label: { en: Logs and DB, ko: 로그·운영 DB }
+      sub: { en: kept on site, ko: 현장 보관 }
+      x: 260
+      y: 308
+      w: 192
+      h: 56
+    - id: gw
+      kind: focus
+      label: { en: Export gateway, ko: 반출 게이트웨이 }
+      sub: { en: 'optional · de-identified first', ko: 옵션 · 비식별화 후 반출 }
+      x: 260
+      y: 412
+      w: 192
+      h: 56
+    - id: console
+      kind: plain
+      label: { en: Console, ko: 통합 콘솔 }
+      sub: { en: overview · alarms · remote, ko: 현황·알람·원격 }
+      x: 512
+      y: 140
+      w: 196
+      h: 56
+    - id: fto
+      kind: plain
+      label: { en: Fleet · Task Ops, ko: Fleet · Task Ops }
+      sub: { en: robots · tasks, ko: 로봇·태스크 }
+      x: 512
+      y: 224
+      w: 196
+      h: 56
+    - id: dm
+      kind: plain
+      label: { en: Data · Model Ops, ko: Data · Model Ops }
+      sub: { en: datasets · registry · rollback, ko: 데이터셋·레지스트리·롤백 }
+      x: 512
+      y: 308
+      w: 196
+      h: 56
+    - id: common
+      kind: logic
+      label: { en: Common platform, ko: 공통 플랫폼 }
+      sub: { en: 'auth · multi-tenant', ko: 인증·멀티테넌트 }
+      x: 512
+      y: 412
+      w: 196
+      h: 56
+  edges:
+    - from: api
+      to: agent
+      d: 'M192,48 L192,140'
+      style: both
+    - from: agent
+      to: cp
+      d: 'M216,168 L260,168'
+      style: both
+    - from: agent
+      to: ctrl
+      d: 'M120,196 L120,224'
+    - from: ctrl
+      to: hw
+      d: 'M120,280 L120,308'
+      style: both
+    - from: ctrl
+      to: models
+      d: 'M216,252 L260,252'
+      style: both
+    - from: cp
+      to: console
+      d: 'M452,168 L512,168'
+      style: remote
+    - from: dm
+      to: models
+      d: 'M512,336 L492,336 Q484,336 484,328 L484,268 Q484,260 476,260 L452,260'
+      style: dash
+      label:
+        text: { en: MODELS, ko: 모델 배포 }
+        x: 478
+        y: 302
+        anchor: end
+    - from: db
+      to: gw
+      d: 'M356,364 L356,412'
+    - from: gw
+      to: dm
+      d: 'M452,440 L484,440 Q492,440 492,432 L492,360 Q492,352 500,352 L512,352'
+      style: acc
+
+# 명령에서 토크까지: 회사소개서 "로봇 지능 계층 구조"의 예시(Illustrative)를 다시 그린 것. 모델·위치는 제품 사양서 Ⅰ.2.
+stack:
+  command: { en: '“Go to where the red cup is”', ko: '“빨간 컵 있는 곳으로 가”' }
+  descent:
+    {
+      en: 'EACH LAYER DOWN: LESS INFORMATION, MORE PRECISION',
+      ko: 내려갈수록 정보는 줄고 구체성은 늘어남,
+    }
+  layers:
+    - name: { en: Perception and mapping, ko: 인지·매핑 }
+      does: { en: 'Maps the space, finds the goal', ko: 지도를 만들고 목표를 좌표로 }
+      where: { en: FSR-VLN · local server, ko: FSR-VLN · 로컬 서버 }
+      out: { en: GOAL COORDINATES, ko: 목표 좌표 }
+      sample: coords
+      value: '[2.3, 1.1, 0.8]'
+    - name: { en: VLA policy, ko: 상위 지능 (VLA) }
+      does: { en: Turns the goal into next motions, ko: 목표를 앞으로 취할 동작으로 }
+      where: { en: GR00T N1.7 · local server, ko: GR00T N1.7 · 로컬 서버 }
+      out: { en: ACTION CHUNK · 16 STEPS × 29 JOINTS, ko: 액션 청크 · 16 스텝 × 관절 29개 }
+      sample: chunk
+      focus: true
+    - name: { en: Whole-body control, ko: 전신 제어 }
+      does: { en: 'Sets each step’s pose, keeps balance', ko: '매 스텝 자세 결정, 균형·접촉 처리' }
+      where: { en: GEAR-SONIC · on-board PC2, ko: GEAR-SONIC · 온보드 PC2 }
+      out: { en: JOINT TARGETS · 29, ko: 관절 목표각 · 29 }
+      sample: joints
+    - name: { en: Motors, ko: 하드웨어 (모터) }
+      does: { en: Drives joints to close the error, ko: 목표와 현재 각의 오차를 줄이도록 구동 }
+      where: { en: motor control · on-board PC1, ko: 모터 제어 · 온보드 PC1 }
+      out: { en: JOINT TORQUE, ko: 관절 토크 }
+      sample: torque
+      value: 'τ = Kp(θ* − θ) − Kd·ω'
+  note:
+    en: 'Illustrative. One spoken command changes form at each layer, from language to coordinates, an action chunk, joint targets, and torque.'
+    ko: '예시. 음성 명령 하나가 계층을 내려가며 자연어 → 좌표 → 액션 청크 → 관절 목표각 → 토크로 형태를 바꾼다.'
+# 학습 루프: 회사소개서 "VLA 학습 데이터 구축 절차"·"VLA 모델 학습/평가". 시연 예시는 생활 지원 시연 시나리오(캔 분리수거).
+episode:
+  segments:
+    - { en: move to the table, ko: 테이블로 이동 }
+    - { en: grasp the can, ko: 캔 파지 }
+    - { en: carry to the bin, ko: 분리수거함으로 이동 }
+    - { en: 'drop, sort', ko: 분리수거 }
+  tracks:
+    - { key: L, name: { en: Language, ko: 언어 지시 } }
+    - { key: V, name: { en: Vision, ko: 카메라 영상 } }
+    - { key: S, name: { en: State, ko: 로봇 상태 } }
+    - { key: A, name: { en: Action, ko: 행동 } }
+    - { key: O, name: { en: Outcome, ko: 결과 } }
+  instruction:
+    {
+      en: '“Pick up the can on the table and sort it into recycling”',
+      ko: '“테이블 위 캔을 집어 분리수거함에 정리해”',
+    }
+  result: { en: success, ko: 성공 }
+  steps:
+    - name: { en: Collect, ko: 수집 }
+      sub: { en: VR teleop · simulation, ko: VR 텔레옵·시뮬레이션 }
+    - name: { en: 'Curate, label', ko: 정제·라벨링 }
+      sub: { en: per segment, ko: 구간별 라벨 }
+    - name: { en: Fine-tune VLA, ko: VLA 파인튜닝 }
+      sub: { en: GR00T N1.7, ko: GR00T N1.7 }
+    - name: { en: Evaluate, ko: 단계별 평가 }
+      sub: { en: offline · sim · robot, ko: 오프라인·시뮬·실기 }
+      focus: true
+  back: { en: BELOW TARGET · COLLECT FAILURE SCENES, ko: 목표 미달 · 실패 장면 추가 수집 }
+  metrics:
+    en: 'Measured by success rate, generalization, safety, speed, and recovery.'
+    ko: '평가 지표: 작업 성공률, 일반화 성능, 안전성, 수행 속도, 복구 능력.'
+  note:
+    en: 'One demonstration becomes five recorded tracks under a shared episode schema, labeled per segment.'
+    ko: '시연 한 번이 공통 에피소드 스키마(EpisodeSchema)의 다섯 줄 기록이 되고, 구간별로 라벨을 단다.'

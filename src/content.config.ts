@@ -155,11 +155,20 @@ const DG_KINDS = [
   'decision',
   'ghost',
 ] as const;
-// Legend swatches: a node kind, a pain-point mark, a journey touchpoint dot, or the accent (safety) connector.
+// Legend swatches: a node kind, a pain-point mark, a journey touchpoint dot, the accent (safety) connector,
+// a dashed connector (dash-line), or the dashed accent divider (acc-dash).
 const DG_LEGEND = z
   .array(
     z.strictObject({
-      kind: z.enum([...DG_KINDS, 'mark', 'dot-own', 'dot-out', 'acc-line']),
+      kind: z.enum([
+        ...DG_KINDS,
+        'mark',
+        'dot-own',
+        'dot-out',
+        'acc-line',
+        'dash-line',
+        'acc-dash',
+      ]),
       label: localized,
     }),
   )
@@ -279,21 +288,24 @@ const diagram = z
         }),
       )
       .default([]),
+    // A dashed accent line across the drawing at y, with its label centered at x (e.g. the line customization stays above).
+    divider: z.strictObject({ y: z.number(), x: z.number(), label: localized }).optional(),
     // from/to name a node or zone (read by screen readers); d is the drawn path.
-    // style: back = dashed return, both = arrowheads at both ends, acc = the accent path (one per diagram, e.g. a safety channel).
+    // style: back = dashed return, both = arrowheads at both ends, acc = the accent path (one per diagram, e.g. a safety channel),
+    // dash = dashed one-way (an optional or remote link), remote = dashed with arrowheads at both ends.
     edges: z
       .array(
         z.strictObject({
           from: text,
           to: text,
           d: text,
-          style: z.enum(['back', 'both', 'acc']).optional(),
+          style: z.enum(['back', 'both', 'acc', 'dash', 'remote']).optional(),
           label: z
             .strictObject({
               text: localized,
               x: z.number(),
               y: z.number(),
-              anchor: z.enum(['start', 'middle']).default('middle'), // every edge label sits on a mask
+              anchor: z.enum(['start', 'middle', 'end']).default('middle'), // every edge label sits on a mask
             })
             .optional(),
         }),
@@ -354,6 +366,44 @@ const results = z
       ctx.addIssue({ code: 'custom', message: 'at most one best row' });
   });
 
+// Layer stack (DESIGN.md 5.24.9): one command stepping down through layers, each with the data it hands on.
+// sample picks the drawing of that output: coords (a 3D point), chunk (steps × joints grid), joints (one tick per joint),
+// torque (the control law in mono). value is the text drawn for coords and torque.
+const stack = z.strictObject({
+  command: localized,
+  descent: localized, // one line over the drawing (e.g. less information, more precision)
+  layers: z
+    .array(
+      z.strictObject({
+        name: localized,
+        does: localized,
+        where: localized,
+        out: localized, // label over the sample
+        sample: z.enum(['coords', 'chunk', 'joints', 'torque']),
+        value: text.optional(),
+        focus: z.boolean().default(false),
+      }),
+    )
+    .min(2)
+    .max(5),
+  note: localized,
+});
+
+// Episode anatomy (DESIGN.md 5.24.10): one demonstration as five recorded tracks over labeled segments,
+// then the training loop that consumes it, with the accent return path for runs below target.
+const episode = z.strictObject({
+  segments: z.array(localized).min(2).max(5),
+  tracks: z.array(z.strictObject({ name: localized, key: text })).length(5), // language, vision, state, action, outcome
+  instruction: localized,
+  result: localized,
+  steps: z
+    .array(z.strictObject({ name: localized, sub: localized, focus: z.boolean().default(false) }))
+    .length(4),
+  back: localized, // label on the return path
+  metrics: localized,
+  note: localized,
+});
+
 const diagrams = defineCollection({
   loader: glob({ pattern: '*.yaml', base: './src/content/diagrams' }),
   schema: z.strictObject({
@@ -365,6 +415,8 @@ const diagrams = defineCollection({
     journey: diagram.optional(), // Visitor journey section (floor plan), before Architecture
     safety: diagram.optional(), // Safety section, after Service flow
     results: results.optional(), // experiment results chart under the Approach bullets
+    stack: stack.optional(), // its own section after Approach (5.24.9)
+    episode: episode.optional(), // Learning loop section before Outcome (5.24.10)
   }),
 });
 
@@ -401,6 +453,54 @@ const roadmap = z
         ctx.addIssue({ code: 'custom', message: `"${s.label.en}": robot exceeds the task count` });
   });
 
+// Domain comparison under the Approach diagram (DESIGN.md 5.24.11): one row per domain with a status badge.
+// status: done (accent), draft, todo (dashed).
+const domains = z.strictObject({
+  title: localized,
+  heads: z.strictObject({
+    domain: localized,
+    basic: localized,
+    tech: localized,
+    measure: localized,
+  }),
+  items: z
+    .array(
+      z.strictObject({
+        name: localized,
+        focus: localized,
+        status: z.strictObject({ kind: z.enum(['done', 'draft', 'todo']), label: localized }),
+        basic: localized,
+        option: localized,
+        tech: localized,
+        measure: localized,
+      }),
+    )
+    .min(2)
+    .max(4),
+  note: localized,
+});
+
+// Standard delivery set under the Architecture diagram (DESIGN.md 5.24.12): robot photo, local server and external
+// services with the links between them, what runs where, and the robot's specifications.
+const unit = z.strictObject({
+  name: localized,
+  sub: localized,
+  items: z.array(z.strictObject({ name: localized, value: localized })).min(1),
+});
+const hardware = (image: ImageFn) =>
+  z.strictObject({
+    title: localized,
+    image: image(),
+    alt: localized,
+    robot: unit,
+    server: unit,
+    external: unit,
+    links: z.strictObject({ robotServer: z.array(text).length(2), serverExternal: localized }),
+    specsTitle: localized,
+    specs: z.array(z.strictObject({ label: localized, value: localized })).min(2),
+    credit: localized,
+  });
+
 const caseStudy = (image: ImageFn) =>
   z.strictObject({
     context: bullets,
@@ -427,6 +527,10 @@ const caseStudy = (image: ImageFn) =>
     safety: bullets.optional(), // Safety section text under its diagram
     compare: compare(image).optional(),
     roadmap: roadmap.optional(),
+    domains: domains.optional(), // under the Approach diagram
+    archNote: localized.optional(), // one line under the Architecture diagram (e.g. a target, not current, structure)
+    hardware: hardware(image).optional(), // under the Architecture diagram
+    loop: bullets.optional(), // Learning loop section text under its figure
   });
 
 const projects = defineCollection({

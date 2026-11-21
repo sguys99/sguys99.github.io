@@ -31,6 +31,7 @@ const {
   route,
   rings,
   texts,
+  divider,
 } = spec;
 const arrow = `url(#dg-ar-${uid}-${lang})`;
 const arrowAcc = `url(#dg-ara-${uid}-${lang})`;
@@ -91,10 +92,18 @@ for (const n of nodes) {
     name.set(n.id, `${plain(n)} (${home.label[lang]})`);
 }
 const linkText = (e: Spec['edges'][number]) =>
-  t(lang, e.style === 'both' ? 'dgWith' : e.style === 'back' ? 'dgBack' : 'dgThen', {
-    a: name.get(e.from)!,
-    b: name.get(e.to)!,
-  });
+  t(
+    lang,
+    e.style === 'both' || e.style === 'remote'
+      ? 'dgWith'
+      : e.style === 'back'
+        ? 'dgBack'
+        : 'dgThen',
+    {
+      a: name.get(e.from)!,
+      b: name.get(e.to)!,
+    },
+  );
 ---
 
 <figure class="dg">
@@ -210,12 +219,39 @@ const linkText = (e: Spec['edges'][number]) =>
       {route && <path class="route" d={route} />}
       {edges.map((e) => (
         <path
-          class:list={['ln', { back: e.style === 'back', acc: e.style === 'acc' }]}
+          class:list={[
+            'ln',
+            {
+              back: e.style === 'back' || e.style === 'dash' || e.style === 'remote',
+              acc: e.style === 'acc',
+            },
+          ]}
           d={e.d}
           marker-end={e.style === 'acc' ? arrowAcc : arrow}
-          marker-start={e.style === 'both' ? arrow : undefined}
+          marker-start={e.style === 'both' || e.style === 'remote' ? arrow : undefined}
         />
       ))}
+      {/* Divider: a dashed accent line across the drawing, its label on a mask centered at x. */}
+      {divider &&
+        (() => {
+          const w = lw(divider.label[lang]) + 16;
+          return (
+            <>
+              <path class="ln acc dv" d={`M0,${divider.y} H${W}`} />
+              <rect
+                class:list={['em', { wash: onWash({ x: divider.x, y: divider.y - 12 }) }]}
+                x={divider.x - w / 2}
+                y={divider.y - 18}
+                width={w}
+                height="12"
+                rx="2"
+              />
+              <text class="el acc" x={divider.x} y={divider.y - 9} text-anchor="middle">
+                {divider.label[lang]}
+              </text>
+            </>
+          );
+        })()}
       {curve && <path class="cv" d={curve} />}
       {zones
         .filter((z) => z.center)
@@ -241,7 +277,8 @@ const linkText = (e: Spec['edges'][number]) =>
         .filter((e) => e.label)
         .map(({ label: l, style }) => {
           const w = lw(l!.text[lang]) + 8;
-          const x = l!.anchor === 'start' ? l!.x - 4 : l!.x - w / 2;
+          const x =
+            l!.anchor === 'start' ? l!.x - 4 : l!.anchor === 'end' ? l!.x - w + 4 : l!.x - w / 2;
           return (
             <>
               <rect
@@ -350,8 +387,18 @@ const linkText = (e: Spec['edges'][number]) =>
       <line class="rule" x1="0" y1={LG - 20} x2={W} y2={LG - 20}></line>
       {legend.map((l, i) => (
         <>
-          {l.kind === 'acc-line' ? (
-            <path class="ln acc" d={`M${i * lgStep},${LG - 4} H${i * lgStep + 16}`} />
+          {l.kind === 'acc-line' || l.kind === 'acc-dash' || l.kind === 'dash-line' ? (
+            <path
+              class:list={[
+                'ln',
+                {
+                  acc: l.kind !== 'dash-line',
+                  dv: l.kind === 'acc-dash',
+                  back: l.kind === 'dash-line',
+                },
+              ]}
+              d={`M${i * lgStep},${LG - 4} H${i * lgStep + 16}`}
+            />
           ) : l.kind === 'mark' ? (
             <circle class="mkc" cx={i * lgStep + 8} cy={LG - 4} r="6" />
           ) : l.kind.startsWith('dot-') ? (
@@ -404,6 +451,7 @@ const linkText = (e: Spec['edges'][number]) =>
     {texts.map((x) => (
       <p>{x.text[lang]}</p>
     ))}
+    {divider && <p>{divider.label[lang]}</p>}
     {callouts.length > 0 && (
       <>
         <p>{t(lang, 'dgPains')}</p>
@@ -671,6 +719,12 @@ const linkText = (e: Spec['edges'][number]) =>
   .ln.acc {
     stroke: var(--accent);
     stroke-width: 1.6;
+  }
+
+  /* Divider: dashed accent line marking a boundary (e.g. customization stays above it). */
+  .ln.dv {
+    stroke-width: 1.2;
+    stroke-dasharray: 4 3;
   }
 
   .mk.acc,

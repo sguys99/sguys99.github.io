@@ -13,6 +13,10 @@ import Diagram from './Diagram.astro';
 import ResultsChart from './ResultsChart.astro';
 import Comparison from './Comparison.astro';
 import RoleShift from './RoleShift.astro';
+import DomainTable from './DomainTable.astro';
+import LayerStack from './LayerStack.astro';
+import EpisodeLoop from './EpisodeLoop.astro';
+import StandardSet from './StandardSet.astro';
 import { t, fmtPeriod, homePath, type Lang } from '../i18n/ui';
 
 /** Featured projects with a case study, in `order` (6.3): page list, pager order and the `01 / 05` position. */
@@ -43,13 +47,16 @@ const client = p.client && (p.client.public ? p.client.name[lang] : p.client.lab
 // getCollection, not getEntry: most case studies have no diagram file, and getEntry warns on a miss.
 const dg = (await getCollection('diagrams')).find((d) => d.id === slug)?.data;
 
-// Numbered sections (5.24.3); Visitor journey, Architecture, Service flow and Safety only when present,
-// so later numbers move up. Architecture is a diagram when src/content/diagrams/<slug>.yaml has `arch`, else the layer table.
+// Numbered sections (5.24.3); layer stack, Visitor journey, Architecture, Service flow, Safety and Learning loop only
+// when present, so later numbers move up. Architecture is a diagram when src/content/diagrams/<slug>.yaml has `arch`,
+// else the layer table.
 const show = {
+  stack: !!dg?.stack,
   journey: !!dg?.journey,
   arch: !!(cs.architecture || dg?.arch),
   flow: !!dg?.flow,
   safety: !!(dg?.safety || cs.safety),
+  loop: !!dg?.episode,
 };
 const secs = (
   [
@@ -57,10 +64,12 @@ const secs = (
     ['problem', cs.problem],
     ['role', cs.role],
     ['approach', cs.approach],
+    ['stack', []],
     ['journey', []],
     ['arch', []],
     ['flow', []],
     ['safety', cs.safety ?? []],
+    ['loop', cs.loop ?? []],
     ['outcome', cs.outcome],
   ] as const
 )
@@ -199,6 +208,12 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
           {(s.id === 'journey' || s.id === 'safety') && dg?.[s.id] && (
             <Diagram lang={lang} spec={dg[s.id]!} legend={dg.legend} label={s.label} uid={s.id} />
           )}
+          {s.id === 'stack' && dg?.stack && (
+            <LayerStack lang={lang} data={dg.stack} label={s.label} />
+          )}
+          {s.id === 'loop' && dg?.episode && (
+            <EpisodeLoop lang={lang} data={dg.episode} label={s.label} />
+          )}
           {s.id === 'journey' ? (
             cs.journey && (
               <>
@@ -278,7 +293,10 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
               <ul
                 class:list={[
                   'bl',
-                  { oc: s.id === 'outcome', after: s.id === 'safety' && dg?.safety },
+                  {
+                    oc: s.id === 'outcome',
+                    after: (s.id === 'safety' && dg?.safety) || (s.id === 'loop' && dg?.episode),
+                  },
                 ]}
               >
                 {s.items.map((b) => (
@@ -297,6 +315,19 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
                 uid="approach"
               />
             </div>
+          )}
+          {s.id === 'approach' && cs.domains && (
+            <>
+              <h3>{cs.domains.title[lang]}</h3>
+              <DomainTable lang={lang} data={cs.domains} />
+            </>
+          )}
+          {s.id === 'arch' && cs.archNote && <p class="fig-note">{cs.archNote[lang]}</p>}
+          {s.id === 'arch' && cs.hardware && (
+            <>
+              <h3>{cs.hardware.title[lang]}</h3>
+              <StandardSet lang={lang} data={cs.hardware} label={cs.hardware.title[lang]} />
+            </>
           )}
           {s.id === 'approach' && dg?.results && (
             <>
@@ -612,6 +643,14 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
 
   .fig-post {
     margin-top: var(--sp-5);
+  }
+
+  /* One line under a section diagram (e.g. "target architecture"), like the figure notes. */
+  .fig-note {
+    max-width: var(--measure);
+    margin-top: var(--sp-3);
+    font-size: var(--fs-sm);
+    color: var(--text-2);
   }
 
   .bl {
