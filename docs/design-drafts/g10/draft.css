@@ -1,0 +1,98 @@
+/* g10 시안 공통: 토큰만 사용. ①②는 Diagram.astro 스타일을 범위 없이 옮긴 것. */
+.g10 .dg { container-type: inline-size; position: relative; }
+.g10 .dg-scroll, .g10 .x-scroll { overflow-x: auto; }
+.g10 :is(.dg-scroll, .x-scroll):focus-visible { outline: var(--focus-w) solid var(--focus); outline-offset: var(--focus-offset); border-radius: var(--radius-xs); }
+.g10 .dg svg, .g10 .x-scroll svg { display: block; width: 100%; min-width: 640px; height: auto; font-family: inherit; }
+.g10 .hint { display: none; margin-top: var(--sp-2); font-size: var(--fs-xs); color: var(--text-3); }
+.g10 { container-type: inline-size; }
+@container (max-width: 639px) { .g10 .hint { display: block; } }
+
+.g10 .k-sllm rect { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1; }
+.g10 .k-llm rect { fill: var(--surface); stroke: var(--text-2); stroke-width: 1.2; }
+.g10 .k-logic rect { fill: var(--chip); stroke: var(--line-strong); stroke-width: 0.8; }
+.g10 .k-plain rect { fill: var(--surface); stroke: var(--line-strong); stroke-width: 1; }
+.g10 .k-input rect { fill: var(--surface); stroke: var(--line-strong); stroke-dasharray: 4 3; }
+.g10 .nt { fill: var(--text); font-size: 12px; font-weight: var(--fw-strong); }
+.g10 .ns, .g10 .el { fill: var(--text-3); font-family: var(--font-meta); }
+.g10 .ns { font-size: 9px; }
+.g10 .el { font-size: 8px; letter-spacing: 0.06em; }
+.g10 .zone { fill: var(--bg); }
+.g10 .zl { fill: var(--text-2); font-size: 12px; font-weight: var(--fw-strong); }
+.g10 .zm { fill: var(--bg); }
+.g10 .zone.in, .g10 .zm.in { fill: var(--surface); }
+.g10 .zone.in { stroke: var(--line-strong); stroke-width: 0.8; }
+.g10 .em { fill: var(--surface); }
+.g10 .em.wash { fill: var(--bg); }
+.g10 .ln { fill: none; stroke: var(--text-3); stroke-width: 1.2; }
+.g10 .ln.back { stroke-dasharray: 4 3; }
+.g10 .mk { fill: var(--text-3); }
+.g10 .rule { stroke: var(--line); }
+.g10 .lg { fill: var(--text-2); font-size: 12px; }
+
+.g10 .xnote { margin-top: var(--sp-3); font-size: var(--fs-xs); color: var(--text-3); }
+
+/* ---------- ③ A. 실험 축 원장 ---------- */
+.xa table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+.xa thead th { text-align: left; font-weight: var(--fw-medium); font-size: var(--fs-2xs); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--text-3); padding: 0 var(--sp-3) var(--sp-2) 0; border-bottom: 1px solid var(--line-strong); vertical-align: bottom; }
+html:lang(ko) .xa thead th { font-size: var(--fs-xs); letter-spacing: 0; text-transform: none; }
+.xa td, .xa tbody th { padding: var(--sp-2) var(--sp-3) var(--sp-2) 0; border-bottom: 1px solid var(--line); vertical-align: middle; text-align: left; }
+.xa tbody th { font-weight: var(--fw-medium); color: var(--text); white-space: nowrap; }
+.xa .n { width: 1%; font-family: var(--font-meta); font-size: var(--fs-xs); color: var(--accent); }
+.xa .cmp { color: var(--text-2); }
+.xa .off { color: var(--text-3); }
+.xa .vs { font-family: var(--font-meta); font-size: var(--fs-2xs); color: var(--text-3); margin: 0 var(--sp-1); }
+.xa .on { color: var(--text); font-weight: var(--fw-medium); }
+.xa .anote { font-size: var(--fs-xs); color: var(--text-3); }
+.xa .m { width: 252px; white-space: nowrap; padding-right: 0; }
+.xa .db { display: inline-block; vertical-align: middle; width: 120px; height: 16px; }
+.xa .db.sc { display: block; margin-top: var(--sp-1); }
+.xa .db.sc text { font-family: var(--font-meta); font-size: 8px; fill: var(--text-3); letter-spacing: 0; text-transform: none; }
+.xa .db .tg { stroke: var(--line-strong); stroke-dasharray: 2 2; }
+.xa .db .bar { stroke: var(--line-strong); stroke-width: 2; }
+.xa .db .a { fill: var(--surface); stroke: var(--text-3); stroke-width: 1.2; }
+.xa .db .b { fill: var(--accent); }
+.xa .mv { display: inline-block; margin-left: var(--sp-2); font-family: var(--font-meta); font-size: var(--fs-xs); color: var(--text-3); vertical-align: middle; }
+.xa .mv b { color: var(--text); font-weight: var(--fw-medium); }
+.xa tfoot td { border-bottom: 0; padding-top: var(--sp-3); color: var(--text-2); }
+.xa tfoot b { color: var(--accent); font-weight: var(--fw-strong); font-family: var(--font-meta); }
+.xa .bm { color: var(--text-3); font-size: var(--fs-xs); }
+@container (max-width: 560px) {
+  .xa thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .xa table, .xa tbody, .xa tfoot, .xa tr { display: block; }
+  .xa tbody tr { display: grid; grid-template-columns: 20px minmax(0, 1fr); column-gap: var(--sp-2); padding: var(--sp-3) 0; border-bottom: 1px solid var(--line); }
+  .xa tbody tr > * { border: 0; padding: 0; }
+  .xa tbody .cmp, .xa tbody .m { grid-column: 2; margin-top: var(--sp-1); }
+  .xa tfoot tr { display: block; } .xa tfoot td:first-child { display: none; } .xa tfoot td { display: block; }
+}
+
+/* ---------- ③ B. 막대 + 설정 행렬 ---------- */
+.xb text { font-size: 12px; fill: var(--text); }
+.xb .nm.rl0 { fill: var(--text-2); }
+.xb .nm.best { font-weight: var(--fw-strong); }
+.xb .bar.rl0 { fill: var(--chip); stroke: var(--line-strong); stroke-width: 0.8; }
+.xb .bar.ml { fill: var(--surface); stroke: var(--text-3); stroke-width: 1; }
+.xb .bar.best { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.2; }
+.xb :is(.v, .tk, .ch, .nr, .rl) { font-family: var(--font-meta); font-size: 9px; fill: var(--text-3); }
+.xb .rl { font-size: 8px; letter-spacing: 0.06em; }
+.xb .v.best { fill: var(--accent); font-weight: var(--fw-strong); }
+.xb .ref { stroke: var(--text-3); stroke-dasharray: 4 3; stroke-width: 1; }
+.xb .ref.dot { stroke-dasharray: 1 3; stroke-linecap: round; }
+.xb .sep, .xb .ax { stroke: var(--line); }
+.xb .ax { stroke: var(--line-strong); }
+.xb .cell { fill: none; stroke: var(--line-strong); stroke-width: 1; }
+.xb .cell.on { fill: var(--text-2); stroke: var(--text-2); }
+.xb .cell.on.best { fill: var(--accent); stroke: var(--accent); }
+
+/* ---------- ③ C. 노선도 ---------- */
+.xc text { font-size: 12px; }
+.xc .an { fill: var(--text-2); font-weight: var(--fw-strong); }
+.xc .sub, .xc .mv { font-family: var(--font-meta); font-size: 9px; fill: var(--text-3); }
+.xc .val { fill: var(--text-2); font-family: var(--font-meta); font-weight: var(--fw-medium); }
+.xc .val.best { fill: var(--accent); font-weight: var(--fw-strong); font-size: 16px; }
+.xc .on { fill: var(--text); font-weight: var(--fw-medium); }
+.xc .off { fill: var(--text-3); text-decoration: line-through; }
+.xc .track { stroke: var(--text-2); stroke-width: 2; }
+.xc .st, .xc .st0 { fill: var(--surface); stroke: var(--text-2); stroke-width: 2; }
+.xc .st0 { stroke: var(--text-3); }
+.xc .stub { stroke: var(--line-strong); stroke-dasharray: 2 2; }
+.xc .end { fill: var(--accent); }
