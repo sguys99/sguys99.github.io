@@ -1,0 +1,262 @@
+---
+// Experiment results chart (DESIGN.md 5.24.6; g10 시안 B): error bar per configuration + settings matrix,
+// drawn from `results` in src/content/diagrams/<slug>.yaml. The SVG is hidden from screen readers;
+// the same numbers are in the .sr-only table below it.
+import type { CollectionEntry } from 'astro:content';
+import { t, type Lang } from '../i18n/ui';
+
+type Results = NonNullable<CollectionEntry<'diagrams'>['data']['results']>;
+
+interface Props {
+  lang: Lang;
+  data: Results;
+  label: string; // accessible name, the heading above the chart
+}
+
+const { lang, data, label } = Astro.props;
+const { max, ticks, target, benchmark, ruleNote, settings, rows, note } = data;
+
+// Layout in SVG units: names 0–180, bars 188–428 (0–max %), matrix columns 44 apart from 476.
+const W = 720;
+const X0 = 188;
+const PX = 240 / max;
+const CX = (i: number) => 476 + i * 44;
+// One 32px row each; 8px more before the first model row so rule-based rows read as their own group.
+const split = rows.findIndex((r) => !r.rule);
+const rowY = (i: number) => 36 + i * 32 + (split > 0 && i >= split ? 8 : 0);
+const end = rowY(rows.length - 1) + 32;
+const AX = end + 12;
+const H = AX + 24;
+const pct = (v: number) => `${v.toFixed(1)}%`;
+const xt = X0 + target.value * PX;
+const xb = X0 + benchmark.value * PX;
+---
+
+<figure class="rc">
+  <div class="rc-scroll" tabindex="0" role="region" aria-label={label}>
+    <svg viewBox={`0 0 ${W} ${H}`} aria-hidden="true" focusable="false">
+      {/* Reference lines sit behind the bars. */}
+      <line class="ref" x1={xt} y1="28" x2={xt} y2={end + 4}></line>
+      <line class="ref dot" x1={xb} y1="28" x2={xb} y2={end + 4}></line>
+      <text class="rl" x={xt} y="20" text-anchor="middle">
+        {target.label[lang]}
+      </text>
+      <text class="rl" x={xb} y="20" text-anchor="middle">
+        {benchmark.label[lang]}
+      </text>
+      {settings.map((s, i) => (
+        <text class="mt" x={CX(i)} y="20" text-anchor="middle">
+          {s.short[lang]}
+        </text>
+      ))}
+      {split > 0 && <line class="sep" x1="0" y1={rowY(split) - 4} x2={W} y2={rowY(split) - 4} />}
+      {rows.map((r, i) => {
+        const cy = rowY(i) + 16;
+        const w = r.mape * PX;
+        return (
+          <>
+            <text class:list={['nm', { rule: r.rule, best: r.best }]} x="0" y={cy + 4}>
+              {r.label[lang]}
+            </text>
+            <rect
+              class:list={['bar', r.best ? 'best' : r.rule ? 'rule' : 'model']}
+              x={X0}
+              y={cy - 6}
+              width={w}
+              height="12"
+              rx="2"
+            />
+            <text class:list={['mt', 'v', { best: r.best }]} x={X0 + w + 6} y={cy + 3}>
+              {pct(r.mape)}
+            </text>
+            {r.set ? (
+              r.set.map((on, j) => (
+                <circle
+                  class:list={['cell', { on, best: on && r.best }]}
+                  cx={CX(j)}
+                  cy={cy}
+                  r="4"
+                />
+              ))
+            ) : (
+              <text
+                class="mt"
+                x={(CX(0) + CX(settings.length - 1)) / 2}
+                y={cy + 3}
+                text-anchor="middle"
+              >
+                {ruleNote[lang]}
+              </text>
+            )}
+          </>
+        );
+      })}
+      <line class="ax" x1={X0} y1={AX} x2={X0 + max * PX} y2={AX}></line>
+      {ticks.map((v) => (
+        <text class="mt" x={X0 + v * PX} y={AX + 16} text-anchor="middle">
+          {v}%
+        </text>
+      ))}
+    </svg>
+  </div>
+  <p class="hint">{t(lang, 'dgScroll')}</p>
+  <p class="note">{note[lang]}</p>
+  <div class="sr-only">
+    <table>
+      <caption>{label}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{t(lang, 'resConfig')}</th>
+          <th scope="col">MAPE</th>
+          {settings.map((s) => (
+            <th scope="col">{s.name[lang]}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr>
+            <th scope="row">{r.label[lang]}</th>
+            <td>{pct(r.mape)}</td>
+            {r.set ? (
+              r.set.map((on) => <td>{t(lang, on ? 'resUsed' : 'resUnused')}</td>)
+            ) : (
+              <td colspan={settings.length}>{ruleNote[lang]}</td>
+            )}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</figure>
+
+<style>
+  .rc {
+    container-type: inline-size;
+  }
+
+  /* Narrower than the chart (≤640px column): scroll inside the figure, as diagrams do (5.24.4). */
+  .rc-scroll {
+    overflow-x: auto;
+  }
+
+  .rc-scroll:focus-visible {
+    outline: var(--focus-w) solid var(--focus);
+    outline-offset: var(--focus-offset);
+    border-radius: var(--radius-xs);
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    min-width: 640px;
+    height: auto;
+    font-family: inherit;
+  }
+
+  .hint {
+    display: none;
+    margin-top: var(--sp-2);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  @container (max-width: 639px) {
+    .hint {
+      display: block;
+    }
+  }
+
+  .note {
+    margin-top: var(--sp-3);
+    max-width: var(--measure);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  /* Names 12px like diagram nodes; numbers and heads 9px mono like sublabels, reference labels 8px like edge labels. */
+  .nm {
+    fill: var(--text);
+    font-size: 12px;
+  }
+
+  .nm.rule {
+    fill: var(--text-2);
+  }
+
+  .nm.best {
+    font-weight: var(--fw-strong);
+  }
+
+  .mt {
+    fill: var(--text-3);
+    font-family: var(--font-meta);
+    font-size: 9px;
+  }
+
+  .rl {
+    fill: var(--text-3);
+    font-family: var(--font-meta);
+    font-size: 8px;
+    letter-spacing: 0.06em;
+  }
+
+  .v.best {
+    fill: var(--accent);
+    font-weight: var(--fw-strong);
+  }
+
+  /* Bars: rule-based quiet fill, models outlined, the best one the only accent. */
+  .bar.rule {
+    fill: var(--chip);
+    stroke: var(--line-strong);
+    stroke-width: 0.8;
+  }
+
+  .bar.model {
+    fill: var(--surface);
+    stroke: var(--text-3);
+    stroke-width: 1;
+  }
+
+  .bar.best {
+    fill: var(--accent-soft);
+    stroke: var(--accent);
+    stroke-width: 1.2;
+  }
+
+  .ref {
+    stroke: var(--text-3);
+    stroke-width: 1;
+    stroke-dasharray: 4 3;
+  }
+
+  .ref.dot {
+    stroke-dasharray: 1 3;
+    stroke-linecap: round;
+  }
+
+  .sep {
+    stroke: var(--line);
+  }
+
+  .ax {
+    stroke: var(--line-strong);
+  }
+
+  .cell {
+    fill: none;
+    stroke: var(--line-strong);
+    stroke-width: 1;
+  }
+
+  .cell.on {
+    fill: var(--text-2);
+    stroke: var(--text-2);
+  }
+
+  .cell.on.best {
+    fill: var(--accent);
+    stroke: var(--accent);
+  }
+</style>

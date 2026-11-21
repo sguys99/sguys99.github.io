@@ -66,7 +66,8 @@
 
 - [x] SCM 케이스 스터디 다이어그램 (2026-11-21, DESIGN.md 11.10): 시안 3개(g9) 중 A 회로도 선택. Architecture에 서비스 구성도, 새 섹션 Service flow에 흐름도. 공통 컴포넌트 `Diagram.astro` + `src/content/diagrams/<slug>.yaml`
 - [x] 고객 상담 어시스턴트 케이스 스터디 다이어그램 (2026-11-21, DESIGN.md 11.11): 시안 g11에서 여정 B·진화 A·아키텍처 B·흐름 A 조합. 영문 제목 "AI Assistant for Customer Service". `Diagram.astro`에 `focus`·`new` 종류, 단계 띠·경로·접점·고충 말풍선·영역 메모, 자리 `problem`·`approach` 추가
-- [ ] 다른 케이스 스터디 다이어그램 (genp-humanoid, docent-humanoid, lotte-price-forecasting): 건별 자료 확인 후 `src/content/diagrams/<slug>.yaml` 추가. 없으면 지금처럼 표
+- [x] 원자재 가격 예측 케이스 스터디 다이어그램 (2026-11-21, DESIGN.md 11.12): 시안 g10에서 아키텍처 A·서비스 흐름 C·실험 B 조합. 실험 결과 차트 `ResultsChart.astro` + `results` 필드(5.24.6). 영문 제목 "Raw-Material Price Forecasting and Market Dashboard", 결정 2 벤치마크 문구를 자료에 맞춤
+- [ ] 다른 케이스 스터디 다이어그램 (genp-humanoid, docent-humanoid): 건별 자료 확인 후 `src/content/diagrams/<slug>.yaml` 추가. 없으면 지금처럼 표
 - [ ] 국문 글꼴 빌드 서브셋 검토 (국문 홈 Pretendard 분할 441KB, 7.5)
 - [ ] WebKit 글꼴 중복 요청: 영문 페이지에서 Geist를 preload(cors)와 `@font-face`로 두 번 받음(24.5KB), Pretendard 라틴 분할 1개 추가 요청(원인 미확인) (7.6)
 - [ ] WebKit 국문 기간 줄바꿈: `2026.10 – 2027.01 [진행 중]`이 대시 뒤에서 꺾임(`<wbr>` 앞 여백), 넘침 없음 (7.6)

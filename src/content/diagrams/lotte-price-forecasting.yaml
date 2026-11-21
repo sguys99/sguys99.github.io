@@ -1,0 +1,407 @@
+# 원자재 가격 예측 케이스 스터디 다이어그램 (DESIGN.md 5.24.4·5.24.6, 11.12). 시안 g10에서 고른 조합:
+# arch = A(학습 파이프라인 + 현업 대시보드 두 구역), flow = C(구매 절차 개요 + 견적 검토 확대), results = B(최종 비교 막대 + 설정 행렬).
+# 출처: docs/project-references/price-forecasting/ 최종보고(6, 15–16, 25–35, 36–40장). 원자재·출처 명칭은 사용자 승인(2026-11-21).
+# 포인트 색은 예측 모델(focus)과 최종 모델 막대에만. 좌표는 SVG 단위(4px 격자), 연결선은 직각 + 모서리 반지름 8.
+
+legend:
+  - kind: focus
+    label: { en: Forecast model, ko: '예측 모델' }
+  - kind: llm
+    label: { en: Pipeline step, ko: '파이프라인 단계' }
+  - kind: logic
+    label: { en: Evaluation, ko: '평가' }
+  - kind: plain
+    label: { en: Dashboard page, ko: '대시보드 페이지' }
+  - kind: input
+    label: { en: External data, ko: '외부 데이터' }
+
+# 05 Architecture: 위 학습 파이프라인(목표 미달이면 재학습), 아래 현업이 쓰는 대시보드 4페이지.
+arch:
+  width: 720
+  height: 364
+  zones:
+    - { id: src, label: { en: '~150 attributes', ko: '속성 약 150개' }, x: 0, y: 0, w: 152, h: 232 }
+    - {
+        id: pipe,
+        label: { en: Training pipeline, ko: '학습 파이프라인' },
+        x: 176,
+        y: 0,
+        w: 544,
+        h: 176,
+      }
+    - {
+        id: dash,
+        label: { en: Dashboard for business users, ko: '현업용 대시보드' },
+        x: 176,
+        y: 212,
+        w: 544,
+        h: 104,
+      }
+  nodes:
+    - {
+        id: s1,
+        kind: input,
+        label: { en: Raw-material prices, ko: '원료 가격' },
+        sub: { en: 'cotton, linter, viscose', ko: '면화·린터·비스코스' },
+        x: 8,
+        y: 36,
+        w: 136,
+        h: 40,
+      }
+    - {
+        id: s2,
+        kind: input,
+        label: { en: Cotton market, ko: '면화 시장' },
+        sub: { en: USDA, ko: '미국 농무부(USDA)' },
+        x: 8,
+        y: 84,
+        w: 136,
+        h: 40,
+      }
+    - {
+        id: s3,
+        kind: input,
+        label: { en: Macro indicators, ko: '거시 지표' },
+        sub: { en: 'FRED: FX, SCFI, CPI', ko: 'FRED: 환율·SCFI·물가' },
+        x: 8,
+        y: 132,
+        w: 136,
+        h: 40,
+      }
+    - {
+        id: s4,
+        kind: input,
+        label: { en: Climate, ko: '기후' },
+        sub: { en: NASA, ko: NASA },
+        x: 8,
+        y: 180,
+        w: 136,
+        h: 40,
+      }
+    - {
+        id: build,
+        kind: llm,
+        label: { en: Build dataset, ko: '데이터셋 생성' },
+        sub: { en: merge · resample, ko: '병합·리샘플링' },
+        x: 188,
+        y: 40,
+        w: 112,
+        h: 44,
+      }
+    - {
+        id: lag,
+        kind: llm,
+        label: { en: Lag features, ko: 'lag 피처' },
+        sub: { en: 'X(t−2…t)→y(t+1…3)', ko: 'X(t−2…t)→y(t+1…3)' },
+        x: 324,
+        y: 40,
+        w: 112,
+        h: 44,
+      }
+    - {
+        id: prep,
+        kind: llm,
+        label: { en: Preprocess, ko: '전처리' },
+        sub: { en: interpolate · scale, ko: '보간·스케일링' },
+        x: 460,
+        y: 40,
+        w: 112,
+        h: 44,
+      }
+    - {
+        id: model,
+        kind: focus,
+        label: { en: Forecast model, ko: '예측 모델' },
+        sub: { en: XGBoost · RF · LR, ko: XGBoost · RF · LR },
+        x: 596,
+        y: 40,
+        w: 112,
+        h: 44,
+      }
+    - {
+        id: eval,
+        kind: logic,
+        label: { en: Evaluate, ko: '성능 평가' },
+        sub: { en: MAE · RMSE · MAPE, ko: MAE · RMSE · MAPE },
+        x: 596,
+        y: 120,
+        w: 112,
+        h: 44,
+      }
+    - {
+        id: gate,
+        kind: logic,
+        label: { en: 'Meets target?', ko: '목표 충족?' },
+        sub: { en: 'MAPE ≤ 10%', ko: 'MAPE 10% 이하' },
+        x: 460,
+        y: 120,
+        w: 112,
+        h: 44,
+      }
+    - {
+        id: up,
+        kind: plain,
+        label: { en: Upload, ko: Upload },
+        sub: { en: data files, ko: '데이터 파일' },
+        x: 188,
+        y: 248,
+        w: 112,
+        h: 44,
+      }
+    - {
+        id: eda,
+        kind: plain,
+        label: { en: EDA, ko: EDA },
+        sub: { en: variable analysis, ko: '변수 분석' },
+        x: 324,
+        y: 248,
+        w: 112,
+        h: 44,
+      }
+    - {
+        id: trn,
+        kind: plain,
+        label: { en: Training, ko: Training },
+        sub: { en: settings · retrain, ko: '설정·재학습' },
+        x: 460,
+        y: 248,
+        w: 112,
+        h: 44,
+      }
+    - {
+        id: brd,
+        kind: plain,
+        label: { en: Dashboard, ko: Dashboard },
+        sub: { en: forecast · SHAP, ko: '예측·SHAP' },
+        x: 596,
+        y: 248,
+        w: 112,
+        h: 44,
+      }
+  edges:
+    - { from: src, to: build, d: 'M152,62 L188,62' }
+    - { from: build, to: lag, d: 'M300,62 L324,62' }
+    - { from: lag, to: prep, d: 'M436,62 L460,62' }
+    - { from: prep, to: model, d: 'M572,62 L596,62' }
+    - { from: model, to: eval, d: 'M652,84 L652,120' }
+    - { from: eval, to: gate, d: 'M596,142 L572,142' }
+    - {
+        from: gate,
+        to: build,
+        d: 'M460,142 L280,142 Q272,142 272,134 L272,84',
+        style: back,
+        label: { text: { en: NO · RETRAIN, ko: '미달 · 재학습' }, x: 368, y: 132 },
+      }
+    - {
+        from: gate,
+        to: brd,
+        d: 'M516,164 L516,192 Q516,200 524,200 L644,200 Q652,200 652,208 L652,248',
+        label: { text: { en: YES · DEPLOY, ko: '충족 · 배포' }, x: 584, y: 190 },
+      }
+    - {
+        from: up,
+        to: build,
+        d: 'M188,270 L172,270 Q164,270 164,262 L164,82 Q164,74 172,74 L188,74',
+      }
+    - { from: up, to: eda, d: 'M300,270 L324,270' }
+    - { from: eda, to: trn, d: 'M436,270 L460,270' }
+    - { from: trn, to: brd, d: 'M572,270 L596,270' }
+
+# 06 Service flow: 구매 절차 한 줄, 견적 검토를 펼쳐 입력 → 모델 → 예측값이 견적 조정의 근거로.
+flow:
+  width: 720
+  height: 312
+  legend:
+    - kind: focus
+      label: { en: Forecast model, ko: '예측 모델' }
+    - kind: llm
+      label: { en: Changed step, ko: '바뀐 단계' }
+    - kind: logic
+      label: { en: Model output, ko: '모델 출력' }
+    - kind: plain
+      label: { en: Process step, ko: '업무 단계' }
+    - kind: input
+      label: { en: Data source, ko: '데이터 출처' }
+  zones:
+    - {
+        id: zoom,
+        label: { en: Quote review with forecasts, ko: '예측을 활용한 견적 검토' },
+        center: true,
+        x: 0,
+        y: 72,
+        w: 720,
+        h: 192,
+      }
+  nodes:
+    - {
+        id: c1,
+        kind: plain,
+        label: { en: Purchase plan, ko: '구매계획 수립' },
+        sub: { en: monthly revision, ko: '월 단위 수정' },
+        x: 0,
+        y: 0,
+        w: 128,
+        h: 40,
+      }
+    - {
+        id: c2,
+        kind: plain,
+        label: { en: Quote request, ko: '견적 요청' },
+        sub: { en: quarterly, ko: '분기 단위' },
+        x: 148,
+        y: 0,
+        w: 128,
+        h: 40,
+      }
+    - {
+        id: c3,
+        kind: llm,
+        label: { en: Quote review, ko: '견적 검토' },
+        x: 296,
+        y: 0,
+        w: 128,
+        h: 40,
+      }
+    - {
+        id: c4,
+        kind: plain,
+        label: { en: 'Adjust & confirm', ko: '견적 조정·확정' },
+        x: 444,
+        y: 0,
+        w: 128,
+        h: 40,
+      }
+    - {
+        id: c5,
+        kind: plain,
+        label: { en: Purchase order, ko: '구매 주문' },
+        x: 592,
+        y: 0,
+        w: 128,
+        h: 40,
+      }
+    - {
+        id: i1,
+        kind: input,
+        label: { en: Raw-material prices, ko: '원료 가격' },
+        sub: { en: 'cotton, linter, viscose', ko: '면화·린터·비스코스' },
+        x: 16,
+        y: 112,
+        w: 168,
+        h: 40,
+      }
+    - {
+        id: i2,
+        kind: input,
+        label: { en: Market and macro, ko: '시장·거시 지표' },
+        sub: { en: USDA · FRED · SCFI, ko: USDA · FRED · SCFI },
+        x: 16,
+        y: 160,
+        w: 168,
+        h: 40,
+      }
+    - {
+        id: i3,
+        kind: input,
+        label: { en: Climate, ko: '기후' },
+        sub: { en: NASA, ko: NASA },
+        x: 16,
+        y: 208,
+        w: 168,
+        h: 40,
+      }
+    - {
+        id: model,
+        kind: focus,
+        label: { en: Forecast model, ko: '예측 모델' },
+        sub: { en: 'XGBoost · Δ price', ko: 'XGBoost · 가격 변화량' },
+        x: 296,
+        y: 160,
+        w: 128,
+        h: 40,
+      }
+    - {
+        id: out,
+        kind: logic,
+        label: { en: Forecasts and drivers, ko: '예측값과 영향 요인' },
+        sub: { en: '1–4 wk · 1–3 mo · SHAP', ko: '1–4주·1–3개월·SHAP' },
+        x: 468,
+        y: 160,
+        w: 176,
+        h: 40,
+      }
+  edges:
+    - { from: c1, to: c2, d: 'M128,20 L148,20' }
+    - { from: c2, to: c3, d: 'M276,20 L296,20' }
+    - { from: c3, to: c4, d: 'M424,20 L444,20' }
+    - { from: c4, to: c5, d: 'M572,20 L592,20' }
+    - { from: c3, to: model, d: 'M360,40 L360,160' }
+    - {
+        from: i1,
+        to: model,
+        d: 'M184,132 L232,132 Q240,132 240,140 L240,160 Q240,168 248,168 L296,168',
+      }
+    - { from: i2, to: model, d: 'M184,180 L296,180' }
+    - {
+        from: i3,
+        to: model,
+        d: 'M184,228 L244,228 Q252,228 252,220 L252,200 Q252,192 260,192 L296,192',
+      }
+    - { from: model, to: out, d: 'M424,180 L468,180' }
+    - {
+        from: out,
+        to: c4,
+        d: 'M556,160 L556,40',
+        label: { text: { en: INFORMS, ko: '판단 근거' }, x: 568, y: 60, anchor: start },
+      }
+
+# 04 Approach 아래 실험 결과(최종보고 35장): 같은 시험 구간의 7개 구성. set 순서는 settings와 같다.
+results:
+  max: 16
+  ticks: [0, 5, 10, 15]
+  target: { value: 10, label: { en: 'TARGET 10%', ko: '목표 10%' } }
+  benchmark: { value: 5.9, label: { en: BENCHMARK, ko: '벤치마크' } }
+  ruleNote: { en: 'rule, no model', ko: '규칙, 모델 없음' }
+  settings:
+    - { short: { en: feat., ko: '피처' }, name: { en: feature selection, ko: '피처 선별' } }
+    - { short: { en: lags, ko: lag }, name: { en: lag features, ko: 'lag 피처' } }
+    - {
+        short: { en: 'Δ y', ko: '변화량' },
+        name: { en: price-change target, ko: '가격 변화량 타깃' },
+      }
+    - {
+        short: { en: recur., ko: '재귀' },
+        name: { en: recursive forecasting, ko: 'Recursive 예측' },
+      }
+    - { short: { en: retrain, ko: '재학습' }, name: { en: retraining, ko: '재학습' } }
+    - { short: { en: interp., ko: '보간' }, name: { en: target interpolation, ko: '타깃 보간' } }
+  rows:
+    - { label: { en: Persistence, ko: Persistence }, mape: 5.9, rule: true }
+    - { label: { en: Linter-price rule, ko: '린터 가격 규칙' }, mape: 9.7, rule: true }
+    - {
+        label: { en: Linear Regression, ko: Linear Regression },
+        mape: 13.3,
+        set: [false, false, false, false, false, false],
+      }
+    - {
+        label: { en: Random Forest, ko: Random Forest },
+        mape: 6.3,
+        set: [true, true, false, true, true, false],
+      }
+    - { label: { en: XGBoost, ko: XGBoost }, mape: 7, set: [true, true, false, true, true, false] }
+    - {
+        label: { en: 'Random Forest, Δ', ko: 'Random Forest, 변화량' },
+        mape: 2.5,
+        set: [true, true, true, true, true, true],
+      }
+    - {
+        label: { en: 'XGBoost, Δ', ko: 'XGBoost, 변화량' },
+        mape: 1.3,
+        set: [true, true, true, true, true, true],
+        best: true,
+      }
+  note:
+    {
+      en: 'Final comparison on one test window. Δ: the model predicts the price change instead of the price.',
+      ko: '같은 시험 구간에서 비교한 최종 결과. 변화량: 가격 대신 가격 변화량을 예측',
+    }

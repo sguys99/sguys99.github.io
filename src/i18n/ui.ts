@@ -147,6 +147,11 @@ const ui = {
   dgBack: { en: '{a} back to {b}', ko: '{a}에서 {b}로 반환' },
   dgPath: { en: 'Path: {a}', ko: '경로: {a}' },
   dgPains: { en: 'Pain points', ko: '고충' },
+  // Experiment results chart under Approach (5.24.6): heading, then screen-reader table text.
+  resTitle: { en: 'Experiment results', ko: '실험 결과' },
+  resConfig: { en: 'Configuration', ko: '구성' },
+  resUsed: { en: 'used', ko: '사용' },
+  resUnused: { en: 'not used', ko: '미사용' },
   keyDecisions: { en: 'Key decisions', ko: '주요 결정' },
   decision: { en: 'Decision', ko: '결정' },
   why: { en: 'Why', ko: '이유' },

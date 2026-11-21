@@ -131,7 +131,7 @@ docs/private/         원본 자료: 이력서, 경력기술서, 사진 원본 (
 | 경력 | `src/content/experience.yaml` (키 = id) | 6곳 외 추가는 사용자 확인 (규칙 3) |
 | 프로젝트 | `src/content/projects/<slug>.md` (frontmatter) | `client` 기본 익명 (`public: false` + `label`). `domain`·`capability`는 config의 `DOMAINS`·`CAPABILITIES` 값만 |
 | 대표 프로젝트 | 위 파일의 `featured: true`, `order`, `caseStudy` | `featured` + `caseStudy`가 있어야 `/work/<slug>/` 생성. 지정은 사용자 승인 |
-| 케이스 스터디 다이어그램 | `src/content/diagrams/<slug>.yaml` (`legend`, `problem`, `approach`, `arch`, `flow`) | 있으면 `problem`은 Problem 목록 위, `approach`는 Approach 목록 아래, Architecture는 표 대신 회로도, `flow`는 Service flow 섹션. 형식은 DESIGN.md 5.24.4 |
+| 케이스 스터디 다이어그램 | `src/content/diagrams/<slug>.yaml` (`legend`, `problem`, `approach`, `arch`, `flow`, `results`) | 있으면 `problem`은 Problem 목록 위, `approach`는 Approach 목록 아래, Architecture는 표 대신 회로도, `flow`는 Service flow 섹션, `results`는 Approach 아래 실험 결과 차트. 형식은 DESIGN.md 5.24.4·5.24.6 |
 | 개인 프로젝트 | `src/content/personal/<slug>.md` | `repo` 필수, `status`는 `in-progress`·`active`·`archived` |
 | 특허 | `src/content/patents.yaml` | `status` `filed`·`registered`. 파일 머리 주석의 건수 |
 | SW 등록 | `src/content/software.yaml` | 파일 머리 주석의 건수 |

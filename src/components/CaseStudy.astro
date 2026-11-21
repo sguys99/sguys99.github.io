@@ -10,6 +10,7 @@ import Badge from './Badge.astro';
 import Icon from './Icon.astro';
 import CasePager from './CasePager.astro';
 import Diagram from './Diagram.astro';
+import ResultsChart from './ResultsChart.astro';
 import { t, fmtPeriod, homePath, type Lang } from '../i18n/ui';
 
 /** Featured projects with a case study, in `order` (6.3): page list, pager order and the `01 / 05` position. */
@@ -256,6 +257,12 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
                 uid="approach"
               />
             </div>
+          )}
+          {s.id === 'approach' && dg?.results && (
+            <>
+              <h3>{t(lang, 'resTitle')}</h3>
+              <ResultsChart lang={lang} data={dg.results} label={t(lang, 'resTitle')} />
+            </>
           )}
           {s.id === 'approach' && cs.decisions && (
             <>

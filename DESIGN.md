@@ -1867,7 +1867,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 01 | `context` | Context / 배경 | `caseStudy.context[]` | 항상 |
 | 02 | `problem` | Problem / 문제 | `caseStudy.problem[]` | 항상 |
 | 03 | `role` | My role / 역할 | `caseStudy.role[]` | 항상 |
-| 04 | `approach` | Approach / 접근 | `caseStudy.approach[]` + `decisions[]` 표 | 결정 표는 `decisions` 있을 때 |
+| 04 | `approach` | Approach / 접근 | `caseStudy.approach[]` + (`diagrams/<slug>.yaml`의 `approach` 그림, `results` 실험 결과 차트) + `decisions[]` 표 | 그림·차트·결정 표는 각각 있을 때만 (5.24.4, 5.24.6) |
 | 05 | `arch` | Architecture / 아키텍처 | `diagrams/<slug>.yaml`의 `arch`(회로도), 없으면 `caseStudy.architecture`(표) | 둘 중 하나가 있을 때만. 없으면 번호가 당겨진다 |
 | 06 | `flow` | Service flow / 서비스 흐름 | `diagrams/<slug>.yaml`의 `flow`(회로도) | 있을 때만 (11.10) |
 | 07 | `outcome` | Outcome / 성과 | `caseStudy.outcome[]` | 항상. `period.status`가 `present`/`planned`면 진행 중 배지 |
@@ -1876,13 +1876,13 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 #### 5.24.4 아키텍처: 회로도 (diagrams) 또는 표 (layers / flows)
 
-케이스마다 `src/content/diagrams/<slug>.yaml`이 있으면 회로도를, 없으면 아래 표를 쓴다 (3.2.3 C의 "그림 대신 표"를 11.10에서 바꿈). 현재 회로도는 SCM, 고객 상담 어시스턴트 2건, 나머지는 표.
+케이스마다 `src/content/diagrams/<slug>.yaml`이 있으면 회로도를, 없으면 아래 표를 쓴다 (3.2.3 C의 "그림 대신 표"를 11.10에서 바꿈). 현재 회로도는 SCM, 고객 상담 어시스턴트, 원자재 가격 예측 3건, 나머지는 표.
 
 **회로도** (`src/components/Diagram.astro`, g9 시안 A)
 
 | 요소 | 값 |
 |---|---|
-| 파일 | `legend[]`(종류·라벨, 기본 범례) + 자리별 다이어그램: `problem`(Problem 목록 위), `approach`(Approach 목록 아래, 결정 표 앞), `arch`(Architecture 섹션), `flow`(Service flow 섹션). 각 다이어그램은 `width`·`height`(SVG 단위), `zones[]`, `nodes[]`, `edges[]`, 선택으로 자기 `legend`(기본 범례를 대신함). 좌표는 4px 격자, 스키마가 id 중복과 연결·말풍선 대상 id를 검사 (11.11) |
+| 파일 | `legend[]`(종류·라벨, 기본 범례) + 자리별 다이어그램: `problem`(Problem 목록 위), `approach`(Approach 목록 아래, 결정 표 앞), `arch`(Architecture 섹션), `flow`(Service flow 섹션). 각 다이어그램은 `width`·`height`(SVG 단위), `zones[]`, `nodes[]`, `edges[]`, 선택으로 자기 `legend`(기본 범례를 대신함). 좌표는 4px 격자, 스키마가 id 중복과 연결·말풍선 대상 id를 검사 (11.11). 같은 파일의 `results`는 그림이 아닌 실험 결과 차트(5.24.6, 11.12) |
 | 노드 종류 `kind` | `sllm` 바탕 `--accent-soft` + 선 `--accent` (포인트 색은 여기에만) / `llm` 바탕 `--surface` + 선 `--text-2` 1.2 / `logic` 바탕 `--chip` + 선 `--line-strong` 0.8 / `plain` 바탕 `--surface` + 선 `--line-strong` / `input` 같은 바탕 + 점선 `4 3`. sLLM이 없는 케이스는 `focus`(바탕 `--accent-soft` + 선 `--accent`, 그림의 초점 1곳)와 `new`(바탕 `--surface` + 선 `--accent` 1.2, 버전별로 추가된 것)를 쓴다 (11.11). 모서리 6 |
 | 글자 | 이름 12px `--fw-strong` `--text` (`\n`으로 줄바꿈, 14px 간격), 부제 9px `--font-meta` `--text-3`. 서체는 페이지 상속(국문 Pretendard). 크기는 diagram-design 기준 |
 | 영역 `zones` | 바탕 `--bg`, 모서리 8, 이름 12px `--fw-strong` `--text-2` 왼쪽 위. 다른 영역 안의 영역은 바탕 `--surface` + 선 `--line-strong`. `center: true`면 위에서 내려오는 연결선 위에 이름을 가운데 두고 바탕색으로 가린다 |
@@ -1947,6 +1947,23 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 **미정·확인**
 - 기간 옆 "Planned / 예정" 배지: 홈과 CV는 `planned`를 "In progress / 진행 중"으로 표시한다. 케이스 기록표도 같은 문구로 맞춘다 (11.5).
 - 시안의 UI 문구 `domain`(분야)은 정의만 있고 기록표에 쓰이지 않는다 → 기록표에 Domain을 넣지 않는다(시안 그대로).
+
+#### 5.24.6 실험 결과 차트 (results)
+
+Approach 목록 아래(그림 `approach`가 있으면 그 아래), 결정 표 앞. 소제목 h3 "Experiment results / 실험 결과"(`resTitle`, 결정 표 제목과 같은 모양). `src/components/ResultsChart.astro`, g10 시안 B (11.12). 현재 원자재 가격 예측 1건.
+
+| 요소 | 값 |
+|---|---|
+| 파일 | `diagrams/<slug>.yaml`의 `results`: `max`(축 끝 %), `ticks[]`, `target`·`benchmark`(`value` + `label`), `ruleNote`, `settings[]`(`short` 열 머리, `name` 화면 낭독기용), `rows[]`(`label`, `mape`, `rule` 또는 `set[]`, `best`), `note`. 스키마가 규칙 행에는 `set`이 없고 모델 행의 `set` 길이가 `settings`와 같은지, `mape` ≤ `max`, `best` 1개 이하인지 검사 |
+| 배치 (SVG 720 단위) | 이름 0–180, 막대 188–428(0–`max`%), 설정 열 476부터 44 간격. 행 32, 규칙 행과 모델 행 사이 8 더 띄우고 가는 선(`--line`) |
+| 막대 | 높이 12, 모서리 2. 규칙 기반 바탕 `--chip` + 선 `--line-strong` 0.8 / 모델 바탕 `--surface` + 선 `--text-3` / `best` 바탕 `--accent-soft` + 선 `--accent` 1.2 (포인트 색은 여기에만). 끝에 값 9px `--font-meta` `--text-3`(`best`는 `--accent` `--fw-strong`) |
+| 기준선 | 목표 점선(`4 3`), 벤치마크 점선(`1 3` 둥근 끝), 둘 다 `--text-3`, 막대 뒤. 위에 라벨 8px `--font-meta` 자간 0.06em |
+| 설정 행렬 | 원 r4: 쓴 설정 채움 `--text-2`, 안 쓴 설정 빈 원 `--line-strong`, `best` 행은 `--accent`. 규칙 행은 원 대신 `ruleNote` |
+| 글자 | 이름 12px `--text`(규칙 행 `--text-2`, `best` `--fw-strong`), 열 머리·눈금 9px `--font-meta` `--text-3` |
+| 아래 | 눈금 축(`--line-strong`), 주석 `note` `--fs-xs` `--text-3` `max-width: --measure` |
+| 폭 | 회로도와 같이 `min-width: 640px`, 좁은 열에서 그림 안 가로 스크롤 + `dgScroll` 안내 |
+
+- 접근성: SVG는 `aria-hidden`, 스크롤 상자는 `role="region"` + `aria-label`(소제목) + `tabindex="0"`. 같은 수치를 `.sr-only` 안의 진짜 표로(`caption` 소제목, 열: Configuration / 구성, MAPE, 설정 이름. 칸은 `resUsed`·`resUnused`, 규칙 행은 `ruleNote`). 표는 내용보다 좁아지지 않으므로 `.sr-only`는 감싸는 `div`에 둔다.
 
 ## 6. Page Templates
 
@@ -3067,3 +3084,16 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 기존 계층 표(`caseStudy.architecture`)는 이 케이스에서 삭제 (SCM과 같음) | 회로도가 대신하고 같은 내용은 화면 낭독기용 텍스트로 남음 |
 | 여정 곡선은 diagram-design의 직각 연결선 규칙 예외, 아키텍처·흐름은 노드 수 예산(9개) 초과를 그대로 둠 | 곡선은 노드 사이 연결이 아니라 고객 경로. 예산 초과는 SCM(11.10)과 같은 이유 |
 
+### 11.12 원자재 가격 예측 케이스 다이어그램 — 2026-11-21
+
+시안: `docs/design-drafts/g10/` (아키텍처 A 두 구역 / B 순환 / C 계층 띠, 서비스 흐름 A 기존·개선 두 줄 / B 스윔레인 / C 개요 + 확대, 실험 A 축 원장 / B 최종 비교 막대 / C 노선도. 영문·국문 × 라이트·다크 × 데스크톱·모바일 캡처 `shots/`, 비교 페이지 `review.html`). 자료: 최종보고·수행계획서(`docs/project-references/price-forecasting/`).
+
+| 결정 | 이유 |
+|---|---|
+| 아키텍처 A(위 학습 파이프라인, 아래 현업 대시보드 4페이지), 서비스 흐름 C(구매 절차 한 줄에서 견적 검토를 펼침), 실험 B(최종 비교 막대 + 설정 행렬)를 고름 | 사용자 선택(제안안). 세 그림이 시스템·업무·근거를 나눠 맡아 겹치지 않음 |
+| 실험 결과는 그림이 아닌 차트라 새 필드 `results`와 `ResultsChart.astro`로 그린다(5.24.6). 자리는 Approach 목록 아래 소제목, 목차 항목은 늘리지 않음 | 사용자 결정(소제목). 노드·연결선 형식으로 표현할 수 없음 |
+| 실험 차트는 같은 시험 구간의 최종 비교(최종보고 35장)만 쓴다. 축별 비교 값(30–33장)은 축마다 시험 구간이 달라 싣지 않음 | 축별 값을 이어 놓으면 오차가 누적해 내려간 것처럼 읽힌다 |
+| 원자재(면 펄프 원료: 면화·린터·비스코스), SCFI, 출처(USDA·FRED·NASA)와 중간 MAPE 수치를 실명으로 싣는다 | 사용자 승인 |
+| 포인트 색은 예측 모델 노드(`focus`)와 최종 모델 막대·설정 원에만 | 포인트 색 1개 원칙(2장). sLLM이 없는 케이스의 `focus` 규칙(11.11)을 따름 |
+| 기존 계층 표(`caseStudy.architecture`)는 이 케이스에서 삭제 (SCM과 같음). 결정 2의 벤치마크 문구를 자료에 맞춤(Persistence·린터 가격 규칙·선형 회귀, 지수평활 삭제). 영문 제목을 "Raw-Material Price Forecasting and Market Dashboard"로 줄임 | 회로도가 표를 대신함. 문구는 자료와 어긋나 사용자 확인. 제목은 사용자 요청 |
+| 노드 수 예산(9개) 초과(아키텍처 14개)는 그대로 둠 | SCM(11.10)과 같은 이유: 한 장에 전체 구조를 보임 |

@@ -163,6 +163,13 @@
 | raw-material price forecasting | 원자재 가격 예측 | |
 | market analysis dashboard | 시황 분석 대시보드 | |
 | market dashboard | 시황 대시보드 | 제목 등 짧게 쓸 때 |
+| cotton linter / viscose | 린터 / 비스코스 | 면 펄프 원료 가격. 영문 문장에서 "linter"만 쓰면 코드 도구로 읽히므로 처음엔 cotton linter |
+| persistence model | Persistence | 직전 값을 그대로 예측하는 벤치마크. 국문도 영문 유지 |
+| price change (target) | 가격 변화량 | 차트의 Δ |
+| quote review | 견적 검토 | 구매 절차 단계 (구매계획 수립 → 견적 요청 → 견적 검토 → 견적 조정·확정 → 구매 주문) |
+| retraining / interpolation / resampling | 재학습 / 보간 / 리샘플링 | |
+| Bollinger bands | 볼린저 밴드 | |
+| training pipeline | 학습 파이프라인 | 다이어그램 영역 이름 |
 | green material | 그린소재 | |
 | inventory blend optimization | 재고 조합 최적화 | |
 | demand forecasting / price forecasting | 수요 예측 / 가격 예측 | |

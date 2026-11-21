@@ -248,6 +248,49 @@ const diagram = z
         ctx.addIssue({ code: 'custom', message: `unknown diagram id "${end}"` });
   });
 
+// Experiment results under the Approach bullets (DESIGN.md 5.24.6): error bar per configuration on a 0–max % axis,
+// plus a matrix of which settings each model configuration used. Rule-based rows have no settings.
+const results = z
+  .strictObject({
+    max: z.number().positive(), // axis end in %
+    ticks: z.array(z.number()).min(2),
+    target: z.strictObject({ value: z.number(), label: localized }),
+    benchmark: z.strictObject({ value: z.number(), label: localized }),
+    ruleNote: localized, // shown in the matrix for rule-based rows
+    // short: matrix column head, name: screen-reader table head
+    settings: z.array(z.strictObject({ short: localized, name: localized })).min(1),
+    rows: z
+      .array(
+        z.strictObject({
+          label: localized,
+          mape: z.number().nonnegative(),
+          rule: z.boolean().default(false),
+          set: z.array(z.boolean()).optional(),
+          best: z.boolean().default(false),
+        }),
+      )
+      .min(2),
+    note: localized,
+  })
+  .superRefine((r, ctx) => {
+    for (const row of r.rows) {
+      if (row.rule === !!row.set)
+        ctx.addIssue({
+          code: 'custom',
+          message: `"${row.label.en}": rule rows have no set, model rows need one`,
+        });
+      if (row.set && row.set.length !== r.settings.length)
+        ctx.addIssue({
+          code: 'custom',
+          message: `"${row.label.en}": set length must match settings`,
+        });
+      if (row.mape > r.max)
+        ctx.addIssue({ code: 'custom', message: `"${row.label.en}": mape above max` });
+    }
+    if (r.rows.filter((row) => row.best).length > 1)
+      ctx.addIssue({ code: 'custom', message: 'at most one best row' });
+  });
+
 const diagrams = defineCollection({
   loader: glob({ pattern: '*.yaml', base: './src/content/diagrams' }),
   schema: z.strictObject({
@@ -256,6 +299,7 @@ const diagrams = defineCollection({
     approach: diagram.optional(), // below the Approach bullets (e.g. architecture versions)
     arch: diagram.optional(), // Architecture section; replaces the caseStudy.architecture table
     flow: diagram.optional(), // Service flow section
+    results: results.optional(), // experiment results chart under the Approach bullets
   }),
 });
 
