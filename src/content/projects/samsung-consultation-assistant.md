@@ -1,6 +1,6 @@
 ---
 title:
-  en: Online Consultation and Product Recommendation Assistant
+  en: AI Assistant for Customer Service
   ko: 온라인 상담 지원 및 제품 추천 어시스턴트 개발
 summary:
   en: Led an agent and RAG assistant that supports online customer consultation and recommends products.
@@ -81,45 +81,4 @@ caseStudy:
       tradeoff:
         en: Less flexible answers and a table to maintain.
         ko: 답변 유연성 감소, 테이블 유지 부담
-  architecture:
-    layers:
-      - id: channels
-        label: { en: Channels, ko: 채널 }
-        nodes:
-          - { en: Offline stores, ko: 오프라인 매장 }
-          - { en: Online stores, ko: 온라인몰 }
-          - { en: Agent console, ko: 상담원 콘솔 }
-      - id: gateway
-        label: { en: API gateway, ko: API 게이트웨이 }
-        nodes:
-          - { en: Channel-independent interface, ko: 채널 독립 인터페이스 }
-      - id: orchestrator
-        label: { en: Orchestrator, ko: 오케스트레이터 }
-        nodes:
-          - { en: Query rewrite, ko: 질의 재작성 }
-          - { en: Intent triage, ko: 의도 분류 }
-          - { en: "Entity extraction, code mapping, and pseudo query", ko: "엔티티 추출, 코드 매핑, Pseudo Query" }
-          - { en: "Predefined answers and guardrails", ko: "Predefined 답변, 가드레일" }
-          - { en: "Merge and response layout", ko: "결과 병합, 답변 구성" }
-      - id: retrieval
-        label: { en: Retrieval and storage, ko: 검색·저장소 }
-        nodes:
-          - { en: Structured data (PostgreSQL), ko: 정형 데이터(PostgreSQL) }
-          - { en: Unstructured data (Azure AI Search), ko: 비정형 데이터(Azure AI Search) }
-          - { en: Web search, ko: 웹 검색 }
-          - { en: "Logs and cache", ko: "로그, 캐시" }
-      - id: llm
-        label: { en: LLM, ko: LLM }
-        nodes:
-          - { en: Azure OpenAI, ko: Azure OpenAI }
-      - id: admin
-        label: { en: Admin, ko: Admin }
-        nodes:
-          - { en: "Logs, monitoring, permissions, and sensitive-data controls", ko: "로그, 모니터링, 권한, 민감정보 관리" }
-    flows:
-      - { from: channels, to: gateway }
-      - { from: gateway, to: orchestrator }
-      - { from: orchestrator, to: retrieval, label: { en: Parallel queries, ko: 병렬 조회 } }
-      - { from: orchestrator, to: llm }
-      - { from: admin, to: orchestrator }
 ---

@@ -138,18 +138,46 @@ const architecture = z
 
 // --- Case study diagrams (DESIGN.md 5.24.4) --------------------------------
 // One file per case study: src/content/diagrams/<slug>.yaml. Coordinates are SVG units on a 4px grid.
-// kind: sllm = fine-tuned small model (accent), llm = general LLM, logic = search/DB/rules, plain = component, input = user end.
-const DG_KINDS = ['sllm', 'llm', 'logic', 'plain', 'input'] as const;
+// kind: sllm = fine-tuned small model (accent), llm = general LLM, logic = search/DB/rules, plain = component, input = user end,
+// focus = the one accented step when there is no sLLM (accent fill), new = added in this version (accent outline).
+const DG_KINDS = ['sllm', 'llm', 'logic', 'plain', 'input', 'focus', 'new'] as const;
+// Legend swatches: a node kind, a pain-point mark, or a journey touchpoint dot.
+const DG_LEGEND = z
+  .array(
+    z.strictObject({
+      kind: z.enum([...DG_KINDS, 'mark', 'dot-own', 'dot-out']),
+      label: localized,
+    }),
+  )
+  .min(1);
 const rect = { x: z.number(), y: z.number(), w: z.number().positive(), h: z.number().positive() };
 
 const diagram = z
   .strictObject({
     width: z.number().positive(),
     height: z.number().positive(),
+    legend: DG_LEGEND.optional(), // replaces the file-level legend for this diagram
+    // Stage strip along the top (customer journey): one chevron of width w per item, from x.
+    stages: z
+      .strictObject({
+        x: z.number(),
+        y: z.number(),
+        w: z.number().positive(),
+        h: z.number().positive(),
+        items: z.array(localized).min(2),
+      })
+      .optional(),
     // center: an incoming connector runs through the label, so it sits centered on the line over a mask.
+    // note: short text right-aligned in the zone header (e.g. a metric); accent marks the headline one.
     zones: z
       .array(
-        z.strictObject({ id: text, label: localized, center: z.boolean().default(false), ...rect }),
+        z.strictObject({
+          id: text,
+          label: localized,
+          center: z.boolean().default(false),
+          note: z.strictObject({ text: localized, accent: z.boolean().default(false) }).optional(),
+          ...rect,
+        }),
       )
       .default([]),
     nodes: z
@@ -162,7 +190,33 @@ const diagram = z
           ...rect,
         }),
       )
-      .min(1),
+      .default([]),
+    // Customer journey: a path (curve) through touchpoint dots. own = the client's channel (filled), out = outside (hollow).
+    curve: text.optional(),
+    dots: z
+      .array(
+        z.strictObject({
+          id: text,
+          lane: z.enum(['own', 'out']),
+          label: localized,
+          x: z.number(),
+          y: z.number(),
+        }),
+      )
+      .default([]),
+    // Numbered pain points: a box with a quote, pointing at (px, py) near the dot or node `on`.
+    callouts: z
+      .array(
+        z.strictObject({
+          n: z.number().int().positive(),
+          on: text,
+          text: localized,
+          px: z.number(),
+          py: z.number(),
+          ...rect,
+        }),
+      )
+      .default([]),
     // from/to name a node or zone (read by screen readers); d is the drawn path.
     edges: z
       .array(
@@ -184,19 +238,22 @@ const diagram = z
       .default([]),
   })
   .superRefine((d, ctx) => {
-    const ids = [...d.zones, ...d.nodes].map((n) => n.id);
+    const ids = [...d.zones, ...d.nodes, ...d.dots].map((n) => n.id);
     if (new Set(ids).size !== ids.length)
       ctx.addIssue({ code: 'custom', message: 'duplicate diagram id' });
-    for (const e of d.edges)
-      for (const end of [e.from, e.to])
-        if (!ids.includes(end))
-          ctx.addIssue({ code: 'custom', message: `unknown diagram id "${end}"` });
+    if (!d.nodes.length && !d.dots.length)
+      ctx.addIssue({ code: 'custom', message: 'a diagram needs nodes or dots' });
+    for (const end of [...d.edges.flatMap((e) => [e.from, e.to]), ...d.callouts.map((c) => c.on)])
+      if (!ids.includes(end))
+        ctx.addIssue({ code: 'custom', message: `unknown diagram id "${end}"` });
   });
 
 const diagrams = defineCollection({
   loader: glob({ pattern: '*.yaml', base: './src/content/diagrams' }),
   schema: z.strictObject({
-    legend: z.array(z.strictObject({ kind: z.enum(DG_KINDS), label: localized })).min(1),
+    legend: DG_LEGEND, // default legend; a diagram's own `legend` replaces it
+    problem: diagram.optional(), // above the Problem bullets (e.g. customer journey)
+    approach: diagram.optional(), // below the Approach bullets (e.g. architecture versions)
     arch: diagram.optional(), // Architecture section; replaces the caseStudy.architecture table
     flow: diagram.optional(), // Service flow section
   }),

@@ -145,6 +145,8 @@ const ui = {
   dgThen: { en: '{a} to {b}', ko: '{a} 다음 {b}' },
   dgWith: { en: '{a} with {b}', ko: '{a}·{b} 연동' },
   dgBack: { en: '{a} back to {b}', ko: '{a}에서 {b}로 반환' },
+  dgPath: { en: 'Path: {a}', ko: '경로: {a}' },
+  dgPains: { en: 'Pain points', ko: '고충' },
   keyDecisions: { en: 'Key decisions', ko: '주요 결정' },
   decision: { en: 'Decision', ko: '결정' },
   why: { en: 'Why', ko: '이유' },

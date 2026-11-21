@@ -174,8 +174,19 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
             <h2 id={`h-${s.id}`}>{s.label}</h2>
             {s.id === 'outcome' && live && <Badge lang={lang} kind="in-progress" />}
           </div>
+          {s.id === 'problem' && dg?.problem && (
+            <div class="fig-pre">
+              <Diagram
+                lang={lang}
+                spec={dg.problem}
+                legend={dg.legend}
+                label={s.label}
+                uid="problem"
+              />
+            </div>
+          )}
           {(s.id === 'arch' || s.id === 'flow') && dg?.[s.id] ? (
-            <Diagram lang={lang} spec={dg[s.id]!} legend={dg.legend} label={s.label} />
+            <Diagram lang={lang} spec={dg[s.id]!} legend={dg.legend} label={s.label} uid={s.id} />
           ) : s.id === 'arch' && arch ? (
             <table class="tbl arch">
               <thead>
@@ -234,6 +245,17 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
                 <li>{b[lang]}</li>
               ))}
             </ul>
+          )}
+          {s.id === 'approach' && dg?.approach && (
+            <div class="fig-post">
+              <Diagram
+                lang={lang}
+                spec={dg.approach}
+                legend={dg.legend}
+                label={s.label}
+                uid="approach"
+              />
+            </div>
           )}
           {s.id === 'approach' && cs.decisions && (
             <>
@@ -522,6 +544,15 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
     font-size: var(--fs-sm);
     letter-spacing: var(--ls-label-ko);
     text-transform: none;
+  }
+
+  /* Figures inside a bulleted section: Problem diagram above the list, Approach diagram below it (5.24.4). */
+  .fig-pre {
+    margin-bottom: var(--sp-5);
+  }
+
+  .fig-post {
+    margin-top: var(--sp-5);
   }
 
   .bl {

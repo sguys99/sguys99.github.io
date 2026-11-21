@@ -1876,22 +1876,24 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 #### 5.24.4 아키텍처: 회로도 (diagrams) 또는 표 (layers / flows)
 
-케이스마다 `src/content/diagrams/<slug>.yaml`이 있으면 회로도를, 없으면 아래 표를 쓴다 (3.2.3 C의 "그림 대신 표"를 11.10에서 바꿈). 현재 회로도는 SCM 1건, 나머지 4건은 표.
+케이스마다 `src/content/diagrams/<slug>.yaml`이 있으면 회로도를, 없으면 아래 표를 쓴다 (3.2.3 C의 "그림 대신 표"를 11.10에서 바꿈). 현재 회로도는 SCM, 고객 상담 어시스턴트 2건, 나머지는 표.
 
 **회로도** (`src/components/Diagram.astro`, g9 시안 A)
 
 | 요소 | 값 |
 |---|---|
-| 파일 | `legend[]`(종류·라벨) + `arch`(Architecture 섹션) + `flow`(Service flow 섹션). 각 다이어그램은 `width`·`height`(SVG 단위), `zones[]`, `nodes[]`, `edges[]`. 좌표는 4px 격자, 스키마가 id 중복과 연결 대상 id를 검사 |
-| 노드 종류 `kind` | `sllm` 바탕 `--accent-soft` + 선 `--accent` (포인트 색은 여기에만) / `llm` 바탕 `--surface` + 선 `--text-2` 1.2 / `logic` 바탕 `--chip` + 선 `--line-strong` 0.8 / `plain` 바탕 `--surface` + 선 `--line-strong` / `input` 같은 바탕 + 점선 `4 3`. 모서리 6 |
+| 파일 | `legend[]`(종류·라벨, 기본 범례) + 자리별 다이어그램: `problem`(Problem 목록 위), `approach`(Approach 목록 아래, 결정 표 앞), `arch`(Architecture 섹션), `flow`(Service flow 섹션). 각 다이어그램은 `width`·`height`(SVG 단위), `zones[]`, `nodes[]`, `edges[]`, 선택으로 자기 `legend`(기본 범례를 대신함). 좌표는 4px 격자, 스키마가 id 중복과 연결·말풍선 대상 id를 검사 (11.11) |
+| 노드 종류 `kind` | `sllm` 바탕 `--accent-soft` + 선 `--accent` (포인트 색은 여기에만) / `llm` 바탕 `--surface` + 선 `--text-2` 1.2 / `logic` 바탕 `--chip` + 선 `--line-strong` 0.8 / `plain` 바탕 `--surface` + 선 `--line-strong` / `input` 같은 바탕 + 점선 `4 3`. sLLM이 없는 케이스는 `focus`(바탕 `--accent-soft` + 선 `--accent`, 그림의 초점 1곳)와 `new`(바탕 `--surface` + 선 `--accent` 1.2, 버전별로 추가된 것)를 쓴다 (11.11). 모서리 6 |
 | 글자 | 이름 12px `--fw-strong` `--text` (`\n`으로 줄바꿈, 14px 간격), 부제 9px `--font-meta` `--text-3`. 서체는 페이지 상속(국문 Pretendard). 크기는 diagram-design 기준 |
 | 영역 `zones` | 바탕 `--bg`, 모서리 8, 이름 12px `--fw-strong` `--text-2` 왼쪽 위. 다른 영역 안의 영역은 바탕 `--surface` + 선 `--line-strong`. `center: true`면 위에서 내려오는 연결선 위에 이름을 가운데 두고 바탕색으로 가린다 |
 | 연결선 `edges` | `d`에 직각 경로(모서리 반지름 8), 선 `--text-3` 1.2, 화살촉 같은 색. `style: back`은 점선(돌아가는 길), `both`는 양쪽 화살촉. 선끼리 경로를 공유하지 않고, 한 변에서 여러 선이 나가면 연결 지점을 12px 이상 띄운다 (diagram-design 규칙 3·4). 라벨 8px `--font-meta` `--text-3` 자간 0.06em, 선과 6~10px 띄우고(`anchor: start`는 세로선 옆) 항상 가림 바탕을 깐다: 바깥 영역 안이면 `--bg`, 그 밖은 `--surface` |
-| 범례 | 그림 아래 가는 선(`--line`) + 종류별 견본 16×12 |
+| 범례 | 그림 아래 가는 선(`--line`) + 종류별 견본 16×12. 고충 번호는 `mark`(포인트 색 원), 여정 접점은 `dot-own`·`dot-out` |
+| 영역 메모 `zones[].note` | 영역 이름 줄 오른쪽 끝에 짧은 글(지표 등), 12px `--font-meta` `--text-2`. `accent: true`는 `--accent` `--fw-strong` (11.11) |
+| 고객 여정 (11.11) | `stages`: 위쪽 단계 띠(`--chip` 갈매기형, 12px `--fw-medium` `--text-2`). `curve`: 접점을 잇는 경로(`--text-2` 1.4, 연결선이 아닌 경로라 직각 규칙의 예외). `dots`: 접점 r5, `own` 채움 `--text`·이름 아래 / `out` 빈 원·이름 위. `callouts`: 고충 말풍선(바탕 `--surface` + 선 `--line-strong`, 글 12px `--text-2` 두 줄) + 왼쪽 위 번호 원 r8 `--accent`(숫자 9px `--surface`) + 점선 지시선(`2 2`)이 `px`·`py`까지 |
 | 폭 | 본문 열 100%, SVG `min-width: 640px`. 열이 640px보다 좁으면(861–1100px, ≤860px) 그림 안에서 가로 스크롤, 그 아래 `dgScroll` 안내(`--fs-xs` `--text-3`, 컨테이너 쿼리). 페이지 가로 스크롤은 없음 |
-| 그리는 순서 | 영역 → 연결선 → 연결선 위 라벨 → 노드 → 범례 |
+| 그리는 순서 | 단계 띠 → 영역 → 연결선·경로 → 연결선 위 라벨 → 말풍선 → 노드 → 접점 → 범례 |
 
-- 접근성: SVG는 `aria-hidden`. 스크롤 상자는 `role="region"` + `aria-label`(섹션 제목) + `tabindex="0"`(키보드 스크롤, 포커스 테두리). 같은 내용을 `.sr-only`로: "Components / 구성 요소" 목록(노드를 가장 안쪽 영역별로, `sllm`·`llm`은 범례 라벨을 괄호로) + "Connections / 연결" 목록(`dgThen`·`dgBack`·`dgWith`). 이름이 같은 노드는 연결 문장에 영역 이름을 붙인다.
+- 접근성: SVG는 `aria-hidden`. 스크롤 상자는 `role="region"` + `aria-label`(섹션 제목) + `tabindex="0"`(키보드 스크롤, 포커스 테두리). 같은 내용을 `.sr-only`로: "Components / 구성 요소" 목록(노드와 접점을 가장 안쪽 영역별로, `logic`·`plain` 외의 종류는 범례 라벨을 괄호로) + "Connections / 연결" 목록(`dgThen`·`dgBack`·`dgWith`, 연결선이 있을 때만) + 경로(`dgPath`, 접점 순서) + "Pain points / 고충" 번호 목록(인용과 대상 접점). 이름이 같은 노드는 연결 문장에 영역 이름을 붙인다.
 - 섹션 안에 그림 제목(figcaption)은 두지 않는다. 섹션 제목이 이름이다.
 - 고객 내부 명칭(시스템·플랫폼·제품명)과 인프라 사양은 일반 명칭으로 바꿔 그린다 (CLAUDE.md 규칙 3, tasks.md 1.5.2 공개 범위).
 
@@ -3049,3 +3051,19 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 고객 내부 명칭(시스템·플랫폼·BI 제품명, 사내 클라우드)과 인프라 사양은 일반 명칭으로: SCM DB, LLMOps 플랫폼, LLM 서버, 외부 시황 DB, BI 엔진 | CLAUDE.md 규칙 3, 1.5.2 공개 범위(내부 용어·인프라 사양 일반화) |
 | 좁은 열(<640px: 861–1100px, ≤860px)에서는 그림을 줄이지 않고 그림 안에서 가로 스크롤 + 안내 한 줄(`dgScroll`) | 줄이면 12px 글자가 6px 아래로 내려가 읽을 수 없다. 페이지 가로 스크롤은 생기지 않는다 |
 | diagram-design 점검표(§9)로 다시 검사해 위반만 고침: 라우터에서 나가는 연결선 3개가 가로선을 공유하던 것을 연결 지점별로 분리, 연결선 라벨 모두 가림 바탕 + 6~10px 간격, 이름 굵기 600·부제 9px·라벨 8px. 흐름도의 A2A 라벨은 둘 자리가 없어 뺌(구성도에 남음). 복잡도 예산(노드 9개)은 원본처럼 한 장에 전체를 보이려고 넘긴 채 둠 | 사용자 결정 ("규칙 위반만 수정"). 개요 + 상세로 나누는 안은 고르지 않음 |
+
+### 11.11 고객 상담 어시스턴트 케이스 다이어그램 — 2026-11-21
+
+시안: `docs/design-drafts/g11/` (A 회로도 통일 / B 여정 지도 + 계층 / C 전후 대비(여정만), 영문·국문 × 라이트·다크 × 데스크톱·모바일 캡처 `shots/`). 자료: 프로젝트 개요 자료(고객 여정, 플랫폼 구성, 1~3차 흐름).
+
+| 결정 | 이유 |
+|---|---|
+| 다이어그램 4개를 조합으로 고름: 고객 여정 B(곡선 여정 지도 + 고충 말풍선), 아키텍처 진화 A(버전별 파이프라인), 아키텍처 B(계층 스택), 서비스 흐름 A(세로 3갈래) | 사용자 선택. 텍스트만 있던 페이지에 문제(여정 단절)부터 구조, 흐름, 3차에 걸친 개선까지 그림으로 보이게 |
+| 고객 여정은 Problem 목록 위(`problem`), 진화는 Approach 목록 아래·결정 표 앞(`approach`)에 둔다. 섹션 번호는 그대로이고 Service flow만 새 섹션 | 사용자 결정(여정 = Problem). 진화는 사용자에게 제안해 추가. 자리 이름을 섹션 기준으로 둬 다른 케이스도 같은 자리를 쓸 수 있게 |
+| 포인트 색: sLLM이 없으므로 아키텍처·흐름에서는 LLM 없이 답하는 Predefined 1곳(`focus`), 여정에서는 고충 번호, 진화에서는 버전마다 추가된 모듈(`new`) | 포인트 색 1개 원칙(2장). Predefined는 LLM 비용 50% 절감(주요 결정 3)과 이어짐 |
+| 진화 그림의 지표는 사이트에 있는 것만: 2차 평균 응답 10초·LLM 비용 50% 절감, 3차 5초(포인트 색). 1차 지표는 없음 | 규칙 2(없는 사실을 만들지 않음) |
+| 영문 제목을 "AI Assistant for Customer Service"로 바꿈. 국문 제목과 주소(`/work/samsung-consultation-assistant/`)는 그대로 | 사용자 요청. Title Case는 다른 프로젝트 제목과 맞춤(사용자 선택) |
+| 원본의 응대 기능 19칸은 그리지 않음. 제3자 서비스명(포털·쇼핑몰)은 일반 명칭으로 | 사이트 성과 문구(18개 시나리오)와 개수가 달라 확인함. 사용자 선택(대표 기능만). 규칙 3 |
+| 기존 계층 표(`caseStudy.architecture`)는 이 케이스에서 삭제 (SCM과 같음) | 회로도가 대신하고 같은 내용은 화면 낭독기용 텍스트로 남음 |
+| 여정 곡선은 diagram-design의 직각 연결선 규칙 예외, 아키텍처·흐름은 노드 수 예산(9개) 초과를 그대로 둠 | 곡선은 노드 사이 연결이 아니라 고객 경로. 예산 초과는 SCM(11.10)과 같은 이유 |
+

@@ -10,12 +10,15 @@ type Spec = NonNullable<File['arch']>;
 interface Props {
   lang: Lang;
   spec: Spec;
-  legend: File['legend'];
+  legend: File['legend']; // file default; spec.legend replaces it
   label: string; // accessible name, the section title
+  uid: string; // unique per page (the slot: problem, approach, arch, flow), for the marker id
 }
 
-const { lang, spec, legend, label } = Astro.props;
-const { width: W, height: H, zones, nodes, edges } = spec;
+const { lang, spec, label, uid } = Astro.props;
+const legend = spec.legend ?? Astro.props.legend;
+const { width: W, height: H, zones, nodes, edges, stages, curve, dots, callouts } = spec;
+const arrow = `url(#dg-ar-${uid}-${lang})`;
 
 // Mask width for centered zone labels and edge labels (Latin ~6.8px, Hangul 12px at 12px).
 const est = (s: string) => [...s].reduce((n, c) => n + (/[ㄱ-힝]/.test(c) ? 12 : 6.8), 0);
@@ -45,14 +48,22 @@ const kindLabel = new Map(legend.map((l) => [l.kind, l.label[lang]]));
 const nodeText = (n: Spec['nodes'][number]) =>
   n.label[lang].replace(/\n/g, ' ') +
   (n.sub ? `, ${n.sub[lang]}` : '') +
-  (kindLabel.has(n.kind) && n.kind !== 'logic' ? ` (${kindLabel.get(n.kind)})` : '');
+  (kindLabel.has(n.kind) && n.kind !== 'logic' && n.kind !== 'plain'
+    ? ` (${kindLabel.get(n.kind)})`
+    : '');
 const groups = new Map<string, string[]>([
   ['', []],
   ...zones.map((z) => [z.id, []] as [string, string[]]),
 ]);
 const zoneLabel = new Map(zones.map((z) => [z.id, z.label[lang]]));
 const plain = (n: { label: { en: string; ko: string } }) => n.label[lang].replace(/\n/g, ' ');
-const name = new Map([...zones, ...nodes].map((n) => [n.id, plain(n)]));
+const name = new Map([...zones, ...nodes, ...dots].map((n) => [n.id, plain(n)]));
+// Touchpoint dots are listed under their lane (zone) like nodes; the curve is read as the path through them in order.
+for (const d of dots) {
+  const home = zones.find((z) => d.x >= z.x && d.y >= z.y && d.x <= z.x + z.w && d.y <= z.y + z.h);
+  groups.get(home?.id ?? '')!.push(plain(d));
+}
+const pathText = curve && dots.length ? dots.map(plain).join(' → ') : '';
 for (const n of nodes) {
   const home = zones.filter((z) => within(n, z)).sort((a, b) => area(a) - area(b))[0];
   groups.get(home?.id ?? '')!.push(nodeText(n));
@@ -72,7 +83,7 @@ const linkText = (e: Spec['edges'][number]) =>
     <svg viewBox={`0 0 ${W} ${H}`} aria-hidden="true" focusable="false">
       <defs>
         <marker
-          id={`dg-ar-${lang}-${W}-${H}`}
+          id={`dg-ar-${uid}-${lang}`}
           markerWidth="8"
           markerHeight="6"
           refX="7"
@@ -82,7 +93,24 @@ const linkText = (e: Spec['edges'][number]) =>
           <polygon class="mk" points="0 0, 8 3, 0 6"></polygon>
         </marker>
       </defs>
-      {/* z-order: zones → connectors → labels on connectors → nodes (diagram-design §6) */}
+      {/* z-order: stages → zones → connectors and path → labels on connectors → callouts → nodes → dots (diagram-design §6) */}
+      {stages?.items.map((s, i) => {
+        const x = stages.x + stages.w * i;
+        const { y, h, w } = stages;
+        // Chevrons: the first has a flat left end, the rest a notch that takes the previous point.
+        const notch = i ? `${x + 8},${y + h / 2} ` : '';
+        return (
+          <>
+            <polygon
+              class="stg"
+              points={`${notch}${x},${y} ${x + w - 8},${y} ${x + w},${y + h / 2} ${x + w - 8},${y + h} ${x},${y + h}`}
+            />
+            <text class="stt" x={x + w / 2 + (i ? 2 : -2)} y={y + h / 2 + 4} text-anchor="middle">
+              {s[lang]}
+            </text>
+          </>
+        );
+      })}
       {zones.map((z) => (
         <>
           <rect
@@ -98,16 +126,27 @@ const linkText = (e: Spec['edges'][number]) =>
               {z.label[lang]}
             </text>
           )}
+          {z.note && (
+            <text
+              class:list={['zn', { acc: z.note.accent }]}
+              x={z.x + z.w - 12}
+              y={z.y + 20}
+              text-anchor="end"
+            >
+              {z.note.text[lang]}
+            </text>
+          )}
         </>
       ))}
       {edges.map((e) => (
         <path
           class:list={['ln', { back: e.style === 'back' }]}
           d={e.d}
-          marker-end={`url(#dg-ar-${lang}-${W}-${H})`}
-          marker-start={e.style === 'both' ? `url(#dg-ar-${lang}-${W}-${H})` : undefined}
+          marker-end={arrow}
+          marker-start={e.style === 'both' ? arrow : undefined}
         />
       ))}
+      {curve && <path class="cv" d={curve} />}
       {zones
         .filter((z) => z.center)
         .map((z) => {
@@ -149,6 +188,21 @@ const linkText = (e: Spec['edges'][number]) =>
             </>
           );
         })}
+      {callouts.map((c) => (
+        <>
+          <path class="ptr" d={`M${c.px},${c.py > c.y ? c.y + c.h : c.y} V${c.py}`} />
+          <rect class="co" x={c.x} y={c.y} width={c.w} height={c.h} rx="6" />
+          {lines(c.text[lang]).map((s, i) => (
+            <text class="cot" x={c.x + 20} y={c.y + 16 + i * 14}>
+              {s}
+            </text>
+          ))}
+          <circle class="mkc" cx={c.x + 2} cy={c.y + 2} r="8" />
+          <text class="mkt" x={c.x + 2} y={c.y + 5} text-anchor="middle">
+            {c.n}
+          </text>
+        </>
+      ))}
       {nodes.map((n) => {
         const ls = lines(n.label[lang]);
         const rows = ls.length + (n.sub ? 1 : 0);
@@ -171,12 +225,37 @@ const linkText = (e: Spec['edges'][number]) =>
           </g>
         );
       })}
+      {/* Dots: label above for outside touchpoints, below for the client's own (multi-line labels grow away from the dot). */}
+      {dots.map((d) => {
+        const ls = lines(d.label[lang]);
+        return (
+          <>
+            <circle class={`dot ${d.lane}`} cx={d.x} cy={d.y} r="5" />
+            {ls.map((s, i) => (
+              <text
+                class="nt"
+                x={d.x}
+                y={d.lane === 'out' ? d.y - 14 - (ls.length - 1 - i) * 14 : d.y + 22 + i * 14}
+                text-anchor="middle"
+              >
+                {s}
+              </text>
+            ))}
+          </>
+        );
+      })}
       <line class="rule" x1="0" y1={LG - 20} x2={W} y2={LG - 20}></line>
       {legend.map((l, i) => (
         <>
-          <g class={`k-${l.kind}`}>
-            <rect x={i * lgStep} y={LG - 10} width="16" height="12" rx="3" />
-          </g>
+          {l.kind === 'mark' ? (
+            <circle class="mkc" cx={i * lgStep + 8} cy={LG - 4} r="6" />
+          ) : l.kind.startsWith('dot-') ? (
+            <circle class={`dot ${l.kind.slice(4)}`} cx={i * lgStep + 8} cy={LG - 4} r="5" />
+          ) : (
+            <g class={`k-${l.kind}`}>
+              <rect x={i * lgStep} y={LG - 10} width="16" height="12" rx="3" />
+            </g>
+          )}
           <text class="lg" x={i * lgStep + 24} y={LG}>
             {l.label[lang]}
           </text>
@@ -197,12 +276,29 @@ const linkText = (e: Spec['edges'][number]) =>
           </li>
         ))}
     </ul>
-    <p>{t(lang, 'dgLinks')}</p>
-    <ul>
-      {edges.map((e) => (
-        <li>{linkText(e)}</li>
-      ))}
-    </ul>
+    {edges.length > 0 && (
+      <>
+        <p>{t(lang, 'dgLinks')}</p>
+        <ul>
+          {edges.map((e) => (
+            <li>{linkText(e)}</li>
+          ))}
+        </ul>
+      </>
+    )}
+    {pathText && <p>{t(lang, 'dgPath', { a: pathText })}</p>}
+    {callouts.length > 0 && (
+      <>
+        <p>{t(lang, 'dgPains')}</p>
+        <ol>
+          {callouts.map((c) => (
+            <li>
+              {c.text[lang].replace(/\n/g, ' ')} ({name.get(c.on)})
+            </li>
+          ))}
+        </ol>
+      </>
+    )}
   </div>
 </figure>
 
@@ -273,6 +369,19 @@ const linkText = (e: Spec['edges'][number]) =>
     fill: var(--surface);
     stroke: var(--line-strong);
     stroke-dasharray: 4 3;
+  }
+
+  /* Without an sLLM the accent goes to one focal kind (focus), or outlines what a version added (new). */
+  .k-focus rect {
+    fill: var(--accent-soft);
+    stroke: var(--accent);
+    stroke-width: 1;
+  }
+
+  .k-new rect {
+    fill: var(--surface);
+    stroke: var(--accent);
+    stroke-width: 1.2;
   }
 
   /* Sizes follow diagram-design: name 12px semibold, sublabel 9px mono, edge label 8px mono. */
@@ -350,5 +459,69 @@ const linkText = (e: Spec['edges'][number]) =>
   .lg {
     fill: var(--text-2);
     font-size: 12px;
+  }
+
+  .zn {
+    fill: var(--text-2);
+    font-size: 12px;
+    font-family: var(--font-meta);
+  }
+
+  .zn.acc {
+    fill: var(--accent);
+    font-weight: var(--fw-strong);
+  }
+
+  /* Customer journey: stage chevrons, path through touchpoint dots, numbered pain points with quotes. */
+  .stg {
+    fill: var(--chip);
+  }
+
+  .stt {
+    fill: var(--text-2);
+    font-size: 12px;
+    font-weight: var(--fw-medium);
+  }
+
+  .cv {
+    fill: none;
+    stroke: var(--text-2);
+    stroke-width: 1.4;
+  }
+
+  .dot.own {
+    fill: var(--text);
+  }
+
+  .dot.out {
+    fill: var(--surface);
+    stroke: var(--text-2);
+    stroke-width: 1.4;
+  }
+
+  .co {
+    fill: var(--surface);
+    stroke: var(--line-strong);
+  }
+
+  .cot {
+    fill: var(--text-2);
+    font-size: 12px;
+  }
+
+  .ptr {
+    stroke: var(--line-strong);
+    stroke-dasharray: 2 2;
+  }
+
+  .mkc {
+    fill: var(--accent);
+  }
+
+  .mkt {
+    fill: var(--surface);
+    font-size: 9px;
+    font-weight: var(--fw-strong);
+    font-family: var(--font-meta);
   }
 </style>

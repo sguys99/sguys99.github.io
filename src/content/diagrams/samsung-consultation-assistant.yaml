@@ -1,0 +1,874 @@
+# 고객 상담 어시스턴트 케이스 스터디 다이어그램 (DESIGN.md 5.24.4, 11.11). 시안 g11에서 고른 조합:
+# problem = 여정 B(곡선 여정 지도), approach = 진화 A(버전별 파이프라인), arch = B(계층 스택), flow = A(세로 3갈래).
+# 출처: docs/project-references/online-ai-assistant/프로젝트 개요.pdf (1장 고객 여정, 3장 플랫폼, 4~6장 Ver1~3).
+# 제3자 서비스명(포털·쇼핑몰)은 일반 명칭으로. 포인트 색은 LLM 없이 답하는 Predefined(focus), 고충 번호, 버전별 추가 모듈(new)에만.
+# 좌표는 SVG 단위(4px 격자). 연결선 d는 직각 + 모서리 반지름 8, 한 변에서 나가는 선은 연결 지점을 따로 둔다 (diagram-design 규칙 3·4).
+
+legend:
+  - kind: llm
+    label: { en: LLM call, ko: LLM 호출 }
+  - kind: logic
+    label: { en: 'Logic, search, storage', ko: 로직·검색·저장소 }
+  - kind: focus
+    label: { en: Answered without the LLM, ko: LLM 없이 답변 }
+
+# 02 Problem: 고객 여정. 외부 채널(빈 점)과 자사 채널(찬 점)을 오가는 경로와 고충 4곳.
+problem:
+  width: 720
+  height: 396
+  legend:
+    - kind: dot-own
+      label: { en: Samsung touchpoint, ko: 자사 접점 }
+    - kind: dot-out
+      label: { en: Outside touchpoint, ko: 외부 접점 }
+    - kind: mark
+      label: { en: Pain point, ko: 고충 }
+  stages:
+    x: 8
+    y: 0
+    w: 88
+    h: 28
+    items:
+      - { en: Discover, ko: 인지 }
+      - { en: Research, ko: 탐색 }
+      - { en: Visit, ko: 방문·체험 }
+      - { en: Purchase, ko: 구매 }
+      - { en: Delivery, ko: 배송·설치 }
+      - { en: Use, ko: 등록·사용 }
+      - { en: Service, ko: 서비스 이용 }
+      - { en: Repurchase, ko: 재구매 }
+  zones:
+    - { id: out, label: { en: Outside channels, ko: 외부 채널 }, x: 0, y: 96, w: 720, h: 88 }
+    - { id: own, label: { en: Samsung channels, ko: 자사 채널 }, x: 0, y: 200, w: 720, h: 88 }
+  curve: 'M52,152 C96,152 96,152 140,152 C184,152 184,228 228,228 C264,228 264,152 300,152 C320,152 320,228 340,228 C374,228 374,228 408,228 C440,228 440,228 472,228 C494,228 494,152 516,152 C548,152 548,228 580,228 C624,228 624,228 668,228'
+  dots:
+    - { id: ads, lane: out, label: { en: Ads, ko: 광고 노출 }, x: 52, y: 152 }
+    - {
+        id: search,
+        lane: out,
+        label: { en: Search & compare, ko: 정보 검색·제품 비교 },
+        x: 140,
+        y: 152,
+      }
+    - { id: store, lane: own, label: { en: Store visit, ko: 매장 방문 }, x: 228, y: 228 }
+    - { id: price, lane: out, label: { en: Price check, ko: 가격 비교 }, x: 300, y: 152 }
+    - { id: buy, lane: own, label: { en: Purchase, ko: 구매 }, x: 340, y: 228 }
+    - { id: deliv, lane: own, label: { en: "Delivery\n& setup", ko: 배송·설치 }, x: 408, y: 228 }
+    - { id: reg, lane: own, label: { en: Register, ko: 제품 등록 }, x: 472, y: 228 }
+    - { id: howto, lane: out, label: { en: How-to search, ko: 사용법 탐색 }, x: 516, y: 152 }
+    - { id: svc, lane: own, label: { en: "Service\ninquiry", ko: 서비스 문의 }, x: 580, y: 228 }
+    - { id: again, lane: own, label: { en: Buy again, ko: 추가 구매 }, x: 668, y: 228 }
+  callouts:
+    - n: 1
+      on: search
+      text:
+        {
+          en: "Too many lookalikes;\nreviews hard to trust",
+          ko: "유사 상품은 많고\n후기는 믿기 어렵다",
+        }
+      x: 48
+      y: 40
+      w: 192
+      h: 40
+      px: 140
+      py: 128
+    - n: 2
+      on: price
+      text:
+        {
+          en: "Which promotions apply?\nI might miss out",
+          ko: "어떤 프로모션이 있는지\n몰라 손해 볼 것 같다",
+        }
+      x: 252
+      y: 40
+      w: 192
+      h: 40
+      px: 300
+      py: 128
+    - n: 3
+      on: deliv
+      text:
+        {
+          en: "Can't track or change\ndelivery; no one answers",
+          ko: "배송 확인·변경이 어렵고\n전화 연결도 안 된다",
+        }
+      x: 316
+      y: 304
+      w: 192
+      h: 40
+      px: 408
+      py: 270
+    - n: 4
+      on: svc
+      text:
+        {
+          en: "Is it broken? The agent\nisn't sure either",
+          ko: "고장인지도 모르겠고\n상담원도 잘 모르는 것 같다",
+        }
+      x: 520
+      y: 304
+      w: 192
+      h: 40
+      px: 580
+      py: 270
+
+# 04 Approach: 1·2·3차 아키텍처. 직렬 → 분기 → 병렬, 버전마다 추가된 모듈은 new.
+approach:
+  width: 720
+  height: 564
+  legend:
+    - kind: plain
+      label: { en: Kept from the previous version, ko: 이전 버전에서 유지 }
+    - kind: new
+      label: { en: Added in this version, ko: 이 버전에서 추가 }
+  zones:
+    - { id: v1, label: { en: Version 1 · MVP, ko: 1차 · MVP }, x: 0, y: 0, w: 720, h: 88 }
+    - id: v2
+      label: { en: Version 2, ko: 2차 }
+      note:
+        {
+          text:
+            { en: '10 s avg response · LLM cost −50%', ko: '평균 응답 10초 · LLM 비용 50% 절감' },
+        }
+      x: 0
+      y: 104
+      w: 720
+      h: 188
+    - id: v3
+      label: { en: Version 3, ko: 3차 }
+      note: { text: { en: 5 s avg response, ko: 평균 응답 5초 }, accent: true }
+      x: 0
+      y: 308
+      w: 720
+      h: 196
+  nodes:
+    - {
+        id: a1,
+        kind: plain,
+        label: { en: Query rewrite, ko: 질의 재작성 },
+        x: 16,
+        y: 36,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: a2,
+        kind: plain,
+        label: { en: Intent triage, ko: 의도 분류 },
+        x: 132,
+        y: 36,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: a3,
+        kind: plain,
+        label: { en: Entities, ko: 엔티티 추출 },
+        sub: { en: code mapping, ko: 코드 매핑 },
+        x: 248,
+        y: 36,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: a4,
+        kind: plain,
+        label: { en: Pseudo query, ko: Pseudo Query },
+        x: 364,
+        y: 36,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: a5,
+        kind: plain,
+        label: { en: Data lookup, ko: 데이터 조회 },
+        sub: { en: one combined path, ko: 정형·비정형 통합 },
+        x: 480,
+        y: 36,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: a6,
+        kind: plain,
+        label: { en: Answer, ko: 답변 구성 },
+        sub: { en: templates, ko: 답변 템플릿 },
+        x: 596,
+        y: 36,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: b1,
+        kind: plain,
+        label: { en: Query rewrite, ko: 질의 재작성 },
+        x: 16,
+        y: 188,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: b2,
+        kind: plain,
+        label: { en: Intent triage, ko: 의도 분류 },
+        x: 132,
+        y: 188,
+        w: 104,
+        h: 40,
+      }
+    - id: b3
+      kind: new
+      label: { en: 'Predefined answers, guardrails', ko: Predefined 답변·가드레일 }
+      sub: { en: FAQ · attack check · re-asking, ko: FAQ·공격 탐지·재질문 }
+      x: 248
+      y: 136
+      w: 336
+      h: 40
+    - {
+        id: b4,
+        kind: plain,
+        label: { en: Entities, ko: 엔티티 추출 },
+        sub: { en: code mapping, ko: 코드 매핑 },
+        x: 248,
+        y: 188,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: b5,
+        kind: plain,
+        label: { en: Pseudo query, ko: Pseudo Query },
+        x: 364,
+        y: 188,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: b6,
+        kind: plain,
+        label: { en: DB lookup, ko: DB 조회 },
+        sub: { en: structured, ko: 정형 },
+        x: 480,
+        y: 188,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: b7,
+        kind: new,
+        label: { en: Unstructured, ko: 비정형 검색 },
+        sub: { en: AI search, ko: AI 검색 },
+        x: 248,
+        y: 240,
+        w: 104,
+        h: 40,
+      }
+    - { id: b8, kind: new, label: { en: Reranking, ko: 재순위화 }, x: 364, y: 240, w: 104, h: 40 }
+    - { id: b9, kind: plain, label: { en: Answer, ko: 답변 구성 }, x: 596, y: 188, w: 104, h: 40 }
+    - {
+        id: c1,
+        kind: new,
+        label: { en: 'Rewrite, split', ko: 재작성·분해 },
+        sub: { en: sub-queries, ko: 하위 질의 },
+        x: 16,
+        y: 396,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: c2,
+        kind: plain,
+        label: { en: Predefined, ko: Predefined },
+        x: 248,
+        y: 344,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: c3,
+        kind: plain,
+        label: { en: Guardrails, ko: 가드레일 },
+        x: 364,
+        y: 344,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: c4,
+        kind: plain,
+        label: { en: Entities, ko: 엔티티 추출 },
+        sub: { en: triage · mapping, ko: 분류·매핑 },
+        x: 248,
+        y: 396,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: c5,
+        kind: plain,
+        label: { en: Pseudo query, ko: Pseudo Query },
+        sub: { en: DB / API, ko: DB·API },
+        x: 364,
+        y: 396,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: c6,
+        kind: new,
+        label: { en: AI search + web search, ko: AI 검색 + 웹 검색 },
+        sub: { en: unstructured, ko: 비정형 },
+        x: 248,
+        y: 448,
+        w: 220,
+        h: 40,
+      }
+    - {
+        id: c7,
+        kind: new,
+        label: { en: "Merge\ndata", ko: "결과\n병합" },
+        x: 480,
+        y: 344,
+        w: 96,
+        h: 144,
+      }
+    - {
+        id: c8,
+        kind: new,
+        label: { en: Answer, ko: 답변 구성 },
+        sub: { en: simple / informative, ko: 단순·정보형 },
+        x: 596,
+        y: 396,
+        w: 116,
+        h: 40,
+      }
+  edges:
+    - { from: a1, to: a2, d: 'M120,56 H132' }
+    - { from: a2, to: a3, d: 'M236,56 H248' }
+    - { from: a3, to: a4, d: 'M352,56 H364' }
+    - { from: a4, to: a5, d: 'M468,56 H480' }
+    - { from: a5, to: a6, d: 'M584,56 H596' }
+    - { from: b1, to: b2, d: 'M120,208 H132' }
+    - { from: b2, to: b3, d: 'M196,188 V164 Q196,156 204,156 H248' }
+    - { from: b2, to: b4, d: 'M236,208 H248' }
+    - { from: b4, to: b5, d: 'M352,208 H364' }
+    - { from: b5, to: b6, d: 'M468,208 H480' }
+    - { from: b6, to: b9, d: 'M584,208 H596' }
+    - { from: b2, to: b7, d: 'M196,228 V252 Q196,260 204,260 H248' }
+    - { from: b7, to: b8, d: 'M352,260 H364' }
+    - { from: b3, to: b9, d: 'M584,156 H612 Q620,156 620,164 V188' }
+    - { from: b8, to: b9, d: 'M468,260 H668 Q676,260 676,252 V228' }
+    - from: c1
+      to: c2
+      d: 'M120,404 H156 Q164,404 164,396 V372 Q164,364 172,364 H248'
+      label: { text: { en: PARALLEL, ko: 병렬 }, x: 174, y: 388, anchor: start }
+    - { from: c1, to: c4, d: 'M120,416 H248' }
+    - { from: c1, to: c6, d: 'M120,428 H156 Q164,428 164,436 V460 Q164,468 172,468 H248' }
+    - { from: c2, to: c3, d: 'M352,364 H364' }
+    - { from: c4, to: c5, d: 'M352,416 H364' }
+    - { from: c3, to: c7, d: 'M468,364 H480' }
+    - { from: c5, to: c7, d: 'M468,416 H480' }
+    - { from: c6, to: c7, d: 'M468,468 H480' }
+    - { from: c7, to: c8, d: 'M576,416 H596' }
+
+# 05 Architecture: 계층 스택. 채널 → Azure 플랫폼(게이트웨이, 이해·조회·답변 모듈, 관리자 페이지) → 모델·저장소 → 데이터 원천.
+arch:
+  width: 720
+  height: 652
+  zones:
+    - { id: channels, label: { en: Channels, ko: 채널 }, x: 0, y: 0, w: 720, h: 72 }
+    - {
+        id: platform,
+        label: { en: Gen AI platform on Azure, ko: Gen AI 플랫폼 (Azure) },
+        x: 0,
+        y: 96,
+        w: 720,
+        h: 280,
+      }
+    - { id: und, label: { en: Understand, ko: 질의 이해 }, x: 16, y: 164, w: 208, h: 140 }
+    - { id: ret, label: { en: Retrieve, ko: 조회 }, x: 256, y: 164, w: 208, h: 140 }
+    - { id: ans, label: { en: Answer, ko: 답변 }, x: 496, y: 164, w: 208, h: 140 }
+    - {
+        id: storage,
+        label: { en: Models and storage, ko: 모델·저장소 },
+        x: 0,
+        y: 400,
+        w: 720,
+        h: 84,
+      }
+    - { id: sources, label: { en: Data sources, ko: 데이터 원천 }, x: 0, y: 508, w: 720, h: 84 }
+  nodes:
+    - {
+        id: offline,
+        kind: input,
+        label: { en: Offline stores, ko: 오프라인 매장 },
+        x: 16,
+        y: 28,
+        w: 168,
+        h: 32,
+      }
+    - {
+        id: online,
+        kind: input,
+        label: { en: Online store, ko: 온라인몰 },
+        x: 196,
+        y: 28,
+        w: 168,
+        h: 32,
+      }
+    - {
+        id: console,
+        kind: input,
+        label: { en: Agent console, ko: 상담원 콘솔 },
+        x: 376,
+        y: 28,
+        w: 168,
+        h: 32,
+      }
+    - {
+        id: gw,
+        kind: plain,
+        label: { en: API gateway (channel-independent), ko: API 게이트웨이 (채널 독립) },
+        x: 16,
+        y: 124,
+        w: 688,
+        h: 28,
+      }
+    - {
+        id: rewrite,
+        kind: llm,
+        label: { en: Query rewrite, ko: 질의 재작성 },
+        x: 28,
+        y: 192,
+        w: 184,
+        h: 28,
+      }
+    - {
+        id: triage,
+        kind: logic,
+        label: { en: Intent triage, ko: 의도 분류 },
+        x: 28,
+        y: 228,
+        w: 184,
+        h: 28,
+      }
+    - {
+        id: entity,
+        kind: llm,
+        label: { en: Entity extraction, ko: 엔티티 추출 },
+        x: 28,
+        y: 264,
+        w: 184,
+        h: 28,
+      }
+    - {
+        id: structured,
+        kind: logic,
+        label: { en: Structured · pseudo query, ko: 정형 · Pseudo Query },
+        x: 268,
+        y: 192,
+        w: 184,
+        h: 28,
+      }
+    - {
+        id: unstructured,
+        kind: logic,
+        label: { en: Unstructured search, ko: 비정형 검색 },
+        x: 268,
+        y: 228,
+        w: 184,
+        h: 28,
+      }
+    - {
+        id: check,
+        kind: logic,
+        label: { en: Spec · price check, ko: 스펙·가격·프로모션 확인 },
+        x: 268,
+        y: 264,
+        w: 184,
+        h: 28,
+      }
+    - {
+        id: predef,
+        kind: focus,
+        label: { en: Predefined answers, ko: Predefined 답변 },
+        x: 508,
+        y: 192,
+        w: 184,
+        h: 28,
+      }
+    - {
+        id: guard,
+        kind: logic,
+        label: { en: Guardrails, ko: 가드레일 },
+        x: 508,
+        y: 228,
+        w: 184,
+        h: 28,
+      }
+    - {
+        id: layout,
+        kind: llm,
+        label: { en: Response layout, ko: 답변 구성 },
+        x: 508,
+        y: 264,
+        w: 184,
+        h: 28,
+      }
+    - id: admin
+      kind: plain
+      label: { en: Admin page, ko: 관리자 페이지 }
+      sub:
+        {
+          en: logs · monitoring · permissions · personal data,
+          ko: 로그·모니터링·권한·개인정보 관리,
+        }
+      x: 16
+      y: 320
+      w: 688
+      h: 40
+    - {
+        id: llm,
+        kind: llm,
+        label: { en: LLM, ko: LLM },
+        sub: { en: Azure OpenAI, ko: Azure OpenAI },
+        x: 28,
+        y: 428,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: web,
+        kind: logic,
+        label: { en: Web search, ko: 웹 검색 },
+        sub: { en: Bing, ko: Bing },
+        x: 140,
+        y: 428,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: pg,
+        kind: logic,
+        label: { en: Structured, ko: 정형 },
+        sub: { en: PostgreSQL, ko: PostgreSQL },
+        x: 252,
+        y: 428,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: search,
+        kind: logic,
+        label: { en: Unstructured, ko: 비정형 },
+        sub: { en: Azure AI Search, ko: Azure AI Search },
+        x: 364,
+        y: 428,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: cache,
+        kind: logic,
+        label: { en: Cache, ko: 캐시 },
+        sub: { en: Redis, ko: Redis },
+        x: 476,
+        y: 428,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: logs,
+        kind: logic,
+        label: { en: User logs, ko: 사용자 로그 },
+        sub: { en: Cosmos DB, ko: Cosmos DB },
+        x: 588,
+        y: 428,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: orders,
+        kind: plain,
+        label: { en: "Orders,\ndelivery", ko: "주문·결제·\n배송" },
+        x: 28,
+        y: 536,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: catalog,
+        kind: plain,
+        label: { en: "Product\ncatalog", ko: "제품\n카탈로그" },
+        x: 140,
+        y: 536,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: manuals,
+        kind: plain,
+        label: { en: Manuals, ko: 제품 매뉴얼 },
+        x: 252,
+        y: 536,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: stores,
+        kind: plain,
+        label: { en: "Stores,\nonline mall", ko: "매장·\n온라인몰" },
+        x: 364,
+        y: 536,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: cs,
+        kind: plain,
+        label: { en: "Service\nand CS", ko: "AS·CS\n정보" },
+        x: 476,
+        y: 536,
+        w: 104,
+        h: 40,
+      }
+    - {
+        id: legacy,
+        kind: plain,
+        label: { en: "Existing\nGen AI", ko: "기존 Gen AI\n서비스" },
+        x: 588,
+        y: 536,
+        w: 104,
+        h: 40,
+      }
+  edges:
+    - { from: channels, to: platform, d: 'M360,72 V96', style: both }
+    - { from: gw, to: und, d: 'M120,152 V164' }
+    - { from: und, to: ret, d: 'M224,234 H256' }
+    - { from: ret, to: ans, d: 'M464,234 H496' }
+    - { from: platform, to: storage, d: 'M360,376 V400', style: both }
+    - { from: storage, to: sources, d: 'M360,484 V508', style: both }
+
+# 06 Service flow: 3차 흐름. 전처리 후 정형·비정형(+웹)·Predefined/가드레일 3갈래 병렬 → 병합 → 답변 구성.
+flow:
+  width: 720
+  height: 596
+  zones:
+    - { id: orch, label: { en: Orchestrator, ko: 오케스트레이터 }, x: 136, y: 0, w: 584, h: 88 }
+    - {
+        id: st,
+        label: { en: Structured · sub-queries, ko: 정형 · 하위 질의 },
+        center: true,
+        x: 0,
+        y: 132,
+        w: 224,
+        h: 272,
+      }
+    - {
+        id: un,
+        label: { en: Unstructured · top query, ko: 비정형 · 원질의 },
+        center: true,
+        x: 248,
+        y: 132,
+        w: 224,
+        h: 272,
+      }
+    - {
+        id: pg,
+        label: { en: Predefined · guardrails, ko: Predefined · 가드레일 },
+        center: true,
+        x: 496,
+        y: 132,
+        w: 224,
+        h: 272,
+      }
+  nodes:
+    - { id: q, kind: input, label: { en: Question, ko: 질의 입력 }, x: 0, y: 36, w: 112, h: 40 }
+    - {
+        id: hist,
+        kind: logic,
+        label: { en: Chat history, ko: 대화 이력 확인 },
+        x: 148,
+        y: 36,
+        w: 120,
+        h: 40,
+      }
+    - {
+        id: lang,
+        kind: llm,
+        label: { en: Language ID, ko: 언어 식별 },
+        x: 288,
+        y: 36,
+        w: 120,
+        h: 40,
+      }
+    - {
+        id: rw,
+        kind: llm,
+        label: { en: 'Rewrite, split', ko: 재작성·분해 },
+        sub: { en: top + sub-queries, ko: 원질의·하위 질의 },
+        x: 428,
+        y: 36,
+        w: 132,
+        h: 40,
+      }
+    - { id: emb, kind: logic, label: { en: Embedding, ko: 임베딩 }, x: 580, y: 36, w: 128, h: 40 }
+    - {
+        id: st1,
+        kind: logic,
+        label: { en: Intent triage, ko: 의도 분류 },
+        x: 32,
+        y: 172,
+        w: 160,
+        h: 32,
+      }
+    - {
+        id: st2,
+        kind: llm,
+        label: { en: Entity extraction, ko: 엔티티 추출 },
+        x: 32,
+        y: 220,
+        w: 160,
+        h: 32,
+      }
+    - {
+        id: st3,
+        kind: logic,
+        label: { en: Code mapping, ko: 코드 매핑 },
+        x: 32,
+        y: 268,
+        w: 160,
+        h: 32,
+      }
+    - {
+        id: st4,
+        kind: llm,
+        label: { en: Pseudo query, ko: Pseudo Query },
+        x: 32,
+        y: 316,
+        w: 160,
+        h: 32,
+      }
+    - {
+        id: st5,
+        kind: logic,
+        label: { en: DB / API query, ko: DB·API 조회 },
+        x: 32,
+        y: 364,
+        w: 160,
+        h: 32,
+      }
+    - {
+        id: un1,
+        kind: logic,
+        label: { en: Intent triage, ko: 의도 분류 },
+        x: 280,
+        y: 172,
+        w: 160,
+        h: 32,
+      }
+    - {
+        id: un2,
+        kind: llm,
+        label: { en: Entity extraction, ko: 엔티티 추출 },
+        x: 280,
+        y: 220,
+        w: 160,
+        h: 32,
+      }
+    - {
+        id: un3,
+        kind: logic,
+        label: { en: AI search, ko: AI 검색 },
+        sub: { en: + validity check, ko: + 제품 유효성 검증 },
+        x: 264,
+        y: 276,
+        w: 92,
+        h: 40,
+      }
+    - {
+        id: un4,
+        kind: logic,
+        label: { en: Web search, ko: 웹 검색 },
+        sub: { en: Bing, ko: Bing },
+        x: 364,
+        y: 276,
+        w: 92,
+        h: 40,
+      }
+    - {
+        id: pg1,
+        kind: focus,
+        label: { en: Predefined, ko: Predefined },
+        sub: { en: greetings · FAQ, ko: 인사·FAQ },
+        x: 528,
+        y: 172,
+        w: 160,
+        h: 40,
+      }
+    - {
+        id: pg2,
+        kind: logic,
+        label: { en: Guardrails, ko: 가드레일 },
+        sub: { en: attacks · policy limits, ko: 공격 탐지·정책 제한 },
+        x: 528,
+        y: 228,
+        w: 160,
+        h: 40,
+      }
+    - {
+        id: merge,
+        kind: logic,
+        label: { en: Merge data, ko: 결과 병합 },
+        x: 0,
+        y: 436,
+        w: 720,
+        h: 32,
+      }
+    - {
+        id: layout,
+        kind: llm,
+        label: { en: Response layout, ko: 답변 구성 },
+        sub: { en: simple · informative · re-ask, ko: 단순·정보형·재질문 },
+        x: 248,
+        y: 496,
+        w: 224,
+        h: 40,
+      }
+    - { id: ans, kind: input, label: { en: Answer, ko: 답변 출력 }, x: 0, y: 496, w: 120, h: 40 }
+    - {
+        id: upd,
+        kind: logic,
+        label: { en: Update history, ko: 대화 이력 갱신 },
+        x: 504,
+        y: 496,
+        w: 120,
+        h: 40,
+      }
+  edges:
+    - { from: q, to: hist, d: 'M112,56 H148' }
+    - { from: hist, to: lang, d: 'M268,56 H288' }
+    - { from: lang, to: rw, d: 'M408,56 H428' }
+    - { from: rw, to: emb, d: 'M560,56 H580' }
+    - from: emb
+      to: st1
+      d: 'M604,76 V92 Q604,100 596,100 H120 Q112,100 112,108 V172'
+      label: { text: { en: PARALLEL, ko: 병렬 }, x: 122, y: 124, anchor: start }
+    - { from: emb, to: un1, d: 'M644,76 V104 Q644,112 636,112 H368 Q360,112 360,120 V172' }
+    - { from: emb, to: pg1, d: 'M684,76 V116 Q684,124 676,124 H616 Q608,124 608,132 V172' }
+    - { from: st1, to: st2, d: 'M112,204 V220' }
+    - { from: st2, to: st3, d: 'M112,252 V268' }
+    - { from: st3, to: st4, d: 'M112,300 V316' }
+    - { from: st4, to: st5, d: 'M112,348 V364' }
+    - { from: un1, to: un2, d: 'M360,204 V220' }
+    - { from: un2, to: un3, d: 'M310,252 V276' }
+    - { from: un2, to: un4, d: 'M410,252 V276' }
+    - { from: pg1, to: pg2, d: 'M608,212 V228' }
+    - { from: st5, to: merge, d: 'M112,396 V436' }
+    - { from: un3, to: merge, d: 'M310,316 V436' }
+    - { from: un4, to: merge, d: 'M410,316 V436' }
+    - { from: pg2, to: merge, d: 'M608,268 V436' }
+    - { from: merge, to: layout, d: 'M360,468 V496' }
+    - { from: layout, to: ans, d: 'M248,516 H120' }
+    - { from: layout, to: upd, d: 'M472,516 H504' }
