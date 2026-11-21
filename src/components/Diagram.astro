@@ -1,0 +1,330 @@
+---
+// Case study diagram (DESIGN.md 5.24.4; g9 시안 A): inline SVG drawn from src/content/diagrams/<slug>.yaml.
+// The SVG is hidden from screen readers; the same content is listed in .sr-only text below it.
+import type { CollectionEntry } from 'astro:content';
+import { t, type Lang } from '../i18n/ui';
+
+type File = CollectionEntry<'diagrams'>['data'];
+type Spec = NonNullable<File['arch']>;
+
+interface Props {
+  lang: Lang;
+  spec: Spec;
+  legend: File['legend'];
+  label: string; // accessible name, the section title
+}
+
+const { lang, spec, legend, label } = Astro.props;
+const { width: W, height: H, zones, nodes, edges } = spec;
+
+// Mask width for centered zone labels and edge labels (Latin ~6.8px, Hangul 12px at 12px).
+const est = (s: string) => [...s].reduce((n, c) => n + (/[ㄱ-힝]/.test(c) ? 12 : 6.8), 0);
+const lines = (s: string) => s.split('\n');
+// A zone drawn inside another zone gets the card surface and a hairline, so it stays visible on the outer wash.
+type Box = { x: number; y: number; w: number; h: number };
+const within = (a: Box, b: Box) =>
+  a !== b && a.x >= b.x && a.y >= b.y && a.x + a.w <= b.x + b.w && a.y + a.h <= b.y + b.h;
+const nested = new Set(zones.filter((z) => zones.some((o) => within(z, o))).map((z) => z.id));
+
+// Legend strip under the drawing: hairline, then one item per kind.
+const LG = H - 12;
+const lgStep = W / legend.length;
+
+// Screen-reader text: each node under its innermost zone, then the connections.
+const area = (r: { w: number; h: number }) => r.w * r.h;
+const kindLabel = new Map(legend.map((l) => [l.kind, l.label[lang]]));
+const nodeText = (n: Spec['nodes'][number]) =>
+  n.label[lang].replace(/\n/g, ' ') +
+  (n.sub ? `, ${n.sub[lang]}` : '') +
+  (kindLabel.has(n.kind) && n.kind !== 'logic' ? ` (${kindLabel.get(n.kind)})` : '');
+const groups = new Map<string, string[]>([
+  ['', []],
+  ...zones.map((z) => [z.id, []] as [string, string[]]),
+]);
+const zoneLabel = new Map(zones.map((z) => [z.id, z.label[lang]]));
+const plain = (n: { label: { en: string; ko: string } }) => n.label[lang].replace(/\n/g, ' ');
+const name = new Map([...zones, ...nodes].map((n) => [n.id, plain(n)]));
+for (const n of nodes) {
+  const home = zones.filter((z) => within(n, z)).sort((a, b) => area(a) - area(b))[0];
+  groups.get(home?.id ?? '')!.push(nodeText(n));
+  // Two steps with the same name (e.g. Generation in two agents): name the zone in connections.
+  if (home && nodes.some((o) => o !== n && plain(o) === plain(n)))
+    name.set(n.id, `${plain(n)} (${home.label[lang]})`);
+}
+const linkText = (e: Spec['edges'][number]) =>
+  t(lang, e.style === 'both' ? 'dgWith' : e.style === 'back' ? 'dgBack' : 'dgThen', {
+    a: name.get(e.from)!,
+    b: name.get(e.to)!,
+  });
+---
+
+<figure class="dg">
+  <div class="dg-scroll" tabindex="0" role="region" aria-label={label}>
+    <svg viewBox={`0 0 ${W} ${H}`} aria-hidden="true" focusable="false">
+      <defs>
+        <marker
+          id={`dg-ar-${lang}-${W}-${H}`}
+          markerWidth="8"
+          markerHeight="6"
+          refX="7"
+          refY="3"
+          orient="auto-start-reverse"
+        >
+          <polygon class="mk" points="0 0, 8 3, 0 6"></polygon>
+        </marker>
+      </defs>
+      {/* z-order: zones → connectors → labels on connectors → nodes (diagram-design §6) */}
+      {zones.map((z) => (
+        <>
+          <rect
+            class:list={['zone', { in: nested.has(z.id) }]}
+            x={z.x}
+            y={z.y}
+            width={z.w}
+            height={z.h}
+            rx="8"
+          />
+          {!z.center && (
+            <text class="zl" x={z.x + 12} y={z.y + 20}>
+              {z.label[lang]}
+            </text>
+          )}
+        </>
+      ))}
+      {edges.map((e) => (
+        <path
+          class:list={['ln', { back: e.style === 'back' }]}
+          d={e.d}
+          marker-end={`url(#dg-ar-${lang}-${W}-${H})`}
+          marker-start={e.style === 'both' ? `url(#dg-ar-${lang}-${W}-${H})` : undefined}
+        />
+      ))}
+      {zones
+        .filter((z) => z.center)
+        .map((z) => {
+          const w = est(z.label[lang]) + 12;
+          return (
+            <>
+              <rect
+                class:list={['zm', { in: nested.has(z.id) }]}
+                x={z.x + z.w / 2 - w / 2}
+                y={z.y + 8}
+                width={w}
+                height="16"
+                rx="2"
+              />
+              <text class="zl" x={z.x + z.w / 2} y={z.y + 20} text-anchor="middle">
+                {z.label[lang]}
+              </text>
+            </>
+          );
+        })}
+      {edges
+        .filter((e) => e.label)
+        .map(({ label: l }) => (
+          <>
+            {l!.mask && (
+              <rect
+                class="em"
+                x={l!.x - est(l!.text[lang]) / 2 - 4}
+                y={l!.y - 9}
+                width={est(l!.text[lang]) + 8}
+                height="12"
+                rx="2"
+              />
+            )}
+            <text class="el" x={l!.x} y={l!.y} text-anchor={l!.mask ? 'middle' : 'start'}>
+              {l!.text[lang]}
+            </text>
+          </>
+        ))}
+      {nodes.map((n) => {
+        const ls = lines(n.label[lang]);
+        const rows = ls.length + (n.sub ? 1 : 0);
+        // First baseline so the block of rows (14px apart) is centered in the box.
+        const y0 = n.y + n.h / 2 - ((rows - 1) * 14) / 2 + 4;
+        const cx = n.x + n.w / 2;
+        return (
+          <g class={`k-${n.kind}`}>
+            <rect x={n.x} y={n.y} width={n.w} height={n.h} rx="6" />
+            {ls.map((s, i) => (
+              <text class="nt" x={cx} y={y0 + i * 14} text-anchor="middle">
+                {s}
+              </text>
+            ))}
+            {n.sub && (
+              <text class="ns" x={cx} y={y0 + ls.length * 14} text-anchor="middle">
+                {n.sub[lang]}
+              </text>
+            )}
+          </g>
+        );
+      })}
+      <line class="rule" x1="0" y1={LG - 20} x2={W} y2={LG - 20}></line>
+      {legend.map((l, i) => (
+        <>
+          <g class={`k-${l.kind}`}>
+            <rect x={i * lgStep} y={LG - 10} width="16" height="12" rx="3" />
+          </g>
+          <text class="lg" x={i * lgStep + 24} y={LG}>
+            {l.label[lang]}
+          </text>
+        </>
+      ))}
+    </svg>
+  </div>
+  <p class="hint">{t(lang, 'dgScroll')}</p>
+  <div class="sr-only">
+    <p>{t(lang, 'dgParts')}</p>
+    <ul>
+      {[...groups]
+        .filter(([, items]) => items.length)
+        .map(([id, items]) => (
+          <li>
+            {id ? `${zoneLabel.get(id)}: ` : ''}
+            {items.join('; ')}
+          </li>
+        ))}
+    </ul>
+    <p>{t(lang, 'dgLinks')}</p>
+    <ul>
+      {edges.map((e) => (
+        <li>{linkText(e)}</li>
+      ))}
+    </ul>
+  </div>
+</figure>
+
+<style>
+  .dg {
+    container-type: inline-size;
+    position: relative;
+  }
+
+  /* Narrower than the drawing (≤640px column: tablet sidebar widths and phones): scroll inside the figure. */
+  .dg-scroll {
+    overflow-x: auto;
+  }
+
+  .dg-scroll:focus-visible {
+    outline: var(--focus-w) solid var(--focus);
+    outline-offset: var(--focus-offset);
+    border-radius: var(--radius-xs);
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    min-width: 640px;
+    height: auto;
+    font-family: inherit;
+  }
+
+  .hint {
+    display: none;
+    margin-top: var(--sp-2);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  @container (max-width: 639px) {
+    .hint {
+      display: block;
+    }
+  }
+
+  /* Node kinds: sLLM is the one accent; LLM a strong outline; logic a quiet fill; input dashed. */
+  .k-sllm rect {
+    fill: var(--accent-soft);
+    stroke: var(--accent);
+    stroke-width: 1;
+  }
+
+  .k-llm rect {
+    fill: var(--surface);
+    stroke: var(--text-2);
+    stroke-width: 1.2;
+  }
+
+  .k-logic rect {
+    fill: var(--chip);
+    stroke: var(--line-strong);
+    stroke-width: 0.8;
+  }
+
+  .k-plain rect {
+    fill: var(--surface);
+    stroke: var(--line-strong);
+    stroke-width: 1;
+  }
+
+  .k-input rect {
+    fill: var(--surface);
+    stroke: var(--line-strong);
+    stroke-dasharray: 4 3;
+  }
+
+  .nt {
+    fill: var(--text);
+    font-size: 12px;
+    font-weight: var(--fw-medium);
+  }
+
+  .ns,
+  .el {
+    fill: var(--text-3);
+    font-size: 10px;
+    font-family: var(--font-meta);
+  }
+
+  .zone {
+    fill: var(--bg);
+  }
+
+  .zl {
+    fill: var(--text-2);
+    font-size: 12px;
+    font-weight: var(--fw-strong);
+  }
+
+  .zm {
+    fill: var(--bg);
+  }
+
+  .zone.in,
+  .zm.in {
+    fill: var(--surface);
+  }
+
+  .zone.in {
+    stroke: var(--line-strong);
+    stroke-width: 0.8;
+  }
+
+  .em {
+    fill: var(--surface);
+  }
+
+  .ln {
+    fill: none;
+    stroke: var(--text-3);
+    stroke-width: 1.2;
+  }
+
+  .ln.back {
+    stroke-dasharray: 4 3;
+  }
+
+  .mk {
+    fill: var(--text-3);
+  }
+
+  .rule {
+    stroke: var(--line);
+  }
+
+  .lg {
+    fill: var(--text-2);
+    font-size: 12px;
+  }
+</style>

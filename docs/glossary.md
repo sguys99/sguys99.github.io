@@ -219,6 +219,17 @@
 | autoencoder | Autoencoder | 영문 문장은 소문자 일반명사, 국문은 영문 표기 |
 | knowledge base | 지식 베이스 | |
 | inference server | 추론 서버 | |
+| training server | 학습 서버 | 다이어그램 (DESIGN.md 5.24.4) |
+| service flow | 서비스 흐름 | 케이스 스터디 섹션 이름 |
+| response layout | 답변 구성 | 오케스트레이터 단계 |
+| BI engine | BI 엔진 | 제품명 대신 일반 명칭 |
+| admin page | 관리자 페이지 | |
+| data pipeline | 데이터 파이프라인 | |
+| system logs | 시스템 로그 | |
+| embedding | 임베딩 | |
+| retrieval / search | 검색 | |
+| post-processing | 후처리 | |
+| market data | 외부 시황 데이터 | DB는 `외부 시황 DB` |
 | traceability / reproducibility | 추적성 / 재현성 | |
 | data labeling | 데이터 레이블링 | |
 | product definition | 제품 정의(서) | 문서를 가리킬 때 제품 정의서 |

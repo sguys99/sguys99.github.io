@@ -1,0 +1,412 @@
+# SCM 케이스 스터디 다이어그램 (DESIGN.md 5.24.4, 11.10).
+# arch: 서비스 구성도, flow: 서비스 흐름도. 출처는 프로젝트 service flow 자료(구성도, 흐름도 G-Matrix 2.0판).
+# 고객 내부 명칭(시스템·플랫폼·제품명)과 인프라 사양은 일반 명칭으로 바꿨다. 모델은 사이트 확정 기준(Qwen 8B 파인튜닝 2역할, Llama 3.1 70B).
+# 좌표는 SVG 단위(4px 격자). 연결선 d는 직각 + 모서리 반지름 8.
+
+legend:
+  - kind: sllm
+    label: { en: Fine-tuned sLLM · Qwen 8B, ko: 파인튜닝 sLLM · Qwen 8B }
+  - kind: llm
+    label: { en: LLM · Llama 3.1 70B, ko: LLM · Llama 3.1 70B }
+  - kind: logic
+    label: { en: 'Search, database, rules', ko: 검색·DB·규칙 }
+
+arch:
+  width: 720
+  height: 480
+  zones:
+    - {
+        id: platform,
+        label: { en: Service platform, ko: 서비스 플랫폼 },
+        x: 176,
+        y: 0,
+        w: 368,
+        h: 432,
+      }
+    - { id: orch, label: { en: Orchestrator, ko: 오케스트레이터 }, x: 192, y: 96, w: 344, h: 200 }
+    - {
+        id: llmops,
+        label: { en: LLMOps platform, ko: LLMOps 플랫폼 },
+        x: 568,
+        y: 96,
+        w: 152,
+        h: 160,
+      }
+  nodes:
+    - {
+        id: portal,
+        kind: input,
+        label: { en: Web and mobile portal, ko: 웹·모바일 포털 },
+        x: 0,
+        y: 120,
+        w: 152,
+        h: 40,
+      }
+    - id: bi
+      kind: plain
+      label: { en: BI engine, ko: BI 엔진 }
+      sub: { en: query · compute · chart, ko: 조회·연산·시각화 }
+      x: 0
+      y: 244
+      w: 152
+      h: 48
+    - {
+        id: scmdb,
+        kind: logic,
+        label: { en: SCM database, ko: SCM DB },
+        x: 0,
+        y: 336,
+        w: 152,
+        h: 40,
+      }
+    - {
+        id: admin,
+        kind: plain,
+        label: { en: Admin page, ko: 관리자 페이지 },
+        x: 192,
+        y: 36,
+        w: 344,
+        h: 36,
+      }
+    - {
+        id: rewrite,
+        kind: llm,
+        label: { en: Query rewrite, ko: 질의 재작성 },
+        x: 200,
+        y: 124,
+        w: 148,
+        h: 32,
+      }
+    - { id: router, kind: llm, label: { en: Router, ko: 라우터 }, x: 380, y: 124, w: 148, h: 32 }
+    - id: data
+      kind: plain
+      label: { en: Data query, ko: 데이터 조회 }
+      sub: { en: Text-to-SQL, ko: Text-to-SQL }
+      x: 200
+      y: 192
+      w: 104
+      h: 44
+    - id: advisor
+      kind: plain
+      label: { en: AI Advisor, ko: AI Advisor }
+      sub: { en: work support, ko: 업무 지원 }
+      x: 312
+      y: 192
+      w: 104
+      h: 44
+    - id: external
+      kind: plain
+      label: { en: "External\ninformation", ko: 외부 정보 조회 }
+      x: 424
+      y: 192
+      w: 104
+      h: 44
+    - {
+        id: layout,
+        kind: logic,
+        label: { en: Response layout, ko: 답변 구성 },
+        x: 200,
+        y: 252,
+        w: 328,
+        h: 32,
+      }
+    - {
+        id: embed,
+        kind: logic,
+        label: { en: Embedding · reranker, ko: 임베딩·재순위화 },
+        x: 192,
+        y: 316,
+        w: 148,
+        h: 40,
+      }
+    - id: vdb
+      kind: logic
+      label: { en: Vector DB, ko: 벡터 DB }
+      sub: { en: work guides, ko: 업무 가이드 }
+      x: 356
+      y: 316
+      w: 148
+      h: 40
+    - {
+        id: logs,
+        kind: logic,
+        label: { en: System logs, ko: 시스템 로그 },
+        x: 192,
+        y: 376,
+        w: 148,
+        h: 40,
+      }
+    - {
+        id: pipeline,
+        kind: logic,
+        label: { en: Data pipeline, ko: 데이터 파이프라인 },
+        x: 356,
+        y: 376,
+        w: 148,
+        h: 40,
+      }
+    - id: train
+      kind: sllm
+      label: { en: Training server, ko: 학습 서버 }
+      sub: { en: fine-tunes Qwen 8B, ko: Qwen 8B 파인튜닝 }
+      x: 576
+      y: 128
+      w: 136
+      h: 44
+    - id: infer
+      kind: sllm
+      label: { en: Inference server, ko: 추론 서버 }
+      sub: { en: entity · pseudo query, ko: 엔티티·Pseudo Query }
+      x: 576
+      y: 196
+      w: 136
+      h: 44
+    - id: llm
+      kind: llm
+      label: { en: LLM server, ko: LLM 서버 }
+      sub: { en: Llama 3.1 70B, ko: Llama 3.1 70B }
+      x: 568
+      y: 316
+      w: 152
+      h: 40
+    - id: market
+      kind: logic
+      label: { en: Market data DB, ko: 외부 시황 DB }
+      sub: { en: trend search, ko: 트렌드 검색 }
+      x: 568
+      y: 376
+      w: 152
+      h: 40
+  edges:
+    - { from: portal, to: rewrite, d: 'M152,140 H200' }
+    - { from: rewrite, to: router, d: 'M348,140 H380' }
+    - from: router
+      to: data
+      d: 'M454,156 V164 Q454,172 446,172 H260 Q252,172 252,180 V192'
+      label: { text: { en: A2A, ko: A2A }, x: 492, y: 176 }
+    - { from: router, to: advisor, d: 'M364,172 V192' }
+    - { from: router, to: external, d: 'M454,172 H468 Q476,172 476,180 V192' }
+    - { from: data, to: layout, d: 'M252,236 V252' }
+    - { from: advisor, to: layout, d: 'M364,236 V252' }
+    - { from: external, to: layout, d: 'M476,236 V252' }
+    - { from: layout, to: bi, d: 'M200,268 H152' }
+    - from: bi
+      to: scmdb
+      d: 'M76,292 V336'
+      label: { text: { en: SQL, ko: SQL }, x: 84, y: 318 }
+    - { from: bi, to: portal, d: 'M116,244 V160', style: back }
+    - { from: pipeline, to: vdb, d: 'M430,376 V356' }
+    - { from: train, to: infer, d: 'M644,172 V196' }
+    - { from: orch, to: infer, d: 'M536,218 H576', style: both }
+    - { from: platform, to: llm, d: 'M544,336 H568', style: both }
+    - { from: platform, to: market, d: 'M544,396 H568', style: both }
+
+flow:
+  width: 720
+  height: 528
+  zones:
+    - { id: orch, label: { en: Orchestrator, ko: 오케스트레이터 }, x: 176, y: 8, w: 544, h: 84 }
+    - { id: bi, label: { en: BI engine, ko: BI 엔진 }, x: 0, y: 136, w: 156, h: 264 }
+    - {
+        id: data,
+        label: { en: Data query, ko: 데이터 조회 },
+        center: true,
+        x: 176,
+        y: 136,
+        w: 168,
+        h: 264,
+      }
+    - id: advisor
+      label: { en: Work support (AI Advisor), ko: 업무 지원(AI Advisor) }
+      center: true
+      x: 364
+      y: 136
+      w: 168
+      h: 264
+    - {
+        id: external,
+        label: { en: External information, ko: 외부 정보 조회 },
+        center: true,
+        x: 552,
+        y: 136,
+        w: 168,
+        h: 264,
+      }
+  nodes:
+    - {
+        id: portal,
+        kind: input,
+        label: { en: Web and mobile portal, ko: 웹·모바일 포털 },
+        x: 0,
+        y: 40,
+        w: 156,
+        h: 40,
+      }
+    - {
+        id: rewrite,
+        kind: llm,
+        label: { en: Query rewrite, ko: 질의 재작성 },
+        x: 188,
+        y: 40,
+        w: 144,
+        h: 40,
+      }
+    - { id: embed, kind: logic, label: { en: Embedding, ko: 임베딩 }, x: 376, y: 40, w: 144, h: 40 }
+    - { id: router, kind: llm, label: { en: Router, ko: 라우터 }, x: 564, y: 40, w: 144, h: 40 }
+    - {
+        id: view,
+        kind: llm,
+        label: { en: View identification, ko: View 식별 },
+        x: 188,
+        y: 176,
+        w: 144,
+        h: 40,
+      }
+    - {
+        id: entity,
+        kind: sllm,
+        label: { en: Entity extraction, ko: 엔티티 추출 },
+        x: 188,
+        y: 232,
+        w: 144,
+        h: 40,
+      }
+    - {
+        id: code,
+        kind: logic,
+        label: { en: Code mapping, ko: 코드 매핑 },
+        x: 188,
+        y: 288,
+        w: 144,
+        h: 40,
+      }
+    - {
+        id: pq,
+        kind: sllm,
+        label: { en: Pseudo query, ko: Pseudo Query },
+        x: 188,
+        y: 344,
+        w: 144,
+        h: 40,
+      }
+    - id: retrieve
+      kind: logic
+      label: { en: Retrieval, ko: 검색 }
+      sub: { en: work-guide vector DB, ko: 업무 가이드 벡터 DB }
+      x: 376
+      y: 176
+      w: 144
+      h: 40
+    - {
+        id: rerank,
+        kind: logic,
+        label: { en: Reranking, ko: 재순위화 },
+        x: 376,
+        y: 232,
+        w: 144,
+        h: 40,
+      }
+    - {
+        id: generate,
+        kind: llm,
+        label: { en: Generation, ko: 생성 },
+        x: 376,
+        y: 288,
+        w: 144,
+        h: 40,
+      }
+    - id: search
+      kind: logic
+      label: { en: Search, ko: 검색 }
+      sub: { en: market data, ko: 외부 시황 데이터 }
+      x: 564
+      y: 176
+      w: 144
+      h: 40
+    - {
+        id: post,
+        kind: logic,
+        label: { en: Post-processing, ko: 후처리 },
+        x: 564,
+        y: 232,
+        w: 144,
+        h: 40,
+      }
+    - {
+        id: generate2,
+        kind: llm,
+        label: { en: Generation, ko: 생성 },
+        x: 564,
+        y: 288,
+        w: 144,
+        h: 40,
+      }
+    - {
+        id: layout,
+        kind: logic,
+        label: { en: Response layout, ko: 답변 구성 },
+        x: 188,
+        y: 424,
+        w: 520,
+        h: 40,
+      }
+    - {
+        id: convert,
+        kind: logic,
+        label: { en: Query conversion, ko: 쿼리 변환 },
+        x: 8,
+        y: 344,
+        w: 140,
+        h: 40,
+      }
+    - id: run
+      kind: logic
+      label: { en: Run query, ko: 쿼리 실행 }
+      sub: { en: SCM database, ko: SCM DB }
+      x: 8
+      y: 288
+      w: 140
+      h: 40
+    - {
+        id: chart,
+        kind: logic,
+        label: { en: Compute and chart, ko: 연산·시각화 },
+        x: 8,
+        y: 232,
+        w: 140,
+        h: 40,
+      }
+    - {
+        id: result,
+        kind: logic,
+        label: { en: Build result, ko: 결과 생성 },
+        x: 8,
+        y: 176,
+        w: 140,
+        h: 40,
+      }
+  edges:
+    - { from: portal, to: rewrite, d: 'M156,60 H188' }
+    - { from: rewrite, to: embed, d: 'M332,60 H376' }
+    - { from: embed, to: router, d: 'M520,60 H564' }
+    - from: router
+      to: view
+      d: 'M636,80 V108 Q636,116 628,116 H268 Q260,116 260,124 V176'
+      label: { text: { en: A2A, ko: A2A }, x: 348, y: 105, mask: true }
+    - { from: router, to: retrieve, d: 'M448,116 V176' }
+    - { from: router, to: search, d: 'M636,80 V176' }
+    - { from: view, to: entity, d: 'M260,216 V232' }
+    - { from: entity, to: code, d: 'M260,272 V288' }
+    - { from: code, to: pq, d: 'M260,328 V344' }
+    - { from: retrieve, to: rerank, d: 'M448,216 V232' }
+    - { from: rerank, to: generate, d: 'M448,272 V288' }
+    - { from: search, to: post, d: 'M636,216 V232' }
+    - { from: post, to: generate2, d: 'M636,272 V288' }
+    - { from: pq, to: layout, d: 'M260,384 V424' }
+    - { from: generate, to: layout, d: 'M448,328 V424' }
+    - { from: generate2, to: layout, d: 'M636,328 V424' }
+    - { from: layout, to: convert, d: 'M188,444 H86 Q78,444 78,436 V384' }
+    - { from: convert, to: run, d: 'M78,344 V328' }
+    - { from: run, to: chart, d: 'M78,288 V272' }
+    - { from: chart, to: result, d: 'M78,232 V216' }
+    - { from: result, to: portal, d: 'M116,176 V80', style: back }

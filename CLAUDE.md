@@ -37,7 +37,7 @@ Node 24 LTS (`.nvmrc`). URL은 끝에 `/`를 붙인다 (`trailingSlash: 'always'
 ## 디렉터리
 
 ```
-src/content/      콘텐츠 원본 (profile, experience, projects, personal, patents, ...)
+src/content/      콘텐츠 원본 (profile, experience, projects, diagrams, personal, patents, ...)
 src/content.config.ts  콘텐츠 스키마, DOMAINS·CAPABILITIES·APPROVED_CLIENTS
 src/components/   UI 컴포넌트
 src/layouts/      페이지 레이아웃 (Base: head·GoatCounter, Shell, Page)
@@ -131,6 +131,7 @@ docs/private/         원본 자료: 이력서, 경력기술서, 사진 원본 (
 | 경력 | `src/content/experience.yaml` (키 = id) | 6곳 외 추가는 사용자 확인 (규칙 3) |
 | 프로젝트 | `src/content/projects/<slug>.md` (frontmatter) | `client` 기본 익명 (`public: false` + `label`). `domain`·`capability`는 config의 `DOMAINS`·`CAPABILITIES` 값만 |
 | 대표 프로젝트 | 위 파일의 `featured: true`, `order`, `caseStudy` | `featured` + `caseStudy`가 있어야 `/work/<slug>/` 생성. 지정은 사용자 승인 |
+| 케이스 스터디 다이어그램 | `src/content/diagrams/<slug>.yaml` (`legend`, `arch`, `flow`) | 있으면 Architecture는 표 대신 회로도, `flow`는 Service flow 섹션. 형식은 DESIGN.md 5.24.4 |
 | 개인 프로젝트 | `src/content/personal/<slug>.md` | `repo` 필수, `status`는 `in-progress`·`active`·`archived` |
 | 특허 | `src/content/patents.yaml` | `status` `filed`·`registered`. 파일 머리 주석의 건수 |
 | SW 등록 | `src/content/software.yaml` | 파일 머리 주석의 건수 |

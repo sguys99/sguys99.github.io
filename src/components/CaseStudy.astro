@@ -9,6 +9,7 @@ import Head from './Head.astro';
 import Badge from './Badge.astro';
 import Icon from './Icon.astro';
 import CasePager from './CasePager.astro';
+import Diagram from './Diagram.astro';
 import { t, fmtPeriod, homePath, type Lang } from '../i18n/ui';
 
 /** Featured projects with a case study, in `order` (6.3): page list, pager order and the `01 / 05` position. */
@@ -36,8 +37,11 @@ const link = (e?: (typeof list)[number]) => e && { href: href(e.id), title: e.da
 const title = `${p.title[lang]} · ${profile.name[lang]}`;
 const live = p.period.status === 'present' || p.period.status === 'planned';
 const client = p.client && (p.client.public ? p.client.name[lang] : p.client.label[lang]);
+// getCollection, not getEntry: most case studies have no diagram file, and getEntry warns on a miss.
+const dg = (await getCollection('diagrams')).find((d) => d.id === slug)?.data;
 
-// Numbered sections (5.24.3); Architecture only when present, so later numbers move up.
+// Numbered sections (5.24.3); Architecture and Service flow only when present, so later numbers move up.
+// Architecture is a diagram when src/content/diagrams/<slug>.yaml has `arch`, else the layer table.
 const secs = (
   [
     ['context', cs.context],
@@ -45,10 +49,11 @@ const secs = (
     ['role', cs.role],
     ['approach', cs.approach],
     ['arch', []],
+    ['flow', []],
     ['outcome', cs.outcome],
   ] as const
 )
-  .filter(([id]) => id !== 'arch' || cs.architecture)
+  .filter(([id]) => (id === 'arch' ? cs.architecture || dg?.arch : id === 'flow' ? dg?.flow : true))
   .map(([id, items]) => ({ id, items, label: t(lang, `cs_${id}`) }));
 
 const arch = cs.architecture;
@@ -169,7 +174,9 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
             <h2 id={`h-${s.id}`}>{s.label}</h2>
             {s.id === 'outcome' && live && <Badge lang={lang} kind="in-progress" />}
           </div>
-          {s.id === 'arch' && arch ? (
+          {(s.id === 'arch' || s.id === 'flow') && dg?.[s.id] ? (
+            <Diagram lang={lang} spec={dg[s.id]!} legend={dg.legend} label={s.label} />
+          ) : s.id === 'arch' && arch ? (
             <table class="tbl arch">
               <thead>
                 <tr>

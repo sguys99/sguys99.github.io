@@ -81,39 +81,4 @@ caseStudy:
       tradeoff:
         en: Longer lead time for production releases.
         ko: 운영 반영 리드타임 증가
-  architecture:
-    layers:
-      - id: client
-        label: { en: Users, ko: 사용자 }
-        nodes:
-          - { en: Web and mobile portal, ko: 웹·모바일 포털 }
-      - id: orchestrator
-        label: { en: Orchestrator, ko: 오케스트레이터 }
-        nodes:
-          - { en: Query rewrite, ko: 질의 재작성 }
-          - { en: Router, ko: 라우터 }
-          - { en: Response layout, ko: 답변 구성 }
-      - id: agents
-        label: { en: Agents, ko: 에이전트 }
-        nodes:
-          - { en: "Data query: view identification, entity extraction, code mapping, pseudo query", ko: "데이터 조회: View 식별, 엔티티 추출, 코드 매핑, Pseudo Query" }
-          - { en: "Work support (AI Advisor): retrieval, reranking, generation", ko: "업무 지원(AI Advisor): 검색, 재순위화, 생성" }
-          - { en: "External information: retrieval and post-processing", ko: "외부 정보 조회: 검색, 후처리" }
-      - id: models
-        label: { en: Models, ko: 모델 }
-        nodes:
-          - { en: Qwen 8B sLLM (fine-tuned) for Text-to-SQL, ko: Text-to-SQL용 Qwen 8B sLLM(파인튜닝) }
-          - { en: Llama 3.1 70B for generation, ko: 생성용 Llama 3.1 70B }
-          - { en: vLLM serving, ko: vLLM 서빙 }
-      - id: data
-        label: { en: Data, ko: 데이터 }
-        nodes:
-          - { en: "BI engine and SCM database", ko: "BI 엔진, SCM DB" }
-          - { en: Vector DB of work guides, ko: 업무 가이드 벡터 DB }
-          - { en: External market data, ko: 외부 시황 데이터 }
-    flows:
-      - { from: client, to: orchestrator }
-      - { from: orchestrator, to: agents, label: { en: A2A, ko: A2A } }
-      - { from: agents, to: models }
-      - { from: agents, to: data }
 ---

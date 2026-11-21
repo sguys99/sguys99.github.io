@@ -136,6 +136,72 @@ const architecture = z
         if (!ids.has(end)) ctx.addIssue({ code: 'custom', message: `unknown layer id "${end}"` });
   });
 
+// --- Case study diagrams (DESIGN.md 5.24.4) --------------------------------
+// One file per case study: src/content/diagrams/<slug>.yaml. Coordinates are SVG units on a 4px grid.
+// kind: sllm = fine-tuned small model (accent), llm = general LLM, logic = search/DB/rules, plain = component, input = user end.
+const DG_KINDS = ['sllm', 'llm', 'logic', 'plain', 'input'] as const;
+const rect = { x: z.number(), y: z.number(), w: z.number().positive(), h: z.number().positive() };
+
+const diagram = z
+  .strictObject({
+    width: z.number().positive(),
+    height: z.number().positive(),
+    // center: an incoming connector runs through the label, so it sits centered on the line over a mask.
+    zones: z
+      .array(
+        z.strictObject({ id: text, label: localized, center: z.boolean().default(false), ...rect }),
+      )
+      .default([]),
+    nodes: z
+      .array(
+        z.strictObject({
+          id: text,
+          kind: z.enum(DG_KINDS),
+          label: localized, // "\n" breaks the line
+          sub: localized.optional(),
+          ...rect,
+        }),
+      )
+      .min(1),
+    // from/to name a node or zone (read by screen readers); d is the drawn path.
+    edges: z
+      .array(
+        z.strictObject({
+          from: text,
+          to: text,
+          d: text,
+          style: z.enum(['back', 'both']).optional(),
+          label: z
+            .strictObject({
+              text: localized,
+              x: z.number(),
+              y: z.number(),
+              mask: z.boolean().default(false),
+            })
+            .optional(),
+        }),
+      )
+      .default([]),
+  })
+  .superRefine((d, ctx) => {
+    const ids = [...d.zones, ...d.nodes].map((n) => n.id);
+    if (new Set(ids).size !== ids.length)
+      ctx.addIssue({ code: 'custom', message: 'duplicate diagram id' });
+    for (const e of d.edges)
+      for (const end of [e.from, e.to])
+        if (!ids.includes(end))
+          ctx.addIssue({ code: 'custom', message: `unknown diagram id "${end}"` });
+  });
+
+const diagrams = defineCollection({
+  loader: glob({ pattern: '*.yaml', base: './src/content/diagrams' }),
+  schema: z.strictObject({
+    legend: z.array(z.strictObject({ kind: z.enum(DG_KINDS), label: localized })).min(1),
+    arch: diagram.optional(), // Architecture section; replaces the caseStudy.architecture table
+    flow: diagram.optional(), // Service flow section
+  }),
+});
+
 const caseStudy = z.strictObject({
   context: bullets,
   problem: bullets,
@@ -259,6 +325,7 @@ export const collections = {
   profile,
   experience,
   projects,
+  diagrams,
   personal,
   patents,
   software,

@@ -49,7 +49,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | Quiet | 차가운 무채색 바탕, 포인트 색은 현재 위치·상태에만 |
 | Composed | 모든 목록이 같은 행 문법, 같은 간격 |
 | Factual | 수식어 대신 기간·건수·역할·성과 |
-| Engineered | Geist Mono 메타 정보, 번호 매긴 목록, 표로 쓴 아키텍처 |
+| Engineered | Geist Mono 메타 정보, 번호 매긴 목록, 표 또는 회로도로 쓴 아키텍처 |
 | Bilingual | 영문·국문이 같은 레이아웃, 같은 완성도 |
 
 ### 시각 언어 요약
@@ -1868,14 +1868,36 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 02 | `problem` | Problem / 문제 | `caseStudy.problem[]` | 항상 |
 | 03 | `role` | My role / 역할 | `caseStudy.role[]` | 항상 |
 | 04 | `approach` | Approach / 접근 | `caseStudy.approach[]` + `decisions[]` 표 | 결정 표는 `decisions` 있을 때 |
-| 05 | `arch` | Architecture / 아키텍처 | `caseStudy.architecture` | 있을 때만. 없으면 번호가 당겨진다 |
-| 06 | `outcome` | Outcome / 성과 | `caseStudy.outcome[]` | 항상. `period.status`가 `present`/`planned`면 진행 중 배지 |
+| 05 | `arch` | Architecture / 아키텍처 | `diagrams/<slug>.yaml`의 `arch`(회로도), 없으면 `caseStudy.architecture`(표) | 둘 중 하나가 있을 때만. 없으면 번호가 당겨진다 |
+| 06 | `flow` | Service flow / 서비스 흐름 | `diagrams/<slug>.yaml`의 `flow`(회로도) | 있을 때만 (11.10) |
+| 07 | `outcome` | Outcome / 성과 | `caseStudy.outcome[]` | 항상. `period.status`가 `present`/`planned`면 진행 중 배지 |
 
 결정 표(`.tbl`): 열 Decision / Why / Trade-off (결정 / 이유 / 트레이드오프) ← `decisions[].title` / `.rationale` / `.tradeoff`. 시안은 "Decision"·"Why"를 코드에 직접 썼다 → `src/i18n/`로.
 
-#### 5.24.4 아키텍처 표 (layers / flows)
+#### 5.24.4 아키텍처: 회로도 (diagrams) 또는 표 (layers / flows)
 
-그림 대신 표 (3.2.3 C). 계층 한 줄 = 행.
+케이스마다 `src/content/diagrams/<slug>.yaml`이 있으면 회로도를, 없으면 아래 표를 쓴다 (3.2.3 C의 "그림 대신 표"를 11.10에서 바꿈). 현재 회로도는 SCM 1건, 나머지 4건은 표.
+
+**회로도** (`src/components/Diagram.astro`, g9 시안 A)
+
+| 요소 | 값 |
+|---|---|
+| 파일 | `legend[]`(종류·라벨) + `arch`(Architecture 섹션) + `flow`(Service flow 섹션). 각 다이어그램은 `width`·`height`(SVG 단위), `zones[]`, `nodes[]`, `edges[]`. 좌표는 4px 격자, 스키마가 id 중복과 연결 대상 id를 검사 |
+| 노드 종류 `kind` | `sllm` 바탕 `--accent-soft` + 선 `--accent` (포인트 색은 여기에만) / `llm` 바탕 `--surface` + 선 `--text-2` 1.2 / `logic` 바탕 `--chip` + 선 `--line-strong` 0.8 / `plain` 바탕 `--surface` + 선 `--line-strong` / `input` 같은 바탕 + 점선 `4 3`. 모서리 6 |
+| 글자 | 이름 12px `--fw-medium` `--text` (`\n`으로 줄바꿈, 14px 간격), 부제 10px `--font-meta` `--text-3`. 서체는 페이지 상속(국문 Pretendard) |
+| 영역 `zones` | 바탕 `--bg`, 모서리 8, 이름 12px `--fw-strong` `--text-2` 왼쪽 위. 다른 영역 안의 영역은 바탕 `--surface` + 선 `--line-strong`. `center: true`면 위에서 내려오는 연결선 위에 이름을 가운데 두고 바탕색으로 가린다 |
+| 연결선 `edges` | `d`에 직각 경로(모서리 반지름 8), 선 `--text-3` 1.2, 화살촉 같은 색. `style: back`은 점선(돌아가는 길), `both`는 양쪽 화살촉. 라벨 10px `--font-meta` `--text-3`, `mask: true`면 바탕 `--surface`로 가림 |
+| 범례 | 그림 아래 가는 선(`--line`) + 종류별 견본 16×12 |
+| 폭 | 본문 열 100%, SVG `min-width: 640px`. 열이 640px보다 좁으면(861–1100px, ≤860px) 그림 안에서 가로 스크롤, 그 아래 `dgScroll` 안내(`--fs-xs` `--text-3`, 컨테이너 쿼리). 페이지 가로 스크롤은 없음 |
+| 그리는 순서 | 영역 → 연결선 → 연결선 위 라벨 → 노드 → 범례 |
+
+- 접근성: SVG는 `aria-hidden`. 스크롤 상자는 `role="region"` + `aria-label`(섹션 제목) + `tabindex="0"`(키보드 스크롤, 포커스 테두리). 같은 내용을 `.sr-only`로: "Components / 구성 요소" 목록(노드를 가장 안쪽 영역별로, `sllm`·`llm`은 범례 라벨을 괄호로) + "Connections / 연결" 목록(`dgThen`·`dgBack`·`dgWith`). 이름이 같은 노드는 연결 문장에 영역 이름을 붙인다.
+- 섹션 안에 그림 제목(figcaption)은 두지 않는다. 섹션 제목이 이름이다.
+- 고객 내부 명칭(시스템·플랫폼·제품명)과 인프라 사양은 일반 명칭으로 바꿔 그린다 (CLAUDE.md 규칙 3, tasks.md 1.5.2 공개 범위).
+
+**표** (회로도가 없는 케이스)
+
+계층 한 줄 = 행.
 
 ```html
 <table class="tbl ledger">
@@ -2046,8 +2068,9 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 02 | Problem / 문제 | `problem` | `caseStudy.problem` | 항상 |
 | 03 | My role / 역할 | `role` | `caseStudy.role` | 항상 |
 | 04 | Approach / 접근 (+ Key decisions / 주요 결정 표) | `approach` | `caseStudy.approach`, `caseStudy.decisions` | 결정 표는 `decisions`가 있을 때만 |
-| 05 | Architecture / 아키텍처 | `arch` | `caseStudy.architecture` (계층 \| 구성 요소 \| 흐름 표) | 있을 때만. 없으면 번호를 당긴다 |
-| 06 | Outcome / 성과 | `outcome` | `caseStudy.outcome` | 항상. 진행 중(`present`·`planned`)이면 제목 옆 "In progress / 진행 중" 배지 |
+| 05 | Architecture / 아키텍처 | `arch` | `src/content/diagrams/<slug>.yaml`의 `arch` 회로도, 없으면 `caseStudy.architecture` (계층 \| 구성 요소 \| 흐름 표) | 있을 때만. 없으면 번호를 당긴다 |
+| 06 | Service flow / 서비스 흐름 | `flow` | `src/content/diagrams/<slug>.yaml`의 `flow` 회로도 | 있을 때만 |
+| 07 | Outcome / 성과 | `outcome` | `caseStudy.outcome` | 항상. 진행 중(`present`·`planned`)이면 제목 옆 "In progress / 진행 중" 배지 |
 
 - Stack은 본문 섹션이 아니라 기록표의 Stack 행으로 보인다 (시안 그대로). basic-plan 4.4의 Stack 단계는 이 행이 담당한다.
 - 섹션 번호는 화면용 장식(`aria-hidden`), 제목은 `h2`. 결정 표 제목은 `h3`.
@@ -3011,3 +3034,17 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | Awards 카드는 그룹 머리(`수상 4`)를 빼고 행을 `<ol class="lg">`에 바로 둔다(Experience와 같은 구조, 행 제목 h3). 건수는 카드 머리 오른쪽 `recordCount`(`4 records`/`총 4건`) | 학력을 빼서 묶음이 하나만 남아 카드 제목과 그룹 이름이 `수상 / 수상`으로 겹쳤다 |
 | 홈 섹션 순서를 About → Experience → Teaching → Awards → Selected Work → Personal → IP → Contact로, 상단 탭을 About · Experience · Work · Personal · Publications · Contact로 바꾼다 (`SECTIONS`·`TABS`, 404 바로 가기도 같은 순서). G6 결정(Work가 About 다음)을 바꿈 | 사용자 요청. About이 궤적·학력으로 끝나 경력이 바로 이어지는 흐름이 자연스럽다. Experience 탭이 Teaching·Awards까지 덮으므로 셋을 붙여서 옮겼다. 대표작은 세 카드 아래로 내려간다 |
 | About의 학력과 역량 표 사이 여백 `--sp-4` → `--sp-6` (궤적과 학력 사이와 같음) | 사용자 요청. 두 표가 붙어 한 덩어리로 보였다 |
+
+### 11.10 케이스 스터디 다이어그램 — 2026-11-21
+
+시안: `docs/design-drafts/g9/` (A 회로도 SVG / B 단계 원장 HTML / C 개요 + 확대 HTML, 영문·국문 × 라이트·다크 × 데스크톱·모바일 캡처 `shots/`). 자료: 프로젝트 service flow 자료의 구성도와 흐름도(G-Matrix 2.0판).
+
+| 결정 | 이유 |
+|---|---|
+| 시안 A(회로도)를 고름. 케이스 스터디에 다이어그램 공통 컴포넌트 `Diagram.astro`를 두고, 내용은 `src/content/diagrams/<slug>.yaml`(`legend`, `arch`, `flow`)에서 그린다. B·C는 고르지 않음 | 사용자 선택. 텍스트만 있던 페이지에 구조가 한눈에 보이는 그림이 필요했다. 글자와 좌표를 콘텐츠에 두어 영문·국문을 한 곳에서 관리한다(규칙 2) |
+| SCM: Architecture 섹션에 서비스 구성도, 새 섹션 Service flow / 서비스 흐름(`flow`, Outcome 앞)에 흐름도. 기존 계층 표(`caseStudy.architecture`)는 SCM에서 삭제하고 같은 내용은 화면 낭독기용 텍스트로만 남긴다. 다른 4건은 표 그대로 | 사용자 요청. 3.2.3 C의 "그림 대신 표"를 회로도가 있는 케이스에 한해 바꿈 |
+| 모델·배포 그림(개발계/운영계, 학습 서버)은 넣지 않는다 | 사용자 요청 |
+| 포인트 색은 파인튜닝 sLLM 노드에만. LLM은 진한 테두리, 검색·DB·규칙은 옅은 바탕. 원본 자료의 sLLM/LLM/로직 범례를 그대로 정보로 쓴다 | 포인트 색 1개 원칙(2장)과 맞고, Text-to-SQL에 파인튜닝 모델을 쓴 결정(주요 결정 2)이 그림에서 드러난다 |
+| 모델 표기는 사이트 확정 기준: Qwen 8B 파인튜닝이 엔티티 추출·Pseudo Query 두 역할, 생성은 Llama 3.1 70B. 흐름도의 Predefined 분기와 개인화·권한 확인 단계는 넣지 않는다 | 사용자 결정 (자료의 llama 3 8b 표기와 달라 확인함) |
+| 고객 내부 명칭(시스템·플랫폼·BI 제품명, 사내 클라우드)과 인프라 사양은 일반 명칭으로: SCM DB, LLMOps 플랫폼, LLM 서버, 외부 시황 DB, BI 엔진 | CLAUDE.md 규칙 3, 1.5.2 공개 범위(내부 용어·인프라 사양 일반화) |
+| 좁은 열(<640px: 861–1100px, ≤860px)에서는 그림을 줄이지 않고 그림 안에서 가로 스크롤 + 안내 한 줄(`dgScroll`) | 줄이면 12px 글자가 6px 아래로 내려가 읽을 수 없다. 페이지 가로 스크롤은 생기지 않는다 |
