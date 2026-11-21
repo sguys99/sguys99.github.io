@@ -17,6 +17,8 @@ import DomainTable from './DomainTable.astro';
 import LayerStack from './LayerStack.astro';
 import EpisodeLoop from './EpisodeLoop.astro';
 import StandardSet from './StandardSet.astro';
+import RepoMap from './RepoMap.astro';
+import Screens from './Screens.astro';
 import { t, fmtPeriod, homePath, type Lang } from '../i18n/ui';
 
 /** Featured projects with a case study, in `order` (6.3): page list, pager order and the `01 / 05` position. */
@@ -47,10 +49,11 @@ const client = p.client && (p.client.public ? p.client.name[lang] : p.client.lab
 // getCollection, not getEntry: most case studies have no diagram file, and getEntry warns on a miss.
 const dg = (await getCollection('diagrams')).find((d) => d.id === slug)?.data;
 
-// Numbered sections (5.24.3); layer stack, Visitor journey, Architecture, Service flow, Safety and Learning loop only
-// when present, so later numbers move up. Architecture is a diagram when src/content/diagrams/<slug>.yaml has `arch`,
+// Numbered sections (5.24.3); System prompt, layer stack, Visitor journey, Architecture, Service flow, Safety and
+// Learning loop only when present, so later numbers move up. Architecture is a diagram when src/content/diagrams/<slug>.yaml has `arch`,
 // else the layer table.
 const show = {
+  prompt: !!(dg?.prompt || dg?.repomap),
   stack: !!dg?.stack,
   journey: !!dg?.journey,
   arch: !!(cs.architecture || dg?.arch),
@@ -64,6 +67,7 @@ const secs = (
     ['problem', cs.problem],
     ['role', cs.role],
     ['approach', cs.approach],
+    ['prompt', []],
     ['stack', []],
     ['journey', []],
     ['arch', []],
@@ -208,6 +212,14 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
           {(s.id === 'journey' || s.id === 'safety') && dg?.[s.id] && (
             <Diagram lang={lang} spec={dg[s.id]!} legend={dg.legend} label={s.label} uid={s.id} />
           )}
+          {s.id === 'prompt' && dg?.prompt && (
+            <Diagram lang={lang} spec={dg.prompt} legend={dg.legend} label={s.label} uid="prompt" />
+          )}
+          {s.id === 'prompt' && dg?.repomap && (
+            <div class:list={{ 'fig-post': !!dg.prompt }}>
+              <RepoMap lang={lang} data={dg.repomap} label={s.label} />
+            </div>
+          )}
           {s.id === 'stack' && dg?.stack && (
             <LayerStack lang={lang} data={dg.stack} label={s.label} />
           )}
@@ -305,6 +317,7 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
               </ul>
             )
           )}
+          {s.id === 'context' && cs.screens && <Screens lang={lang} data={cs.screens} />}
           {s.id === 'approach' && dg?.approach && (
             <div class="fig-post">
               <Diagram

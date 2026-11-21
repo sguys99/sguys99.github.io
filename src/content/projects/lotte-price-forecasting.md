@@ -22,7 +22,7 @@ domain: Petrochemical & Steel
 capability: [Forecasting]
 stack: [XGBoost, scikit-learn, SHAP, Streamlit]
 featured: true
-order: 5
+order: 7
 caseStudy:
   context:
     - en: As a PoC within the AI master plan for LOTTE Fine Chemical, built a price forecasting model and dashboard for a key purchased raw material.

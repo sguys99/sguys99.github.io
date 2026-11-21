@@ -1,6 +1,7 @@
 ---
 // Option comparison under Key decisions (DESIGN.md 5.24.7; g13 시안 C): product images over a criteria table,
 // the picked column marked with an accent rule and a "Selected" badge. Data: caseStudy.compare.
+// Images and pick are optional (g15 시안 A): two sources used together get a plain two-column table.
 import type { CollectionEntry } from 'astro:content';
 import { Picture } from 'astro:assets';
 import { t, type Lang } from '../i18n/ui';
@@ -16,29 +17,32 @@ interface Props {
 
 const { lang, data } = Astro.props;
 const { options, pick, rows, verdict, credit } = data;
+const name = options.map((o) => (typeof o.name === 'string' ? o.name : o.name[lang]));
+const imgs = options.every((o) => o.image && o.alt);
 // On narrow columns the table stacks, so each value carries its option name (and the pick) as a label.
-const tag = (i: number) =>
-  i === pick ? `${options[i].name} · ${t(lang, 'cmpPick')}` : options[i].name;
+const tag = (i: number) => (i === pick ? `${name[i]} · ${t(lang, 'cmpPick')}` : name[i]);
 ---
 
 <div class="cmp">
-  <div class="imgs">
-    <span></span>
-    {options.map((o, i) => (
-      <div class:list={{ pick: i === pick }}>
-        <Picture
-          src={o.image}
-          alt={o.alt[lang]}
-          widths={[180, 360]}
-          sizes="180px"
-          formats={['avif', 'webp']}
-          loading="lazy"
-        />
-      </div>
-    ))}
-  </div>
-  <p class="credit">{credit[lang]}</p>
-  <table class="tbl">
+  {imgs && (
+    <div class="imgs">
+      <span />
+      {options.map((o, i) => (
+        <div class:list={{ pick: i === pick }}>
+          <Picture
+            src={o.image!}
+            alt={o.alt![lang]}
+            widths={[180, 360]}
+            sizes="180px"
+            formats={['avif', 'webp']}
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
+  )}
+  {credit && <p class="credit">{credit[lang]}</p>}
+  <table class:list={['tbl', { solo: !imgs }]}>
     <colgroup>
       <col class="c0" />
       <col />
@@ -49,9 +53,9 @@ const tag = (i: number) =>
         <th scope="col">
           <span class="sr-only">{t(lang, 'cmpCriterion')}</span>
         </th>
-        {options.map((o, i) => (
+        {options.map((_, i) => (
           <th scope="col" class:list={{ pick: i === pick }}>
-            {o.name}
+            {name[i]}
             {i === pick && <span class="sel">{t(lang, 'cmpPick')}</span>}
           </th>
         ))}
@@ -110,6 +114,11 @@ const tag = (i: number) =>
     margin-top: var(--sp-4);
     border-collapse: collapse;
     font-size: var(--fs-sm);
+  }
+
+  /* No image row above: the table starts right under the heading. */
+  .tbl.solo {
+    margin-top: 0;
   }
 
   .c0 {

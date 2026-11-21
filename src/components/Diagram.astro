@@ -91,6 +91,8 @@ for (const n of nodes) {
   if (home && nodes.some((o) => o !== n && plain(o) === plain(n)))
     name.set(n.id, `${plain(n)} (${home.label[lang]})`);
 }
+// A spine (style line) only carries labels; it is not read as a connection.
+const links = edges.filter((e) => e.style !== 'line');
 const linkText = (e: Spec['edges'][number]) =>
   t(
     lang,
@@ -212,9 +214,12 @@ const linkText = (e: Spec['edges'][number]) =>
         </>
       )}
       {texts.map((x) => (
-        <text class="ns" x={x.x} y={x.y} text-anchor={x.anchor}>
-          {x.text[lang]}
-        </text>
+        <>
+          {x.bullet && <circle class="tb" cx={x.x - 12} cy={x.y - 4} r="3" />}
+          <text class={x.style === 'name' ? 'nt' : 'ns'} x={x.x} y={x.y} text-anchor={x.anchor}>
+            {x.text[lang]}
+          </text>
+        </>
       ))}
       {route && <path class="route" d={route} />}
       {edges.map((e) => (
@@ -227,7 +232,7 @@ const linkText = (e: Spec['edges'][number]) =>
             },
           ]}
           d={e.d}
-          marker-end={e.style === 'acc' ? arrowAcc : arrow}
+          marker-end={e.style === 'line' ? undefined : e.style === 'acc' ? arrowAcc : arrow}
           marker-start={e.style === 'both' || e.style === 'remote' ? arrow : undefined}
         />
       ))}
@@ -428,11 +433,11 @@ const linkText = (e: Spec['edges'][number]) =>
           </li>
         ))}
     </ul>
-    {edges.length > 0 && (
+    {links.length > 0 && (
       <>
         <p>{t(lang, 'dgLinks')}</p>
         <ul>
-          {edges.map((e) => (
+          {links.map((e) => (
             <li>{linkText(e)}</li>
           ))}
         </ul>
@@ -764,5 +769,10 @@ const linkText = (e: Spec['edges'][number]) =>
 
   .rc {
     fill: var(--text);
+  }
+
+  /* Bullet on a spine line (texts[].bullet) */
+  .tb {
+    fill: var(--text-3);
   }
 </style>

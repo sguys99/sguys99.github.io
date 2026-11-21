@@ -20,7 +20,7 @@ domain: Manufacturing
 capability: [LLM Agents & RAG]
 stack: [Microsoft Azure, Azure AI Search, Python, LangChain, Ragas]
 featured: true
-order: 4
+order: 5
 caseStudy:
   context:
     - en: Samsung Electronics wanted an assistant that answers customer questions consistently across offline stores, online stores, and consultation agents.

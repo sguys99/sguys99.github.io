@@ -30,7 +30,7 @@ const featured = projects
   <ol class="work">
     {featured.map(({ id, data: p }, i) => {
       const live = p.period.status === 'present' || p.period.status === 'planned';
-      const logo = ORG_LOGO[p.org.en];
+      const logo = p.org && ORG_LOGO[p.org.en];
       const client = p.client && (p.client.public ? p.client.name[lang] : p.client.label[lang]);
       const out = !live && p.caseStudy?.outcome[0][lang];
       const href = p.caseStudy && `${homePath(lang)}work/${id}/`;
@@ -41,10 +41,22 @@ const featured = projects
           </span>
           <div class="body">
             <p class="proj-meta">
-              <span class="org">
-                {logo ? <Logo name={logo} label={p.org[lang]} small /> : <span>{p.org[lang]}</span>}
-                {client && <span>· {client}</span>}
-              </span>
+              {(p.org || client) && (
+                <span class="org">
+                  {p.org &&
+                    (logo ? (
+                      <Logo name={logo} label={p.org[lang]} small />
+                    ) : (
+                      <span>{p.org[lang]}</span>
+                    ))}
+                  {client && (
+                    <span>
+                      {p.org ? '· ' : ''}
+                      {client}
+                    </span>
+                  )}
+                </span>
+              )}
               <span class="num">{fmtPeriod(lang, p.period)}</span>
               {live && <Status lang={lang} value="live" />}
             </p>

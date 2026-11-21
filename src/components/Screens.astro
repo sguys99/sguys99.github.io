@@ -1,0 +1,185 @@
+---
+// Live service screens under the Context bullets (DESIGN.md 5.24.17; g15 시안 C): crops of one real answer, top to
+// bottom, each with numbered pins in the left margin and the matching notes beside it, then a captioned link.
+// Data: caseStudy.screens. Pins are decorative; the notes list carries the same numbers and text.
+import type { CollectionEntry } from 'astro:content';
+import { Picture } from 'astro:assets';
+import type { Lang } from '../i18n/ui';
+
+type Screens = NonNullable<
+  NonNullable<CollectionEntry<'projects'>['data']['caseStudy']>['screens']
+>;
+
+interface Props {
+  lang: Lang;
+  data: Screens;
+}
+
+const { lang, data } = Astro.props;
+const { slices, gap, caption, url } = data;
+// Notes are numbered across slices (1, 2 on the first crop, 3, 4 on the next).
+const start = slices.map((_, k) => slices.slice(0, k).reduce((n, s) => n + s.notes.length, 1));
+const host = new URL(url).host;
+---
+
+<figure class="scr">
+  {slices.map((s, k) => (
+    <>
+      {k > 0 && gap && <p class="gap">{gap[lang]}</p>}
+      <div class="row">
+        <div class="shot">
+          {s.notes.map((n, j) => (
+            <span class="pin num" style={`top: ${n.at}%`} aria-hidden="true">
+              {start[k] + j}
+            </span>
+          ))}
+          <Picture
+            src={s.image}
+            alt={s.alt[lang]}
+            widths={[280, 560]}
+            sizes="280px"
+            formats={['avif', 'webp']}
+            loading="lazy"
+          />
+        </div>
+        <ol class="notes" start={start[k]}>
+          {s.notes.map((n, j) => (
+            <li>
+              <span class="nb num" aria-hidden="true">
+                {start[k] + j}
+              </span>
+              <div>
+                <p class="nt">{n.title[lang]}</p>
+                <p class="nd">{n.body[lang]}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </>
+  ))}
+  <figcaption>
+    {caption[lang]} · <a href={url}>{host}</a>
+  </figcaption>
+</figure>
+
+<style>
+  .scr {
+    container-type: inline-size;
+    margin-top: var(--sp-5);
+  }
+
+  /* One crop and its notes per row: the crop at phone width (280px) with a 32px margin for the pins. */
+  .row {
+    display: grid;
+    grid-template-columns: minmax(0, 312px) minmax(0, 1fr);
+    gap: var(--sp-5);
+    align-items: center;
+  }
+
+  .shot {
+    position: relative;
+    margin-left: 32px;
+  }
+
+  /* A screenshot of a light-only page: a hairline frame keeps it from floating in dark mode. */
+  .shot :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+  }
+
+  .pin,
+  .nb {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: var(--radius-pill);
+    background: var(--accent);
+    color: var(--surface);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-strong);
+    line-height: 20px;
+    text-align: center;
+  }
+
+  .pin {
+    position: absolute;
+    left: -32px;
+    transform: translateY(-50%);
+  }
+
+  /* The omitted middle of the answer, between two dashed rules as wide as the crop. */
+  .gap {
+    width: 280px;
+    margin: var(--sp-2) 0 var(--sp-2) 32px;
+    padding: var(--sp-2) 0;
+    border-block: 1px dashed var(--line-strong);
+    text-align: center;
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  .notes {
+    display: grid;
+    gap: var(--sp-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .notes li {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .nt {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-strong);
+    color: var(--text);
+  }
+
+  .nd {
+    margin-top: var(--sp-1);
+    max-width: 40ch;
+    font-size: var(--fs-sm);
+    color: var(--text-2);
+  }
+
+  figcaption {
+    margin-top: var(--sp-3);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  figcaption a {
+    color: var(--text-2);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color var(--dur);
+  }
+
+  figcaption a:hover {
+    color: var(--accent);
+  }
+
+  /* Narrow column: notes drop under their crop. */
+  @container (max-width: 560px) {
+    .row {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--sp-3);
+    }
+
+    .shot {
+      max-width: 280px;
+    }
+
+    .gap {
+      width: auto;
+      max-width: 280px;
+    }
+  }
+</style>

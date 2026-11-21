@@ -1,0 +1,297 @@
+---
+// Repository map (DESIGN.md 5.24.13; g15 시안 A): the folder tree the system prompt describes, one statute file opened
+// with its lines, bracketed notes on what each part is used for, and the commit message convention.
+// Drawn from `repomap` in src/content/diagrams/<slug>.yaml. The SVG is hidden from screen readers; the same content
+// is in the .sr-only text below it. File lines stay as written in the repository (Korean) in both languages.
+import type { CollectionEntry } from 'astro:content';
+import { t, type Lang } from '../i18n/ui';
+
+type RepoMap = NonNullable<CollectionEntry<'diagrams'>['data']['repomap']>;
+
+interface Props {
+  lang: Lang;
+  data: RepoMap;
+  label: string; // accessible name, the section title
+}
+
+const { lang, data, label } = Astro.props;
+const { repo, tree, treeNote, open, file, path, lines, notes, commit } = data;
+
+// Layout in SVG units: tree area 0–216, file area 236–552 (card 248–540), notes from 548, commit strip under both.
+const W = 720;
+// Mono 12px: Latin ~7.2px, Hangul 12px. Labels on the connector are 8px mono (~4.8px, Hangul 8px).
+const mono = (s: string) => [...s].reduce((n, c) => n + (/[ㄱ-힝]/.test(c) ? 12 : 7.2), 0);
+const lw = (s: string) => [...s].reduce((n, c) => n + (/[ㄱ-힝]/.test(c) ? 8 : 4.8), 0);
+
+// Tree rows: 24px apart, 8px more before each folder under the root; names indent 24px per depth.
+const rows: { y: number; x: number; depth: number; name: string; focus: boolean }[] = [];
+let y = 52;
+for (const [k, r] of tree.entries()) {
+  if (k > 0) y += 24 + (r.depth === 1 ? 8 : 0);
+  rows.push({ y, x: 16 + r.depth * 24, depth: r.depth, name: r.name, focus: r.focus });
+}
+// Elbows: each row hangs from a vertical line under its parent (24px left of its own name).
+const elbows = rows
+  .map((r, k) => {
+    if (!r.depth) return '';
+    const parent = rows.slice(0, k).findLast((p) => p.depth === r.depth - 1)!;
+    const vx = r.x - 16;
+    return `M${vx},${parent.y + 6} V${r.y - 4} M${vx},${r.y - 4} H${vx + 10}`;
+  })
+  .join(' ');
+const hit = rows.find((r) => r.focus)!;
+const hitW = mono(hit.name) + 16;
+const treeEnd = rows.at(-1)!.y;
+
+// File card: path, then one line every 20px.
+const LY = (i: number) => 68 + i * 20; // baseline
+const cardH = LY(lines.length - 1) + 12 - 32;
+const AREA = Math.max(cardH + 44, treeEnd + 32 + treeNote.length * 16);
+const CY = AREA + 16; // commit strip
+const H = CY + 44;
+const openX = (hit.x + hitW - 8 + 248) / 2;
+const openW = lw(open[lang]) + 8;
+---
+
+<figure class="rm">
+  <div class="rm-scroll" tabindex="0" role="region" aria-label={label}>
+    <svg viewBox={`0 0 ${W} ${H}`} aria-hidden="true" focusable="false">
+      <defs>
+        <marker
+          id={`rm-ar-${lang}`}
+          markerWidth="8"
+          markerHeight="6"
+          refX="7"
+          refY="3"
+          orient="auto-start-reverse"
+        >
+          <polygon class="mk" points="0 0, 8 3, 0 6"></polygon>
+        </marker>
+      </defs>
+      <rect class="zone" x="0" y="0" width="216" height={AREA} rx="8"></rect>
+      <text class="zl" x="12" y="20">
+        {repo[lang]}
+      </text>
+      <rect class="zone" x="236" y="0" width="316" height={AREA} rx="8"></rect>
+      <text class="zl" x="248" y="20">
+        {file[lang]}
+      </text>
+
+      {/* Tree */}
+      <path class="tr" d={elbows}></path>
+      <rect class="hl" x={hit.x - 8} y={hit.y - 16} width={hitW} height="24" rx="4"></rect>
+      {rows.map((r) => (
+        <text class:list={['code', { acc: r.focus }]} x={r.x} y={r.y}>
+          {r.name}
+        </text>
+      ))}
+      {treeNote.map((n, k) => (
+        <text class="tx" x="16" y={treeEnd + 44 + k * 16}>
+          {n[lang]}
+        </text>
+      ))}
+
+      {/* Tree → file */}
+      <path
+        class="ln"
+        d={`M${hit.x + hitW - 8},${hit.y - 4} H248`}
+        marker-end={`url(#rm-ar-${lang})`}
+      ></path>
+      <rect class="em" x={openX - openW / 2} y={hit.y - 22} width={openW} height="11" rx="2"></rect>
+      <text class="el" x={openX} y={hit.y - 14} text-anchor="middle">
+        {open[lang]}
+      </text>
+
+      {/* File card */}
+      <rect class="card" x="248" y="32" width="292" height={cardH} rx="6"></rect>
+      <text class="code acc" x="260" y="50">
+        {path}
+      </text>
+      {lines.map((l, i) => (
+        <text class:list={['code', l.kind]} x="260" y={LY(i)}>
+          {l.text}
+        </text>
+      ))}
+
+      {/* Notes: a bracket over the line range, name and use beside it */}
+      {notes.map((n) => {
+        const y1 = LY(n.from) - 12;
+        const y2 = LY(n.to) + 4;
+        const m = (y1 + y2) / 2;
+        return (
+          <>
+            <path class="tr" d={`M548,${y1 + 2} H556 V${y2 - 2} H548 M556,${m} H564`} />
+            <text class="nb" x="572" y={m - 4}>
+              {n.title[lang]}
+            </text>
+            <text class="nu" x="572" y={m + 14}>
+              {n.body[lang]}
+            </text>
+          </>
+        );
+      })}
+
+      {/* Commit message convention */}
+      <rect class="card" x="0" y={CY} width={W} height="40" rx="6"></rect>
+      <text class="nb" x="16" y={CY + 24}>
+        {commit.label[lang]}
+      </text>
+      <text class="code" x="148" y={CY + 24}>
+        {commit.text}
+      </text>
+      <text class="nu" x="440" y={CY + 24}>
+        {commit.note[lang]}
+      </text>
+    </svg>
+  </div>
+  <p class="hint">{t(lang, 'dgScroll')}</p>
+  <div class="sr-only">
+    <p>
+      {repo[lang]}: {rows.map((r) => r.name).join(', ')}
+    </p>
+    {treeNote.map((n) => (
+      <p>{n[lang]}</p>
+    ))}
+    <p>
+      {file[lang]}: {path}
+    </p>
+    <ul>
+      {notes.map((n) => (
+        <li>
+          {n.title[lang]} ({n.body[lang]}):{' '}
+          {lines
+            .slice(n.from, n.to + 1)
+            .map((l) => l.text)
+            .join(' / ')}
+        </li>
+      ))}
+    </ul>
+    <p>
+      {commit.label[lang]}: {commit.text}. {commit.note[lang]}
+    </p>
+  </div>
+</figure>
+
+<style>
+  .rm {
+    container-type: inline-size;
+  }
+
+  /* Narrower than the drawing (≤640px column): scroll inside the figure, as diagrams do (5.24.4). */
+  .rm-scroll {
+    overflow-x: auto;
+  }
+
+  .rm-scroll:focus-visible {
+    outline: var(--focus-w) solid var(--focus);
+    outline-offset: var(--focus-offset);
+    border-radius: var(--radius-xs);
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    min-width: 640px;
+    height: auto;
+    font-family: inherit;
+  }
+
+  .hint {
+    display: none;
+    margin-top: var(--sp-2);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  @container (max-width: 639px) {
+    .hint {
+      display: block;
+    }
+  }
+
+  /* Areas and labels as diagram zones (5.24.4). */
+  .zone {
+    fill: var(--bg);
+  }
+
+  .zl {
+    fill: var(--text-2);
+    font-size: 12px;
+    font-weight: var(--fw-strong);
+  }
+
+  .card {
+    fill: var(--surface);
+    stroke: var(--line-strong);
+    stroke-width: 0.8;
+  }
+
+  /* File content in mono 12px: muted for the frontmatter fences, headings in full text color. */
+  .code {
+    fill: var(--text-2);
+    font-family: var(--font-meta);
+    font-size: 12px;
+  }
+
+  .code.muted {
+    fill: var(--text-3);
+  }
+
+  .code.head {
+    fill: var(--text);
+    font-weight: var(--fw-strong);
+  }
+
+  .code.acc {
+    fill: var(--accent);
+    font-weight: var(--fw-strong);
+  }
+
+  .hl {
+    fill: var(--accent-soft);
+  }
+
+  .tr {
+    fill: none;
+    stroke: var(--line-strong);
+    stroke-width: 1;
+  }
+
+  .ln {
+    fill: none;
+    stroke: var(--text-3);
+    stroke-width: 1.2;
+  }
+
+  .mk {
+    fill: var(--text-3);
+  }
+
+  .em {
+    fill: var(--bg);
+  }
+
+  .el {
+    fill: var(--text-3);
+    font-family: var(--font-meta);
+    font-size: 8px;
+    letter-spacing: 0.06em;
+  }
+
+  .tx {
+    fill: var(--text-3);
+    font-family: var(--font-meta);
+    font-size: 9px;
+  }
+
+  .nb {
+    fill: var(--text);
+    font-size: 12px;
+    font-weight: var(--fw-strong);
+  }
+
+  .nu {
+    fill: var(--text-2);
+    font-size: 12px;
+  }
+</style>

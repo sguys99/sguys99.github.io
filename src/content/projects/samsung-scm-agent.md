@@ -20,7 +20,7 @@ domain: Manufacturing
 capability: [LLM Agents & RAG]
 stack: [Qwen 8B (fine-tuned), Llama 3.1 70B, LangChain, LangGraph, Hugging Face, vLLM, Milvus, LiteLLM, Braintrust]
 featured: true
-order: 3
+order: 4
 caseStudy:
   context:
     - en: Samsung Electronics' supply chain management (SCM) organization wanted planners to query SCM data and get work guidance directly, in natural language.

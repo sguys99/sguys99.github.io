@@ -136,6 +136,11 @@
 | E-Stop | E-Stop | 국문 첫 언급 `비상정지(E-Stop)` |
 | Teleop | Teleop | 국문 `Teleop 조작 데이터` |
 | BM25 | BM25 | 이력서의 "BM 25"는 붙여 씀 |
+| Seahorse | Seahorse | 법령 벡터 DB에 쓴 벡터 DB 제품. 국문도 영문 유지 |
+| legalQ | legalQ | 법령 검색 서비스 이름. 국문 첫 언급 `legalQ(리걸큐)` |
+| legalize-kr | legalize-kr | 법령 Markdown 공개 저장소 이름. 소문자 |
+| Markdown / frontmatter | Markdown / frontmatter | 파일 형식과 머리 메타데이터 |
+| Dense / BM25 hybrid | Dense·BM25 하이브리드 | 의미 벡터 + 키워드 점수 결합 검색 |
 | PLC / DCS | PLC / DCS | |
 | Physical AI | Physical AI | |
 | Harness Engineering | Harness Engineering | 강의 주제명 |
@@ -187,6 +192,20 @@
 | feature engineering | 피처 엔지니어링 | |
 | hybrid search | 하이브리드 검색 | |
 | vector DB | 벡터 DB | 제품명(pgvector, Qdrant, Milvus)은 원문 |
+| statute / statutes | 법령 | 법률·시행령·시행규칙을 아우를 때. 국회 제정 법만 가리키면 법률(act) |
+| enforcement decree / enforcement rule | 시행령 / 시행규칙 | |
+| article / paragraph | 조문(조) / 항 | "제23조", "조·항 단위" |
+| addenda | 부칙 | 개정 이력(공포번호·시행일·경과조치)이 적힌 부분 |
+| appendix table | 별표 | 별지·부표 포함 |
+| revision history | 개정 이력 | |
+| verbatim quote | 원문 인용 | |
+| National Law Information Center | 국가법령정보센터 | law.go.kr |
+| system prompt | 시스템 프롬프트 | |
+| intent routing / intent | 의도 라우팅 / 의도 | 질문 의도에 따라 조회 경로를 고르는 규칙 |
+| chunk / re-index | 청크 / 재적재 | |
+| fallback | 폴백 | |
+| stateless | 무상태 | 서버에 대화를 저장하지 않음 |
+| everyday language | 일상어 | 법률 용어와 대비 |
 | control optimization | 제어 최적화 | |
 | optimal control | 최적제어 | |
 | guidance model | 가이던스 모델 | |

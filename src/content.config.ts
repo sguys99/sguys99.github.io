@@ -278,6 +278,7 @@ const diagram = z
       })
       .optional(),
     // Small mono captions placed in the drawing (also read by screen readers).
+    // style name: a 12px row label instead of the mono caption; bullet: a small dot 12px to its left (e.g. on a spine line).
     texts: z
       .array(
         z.strictObject({
@@ -285,6 +286,8 @@ const diagram = z
           x: z.number(),
           y: z.number(),
           anchor: z.enum(['start', 'middle', 'end']).default('start'),
+          style: z.enum(['note', 'name']).default('note'),
+          bullet: z.boolean().default(false),
         }),
       )
       .default([]),
@@ -292,14 +295,15 @@ const diagram = z
     divider: z.strictObject({ y: z.number(), x: z.number(), label: localized }).optional(),
     // from/to name a node or zone (read by screen readers); d is the drawn path.
     // style: back = dashed return, both = arrowheads at both ends, acc = the accent path (one per diagram, e.g. a safety channel),
-    // dash = dashed one-way (an optional or remote link), remote = dashed with arrowheads at both ends.
+    // dash = dashed one-way (an optional or remote link), remote = dashed with arrowheads at both ends,
+    // line = no arrowhead (a spine that labels hang from; not read as a connection).
     edges: z
       .array(
         z.strictObject({
           from: text,
           to: text,
           d: text,
-          style: z.enum(['back', 'both', 'acc', 'dash', 'remote']).optional(),
+          style: z.enum(['back', 'both', 'acc', 'dash', 'remote', 'line']).optional(),
           label: z
             .strictObject({
               text: localized,
@@ -404,6 +408,50 @@ const episode = z.strictObject({
   note: localized,
 });
 
+// Repository map (DESIGN.md 5.24.13): a folder tree, one file opened with its lines, notes on what each part is used for,
+// and the commit message convention. notes[].from/to are line indexes (bracketed range).
+const repomap = z
+  .strictObject({
+    repo: localized, // tree area label
+    tree: z
+      .array(
+        z.strictObject({
+          depth: z.number().int().min(0).max(2),
+          name: text,
+          focus: z.boolean().default(false), // the file that is opened
+        }),
+      )
+      .min(2),
+    treeNote: z.array(localized).max(2).default([]),
+    open: localized, // label on the arrow from the tree to the file
+    file: localized, // file area label
+    path: text,
+    lines: z
+      .array(
+        z.strictObject({ text: text, kind: z.enum(['plain', 'muted', 'head']).default('plain') }),
+      )
+      .min(2)
+      .max(14),
+    notes: z
+      .array(
+        z.strictObject({
+          from: z.number().int().nonnegative(),
+          to: z.number().int().nonnegative(),
+          title: localized,
+          body: localized,
+        }),
+      )
+      .max(4),
+    commit: z.strictObject({ label: localized, text: text, note: localized }),
+  })
+  .superRefine((r, ctx) => {
+    if (r.tree.filter((t) => t.focus).length !== 1)
+      ctx.addIssue({ code: 'custom', message: 'repomap: exactly one focus row' });
+    for (const n of r.notes)
+      if (n.from > n.to || n.to >= r.lines.length)
+        ctx.addIssue({ code: 'custom', message: `repomap: bad note range ${n.from}-${n.to}` });
+  });
+
 const diagrams = defineCollection({
   loader: glob({ pattern: '*.yaml', base: './src/content/diagrams' }),
   schema: z.strictObject({
@@ -417,6 +465,8 @@ const diagrams = defineCollection({
     results: results.optional(), // experiment results chart under the Approach bullets
     stack: stack.optional(), // its own section after Approach (5.24.9)
     episode: episode.optional(), // Learning loop section before Outcome (5.24.10)
+    prompt: diagram.optional(), // System prompt section after Approach (5.24.3)
+    repomap: repomap.optional(), // System prompt section, under the prompt diagram (5.24.13)
   }),
 });
 
@@ -425,15 +475,59 @@ type ImageFn = SchemaContext['image'];
 // Option comparison under Key decisions (DESIGN.md 5.24.7): one product image per option, rows of criteria,
 // the picked column marked. Images are the makers' product shots, so `credit` names them.
 const compare = (image: ImageFn) =>
+  z
+    .strictObject({
+      title: localized,
+      // Without images (both or neither) the table stands alone; without pick neither column is marked (5.24.7).
+      options: z
+        .array(
+          z.strictObject({
+            name: z.union([text, localized]),
+            image: image().optional(),
+            alt: localized.optional(),
+          }),
+        )
+        .length(2),
+      pick: z.number().int().min(0).max(1).optional(),
+      rows: z
+        .array(z.strictObject({ label: localized, values: z.array(localized).length(2) }))
+        .min(2),
+      verdict: localized,
+      credit: localized.optional(),
+    })
+    .superRefine((c, ctx) => {
+      const imgs = c.options.filter((o) => o.image && o.alt).length;
+      if (imgs === 1 || c.options.some((o) => !!o.image !== !!o.alt))
+        ctx.addIssue({
+          code: 'custom',
+          message: 'compare: images and alt on both options or neither',
+        });
+      if (imgs === 2 && !c.credit)
+        ctx.addIssue({ code: 'custom', message: 'compare: product images need a credit' });
+    });
+
+// Live service screens under the Context bullets (DESIGN.md 5.24.17): crops of one real answer, top to bottom,
+// each with numbered notes pinned at a height (at, % of the crop), the omitted middle named in gap, and a captioned link.
+const screens = (image: ImageFn) =>
   z.strictObject({
-    title: localized,
-    options: z.array(z.strictObject({ name: text, image: image(), alt: localized })).length(2),
-    pick: z.number().int().min(0).max(1),
-    rows: z
-      .array(z.strictObject({ label: localized, values: z.array(localized).length(2) }))
-      .min(2),
-    verdict: localized,
-    credit: localized,
+    slices: z
+      .array(
+        z.strictObject({
+          image: image(),
+          alt: localized,
+          notes: z
+            .array(
+              z.strictObject({ at: z.number().min(0).max(100), title: localized, body: localized }),
+            )
+            .min(1)
+            .max(3),
+        }),
+      )
+      .min(1)
+      .max(3),
+    gap: localized.optional(), // between slices: what was left out
+    caption: localized,
+    url: z.url(),
   });
 
 // Who does each task at each stage (DESIGN.md 5.24.8): tasks in order, and per stage how many from the start the robot takes.
@@ -531,6 +625,7 @@ const caseStudy = (image: ImageFn) =>
     archNote: localized.optional(), // one line under the Architecture diagram (e.g. a target, not current, structure)
     hardware: hardware(image).optional(), // under the Architecture diagram
     loop: bullets.optional(), // Learning loop section text under its figure
+    screens: screens(image).optional(), // under the Context bullets
   });
 
 const projects = defineCollection({

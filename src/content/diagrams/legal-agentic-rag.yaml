@@ -1,0 +1,843 @@
+# 법령 검색 Agentic RAG 케이스 스터디 다이어그램 (DESIGN.md 5.24.4, 5.24.13, 11.16). 시안 g15에서 고른 조합:
+# problem = ①-C 이전 vs 이후, prompt = ⑥-B 처리 단계에 맞춘 섹션, repomap = ②-A 파일 구조도, arch = ③-B 계층 스택, flow = ④-A 의도 6행 × 두 레인.
+# 출처: docs/project-references/legal/ (systemprompt.md, legal-chat-agent-main 문서·설정), legalQ 답변(2026-11-21).
+# 이 파일은 docs/design-drafts/g15/export.mjs로 만들었다. 좌표는 SVG 단위(4px 격자), 연결선 d는 직각 + 모서리 반지름 8.
+# 포인트 색: 문제는 에이전트(focus)·한계 번호, 프롬프트는 참고 지식, 아키텍처는 시스템 프롬프트, 흐름은 최신 원문 재확인 경로 1개.
+
+legend:
+  - { kind: input, label: { en: 'User', ko: '이용자' } }
+  - { kind: llm, label: { en: 'Agent, LLM', ko: '에이전트·LLM' } }
+  - { kind: logic, label: { en: 'Tools and data', ko: '도구·데이터' } }
+  - { kind: focus, label: { en: 'System prompt', ko: '시스템 프롬프트' } }
+  - { kind: ghost, label: { en: 'Upstream source', ko: '외부 원천' } }
+problem:
+  width: 720
+  height: 404
+  legend:
+    - { kind: input, label: { en: 'Question', ko: '질문' } }
+    - { kind: logic, label: { en: 'Search, file, data', ko: '검색·파일·데이터' } }
+    - { kind: llm, label: { en: 'LLM call', ko: 'LLM 호출' } }
+    - { kind: focus, label: { en: 'Agent loop', ko: '에이전트 반복' } }
+    - { kind: mark, label: { en: 'Where it fell short', ko: '한계' } }
+  zones:
+    - {
+        id: before,
+        label: { en: 'Before · one vector search', ko: '이전 · 벡터 DB 1회 조회' },
+        x: 0,
+        y: 0,
+        w: 720,
+        h: 152,
+      }
+    - {
+        id: after,
+        label: { en: 'After · agent with two sources', ko: '이후 · 두 지식원을 쓰는 에이전트' },
+        x: 0,
+        y: 168,
+        w: 720,
+        h: 176,
+      }
+  nodes:
+    - { id: b1, kind: input, label: { en: 'Question', ko: '질문' }, x: 16, y: 40, w: 112, h: 40 }
+    - {
+        id: b2,
+        kind: logic,
+        label: { en: 'Hybrid search', ko: '하이브리드 검색' },
+        sub: { en: 'one call', ko: '1회 호출' },
+        x: 176,
+        y: 40,
+        w: 136,
+        h: 40,
+      }
+    - {
+        id: b3,
+        kind: logic,
+        label: { en: '3 chunks', ko: '청크 3개' },
+        sub: { en: '1,000 characters each', ko: '1,000자 단위' },
+        x: 360,
+        y: 40,
+        w: 136,
+        h: 40,
+      }
+    - { id: b4, kind: llm, label: { en: 'Answer', ko: '답변 생성' }, x: 544, y: 40, w: 160, h: 40 }
+    - { id: a1, kind: input, label: { en: 'Question', ko: '질문' }, x: 16, y: 236, w: 112, h: 40 }
+    - {
+        id: a2,
+        kind: focus,
+        label: { en: 'Agent', ko: '에이전트' },
+        sub: { en: 'intent → route → verify', ko: '의도 → 경로 → 검증' },
+        x: 176,
+        y: 228,
+        w: 160,
+        h: 56,
+      }
+    - {
+        id: t1,
+        kind: logic,
+        label: { en: 'Vector DB', ko: '벡터 DB' },
+        sub: { en: 'find by meaning', ko: '의미로 찾기' },
+        x: 392,
+        y: 200,
+        w: 136,
+        h: 40,
+      }
+    - {
+        id: t2,
+        kind: logic,
+        label: { en: 'Statute file', ko: '법령 파일' },
+        sub: { en: 'exact current text', ko: '정확한 현행 원문' },
+        x: 392,
+        y: 248,
+        w: 136,
+        h: 40,
+      }
+    - {
+        id: t3,
+        kind: logic,
+        label: { en: 'History, stats', ko: '이력·통계' },
+        sub: { en: 'commits · metadata', ko: '커밋·메타데이터' },
+        x: 392,
+        y: 296,
+        w: 136,
+        h: 40,
+      }
+    - {
+        id: a3,
+        kind: llm,
+        label: { en: 'Verbatim answer', ko: '원문 인용 답변' },
+        sub: { en: 'source · disclaimer', ko: '출처·면책' },
+        x: 576,
+        y: 236,
+        w: 128,
+        h: 40,
+      }
+  callouts:
+    - {
+        n: 1,
+        on: b2,
+        text: { en: 'Chunks split articles', ko: '조문이 청크 경계에서 잘림' },
+        x: 176,
+        y: 100,
+        w: 168,
+        h: 24,
+        px: 244,
+        py: 80,
+      }
+    - {
+        n: 2,
+        on: b3,
+        text: { en: 'Needs more than 3', ko: '필요한 조문이 3개 초과' },
+        x: 360,
+        y: 100,
+        w: 168,
+        h: 24,
+        px: 428,
+        py: 80,
+      }
+    - {
+        n: 3,
+        on: b4,
+        text: { en: 'No revision history', ko: '개정 이력·과거 원문 없음' },
+        x: 544,
+        y: 100,
+        w: 160,
+        h: 24,
+        px: 624,
+        py: 80,
+      }
+  texts:
+    - { text: { en: 'REPEAT AS NEEDED', ko: '필요한 만큼 반복' }, x: 256, y: 304, anchor: middle }
+  edges:
+    - { from: b1, to: b2, d: 'M128,60 L176,60' }
+    - { from: b2, to: b3, d: 'M312,60 L360,60' }
+    - { from: b3, to: b4, d: 'M496,60 L544,60' }
+    - { from: a1, to: a2, d: 'M128,256 L176,256' }
+    - {
+        from: a2,
+        to: t1,
+        d: 'M336,240 L344,240 Q352,240 352,232 L352,228 Q352,220 360,220 L392,220',
+        style: both,
+      }
+    - {
+        from: a2,
+        to: t2,
+        d: 'M336,256 L358,256 Q364,256 364,262 L364,262 Q364,268 370,268 L392,268',
+        style: both,
+      }
+    - {
+        from: a2,
+        to: t3,
+        d: 'M336,272 L342,272 Q348,272 348,278 L348,308 Q348,316 356,316 L392,316',
+        style: both,
+      }
+    - {
+        from: a2,
+        to: a3,
+        d: 'M304,228 L304,200 Q304,192 312,192 L632,192 Q640,192 640,200 L640,236',
+      }
+
+prompt:
+  width: 728
+  height: 364
+  legend:
+    - { kind: plain, label: { en: 'Prompt section', ko: '프롬프트 섹션' } }
+    - { kind: focus, label: { en: 'Reference knowledge', ko: '참고 지식' } }
+    - { kind: logic, label: { en: 'Exception table', ko: '예외 표' } }
+  stages:
+    x: 0
+    y: 40
+    w: 104
+    h: 24
+    items:
+      - { en: 'Input', ko: '입력' }
+      - { en: 'Preprocess', ko: '전처리' }
+      - { en: 'Appendix', ko: '별표 확인' }
+      - { en: 'Classify', ko: '의도 분류' }
+      - { en: 'Retrieve', ko: '조회' }
+      - { en: 'Verify', ko: '검증·폴백' }
+      - { en: 'Answer', ko: '출력' }
+  zones:
+    - {
+        id: rules,
+        label:
+          { en: '6 absolute rules · apply to every step', ko: '절대 규칙 6개 · 모든 단계에 적용' },
+        note:
+          {
+            text:
+              {
+                en: 'verbatim · no advice · cite · read-only',
+                ko: '원문 그대로 · 조언 금지 · 출처 · 읽기 전용',
+              },
+          },
+        x: 0,
+        y: 0,
+        w: 728,
+        h: 32,
+      }
+  nodes:
+    - {
+        id: c0,
+        kind: plain,
+        label: { en: 'Multi-turn', ko: "멀티턴\n처리" },
+        sub: { en: 'per-turn intent', ko: '턴마다 새로 분류' },
+        x: 4,
+        y: 72,
+        w: 96,
+        h: 56,
+      }
+    - {
+        id: c1,
+        kind: plain,
+        label: { en: 'Normalize', ko: "전처리\n규칙" },
+        sub: { en: '4 rules', ko: '규칙 4개' },
+        x: 108,
+        y: 72,
+        w: 96,
+        h: 56,
+      }
+    - {
+        id: c2,
+        kind: plain,
+        label: { en: 'Fallback #0', ko: '폴백 #0' },
+        sub: { en: 'appendix stop', ko: '별표 즉시 마감' },
+        x: 212,
+        y: 72,
+        w: 96,
+        h: 56,
+      }
+    - {
+        id: c3,
+        kind: plain,
+        label: { en: "Intent\nclasses", ko: "의도\n분류" },
+        sub: { en: '6 intents', ko: '의도 6가지' },
+        x: 316,
+        y: 72,
+        w: 96,
+        h: 56,
+      }
+    - {
+        id: c4,
+        kind: plain,
+        label: { en: "Routing\ntable", ko: "라우팅\n테이블" },
+        sub: { en: '6 rows', ko: '6행' },
+        x: 420,
+        y: 72,
+        w: 96,
+        h: 56,
+      }
+    - {
+        id: c4b,
+        kind: plain,
+        label: { en: 'Workflows', ko: "워크\n플로우" },
+        sub: { en: '5 task types', ko: '작업 유형 5개' },
+        x: 420,
+        y: 136,
+        w: 96,
+        h: 56,
+      }
+    - {
+        id: c5,
+        kind: plain,
+        label: { en: "Recency\ncheck", ko: "검증\n파이프라인" },
+        sub: { en: '17 keywords', ko: '최신성 키워드 17개' },
+        x: 524,
+        y: 72,
+        w: 96,
+        h: 56,
+      }
+    - {
+        id: c5b,
+        kind: plain,
+        label: { en: "Fallback\n#1–#5", ko: "폴백\n#1–#5" },
+        sub: { en: 'no hits, errors', ko: '0건·어긋남·오류' },
+        x: 524,
+        y: 136,
+        w: 96,
+        h: 56,
+      }
+    - {
+        id: c6,
+        kind: plain,
+        label: { en: "Output\nformat", ko: "출력\n형식" },
+        sub: { en: 'quote · source', ko: '원문·출처·면책' },
+        x: 628,
+        y: 72,
+        w: 96,
+        h: 56,
+      }
+    - {
+        id: kn,
+        kind: focus,
+        label:
+          {
+            en: 'Knowledge: tool guide · repository layout and schema',
+            ko: '참고 지식: 도구 소개 · 저장소 구조·스키마',
+          },
+        sub: { en: 'read by retrieval and verification', ko: '조회·검증 단계가 참고' },
+        x: 316,
+        y: 216,
+        w: 408,
+        h: 48,
+      }
+    - {
+        id: ex,
+        kind: logic,
+        label: { en: 'Exceptions · 12 cases', ko: '예외 처리 · 12가지' },
+        sub: { en: 'not found, ambiguous, API errors …', ko: '미발견·모호·API 오류 …' },
+        x: 4,
+        y: 216,
+        w: 304,
+        h: 48,
+      }
+  texts:
+    - {
+        text:
+          {
+            en: 'Each box = one section of the system prompt; second line = rules it holds',
+            ko: '각 상자 = 시스템 프롬프트의 섹션, 아래 줄 = 그 섹션에 든 규칙 수',
+          },
+        x: 4,
+        y: 292,
+      }
+  edges:
+    - { from: kn, to: c4b, d: 'M468,216 L468,192', style: back }
+    - { from: kn, to: c5b, d: 'M572,216 L572,192', style: back }
+
+repomap:
+  repo: { en: 'Repository · legalize-kr', ko: '저장소 · legalize-kr' }
+  tree:
+    - { depth: 0, name: 'kr/' }
+    - { depth: 1, name: '근로기준법/' }
+    - { depth: 2, name: '법률.md', focus: true }
+    - { depth: 2, name: '시행령.md' }
+    - { depth: 2, name: '시행규칙.md' }
+    - { depth: 1, name: '민법/' }
+    - { depth: 2, name: '법률.md' }
+    - { depth: 1, name: '도로교통법/' }
+    - { depth: 2, name: '법률.md · …' }
+  treeNote:
+    - { en: 'about 3,046 statute folders', ko: '법령 폴더 약 3,046개' }
+    - { en: 'folder = act, decree, and rule set', ko: '폴더 = 법률·시행령·시행규칙 세트' }
+  open: { en: 'OPEN BY PATH', ko: '경로로 바로 열기' }
+  file: { en: 'One statute file', ko: '법령 파일 하나' }
+  path: 'kr/근로기준법/법률.md'
+  lines:
+    - { text: '---', kind: muted }
+    - { text: '제목: 근로기준법' }
+    - { text: '법령구분: 법률' }
+    - { text: '소관부처: [고용노동부]' }
+    - { text: '공포일자: 2026-08-04' }
+    - { text: '시행일자: 2026-10-02' }
+    - { text: '상태: 시행' }
+    - { text: '출처: law.go.kr/법령/근로기준법' }
+    - { text: '---', kind: muted }
+    - { text: '# 근로기준법', kind: head }
+    - { text: '## 제23조 (해고 등의 제한)', kind: head }
+    - { text: '① 사용자는 근로자에게 정당한 이유 없이 …' }
+    - { text: '## 부칙', kind: head }
+    - { text: '부칙 <제{번호}호,{공포일자}>' }
+  notes:
+    - {
+        from: 1,
+        to: 7,
+        title: { en: 'Metadata', ko: '메타데이터' },
+        body: { en: 'header and stats', ko: '대상 법령 표시·통계' },
+      }
+    - {
+        from: 10,
+        to: 11,
+        title: { en: 'Article heading', ko: '조문 제목 줄' },
+        body: { en: 'found without search', ko: '검색 없이 바로 찾음' },
+      }
+    - {
+        from: 12,
+        to: 13,
+        title: { en: 'Addenda marker', ko: '부칙 표시' },
+        body: { en: 'source for history', ko: '개정 이력의 근거' },
+      }
+  commit:
+    label: { en: 'Commit message', ko: '커밋 메시지' }
+    text: '법률: 근로기준법 (일부개정)'
+    note: { en: 'one amendment = one commit → compare', ko: '개정 1건 = 커밋 1개 → 시점 비교' }
+
+arch:
+  width: 720
+  height: 532
+  zones:
+    - {
+        id: r1,
+        label: { en: 'Users', ko: '이용자' },
+        note: { text: { en: '3 turns per chat', ko: '대화당 3턴' } },
+        x: 0,
+        y: 0,
+        w: 720,
+        h: 84,
+      }
+    - {
+        id: r2,
+        label: { en: 'Agent server', ko: '에이전트 서버' },
+        note: { text: { en: 'stateless', ko: '무상태' } },
+        x: 0,
+        y: 100,
+        w: 720,
+        h: 92,
+      }
+    - {
+        id: r3,
+        label: { en: 'MCP · read-only tools', ko: 'MCP · 읽기 전용 도구' },
+        x: 0,
+        y: 208,
+        w: 720,
+        h: 120,
+      }
+    - { id: sg, label: { en: 'Seahorse MCP', ko: 'Seahorse MCP' }, x: 16, y: 240, w: 264, h: 76 }
+    - { id: gg, label: { en: 'GitHub MCP', ko: 'GitHub MCP' }, x: 296, y: 240, w: 408, h: 76 }
+    - { id: r4, label: { en: 'Knowledge sources', ko: '지식원' }, x: 0, y: 344, w: 720, h: 132 }
+  nodes:
+    - {
+        id: chat,
+        kind: input,
+        label: { en: 'legalQ web chat', ko: '웹 챗 legalQ' },
+        sub: { en: 'desktop · mobile', ko: '데스크톱·모바일' },
+        x: 176,
+        y: 32,
+        w: 176,
+        h: 40,
+      }
+    - {
+        id: hist,
+        kind: logic,
+        label: { en: 'Chat history', ko: '대화 기록' },
+        sub: { en: 'encrypted in browser', ko: '브라우저 암호화 저장' },
+        x: 368,
+        y: 32,
+        w: 176,
+        h: 40,
+      }
+    - {
+        id: guard,
+        kind: logic,
+        label: { en: 'Guardrails', ko: '가드레일' },
+        sub: { en: 'rate · concurrency · PII', ko: 'IP 제한·동시성·개인정보' },
+        x: 16,
+        y: 132,
+        w: 160,
+        h: 48,
+      }
+    - {
+        id: agent,
+        kind: llm,
+        label: { en: 'Agent', ko: '에이전트' },
+        sub: { en: 'tool loop, up to 8 turns', ko: '도구 호출 반복 · 최대 8턴' },
+        x: 192,
+        y: 132,
+        w: 176,
+        h: 48,
+      }
+    - {
+        id: llm,
+        kind: llm,
+        label: { en: 'Claude Sonnet 4.6', ko: 'Claude Sonnet 4.6' },
+        x: 384,
+        y: 132,
+        w: 128,
+        h: 48,
+      }
+    - {
+        id: prompt,
+        kind: focus,
+        label: { en: 'System prompt', ko: '시스템 프롬프트' },
+        sub: { en: 'intents · routing · repo map', ko: '의도·라우팅·저장소 지도' },
+        x: 528,
+        y: 132,
+        w: 176,
+        h: 48,
+      }
+    - { id: t1, kind: logic, label: { en: 'search', ko: 'search' }, x: 28, y: 272, w: 116, h: 36 }
+    - {
+        id: t2,
+        kind: logic,
+        label: { en: 'adjacent chunks', ko: 'adjacent chunks' },
+        x: 152,
+        y: 272,
+        w: 116,
+        h: 36,
+      }
+    - {
+        id: t3,
+        kind: logic,
+        label: { en: 'search_code', ko: 'search_code' },
+        x: 308,
+        y: 272,
+        w: 120,
+        h: 36,
+      }
+    - {
+        id: t4,
+        kind: logic,
+        label: { en: 'get_file_contents', ko: 'get_file_contents' },
+        x: 440,
+        y: 272,
+        w: 136,
+        h: 36,
+      }
+    - {
+        id: t5,
+        kind: logic,
+        label: { en: 'list_commits', ko: 'list_commits' },
+        x: 588,
+        y: 272,
+        w: 104,
+        h: 36,
+      }
+    - {
+        id: vdb,
+        kind: logic,
+        label: { en: 'Seahorse vector DB', ko: 'Seahorse 벡터 DB' },
+        sub:
+          {
+            en: 'Dense·BM25 hybrid · article chunks',
+            ko: 'Dense·BM25 하이브리드 · 조·항 단위 청크',
+          },
+        x: 16,
+        y: 376,
+        w: 252,
+        h: 48,
+      }
+    - {
+        id: repo,
+        kind: logic,
+        label: { en: 'legalize-kr repo', ko: 'legalize-kr 저장소' },
+        sub:
+          {
+            en: 'about 3,046 statutes as Markdown · Git history',
+            ko: '법령 약 3,046개 Markdown · Git 이력',
+          },
+        x: 296,
+        y: 376,
+        w: 408,
+        h: 48,
+      }
+    - {
+        id: reidx,
+        kind: logic,
+        label: { en: 'Re-index by article', ko: '조·항 단위 재적재' },
+        x: 116,
+        y: 440,
+        w: 152,
+        h: 24,
+      }
+    - {
+        id: law,
+        kind: ghost,
+        label: { en: 'Source: law.go.kr', ko: '원천: 국가법령정보센터' },
+        x: 548,
+        y: 440,
+        w: 156,
+        h: 24,
+      }
+  edges:
+    - { from: chat, to: agent, d: 'M264,72 L264,132', style: both }
+    - {
+        from: agent,
+        to: sg,
+        d: 'M232,180 L232,192 Q232,200 224,200 L208,200 Q200,200 200,208 L200,240',
+        style: both,
+      }
+    - {
+        from: agent,
+        to: gg,
+        d: 'M328,180 L328,192 Q328,200 336,200 L492,200 Q500,200 500,208 L500,240',
+        style: both,
+      }
+    - { from: sg, to: vdb, d: 'M148,316 L148,376', style: both }
+    - { from: gg, to: repo, d: 'M500,316 L500,376', style: both }
+    - { from: repo, to: reidx, d: 'M400,424 L400,444 Q400,452 392,452 L268,452' }
+    - { from: reidx, to: vdb, d: 'M192,440 L192,424' }
+    - { from: law, to: repo, d: 'M626,440 L626,424' }
+
+flow:
+  width: 720
+  height: 644
+  legend:
+    - { kind: logic, label: { en: 'First call', ko: '1차 호출' } }
+    - { kind: input, label: { en: 'Conditional call', ko: '조건부 호출' } }
+    - { kind: acc-line, label: { en: 'Re-check latest text', ko: '최신 원문 재확인' } }
+    - { kind: llm, label: { en: 'LLM step', ko: 'LLM 판단' } }
+  zones:
+    - {
+        id: vl,
+        label: { en: 'Vector DB · Seahorse MCP', ko: '벡터 DB · Seahorse MCP' },
+        x: 160,
+        y: 136,
+        w: 268,
+        h: 392,
+      }
+    - {
+        id: rl,
+        label: { en: 'Repository · GitHub MCP', ko: '법령 저장소 · GitHub MCP' },
+        x: 440,
+        y: 136,
+        w: 280,
+        h: 392,
+      }
+  nodes:
+    - { id: q, kind: input, label: { en: 'Question', ko: '질문' }, x: 0, y: 4, w: 96, h: 40 }
+    - {
+        id: pre,
+        kind: logic,
+        label: { en: 'Preprocess', ko: '전처리' },
+        sub: { en: 'normalize names', ko: '공백·가운뎃점 정규화' },
+        x: 120,
+        y: 4,
+        w: 136,
+        h: 40,
+      }
+    - {
+        id: gate,
+        kind: decision,
+        label: { en: 'Appendix?', ko: '별표?' },
+        x: 280,
+        y: 0,
+        w: 112,
+        h: 48,
+      }
+    - {
+        id: app,
+        kind: plain,
+        label: { en: 'Point to law.go.kr', ko: '국가법령정보센터 안내' },
+        sub: { en: 'stop, no more calls', ko: '추가 호출 없이 마감' },
+        x: 424,
+        y: 4,
+        w: 168,
+        h: 40,
+      }
+    - {
+        id: cls,
+        kind: llm,
+        label: { en: 'Classify intent', ko: '의도 분류' },
+        sub: { en: '6 intents', ko: '의도 6가지' },
+        x: 280,
+        y: 76,
+        w: 112,
+        h: 40,
+      }
+    - {
+        id: v1,
+        kind: logic,
+        label: { en: 'search', ko: 'search' },
+        sub: { en: 'by meaning', ko: '의미 검색' },
+        x: 172,
+        y: 192,
+        w: 112,
+        h: 40,
+      }
+    - {
+        id: r1a,
+        kind: input,
+        label: { en: 'get_file_contents', ko: 'get_file_contents' },
+        sub: { en: 'if recency signal', ko: '최신성 신호가 있으면' },
+        x: 588,
+        y: 168,
+        w: 128,
+        h: 40,
+      }
+    - {
+        id: r1b,
+        kind: input,
+        label: { en: 'search_code', ko: 'search_code' },
+        sub: { en: 'if empty or off-topic', ko: '0건·어긋나면' },
+        x: 588,
+        y: 216,
+        w: 128,
+        h: 40,
+      }
+    - {
+        id: r2,
+        kind: logic,
+        label: { en: 'get_file_contents', ko: 'get_file_contents' },
+        sub: { en: 'straight to the path', ko: '경로로 직행' },
+        x: 452,
+        y: 268,
+        w: 128,
+        h: 40,
+      }
+    - {
+        id: v2,
+        kind: input,
+        label: { en: 'search', ko: 'search' },
+        sub: { en: 'if 404, check name', ko: '404면 법령명 확인' },
+        x: 304,
+        y: 268,
+        w: 112,
+        h: 40,
+      }
+    - {
+        id: v3,
+        kind: logic,
+        label: { en: 'search', ko: 'search' },
+        sub: { en: '"<statute> addenda"', ko: '"법령명 부칙"' },
+        x: 172,
+        y: 320,
+        w: 112,
+        h: 40,
+      }
+    - {
+        id: r3,
+        kind: input,
+        label: { en: 'get_file_contents', ko: 'get_file_contents' },
+        sub: { en: 'else parse addenda', ko: '부족하면 부칙 파싱' },
+        x: 588,
+        y: 320,
+        w: 128,
+        h: 40,
+      }
+    - {
+        id: r4,
+        kind: logic,
+        label:
+          { en: 'list_commits → get_file_contents ×2', ko: 'list_commits → get_file_contents ×2' },
+        sub: { en: 'two commits by date', ko: '두 시점의 커밋' },
+        x: 452,
+        y: 372,
+        w: 264,
+        h: 40,
+      }
+    - {
+        id: r5,
+        kind: logic,
+        label: { en: 'get_file_contents ×N', ko: 'get_file_contents ×N' },
+        sub: { en: 'one call per statute', ko: '법령마다 1회' },
+        x: 452,
+        y: 424,
+        w: 144,
+        h: 40,
+      }
+    - {
+        id: v5,
+        kind: input,
+        label: { en: 'search', ko: 'search' },
+        sub: { en: 'if by topic', ko: '주제 기반이면' },
+        x: 304,
+        y: 424,
+        w: 112,
+        h: 40,
+      }
+    - {
+        id: r6,
+        kind: logic,
+        label: { en: 'search_code', ko: 'search_code' },
+        sub: { en: 'frontmatter · approx.', ko: 'frontmatter · 근사치' },
+        x: 452,
+        y: 476,
+        w: 128,
+        h: 40,
+      }
+    - {
+        id: ans,
+        kind: llm,
+        label: { en: 'Verbatim quote · source · disclaimer', ko: '원문 인용 · 출처 · 면책' },
+        sub: { en: 'article, paragraph, and item numbers as written', ko: '조·항·호 번호 그대로' },
+        x: 160,
+        y: 556,
+        w: 560,
+        h: 40,
+      }
+  texts:
+    - { text: { en: 'Meaning search', ko: '의미 검색' }, x: 24, y: 216, style: name, bullet: true }
+    - { text: { en: 'default', ko: '기본값' }, x: 24, y: 230 }
+    - { text: { en: 'Article lookup', ko: '조문 검색' }, x: 24, y: 292, style: name, bullet: true }
+    - {
+        text: { en: 'Revision history', ko: '개정 이력' },
+        x: 24,
+        y: 344,
+        style: name,
+        bullet: true,
+      }
+    - {
+        text: { en: 'Compare two dates', ko: '시점 간 비교' },
+        x: 24,
+        y: 396,
+        style: name,
+        bullet: true,
+      }
+    - {
+        text: { en: 'Compare statutes', ko: '법령 간 비교' },
+        x: 24,
+        y: 448,
+        style: name,
+        bullet: true,
+      }
+    - { text: { en: 'Statistics', ko: '통계' }, x: 24, y: 500, style: name, bullet: true }
+  edges:
+    - { from: cls, to: vl, d: 'M280,96 L20,96 Q12,96 12,104 L12,496', style: line }
+    - { from: q, to: pre, d: 'M96,24 L120,24' }
+    - { from: pre, to: gate, d: 'M256,24 L280,24' }
+    - {
+        from: gate,
+        to: app,
+        d: 'M392,24 L424,24',
+        label: { text: { en: 'YES', ko: '예' }, x: 408, y: 14 },
+      }
+    - {
+        from: gate,
+        to: cls,
+        d: 'M336,48 L336,76',
+        label: { text: { en: 'NO', ko: '아니오' }, x: 344, y: 66, anchor: start },
+      }
+    - {
+        from: v1,
+        to: r1a,
+        d: 'M284,204 L552,204 Q560,204 560,196 L560,196 Q560,188 568,188 L588,188',
+        style: acc,
+      }
+    - {
+        from: v1,
+        to: r1b,
+        d: 'M284,220 L564,220 Q572,220 572,228 L572,228 Q572,236 580,236 L588,236',
+        style: back,
+      }
+    - { from: r2, to: v2, d: 'M452,288 L416,288', style: back }
+    - { from: v3, to: r3, d: 'M284,340 L588,340', style: back }
+    - { from: r5, to: v5, d: 'M452,444 L416,444', style: back }
+    - { from: vl, to: ans, d: 'M294,528 L294,556' }
+    - { from: rl, to: ans, d: 'M580,528 L580,556' }

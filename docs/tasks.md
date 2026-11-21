@@ -71,6 +71,8 @@
 - [x] 도슨트 휴머노이드 케이스 스터디 + 다이어그램 (2026-11-21, DESIGN.md 11.13): 착수보고서·포커스 세미나로 본문 영문·국문 보강(주요 결정 4건, 검수 기준(안)). 시안 g13에서 관람 동선 A·아키텍처 A·안전 A·기종 비교 C·단계 확장 B. 새 섹션 Visitor journey·Safety, `Comparison.astro`·`RoleShift.astro`, `Diagram.astro`에 정차 지점·걷는 구간·거리 원·`ghost`·`acc` 추가
 - [ ] 기종 비교 제품 사진(Unitree, AgiBot) 공개 사이트 이용 조건 확인 (11.13). 문제가 있으면 시안 B(선화)로 교체. G1 사진은 GenP 표준 구성(11.15)에도 쓰임
 - [x] GenP 휴머노이드 제품 케이스 스터디 + 다이어그램 (2026-11-21, DESIGN.md 11.15): 자료 6건(`docs/project-references/genp/`)으로 본문 영문·국문 재작성(주요 결정 4건, 기술 스택 사양서 기준). 시안 g14에서 코어+프로파일 A·도메인 표 B·아키텍처 C(Phase 2·3 목표 구조)·명령에서 토크까지 A·학습 루프 C·표준 구성 C(+A 로봇 사양). 새 섹션 2개, 컴포넌트 `LayerStack`·`EpisodeLoop`·`DomainTable`·`StandardSet`, `Diagram.astro`에 `divider`·`dash`·`remote`
+- [x] 법령 검색 Agentic RAG 케이스 스터디 + 다이어그램 (2026-11-22, DESIGN.md 11.16): Selected Work 3번째로 추가(소속 행 없음, Seahorse·legalQ 링크 게재 승인), 본문 영문·국문 작성(성과 정성). 시안 g15에서 실서비스 화면 C·이전 vs 이후·프롬프트 구조 B·저장소 지도 A·지식원 비교표·계층 스택·의도 6행. 새 섹션 System prompt, `RepoMap.astro`·`Screens.astro`, `Comparison.astro` 이미지 선택, `Diagram.astro`에 행 이름·척추(`texts.style`·`bullet`, `line`). Selected Work 카드 소속 없는 경우 버그 수정
+- [ ] legalQ 화면 캡처 갱신: 서비스 화면이 바뀌면 `docs/design-drafts/g15/capture.mjs`로 다시 찍어 `src/assets/legalq/` 교체 (실서비스 질문 1회 = 일일 제한 1회)
 - [ ] 국문 글꼴 빌드 서브셋 검토 (국문 홈 Pretendard 분할 441KB, 7.5)
 - [ ] WebKit 글꼴 중복 요청: 영문 페이지에서 Geist를 preload(cors)와 `@font-face`로 두 번 받음(24.5KB), Pretendard 라틴 분할 1개 추가 요청(원인 미확인) (7.6)
 - [ ] WebKit 국문 기간 줄바꿈: `2026.10 – 2027.01 [진행 중]`이 대시 뒤에서 꺾임(`<wbr>` 앞 여백), 넘침 없음 (7.6)

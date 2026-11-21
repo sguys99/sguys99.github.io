@@ -22,7 +22,7 @@ domain: Petrochemical & Steel
 capability: [Control & Optimization]
 stack: [Python, Random Forest, XGBoost]
 featured: true
-order: 6
+order: 8
 caseStudy:
   context:
     - en: LOTTE Fine Chemical blends semi-finished green-material lots and additives into finished grades, following a mix plan that sets which inventory to use and how much.

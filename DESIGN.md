@@ -1865,23 +1865,24 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 | 순서 | id | 제목 영문 / 국문 | 필드 | 조건 |
 |---|---|---|---|---|
-| 01 | `context` | Context / 배경 | `caseStudy.context[]` | 항상 |
+| 01 | `context` | Context / 배경 | `caseStudy.context[]` + `caseStudy.screens` 실서비스 화면(목록 아래, 5.24.17) | 항상. 화면은 있을 때만 (11.16) |
 | 02 | `problem` | Problem / 문제 | `caseStudy.problem[]` | 항상 |
 | 03 | `role` | My role / 역할 | `caseStudy.role[]` | 항상 |
 | 04 | `approach` | Approach / 접근 | `caseStudy.approach[]` + (`diagrams/<slug>.yaml`의 `approach` 그림, `caseStudy.domains` 도메인 표, `results` 실험 결과 차트) + `decisions[]` 표 + `caseStudy.compare` 비교 | 그림·표·차트·결정 표·비교는 각각 있을 때만 (5.24.4, 5.24.11, 5.24.6, 5.24.7) |
-| 05 | `stack` | From command to torque / 명령에서 토크까지 | `diagrams/<slug>.yaml`의 `stack`(계층 계단) | 있을 때만 (5.24.9, 11.15) |
-| 06 | `journey` | Visitor journey / 관람 동선 | `diagrams/<slug>.yaml`의 `journey`(평면 개념도) + `caseStudy.journey`(도입 문장, 단계 목록) | 그림이 있을 때만 (11.13) |
-| 07 | `arch` | Architecture / 아키텍처 | `diagrams/<slug>.yaml`의 `arch`(회로도), 없으면 `caseStudy.architecture`(표). 그 아래 `caseStudy.archNote`(한 줄)와 `caseStudy.hardware`(표준 구성, 5.24.12) | 둘 중 하나가 있을 때만. 없으면 번호가 당겨진다 |
-| 08 | `flow` | Service flow / 서비스 흐름 | `diagrams/<slug>.yaml`의 `flow`(회로도) | 있을 때만 (11.10) |
-| 09 | `safety` | Safety / 안전 체계 | `diagrams/<slug>.yaml`의 `safety` 그림 + `caseStudy.safety[]` 목록(그림 아래, 위 `--sp-5`) | 둘 중 하나가 있을 때만 (11.13) |
-| 10 | `loop` | Learning loop / 학습 루프 | `diagrams/<slug>.yaml`의 `episode`(에피소드 해부 + 루프) + `caseStudy.loop[]` 목록(그림 아래) | 그림이 있을 때만 (5.24.10, 11.15) |
-| 11 | `outcome` | Outcome / 성과 | `caseStudy.outcome[]` + `caseStudy.roadmap` 역할 분담 | 항상. `period.status`가 `present`/`planned`면 진행 중 배지. 역할 분담은 있을 때만 (5.24.8) |
+| 05 | `prompt` | System prompt / 시스템 프롬프트 | `diagrams/<slug>.yaml`의 `prompt`(회로도) + `repomap`(저장소 지도, 그림 아래 `--sp-5`, 5.24.13) | 둘 중 하나가 있을 때만 (11.16) |
+| 06 | `stack` | From command to torque / 명령에서 토크까지 | `diagrams/<slug>.yaml`의 `stack`(계층 계단) | 있을 때만 (5.24.9, 11.15) |
+| 07 | `journey` | Visitor journey / 관람 동선 | `diagrams/<slug>.yaml`의 `journey`(평면 개념도) + `caseStudy.journey`(도입 문장, 단계 목록) | 그림이 있을 때만 (11.13) |
+| 08 | `arch` | Architecture / 아키텍처 | `diagrams/<slug>.yaml`의 `arch`(회로도), 없으면 `caseStudy.architecture`(표). 그 아래 `caseStudy.archNote`(한 줄)와 `caseStudy.hardware`(표준 구성, 5.24.12) | 둘 중 하나가 있을 때만. 없으면 번호가 당겨진다 |
+| 09 | `flow` | Service flow / 서비스 흐름 | `diagrams/<slug>.yaml`의 `flow`(회로도) | 있을 때만 (11.10) |
+| 10 | `safety` | Safety / 안전 체계 | `diagrams/<slug>.yaml`의 `safety` 그림 + `caseStudy.safety[]` 목록(그림 아래, 위 `--sp-5`) | 둘 중 하나가 있을 때만 (11.13) |
+| 11 | `loop` | Learning loop / 학습 루프 | `diagrams/<slug>.yaml`의 `episode`(에피소드 해부 + 루프) + `caseStudy.loop[]` 목록(그림 아래) | 그림이 있을 때만 (5.24.10, 11.15) |
+| 12 | `outcome` | Outcome / 성과 | `caseStudy.outcome[]` + `caseStudy.roadmap` 역할 분담 | 항상. `period.status`가 `present`/`planned`면 진행 중 배지. 역할 분담은 있을 때만 (5.24.8) |
 
 결정 표(`.tbl`): 열 Decision / Why / Trade-off (결정 / 이유 / 트레이드오프) ← `decisions[].title` / `.rationale` / `.tradeoff`. 시안은 "Decision"·"Why"를 코드에 직접 썼다 → `src/i18n/`로.
 
 #### 5.24.4 아키텍처: 회로도 (diagrams) 또는 표 (layers / flows)
 
-케이스마다 `src/content/diagrams/<slug>.yaml`이 있으면 회로도를, 없으면 아래 표를 쓴다 (3.2.3 C의 "그림 대신 표"를 11.10에서 바꿈). 현재 회로도는 SCM, 고객 상담 어시스턴트, 원자재 가격 예측, 그린소재 재고 조합 최적화, 도슨트 휴머노이드, GenP 휴머노이드 제품 6건, 나머지는 표.
+케이스마다 `src/content/diagrams/<slug>.yaml`이 있으면 회로도를, 없으면 아래 표를 쓴다 (3.2.3 C의 "그림 대신 표"를 11.10에서 바꿈). 현재 회로도는 SCM, 고객 상담 어시스턴트, 원자재 가격 예측, 그린소재 재고 조합 최적화, 도슨트 휴머노이드, GenP 휴머노이드 제품, 법령 검색 Agentic RAG 7건, 나머지는 표.
 
 **회로도** (`src/components/Diagram.astro`, g9 시안 A)
 
@@ -1896,6 +1897,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 영역 메모 `zones[].note` | 영역 이름 줄 오른쪽 끝에 짧은 글(지표 등), 12px `--font-meta` `--text-2`. `accent: true`는 `--accent` `--fw-strong` (11.11) |
 | 고객 여정 (11.11) | `stages`: 위쪽 단계 띠(`--chip` 갈매기형, 12px `--fw-medium` `--text-2`). `curve`: 접점을 잇는 경로(`--text-2` 1.4, 연결선이 아닌 경로라 직각 규칙의 예외). `dots`: 접점 r5, `own` 채움 `--text`·이름 아래 / `out` 빈 원·이름 위. `callouts`: 고충 말풍선(바탕 `--surface` + 선 `--line-strong`, 글 12px `--text-2` 두 줄) + 왼쪽 위 번호 원 r8 `--accent`(숫자 9px `--surface`) + 점선 지시선(`2 2`)이 `px`·`py`까지 |
 | 평면도·안전 (11.13) | `zones[].dash`: 평면 위에 표시한 구역(바탕 없음 + 점선 `4 3` `--line-strong`). `marks`: 정차 지점 번호(높이 24 `--accent`, 한 글자면 원, "1 · 2"처럼 길면 알약형, 숫자 9px `--surface`) + 이름·부제를 `lx`·`ly`에(`anchor` start·middle·end). 연결선은 mark id를 끝점으로 쓸 수 있다. `route`: 걷는 구간을 굵은 선(`--text-2` 4, 둥근 끝)으로, 연결선 아래. `rings`: 한 점 둘레의 거리 원(점선 `--text-3` 1.2, `accent: true`는 바탕 `--accent-soft` + 실선 `--accent`), 원 위쪽에 라벨 12px `--fw-strong`(가림 바탕 `--bg`), 가운데 점 r9 `--text` + 이름 9px. `texts`: 그림 안 짧은 설명 9px `--font-meta` `--text-3` |
+| 행 이름·척추 (11.16) | `texts[].style: name`은 그림 안 행 이름(12px `--fw-strong` `--text`, 노드 이름과 같음), 기본 `note`는 9px mono 설명. `bullet: true`는 글자 12px 왼쪽에 점 r3 `--text-3`. 연결선 `style: line`은 화살촉 없는 선(행 이름이 매달리는 척추)이고 화면 낭독기의 "연결" 목록에서 뺀다 |
 | 폭 | 본문 열 100%, SVG `min-width: 640px`. 열이 640px보다 좁으면(861–1100px, ≤860px) 그림 안에서 가로 스크롤, 그 아래 `dgScroll` 안내(`--fs-xs` `--text-3`, 컨테이너 쿼리). 페이지 가로 스크롤은 없음 |
 | 그리는 순서 | 단계 띠 → 영역 → 거리 원·설명 → 걷는 구간 → 연결선·경로 → 연결선 위 라벨 → 말풍선 → 노드 → 정차 지점 → 접점 → 범례 |
 
@@ -1973,11 +1975,11 @@ Approach 목록 아래(그림 `approach`가 있으면 그 아래), 결정 표 �
 
 #### 5.24.7 선택지 비교 (compare)
 
-Approach의 결정 표 아래 소제목(h3, 제목은 콘텐츠 `compare.title`). `src/components/Comparison.astro`, g13 시안 C (11.13). 현재 도슨트 휴머노이드 1건(기종 선정).
+Approach의 결정 표 아래 소제목(h3, 제목은 콘텐츠 `compare.title`). `src/components/Comparison.astro`, g13 시안 C (11.13). 현재 도슨트 휴머노이드(기종 선정), 법령 검색(두 지식원, 이미지 없음, 11.16) 2건.
 
 | 요소 | 값 |
 |---|---|
-| 콘텐츠 | `caseStudy.compare`: `title`, `options[2]`(`name`, `image`, `alt`), `pick`(고른 쪽 0/1), `rows[]`(`label`, `values[2]`), `verdict`, `credit`. 이미지는 `src/assets/`에 두고 콘텐츠 파일 기준 상대 경로(`image()`), `<Picture>` AVIF/WebP 180·360w |
+| 콘텐츠 | `caseStudy.compare`: `title`, `options[2]`(`name` 글자 또는 언어별, `image`·`alt` 선택), `pick`(고른 쪽 0/1, 선택), `rows[]`(`label`, `values[2]`), `verdict`, `credit`(이미지가 있으면 필수). 스키마가 이미지·`alt`를 두 옵션 모두 있거나 모두 없게 검사. 이미지는 `src/assets/`에 두고 콘텐츠 파일 기준 상대 경로(`image()`), `<Picture>` AVIF/WebP 180·360w |
 | 이미지 줄 | 표 열과 맞춘 grid `22% 39% 39%`(첫 칸 비움), `align-items: end`, 이미지 `max-width: 180px` + 선 `--line` + `--radius-sm`(흰 바탕 제품 사진이 다크 모드에서 떠 보이지 않게). 아래 출처 `--fs-xs` `--text-3` |
 | 표 | 5.24.4 `.tbl`과 같은 값. 첫 열(항목) 22%, 행 머리 `th scope="row"` `--text` `--fw-medium`. 머리는 제품명이라 대문자로 바꾸지 않음(`--fw-medium`). 고른 열: 머리 `--text` + 아래 선 `--accent`, 칸 `--text`(다른 열 `--text-2`), 머리 옆 배지 "Selected / 선정"(`cmpPick`, 테두리·글자 `--accent`, `--fs-2xs` 대문자, 국문 `--fs-xs`) |
 | 결론 | `verdict` `--fs-sm` `--text-2` `--measure`, 위 `--sp-3` |
@@ -1985,6 +1987,7 @@ Approach의 결정 표 아래 소제목(h3, 제목은 콘텐츠 `compare.title`)
 
 - 접근성: 이미지 `alt`는 콘텐츠에서(언어별). 표 머리 첫 칸은 `.sr-only` "Criterion / 항목"(`cmpCriterion`).
 - 제품 사진은 제조사 이미지라 `credit`으로 출처를 표기한다 (11.13).
+- 이미지가 없으면 이미지 줄과 출처를 그리지 않고 표가 소제목 바로 아래에서 시작한다(`.tbl.solo`, 위 여백 0). `pick`이 없으면 어느 열도 강조하지 않는다. 둘 다 함께 쓰는 선택지(지식원 비교)에 쓴다 (11.16).
 
 #### 5.24.8 단계별 역할 분담 (roadmap)
 
@@ -2055,6 +2058,39 @@ Architecture 그림 아래 소제목(h3, 제목은 `hardware.title`). 그 위에
 
 - 접근성: SVG `aria-hidden`, 스크롤 상자 `role="region"` + `aria-label`(소제목). `.sr-only` 한 줄: 사진 설명, 로봇 — 연결 — 서버 — 연결 — 외부. 목록·사양은 진짜 `dl`.
 - 제품 사진은 제조사 이미지라 `credit`으로 출처를 표기한다 (11.13과 같음).
+
+#### 5.24.13 저장소 지도 (repomap)
+
+System prompt 섹션에서 프롬프트 그림 아래(위 `--sp-5`). `src/components/RepoMap.astro`, g15 시안 ②-A (11.16). 현재 법령 검색 1건.
+
+| 요소 | 값 |
+|---|---|
+| 콘텐츠 | `diagrams/<slug>.yaml`의 `repomap`: `repo`(트리 영역 이름), `tree[]`(`depth` 0–2, `name`, `focus` 1개), `treeNote[]`(최대 2줄), `open`(트리→파일 화살표 라벨), `file`(파일 영역 이름), `path`, `lines[]`(최대 14줄, `kind` plain·muted·head), `notes[]`(`from`·`to` 줄 번호, `title`, `body`, 최대 4), `commit`(`label`, `text`, `note`). 스키마가 `focus` 1개와 줄 범위를 검사 |
+| 배치 (SVG 720) | 트리 영역 0–216, 파일 영역 236–552(카드 248–540), 설명 572부터, 아래 커밋 띠(높이 40, 위 16). 트리 행 24 간격(1단 폴더 앞 +8), 들여쓰기 24, 꺾은 연결선 `--line-strong` 1. 카드 줄 20 간격 |
+| 글자 | 트리 이름·경로·파일 줄은 `--font-meta` 12px: 기본 `--text-2`, `muted` `--text-3`, `head` `--text` `--fw-strong`, 경로와 `focus` 이름 `--accent` `--fw-strong`. 설명 이름 12px `--fw-strong` `--text`, 쓰임 12px `--text-2`. 트리 메모 9px mono `--text-3`, 화살표 라벨 8px mono(가림 바탕 `--bg`) |
+| 포인트 색 | `focus` 파일 이름(바탕 `--accent-soft`)과 카드의 경로만 |
+| 영역·카드 | 영역 바탕 `--bg` 모서리 8(다이어그램 영역과 같음), 카드·커밋 띠 `--surface` + 선 `--line-strong` 0.8 모서리 6. 설명 괄호선 `--line-strong` 1 |
+| 폭 | `min-width: 640px`, 좁은 열에서 그림 안 가로 스크롤 + `dgScroll` |
+
+- 파일 줄은 저장소 원문(국문) 그대로 두고 영문 페이지에서도 옮기지 않는다. 설명과 라벨만 언어별.
+- 접근성: SVG `aria-hidden`, 스크롤 상자 `role="region"` + `aria-label`(섹션 제목). `.sr-only`: 트리 이름 목록, 메모, 파일 경로, 설명마다 해당 줄, 커밋 규약.
+
+#### 5.24.17 실서비스 화면 (screens)
+
+Context 목록 아래(위 `--sp-5`). `src/components/Screens.astro`, g15 시안 ⑦-C (11.16). 현재 법령 검색 1건.
+
+| 요소 | 값 |
+|---|---|
+| 콘텐츠 | `caseStudy.screens`: `slices[]`(1–3개: `image`, `alt`, `notes[]` 1–3개 = `at` 크롭 높이 %, `title`, `body`), `gap`(조각 사이 생략 설명), `caption`, `url`. 이미지는 `src/assets/`(콘텐츠 기준 상대 경로), `<Picture>` AVIF/WebP 280·560w |
+| 줄 | 크롭 1개 + 설명 목록, grid `312px 1fr`, `gap: --sp-5`, 세로 가운데. 크롭 왼쪽 여백 32px에 번호 원(20px `--accent` 바탕, `--surface` 글자 `--fs-2xs` `--fw-strong`)을 `at` 높이 가운데에 |
+| 크롭 | 폭 280, 선 `--line-strong` + `--radius-sm`(밝은 화면 캡처가 다크 모드에서 떠 보이지 않게) |
+| 설명 | 번호 원(크롭과 같음) + 이름 `--fs-sm` `--fw-strong` `--text`, 설명 `--fs-sm` `--text-2` 40ch. 번호는 조각을 이어서 1부터 |
+| 생략 | 조각 사이 `gap` 한 줄: 폭 280, 위아래 점선 `--line-strong`, `--fs-xs` `--text-3` 가운데 |
+| 캡션 | `caption` · 링크(주소의 호스트 이름), `--fs-xs` `--text-3`, 링크 `--text-2` 밑줄, hover `--accent` |
+| 좁은 열 (≤560px 컨테이너) | 설명이 크롭 아래로, 크롭 최대 280 |
+
+- 크롭 위 번호는 장식(`aria-hidden`)이고 같은 번호와 글이 설명 목록에 있다. 이미지 `alt`는 콘텐츠에서(질문과 보이는 내용).
+- 캡처 방법은 `docs/design-drafts/g15/capture.mjs`: 실서비스에 예시 질문을 보내 답변 화면을 찍는다(질문 1회 = IP별 일일 제한 1회). 헤드리스 브라우저에 한자 글꼴이 없어 Noto Sans KR을 보조 글꼴로만 덧붙인다 (11.16).
 
 ## 6. Page Templates
 
@@ -3234,3 +3270,22 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 시장 진단·경쟁사·가격·트랙 포트폴리오·고객/기관 이름·담당자 이름, 사양서의 TBD 값(서버 GPU 등)은 싣지 않음 | CLAUDE.md 규칙 3, 대외비 자료. 공개 범위는 제품·기술과 회사소개서(고객 대상)에 있는 내용 |
 | 도슨트 사례는 번호 대신 "별도 사례 / own case study"로 가리킴 | 대표 프로젝트 순서가 바뀌면 번호가 어긋남 |
 | G1 제품 사진은 도슨트 기종 비교와 같은 파일(`src/assets/robots/unitree-g1.jpg`) | 이용 조건 확인 과제(tasks.md)를 한 곳에서 관리 |
+
+### 11.16 법령 검색 Agentic RAG 케이스 스터디 — 2026-11-22
+
+시안: `docs/design-drafts/g15/` (⑦ 실서비스 화면 A 브라우저 + 휴대전화 / B 휴대전화 두 장 / C 답변 해부, ① 질문 해부 A 질문 → 근거 → 한계 / B 유형 × 방식 매트릭스 / C 이전 vs 이후, ⑥ 프롬프트 구조 A 문서 지도 / B 처리 단계 정렬 / C 숫자 원장, ② 저장소 지도 A 파일 구조도 / B 경로 5단계 / C 발췌 → 호출 → 조문, ⑤ 지식원 비교 A 비교표 / B 마주 보는 막대 / C 세 갈래, ③ 아키텍처 A 4구역 / B 계층 스택 / C 허브, ④ 서비스 흐름 A 의도 6행 × 두 레인 / B 결정 순서도 / C 시퀀스. 비교 페이지 `review.html`, 캡처 `shots/`, 구현 확인 `shots/impl/`, YAML 변환 `export.mjs`). 자료: `docs/project-references/legal/`(시스템 프롬프트, 저장소 문서·설정), legalQ 실서비스 답변(2026-11-21).
+
+| 결정 | 이유 |
+|---|---|
+| ⑦-C, ①-C, ⑥-B, ②-A, ⑤-A, ③-B, ④-A를 고름 | 사용자 선택 |
+| 새 섹션 System prompt / 시스템 프롬프트(Approach 뒤)에 ⑥ 프롬프트 구조(`prompt`)와 ② 저장소 지도(`repomap`, 5.24.13). 실서비스 화면은 Context 목록 아래(`screens`, 5.24.17), 지식원 비교는 결정 표 아래 `compare` | 사용자 결정(새 섹션). 이 과제의 핵심 산출물인 시스템 프롬프트가 목차에 드러나게 |
+| 프롬프트 개정 이력(r2~r6) 그림 대신 프롬프트 내부 구조 | 사용자 요청 |
+| Seahorse 이름과 legalQ 링크·화면을 싣고 기록표에 소속 행은 두지 않음. 기간 2026-03 – 06, Role 행 없음(본문에 ML 엔지니어로 전체 아키텍처·벡터 DB·프롬프트 설계, 배포). 성과는 정성 | 사용자 결정. 경력 6곳 외 소속은 표기하지 않음(CLAUDE.md 규칙 3). 평가 수치 자료 없음(규칙 2) |
+| legalize-mcp(FastMCP)는 본문(역할)에만 "설계"로 쓰고 그림은 운영 구성(Seahorse MCP + GitHub MCP)대로. 벡터 DB는 12개 → 약 3,046개 확장과 조·항 단위 재적재를 실제 한 일로 씀 | 사용자 답변 |
+| ①의 근거: 실서비스 답변(근로기준법 7개 조, 전세사기피해자법 제2·3조, 관세법 면세 조문)과 재적재 문서의 사실(기본 청크 1,000자, 기본 검색 결과 3개) | 규칙 2(없는 사실을 만들지 않음) |
+| 다이어그램 확장: `texts[].style`(name)·`bullet`, 연결선 `style: line`(화살촉 없음, 낭독 연결에서 뺌), 자리 `prompt`·`repomap`. `compare`는 이미지·`pick`·`credit`을 선택으로, 옵션 이름은 언어별 가능. 모두 추가만 하고 기존 필드는 바꾸지 않음 | ④의 의도 척추와 행 이름, 함께 쓰는 두 선택지의 비교표를 그리기 위해 |
+| 포인트 색: 실서비스 화면 번호, 문제는 에이전트와 한계 번호, 프롬프트는 참고 지식, 저장소 지도는 열리는 파일, 아키텍처는 시스템 프롬프트, 흐름은 최신 원문 재확인 경로 1개 | 포인트 색 1개 원칙(2장)을 그림마다 |
+| Selected Work 카드는 소속(`org`)이 없으면 기간만 표시 | 소속 없는 대표 프로젝트가 처음 생겨 빌드가 실패함(버그 수정). 원장·CV와 같은 처리 |
+| 순서 3번째(GenP, 도슨트 다음). 뒤 프로젝트를 한 칸씩 밀고, 같은 날 다른 작업에서 AI 마스터플랜이 6번에 들어와 원자재 가격 예측 7, 그린소재 8 | 사용자 선택(기간순). 번호 겹침 방지 |
+| 실서비스 캡처: 예시 질문 6회 사용. 헤드리스 브라우저에 한자 글꼴이 없어 Noto Sans KR을 보조 글꼴로만 덧붙임. 같은 질문인데 데스크톱·모바일 답변의 절차 표가 3·4단계로 다름(LLM 답변 차이) | 화면 내용은 바꾸지 않음 |
+| 노드 수 예산(9개) 초과(흐름 17, 아키텍처 15)는 그대로 둠 | SCM(11.10)과 같은 이유: 한 장에 전체 구조를 보임 |

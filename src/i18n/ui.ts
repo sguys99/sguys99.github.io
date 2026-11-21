@@ -135,6 +135,7 @@ const ui = {
   cs_problem: { en: 'Problem', ko: '문제' },
   cs_role: { en: 'My role', ko: '역할' },
   cs_approach: { en: 'Approach', ko: '접근' },
+  cs_prompt: { en: 'System prompt', ko: '시스템 프롬프트' },
   cs_arch: { en: 'Architecture', ko: '아키텍처' },
   cs_flow: { en: 'Service flow', ko: '서비스 흐름' },
   cs_journey: { en: 'Visitor journey', ko: '관람 동선' },
