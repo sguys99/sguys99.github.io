@@ -162,6 +162,7 @@
 | experiment environment | 실험 환경 | |
 | raw-material price forecasting | 원자재 가격 예측 | |
 | market analysis dashboard | 시황 분석 대시보드 | |
+| market dashboard | 시황 대시보드 | 제목 등 짧게 쓸 때 |
 | green material | 그린소재 | |
 | inventory blend optimization | 재고 조합 최적화 | |
 | demand forecasting / price forecasting | 수요 예측 / 가격 예측 | |

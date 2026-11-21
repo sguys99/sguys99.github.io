@@ -1,7 +1,7 @@
 ---
 title:
-  en: Raw-Material Price Forecasting and Market Analysis Dashboard
-  ko: 원자재 가격 예측 및 시황 분석 대시보드 구축
+  en: Raw-Material Price Forecasting and Market Dashboard
+  ko: 원자재 가격 예측 및 시황 대시보드
 summary:
   en: Built a raw-material price forecasting model and market analysis dashboard to support purchasing decisions, as a PoC within the AI master plan engagement.
   ko: 구매 의사결정 지원을 위한 원자재 가격 예측 모델과 시황 분석 대시보드 구축 (AI 마스터플랜 과제 PoC)
