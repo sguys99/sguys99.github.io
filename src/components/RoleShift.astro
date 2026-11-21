@@ -1,0 +1,193 @@
+---
+// Who does each task by stage (DESIGN.md 5.24.8; g13 시안 B): one bar of task cells per stage, robot cells in accent,
+// and a handover line where the robot passes the rest to staff. Data: caseStudy.roadmap.
+// The SVG is hidden from screen readers; the same grid is in the .sr-only table below it.
+import type { CollectionEntry } from 'astro:content';
+import { t, type Lang } from '../i18n/ui';
+
+type Roadmap = NonNullable<
+  NonNullable<CollectionEntry<'projects'>['data']['caseStudy']>['roadmap']
+>;
+
+interface Props {
+  lang: Lang;
+  data: Roadmap;
+  label: string; // accessible name, the heading above the chart
+}
+
+const { lang, data, label } = Astro.props;
+const { tasks, stages, note } = data;
+
+// SVG units: stage names 0–144, task cells from 152, each SW wide with GAP between, ending at 720.
+const W = 720;
+const X0 = 152;
+const GAP = 8;
+const SW = (W - X0 - GAP * (tasks.length - 1)) / tasks.length;
+const cx = (i: number) => X0 + i * (SW + GAP);
+const HEAD = 44;
+const rowY = (r: number) => HEAD + 8 + r * 56;
+const H = rowY(stages.length - 1) + 40;
+const who = (r: number, i: number) => (i < stages[r].robot ? 'r' : 's');
+---
+
+<figure class="rs">
+  <div class="rs-scroll" tabindex="0" role="region" aria-label={label}>
+    <svg viewBox={`0 0 ${W} ${H}`} aria-hidden="true" focusable="false">
+      {tasks.map((task, i) => {
+        const ls = task[lang].split('\n');
+        return ls.map((s, j) => (
+          <text
+            class="th"
+            x={cx(i) + SW / 2}
+            y={(ls.length === 1 ? 23 : 16) + j * 14}
+            text-anchor="middle"
+          >
+            {s}
+          </text>
+        ));
+      })}
+      {stages.map((st, r) => {
+        const y = rowY(r);
+        const hx = cx(st.robot) - GAP / 2;
+        return (
+          <>
+            <text class="sl" x="0" y={y + 22}>
+              {st.label[lang]}
+            </text>
+            {tasks.map((_, i) => (
+              <>
+                <rect
+                  class:list={['cell', who(r, i)]}
+                  x={cx(i)}
+                  y={y + 4}
+                  width={SW}
+                  height="28"
+                  rx="4"
+                />
+                <text
+                  class:list={['cv', who(r, i)]}
+                  x={cx(i) + SW / 2}
+                  y={y + 22}
+                  text-anchor="middle"
+                >
+                  {who(r, i) === 'r' ? t(lang, 'rsRobot') : t(lang, 'rsStaff')}
+                </text>
+              </>
+            ))}
+            {st.robot > 0 && st.robot < tasks.length && (
+              <path class="hand" d={`M${hx},${y} V${y + 36}`} />
+            )}
+          </>
+        );
+      })}
+    </svg>
+  </div>
+  <p class="hint">{t(lang, 'dgScroll')}</p>
+  <div class="sr-only">
+    <table>
+      <caption>{label}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{t(lang, 'rsTask')}</th>
+          {stages.map((s) => (
+            <th scope="col">{s.label[lang]}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {tasks.map((task, i) => (
+          <tr>
+            <th scope="row">{task[lang].replace(/\n/g, ' ')}</th>
+            {stages.map((_, r) => (
+              <td>{who(r, i) === 'r' ? t(lang, 'rsRobot') : t(lang, 'rsStaff')}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="note">{note[lang]}</p>
+</figure>
+
+<style>
+  .rs {
+    container-type: inline-size;
+  }
+
+  /* Same narrow-column rule as the diagrams (5.24.4): keep 12px text, scroll inside the figure. */
+  .rs-scroll {
+    overflow-x: auto;
+  }
+
+  .rs-scroll:focus-visible {
+    outline: var(--focus-w) solid var(--focus);
+    outline-offset: var(--focus-offset);
+    border-radius: var(--radius-xs);
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    min-width: 640px;
+    height: auto;
+    font-family: inherit;
+  }
+
+  .hint {
+    display: none;
+    margin-top: var(--sp-2);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  @container (max-width: 639px) {
+    .hint {
+      display: block;
+    }
+  }
+
+  .th {
+    fill: var(--text-2);
+    font-size: 12px;
+  }
+
+  .sl {
+    fill: var(--text-2);
+    font-size: 12px;
+    font-weight: var(--fw-strong);
+  }
+
+  .cell.r {
+    fill: var(--accent-soft);
+    stroke: var(--accent);
+  }
+
+  .cell.s {
+    fill: var(--chip);
+  }
+
+  .cv {
+    font-size: 12px;
+  }
+
+  .cv.r {
+    fill: var(--accent);
+    font-weight: var(--fw-strong);
+  }
+
+  .cv.s {
+    fill: var(--text-3);
+  }
+
+  .hand {
+    stroke: var(--text);
+    stroke-width: 1.6;
+  }
+
+  .note {
+    margin-top: var(--sp-3);
+    max-width: var(--measure);
+    font-size: var(--fs-sm);
+    color: var(--text-2);
+  }
+</style>

@@ -1,0 +1,418 @@
+# 도슨트 휴머노이드 케이스 스터디 다이어그램 (DESIGN.md 5.24.4, 11.13).
+# journey: 로비 평면 개념도(관람 동선 섹션), arch: 구성도, safety: 접근 거리 원 + 3경로 비상정지(안전 체계 섹션).
+# 출처: 착수보고서(4-1·4-2, 3-1~3-4, 5-1·5-2)와 포커스 세미나(7·10·11쪽). 시안: docs/design-drafts/g13/ (A, A, A).
+# 고객사·브랜드·캐릭터·지역·협력사 이름과 서버 사양은 넣지 않는다 (CLAUDE.md 규칙 3). 로비 배치는 개념도.
+# 좌표는 SVG 단위(4px 격자). 연결선 d는 직각 + 모서리 반지름 8 (diagram-design 규칙 3·4).
+
+legend:
+  - kind: acc-line
+    label: { en: 'Safety channel, separate path', ko: 안전 채널 (별도 경로) }
+  - kind: input
+    label: { en: People and on-site devices, ko: 사람·현장 단말 }
+  - kind: plain
+    label: { en: Software module, ko: 소프트웨어 모듈 }
+journey:
+  width: 720
+  height: 364
+  legend:
+    - kind: mark
+      label: { en: 'Stop, numbered as the steps below', ko: 정차 지점 (아래 단계 번호) }
+    - kind: logic
+      label: { en: Fixed fixture, ko: 고정 설비 }
+    - kind: input
+      label: { en: Visitors, ko: 관람객 }
+  zones:
+    - id: lobby
+      label: { en: 'Lobby, illustrative', ko: 로비 (개념도) }
+      x: 0
+      y: 0
+      w: 720
+      h: 300
+    - id: wait
+      label: { en: Waiting zone, ko: 대기 구역 }
+      dash: true
+      x: 16
+      y: 172
+      w: 176
+      h: 112
+  nodes:
+    - id: wall
+      kind: logic
+      label: { en: Exhibit wall, ko: 전시 벽 }
+      x: 200
+      y: 12
+      w: 240
+      h: 28
+    - id: dock
+      kind: logic
+      label: { en: Charging spot, ko: 충전 스팟 }
+      x: 32
+      y: 228
+      w: 144
+      h: 40
+    - id: door
+      kind: input
+      label: { en: Visitor entrance, ko: 입구·관람객 집결 }
+      x: 560
+      y: 248
+      w: 144
+      h: 40
+  marks:
+    - id: s2
+      n: 1 · 2
+      x: 280
+      y: 120
+      label: { en: 'Welcome, name check', ko: 환영 인사·성함 확인 }
+      sub: { en: 'stops, faces, greets by name', ko: 정지·시선 정렬·이름 호칭 }
+      lx: 280
+      ly: 84
+      anchor: middle
+    - id: s3
+      n: '3'
+      x: 372
+      y: 200
+      label: { en: Souvenir handout, ko: 기념품 전달 }
+      sub: { en: 'slow walk, visitors take one', ko: 저속 보행·관람객 자율 수령 }
+      lx: 460
+      ly: 176
+      anchor: middle
+    - id: s4
+      n: '4'
+      x: 620
+      y: 120
+      label: { en: Photo time, ko: 포토타임 }
+      sub: { en: 'pose, countdown', ko: 포즈·카운트다운 }
+      lx: 600
+      ly: 116
+      anchor: end
+  route: M400,200 H520
+  edges:
+    - { from: wait, to: s2, d: 'M192,200 L272,200 Q280,200 280,192 L280,132' }
+    - {
+        from: s2,
+        to: s3,
+        d: 'M300,120 L336,120 Q344,120 344,128 L344,194 Q344,200 350,200 L356,200',
+      }
+    - { from: s3, to: s4, d: 'M388,200 L612,200 Q620,200 620,192 L620,132' }
+    - from: s4
+      to: wait
+      d: M620,108 L620,64 Q620,56 612,56 L128,56 Q120,56 120,64 L120,172
+      style: back
+      label:
+        text: { en: BACK TO CHARGE, ko: 복귀 후 충전 }
+        x: 520
+        y: 48
+arch:
+  width: 720
+  height: 552
+  legend:
+    - kind: acc-line
+      label: { en: 'Safety channel, separate path', ko: 안전 채널 (별도 경로) }
+    - kind: input
+      label: { en: People and on-site devices, ko: 사람·현장 단말 }
+    - kind: plain
+      label: { en: Software module, ko: 소프트웨어 모듈 }
+  zones:
+    - id: site
+      label: { en: On site, ko: 현장 }
+      x: 0
+      y: 76
+      w: 112
+      h: 380
+    - id: server
+      label: { en: On-prem server, ko: 현장 서버 }
+      x: 140
+      y: 216
+      w: 160
+      h: 236
+    - id: ext
+      label: { en: External, ko: 외부 }
+      x: 320
+      y: 0
+      w: 400
+      h: 56
+    - id: robot
+      label: { en: 'Robot, onboard', ko: 로봇 (온보드) }
+      x: 320
+      y: 76
+      w: 400
+      h: 380
+    - id: s2
+      label: { en: System 2 · understand and plan, ko: System 2 · 이해와 계획 }
+      x: 332
+      y: 108
+      w: 376
+      h: 96
+    - id: s1
+      label: { en: System 1 · real-time control, ko: System 1 · 실시간 제어 }
+      x: 332
+      y: 276
+      w: 376
+      h: 96
+  nodes:
+    - id: visitors
+      kind: input
+      label: { en: Visitors, ko: 관람객 }
+      sub: { en: speech, ko: 발화 }
+      x: 8
+      y: 140
+      w: 96
+      h: 48
+    - id: tablet
+      kind: input
+      label: { en: Docent tablet, ko: 도슨트 태블릿 }
+      x: 8
+      y: 244
+      w: 96
+      h: 40
+    - id: operator
+      kind: input
+      label: { en: Operator, ko: 관제 운영자 }
+      x: 8
+      y: 312
+      w: 96
+      h: 40
+    - id: estop
+      kind: focus
+      label: { en: Wireless
+
+            E-Stop, ko: 무선
+
+            비상정지 }
+      x: 8
+      y: 396
+      w: 96
+      h: 48
+    - id: dash
+      kind: plain
+      label: { en: Control dashboard, ko: 관제 대시보드 }
+      sub: { en: alarms · E-Stop, ko: 상태·알람·E-Stop }
+      x: 152
+      y: 244
+      w: 136
+      h: 48
+    - id: lists
+      kind: plain
+      label: { en: Lists and scripts, ko: 명단·멘트 관리 }
+      sub: { en: 'per tour, 4 languages', ko: 회차별·4개국어 }
+      x: 152
+      y: 316
+      w: 136
+      h: 48
+    - id: logs
+      kind: plain
+      label: { en: Logs, ko: 로그 }
+      sub: { en: kept on site, ko: 현장 보관 }
+      x: 152
+      y: 388
+      w: 136
+      h: 48
+    - id: api
+      kind: logic
+      label: { en: STT/TTS API, ko: STT/TTS API }
+      sub: { en: allowed domains only, ko: 허용 도메인만 }
+      x: 560
+      y: 8
+      w: 136
+      h: 40
+    - id: voice
+      kind: plain
+      label: { en: Voice, ko: 음성 대화 }
+      sub: { en: STT · TTS, ko: STT·TTS }
+      x: 596
+      y: 136
+      w: 100
+      h: 56
+    - id: orch
+      kind: plain
+      label: { en: Orchestration, ko: 오케스트레이션 }
+      sub: { en: 4 scenarios, ko: 4대 시나리오 }
+      x: 460
+      y: 136
+      w: 124
+      h: 56
+    - id: planner
+      kind: plain
+      label: { en: Planner, ko: 플래너 }
+      sub: { en: plan · replan, ko: 계획·재계획 }
+      x: 344
+      y: 136
+      w: 104
+      h: 56
+    - id: bus
+      kind: logic
+      label: { en: Runtime bus · commands and status, ko: 런타임 버스 · 명령과 상태 }
+      x: 332
+      y: 224
+      w: 376
+      h: 32
+    - id: percep
+      kind: plain
+      label: { en: Perception, ko: 인식 }
+      sub: { en: people · distance, ko: 사람·거리 }
+      x: 344
+      y: 304
+      w: 104
+      h: 56
+    - id: nav
+      kind: plain
+      label: { en: Navigation, ko: 자율주행 }
+      sub: { en: SLAM · avoidance, ko: SLAM·회피 }
+      x: 460
+      y: 304
+      w: 124
+      h: 56
+    - id: body
+      kind: plain
+      label: { en: Whole-body
+
+            control, ko: 전신 제어 }
+      sub: { en: balance · stop, ko: 균형·정지 }
+      x: 596
+      y: 304
+      w: 100
+      h: 56
+    - id: hw
+      kind: logic
+      label: { en: Hardware and SDK, ko: 하드웨어·SDK }
+      sub:
+        { en: LiDAR · RGB-D · mics · face display · joints, ko: LiDAR·RGB-D·마이크·얼굴 화면·관절 }
+      x: 332
+      y: 392
+      w: 376
+      h: 48
+  edges:
+    - {
+        from: visitors,
+        to: voice,
+        d: 'M84,140 L84,72 Q84,64 92,64 L652,64 Q660,64 660,72 L660,136',
+        style: both,
+      }
+    - {
+        from: voice,
+        to: api,
+        d: 'M696,164 L706,164 Q714,164 714,156 L714,36 Q714,28 706,28 L696,28',
+        style: both,
+      }
+    - { from: tablet, to: dash, d: 'M104,264 L152,264' }
+    - {
+        from: operator,
+        to: dash,
+        d: 'M104,332 L116,332 Q124,332 124,324 L124,288 Q124,280 132,280 L152,280',
+      }
+    - { from: dash, to: bus, d: 'M288,248 L332,248', style: both }
+    - { from: s2, to: bus, d: 'M520,204 L520,224', style: both }
+    - { from: bus, to: s1, d: 'M520,256 L520,276', style: both }
+    - { from: body, to: hw, d: 'M644,360 L644,392' }
+    - from: estop
+      to: body
+      d: M56,444 L56,468 Q56,476 64,476 L706,476 Q714,476 714,468 L714,340 Q714,332 706,332 L696,332
+      style: acc
+      label:
+        text: { en: SAFETY CHANNEL · SKIPS PLANNING, ko: 안전 채널 · 판단 계층 우회 }
+        x: 520
+        y: 467
+safety:
+  width: 720
+  height: 364
+  legend:
+    - kind: acc-line
+      label: { en: Safety channel, ko: 안전 채널 }
+    - kind: input
+      label: { en: Stop trigger, ko: 정지 트리거 }
+    - kind: ghost
+      label: { en: Bypassed layer, ko: 거치지 않는 계층 }
+  zones:
+    - id: prox
+      label: { en: Distance response, ko: 접근 거리별 대응 }
+      x: 0
+      y: 0
+      w: 320
+      h: 300
+    - id: stop
+      label: { en: 'Emergency stop, three paths', ko: 비상정지 3경로 }
+      x: 340
+      y: 0
+      w: 380
+      h: 300
+  nodes:
+    - id: t1
+      kind: input
+      label: { en: Remote button, ko: 리모컨 버튼 }
+      sub: { en: 'zero torque, may fall', ko: '0 토크, 쓰러질 수 있음' }
+      x: 352
+      y: 40
+      w: 148
+      h: 52
+    - id: t2
+      kind: input
+      label: { en: Voice "Stop", ko: 음성 "멈춰" }
+      sub: { en: 'stops, stays standing', ko: 선 채로 멈춤 }
+      x: 352
+      y: 112
+      w: 148
+      h: 52
+    - id: t3
+      kind: input
+      label: { en: Dashboard button, ko: 대시보드 버튼 }
+      sub: { en: stops standing · logged, ko: 선 채로 멈춤·기록 }
+      x: 352
+      y: 184
+      w: 148
+      h: 52
+    - id: llm
+      kind: ghost
+      label: { en: 'Planning, dialogue', ko: 판단·대화 계층 }
+      sub: { en: LLM · bypassed, ko: LLM · 거치지 않음 }
+      x: 536
+      y: 36
+      w: 172
+      h: 48
+    - id: chan
+      kind: focus
+      label: { en: Safety channel, ko: 안전 채널 }
+      sub: { en: separate path, ko: 별도 경로 }
+      x: 536
+      y: 112
+      w: 172
+      h: 52
+    - id: body
+      kind: plain
+      label: { en: Whole-body control, ko: 전신 제어 }
+      sub: { en: stops at once, ko: 즉시 정지 }
+      x: 536
+      y: 228
+      w: 172
+      h: 52
+  rings:
+    x: 160
+    y: 164
+    center: { en: robot, ko: 로봇 }
+    items:
+      - r: 108
+        label: { en: 1 m · slow down, ko: 1m 이내 · 감속 }
+      - r: 52
+        label: { en: 0.5 m · stop, ko: 0.5m 이내 · 정지 }
+        accent: true
+  texts:
+    - text: { en: LiDAR + depth camera, ko: LiDAR + Depth 카메라 이중 감지 }
+      x: 160
+      y: 290
+      anchor: middle
+  edges:
+    - { from: t1, to: chan, d: 'M500,66 L508,66 Q516,66 516,74 L516,116 Q516,124 524,124 L536,124' }
+    - { from: t2, to: chan, d: 'M500,138 L536,138' }
+    - {
+        from: t3,
+        to: chan,
+        d: 'M500,210 L516,210 Q524,210 524,202 L524,158 Q524,152 530,152 L536,152',
+      }
+    - from: chan
+      to: body
+      d: M622,164 L622,228
+      style: acc
+      label:
+        text: { en: DIRECT, ko: 직결 }
+        x: 632
+        y: 200
+        anchor: start

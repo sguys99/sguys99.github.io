@@ -1,0 +1,236 @@
+---
+// Option comparison under Key decisions (DESIGN.md 5.24.7; g13 시안 C): product images over a criteria table,
+// the picked column marked with an accent rule and a "Selected" badge. Data: caseStudy.compare.
+import type { CollectionEntry } from 'astro:content';
+import { Picture } from 'astro:assets';
+import { t, type Lang } from '../i18n/ui';
+
+type Compare = NonNullable<
+  NonNullable<CollectionEntry<'projects'>['data']['caseStudy']>['compare']
+>;
+
+interface Props {
+  lang: Lang;
+  data: Compare;
+}
+
+const { lang, data } = Astro.props;
+const { options, pick, rows, verdict, credit } = data;
+// On narrow columns the table stacks, so each value carries its option name (and the pick) as a label.
+const tag = (i: number) =>
+  i === pick ? `${options[i].name} · ${t(lang, 'cmpPick')}` : options[i].name;
+---
+
+<div class="cmp">
+  <div class="imgs">
+    <span></span>
+    {options.map((o, i) => (
+      <div class:list={{ pick: i === pick }}>
+        <Picture
+          src={o.image}
+          alt={o.alt[lang]}
+          widths={[180, 360]}
+          sizes="180px"
+          formats={['avif', 'webp']}
+          loading="lazy"
+        />
+      </div>
+    ))}
+  </div>
+  <p class="credit">{credit[lang]}</p>
+  <table class="tbl">
+    <colgroup>
+      <col class="c0" />
+      <col />
+      <col />
+    </colgroup>
+    <thead>
+      <tr>
+        <th scope="col">
+          <span class="sr-only">{t(lang, 'cmpCriterion')}</span>
+        </th>
+        {options.map((o, i) => (
+          <th scope="col" class:list={{ pick: i === pick }}>
+            {o.name}
+            {i === pick && <span class="sel">{t(lang, 'cmpPick')}</span>}
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((r) => (
+        <tr>
+          <th scope="row">{r.label[lang]}</th>
+          {r.values.map((v, i) => (
+            <td class:list={{ pick: i === pick }} data-l={tag(i)}>
+              {v[lang]}
+            </td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <p class="verdict">{verdict[lang]}</p>
+</div>
+
+<style>
+  .cmp {
+    container-type: inline-size;
+  }
+
+  /* Image row lines up with the table columns (criterion 22%, two options 39% each). */
+  .imgs {
+    display: grid;
+    grid-template-columns: 22% 39% 39%;
+    align-items: end;
+  }
+
+  .imgs > div {
+    padding-right: var(--sp-3);
+  }
+
+  /* Product shots on a white ground: a hairline frame keeps them from floating in dark mode. */
+  .imgs img {
+    display: block;
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+  }
+
+  .credit {
+    margin-top: var(--sp-1);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  .tbl {
+    width: 100%;
+    margin-top: var(--sp-4);
+    border-collapse: collapse;
+    font-size: var(--fs-sm);
+  }
+
+  .c0 {
+    width: 22%;
+  }
+
+  th,
+  td {
+    vertical-align: top;
+    text-align: left;
+    padding: var(--sp-3) var(--sp-3) var(--sp-3) 0;
+    border-bottom: 1px solid var(--line);
+    line-height: 1.5;
+    color: var(--text-2);
+  }
+
+  thead th {
+    padding-top: 0;
+    padding-bottom: var(--sp-2);
+    border-bottom-color: var(--line-strong);
+    font-weight: var(--fw-medium);
+  }
+
+  /* The picked option: full text color and an accent rule under its name. */
+  thead th.pick {
+    color: var(--text);
+    border-bottom-color: var(--accent);
+  }
+
+  tbody th {
+    color: var(--text);
+    font-weight: var(--fw-medium);
+  }
+
+  td.pick {
+    color: var(--text);
+  }
+
+  tbody tr:last-child > * {
+    border-bottom: 0;
+  }
+
+  .sel {
+    display: inline-block;
+    margin-left: var(--sp-2);
+    padding: 0 var(--sp-1h);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-xs);
+    color: var(--accent);
+    font-size: var(--fs-2xs);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+
+  html:lang(ko) .sel {
+    font-size: var(--fs-xs);
+    letter-spacing: var(--ls-label-ko);
+    text-transform: none;
+  }
+
+  .verdict {
+    margin-top: var(--sp-3);
+    max-width: var(--measure);
+    font-size: var(--fs-sm);
+    color: var(--text-2);
+  }
+
+  /* Narrow column: two images side by side, the table as stacked records (same as 5.24.4 tables). */
+  @container (max-width: 560px) {
+    .imgs {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .imgs > span {
+      display: none;
+    }
+
+    table,
+    tbody,
+    tr,
+    td,
+    tbody th {
+      display: block;
+    }
+
+    thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    tr {
+      padding: var(--sp-3) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    tbody tr:last-child {
+      border-bottom: 0;
+    }
+
+    td,
+    tbody th {
+      padding: 0 0 var(--sp-1);
+      border: 0;
+    }
+
+    td[data-l]::before {
+      content: attr(data-l);
+      display: block;
+      margin-top: var(--sp-1);
+      font-size: var(--fs-2xs);
+      color: var(--text-3);
+    }
+
+    html:lang(ko) td[data-l]::before {
+      font-size: var(--fs-xs);
+    }
+  }
+</style>

@@ -1,4 +1,5 @@
 import { defineCollection } from 'astro:content';
+import type { SchemaContext } from 'astro/content/config';
 import { file, glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
@@ -140,7 +141,8 @@ const architecture = z
 // One file per case study: src/content/diagrams/<slug>.yaml. Coordinates are SVG units on a 4px grid.
 // kind: sllm = fine-tuned small model (accent), llm = general LLM, logic = search/DB/rules, plain = component, input = user end,
 // focus = the one accented step when there is no sLLM (accent fill), new = added in this version (accent outline),
-// step = an automated step that is not an LLM (strong outline, like llm), decision = a yes/no check (diamond).
+// step = an automated step that is not an LLM (strong outline, like llm), decision = a yes/no check (diamond),
+// ghost = a layer the path skips or a system left unconnected (faint dotted outline).
 const DG_KINDS = [
   'sllm',
   'llm',
@@ -151,12 +153,13 @@ const DG_KINDS = [
   'new',
   'step',
   'decision',
+  'ghost',
 ] as const;
-// Legend swatches: a node kind, a pain-point mark, or a journey touchpoint dot.
+// Legend swatches: a node kind, a pain-point mark, a journey touchpoint dot, or the accent (safety) connector.
 const DG_LEGEND = z
   .array(
     z.strictObject({
-      kind: z.enum([...DG_KINDS, 'mark', 'dot-own', 'dot-out']),
+      kind: z.enum([...DG_KINDS, 'mark', 'dot-own', 'dot-out', 'acc-line']),
       label: localized,
     }),
   )
@@ -180,12 +183,14 @@ const diagram = z
       .optional(),
     // center: an incoming connector runs through the label, so it sits centered on the line over a mask.
     // note: short text right-aligned in the zone header (e.g. a metric); accent marks the headline one.
+    // dash: an area marked on a floor plan (dashed outline, no wash).
     zones: z
       .array(
         z.strictObject({
           id: text,
           label: localized,
           center: z.boolean().default(false),
+          dash: z.boolean().default(false),
           note: z.strictObject({ text: localized, accent: z.boolean().default(false) }).optional(),
           ...rect,
         }),
@@ -228,14 +233,61 @@ const diagram = z
         }),
       )
       .default([]),
+    // Floor plan stops: a numbered accent marker at (x, y) — a pill when n is wider than one digit — with an optional
+    // name and sublabel at (lx, ly). Edges may name a mark's id. Read in order as the path by screen readers.
+    marks: z
+      .array(
+        z.strictObject({
+          id: text,
+          n: text,
+          x: z.number(),
+          y: z.number(),
+          label: localized.optional(),
+          sub: localized.optional(),
+          lx: z.number().optional(),
+          ly: z.number().optional(),
+          anchor: z.enum(['start', 'middle', 'end']).default('start'),
+        }),
+      )
+      .default([]),
+    route: text.optional(), // a thick stroke under the connectors (e.g. the walking stretch of a route)
+    // Distance rings around a point (e.g. slow-down and stop distances); the accent ring is the hard limit.
+    rings: z
+      .strictObject({
+        x: z.number(),
+        y: z.number(),
+        center: localized,
+        items: z
+          .array(
+            z.strictObject({
+              r: z.number().positive(),
+              label: localized,
+              accent: z.boolean().default(false),
+            }),
+          )
+          .min(1),
+      })
+      .optional(),
+    // Small mono captions placed in the drawing (also read by screen readers).
+    texts: z
+      .array(
+        z.strictObject({
+          text: localized,
+          x: z.number(),
+          y: z.number(),
+          anchor: z.enum(['start', 'middle', 'end']).default('start'),
+        }),
+      )
+      .default([]),
     // from/to name a node or zone (read by screen readers); d is the drawn path.
+    // style: back = dashed return, both = arrowheads at both ends, acc = the accent path (one per diagram, e.g. a safety channel).
     edges: z
       .array(
         z.strictObject({
           from: text,
           to: text,
           d: text,
-          style: z.enum(['back', 'both']).optional(),
+          style: z.enum(['back', 'both', 'acc']).optional(),
           label: z
             .strictObject({
               text: localized,
@@ -249,7 +301,7 @@ const diagram = z
       .default([]),
   })
   .superRefine((d, ctx) => {
-    const ids = [...d.zones, ...d.nodes, ...d.dots].map((n) => n.id);
+    const ids = [...d.zones, ...d.nodes, ...d.dots, ...d.marks].map((n) => n.id);
     if (new Set(ids).size !== ids.length)
       ctx.addIssue({ code: 'custom', message: 'duplicate diagram id' });
     if (!d.nodes.length && !d.dots.length)
@@ -310,42 +362,92 @@ const diagrams = defineCollection({
     approach: diagram.optional(), // below the Approach bullets (e.g. architecture versions)
     arch: diagram.optional(), // Architecture section; replaces the caseStudy.architecture table
     flow: diagram.optional(), // Service flow section
+    journey: diagram.optional(), // Visitor journey section (floor plan), before Architecture
+    safety: diagram.optional(), // Safety section, after Service flow
     results: results.optional(), // experiment results chart under the Approach bullets
   }),
 });
 
-const caseStudy = z.strictObject({
-  context: bullets,
-  problem: bullets,
-  role: bullets,
-  approach: bullets,
-  outcome: bullets,
-  decisions: z
-    .array(z.strictObject({ title: localized, rationale: localized, tradeoff: localized }))
-    .min(1)
-    .max(4)
-    .optional(),
-  architecture: architecture.optional(),
-});
+type ImageFn = SchemaContext['image'];
+
+// Option comparison under Key decisions (DESIGN.md 5.24.7): one product image per option, rows of criteria,
+// the picked column marked. Images are the makers' product shots, so `credit` names them.
+const compare = (image: ImageFn) =>
+  z.strictObject({
+    title: localized,
+    options: z.array(z.strictObject({ name: text, image: image(), alt: localized })).length(2),
+    pick: z.number().int().min(0).max(1),
+    rows: z
+      .array(z.strictObject({ label: localized, values: z.array(localized).length(2) }))
+      .min(2),
+    verdict: localized,
+    credit: localized,
+  });
+
+// Who does each task at each stage (DESIGN.md 5.24.8): tasks in order, and per stage how many from the start the robot takes.
+const roadmap = z
+  .strictObject({
+    title: localized,
+    tasks: z.array(localized).min(2).max(6), // "\n" breaks the column head
+    stages: z
+      .array(z.strictObject({ label: localized, robot: z.number().int().nonnegative() }))
+      .min(2)
+      .max(4),
+    note: localized,
+  })
+  .superRefine((r, ctx) => {
+    for (const s of r.stages)
+      if (s.robot > r.tasks.length)
+        ctx.addIssue({ code: 'custom', message: `"${s.label.en}": robot exceeds the task count` });
+  });
+
+const caseStudy = (image: ImageFn) =>
+  z.strictObject({
+    context: bullets,
+    problem: bullets,
+    role: bullets,
+    approach: bullets,
+    outcome: bullets,
+    decisions: z
+      .array(z.strictObject({ title: localized, rationale: localized, tradeoff: localized }))
+      .min(1)
+      .max(4)
+      .optional(),
+    architecture: architecture.optional(),
+    // Visitor journey steps under the floor plan (5.24.3): a lead-in note, then numbered steps matching the plan's marks.
+    journey: z
+      .strictObject({
+        note: localized,
+        steps: z
+          .array(z.strictObject({ title: localized, body: localized, tags: localized }))
+          .min(2)
+          .max(6),
+      })
+      .optional(),
+    safety: bullets.optional(), // Safety section text under its diagram
+    compare: compare(image).optional(),
+    roadmap: roadmap.optional(),
+  });
 
 const projects = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
-  schema: z.strictObject({
-    title: localized,
-    summary: localized,
-    highlights: z.array(localized).min(2).max(3),
-    period,
-    org: localized.optional(),
-    client: client.optional(),
-    lead: z.boolean().default(false),
-    role: localized.optional(),
-    domain: z.enum(DOMAINS),
-    capability: z.array(z.enum(CAPABILITIES)).min(1),
-    stack: z.array(text),
-    featured: z.boolean().default(false),
-    order: z.number().optional(),
-    caseStudy: caseStudy.optional(), // featured projects only; not required (some material is pending)
-  }),
+  schema: ({ image }) =>
+    z.strictObject({
+      title: localized,
+      summary: localized,
+      highlights: z.array(localized).min(2).max(3),
+      period,
+      org: localized.optional(),
+      client: client.optional(),
+      lead: z.boolean().default(false),
+      role: localized.optional(),
+      domain: z.enum(DOMAINS),
+      capability: z.array(z.enum(CAPABILITIES)).min(1),
+      stack: z.array(text),
+      featured: z.boolean().default(false),
+      order: z.number().optional(),
+      caseStudy: caseStudy(image).optional(), // featured projects only; not required (some material is pending)
+    }),
 });
 
 const personal = defineCollection({

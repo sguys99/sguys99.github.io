@@ -254,6 +254,16 @@
 | tour scenario | 안내 시나리오 | 도슨트 로봇 |
 | collision avoidance | 충돌 방지 | |
 | emergency stop | 비상정지 | 기능 이름으로 쓸 때는 E-Stop (5.1) |
+| safety channel | 안전 채널 | 정지 신호가 판단 계층을 거치지 않는 별도 경로 (도슨트) |
+| System 1 / System 2 | System 1 / System 2 | 실시간 제어 / 이해·계획. 국문도 영문 표기 |
+| runtime bus | 런타임 버스 | |
+| on-prem server | 현장 서버 | 온프레미스. 다이어그램 영역 이름 |
+| waiting zone / welcome spot / photo spot | 대기 구역 / 환영 위치 / 포토스팟 | 도슨트 관람 동선 |
+| welcome / name check / souvenir handout / photo time | 환영 인사 / 성함 확인 / 기념품 전달 / 포토타임 | 도슨트 4대 시나리오. 자료의 "스티커 바구니"는 기념품으로 일반화 |
+| wake word | 호출어 | |
+| visitor list | (방문객) 명단 | 회차별 사전 등록 |
+| pilot run | 시범운영 | |
+| face display | 얼굴 화면 (얼굴 디스플레이) | 비교표 항목은 얼굴 디스플레이 |
 | task (robot) | 태스크 | |
 | business users | 현업 | |
 | curation | 큐레이션 | 개인 프로젝트 |
@@ -372,6 +382,9 @@ UI 문구의 원본은 `src/i18n/ui.ts`다. 이 표는 표기 기준이며, 문�
 | English | 한국어 | note |
 |---|---|---|
 | Context / Problem / My role / Approach / Architecture / Outcome | 배경 / 문제 / 역할 / 접근 / 아키텍처 / 성과 | 본문 섹션 |
+| Visitor journey / Safety | 관람 동선 / 안전 체계 | 본문 섹션 (11.13, 있을 때만) |
+| Selected / Criterion | 선정 / 항목 | 선택지 비교 (5.24.7) |
+| Task / Robot / Staff | 업무 / 로봇 / 직원 | 단계별 역할 분담 (5.24.8) |
 | Key decisions | 주요 결정 | |
 | Decision / Why / Trade-off | 결정 / 이유 / 트레이드오프 | 결정 표 열 |
 | Layer / Components / Flows | 계층 / 구성 요소 / 흐름 | 아키텍처 표 열 |

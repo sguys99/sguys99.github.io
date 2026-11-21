@@ -11,6 +11,8 @@ import Icon from './Icon.astro';
 import CasePager from './CasePager.astro';
 import Diagram from './Diagram.astro';
 import ResultsChart from './ResultsChart.astro';
+import Comparison from './Comparison.astro';
+import RoleShift from './RoleShift.astro';
 import { t, fmtPeriod, homePath, type Lang } from '../i18n/ui';
 
 /** Featured projects with a case study, in `order` (6.3): page list, pager order and the `01 / 05` position. */
@@ -41,20 +43,28 @@ const client = p.client && (p.client.public ? p.client.name[lang] : p.client.lab
 // getCollection, not getEntry: most case studies have no diagram file, and getEntry warns on a miss.
 const dg = (await getCollection('diagrams')).find((d) => d.id === slug)?.data;
 
-// Numbered sections (5.24.3); Architecture and Service flow only when present, so later numbers move up.
-// Architecture is a diagram when src/content/diagrams/<slug>.yaml has `arch`, else the layer table.
+// Numbered sections (5.24.3); Visitor journey, Architecture, Service flow and Safety only when present,
+// so later numbers move up. Architecture is a diagram when src/content/diagrams/<slug>.yaml has `arch`, else the layer table.
+const show = {
+  journey: !!dg?.journey,
+  arch: !!(cs.architecture || dg?.arch),
+  flow: !!dg?.flow,
+  safety: !!(dg?.safety || cs.safety),
+};
 const secs = (
   [
     ['context', cs.context],
     ['problem', cs.problem],
     ['role', cs.role],
     ['approach', cs.approach],
+    ['journey', []],
     ['arch', []],
     ['flow', []],
+    ['safety', cs.safety ?? []],
     ['outcome', cs.outcome],
   ] as const
 )
-  .filter(([id]) => (id === 'arch' ? cs.architecture || dg?.arch : id === 'flow' ? dg?.flow : true))
+  .filter(([id]) => (id in show ? show[id as keyof typeof show] : true))
   .map(([id, items]) => ({ id, items, label: t(lang, `cs_${id}`) }));
 
 const arch = cs.architecture;
@@ -186,7 +196,30 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
               />
             </div>
           )}
-          {(s.id === 'arch' || s.id === 'flow') && dg?.[s.id] ? (
+          {(s.id === 'journey' || s.id === 'safety') && dg?.[s.id] && (
+            <Diagram lang={lang} spec={dg[s.id]!} legend={dg.legend} label={s.label} uid={s.id} />
+          )}
+          {s.id === 'journey' ? (
+            cs.journey && (
+              <>
+                <p class="j-note">{cs.journey.note[lang]}</p>
+                <ol class="steps">
+                  {cs.journey.steps.map((st, k) => (
+                    <li>
+                      <span class="sn num" aria-hidden="true">
+                        {k + 1}
+                      </span>
+                      <div>
+                        <h3 class="st">{st.title[lang]}</h3>
+                        <p>{st.body[lang]}</p>
+                        <p class="tg">{st.tags[lang]}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </>
+            )
+          ) : (s.id === 'arch' || s.id === 'flow') && dg?.[s.id] ? (
             <Diagram lang={lang} spec={dg[s.id]!} legend={dg.legend} label={s.label} uid={s.id} />
           ) : s.id === 'arch' && arch ? (
             <table class="tbl arch">
@@ -241,11 +274,18 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
               </tbody>
             </table>
           ) : (
-            <ul class:list={['bl', { oc: s.id === 'outcome' }]}>
-              {s.items.map((b) => (
-                <li>{b[lang]}</li>
-              ))}
-            </ul>
+            s.items.length > 0 && (
+              <ul
+                class:list={[
+                  'bl',
+                  { oc: s.id === 'outcome', after: s.id === 'safety' && dg?.safety },
+                ]}
+              >
+                {s.items.map((b) => (
+                  <li>{b[lang]}</li>
+                ))}
+              </ul>
+            )
           )}
           {s.id === 'approach' && dg?.approach && (
             <div class="fig-post">
@@ -287,6 +327,18 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
                   ))}
                 </tbody>
               </table>
+            </>
+          )}
+          {s.id === 'approach' && cs.compare && (
+            <>
+              <h3>{cs.compare.title[lang]}</h3>
+              <Comparison lang={lang} data={cs.compare} />
+            </>
+          )}
+          {s.id === 'outcome' && cs.roadmap && (
+            <>
+              <h3>{cs.roadmap.title[lang]}</h3>
+              <RoleShift lang={lang} data={cs.roadmap} label={cs.roadmap.title[lang]} />
             </>
           )}
         </div>
@@ -566,6 +618,74 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
     list-style: none;
     display: grid;
     gap: var(--sp-2);
+  }
+
+  /* Bullets under a section diagram (Safety). */
+  .bl.after {
+    margin-top: var(--sp-5);
+  }
+
+  /* Visitor journey steps under the floor plan (5.24.3): numbered like the plan's marks, two columns when there is room. */
+  .j-note {
+    max-width: var(--measure);
+    margin-top: var(--sp-4);
+    color: var(--text-2);
+  }
+
+  .steps {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-4) var(--sp-5);
+    margin-top: var(--sp-4);
+  }
+
+  .steps li {
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr);
+    gap: var(--sp-2);
+  }
+
+  .sn {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    border-radius: var(--radius-pill);
+    background: var(--accent);
+    color: var(--surface);
+    font-family: var(--font-meta);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-strong);
+    line-height: 20px;
+    text-align: center;
+  }
+
+  /* Step names are headings for structure, set as body text rather than the uppercase h3 label. */
+  .steps .st {
+    margin: 0;
+    font-size: var(--fs-md);
+    font-weight: var(--fw-strong);
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--text);
+  }
+
+  .steps p {
+    margin-top: var(--sp-1);
+    font-size: var(--fs-sm);
+    color: var(--text-2);
+  }
+
+  .steps .tg {
+    font-family: var(--font-meta);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+  }
+
+  @container (max-width: 560px) {
+    .steps {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 
   .bl li {

@@ -17,8 +17,23 @@ interface Props {
 
 const { lang, spec, label, uid } = Astro.props;
 const legend = spec.legend ?? Astro.props.legend;
-const { width: W, height: H, zones, nodes, edges, stages, curve, dots, callouts } = spec;
+const {
+  width: W,
+  height: H,
+  zones,
+  nodes,
+  edges,
+  stages,
+  curve,
+  dots,
+  callouts,
+  marks,
+  route,
+  rings,
+  texts,
+} = spec;
 const arrow = `url(#dg-ar-${uid}-${lang})`;
+const arrowAcc = `url(#dg-ara-${uid}-${lang})`;
 
 // Mask width for centered zone labels and edge labels (Latin ~6.8px, Hangul 12px at 12px).
 const est = (s: string) => [...s].reduce((n, c) => n + (/[ㄱ-힝]/.test(c) ? 12 : 6.8), 0);
@@ -58,6 +73,10 @@ const groups = new Map<string, string[]>([
 const zoneLabel = new Map(zones.map((z) => [z.id, z.label[lang]]));
 const plain = (n: { label: { en: string; ko: string } }) => n.label[lang].replace(/\n/g, ' ');
 const name = new Map([...zones, ...nodes, ...dots].map((n) => [n.id, plain(n)]));
+// Floor plan marks: read as "n name" in order; edges that name a mark use the same text.
+const markText = (m: (typeof marks)[number]) => (m.label ? `${m.n} ${m.label[lang]}` : m.n);
+for (const m of marks) name.set(m.id, markText(m));
+const stopText = marks.map(markText).join(' → ');
 // Touchpoint dots are listed under their lane (zone) like nodes; the curve is read as the path through them in order.
 for (const d of dots) {
   const home = zones.find((z) => d.x >= z.x && d.y >= z.y && d.x <= z.x + z.w && d.y <= z.y + z.h);
@@ -92,6 +111,18 @@ const linkText = (e: Spec['edges'][number]) =>
         >
           <polygon class="mk" points="0 0, 8 3, 0 6"></polygon>
         </marker>
+        {edges.some((e) => e.style === 'acc') && (
+          <marker
+            id={`dg-ara-${uid}-${lang}`}
+            markerWidth="8"
+            markerHeight="6"
+            refX="7"
+            refY="3"
+            orient="auto-start-reverse"
+          >
+            <polygon class="mk acc" points="0 0, 8 3, 0 6" />
+          </marker>
+        )}
       </defs>
       {/* z-order: stages → zones → connectors and path → labels on connectors → callouts → nodes → dots (diagram-design §6) */}
       {stages?.items.map((s, i) => {
@@ -114,7 +145,7 @@ const linkText = (e: Spec['edges'][number]) =>
       {zones.map((z) => (
         <>
           <rect
-            class:list={['zone', { in: nested.has(z.id) }]}
+            class:list={['zone', { in: nested.has(z.id), dash: z.dash }]}
             x={z.x}
             y={z.y}
             width={z.w}
@@ -138,11 +169,50 @@ const linkText = (e: Spec['edges'][number]) =>
           )}
         </>
       ))}
+      {/* Distance rings with their labels on masks, the center point, and captions sit under the connectors. */}
+      {rings?.items.map((r) => {
+        const w = est(r.label[lang]) + 12;
+        return (
+          <>
+            <circle class:list={['ring', { acc: r.accent }]} cx={rings.x} cy={rings.y} r={r.r} />
+            <rect
+              class="em wash"
+              x={rings.x - w / 2}
+              y={rings.y - r.r - 8}
+              width={w}
+              height="16"
+              rx="2"
+            />
+            <text
+              class:list={['rt', { acc: r.accent }]}
+              x={rings.x}
+              y={rings.y - r.r + 4}
+              text-anchor="middle"
+            >
+              {r.label[lang]}
+            </text>
+          </>
+        );
+      })}
+      {rings && (
+        <>
+          <circle class="rc" cx={rings.x} cy={rings.y} r="9" />
+          <text class="ns" x={rings.x} y={rings.y + 26} text-anchor="middle">
+            {rings.center[lang]}
+          </text>
+        </>
+      )}
+      {texts.map((x) => (
+        <text class="ns" x={x.x} y={x.y} text-anchor={x.anchor}>
+          {x.text[lang]}
+        </text>
+      ))}
+      {route && <path class="route" d={route} />}
       {edges.map((e) => (
         <path
-          class:list={['ln', { back: e.style === 'back' }]}
+          class:list={['ln', { back: e.style === 'back', acc: e.style === 'acc' }]}
           d={e.d}
-          marker-end={arrow}
+          marker-end={e.style === 'acc' ? arrowAcc : arrow}
           marker-start={e.style === 'both' ? arrow : undefined}
         />
       ))}
@@ -169,7 +239,7 @@ const linkText = (e: Spec['edges'][number]) =>
         })}
       {edges
         .filter((e) => e.label)
-        .map(({ label: l }) => {
+        .map(({ label: l, style }) => {
           const w = lw(l!.text[lang]) + 8;
           const x = l!.anchor === 'start' ? l!.x - 4 : l!.x - w / 2;
           return (
@@ -182,7 +252,12 @@ const linkText = (e: Spec['edges'][number]) =>
                 height="11"
                 rx="2"
               />
-              <text class="el" x={l!.x} y={l!.y} text-anchor={l!.anchor}>
+              <text
+                class:list={['el', { acc: style === 'acc' }]}
+                x={l!.x}
+                y={l!.y}
+                text-anchor={l!.anchor}
+              >
                 {l!.text[lang]}
               </text>
             </>
@@ -231,6 +306,28 @@ const linkText = (e: Spec['edges'][number]) =>
           </g>
         );
       })}
+      {/* Marks: a circle for one digit, a pill for "1 · 2"; the name and sublabel sit at (lx, ly). */}
+      {marks.map((m) => {
+        const w = m.n.length > 1 ? Math.max(24, m.n.length * 6 + 16) : 24;
+        return (
+          <>
+            <rect class="mkc" x={m.x - w / 2} y={m.y - 12} width={w} height="24" rx="12" />
+            <text class="mkt" x={m.x} y={m.y + 4} text-anchor="middle">
+              {m.n}
+            </text>
+            {m.label && (
+              <text class="nt" x={m.lx ?? m.x} y={m.ly ?? m.y - 20} text-anchor={m.anchor}>
+                {m.label[lang]}
+              </text>
+            )}
+            {m.sub && (
+              <text class="ns" x={m.lx ?? m.x} y={(m.ly ?? m.y - 20) + 14} text-anchor={m.anchor}>
+                {m.sub[lang]}
+              </text>
+            )}
+          </>
+        );
+      })}
       {/* Dots: label above for outside touchpoints, below for the client's own (multi-line labels grow away from the dot). */}
       {dots.map((d) => {
         const ls = lines(d.label[lang]);
@@ -253,7 +350,9 @@ const linkText = (e: Spec['edges'][number]) =>
       <line class="rule" x1="0" y1={LG - 20} x2={W} y2={LG - 20}></line>
       {legend.map((l, i) => (
         <>
-          {l.kind === 'mark' ? (
+          {l.kind === 'acc-line' ? (
+            <path class="ln acc" d={`M${i * lgStep},${LG - 4} H${i * lgStep + 16}`} />
+          ) : l.kind === 'mark' ? (
             <circle class="mkc" cx={i * lgStep + 8} cy={LG - 4} r="6" />
           ) : l.kind.startsWith('dot-') ? (
             <circle class={`dot ${l.kind.slice(4)}`} cx={i * lgStep + 8} cy={LG - 4} r="5" />
@@ -293,6 +392,18 @@ const linkText = (e: Spec['edges'][number]) =>
       </>
     )}
     {pathText && <p>{t(lang, 'dgPath', { a: pathText })}</p>}
+    {stopText && <p>{t(lang, 'dgPath', { a: stopText })}</p>}
+    {rings && (
+      <p>
+        {t(lang, 'dgRings', {
+          a: rings.center[lang],
+          b: rings.items.map((r) => r.label[lang]).join('; '),
+        })}
+      </p>
+    )}
+    {texts.map((x) => (
+      <p>{x.text[lang]}</p>
+    ))}
     {callouts.length > 0 && (
       <>
         <p>{t(lang, 'dgPains')}</p>
@@ -396,6 +507,17 @@ const linkText = (e: Spec['edges'][number]) =>
     fill: var(--surface);
     stroke: var(--text-2);
     stroke-width: 1.2;
+  }
+
+  /* A layer the path skips, or a system left unconnected: faint dotted outline, muted name. */
+  .k-ghost rect {
+    fill: none;
+    stroke: var(--line-strong);
+    stroke-dasharray: 2 3;
+  }
+
+  .k-ghost .nt {
+    fill: var(--text-3);
   }
 
   /* Sizes follow diagram-design: name 12px semibold, sublabel 9px mono, edge label 8px mono. */
@@ -537,5 +659,56 @@ const linkText = (e: Spec['edges'][number]) =>
     font-size: 9px;
     font-weight: var(--fw-strong);
     font-family: var(--font-meta);
+  }
+
+  /* Floor plan and safety (docent, 11.13): dashed plan area, accent safety path, walking stretch, distance rings. */
+  .zone.dash {
+    fill: none;
+    stroke: var(--line-strong);
+    stroke-dasharray: 4 3;
+  }
+
+  .ln.acc {
+    stroke: var(--accent);
+    stroke-width: 1.6;
+  }
+
+  .mk.acc,
+  .el.acc {
+    fill: var(--accent);
+  }
+
+  .route {
+    fill: none;
+    stroke: var(--text-2);
+    stroke-width: 4;
+    stroke-linecap: round;
+  }
+
+  .ring {
+    fill: none;
+    stroke: var(--text-3);
+    stroke-width: 1.2;
+    stroke-dasharray: 4 3;
+  }
+
+  .ring.acc {
+    fill: var(--accent-soft);
+    stroke: var(--accent);
+    stroke-dasharray: none;
+  }
+
+  .rt {
+    fill: var(--text-2);
+    font-size: 12px;
+    font-weight: var(--fw-strong);
+  }
+
+  .rt.acc {
+    fill: var(--accent);
+  }
+
+  .rc {
+    fill: var(--text);
   }
 </style>

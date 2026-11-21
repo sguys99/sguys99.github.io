@@ -137,6 +137,8 @@ const ui = {
   cs_approach: { en: 'Approach', ko: '접근' },
   cs_arch: { en: 'Architecture', ko: '아키텍처' },
   cs_flow: { en: 'Service flow', ko: '서비스 흐름' },
+  cs_journey: { en: 'Visitor journey', ko: '관람 동선' },
+  cs_safety: { en: 'Safety', ko: '안전 체계' },
   cs_outcome: { en: 'Outcome', ko: '성과' },
   // Diagrams (5.24.4): hint shown when the diagram is wider than its column; the rest is screen-reader text.
   dgScroll: { en: 'Scroll sideways to see the whole diagram', ko: '옆으로 밀어 전체 보기' },
@@ -147,6 +149,12 @@ const ui = {
   dgBack: { en: '{a} back to {b}', ko: '{a}에서 {b}로 반환' },
   dgPath: { en: 'Path: {a}', ko: '경로: {a}' },
   dgPains: { en: 'Pain points', ko: '고충' },
+  dgRings: { en: 'Around the {a}: {b}', ko: '{a} 주변: {b}' },
+  cmpCriterion: { en: 'Criterion', ko: '항목' },
+  cmpPick: { en: 'Selected', ko: '선정' },
+  rsTask: { en: 'Task', ko: '업무' },
+  rsRobot: { en: 'Robot', ko: '로봇' },
+  rsStaff: { en: 'Staff', ko: '직원' },
   // Experiment results chart under Approach (5.24.6): heading, then screen-reader table text.
   resTitle: { en: 'Experiment results', ko: '실험 결과' },
   resConfig: { en: 'Configuration', ko: '구성' },
