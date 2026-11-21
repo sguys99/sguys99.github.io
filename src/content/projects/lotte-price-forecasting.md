@@ -67,8 +67,8 @@ caseStudy:
         en: Benchmark before models
         ko: 모델보다 벤치마크 먼저
       rationale:
-        en: Persistence and exponential smoothing baselines fixed the bar for improvement, agreed with the client up front.
-        ko: Persistence·지수평활 모델로 최소 기준을 정해 개선의 기준선을 고객과 먼저 합의
+        en: Persistence, a cotton-linter price rule, and linear regression baselines fixed the bar for improvement, agreed with the client up front.
+        ko: Persistence·린터 가격 규칙·선형 회귀로 최소 기준을 정해 개선의 기준선을 고객과 먼저 합의
       tradeoff:
         en: Modeling started about two weeks later.
         ko: 초기 2주 모델링 지연
