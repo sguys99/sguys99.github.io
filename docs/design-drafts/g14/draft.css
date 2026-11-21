@@ -1,0 +1,93 @@
+/* g14 시안 공통 (GenP 휴머노이드 제품). 토큰만 사용. g13 draft.css의 공통 규칙과 표 규칙을 옮기고 GenP 그림용 규칙을 더함. */
+.g14 { container-type: inline-size; }
+.g14 .dg { position: relative; }
+.g14 .dg-scroll, .g14 .x-scroll { overflow-x: auto; }
+.g14 :is(.dg-scroll, .x-scroll):focus-visible { outline: var(--focus-w) solid var(--focus); outline-offset: var(--focus-offset); border-radius: var(--radius-xs); }
+.g14 .dg svg, .g14 .x-scroll svg { display: block; width: 100%; min-width: 640px; height: auto; font-family: inherit; }
+.g14 .hint { display: none; margin-top: var(--sp-2); font-size: var(--fs-xs); color: var(--text-3); }
+@container (max-width: 639px) { .g14 .hint { display: block; } }
+
+.g14 .k-plain rect { fill: var(--surface); stroke: var(--line-strong); stroke-width: 1; }
+.g14 .k-logic rect { fill: var(--chip); stroke: var(--line-strong); stroke-width: 0.8; }
+.g14 .k-input rect { fill: var(--surface); stroke: var(--line-strong); stroke-dasharray: 4 3; }
+.g14 .k-focus rect { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.2; }
+.g14 .k-ghost rect { fill: none; stroke: var(--line-strong); stroke-dasharray: 2 3; }
+.g14 .k-ghost .nt { fill: var(--text-3); }
+.g14 .nt { fill: var(--text); font-size: 12px; font-weight: var(--fw-strong); }
+.g14 .nt.acc { fill: var(--accent); }
+.g14 .ns, .g14 .el { fill: var(--text-3); font-family: var(--font-meta); }
+.g14 .ns { font-size: 9px; }
+.g14 .el { font-size: 8px; letter-spacing: 0.06em; }
+.g14 .el.acc { fill: var(--accent); }
+.g14 .zone { fill: var(--bg); }
+.g14 .zone.dash { fill: none; stroke: var(--line-strong); stroke-dasharray: 4 3; }
+.g14 .zl { fill: var(--text-2); font-size: 12px; font-weight: var(--fw-strong); }
+.g14 .zl.acc { fill: var(--accent); }
+.g14 .zm { fill: var(--bg); }
+.g14 .zone.in, .g14 .zm.in { fill: var(--surface); }
+.g14 .zone.in { stroke: var(--line-strong); stroke-width: 0.8; }
+.g14 .em { fill: var(--surface); }
+.g14 .em.wash { fill: var(--bg); }
+.g14 .ln { fill: none; stroke: var(--text-3); stroke-width: 1.2; }
+.g14 .ln.back { stroke-dasharray: 4 3; }
+.g14 .ln.acc { stroke: var(--accent); stroke-width: 1.6; }
+.g14 .mk { fill: var(--text-3); }
+.g14 .mk.acc { fill: var(--accent); }
+.g14 .rule { stroke: var(--line); }
+.g14 .lg { fill: var(--text-2); font-size: 12px; }
+.g14 .ct { fill: var(--text-2); font-size: 12px; }
+.g14 .it { fill: var(--text-2); font-size: 12px; }
+.g14 .mkc { fill: var(--accent); }
+.g14 .mkt { fill: var(--surface); font-size: 9px; font-weight: var(--fw-strong); font-family: var(--font-meta); }
+.g14 .stg { fill: var(--chip); }
+.g14 .stt { fill: var(--text); font-size: 12px; font-weight: var(--fw-strong); }
+
+/* 표 공통 (.tbl 규칙 5.24.4와 같은 값) */
+.g14-tbl { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); margin-top: var(--sp-4); }
+.g14-tbl th, .g14-tbl td { text-align: left; vertical-align: top; padding: var(--sp-3) var(--sp-3) var(--sp-3) 0; border-bottom: 1px solid var(--line); color: var(--text-2); line-height: 1.5; }
+.g14-tbl thead th { font-weight: var(--fw-medium); font-size: var(--fs-2xs); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--text-3); padding-top: 0; padding-bottom: var(--sp-2); border-bottom-color: var(--line-strong); vertical-align: bottom; }
+html:lang(ko) .g14-tbl thead th { font-size: var(--fs-xs); letter-spacing: 0; }
+.g14-tbl tbody th { color: var(--text); font-weight: var(--fw-medium); }
+.g14-tbl td:first-child { color: var(--text); font-weight: var(--fw-medium); }
+.g14-tbl tbody tr:last-child > * { border-bottom: 0; }
+@container (max-width: 560px) {
+  .g14-tbl thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .g14-tbl, .g14-tbl tbody, .g14-tbl tr, .g14-tbl td, .g14-tbl tbody th { display: block; }
+  .g14-tbl tr { padding: var(--sp-3) 0; border-bottom: 1px solid var(--line); }
+  .g14-tbl tr:last-child { border-bottom: 0; }
+  .g14-tbl td, .g14-tbl tbody th { border: 0; padding: 0 0 var(--sp-1); }
+  .g14-tbl td[data-l]::before { content: attr(data-l); display: block; margin-top: var(--sp-1); font-size: var(--fs-2xs); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--text-3); }
+  html:lang(ko) .g14-tbl td[data-l]::before { font-size: var(--fs-xs); letter-spacing: 0; }
+}
+
+/* 추가 노드 종류 (Diagram.astro와 같은 값) */
+.g14 .k-new rect { fill: var(--surface); stroke: var(--accent); stroke-width: 1.2; }
+.g14 .k-step rect { fill: var(--surface); stroke: var(--text-2); stroke-width: 1.2; }
+.g14 .ln.dash { stroke-dasharray: 4 3; }
+.g14 .ln.thin { stroke-width: 1; }
+.g14 .zn { fill: var(--text-3); font-size: 12px; font-family: var(--font-meta); }
+.g14 .zn.acc, .g14 .t.acc { fill: var(--accent); }
+.g14 .t { fill: var(--text-2); font-size: 12px; }
+.g14 .t.b { fill: var(--text); font-weight: var(--fw-strong); }
+.g14 .t.s { font-size: 9px; font-family: var(--font-meta); fill: var(--text-3); }
+.g14 .t.m { font-family: var(--font-meta); }
+.g14 .t.lab { font-size: 8px; font-family: var(--font-meta); fill: var(--text-3); letter-spacing: 0.06em; }
+.g14 .t.lab.acc { fill: var(--accent); }
+.g14 .dot { fill: var(--text-2); }
+.g14 .dot.acc { fill: var(--accent); }
+.g14 .dot.no { fill: var(--line-strong); }
+.g14 .cell { fill: var(--accent); }
+.g14 .cellbg { fill: var(--surface); stroke: var(--line-strong); stroke-width: 0.8; }
+.g14 .band { fill: var(--bg); }
+.g14 .band.in { fill: var(--surface); stroke: var(--line-strong); stroke-width: 0.8; }
+.g14 .band.acc { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1; }
+.g14 .tk { stroke: var(--text-2); stroke-width: 2; stroke-linecap: round; }
+.g14 .wave { fill: none; stroke: var(--text-2); stroke-width: 1.4; }
+.g14 .frame { fill: var(--chip); stroke: var(--line-strong); stroke-width: 0.8; }
+.g14 .arc { fill: none; stroke: var(--text-3); stroke-width: 1.2; }
+.g14 .ptr { fill: none; stroke: var(--text-3); stroke-width: 1; }
+.g14 .pd { fill: var(--accent); }
+.g14 .photo-bg { fill: #fff; stroke: var(--line); }
+.g14-cap { margin-top: var(--sp-3); font-size: var(--fs-sm); color: var(--text-2); max-width: var(--measure); }
+.g14-credit { margin-top: var(--sp-1); font-size: var(--fs-xs); color: var(--text-3); }
+.g14 .tg { fill: var(--accent); font-size: 9px; font-family: var(--font-meta); font-weight: var(--fw-regular); }
