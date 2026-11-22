@@ -30,6 +30,18 @@ npm run dev
 | `npm run preview` | Serve the build output locally                             |
 | `npm run format`  | Format with Prettier (`format:check` only checks)          |
 
+## Working with Codex
+
+Open the repository in a new Codex session. Codex reads the project rules through
+`AGENTS.md`. Type `$humanize` followed by Korean text to use the repository's
+editing workflow, or type `$` to browse the shared skills. For a Claude command,
+ask in plain language, for example “follow `.claude/commands/add-project.md`
+using this project brief.”
+
+Trusted Codex sessions load the project's Playwright, Context7, and
+sequential-thinking MCP server definitions from `.codex/config.toml`. When
+changing a server, update both that file and `.mcp.json`.
+
 ## Project structure
 
 ```
