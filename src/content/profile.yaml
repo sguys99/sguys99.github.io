@@ -31,8 +31,8 @@ trajectory:
   - label: { en: Data Science & ML, ko: 데이터 사이언스·머신러닝 }
     years: 2015 – 2022
     description:
-      en: Applied ML to the power grid and factories, from solar power forecasting and transformer anomaly detection to a machine vision platform.
-      ko: 태양광 출력 예측, 변압기 이상탐지부터 머신비전 플랫폼까지 전력망과 제조 현장에 머신러닝 적용
+      en: Applied ML to the power grid and factories, including solar power forecasting, transformer anomaly detection, and a machine vision platform.
+      ko: 태양광 출력 예측, 변압기 이상탐지, 머신비전 플랫폼 등 전력망과 제조 현장에 머신러닝 적용
   - label: { en: Generative AI & Agents, ko: 생성형 AI·에이전트 }
     years: 2023 – 2026
     description:

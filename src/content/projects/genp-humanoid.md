@@ -31,8 +31,8 @@ caseStudy:
       ko: 음성 대화, VLA 조작, 자율주행, 전신 제어를 하나의 실행 워크플로우로 묶어, 개별 시연이 아닌 가용 가능한 상태로 납품해야 하는 과제
     - en: Each domain needs its own tasks and content, but the core has to be reused rather than rebuilt for every customer.
       ko: 도메인마다 태스크와 콘텐츠는 다르지만, 고객마다 코어를 다시 개발하지 않고 재사용해야 하는 구조
-    - en: A demo is not an acceptance test; tasks must succeed in repeated runs under fixed conditions, and stopping the robot must not depend on the planning layers.
-      ko: 시연과 검수는 다른 수준으로, 고정 조건 반복 시행에서 성공해야 하고 로봇 정지는 계획 계층에 의존하지 않아야 하는 조건
+    - en: To pass acceptance, tasks must succeed in repeated runs under fixed conditions. Stopping the robot must not depend on the planning layers.
+      ko: 검수는 고정 조건의 반복 시행에서 태스크가 성공해야 통과. 로봇 정지는 계획 계층에 의존 불가.
     - en: Sites may run closed networks, and raw video must not leave the site.
       ko: 현장이 폐쇄망일 수 있고, 영상 원본은 현장 밖으로 반출할 수 없는 조건
   role:
@@ -49,8 +49,8 @@ caseStudy:
       ko: Teleop 수집과 표준 에피소드 스키마부터 VLA 파인튜닝, 오프라인·시뮬레이션·실기 단계별 평가까지 데이터·모델 파이프라인 구축
   decisions:
     - title:
-        en: Build the stack, not the robot or the foundation model
-        ko: 기체와 파운데이션 모델은 만들지 않음
+        en: A custom AI stack on a stock humanoid and open models
+        ko: 상용 기체와 공개 모델 위에 쌓은 맞춤형 AI 스택
       rationale:
         en: A stock humanoid and open models (GR00T N1.7, GEAR-SONIC) carry the hardware and base skills, so the effort goes into the custom AI stack, site delivery, and operations.
         ko: 상용 기체와 공개 모델(GR00T N1.7, GEAR-SONIC)로 하드웨어와 기본 능력을 확보하고, 맞춤형 AI 스택·현장 딜리버리·운영에 집중

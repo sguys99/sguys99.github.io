@@ -40,8 +40,8 @@ caseStudy:
   approach:
     - en: Agreed on 95% SQL generation accuracy on an evaluation set as the success criterion at kickoff.
       ko: 착수 시 평가셋 기준 SQL 생성 정확도 95%를 성공 기준으로 합의
-    - en: Designed an orchestrator (query rewrite, routing, response layout) that coordinates three agents through A2A — data query and analysis, work support (AI Advisor), and external information.
-      ko: 질의 재작성, 라우팅, 답변 구성을 맡는 오케스트레이터가 데이터 조회·분석, 업무 지원(AI Advisor), 외부 정보 조회의 3개 에이전트를 A2A로 연계하는 구조 설계
+    - en: Designed an orchestrator (query rewrite, routing, response layout) that coordinates three agents (data query and analysis, the AI Advisor for work support, and external information) through A2A.
+      ko: 질의 재작성, 라우팅, 답변 구성을 맡는 오케스트레이터를 설계해 데이터 조회와 분석, 업무 지원(AI Advisor), 외부 정보 조회 에이전트 3개를 A2A로 연계
     - en: Built the data-query pipeline as view identification, entity extraction, code mapping, and a pseudo query that a BI engine turns into the final query.
       ko: View 식별, 엔티티 추출, 코드 매핑, Pseudo Query 생성 후 BI 엔진이 최종 쿼리로 변환하는 데이터 조회 파이프라인 구축
     - en: Fine-tuned a Qwen 8B sLLM for entity extraction and Text-to-SQL after a prompted general-purpose LLM kept confusing entity codes, and split training and inference servers.

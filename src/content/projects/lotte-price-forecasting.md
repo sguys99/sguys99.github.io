@@ -38,8 +38,8 @@ caseStudy:
     - en: In a team of three, led the work end to end, framing the business need as an ML problem, designing the experiments, and building the models, pipeline, and dashboard.
       ko: 3명 규모 팀에서 과제 리드, 현업 요구를 ML 문제로 정의하고 실험을 설계, 모델·파이프라인·대시보드 개발
   approach:
-    - en: Set baselines first and agreed with the client on what counts as improvement — a MAPE target of 10% or less against the rule-based benchmark, forecasting 1–4 weeks and 1–3 months ahead.
-      ko: 벤치마크를 먼저 확정하고 개선 기준을 고객과 합의, 규칙 기반 대비 MAPE 10% 이하, 1–4주·1–3개월 후 다구간 예측 목표
+    - en: Set baselines first and agreed with the client on what counts as improvement. Targeted a MAPE of 10% or less against the rule-based benchmark for forecasts 1–4 weeks and 1–3 months ahead.
+      ko: 벤치마크를 먼저 확정하고 개선 기준을 고객과 합의. 1–4주와 1–3개월 후 다구간 예측에서 규칙 기반 대비 MAPE 10% 이하를 목표로 설정.
     - en: Reframed the time series as supervised regression with lag features, screening about 150 candidate attributes from sources with different update cycles.
       ko: 시계열을 lag 피처 기반 지도학습 회귀로 재구성, 갱신 주기가 다른 출처의 후보 속성 약 150개를 검토해 선별
     - en: Ran independent experiments along seven axes, including feature selection, lags, direct vs. recursive forecasting, price vs. price-change targets, and models.

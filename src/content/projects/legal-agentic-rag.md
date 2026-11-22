@@ -52,8 +52,8 @@ caseStudy:
       ko: 개정 이력 조회, 멀티턴 후속 질문, 정체성 보호, 개인정보 입력 거절을 반영해 시스템 프롬프트를 6차에 걸쳐 개선
   decisions:
     - title:
-        en: Two complementary sources, not one
-        ko: 하나가 아닌 두 지식원의 상호 보완
+        en: Two complementary sources
+        ko: 서로 보완하는 두 지식원
       rationale:
         en: The vector DB finds articles from everyday words, and the repository supplies the exact current text, history, and statistics that the vector DB lacks.
         ko: 벡터 DB는 일상어로 조문을 찾고, 저장소는 벡터 DB에 없는 정확한 현행 원문·이력·통계를 제공
@@ -61,8 +61,8 @@ caseStudy:
         en: Two sources to keep in sync and more routing rules.
         ko: 두 지식원의 동기화와 라우팅 규칙 관리 부담
     - title:
-        en: Routing in one agent's prompt, not a multi-agent system
-        ko: 멀티에이전트가 아닌 단일 에이전트 프롬프트 라우팅
+        en: Intent routing inside one agent's prompt
+        ko: 단일 에이전트의 프롬프트로 의도 라우팅
       rationale:
         en: Multi-agent setups multiply token use, and one agent with intent rules answers simple questions in fewer calls.
         ko: 멀티에이전트는 토큰 사용량이 크게 늘고, 의도 규칙을 가진 단일 에이전트는 단순 질문을 적은 호출로 처리
@@ -122,8 +122,8 @@ caseStudy:
           - { en: 'High: chunk, embed, load', ko: '높음: 청킹·임베딩·적재' }
           - { en: 'Low: connect the repository', ko: '낮음: 저장소 연결' }
     verdict:
-      en: 'Not one or the other: the agent finds with the vector DB and confirms with the repository.'
-      ko: '둘 중 하나가 아니라 둘 다: 에이전트는 벡터 DB로 찾고 저장소로 확인한다.'
+      en: The agent finds articles with the vector DB and confirms them in the repository.
+      ko: 에이전트는 벡터 DB로 조문을 찾고 저장소에서 확인
   screens:
     slices:
       - image: ../../assets/legalq/answer-top.webp

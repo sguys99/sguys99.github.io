@@ -55,8 +55,8 @@ caseStudy:
       ko: 자주 묻는 질문을 Predefined 답변으로 처리해 LLM 호출 비용 50% 절감
   decisions:
     - title:
-        en: A modular platform, not a single chatbot
-        ko: 단일 챗봇이 아닌 모듈 기반 플랫폼
+        en: A modular platform shared across channels
+        ko: 여러 채널이 함께 쓰는 모듈형 플랫폼
       rationale:
         en: Modules are reused when channels or features are added, and an admin page lets the operations team take over.
         ko: 채널·기능 확장 시 모듈을 재사용하고 Admin 페이지로 운영 이관 가능
