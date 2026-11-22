@@ -3,13 +3,13 @@ title:
   en: AI Assistant for Customer Service
   ko: 온라인 상담 지원 및 제품 추천 어시스턴트 개발
 summary:
-  en: Led an agent and RAG assistant that supports online customer consultation and recommends products.
-  ko: 온라인 고객 상담 지원과 제품 추천을 위한 에이전트·RAG 기반 어시스턴트 개발 총괄
+  en: Led development of an assistant that uses an agent and RAG to support online customer consultations and recommend products.
+  ko: 에이전트와 RAG로 온라인 고객 상담을 지원하고 제품을 추천하는 어시스턴트 개발 총괄
 highlights:
-  - en: Led the project end to end, designed the service architecture and agent/RAG workflows, and deployed and operated the service on Azure.
-    ko: 프로젝트 총괄, 서비스 아키텍처와 에이전트·RAG 워크플로우 설계, Azure 기반 서비스 배포 및 운영
-  - en: Established an evaluation framework for the RAG service and built a program to automate evaluation.
-    ko: RAG 서비스 평가 체계 수립 및 평가 자동화 프로그램 개발
+  - en: Led the project, designed the service architecture and agent/RAG workflows, and deployed and ran the service on Azure.
+    ko: 프로젝트를 총괄하고 서비스 아키텍처와 에이전트/RAG 워크플로우를 설계해 Azure에 서비스를 배포하고 운영
+  - en: Defined an evaluation framework for the RAG service and wrote a program to automate the checks.
+    ko: RAG 서비스의 평가 체계를 정하고 검사를 자동화하는 프로그램 개발
 period: { start: 2024-12, end: 2025-02 }
 org: { en: PwC Consulting, ko: PwC 컨설팅 }
 client:
@@ -23,32 +23,32 @@ featured: true
 order: 5
 caseStudy:
   context:
-    - en: Samsung Electronics wanted an assistant that answers customer questions consistently across offline stores, online stores, and consultation agents.
-      ko: 삼성전자 오프라인 매장, 온라인몰, 상담원 채널에서 고객 문의에 일관되게 답하는 어시스턴트 구축 과제
+    - en: Samsung Electronics wanted an assistant to give customers consistent answers in stores, in its online store, and through consultation agents.
+      ko: 삼성전자는 오프라인 매장, 온라인몰, 상담원 채널에서 고객 문의에 일관되게 답하는 어시스턴트를 요청
   problem:
     - en: Customers researched reviews and prices on external sites and came to Samsung channels only to buy.
-      ko: 고객이 사용기와 가격은 외부 사이트에서 찾고 자사 채널은 구매 시점에만 방문하는 구조
-    - en: Staff could not answer comparison and promotion questions on the spot, and delivery and repair inquiries stalled on phone transfers, costing sales.
-      ko: 비교·프로모션 질문에 즉답이 어렵고 배송·고장 문의는 전화 연결 지연으로 이탈해 매출 기회 손실
-    - en: Each step of the customer journey, from discovery to repurchase, was answered by a different party.
-      ko: 인지부터 재구매까지 고객 여정의 접점마다 답변 주체가 다른 단절된 경험
+      ko: 고객은 외부 사이트에서 사용기와 가격을 확인한 뒤 구매할 때만 자사 채널 방문
+    - en: Staff could not answer questions about product comparisons or promotions on the spot. Customers dropped out while waiting for phone transfers about deliveries or repairs, costing sales opportunities.
+      ko: 직원이 제품 비교나 프로모션 문의에 즉답하지 못하고 배송이나 고장 문의 고객도 전화 연결이 늦어 이탈하면서 매출 기회 감소
+    - en: Customers had to find a different contact at each stage of the customer journey, including product discovery and repeat purchases.
+      ko: 제품 인지, 재구매 등 고객 여정의 단계마다 다른 담당자에게 문의
   role:
-    - en: Held overall project responsibility and led architecture design and core module development in a team of about 30.
-      ko: 약 30명 규모 프로젝트의 총괄 책임, 아키텍처 설계와 핵심 모듈 개발 리드
-    - en: Defined the platform architecture, 18 response scenarios, data model, and admin requirements, and built the orchestrator pipeline, predefined answer and guardrail modules, and prompt templates hands-on.
-      ko: 플랫폼 아키텍처, 18개 응대 시나리오, 데이터 모델, Admin 요구사항 정의, 오케스트레이터 파이프라인, Predefined 답변·가드레일 모듈, 프롬프트 템플릿 직접 개발
+    - en: Led a project team of about 30 and directed the architecture design and core module development.
+      ko: 약 30명 규모의 프로젝트를 총괄하고 아키텍처 설계와 핵심 모듈 개발 주도
+    - en: Defined the platform architecture, 18 response scenarios, the data model, and admin requirements. Built the orchestrator pipeline, predefined answer and guardrail modules, and prompt templates.
+      ko: 플랫폼 아키텍처, 18개 응대 시나리오, 데이터 모델, 관리자 요구사항을 정의하고 오케스트레이터 파이프라인, Predefined 답변과 가드레일 모듈, 프롬프트 템플릿을 직접 개발
   approach:
     - en: Built a channel-independent platform behind an API gateway, so new channels and features reuse the same modules.
-      ko: API 게이트웨이 뒤에 채널 독립적 플랫폼을 두어 채널·기능 추가 시 같은 모듈을 재사용하는 구조로 설계
+      ko: API 게이트웨이 뒤에 채널 독립형 플랫폼을 두고 채널이나 기능을 추가할 때 같은 모듈을 재사용하도록 설계
     - en: Evolved the architecture over three versions, from a single-pipeline MVP to separate structured and unstructured retrieval with reranking and guardrails, then to parallel execution.
-      ko: 단일 파이프라인 MVP에서 정형·비정형 조회 분리와 재순위화·가드레일 추가를 거쳐 병렬 구조로 3차에 걸쳐 아키텍처 개선
-    - en: In the final version, split queries into sub-queries, ran structured, unstructured, and web search in parallel, and branched simple and informative questions.
-      ko: 최종 버전에서 질의를 하위 질의로 분해해 정형·비정형·웹 검색을 병렬 실행하고 단순·정보형 질문을 분기 처리
+      ko: 단일 파이프라인 MVP로 시작해 정형 조회와 비정형 조회를 분리하고 재순위화와 가드레일을 추가한 뒤 3차 버전에서 병렬 처리 도입
+    - en: Split queries into sub-queries in the final version, ran structured, unstructured, and web searches in parallel, and routed simple and informative questions separately.
+      ko: 최종 버전에서 질의를 하위 질의로 분해해 정형, 비정형, 웹 검색을 병렬로 실행하고 질문을 단순형과 정보형으로 나눠 처리
     - en: Established an evaluation framework for the RAG service and automated evaluation with Ragas.
-      ko: RAG 서비스 평가 체계 수립 및 Ragas 기반 평가 자동화
+      ko: RAG 서비스 평가 체계를 세우고 Ragas로 평가 자동화
   outcome:
     - en: Automated answers for 18 customer scenarios previously handled one by one by agents, and handed the service over to operations for online and offline stores.
-      ko: 상담원이 개별 대응하던 문의를 18개 시나리오 자동 답변으로 전환, 온·오프라인 매장 운영 이관 완료
+      ko: 상담원이 일일이 답하던 고객 문의를 18개 시나리오로 나눠 답변을 자동화하고 온라인과 오프라인 매장 운영팀에 서비스 이관
     - en: Halved average response time from 10 s to 5 s between versions 2 and 3.
       ko: 2차에서 3차 버전으로 평균 응답 시간을 10초에서 5초로 단축
     - en: Cut LLM call cost by 50% by serving frequent questions with predefined answers.
@@ -58,17 +58,17 @@ caseStudy:
         en: A modular platform shared across channels
         ko: 여러 채널이 함께 쓰는 모듈형 플랫폼
       rationale:
-        en: Modules are reused when channels or features are added, and an admin page lets the operations team take over.
-        ko: 채널·기능 확장 시 모듈을 재사용하고 Admin 페이지로 운영 이관 가능
+        en: The team can reuse the modules as it adds channels or features and hand the service over to operations through an admin page.
+        ko: 채널이나 기능을 추가할 때 같은 모듈을 재사용하고 관리자 페이지를 통해 운영팀에 서비스 이관 가능
       tradeoff:
         en: Slower initial MVP delivery.
-        ko: MVP 초기 속도 저하
+        ko: 초기 MVP 납품 지연
     - title:
-        en: Entity mapping and pseudo queries instead of direct Text-to-SQL
-        ko: 직접 Text-to-SQL 대신 엔티티 매핑과 Pseudo Query
+        en: Entity mapping and pseudo queries
+        ko: 엔티티 매핑과 Pseudo Query
       rationale:
-        en: Extracted entities are mapped to codes and a predefined view schema, so queries can be validated and stay secure.
-        ko: 추출한 엔티티를 코드와 View 스키마로 치환해 쿼리 검증과 보안 확보
+        en: Mapping extracted entities to codes and a predefined view schema lets the team validate queries and keep them secure without direct Text-to-SQL.
+        ko: 추출한 엔티티를 코드와 사전에 정의한 View 스키마에 매핑해 직접 Text-to-SQL을 쓰지 않고 쿼리 검증과 보안 유지
       tradeoff:
         en: Mapping tables must be maintained for each new query type.
         ko: 신규 질의 유형마다 매핑 테이블 관리 필요
