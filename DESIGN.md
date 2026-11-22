@@ -1412,8 +1412,8 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 칸 | 큰 숫자 | 보조줄 영문 / 국문 | 출처 |
 |---|---|---|---|
 | Projects / 프로젝트 | `projects` 전체 | `6 featured` / `대표 6건` | `projects.featured` |
-| Patents / 특허 | `patents` 전체 | `7 registered · 8 filed` / `등록 7 · 출원 8` | `patents.status` (`filed`는 전체 − `registered`) |
-| Software / 프로그램 등록 | `software` 전체 | `8 registered · 2 pending` / `등록 8 · 등록 진행 중 2` | `software.status` |
+| Patents / 특허 | `patents` 전체 | `7 registered, 8 filed` / `등록 7, 출원 8` | `patents.status` (`filed`는 전체 − `registered`) |
+| Software / 프로그램 등록 | `software` 전체 | `8 registered, 2 pending` / `등록 8, 등록 진행 중 2` | `software.status` |
 | Books / 저서 | `teaching` 중 `kind: book` | 없음 | `teaching.kind` |
 
 (예시 숫자는 현재 콘텐츠 기준이며 빌드마다 다시 센다.)
