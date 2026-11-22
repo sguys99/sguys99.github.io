@@ -41,6 +41,7 @@
 | 2026-11-22 | 본문 짝 표기 | 국문 본문의 `에이전트·RAG`, `Physical AI·휴머노이드` 같은 짝은 영문을 따른다. 영문이 `agent/RAG`처럼 빗금이면 `/`, 그 밖은 "와/과" (`Physical AI와 휴머노이드`) |
 | 2026-11-22 | `Vision 판독` | genp 도메인 표 `domains.items[].tech`의 국문 `Vision 판독`은 `Vision AI`로 (사용자 답). 영문 `Vision reading`도 맞출지는 4.4 genp 작업 직전에 확인 |
 | 2026-11-22 | 문체 규칙 2건 | 결정 표 칸은 한 문장으로 둔다 (칸 안에 마침표가 섞이지 않게). 영문 목록 항목을 두 문장으로 나누면 둘째 문장도 동사로 시작한다. "A는 ~고 B는 ~" 대칭은 실제 역할 분담을 설명할 때만 케이스 스터디당 1회 허용 (강도 시안 8장 10, 11번) |
+| 2026-11-22 | CV 1쪽 경력 나뉨 | 역할을 다음 줄로 내린 뒤 영문 CV PDF 1쪽의 마지막 경력 행이 2쪽으로 넘어감 (쪽수와 글자 위치는 그대로). 지금은 그대로 두고 4.1 뒤 다시 확인 (사용자 선택. 다른 안: 인쇄만 역할 같은 줄, 인쇄 간격 축소, 요약 축약) |
 | 2026-11-22 | 문서 정리 | `CLAUDE.md`의 대표 프로젝트와 케이스 스터디 건수를 현재 상태(8건, 8건)로 고친다. `docs/basic-plan.md`의 `PM·PO`와 용어집 7.3의 낡은 CV 링크 메모는 단계 7에서 정리 (7.5) |
 
 작업자 판단으로 정한 것 (사용자가 바꿀 수 있음):
@@ -446,7 +447,7 @@ B 조합으로 확정 (2.3, 시안 `docs/design-drafts/g17/`). B를 기본으로
 - [x] 3.2 컴포넌트 구분자를 시안 결과로 교체: `ProjectLedger`(CSS `content` 포함), `CaseStudy`(스택 줄, 페이지 제목, 그림 라벨), `Cv`(머리, 바닥글, 역할 구분, 빈 날짜), `Home`, `Head`(OG 대체 텍스트), `About`, `Teaching`, `SelectedWork`, `Comparison`, `Screens`, `pages/404`
   - 시안 조사에서 더한 것: `PersonalProjects` 스택 줄(`/`를 쉼표로), `StandardSet` 그림 글자 `LLM · STT · TTS`, 원장 역량 태그 `nowrap`과 분야 `<b>` 끝 쉼표(현재 결함 2건: 360px 영문 `& Optimization` 줄 머리, 복사 텍스트 `RoboticsPhysical AI`). 규칙은 5.3과 DESIGN.md 11.18
 - [x] 3.3 `StandardSet.astro` 대체 텍스트의 em dash
-- [ ] 3.4 CV 역할 구분을 바꾼 뒤 PDF 글자 위치 확인 (`Cv.astro` 주석: 이 구분자를 다른 글자 묶음으로 나누면 PDF 글자가 밀렸던 이력)
+- [x] 3.4 CV 역할 구분을 바꾼 뒤 PDF 글자 위치 확인 (`Cv.astro` 주석: 이 구분자를 다른 글자 묶음으로 나누면 PDF 글자가 밀렸던 이력)
 - [ ] 3.5 빌드, 홈과 `/cv/` 영문/국문 확인, 커밋
 
 ### 단계 4. 본문 윤문 (배치마다 영문 → 국문)
@@ -460,6 +461,7 @@ B 조합으로 확정 (2.3, 시안 `docs/design-drafts/g17/`). B를 기본으로
 
 - [ ] 4.0 높음 9건 먼저 일괄 수정 (1.6에서 추가, 보고서 6장): em dash 2, 결정 제목 `, not` 4, 부정 결론 2, 축 없는 범위 1. 어느 강도에서나 고치는 것이고 화면 배치를 바꾸지 않는다
 - [ ] 4.1 프로필과 경력: `profile.yaml`, `experience.yaml`, `education.yaml`, `awards.yaml` (사이드바, About, Experience, CV 머리)
+  - 끝나면 영문 CV PDF 1쪽을 다시 확인: 3.2 이후 마지막 경력 행(POSCO E&C)이 2쪽으로 넘어감. 요약이 짧아져 1쪽에 들어가는지 보고, 그래도 넘치면 사용자에게 다시 묻는다 (2장)
 - [ ] 4.2 일반 프로젝트 12건과 개인 프로젝트 10건 (`projects/` 중 케이스 스터디가 없는 것, `personal/`). 제목은 기호만 (`power-plant-maintenance-assistant.md`의 `운영·정비이력` 1곳)
 - [ ] 4.3 특허, SW, 논문과 보고서, 강의 (`patents`, `software`, `publications`, `teaching`). 제목은 그대로, 설명만
 - [ ] 4.4 케이스 스터디 8건, 한 건씩 커밋. 순서는 단계 1 보고서의 우선순위를 따른다 (1.6 확정: legal은 강도 시안 표본이라 첫 번째, genp와 docent는 문체가 같아 이어서)
@@ -559,4 +561,5 @@ B 조합으로 확정 (2.3, 시안 `docs/design-drafts/g17/`). B를 기본으로
 | 2026-11-22 | 2.6 | 5장 확정본 (5.1 em dash 8곳 표, 5.2 본문 기본 표와 굳은 말과 예외, 5.3 B 조합 규칙과 자리별 요약 21행, 5.5 종결 대상 27곳, 5.6과 5.7 점검표, 5.8). 7.1 예외 목록과 `yaml` 직접 의존성, 8.2 목표 범위. 사용 한도로 한 번 끊겼다가 이어서 끝냄. 남은 미정 5곳은 사용자 답과 작업자 판단으로 정함 (2장) | |
 | 2026-11-22 | 3.1 | `src/i18n/ui.ts`: `teaching`, `ip`, `tab_ip`, `regFiled`, `regPending`, `dgWith`, `cv_teaching`, `TAG_KO` 5개. 빌드 통과, 4조합(en 1280 라이트, en 360 다크, ko 1280 다크, ko 360 라이트)에서 가로 넘침 0, 원장 필터 동작 확인. `check-text` UI 줄 40 → 27 (ui.ts 0). 3.2 전까지 국문 원장에 `/`와 `·`가 섞여 보이는 과도기 | `e999eac` |
 | 2026-11-22 | 문서 정리 | 사용자 승인: `.gitignore`에 `/docs/project-references/` (추적 중인 pptx 3건은 그대로), CLAUDE.md 건수를 대표 8건, 케이스 스터디 8건으로. `basic-plan.md`와 용어집 7.3은 7.5로 미룸 | `b17131f` |
-| 2026-11-22 | 3.2, 3.3 | 컴포넌트 15개: 원장(소속과 고객 쉼표, 태그 `nowrap`, 분야 `<b>` 끝 쉼표 `.pl-sep`), 케이스 스터디(제목 ` \| `, 스택 줄 쉼표, 흐름 라벨 괄호), CV(머리 괄호, 역할 다음 줄, 빈 날짜 빈칸, 바닥글과 제목 ` \| `, description 쉼표와 괄호), Home, Head, About, Teaching, SelectedWork, Comparison, Screens, PersonalProjects, StandardSet(`LLM, STT, TTS`, 스크린 리더 문장은 새 `ui.ts` 키 `ssLink`), 404. `check-text` UI 줄 27 → 0. 화면 28조합: 360px 넘침 0, 줄 머리 구분자 0 (1,455줄), 현재 결함 2건 해소. 영문 CV PDF는 5쪽 (작업자 확인으로는 이번 변경 전에도 5쪽, 3.4에서 기준 커밋과 대조) | |
+| 2026-11-22 | 3.2, 3.3 | 컴포넌트 15개: 원장(소속과 고객 쉼표, 태그 `nowrap`, 분야 `<b>` 끝 쉼표 `.pl-sep`), 케이스 스터디(제목 ` \| `, 스택 줄 쉼표, 흐름 라벨 괄호), CV(머리 괄호, 역할 다음 줄, 빈 날짜 빈칸, 바닥글과 제목 ` \| `, description 쉼표와 괄호), Home, Head, About, Teaching, SelectedWork, Comparison, Screens, PersonalProjects, StandardSet(`LLM, STT, TTS`, 스크린 리더 문장은 새 `ui.ts` 키 `ssLink`), 404. `check-text` UI 줄 27 → 0. 화면 28조합: 360px 넘침 0, 줄 머리 구분자 0 (1,455줄), 현재 결함 2건 해소. 영문 CV PDF는 5쪽 (작업자 확인으로는 이번 변경 전에도 5쪽, 3.4에서 기준 커밋과 대조) | `a77bb22` |
+| 2026-11-22 | 3.4 | 기준 `8ee3c7a`, 3.1 `e999eac`, HEAD를 각각 빌드해 PDF 비교. 쪽수 영문 5, 국문 4로 전후 같음 (영문 5쪽은 `cd3e7eb` 그린소재 케이스 스터디 추가부터). 같은 줄 글자 x 좌표와 폭 차이 0.000000pt, 역할 줄 글자 간격 차이 1e-6pt 이하 (예전 0.002pt 밀림 재발 없음). 글자층: 역할 줄 분리, 머리 괄호, 스택 쉼표, 바닥글 ` \| `, 빈 날짜, em dash 8 → 0 모두 통과. 영문 1쪽 마지막 경력 행이 2쪽으로 넘어감 (2장 결정). 이번과 무관한 기존 현상: 국문 PDF 라틴 글자 간격 불균일 (tasks.md Backlog). 자료 `_workspace/stage3/3.4/` | |

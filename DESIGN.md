@@ -2842,7 +2842,7 @@ JS도 `matchMedia('(prefers-reduced-motion: reduce)')`가 참이면 모션 코�
 |---|---|
 | 크기 | `@page { size: A4 }` |
 | 여백 | `@page { margin: 15mm 16mm 16mm }` (`--cv-margin`. `@page`는 변수를 못 읽어 값을 직접 씀) |
-| 분량 | 영·국 각 4쪽 (시안 결과. 고정 규칙 아님, tasks 7.10에서 확인) |
+| 분량 | 영문 5쪽, 국문 4쪽 (2026-11-22 확인. 시안과 공개 때는 각 4쪽이었고, 영문은 그린소재 케이스 스터디 추가(11.14, `cd3e7eb`)부터 5쪽. 고정 규칙 아님, tasks 7.10) |
 | 쪽 하단 왼쪽 | `@bottom-left`: "{이름} \| CV \| sguys99.github.io" / "{이름} \| 이력서 \| sguys99.github.io" (11.18). 7pt Geist Mono, `#5f6a78` |
 | 쪽 하단 오른쪽 | `@bottom-right`: `counter(page) " / " counter(pages)`. 같은 글꼴·색 |
 | 사진 | 없음 |

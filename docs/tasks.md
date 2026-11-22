@@ -76,6 +76,7 @@
 - [x] 소개·기술 문구 수정 (2026-11-22): About 영문·국문에서 GenON·GenP 이름 제외, 프로그래밍에 C#(윈도우 프로그래밍) 추가. 용어집에 Windows programming
 - [ ] **AI 흔적 제거** (2026-11-22 시작, 단계 0~3 진행 중): 화면에 보이는 영문과 국문 문구에서 AI가 쓴 흔적(em dash, 나열용 중간점, 국문 종결 혼용, 대구 같은 문형)을 걷어냄. 계획과 단계별 체크리스트는 [`anti-ai-slop-plan.md`](anti-ai-slop-plan.md), 진단 보고서는 `anti-ai-slop-report.md`(단계 1에서 작성)
 - [ ] legalQ 화면 캡처 갱신: 서비스 화면이 바뀌면 `docs/design-drafts/g15/capture.mjs`로 다시 찍어 `src/assets/legalq/` 교체 (실서비스 질문 1회 = 일일 제한 1회)
+- [ ] 라틴 글자 간격 불균일 (2026-11-22 발견, 원인 미확인): 국문 CV PDF와 국문 화면에서 `S enior Data S cientist`, `Gen ON`, `Tele op`처럼 벌어지고 일부는 붙음 (기준 커밋에도 같음, `docs/anti-ai-slop-plan.md` 3.4). Pretendard 동적 서브셋의 라틴 조판 문제로 추정. Linux Chromium 캡처의 영문 다이어그램 글자(`Persisten ce`)도 같은 원인인지 함께 확인
 - [ ] 국문 글꼴 빌드 서브셋 검토 (국문 홈 Pretendard 분할 441KB, 7.5)
 - [ ] WebKit 글꼴 중복 요청: 영문 페이지에서 Geist를 preload(cors)와 `@font-face`로 두 번 받음(24.5KB), Pretendard 라틴 분할 1개 추가 요청(원인 미확인) (7.6)
 - [ ] WebKit 국문 기간 줄바꿈: `2026.10 – 2027.01 [진행 중]`이 대시 뒤에서 꺾임(`<wbr>` 앞 여백), 넘침 없음 (7.6)
