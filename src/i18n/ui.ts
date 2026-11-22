@@ -33,10 +33,10 @@ const ui = {
   about: { en: 'About', ko: '소개' },
   work: { en: 'Selected Work', ko: '대표 프로젝트' },
   experience: { en: 'Experience', ko: '경력' },
-  teaching: { en: 'Teaching · Books · Advisory', ko: '강의 · 저서 · 자문' },
+  teaching: { en: 'Teaching, Books & Advisory', ko: '강의, 저서, 자문' },
   awards: { en: 'Awards', ko: '수상' },
   personal: { en: 'Personal Projects', ko: '개인 프로젝트' },
-  ip: { en: 'IP & Publications', ko: '지식재산 · 출판물' },
+  ip: { en: 'IP & Publications', ko: '지식재산과 출판물' },
   contact: { en: 'Contact', ko: '연락처' },
 
   // Tab names (DESIGN.md 5.2)
@@ -44,7 +44,7 @@ const ui = {
   tab_work: { en: 'Work', ko: '대표 프로젝트' },
   tab_experience: { en: 'Experience', ko: '경력' },
   tab_personal: { en: 'Personal', ko: '개인 프로젝트' },
-  tab_ip: { en: 'Publications', ko: '지식재산 · 출판물' },
+  tab_ip: { en: 'Publications', ko: '지식재산과 출판물' },
   tab_contact: { en: 'Contact', ko: '연락처' },
 
   // Section head counts (5.13)
@@ -65,11 +65,11 @@ const ui = {
   education: { en: 'Education', ko: '학력' },
 
   // Drawer summaries (5.21)
-  // NBSP before "·": a wrapped line never starts with the separator (6.17, 7.1).
-  regFiled: { en: '{reg} registered\u00a0· {filed} filed', ko: '등록 {reg}\u00a0· 출원 {filed}' },
+  // The comma stays on the word before it, so no line starts with it; no NBSP (7장 줄바꿈, 11.18).
+  regFiled: { en: '{reg} registered, {filed} filed', ko: '등록 {reg}, 출원 {filed}' },
   regPending: {
-    en: '{reg} registered\u00a0· {pending} pending',
-    ko: '등록 {reg}\u00a0· 등록 진행 중 {pending}',
+    en: '{reg} registered, {pending} pending',
+    ko: '등록 {reg}, 등록 진행 중 {pending}',
   },
   selectedCount: { en: '{n} selected', ko: '대표 {n}' },
   withDoi: { en: 'with DOI', ko: 'DOI 연결' },
@@ -149,7 +149,7 @@ const ui = {
   dgParts: { en: 'Components', ko: '구성 요소' },
   dgLinks: { en: 'Connections', ko: '연결' },
   dgThen: { en: '{a} to {b}', ko: '{a} 다음 {b}' },
-  dgWith: { en: '{a} with {b}', ko: '{a}·{b} 연동' },
+  dgWith: { en: '{a} with {b}', ko: '{a}, {b} 연동' },
   dgBack: { en: '{a} back to {b}', ko: '{a}에서 {b}로 반환' },
   dgPath: { en: 'Path: {a}', ko: '경로: {a}' },
   dgPains: { en: 'Pain points', ko: '고충' },
@@ -189,7 +189,7 @@ const ui = {
   cv_selected: { en: 'Selected Projects', ko: '대표 프로젝트' },
   cv_other: { en: 'Other Projects', ko: '기타 프로젝트' },
   cv_reports: { en: 'Selected Reports', ko: '주요 보고서' },
-  cv_teaching: { en: 'Teaching & Advisory', ko: '강의·자문' },
+  cv_teaching: { en: 'Teaching & Advisory', ko: '강의와 자문' },
   cv_moreReports: { en: '+{n} more reports at {site}', ko: '보고서 {n}건 더 보기: {site}' },
   print: { en: 'Print / Save PDF', ko: '인쇄 / PDF 저장' },
 
@@ -215,18 +215,19 @@ export type Domain = (typeof DOMAINS)[number];
 export type Capability = (typeof CAPABILITIES)[number];
 
 // Domain and Capability tags (glossary 6). Content holds the English value; this is the Korean label.
+// Pairs inside a Korean label are joined with "/" where English keeps "&" (glossary 9.6, DESIGN.md 11.18).
 const TAG_KO = {
-  'Energy & Utilities': '에너지·유틸리티',
+  'Energy & Utilities': '에너지/유틸리티',
   Manufacturing: '제조',
-  'Petrochemical & Steel': '석유화학·철강',
+  'Petrochemical & Steel': '석유화학/철강',
   Healthcare: '헬스케어',
   Robotics: '로보틱스',
-  'Public & Legal': '공공·법률',
+  'Public & Legal': '공공/법률',
   'Physical AI': 'Physical AI',
-  'LLM Agents & RAG': 'LLM 에이전트·RAG',
+  'LLM Agents & RAG': 'LLM 에이전트/RAG',
   'Anomaly Detection': '이상탐지',
   Forecasting: '예측',
-  'Control & Optimization': '제어·최적화',
+  'Control & Optimization': '제어/최적화',
   'Computer Vision': '컴퓨터 비전',
   MLOps: 'MLOps',
 } satisfies Record<Domain | Capability, string>;
