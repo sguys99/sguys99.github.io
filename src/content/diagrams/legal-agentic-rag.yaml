@@ -332,7 +332,7 @@ prompt:
     - {
         text:
           {
-            en: 'Each box = one section of the system prompt; second line = rules it holds',
+            en: 'Each box = one section of the system prompt, second line = rules it holds',
             ko: '각 상자 = 시스템 프롬프트의 섹션, 아래 줄 = 그 섹션에 든 규칙 수',
           },
         x: 4,
