@@ -304,6 +304,7 @@
 | business users | 현업 | |
 | curation | 큐레이션 | 개인 프로젝트 |
 | wiki | 위키 | |
+| Windows programming | 윈도우 프로그래밍 | 기술 스택 (C#) |
 
 ### 5.3 영문 표기만 쓰는 제품·약어 (7.8 추가)
 

@@ -9,12 +9,12 @@ about:
   en: >-
     Started in power plant automation and model predictive control, then developed anomaly detection,
     forecasting, and computer vision models for energy and manufacturing. Led RAG, agent, and
-    Text-to-SQL services for enterprise clients, and now leads GenON's Physical AI humanoid product,
-    GenP, from product definition to VLA training pipelines.
+    Text-to-SQL services for enterprise clients, and now leads a Physical AI humanoid product from
+    product definition to VLA training pipelines.
   ko: >-
     발전 플랜트 자동화와 모델 기반 예측 제어(MPC)로 출발해 에너지·제조 분야의 이상탐지, 예측, 컴퓨터 비전 모델 개발.
     이후 기업 고객 대상 RAG, 에이전트, Text-to-SQL 서비스 총괄.
-    현재 GenON에서 Physical AI 휴머노이드 제품 GenP를 제품 정의부터 VLA 학습 파이프라인까지 총괄.
+    현재 Physical AI 휴머노이드 제품 정의부터 VLA 학습 파이프라인까지 총괄.
 taglines:
   - en: Building industrial AI, from control rooms to humanoid robots.
     ko: 제어실에서 휴머노이드 로봇까지, 산업 현장의 AI 구현.
@@ -46,8 +46,8 @@ trajectory:
 skills:
   - label: { en: Programming, ko: 프로그래밍 }
     summary:
-      en: Python for ML and services, C/C++ for control and embedded code, plus SQL and TypeScript.
-      ko: Python(머신러닝·서비스 개발), C/C++(제어·임베디드), SQL, TypeScript
+      en: Python for ML and services, C/C++/C# for control, embedded, and Windows programming, plus SQL and TypeScript.
+      ko: Python(머신러닝·서비스 개발), C/C++/C#(제어·임베디드·윈도우 프로그래밍), SQL, TypeScript
   - label: { en: AI/ML, ko: AI/ML }
     summary:
       en: LLM agents and RAG with LangChain/LangGraph, LiteLLM, OpenRouter, FastMCP, and Braintrust; anomaly detection, time-series forecasting, and computer vision with PyTorch and scikit-learn.
