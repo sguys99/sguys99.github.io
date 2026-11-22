@@ -35,7 +35,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 독자 | 찾는 것 | 주로 보는 곳 |
 |---|---|---|
 | 채용 담당자·리크루터 | 직무 적합성, 리더십 범위, 최근 실적 | 사이드바, About, Experience, CV PDF |
-| 컨설팅·강의·자문 의뢰자 | 분야별 수행 사례, 강의 이력, 연락 방법 | Selected Work, Teaching · Books · Advisory, Contact |
+| 컨설팅·강의·자문 의뢰자 | 분야별 수행 사례, 강의 이력, 연락 방법 | Selected Work, Teaching, Books & Advisory, Contact |
 | 동료·커뮤니티 | 전체 실적, 저술, 개인 작업 | 전체 프로젝트 원장, IP & Publications, Personal Projects |
 
 핵심 과제: **많은 실적을 minimal하게 보이게 하는 밀도 조절**, 그리고 영문·국문 모두에서 균형 잡힌 타이포그래피 (basic-plan 2.4).
@@ -70,17 +70,21 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 
 | 구분 | 영문 | 국문 |
 |---|---|---|
-| 경력·프로젝트 문장 | 동사로 시작, 과거형, 결과 중심 1~2줄 (`Developed a Model Predictive Control (MPC) program that runs on ...`). 현재 역할만 현재형 (`Lead the Physical AI humanoid product ...`) | 명사형 종결, 마침표 없음 (`... 프로그램 개발`, `... 서비스 총괄`) |
-| 한 줄 소개·요약 | 주어 없는 구 (`Building industrial AI, from control rooms to humanoid robots.`) | 명사형 종결 (`제어실에서 휴머노이드 로봇까지, 산업 현장의 AI 구현.`) |
-| 섹션 제목 | 명사구, Title Case (`Selected Work`, `All Projects`, `IP & Publications`) | 명사구 (`대표 프로젝트`, `전체 프로젝트`, `지식재산 · 출판물`) |
-| 버튼·라벨 | 짧은 명사구·동사구, sentence case (`Show all`, `Clear filters`, `Open to`, `At a glance`) | 짧은 명사구 (`모두 보기`, `필터 해제`, `의뢰 가능 분야`, `숫자로 보기`) |
+| 경력, 프로젝트 문장 | 동사로 시작, 결과 중심 1~2줄 (`Developed a Model Predictive Control (MPC) program that runs on ...`). 끝난 일은 과거형, 진행 중인 일(현재 역할과 진행 중 프로젝트)은 현재형 (`Lead the Physical AI humanoid product ...`) | 명사형 종결 (`... 프로그램 개발`, `... 서비스 총괄`). 한 문장이면 마침표 없음, 두 문장 이상이면 문장마다 마침표. 경력 요약(`experience` `summary`)은 6곳의 끝 모양을 맞춰 문장 수와 관계없이 마침표 |
+| 한 줄 소개, 요약 | 주어 없는 구 (`Building industrial AI, from control rooms to humanoid robots.`) | 명사형 종결, 영문과 짝을 맞춰 마침표 (`제어실에서 휴머노이드 로봇까지, 산업 현장의 AI 구현.`) |
+| 그림 설명, 결정 근거 | 케이스 스터디의 문제, 결정 표, 그림 아래 설명(`note`), 비교 결론(`verdict`). 결정 제목은 고른 것을 담은 명사구 (`Two complementary sources`, `Intent routing inside one agent's prompt`)이고, 버린 대안은 `, not`으로 붙이지 않고 이유 칸에 쓴다. 검토한 대안 자체가 정보인 제목만 `instead of`, `over`를 남긴다 (`Pseudo query instead of direct SQL`). 이유와 설명은 완결 문장, 트레이드오프는 비용을 적는 명사구도 된다 (`A custom parser and re-indexing whenever statutes change.`) | 명사형 종결. 한 문장이면 마침표 없음, 두 문장 이상이면 문장마다 마침표. `~함`, `~음`, `~한다.`로 끝내지 않고 사실을 담은 명사로 끝낸다 (`대응 불가`, `호출 증가`). `상태`, `방식`, `구조`는 다른 명사가 없을 때만. 결정 제목도 명사구이고 "A가 아닌 B"는 쓰지 않는다 (검토한 대안이 정보일 때만 "A 대신 B"). 트레이드오프는 영문처럼 명사구로 쓰고, `~필요`는 영문에 `must`, `needs`가 있을 때만 |
+| 섹션 제목 | 명사구, Title Case (`Selected Work`, `All Projects`, `IP & Publications`) | 명사구 (`대표 프로젝트`, `전체 프로젝트`, `지식재산과 출판물`) |
+| 궤적 단계, 역량 표 머리 | 명사구, Title Case. About 궤적 단계 이름(`h3`, `Control & Automation`)과 역량 표 머리(`dt`, `Serving & Infrastructure`). 같은 `h3`라도 케이스 스터디 소제목(`Key decisions`)과 Contact 머리(`Open to`)는 아래 라벨 행을 따른다 | 명사구. 라벨 안 병렬은 `/` (7장 "구두점·기호") |
+| 버튼, 라벨 | 짧은 명사구나 동사구, sentence case (`Show all`, `Clear filters`, `Open to`, `At a glance`) | 짧은 명사구 (`모두 보기`, `필터 해제`, `의뢰 가능 분야`, `숫자로 보기`) |
 | 상태 배지 | 1~2단어 (`Lead`, `In progress`, `Registered`, `Pending`) | 1~2단어 (`총괄`, `진행 중`, `등록`, `등록 진행 중`) |
-| 안내·빈 상태 문장 | 완결 문장 (`No projects match these filters.`) | 합니다체 (`조건에 맞는 프로젝트가 없습니다.`) |
+| 안내와 빈 상태 문장 | 완결 문장 (`No projects match these filters.`) | 합니다체 (`조건에 맞는 프로젝트가 없습니다.`) |
 | 보조 기술용 라벨 | 동작을 명시 (`Copy email address`, `Open menu`) | 동작을 명시 (`이메일 주소 복사`, `메뉴 열기`) |
 
-- 영문이 원본이다. 국문은 직역하지 않고 위 형식에 맞춘다 (CLAUDE.md 규칙 2).
+- 영문이 원본이다. 국문은 직역하지 않고 위 형식에 맞춘다 (CLAUDE.md 규칙 2). 국문이 영문과 다른 곳은 영문에 맞추고, 국문이 더 구체적이면 지우기 전에 영문을 보완할지 확인한다.
 - 용어 표기는 `docs/glossary.md`를 따른다. 직함 `AI Engineer`, `Director`, 분야명 `Physical AI`는 국문 화면에서도 영문 그대로 쓴다.
 - 1인칭 구호, 감탄문, 과장 수식어(passionate, cutting-edge, 혁신적인 등)는 쓰지 않는다.
+- em dash(`—`)와 나열용 중간점(`·`)은 쓰지 않는다. 나열은 쉼표나 "와/과", 덧붙는 값은 괄호로 쓴다 (7장 "구두점·기호", 11.18).
+- 국문 종결 규칙의 예외: 표 칸과 다이어그램 라벨의 평가어, 상태어(`없음`, `강함`, `멈춤`)는 라벨 관례로 둔다. 따옴표 안 직접 인용과 고객 목소리 말풍선은 바꾸지 않는다.
 
 ### 피할 인상
 
@@ -814,7 +818,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 2 | Work | 대표 프로젝트 | `#work` | work (전체 프로젝트 원장 포함) |
 | 3 | Experience | 경력 | `#experience` | experience, teaching, awards |
 | 4 | Personal | 개인 프로젝트 | `#personal` | personal |
-| 5 | Publications | 지식재산 · 출판물 | `#ip` | ip |
+| 5 | Publications | 지식재산과 출판물 | `#ip` | ip |
 | 6 | Contact | 연락처 | `#contact` | contact |
 
 **토큰**
@@ -895,7 +899,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
     <nav aria-label="Sections"><ul class="sheet-nav grouped" data-nav>
       <li><a href="#about" data-for="about">About</a></li> …
       <li><a href="#experience" data-for="experience teaching awards">Experience</a>
-        <ul class="sheet-sub"><li><a href="#experience">Experience</a></li><li><a href="#teaching">Teaching · Books · Advisory</a></li><li><a href="#awards">Awards</a></li></ul></li>
+        <ul class="sheet-sub"><li><a href="#experience">Experience</a></li><li><a href="#teaching">Teaching, Books & Advisory</a></li><li><a href="#awards">Awards</a></li></ul></li>
       …
     </ul></nav>
     <ul class="contact">{mail, GitHub, LinkedIn, CV: 아이콘 + 글자}</ul>   <!-- CV = "Download CV (PDF)", 현재 언어 PDF, download -->
@@ -935,7 +939,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 그룹 행 | current | `aria-current="true"`, 글자 `--text`, 오른쪽 점 `--accent` (`--radius-pill`) |
 | 그룹 행 (하위 있음) | current | 글자만 `--text`, 점은 하위 행이 대신하므로 투명 |
 | 하위 행 | current | 글자 `--accent` + 오른쪽 점 `--accent` (색만으로 구분하지 않게, 11.8 2026-11-12) |
-| `.bar-cur` | — | 현재 섹션 이름(탭 이름이 아니라 섹션 이름: "Teaching · Books · Advisory" 등) |
+| `.bar-cur` | — | 현재 섹션 이름(탭 이름이 아니라 섹션 이름: "Teaching, Books & Advisory" 등) |
 | `menu-btn` | open | `aria-expanded="true"`, 닫히면 `false` (`close` 이벤트) |
 | 시트 행 | hover / focus-visible | hover 색 규칙 없음(시안). 포커스는 전역 링 |
 
@@ -1087,6 +1091,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 
 - 국문 배지·라벨은 3장 규칙대로 한 단계 크게(`--fs-2xs` → `--fs-xs`) 하고 대문자·자간을 끈다.
 - "Selected / 대표"는 `.badge.f` 한 모양으로 통일한다. 시안 IP 보고서의 글자 표시 `.sel-mark`는 쓰지 않는다 (11.5).
+- 분야와 역량의 국문 이름(`ui.ts` `TAG_KO`)은 라벨 안 병렬을 `/`로 붙여 쓴다 (`제어/최적화`, `LLM 에이전트/RAG`, 11.18). 영문은 `&` 그대로. 같은 이름이 태그, 원장 태그 줄(5.19), 필터 선택 상자(5.10)에 함께 쓰인다.
 - CV의 "Planned" 배지는 "In progress / 진행 중"으로 맞춘다 (decision-log 3.3).
 
 **상태**: 태그·배지는 상호작용 없음(hover·focus 없음).
@@ -1280,7 +1285,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | About, Awards, Contact | 없음 | — |
 | Selected Work | `featured` 건수 / `projects` 전체 건수 | `6 / 20 projects` / `6 / 20 건` |
 | Experience | `experience` 항목 수 | `6 organizations` / `6 곳` |
-| Teaching · Books · Advisory | `teaching.kind`별 건수 (book, teaching, advisory 순) | `Books 2 · Teaching 6 · Advisory 2` |
+| Teaching, Books & Advisory | `teaching.kind`별 건수 (book, teaching, advisory 순), 쉼표로 이음 | `Books 2, Teaching 6, Advisory 2` / `저서 2, 강의 6, 자문 2` |
 | Personal Projects | GitHub 프로필 링크 (5.20) | `github.com/sguys99` |
 | IP & Publications | 특허+프로그램+논문+보고서 합계 | `N records` / `총 N건` |
 
@@ -1344,6 +1349,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 |---|---|---|
 | `.tagline` | `--font-display`, `--fs-2xl` (≤860px `--fs-xl`), `--fw-tagline`/`-ko`, `--lh-tagline`/`-ko`, `--ls-tagline`/`-ko`, `max-width: 30ch` (국문 24ch), `text-wrap: balance`, `margin: 0 0 --sp-4` | `profile.taglines[0]` |
 | `.about` | `--text-2`, 본문 크기, `max-width: --measure` | `profile.about` |
+| `.edu li` | 연도 \| **학교** 학위 (세부전공) \| `GPA n / n` (11.9). 세부전공은 학위 뒤 괄호 (`M.S. in Electrical Engineering (Control & network optimization)`, 11.18) | `education` (`school`, `degree`, `focus`, `gpa`) |
 | `.skills` | `margin-top: --sp-6` (숫자 표 바로 뒤면 `--sp-5`), 위 `--line` | `profile.skills[].label`, `.summary` |
 | `.skills > div` | `grid: 180px minmax(0,1fr)`, `gap: --sp-4`, `padding: --sp-3 0`, 아래 `--line` (마지막 행 없음) | — |
 | `.skills dt` / `dd` | `--fs-sm` `--fw-strong` / `--fs-sm` `--text-2` | — |
@@ -1434,7 +1440,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
   <li class="proj">
     <span class="idx num" aria-hidden="true">01</span>
     <div class="body">
-      <p class="proj-meta"><span class="org">[logo] <span>· Samsung Electronics</span></span>
+      <p class="proj-meta"><span class="org">[logo]<span>, Samsung Electronics</span></span>
         <span class="num">Feb 2025 – Aug 2025</span> [<span class="status">In progress</span>]</p>
       <h3><a href="/work/samsung-scm-agent/">…</a></h3>   <!-- 케이스 없으면 링크 없이 텍스트 -->
       <p class="sum">…</p>
@@ -1451,7 +1457,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | `.proj` | `grid: --col-idx minmax(0,1fr) 24px`, `gap: 0 --sp-4`, `padding: --sp-5 0`, 위 `--line`. 첫 행: 선 없음, `padding-top: --sp-1`. 마지막 행 `padding-bottom: 0` |
 | `.idx` | `--font-meta`, `--fs-sm`, `--text-3`, `padding-top: --sp-0` |
 | `.body` | `grid; gap: --sp-1h; min-width: 0` |
-| `.proj-meta` | flex wrap, `gap: --sp-1 --sp-3`, `--fs-xs`, `--text-3`. `.org`는 `--text-2` `--fw-medium`, 인라인 flex `gap: --sp-2` |
+| `.proj-meta` | flex wrap, `gap: --sp-1 --sp-3`, `--fs-xs`, `--text-3`. `.org`는 `--text-2` `--fw-medium`, 인라인 flex `gap: --sp-2`. 소속(로고 또는 글자)과 고객 사이는 쉼표: 고객 `span` 앞에 `, `를 두고 `gap`만큼 왼쪽으로 당겨 쉼표가 소속 바로 뒤에 붙게 한다 (11.18) |
 | 상태 `.status` | "In progress" + `--dot` 점(`--accent`, 후광 `--halo`). 5.7 참조 |
 | `h3` | `--font-display`, `--fs-lg`, `--fw-title`, `--lh-title`, `--ls-title`/`-ko` |
 | `.sum` | `--fs-sm`, `--text-2`, `max-width: --measure-sm` |
@@ -1503,8 +1509,8 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
     <li class="pl-row">
       <span class="pl-y num">2024–2025</span>
       <div><p class="pl-t">… <span class="badge">Lead</span> <span class="badge f">Selected</span></p>
-           <p class="pl-who">PwC Consulting · LOTTE Fine Chemical</p></div>
-      <p class="pl-cap"><b>Petrochemical & Steel</b>Forecasting · …</p>
+           <p class="pl-who">PwC Consulting, LOTTE Fine Chemical</p></div>
+      <p class="pl-cap"><b>Petrochemical & Steel<span class="sr-only">, </span></b><span>Forecasting,</span> <span>…</span></p>
     </li>
   </ol>
   <p class="pl-none" hidden>No projects match these filters.</p>
@@ -1524,7 +1530,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | `.pl-y` | `--font-meta` `--fs-xs` `--text-3`, `padding-top: --sp-0`, 줄바꿈 없음 |
 | `.pl-t` | `--fs-sm` `--fw-medium` `--lh-row`. 배지는 5.7 (`.badge.f`는 테두리·글자 `--accent`. IP 보고서 대표 건도 같은 배지) |
 | `.pl-who` | `--fs-xs` `--text-3`, `margin-top: --sp-0` |
-| `.pl-cap` | 오른쪽 정렬, `--font-meta` `--fs-2xs` `--text-3`, `padding-top: 3px`. `b`(Domain)는 블록, `--fw-medium` `--text-2` (국문 `--font-ko` `--fs-xs`) |
+| `.pl-cap` | 오른쪽 정렬, `--font-meta` `--fs-2xs` `--text-3`, `padding-top: 3px`. `b`(Domain)는 블록, `--fw-medium` `--text-2` (국문 `--font-ko` `--fs-xs`). Capability는 태그마다 `span`(`white-space: nowrap`)으로 묶고 쉼표는 앞 태그 안에 둔다 (11.18) |
 | `.pl-none` | `--fs-sm` `--text-2`, `margin-top: --sp-3` |
 | `.linkish` (필터 해제) | 글자 버튼 `--fs-sm` `--accent`, 밑줄 `--underline-offset` → 5.6 |
 | `.toggle-all` | → 5.6. `margin-top: --sp-4` |
@@ -1551,10 +1557,11 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 연도 | `period.start` 연도 – `end` 연도 (같으면 한 번, `present`면 "Present") |
 | 제목 | `title` |
 | 배지 | `lead: true` → Lead/총괄, `featured: true` → Selected/대표 |
-| 소속 · 고객 | `org` · (`client.name` 또는 `client.label`) |
+| 소속, 고객 | `org`와 고객(`client.name` 또는 `client.label`)을 쉼표로 이음 (`PwC Consulting, Samsung Electronics`) |
 | Domain / Capability | `domain` / `capability[]` (선택지 목록은 `content.config.ts`의 `DOMAINS`·`CAPABILITIES` 순서) |
 
-- 반응형: ≤560px `.pl-tools`는 1열 grid로 폭 전체, `.sel` 폭 100%. `.pl-row`는 1열 `gap: --sp-0`, `.pl-cap` 왼쪽 정렬·줄바꿈 허용·`padding-top: --sp-1`, Domain은 인라인 + 뒤에 " · ".
+- 반응형: ≤560px `.pl-tools`는 1열 grid로 폭 전체, `.sel` 폭 100%. `.pl-row`는 1열 `gap: --sp-0`, `.pl-cap` 왼쪽 정렬, 줄바꿈 허용, `padding-top: --sp-1`. Domain은 인라인이고 뒤에 쉼표. 줄은 태그 사이에서만 바뀐다 (360px 영문에서 `Control` / `& Optimization`으로 갈라져 `&`가 줄 머리에 오던 결함, 11.18).
+- 분야 뒤 쉼표: `b` 끝에 쉼표를 글자로 둔다. 데스크톱(`b`가 블록)에서는 숨겨 복사 텍스트와 스크린 리더에만 남기고(지금은 복사하면 `RoboticsPhysical AI`로 붙음), ≤560px에서는 같은 쉼표를 보여 지금의 `b::after` `' · '`를 대신한다. 쉼표가 두 번 읽히지 않게 `::after`로 따로 넣지 않는다 (11.18).
 - 접근성: 선택 상자는 `label`로 감싼 네이티브 `select`. 원장 행은 링크가 아니다(시안 그대로. 대표작은 위 목록에서 링크). 접힌 행은 `hidden`이라 읽히지 않는다.
 - 모션: 대상 행 `.ledger > li`. 필터·펼침에는 모션 없음.
 
@@ -1572,7 +1579,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
   <ol class="pidx">
     <li><span class="n num" aria-hidden="true">01</span>
       <div><div class="ttl"><h3>AI Wiki</h3><span class="st reg">Active</span></div>
-        <p class="sum">…</p><p class="stk">Python / Claude Code / …</p></div>
+        <p class="sum">…</p><p class="stk">Python, Claude Code, …</p></div>
       <div class="acts"><a class="chip-lnk" href="…">[gh] Repository<span class="sr-only">: AI Wiki</span></a>
         <a class="chip-lnk" href="…">[ext] Live demo<span class="sr-only">: AI Wiki</span></a></div>
     </li>
@@ -1592,7 +1599,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | `h3` | `--fs-md` `--fw-strong` `--lh-row` |
 | 상태 `.st` | `--font-meta` `--fs-xs` `--text-3`, 앞에 `--dot` 빈 점(`1px solid --text-3`). `active`는 점을 `--accent`로 채우고 글자 `--text-2` |
 | `.sum` | `--fs-sm` `--text-2`, `--measure-sm`, `margin-top: --sp-1` |
-| `.stk` | `--font-meta` `--fs-xs` `--text-3`, `margin-top: --sp-2`, " / "로 연결 |
+| `.stk` | `--font-meta` `--fs-xs` `--text-3`, `margin-top: --sp-2`. 이름마다 `span`(`nowrap`), 쉼표로 연결하고 쉼표는 앞 이름에 붙인다. 케이스 스택 줄, CV 스택 줄과 같은 기호 (지금의 `NBSP/ `를 바꿈, 11.18) |
 | `.acts` | 세로 flex, `gap: --sp-2`, 폭 맞춤(`align-items: stretch`), `min-width: 112px` |
 | `.chip-lnk` | `--ctl-h`, `padding: 0 --sp-3`, `1px solid --line`, `--radius-pill`, `--font-meta` `--fs-xs` `--text-2`, 아이콘 `--icon-sm` `--icon-stroke-sm`, `gap: --sp-1h`. hover 글자·테두리 `--accent` (전환 `--dur`) |
 
@@ -1621,14 +1628,14 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 ### 5.21 Index drawer
 
-특허·프로그램·논문·보고서 색인 서랍 (3.2.5 B). 유형별 한 줄(건수·내역·연도 범위), 열면 연도별 목록. 섹션 이름 IP & Publications / 지식재산 · 출판물, 앵커 `#ip`.
+특허·프로그램·논문·보고서 색인 서랍 (3.2.5 B). 유형별 한 줄(건수·내역·연도 범위), 열면 연도별 목록. 섹션 이름 IP & Publications / 지식재산과 출판물, 앵커 `#ip`.
 
 ```html
 <div class="drawers">
   <details class="dr" id="ip-pat">
     <summary>
       <span class="dn">Patents</span><span class="dc">15</span>
-      <span class="db">7 registered · 8 filed</span><span class="dy">YYYY–YYYY</span>[chev]
+      <span class="db">7 registered, 8 filed</span><span class="dy">YYYY–YYYY</span>[chev]
     </summary>
     <div class="dbody">
       <ol class="yg">
@@ -1680,8 +1687,8 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 | 유형 | 컬렉션 | 내역 (`.db`) | 정렬 · 연도 | 항목 메타 |
 |---|---|---|---|---|
-| Patents / 특허 | `patents` | `N registered · N filed` (`filed` = `filed` 전체) | `date` 내림차순, 연도 = `date` 앞 4자리 | 상태: `registered` → Registered/등록, `filed`이고 `number` 있음 → Filed/출원, `number` 없음 → Filing in progress/출원 진행 중. **`number`는 표시하지 않는다** |
-| Software / 프로그램 등록 | `software` | `N registered · N pending` | `date` 내림차순. `date` 없는 `pending`은 맨 위, 연도 칸에 "Pending / 등록 진행 중" | 상태 `registered` / `pending`. `number` 표시 안 함 |
+| Patents / 특허 | `patents` | `N registered, N filed` / `등록 N, 출원 N` (`filed` = `filed` 전체, `ui.ts` `regFiled`) | `date` 내림차순, 연도 = `date` 앞 4자리 | 상태: `registered` → Registered/등록, `filed`이고 `number` 있음 → Filed/출원, `number` 없음 → Filing in progress/출원 진행 중. **`number`는 표시하지 않는다** |
+| Software / 프로그램 등록 | `software` | `N registered, N pending` / `등록 N, 등록 진행 중 N` (`regPending`) | `date` 내림차순. `date` 없는 `pending`은 맨 위, 연도 칸에 "Pending / 등록 진행 중" | 상태 `registered` / `pending`. `number` 표시 안 함 |
 | Papers / 논문 | `publications` `type: paper` | `with DOI / DOI 연결` | `year` 내림차순 | `authors`(본인 이름 굵게), `venue`, `doi` → `https://doi.org/<doi>` 링크 |
 | Reports / 연구보고서 | `publications` `type: report` | `N selected / 대표 N` (`featured` 건수) | `year` 내림차순 | `publisher?`, `featured`면 `.badge.f` Selected/대표 |
 
@@ -1735,7 +1742,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 섹션 | 그룹 | 행 정렬 | 기간 열 | 제목 | 부제 | 본문 |
 |---|---|---|---|---|---|---|
 | Experience | 없음 (`h3`) | 콘텐츠 순서 (최신 먼저) | `experience.period` + 로고 | `org` | `role` | `summary` |
-| Teaching · Books · Advisory | `teaching.kind`: book → teaching → advisory | `years`의 마지막 연도 내림차순, 같으면 첫 연도 | `years` (자유 표기 그대로) | `title` (`url` 있으면 `.ext` 링크) | `org` | `details[]` → `.dl-list` |
+| Teaching, Books & Advisory | `teaching.kind`: book → teaching → advisory | `years`의 마지막 연도 내림차순, 같으면 첫 연도 | `years` (자유 표기 그대로) | `title` (`url` 있으면 `.ext` 링크) | `org` | `details[]` → `.dl-list` |
 | Awards | `awards` | `years` 같은 규칙 | `years` | `title` | `org` | — |
 
 - 그룹 머리 건수는 그룹 항목 수. 그룹 이름(Books/Teaching/Advisory/Awards/Education)은 `src/i18n/`.
@@ -1832,7 +1839,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | Organization / 소속 | `org` | `org` 있을 때 |
 | Period / 기간 | `period` (+ `planned`면 배지) | 항상 |
 | Role / 역할 | `lead: true`면 "Lead / 총괄" | `lead`일 때만. `role` 필드는 쓰지 않는다 (3.2 결정) |
-| Stack / 기술 스택 | `stack[]`을 " · "로 | 항상 |
+| Stack / 기술 스택 | `stack[]`을 쉼표로. 이름마다 `span`, 쉼표는 앞 이름의 `span` 안 (7장 줄바꿈, 11.18) | 항상 |
 
 - `.pos`: 케이스 목록 안 순번 / 전체 (두 자리).
 - 접근성: 사이드바 `aria-label` "Project facts / 프로젝트 정보". 프로필 사진 `alt=""` (이름이 옆 글자).
@@ -1879,7 +1886,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 12 | `roadmap` | Roadmap / 로드맵 | `diagrams/<slug>.yaml`의 `gantt`(로드맵 Gantt) | 있을 때만 (5.24.16, 11.17) |
 | 13 | `outcome` | Outcome / 성과 | `caseStudy.outcome[]` + `caseStudy.roadmap` 역할 분담 | 항상. `period.status`가 `present`/`planned`면 진행 중 배지. 역할 분담은 있을 때만 (5.24.8) |
 
-결정 표(`.tbl`): 열 Decision / Why / Trade-off (결정 / 이유 / 트레이드오프) ← `decisions[].title` / `.rationale` / `.tradeoff`. 시안은 "Decision"·"Why"를 코드에 직접 썼다 → `src/i18n/`로.
+결정 표(`.tbl`): 열 Decision / Why / Trade-off (결정 / 이유 / 트레이드오프) ← `decisions[].title` / `.rationale` / `.tradeoff`. 시안은 "Decision"·"Why"를 코드에 직접 썼다 → `src/i18n/`로. 칸 문구의 형식(결정 제목은 고른 것을 담은 명사구, 국문 종결과 마침표)은 1장 어조 표의 "그림 설명, 결정 근거" 행 (11.18).
 
 #### 5.24.4 아키텍처: 회로도 (diagrams) 또는 표 (layers / flows)
 
@@ -1897,12 +1904,12 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | 범례 | 그림 아래 가는 선(`--line`) + 종류별 견본 16×12. 고충 번호·정차 지점은 `mark`(포인트 색 원), 여정 접점은 `dot-own`·`dot-out`, `acc` 연결선은 `acc-line`(포인트 색 짧은 선), 점선 연결선은 `dash-line`, `divider`는 `acc-dash`(포인트 색 짧은 점선) (11.15) |
 | 영역 메모 `zones[].note` | 영역 이름 줄 오른쪽 끝에 짧은 글(지표 등), 12px `--font-meta` `--text-2`. `accent: true`는 `--accent` `--fw-strong` (11.11) |
 | 고객 여정 (11.11) | `stages`: 위쪽 단계 띠(`--chip` 갈매기형, 12px `--fw-medium` `--text-2`). `curve`: 접점을 잇는 경로(`--text-2` 1.4, 연결선이 아닌 경로라 직각 규칙의 예외). `dots`: 접점 r5, `own` 채움 `--text`·이름 아래 / `out` 빈 원·이름 위. `callouts`: 고충 말풍선(바탕 `--surface` + 선 `--line-strong`, 글 12px `--text-2` 두 줄) + 왼쪽 위 번호 원 r8 `--accent`(숫자 9px `--surface`) + 점선 지시선(`2 2`)이 `px`·`py`까지 |
-| 평면도·안전 (11.13) | `zones[].dash`: 평면 위에 표시한 구역(바탕 없음 + 점선 `4 3` `--line-strong`). `marks`: 정차 지점 번호(높이 24 `--accent`, 한 글자면 원, "1 · 2"처럼 길면 알약형, 숫자 9px `--surface`) + 이름·부제를 `lx`·`ly`에(`anchor` start·middle·end). 연결선은 mark id를 끝점으로 쓸 수 있다. `route`: 걷는 구간을 굵은 선(`--text-2` 4, 둥근 끝)으로, 연결선 아래. `rings`: 한 점 둘레의 거리 원(점선 `--text-3` 1.2, `accent: true`는 바탕 `--accent-soft` + 실선 `--accent`), 원 위쪽에 라벨 12px `--fw-strong`(가림 바탕 `--bg`), 가운데 점 r9 `--text` + 이름 9px. `texts`: 그림 안 짧은 설명 9px `--font-meta` `--text-3` |
+| 평면도·안전 (11.13) | `zones[].dash`: 평면 위에 표시한 구역(바탕 없음 + 점선 `4 3` `--line-strong`). `marks`: 정차 지점 번호(높이 24 `--accent`, 한 글자면 원, "1–2"처럼 길면 알약형, 숫자 9px `--surface`) + 이름·부제를 `lx`·`ly`에(`anchor` start·middle·end). 연결선은 mark id를 끝점으로 쓸 수 있다. `route`: 걷는 구간을 굵은 선(`--text-2` 4, 둥근 끝)으로, 연결선 아래. `rings`: 한 점 둘레의 거리 원(점선 `--text-3` 1.2, `accent: true`는 바탕 `--accent-soft` + 실선 `--accent`), 원 위쪽에 라벨 12px `--fw-strong`(가림 바탕 `--bg`), 가운데 점 r9 `--text` + 이름 9px. `texts`: 그림 안 짧은 설명 9px `--font-meta` `--text-3` |
 | 행 이름·척추 (11.16) | `texts[].style: name`은 그림 안 행 이름(12px `--fw-strong` `--text`, 노드 이름과 같음), 기본 `note`는 9px mono 설명. `bullet: true`는 글자 12px 왼쪽에 점 r3 `--text-3`. 연결선 `style: line`은 화살촉 없는 선(행 이름이 매달리는 척추)이고 화면 낭독기의 "연결" 목록에서 뺀다 |
 | 폭 | 본문 열 100%, SVG `min-width: 640px`. 열이 640px보다 좁으면(861–1100px, ≤860px) 그림 안에서 가로 스크롤, 그 아래 `dgScroll` 안내(`--fs-xs` `--text-3`, 컨테이너 쿼리). 페이지 가로 스크롤은 없음 |
 | 그리는 순서 | 단계 띠 → 영역 → 거리 원·설명 → 걷는 구간 → 연결선·경로 → 연결선 위 라벨 → 말풍선 → 노드 → 정차 지점 → 접점 → 범례 |
 
-- 접근성: SVG는 `aria-hidden`. 스크롤 상자는 `role="region"` + `aria-label`(섹션 제목) + `tabindex="0"`(키보드 스크롤, 포커스 테두리). 같은 내용을 `.sr-only`로: "Components / 구성 요소" 목록(노드와 접점을 가장 안쪽 영역별로, `logic`·`plain` 외의 종류는 범례 라벨을 괄호로) + "Connections / 연결" 목록(`dgThen`·`dgBack`·`dgWith`, 연결선이 있을 때만) + 경로(`dgPath`, 접점 순서. 정차 지점이 있으면 "번호 이름" 순서) + "Pain points / 고충" 번호 목록(인용과 대상 접점) + 거리 원(`dgRings`, 가운데 이름과 원 라벨) + `texts` 문장. 이름이 같은 노드는 연결 문장에 영역 이름을 붙인다.
+- 접근성: SVG는 `aria-hidden`. 스크롤 상자는 `role="region"` + `aria-label`(섹션 제목) + `tabindex="0"`(키보드 스크롤, 포커스 테두리). 같은 내용을 `.sr-only`로: "Components / 구성 요소" 목록(노드와 접점을 가장 안쪽 영역별로, `logic`·`plain` 외의 종류는 범례 라벨을 괄호로) + "Connections / 연결" 목록(`dgThen`, `dgBack`, `dgWith`, 연결선이 있을 때만. `dgWith` 국문은 `{a}, {b} 연동`: "와/과"는 `{a}` 끝 글자의 받침에 따라 달라 자동으로 붙이지 않는다, 11.18) + 경로(`dgPath`, 접점 순서. 정차 지점이 있으면 "번호 이름" 순서) + "Pain points / 고충" 번호 목록(인용과 대상 접점) + 거리 원(`dgRings`, 가운데 이름과 원 라벨) + `texts` 문장. 이름이 같은 노드는 연결 문장에 영역 이름을 붙인다.
 - 섹션 안에 그림 제목(figcaption)은 두지 않는다. 섹션 제목이 이름이다.
 - 고객 내부 명칭(시스템·플랫폼·제품명)과 인프라 사양은 일반 명칭으로 바꿔 그린다 (CLAUDE.md 규칙 3, tasks.md 1.5.2 공개 범위).
 
@@ -1916,7 +1923,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
   <tbody><tr>
     <td><span class="n">01</span> Data</td>
     <td data-l="Components"><ul><li>…</li></ul></td>
-    <td data-l="Flows"><span class="flow-col"><span class="flow">→ 02 Agent <em>· query</em></span>
+    <td data-l="Flows"><span class="flow-col"><span class="flow">→ 02 Agent <em>(query)</em></span>
                                               <span class="flow back">↩ 01 Data</span></span></td>
   </tr></tbody>
 </table>
@@ -1929,7 +1936,7 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | `td` | 위 정렬, `padding: --sp-3 --sp-3 --sp-3 0`, 아래 `--line`(마지막 행 없음), `--text-2` 행간 1.5. 첫 열 `--text` `--fw-medium`, 아키텍처 표에서는 `width: 1%; white-space: nowrap` |
 | `.n` 계층 번호 | `--font-meta` `--fs-xs` `--accent` `--fw-regular` |
 | `td ul` | 표식 없음, grid `gap: --sp-0` |
-| `.flow` | `--font-meta` `--fs-xs` `--text-2`, 줄바꿈 없음. 앞으로 가는 흐름 `→ NN 계층명`, 뒤로 돌아가는 흐름(대상 순번 < 현재) `↩`·`--text-3`. 흐름 라벨 `em`은 기울임 없이 `--text-3`, 앞에 " · " |
+| `.flow` | `--font-meta` `--fs-xs` `--text-2`, 줄바꿈 없음. 앞으로 가는 흐름 `→ NN 계층명`, 뒤로 돌아가는 흐름(대상 순번 < 현재) `↩`·`--text-3`. 흐름 라벨 `em`은 기울임 없이 `--text-3`, 괄호로 감싼다 (`→ 02 Agent (query)`, 11.18) |
 | 결정 표의 3열 `.to` | `--text-3` |
 
 - 콘텐츠: `caseStudy.architecture.layers[]`(`id`, `label`, `nodes[]`) → 행 순서·번호·구성 요소. `flows[]`(`from`, `to`, `label?`) → `from` 계층 행의 흐름 칸. 스키마가 `from`/`to`가 있는 `id`인지 검사한다.
@@ -1984,7 +1991,7 @@ Approach의 결정 표 아래 소제목(h3, 제목은 콘텐츠 `compare.title`)
 | 이미지 줄 | 표 열과 맞춘 grid `22% 39% 39%`(첫 칸 비움), `align-items: end`, 이미지 `max-width: 180px` + 선 `--line` + `--radius-sm`(흰 바탕 제품 사진이 다크 모드에서 떠 보이지 않게). 아래 출처 `--fs-xs` `--text-3` |
 | 표 | 5.24.4 `.tbl`과 같은 값. 첫 열(항목) 22%, 행 머리 `th scope="row"` `--text` `--fw-medium`. 머리는 제품명이라 대문자로 바꾸지 않음(`--fw-medium`). 고른 열: 머리 `--text` + 아래 선 `--accent`, 칸 `--text`(다른 열 `--text-2`), 머리 옆 배지 "Selected / 선정"(`cmpPick`, 테두리·글자 `--accent`, `--fs-2xs` 대문자, 국문 `--fs-xs`) |
 | 결론 | `verdict` `--fs-sm` `--text-2` `--measure`, 위 `--sp-3` |
-| 좁은 열 (≤560px 컨테이너) | 이미지 2열, 표는 쌓인 기록(5.24.4 표와 같은 규칙). 값마다 `data-l`로 제품명(고른 쪽은 "· Selected")을 붙인다 |
+| 좁은 열 (≤560px 컨테이너) | 이미지 2열, 표는 쌓인 기록(5.24.4 표와 같은 규칙). 값마다 `data-l`로 제품명을 붙이고, 고른 쪽은 괄호로 `cmpPick`을 덧붙인다 (`AgiBot X2 Ultra (Selected)` / `AgiBot X2 Ultra (선정)`, 11.18) |
 
 - 접근성: 이미지 `alt`는 콘텐츠에서(언어별). 표 머리 첫 칸은 `.sr-only` "Criterion / 항목"(`cmpCriterion`).
 - 제품 사진은 제조사 이미지라 `credit`으로 출처를 표기한다 (11.13).
@@ -2052,12 +2059,12 @@ Architecture 그림 아래 소제목(h3, 제목은 `hardware.title`). 그 위에
 | 요소 | 값 |
 |---|---|
 | 콘텐츠 | `caseStudy.hardware`: `title`, `image`(`src/assets/`, 콘텐츠 기준 상대 경로), `alt`, `robot`·`server`·`external`(`name`, `sub`, `items[]` 이름·값), `links`(`robotServer` 두 줄, `serverExternal`), `specsTitle`, `specs[]`(라벨·값), `credit` |
-| 그림 (SVG 720 × 216) | 제품 사진 0–216(흰 바탕 + `--line` 테두리, `getImage` 400w WebP), 서버 선화 296–448(`--surface` + 슬롯 4칸), 외부 상자 556–712(점선). 연결선 y 108: 로봇↔서버 실선 양방향 + 위·아래 라벨, 서버↔외부 점선 양방향 + 라벨. 라벨 8px mono `--text-3`. `min-width: 640px` + 가로 스크롤 |
+| 그림 (SVG 720 × 216) | 제품 사진 0–216(흰 바탕 + `--line` 테두리, `getImage` 400w WebP), 서버 선화 296–448(`--surface` + 슬롯 4칸), 외부 상자 556–712(점선). 연결선 y 108: 로봇↔서버 실선 양방향 + 위·아래 라벨, 서버↔외부 점선 양방향 + 라벨. 라벨 8px mono `--text-3`. 외부 상자 글자 `LLM, STT, TTS` (쉼표, 11.18). `min-width: 640px` + 가로 스크롤 |
 | 목록 | 3열 grid `30% 34% 24%`(`space-between`): 이름 `--fs-sm` `--fw-strong`, 부제 mono `--fs-xs` `--text-3`, 항목 행마다 위 `--line`, 이름 `--text-2` / 값 mono `--fs-xs` `--text-3` 오른쪽 정렬 |
 | 로봇 사양 | 소제목(h4) 아래 굵은 선(`--line-strong`) + 3열 grid(`gap: --sp-3 --sp-4`): 라벨 `--fs-2xs` 대문자 `--text-3`(국문 `--fs-xs`), 값 `--fs-sm` `--text-2` |
 | 좁은 열 (≤560px 컨테이너) | 목록·사양 1열 |
 
-- 접근성: SVG `aria-hidden`, 스크롤 상자 `role="region"` + `aria-label`(소제목). `.sr-only` 한 줄: 사진 설명, 로봇 — 연결 — 서버 — 연결 — 외부. 목록·사양은 진짜 `dl`.
+- 접근성: SVG `aria-hidden`, 스크롤 상자 `role="region"` + `aria-label`(소제목). `.sr-only` 문장: 영문 `{alt}. {robot} and {server}: {robotServer}. {server} and {external}: {serverExternal}.`, 국문 `{alt}. {robot}, {server} 연결: {robotServer}. {server}, {external} 연결: {serverExternal}.` (`robotServer`는 쉼표로 이음. 예: `Wi-Fi 6, ROS 2 + ZMQ`). 지금의 em dash 4개를 바꿈 (11.18). 목록과 사양은 진짜 `dl`.
 - 제품 사진은 제조사 이미지라 `credit`으로 출처를 표기한다 (11.13과 같음).
 
 #### 5.24.13 저장소 지도 (repomap)
@@ -2133,7 +2140,7 @@ Context 목록 아래(위 `--sp-5`). `src/components/Screens.astro`, g15 시안 
 | 크롭 | 폭 280, 선 `--line-strong` + `--radius-sm`(밝은 화면 캡처가 다크 모드에서 떠 보이지 않게) |
 | 설명 | 번호 원(크롭과 같음) + 이름 `--fs-sm` `--fw-strong` `--text`, 설명 `--fs-sm` `--text-2` 40ch. 번호는 조각을 이어서 1부터 |
 | 생략 | 조각 사이 `gap` 한 줄: 폭 280, 위아래 점선 `--line-strong`, `--fs-xs` `--text-3` 가운데 |
-| 캡션 | `caption` · 링크(주소의 호스트 이름), `--fs-xs` `--text-3`, 링크 `--text-2` 밑줄, hover `--accent` |
+| 캡션 | `caption` 뒤 괄호 안에 링크(주소의 호스트 이름): `legalQ live service, captured Nov 21, 2026 (legalq.dnotitia.ai)` (11.18). `--fs-xs` `--text-3`, 링크 `--text-2` 밑줄, hover `--accent` |
 | 좁은 열 (≤560px 컨테이너) | 설명이 크롭 아래로, 크롭 최대 280 |
 
 - 크롭 위 번호는 장식(`aria-hidden`)이고 같은 번호와 글이 설명 목록에 있다. 이미지 `alt`는 콘텐츠에서(질문과 보이는 내용).
@@ -2193,11 +2200,11 @@ Context 목록 아래(위 `--sp-5`). `src/components/Screens.astro`, g15 시안 
 | — | 상단 메뉴 / 모바일 바 | — | — | Top navigation 5.2, Mobile bar + menu sheet 5.3 | `src/i18n/` |
 | 1 | About / 소개 | `about` | About / 소개 | Card 5.14, Hero 5.15, Career trajectory 5.16, Education(11.9), Skills(5.15) | `profile` (taglines[0], about, trajectory, skills), `education` |
 | 2 | Experience / 경력 | `experience` | Experience / 경력 | Card 5.14, Period ledger row 5.22(기간 열 + 단색 로고) | `experience` (6곳) + `public/` 로고 |
-| 3 | Teaching · Books · Advisory / 강의 · 저서 · 자문 | `teaching` | Experience / 경력 | Card 5.14, Period ledger row 5.22 (Books · Teaching · Advisory 묶음) | `teaching` (`kind` 순서: book, teaching, advisory) |
+| 3 | Teaching, Books & Advisory / 강의, 저서, 자문 | `teaching` | Experience / 경력 | Card 5.14, Period ledger row 5.22 (Books, Teaching, Advisory 묶음) | `teaching` (`kind` 순서: book, teaching, advisory) |
 | 4 | Awards / 수상 | `awards` | Experience / 경력 | Card 5.14, Period ledger row 5.22 | `awards` |
 | 5 | Selected Work / 대표 프로젝트 | `work` | Work / 대표 프로젝트 | Card 5.14, Selected work list 5.18(번호 목록 01–06), Project ledger 5.19(전체 원장 + Domain·Capability 선택 상자 + 모두 보기) | `projects` (대표작: `featured`, `order` 순. 원장: 전체 20건) |
 | 6 | Personal Projects / 개인 프로젝트 | `personal` | Personal / 개인 프로젝트 | Card 5.14, Personal projects index 5.20(번호 목록 + 상태 필터 + 저장소·데모 링크) | `personal` |
-| 7 | IP & Publications / 지식재산 · 출판물 | `ip` | Publications / 지식재산 · 출판물 | Card 5.14, Index drawer 5.21(유형별 서랍: 특허·프로그램·논문·보고서, 서랍 id `ip-<유형>`) | `patents`, `software`, `publications` |
+| 7 | IP & Publications / 지식재산과 출판물 | `ip` | Publications / 지식재산과 출판물 | Card 5.14, Index drawer 5.21(유형별 서랍: 특허·프로그램·논문·보고서, 서랍 id `ip-<유형>`) | `patents`, `software`, `publications` |
 | 8 | Contact / 연락처 | `contact` | Contact / 연락처 | Card 5.14, Contact 5.23(의뢰 가능 분야 \| 이메일·복사·링크) | `profile` (availability, contact) |
 | — | 푸터 | — | — | Footer 5.5 (Colophon 한 줄: ©·최종 수정일·사이트 소스·맨 위로) | 최종 수정일은 빌드 시 `src/content` 마지막 커밋 날짜 |
 
@@ -2213,14 +2220,14 @@ Context 목록 아래(위 `--sp-5`). `src/components/Screens.astro`, g15 시안 
 | Work / 대표 프로젝트 | `#work` | `work` |
 | Experience / 경력 | `#experience` | `experience`, `teaching`, `awards` |
 | Personal / 개인 프로젝트 | `#personal` | `personal` |
-| Publications / 지식재산 · 출판물 | `#ip` | `ip` |
+| Publications / 지식재산과 출판물 | `#ip` | `ip` |
 | Contact / 연락처 | `#contact` | `contact` |
 
 - 탭 순서와 섹션 순서는 같다. Experience 탭은 Teaching·Awards 구간을 지나는 동안에도 현재 상태를 유지한다 (탭이 덮는 섹션 목록을 마크업에 둔다. 시안은 `data-for="experience teaching awards"`).
 - 현재 섹션 판정 (시안 그대로): 상단 메뉴 아래 끝 + 화면 높이 25% 선을 지난 마지막 섹션. 페이지 끝에 닿으면 마지막 섹션(Contact). 탭·앵커를 눌러 이동하면 사용자가 직접 스크롤(wheel, touchstart, keydown)할 때까지 누른 섹션을 유지한다 (짧은 Awards가 다음 섹션에 덮이지 않게).
 - 현재 탭: `aria-current="true"` + 미끄러지는 밑줄(5.2, 모션은 3장 Motion).
-- 모바일 바의 현재 섹션 이름은 탭 이름이 아니라 **섹션** 이름을 보인다 (예: Teaching 구간에서 "Teaching · Books · Advisory").
-- 메뉴 시트: 탭 6개, Experience 아래 하위 링크 3개(Experience, Teaching · Books · Advisory, Awards). 하위 링크는 자기 섹션일 때만 현재 표시.
+- 모바일 바의 현재 섹션 이름은 탭 이름이 아니라 **섹션** 이름을 보인다 (예: Teaching 구간에서 "Teaching, Books & Advisory").
+- 메뉴 시트: 탭 6개, Experience 아래 하위 링크 3개(Experience, Teaching, Books & Advisory, Awards). 하위 링크는 자기 섹션일 때만 현재 표시.
 - 앵커 이동으로 들어온 섹션은 등장 효과를 건너뛴다 (decision-log G6, 3장 Motion).
 
 **영문/국문 차이**
@@ -2250,7 +2257,7 @@ Context 목록 아래(위 `--sp-5`). `src/components/Screens.astro`, g15 시안 
 | Organization / 소속 | `org` | |
 | Period / 기간 | `period` | `planned`이면 배지. 배지 문구는 홈과 같은 "In progress / 진행 중" (decision-log G6의 CV 배지 통일과 같은 기준) |
 | Role / 역할 | `lead` | Lead일 때만 "Lead / 총괄". 별도 역할 필드 없음 (G4) |
-| Stack / 기술 스택 | `stack` | ` · `로 이음 |
+| Stack / 기술 스택 | `stack` | 쉼표로 이음 (5.24.1) |
 
 **본문 섹션 순서** (basic-plan 4.4: Context → Problem → My role → Approach & Architecture → Stack → Outcome)
 
@@ -2289,8 +2296,8 @@ Context 목록 아래(위 `--sp-5`). `src/components/Screens.astro`, g15 시안 
 | 영역 | 내용 |
 |---|---|
 | 도구 막대 (`role` 없음, 10장) | 용지 위 오른쪽 정렬, 버튼 3개: 반대 언어("한국어" / "English", 6.1 규칙으로 반대 언어 CV로 이동), 테마("Theme / 테마"), 인쇄("Print / Save PDF" / "인쇄 / PDF 저장", 포인트 색). 인쇄 시 숨김 |
-| 용지 (`main`) | 머리 + 섹션 13개. 화면에서는 테두리 있는 용지 한 장, ≤720px에서 테두리 없이 1열. 이때 행은 기간을 제목 줄 오른쪽 끝에 띄우고(`float: right`, 왼쪽 `--sp-3`) 본문은 전체 폭, 직함(`h3 > .sub`, "— 직함")은 제목 아래 한 줄 (`@media screen`만, 11.8 2026-11-12) |
-| 머리 (`header`) | 이름 `h1`, 직함 줄(`headline · currentRole`), 연락처 열: 이메일, GitHub 호스트, LinkedIn 호스트, 사이트 주소(영문 `sguys99.github.io`, 국문 `sguys99.github.io/ko/`) |
+| 용지 (`main`) | 머리 + 섹션 13개. 화면에서는 테두리 있는 용지 한 장, ≤720px에서 테두리 없이 1열. 이때 행은 기간을 제목 줄 오른쪽 끝에 띄우고(`float: right`, 왼쪽 `--sp-3`) 본문은 전체 폭 (11.8 2026-11-12). 경력 직함(`h3 > .sub`)은 기호 없이 제목 아래 한 줄이고, 화면의 모든 폭과 인쇄에서 같다 (`display: block`, 11.18) |
+| 머리 (`header`) | 이름 `h1`, 직함 줄(`headline (currentRole)`: `AI Engineer (Director, R&D Group, GenON)` / `AI Engineer (GenON R&D그룹 Director)`, 11.18), 연락처 열: 이메일, GitHub 호스트, LinkedIn 호스트, 사이트 주소(영문 `sguys99.github.io`, 국문 `sguys99.github.io/ko/`) |
 
 사이드바·상단 메뉴·모바일 바·푸터 없음. 사진 없음 (3.3.3 A).
 
@@ -2304,17 +2311,17 @@ Context 목록 아래(위 `--sp-5`). `src/components/Screens.astro`, g15 시안 
 | 4 | Education / 학력 | `education` | |
 | 5 | Selected Projects / 대표 프로젝트 | `projects` (`featured`, `order` 순) | 성과·스택 포함. 진행 중 배지는 "In progress / 진행 중" (시안의 "Planned"를 바꿈, decision-log G6) |
 | 6 | Other Projects / 기타 프로젝트 | `projects` (나머지, 시작일 내림차순) | 촘촘한 목록 |
-| 7 | Patents / 특허 | `patents` (날짜 내림차순) | 제목 옆 "등록 n · 출원 n". 등록번호 없음 (G6) |
-| 8 | Software / 프로그램 등록 | `software` | 등록번호 없음 |
+| 7 | Patents / 특허 | `patents` (날짜 내림차순) | 제목 옆 "등록 n, 출원 n". 등록번호 없음 (G6) |
+| 8 | Software / 프로그램 등록 | `software` | 등록번호 없음. 날짜 없는 `pending` 항목은 기간 칸을 비운다 (같은 줄 상태가 이유를 말함, 11.18) |
 | 9 | Papers / 논문 | `publications` (`paper`) | DOI 링크 |
 | 10 | Selected Reports / 주요 보고서 | `publications` (`report`, `featured`) | 끝에 나머지 건수와 사이트 주소 한 줄. 총량 "50+"는 쓰지 않는다 (G4) |
-| 11 | Teaching & Advisory / 강의·자문 | `teaching` (book 제외) | |
+| 11 | Teaching & Advisory / 강의와 자문 | `teaching` (book 제외) | |
 | 12 | Books / 저서 | `teaching` (book) | `url` 있으면 링크 |
 | 13 | Awards / 수상 | `awards` | |
 
 - 기간 열은 연도만 (`2024 – 2025`, 같은 해면 한 번).
 - 개인 프로젝트(`personal`)는 싣지 않는다 (시안 그대로).
-- `<title>`: `Kwang Myung Yu · CV` / `유광명 · 이력서` (시안 그대로).
+- `<title>`: `Kwang Myung Yu | CV` / `유광명 | 이력서` (11.18).
 - 진입 경로: 시안에 `/cv/` HTML 페이지로 가는 링크가 없다. 사이드바 "Download CV"는 PDF로 연결한다. HTML CV 링크는 두지 않는다 (11.8 사용자 결정).
 
 ### 6.5 404
@@ -2355,7 +2362,7 @@ Context 목록 아래(위 `--sp-5`). `src/components/Screens.astro`, g15 시안 
 - 바로 가기 목록 이름 = `h2` (`sr-only`).
 
 **그 밖** [구현 기본값]
-- `<title>`: `Page not found · Kwang Myung Yu` / `페이지를 찾을 수 없습니다 · 유광명` (시안 그대로).
+- `<title>`: `Page not found | Kwang Myung Yu` / `페이지를 찾을 수 없습니다 | 유광명` (11.18).
 - `<meta name="robots" content="noindex">`. canonical·hreflang·JSON-LD 없음.
 - 요청 주소는 보여 주지 않는다 (3.3.5 A에 없음).
 
@@ -2367,12 +2374,12 @@ Context 목록 아래(위 `--sp-5`). `src/components/Screens.astro`, g15 시안 
 
 | 페이지 | `<title>` | `description` |
 |---|---|---|
-| 홈 | `Kwang Myung Yu · AI Engineer` / `유광명 · AI Engineer` [구현 기본값: `name · headline`] | `profile.taglines[0]` [구현 기본값] |
-| 케이스 스터디 | `<프로젝트 제목> · Kwang Myung Yu` / `<프로젝트 제목> · 유광명` (시안 그대로) | 프로젝트 `summary` [구현 기본값] |
-| CV | `Kwang Myung Yu · CV` / `유광명 · 이력서` (시안 그대로) | `name · headline · currentRole` [구현 기본값] |
+| 홈 | `Kwang Myung Yu \| AI Engineer` / `유광명 \| AI Engineer` [구현 기본값: `name \| headline`] | `profile.taglines[0]` [구현 기본값] |
+| 케이스 스터디 | `<프로젝트 제목> \| Kwang Myung Yu` / `<프로젝트 제목> \| 유광명` | 프로젝트 `summary` [구현 기본값] |
+| CV | `Kwang Myung Yu \| CV` / `유광명 \| 이력서` | `name, headline (currentRole)`: `Kwang Myung Yu, AI Engineer (Director, R&D Group, GenON)` / `유광명, AI Engineer (GenON R&D그룹 Director)` |
 | 404 | 6.5 | `nf_body` (본문 문구 그대로, 국문 경로면 머리 스크립트가 국문으로 바꿈. 11.8, tasks 7.5) |
 
-- 구분자는 시안이 쓴 ` · ` 하나로 통일.
+- `<title>`과 og:title의 구분자는 ` | ` (웹 탭 제목 관례, 11.18). description과 `og:image:alt`는 검색 결과와 스크린 리더에서 문장처럼 읽히는 자리라 쉼표와 괄호를 쓴다. 시안의 ` · `는 쓰지 않는다.
 - 값은 모두 콘텐츠·i18n에서 조합한다. 페이지에 문장을 직접 쓰지 않는다.
 
 **OG · 공유 카드** (명함형 A "Card on paper", 11.7 사용자 결정. 3.3.4 D의 OG를 대체)
@@ -2382,7 +2389,7 @@ Context 목록 아래(위 `--sp-5`). `src/components/Screens.astro`, g15 시안 
 | 이미지 | 언어별 PNG 2장 (영문·국문), 1200×630, 라이트만. 종이색 바탕 위에 흰 명함 한 장(936×520, 1.8:1, 헤어라인 테두리, 그림자 없음). 위 줄: KM 타일(왼쪽) · `sguys99.github.io`(오른쪽, 모노). 아래: 풀네임(크게. 국문은 `유광명` 옆에 작은 모노 `Kwang Myung Yu`), 가는 선, 마지막 줄 직함 `AI Engineer`(포인트 색, 왼쪽) · `github.com/sguys99`(모노, 오른쪽). **현재 소속 줄 없음**(빠진 자리는 직함이 선 아래 줄로 내려가 위 줄의 좌우 짝과 맞춤). 사진·한 줄 소개 없음. 색은 3장 "자산 고정색" |
 | 파일 경로 | `/og-en.png`, `/og-ko.png` [구현 기본값]. 원본 HTML `docs/design-drafts/og/og-a.html` (`?lang=en\|ko&theme=light\|dark`), 비교 페이지 `og/index.html` |
 | 사용 | 모든 페이지가 자기 언어 이미지를 쓴다. 케이스 스터디별 이미지는 만들지 않는다 [구현 기본값: 시안이 사이트 공통 카드만 정함] |
-| 메타 | `og:title`·`og:description`(= title·description), `og:url`(= canonical), `og:image`(절대 URL), `og:image:width` 1200, `og:image:height` 630, `og:image:alt`(이름 · 직함), `og:type` `website`, `og:site_name` 이름, `og:locale` `en_US` / `ko_KR`, `og:locale:alternate` 반대 언어, `twitter:card` `summary_large_image` [구현 기본값] |
+| 메타 | `og:title`·`og:description`(= title·description), `og:url`(= canonical), `og:image`(절대 URL), `og:image:width` 1200, `og:image:height` 630, `og:image:alt`(이름, 직함: `Kwang Myung Yu, AI Engineer` / `유광명, AI Engineer`), `og:type` `website`, `og:site_name` 이름, `og:locale` `en_US` / `ko_KR`, `og:locale:alternate` 반대 언어, `twitter:card` `summary_large_image` [구현 기본값] |
 | 생성 | **수동 갱신** (11.7). 빌드 시 생성하지 않고 의존성도 추가하지 않는다. 글자는 `og-a.html`에 직접 쓰여 있으므로 이름·직함·주소가 바뀌면 HTML을 고친 뒤 다시 렌더한다: `npm i --no-save playwright && npx playwright install chromium && node docs/design-drafts/og/render.mjs --site` → `public/og-en.png`, `public/og-ko.png`, `public/favicon.ico`. 인자 없이 실행하면 시안 비교용 `og/shots/`(A·B·C × 영/국 × 라이트/다크)를 다시 만든다. 이미 받아 둔 Chromium이 있으면 `CHROME=<실행 파일 경로>`로 설치를 건너뛴다 |
 
 **파비콘 세트** (3.3.4 D, 파일 생성은 tasks 5.8)
@@ -2490,6 +2497,9 @@ Context 목록 아래(위 `--sp-5`). `src/components/Screens.astro`, g15 시안 
 | 한 줄 소개 `.tagline` (두 언어), `.cs-title`, OG `.tg` | `text-wrap: balance` | G2 결정: 영문 모바일 외톨이 줄 처리. 줄 길이를 고르게 |
 | 기간·연도·건수 칸 (`.pl-y`, `.pl-cap` 데스크톱) | `white-space: nowrap` | `2024.03 – 2025.08`이 중간에서 끊기지 않게 |
 | 본문 문단 (`.about`, `.desc`, `.sum`) | `text-wrap: pretty` | 마지막 줄 한 단어 방지 (시안에 없던 보완. 미지원 브라우저는 무시) |
+| 구분 쉼표 (스택 줄, 메타 줄, 건수 줄) | 쉼표는 앞 말에 붙여 쓰고 앞에 NBSP를 두지 않는다. 스택은 이름마다 `span`으로 묶고(케이스 사이드바 `inline-block; max-width: 100%`, 개인 프로젝트와 CV `nowrap`) 쉼표는 앞 이름 쪽에 둔다 | 쉼표는 앞 글자에 붙어 줄 머리에 오지 않는다. 11.8의 "구분자 앞 NBSP" 규칙을 대신함 (11.18) |
+| 원장 Capability 태그 (`.pl-cap`, ≤560px) | 태그마다 `white-space: nowrap`, 줄은 태그 사이에서만 바뀜 | 360px 영문에서 `Control` / `& Optimization`처럼 태그 안에서 끊겨 `&`가 줄 머리에 왔다 (11.18) |
+| 괄호로 덧붙인 값 (CV 머리, 학력, 기종 비교, 화면 캡션) | NBSP 없음 | 여는 괄호는 줄 머리에 와도 되는 기호 (11.18) |
 
 `overflow-wrap: anywhere`는 최소 폭 계산에도 들어가므로 grid 칸이 좁아질 수 있다. 칸은 `minmax(0, 1fr)`을 유지한다.
 
@@ -2520,13 +2530,21 @@ Context 목록 아래(위 `--sp-5`). `src/components/Screens.astro`, g15 시안 
 | 기호 | 용법 | 예 |
 |---|---|---|
 | en dash `–` 앞뒤 공백 | 기간 (두 언어 같음, glossary 9.1) | `Mar 2024 – Aug 2025` / `2024.03 – 2025.08`, `Jul 2026 – Present` / `2026.07 – 현재`, 궤적 `2023 – 2026` |
-| en dash `–` 공백 없음 | 쪽 범위 | `pp. 107–114` |
-| 가운뎃점 `·` 붙임 | 한 라벨 안의 병렬 (국문, glossary 9.5) | `에너지·유틸리티`, `제어·최적화` |
-| 가운뎃점 ` · ` 앞뒤 공백 | 독립 항목 구분 (두 언어) | 메타 `조직 · 고객`, `등록 n · 출원 n`, 탭 `지식재산 · 출판물`, 섹션 `Teaching · Books · Advisory`, 문서 제목 `이름 · 직함` |
-| 쉼표 | 국문 나열 | `RAG, 에이전트, Text-to-SQL` |
+| en dash `–` 공백 없음 | 쪽 범위와 숫자 범위 | `pp. 107–114`, `1–4 weeks`, 정차 지점 번호 `1–2` |
+| em dash `—` | 쓰지 않는다. 화면 글자, 대체 텍스트, 스크린 리더 문장, 메타, CV PDF 모두. 영문 문장은 마침표, 쉼표, 콜론, 괄호, 문장 재구성 중에서 고르고, 빈 칸 표시는 빈칸으로 둔다 (11.18) | CV 역할 `Title — role` → 역할을 제목 아래 줄로, CV 빈 날짜 `—` → 빈칸 |
+| 쉼표 | 나열(두 언어, 영문은 Oxford comma)과 필드 구분(소속과 고객). 앞 말에 붙여 쓴다 | `RAG, 에이전트, Text-to-SQL`, 섹션 `Teaching, Books & Advisory` / `강의, 저서, 자문`, 건수 `7 registered, 8 filed` / `등록 7, 출원 8`, 메타 `PwC Consulting, Samsung Electronics`, 스택 `AgiBot SDK, SLAM, FastAPI` |
+| "와/과" | 국문 두 말 나열 | `지식재산과 출판물`, `강의와 자문` |
+| 괄호 | 앞 값에 덧붙는 값 | 직함 줄 `AI Engineer (Director, R&D Group, GenON)`, 기종 비교 `AgiBot X2 Ultra (Selected)`, 학력 `M.S. in Electrical Engineering (Control & network optimization)`, 캡션 `… 2026 (legalq.dnotitia.ai)` |
+| 슬래시 `/` 붙임 | 국문 라벨 안 병렬 (분야, 역량, 궤적과 역량 표 머리, 다이어그램 라벨처럼 좁은 자리) | `제어/최적화`, `LLM 에이전트/RAG`. 이미 쓰는 기술 이름 짝 `LangChain/LangGraph`, `STT/TTS`도 같은 꼴 |
+| 슬래시 ` / ` 앞뒤 공백 | 경력 직함 구분(국문도 영문 `role`과 같음), 위치, 분수 | `Director / AI Product Engineer`, `03 / 08`, `GPA 3.83 / 4.3` |
+| 세로 막대 ` \| ` 앞뒤 공백 | 문서 제목(`<title>`, og:title)과 CV PDF 바닥글에만 | `Kwang Myung Yu \| AI Engineer`, `<프로젝트 제목> \| 유광명`, `유광명 \| 이력서 \| sguys99.github.io` |
+| 가운뎃점 `·` | 나열과 구분에 쓰지 않는다. 남는 것은 단위와 수식, 법령 단위 표기뿐 | `N·m`, `Kd·ω`, `조·항`, `조·항·호` |
+| 따옴표 | 곧은 따옴표 `"` (곡선 따옴표 `“ ”`는 쓰지 않음) | `"해외직구 세금이 어떻게 되나요?"` |
 
 - **연도 범위 표기**: 모든 곳에서 glossary 9.1의 `2015 – 2022`(en dash 앞뒤 공백)로 통일한다. 시안의 원장 `yrs()`, IP 서랍 `yearSpan()`, CV `--cv-date` 주석은 공백 없이 `2015–2022`로 만들고 있어 구현할 때 고친다.
 - 국문 날짜 월은 두 자리(`2024.03`), 영문은 세 글자 약어(마침표 없음).
+- **중간점을 바꾸는 기준** (콘텐츠 문구, 11.18): 두 항목은 "와/과", 셋 이상은 쉼표, 쉼표 나열 안의 하위 묶음은 "와/과"나 `/`, 좁은 자리(다이어그램 상자, 태그, 표 머리)는 글자 수가 덜 느는 쉼표나 `/`. 영문 라벨의 ` · `는 쉼표, `and`, 괄호 중에서 고른다. `/`는 국문에서 "또는"으로도 읽히므로, 그리고의 뜻인 나열에는 쉼표나 "와/과"를 먼저 쓴다. 굳은 말 목록과 처리는 `docs/anti-ai-slop-report.md` 5장, 세부 기준은 `docs/anti-ai-slop-plan.md` 5.2.
+- 바꾸지 않는 것: 발표된 제목(논문, 보고서, 특허, 책, 강의 제목의 `학부·석사` 등)과 회사, 조직, 직함 같은 고유명사. 프로젝트 제목은 문구를 두고 기호만 바꾼다 (`운영/정비이력`).
 
 ### 국문 페이지의 영문 표기
 
@@ -2825,7 +2843,7 @@ JS도 `matchMedia('(prefers-reduced-motion: reduce)')`가 참이면 모션 코�
 | 크기 | `@page { size: A4 }` |
 | 여백 | `@page { margin: 15mm 16mm 16mm }` (`--cv-margin`. `@page`는 변수를 못 읽어 값을 직접 씀) |
 | 분량 | 영·국 각 4쪽 (시안 결과. 고정 규칙 아님, tasks 7.10에서 확인) |
-| 쪽 하단 왼쪽 | `@bottom-left`: "{이름} · CV · sguys99.github.io" / "{이름} · 이력서 · sguys99.github.io". 7pt Geist Mono, `#5f6a78` |
+| 쪽 하단 왼쪽 | `@bottom-left`: "{이름} \| CV \| sguys99.github.io" / "{이름} \| 이력서 \| sguys99.github.io" (11.18). 7pt Geist Mono, `#5f6a78` |
 | 쪽 하단 오른쪽 | `@bottom-right`: `counter(page) " / " counter(pages)`. 같은 글꼴·색 |
 | 사진 | 없음 |
 
@@ -2835,14 +2853,14 @@ JS도 `matchMedia('(prefers-reduced-motion: reduce)')`가 참이면 모션 코�
 
 | 요소 | 규칙 |
 |---|---|
-| 머리 `.head` | 왼쪽 이름(h1, `--cv-fs-name`) + 직함 · 현재 소속(`--cv-fs-title`, `--text-2`), 오른쪽 연락처 4줄(이메일, GitHub, LinkedIn, 사이트 주소. `--font-meta` `--cv-fs-meta`). 아래 1.5px `--text` 선, 4mm 패딩, 5mm 간격 |
+| 머리 `.head` | 왼쪽 이름(h1, `--cv-fs-name`) + 직함 줄(직함 뒤 괄호에 현재 소속, `AI Engineer (Director, R&D Group, GenON)`. `--cv-fs-title`, `--text-2`, 11.18), 오른쪽 연락처 4줄(이메일, GitHub, LinkedIn, 사이트 주소. `--font-meta` `--cv-fs-meta`). 아래 1.5px `--text` 선, 4mm 패딩, 5mm 간격 |
 | 섹션 `.sec` | 2열: 라벨 칸 `--cv-gutter` 24mm + 본문, 열 간격 `--cv-gap`. 위 1px `--line`, 상하 2.6mm |
-| 라벨 칸 | 영문 `--font-meta` 대문자, `--cv-fs-label`, `--ls-eyebrow`, `--text-3`. 국문 `--font-ko` 600, 0.86em, 자간 0. 보조 줄(`small`, 예: 특허 "Registered n · Filed n")은 라벨 아래 줄 |
+| 라벨 칸 | 영문 `--font-meta` 대문자, `--cv-fs-label`, `--ls-eyebrow`, `--text-3`. 국문 `--font-ko` 600, 0.86em, 자간 0. 보조 줄(`small`, 예: 특허 `7 registered, 8 filed` / `등록 7, 출원 8`)은 라벨 아래 줄 |
 | 라벨 칸 겹침 해소 | 라벨 보조 줄은 `display: block`으로 라벨 아래에 두고, Skills 키는 `min-width: 0; overflow-wrap: break-word`로 31mm 칸 안에서 줄바꿈해 본문을 덮지 않는다 (3.3.3 사용자 요청) |
 | 행 `.row` | 2열: 기간 `--cv-date` 24mm + 내용, 간격 3mm. 행 사이 2.2mm, 촘촘한 목록(`.tight`) 1mm |
-| 기간 | **한 줄** (`white-space: nowrap`), 연도만 (`2019 – 2023`, 같은 해면 하나, 진행 중이면 "Present / 현재"). 대시 양옆 thin space. `--cv-date`는 "2000, 2003 – 2006"(thin space 포함)이 한 줄에 들어가는 폭: 화면 28mm, 인쇄 24mm (11.8) |
-| 행 내용 | 제목(`--fw-title`) + 부제(` — 직무`, `--text-2`) / 메타(회사 · 고객, `--font-meta`) / 요약·성과(짧은 선 글머리, `--text-2`) / 스택(`--font-meta`, `--text-3`) |
-| 촘촘한 목록 | 기타 프로젝트, 특허, 프로그램, 논문, 보고서, 강의·자문, 저서, 수상, 학력: 제목과 메타를 한 줄로 이어 씀 |
+| 기간 | **한 줄** (`white-space: nowrap`), 연도만 (`2019 – 2023`, 같은 해면 하나, 진행 중이면 "Present / 현재"). 날짜 없는 항목(등록 진행 중 프로그램)은 빈칸 (11.18). 대시 양옆 thin space. `--cv-date`는 "2000, 2003 – 2006"(thin space 포함)이 한 줄에 들어가는 폭: 화면 28mm, 인쇄 24mm (11.8) |
+| 행 내용 | 제목(`--fw-title`) + 부제(직무, 기호 없이 제목 아래 줄 `display: block`, `--text-2`) / 메타(회사, 고객을 쉼표로, `--font-meta`) / 요약과 성과(짧은 선 글머리, `--text-2`) / 스택(쉼표로 이음, `--font-meta`, `--text-3`) (11.18) |
+| 촘촘한 목록 | 기타 프로젝트, 특허, 프로그램, 논문, 보고서, 강의와 자문, 저서, 수상, 학력: 제목과 메타를 한 줄로 이어 씀 |
 | Skills | `<dl>` 2열, 키 `--cv-key` 31mm |
 | 글자 | 기준 `--cv-base` (화면 13px, 인쇄 8.4pt), 행간 `--cv-lh` 1.5 / 국문 `--cv-lh-ko` 1.62, 국문 자간 -0.005em |
 | 링크 | 글자색 그대로, 밑줄 없음. URL은 본문에 펼치지 않는다 (연락처는 이미 주소 글자) |
@@ -2875,7 +2893,7 @@ JS도 `matchMedia('(prefers-reduced-motion: reduce)')`가 참이면 모션 코�
 |---|---|---|
 | 도구 줄 `.tools` (언어, 테마, "Print / Save PDF") | 종이 위 오른쪽 | `display: none` |
 | 종이 `.cv` | `--cv-paper-w`, `--cv-pad`, `--surface` 바탕, `--line` 테두리, `--radius-sm` | 여백·테두리·모서리 없음, 쪽 흐름 |
-| ≤720px | 라벨 칸·연락처·Skills를 1열로, 좌우 테두리 없음. 행: 기간은 제목 줄 오른쪽 끝(`float`), 직함은 제목 아래 줄 (`screen`만) | — (기간 열 그대로) |
+| ≤720px | 라벨 칸·연락처·Skills를 1열로, 좌우 테두리 없음. 행: 기간은 제목 줄 오른쪽 끝(`float`). 직함이 제목 아래 줄인 것은 모든 폭과 인쇄가 같다 (11.18) | — (기간 열 그대로) |
 
 - 도구 줄은 시안의 `role="toolbar"`를 쓰지 않는다 [구현 기본값]: toolbar 역할은 화살표 키 이동을 요구하는데 버튼 3개라 일반 Tab 이동이 맞다.
 - 도구 줄의 언어 전환은 `/cv/` ↔ `/ko/cv/` 링크, 테마는 8장 버튼과 같은 동작.
@@ -3355,3 +3373,27 @@ Gate 기록 아래 있던 "이후로 넘긴 것 / 구현 시 처리할 것"은 1
 | 데이터 거버넌스·데이터 레이크(수행팀 제안 2건)는 ③에서 별도 레인 + `add` 모양 | ①의 "+2"와 같은 모양으로 이어지게 |
 | 포인트 색: ①은 수행팀 PoC 3건, ②는 PoC 칸, ③은 수행팀 PoC 막대 2건 | 포인트 색 1개 원칙(2장) |
 | 복잡도 예산(Gantt 12개) 초과(26개)는 그대로 둠 | 로드맵의 규모 자체가 결과물. SCM(11.10)과 같은 이유 |
+
+### 11.18 AI 흔적 제거 — 2026-11-22
+
+시안: `docs/design-drafts/g17/` (구분자 A 글자 구분 / B 문장 부호와 말 / C 여백과 선. 5쪽 × 4안(지금, A, B, C) × 4조합(영문/국문, 1280/360, 라이트/다크)과 CV PDF 첫 쪽, 끝 쪽. 비교 페이지 `index.html`(`make.mjs`), 캡처 `shots/`(`shoot.mjs`), 규칙 `variants.mjs`), `docs/design-drafts/g17/tone/` (윤문 강도 보수 / 중간 / 적극, 표본 57쌍 `samples.md`). 진단: `docs/anti-ai-slop-report.md` (판단 필요 15건은 7장). 계획: `docs/anti-ai-slop-plan.md` (결정 2장, 표기 기준 5장).
+
+| 결정 | 이유 |
+|---|---|
+| 구분자는 B 조합. 자리 성격별로 (1) 키워드 나열은 쉼표, 국문 두 말은 "와/과" (섹션 `Teaching, Books & Advisory` / `강의, 저서, 자문`, `지식재산과 출판물`, CV `강의와 자문`, 건수 줄 `7 registered, 8 filed`, 스택 줄, 원장 역량 줄, 표준 구성 `LLM, STT, TTS`) (2) 필드는 소속과 고객 사이 쉼표(`PwC Consulting, Samsung Electronics`, 대표작 로고 뒤 고객도 쉼표), 덧붙는 값은 괄호(CV 머리 `AI Engineer (Director, R&D Group, GenON)`, 학력 세부전공, 기종 비교 `AgiBot X2 Ultra (Selected)`, 화면 캡션의 주소) (3) 문서 제목은 ` \| ` (4) 국문 라벨 안 병렬은 `/` (5) 빈 날짜는 빈칸. A와 C는 고르지 않음 | 사용자 선택 (시안 README의 추천안: B를 기본으로, (3)은 ` \| `, (4)는 `/`). 구분자가 가장 많이 남는 곳은 CV PDF와 복사 텍스트인데, B는 두 곳에서 보이는 그대로 읽히고 A처럼 슬래시 뜻(`03 / 08`, `GPA 3.83 / 4.3`, 영문 직함)이 섞이지 않는다. C는 화면이 가장 조용하지만 PDF 글자층에서 숨긴 쉼표가 빠져 `PwC Consulting        Samsung Electronics`처럼 구분이 사라지고 구현 범위가 가장 크다 |
+| 문서 제목(`<title>`, og:title)과 CV PDF 바닥글만 ` \| ` (`Kwang Myung Yu \| AI Engineer`, `<프로젝트 제목> \| 유광명`, `Kwang Myung Yu \| CV`, `유광명 \| 이력서 \| sguys99.github.io`). CV meta description과 `og:image:alt`는 쉼표와 괄호 (`Kwang Myung Yu, AI Engineer (Director, R&D Group, GenON)`, `유광명, AI Engineer`). 홈 description은 한 줄 소개라 그대로 | B의 쉼표 제목은 국문에서 어색하고(`페이지를 찾을 수 없습니다, 유광명`), 탭 제목의 세로 막대는 웹 관례라 눈에 띄지 않는다. description은 검색 결과에서, alt는 스크린 리더에서 문장처럼 읽히는 자리라 B 그대로 (계획서 2장 작업자 판단) |
+| 국문 라벨 안 병렬은 "와/과" 대신 `/` (`제어/최적화`, `석유화학/철강`, `LLM 에이전트/RAG`). 분야와 역량 이름(`ui.ts` `TAG_KO`, 바뀌는 것 5개)과 같은 성격의 콘텐츠 라벨에 쓴다. 영문은 `&` 그대로 | 칩과 필터 선택 상자에서 짧고(`석유화학/철강 (3)`) 분류 이름으로 익숙하며 쉼표 나열과 겹치지 않는다. "와/과"는 라벨이 길어진다. `/`는 "또는"으로도 읽혀 문장 안 나열에는 쓰지 않는다 |
+| CV 경력 역할은 기호 없이 제목 아래 줄로 (`GenON, R&D Group` 다음 줄에 `Director / AI Product Engineer`). 화면의 모든 폭과 인쇄에서 `.row h3 > .sub { display: block }` | 소속에 쉼표, 영문 직함에 슬래시가 있어 쉼표나 슬래시로 이으면 겹치고, 괄호는 PDF에서 괄호만 남은 줄이 된다. 역할 앞 `—`를 다른 글자 묶음으로 나누면 PDF 글자가 밀리던 이력(`Cv.astro` 주석)도 기호가 없어져 함께 해소된다 |
+| CV 날짜 없는 항목(등록 진행 중 프로그램 2건)의 `—`는 빈칸 | 홈 IP 서랍과 같은 처리(날짜 없는 항목을 "Pending / 등록 진행 중" 묶음에 두고 연도를 비움). 같은 줄 상태 `Pending`이 이유를 말한다 |
+| 세 안 공통 처리와 새로 찾은 자리: 원장 역량 태그는 태그마다 `nowrap`, 분야 `<b>` 끝에 쉼표를 글자로 둔다(데스크톱은 숨김, 모바일은 `b::after` 대신 보임), `dgWith` 국문은 `{a}, {b} 연동`, 표준 구성 그림의 스크린 리더 문장은 em dash 4개 대신 `{robot} and {server}: …` / `{robot}, {server} 연결: …` 꼴. 개인 프로젝트 스택 줄의 `NBSP/ `는 고른 안의 (1)에 맞춰 쉼표 (5.19, 5.20, 5.24.4, 5.24.12) | 시안 조사에서 찾은 지금 화면의 결함 2건(360px 영문 원장 `Control` / `& Optimization`의 `&` 줄 머리, 원장 복사 텍스트 `RoboticsPhysical AI`)과 숨은 자리. "와/과"는 `{a}` 끝 글자의 받침에 따라 달라 자동으로 붙일 수 없다. 스택 줄은 케이스 사이드바, CV와 기호를 맞춘다 |
+| 구분 쉼표는 앞 말에 붙이고 앞에 NBSP를 두지 않는다. 괄호도 NBSP 없음. 11.8의 "구분자 앞 NBSP"(tasks 6.17, 7.1)는 이 규칙으로 대신한다 (7장 줄바꿈) | 쉼표는 줄 머리에 오지 않고 여는 괄호는 줄 머리에 와도 된다. 시안 80쪽에서 줄 머리 구분 글자 0, 360px 가로 넘침 0 |
+| 윤문 강도는 중간을 기본으로 하고, 두 줄을 넘는 긴 영문 문장(진단 보고서 P12)과 비교 결론(`verdict`)만 적극. 연결어미 뒤 쉼표 정리는 중간에 포함. 국문이 영문과 다른 곳은 영문에 맞추고, 국문이 더 구체적이면 영문 보완을 확인 | 사용자 선택. 중간은 표본의 스캔 신호를 1개(영문 자체가 요구 문장이라 남는 당위 결말)로 줄이면서 국문 변경 20.4%로 humanize 경고선(30%) 아래이고, 사실 대조 차이는 의도한 1건뿐이다. 보수는 연결어미 뒤 쉼표, 명사 더미, 꾸밈용 범위가 남고, 적극 전면은 국문 프로필이 33.2% 바뀌며 없던 연결이 생긴다. 긴 문장과 결론 문장에서는 적극안이 가장 짧고 정보가 같다 |
+| 국문 콘텐츠는 명사형 종결로 통일. 한 문장이면 마침표 없음, 두 문장 이상이면 문장마다 마침표. `~함`, `~음`, `~한다.`는 사실을 담은 명사로 고치고, `상태`, `방식`, `구조`는 다른 명사가 없을 때만. 예외: 한 줄 소개(영문과 짝을 맞춰 마침표), 경력 요약(6곳 모양을 맞춰 마침표), 표 칸과 다이어그램 라벨의 평가어와 상태어(`없음`, `강함`), 고객 목소리 말풍선과 따옴표 안 인용. UI 안내 문장의 합니다체는 그대로 (1장 어조 표) | 계획서 2장 결정과 보고서 7장 9, 11번. 25자 이상 국문 360개 중 ③ 14, ④ 10이 결정 근거, 트레이드오프, 문제 목록, 그림 설명, 비교 결론에 몰려 있었고 1장 어조 표에 이 자리의 규칙이 없었다. `~하는 방식`, `~있는 상태`를 기계적으로 붙이면 빈 머리명사가 새로 생긴다 (강도 시안 8장 3번) |
+| 당위 결말: `~해야 함`은 명사형으로 고치고, `~필요`는 영문에 `must`, `needs`가 있을 때만 쓴다. 문제 목록의 `필요` 결말은 사례마다 1개 이하 | 영문 트레이드오프는 비용을 명사구로 쓰는데 국문만 `~필요`로 끝나 당위 결말(humanize I-4)이 됐다 (보고서 7장 10번, 강도 시안 8장 2번) |
+| 중간점 대체 기준은 계획서 5.2 (두 항목 "와/과", 셋 이상 쉼표, 좁은 자리는 쉼표나 `/`, 영문 라벨의 ` · `는 쉼표, `and`, 괄호). 굳은 말은 보고서 5장 제안대로 풀거나 `/`, `~`로 바꾸고, 남기는 것은 단위 `N·m`, 수식 `Kd·ω`, 법령 단위 `조·항`, `조·항·호`뿐. 경력 직함 구분(`Director · AI Product Engineer` 등)은 영문 `role`과 같은 ` / ` (7장 구두점·기호) | 콘텐츠 중간점 617개 중 550개가 케이스 스터디 8건에 있다. 쉼표나 "와/과"로 풀면 뜻이 바뀌거나 어색한 묶음 25개는 따로 판단했다. `조·항`은 법령 단위 표기 관례이고 용어집도 같은 표기, `Kd·ω`는 제어 법칙 수식의 곱셈 기호다 (보고서 7장 12, 13번) |
+| em dash(`—`)는 화면 글자, 대체 텍스트, 스크린 리더 문장, 메타, CV PDF 어디에도 쓰지 않는다. en dash(`–`)는 기간과 숫자 범위에만 | 계획서 2장 결정. antislop 영문 점검(R-02) 대상이고, 지금 콘텐츠 2곳과 컴포넌트 6곳에 있다. en dash 39곳은 모두 기간과 숫자 범위라 유지 (보고서 4.3) |
+| 결정 제목은 고른 것을 담은 명사구. `, not`과 "A가 아닌 B"는 쓰지 않고 버린 대안은 이유 칸에 둔다. 검토한 대안 자체가 정보인 5개(docent `decisions[1]`, lotte-inventory `decisions[0]`, lotte-price `decisions[0]`, samsung-scm `decisions[0]`, `decisions[2]`)만 비교 틀(`instead of`, `over`, "A 대신 B")을 남긴다 | 결정 제목 24개 중 13개가 비교 틀(`, not` 4, `instead of`와 `over` 6, `A, B` 대구 3)이라 하나씩은 자연스러워도 묶음으로 신호가 된다. 버린 대안은 바로 아래 근거 문장이 이미 설명한다 (보고서 7장 3번, 강도 시안 8장 1번) |
+| 영문 시제: 끝난 일은 과거형, 진행 중인 일(현재 역할과 진행 중 프로젝트)은 현재형. 1장의 "현재 역할만 현재형"을 넓힘 | docent의 `summary`와 `highlights`, genp의 `summary`가 `Delivering`, `Leading`처럼 `-ing`로 시작하고, `approach` 목록에도 과거형 사이에 `-ing` 3곳이 섞여 있었다 (8곳, 보고서 7장 2번) |
+| 영문 형식 세부: About 궤적 단계 이름(`h3`)과 역량 표 머리(`dt`)는 Title Case 유지 (`Control & Automation`, `Serving & Infrastructure`), 따옴표는 곧은 따옴표 `"`로 통일 | 두 자리는 용어집 9.4의 제목형 라벨이라 목록 문장의 sentence case 규칙 밖이다. 곡선 따옴표는 genp에만 섞여 있다 (보고서 7장 8번) |
+
+반영한 명세: 1장 어조 표(그림 설명과 결정 근거 행, 시제, 궤적과 역량 표 머리 행, 섹션 제목 예시), 5.2, 5.3, 5.7, 5.13, 5.15, 5.18, 5.19, 5.20, 5.21, 5.22, 5.24.1, 5.24.3, 5.24.4, 5.24.7, 5.24.12, 5.24.17, 6.2~6.6, 7장 줄바꿈과 구두점·기호, 10장. 5.17(삭제된 숫자 표)과 11.1~11.17은 기록이라 그대로 둔다. 구현은 계획서 단계 3, 콘텐츠 문구는 단계 4~5.
