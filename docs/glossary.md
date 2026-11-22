@@ -158,6 +158,7 @@
 |---|---|---|
 | AI agent / agent | 에이전트 | 고유 라벨(4.3 Capability)은 6절 따름 |
 | workflow | 워크플로우 | |
+| non-agentic workflow | 에이전트 없이 ... 워크플로우 | 형용사를 그대로 옮기지 않고 "에이전트 없이"로 푼다 (`에이전트 없이 벡터 DB를 한 번 조회하는 워크플로우`, legal 문제 줄. 진단 보고서 4.1 K6) |
 | anomaly detection | 이상탐지 | 붙여 씀 |
 | time-series forecasting | 시계열 예측 | |
 | sequence model | 시퀀스 모델 | |
