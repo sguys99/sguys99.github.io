@@ -74,6 +74,7 @@
 - [x] 법령 검색 Agentic RAG 케이스 스터디 + 다이어그램 (2026-11-22, DESIGN.md 11.16): Selected Work 3번째로 추가(소속 행 없음, Seahorse·legalQ 링크 게재 승인), 본문 영문·국문 작성(성과 정성). 시안 g15에서 실서비스 화면 C·이전 vs 이후·프롬프트 구조 B·저장소 지도 A·지식원 비교표·계층 스택·의도 6행. 새 섹션 System prompt, `RepoMap.astro`·`Screens.astro`, `Comparison.astro` 이미지 선택, `Diagram.astro`에 행 이름·척추(`texts.style`·`bullet`, `line`). Selected Work 카드 소속 없는 경우 버그 수정
 - [x] AI 과제 추진 로드맵 케이스 스터디 + 다이어그램 (2026-11-22, DESIGN.md 11.17): 기존 항목 `lotte-ai-masterplan`을 대표 프로젝트 6번(원자재 가격 예측 위)으로 올리고 제목을 "AI Roadmap Consulting and PoC Delivery / AI 과제 추진 로드맵 수립 컨설팅 및 PoC 수행"으로 바꿈. 자료 3건(`docs/project-references/ai-roadmap/`)으로 본문 영문·국문 작성(역할 PM 총괄 + PoC 3건 리드, LLM 플랫폼은 한 줄). 시안 g16에서 과제 선별 B·분류 매트릭스 A·로드맵 C. 새 섹션 Roadmap, `TaskSelection`·`Quadrant`·`RoadmapGantt`
 - [x] 소개·기술 문구 수정 (2026-11-22): About 영문·국문에서 GenON·GenP 이름 제외, 프로그래밍에 C#(윈도우 프로그래밍) 추가. 용어집에 Windows programming
+- [ ] **AI 흔적 제거** (2026-11-22 시작, 단계 0~3 진행 중): 화면에 보이는 영문과 국문 문구에서 AI가 쓴 흔적(em dash, 나열용 중간점, 국문 종결 혼용, 대구 같은 문형)을 걷어냄. 계획과 단계별 체크리스트는 [`anti-ai-slop-plan.md`](anti-ai-slop-plan.md), 진단 보고서는 `anti-ai-slop-report.md`(단계 1에서 작성)
 - [ ] legalQ 화면 캡처 갱신: 서비스 화면이 바뀌면 `docs/design-drafts/g15/capture.mjs`로 다시 찍어 `src/assets/legalq/` 교체 (실서비스 질문 1회 = 일일 제한 1회)
 - [ ] 국문 글꼴 빌드 서브셋 검토 (국문 홈 Pretendard 분할 441KB, 7.5)
 - [ ] WebKit 글꼴 중복 요청: 영문 페이지에서 Geist를 preload(cors)와 `@font-face`로 두 번 받음(24.5KB), Pretendard 라틴 분할 1개 추가 요청(원인 미확인) (7.6)
