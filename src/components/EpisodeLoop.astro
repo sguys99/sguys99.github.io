@@ -28,7 +28,8 @@ const SX = [0, 188, 376, 564];
 const BW = 140;
 const H = LY + 108;
 const id = `ep-${lang}`;
-const lw = (s: string) => [...s].reduce((n, c) => n + (/[ㄱ-힝]/.test(c) ? 8 : 4.8), 0);
+// Same 8px mono face and .el tracking as the edge labels in Diagram.astro.
+const lw = (s: string) => [...s].reduce((n, c) => n + (/\p{Script=Hangul}/u.test(c) ? 8 : 5.6), 0);
 const bw = lw(back[lang]) + 16;
 // Illustrative traces: smooth deterministic shapes, not recorded data.
 let state = `M${X0},${ty(2) + 12}`;
