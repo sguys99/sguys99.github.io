@@ -26,5 +26,8 @@ Thumbs.db
 # 원본 자료 (이력서·경력기술서·사진 원본). 공개 저장소이므로 절대 커밋하지 않음
 /docs/private/
 
+# 케이스 스터디 원자료. samsung-scm-agent의 이미 추적 중인 3건 외에는 커밋하지 않음 (docs/anti-ai-slop-plan.md 2장)
+/docs/project-references/
+
 # humanize-korean 스킬 작업 폴더와 문구 점검 캡처 (docs/anti-ai-slop-plan.md)
 /_workspace/
