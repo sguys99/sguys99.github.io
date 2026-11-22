@@ -149,6 +149,7 @@
 | Dense/BM25 hybrid | Dense/BM25 하이브리드 | 의미 벡터 + 키워드 점수 결합 검색. 두 언어 모두 `/`를 붙여 쓴다 (진단 보고서 5장 19번) |
 | PLC / DCS | PLC / DCS | |
 | Physical AI | Physical AI | |
+| Vision AI | Vision AI | GenP 현장 감시 도메인의 핵심 기술 |
 | Harness Engineering | Harness Engineering | 강의 주제명 |
 | Gen AI / generative AI | 생성형 AI | 영문 문장에서는 generative AI, 라벨에서는 Gen AI |
 
