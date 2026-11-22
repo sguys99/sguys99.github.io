@@ -154,6 +154,8 @@ const ui = {
   dgPath: { en: 'Path: {a}', ko: '경로: {a}' },
   dgPains: { en: 'Pain points', ko: '고충' },
   dgRings: { en: 'Around the {a}: {b}', ko: '{a} 주변: {b}' },
+  // Standard set (5.24.12): one link of the drawing as a sentence, `{a}` and `{b}` the two ends.
+  ssLink: { en: '{a} and {b}: {c}.', ko: '{a}, {b} 연결: {c}.' },
   cmpCriterion: { en: 'Criterion', ko: '항목' },
   cmpPick: { en: 'Selected', ko: '선정' },
   rsTask: { en: 'Task', ko: '업무' },

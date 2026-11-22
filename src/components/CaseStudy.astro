@@ -46,7 +46,7 @@ const home = homePath(lang);
 const pad = (n: number) => String(n).padStart(2, '0');
 const href = (id: string) => `${home}work/${id}/`;
 const link = (e?: (typeof list)[number]) => e && { href: href(e.id), title: e.data.title[lang] };
-const title = `${p.title[lang]} · ${profile.name[lang]}`;
+const title = `${p.title[lang]} | ${profile.name[lang]}`;
 const live = p.period.status === 'present' || p.period.status === 'planned';
 const client = p.client && (p.client.public ? p.client.name[lang] : p.client.label[lang]);
 // getCollection, not getEntry: most case studies have no diagram file, and getEntry warns on a miss.
@@ -162,15 +162,12 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
       )}
       <div>
         <dt>{t(lang, 'stack')}</dt>
-        {/* Break only between names, not inside "Unitree SDK"; the "·" rides with its name so no line starts with it. */}
+        {/* Break only between names, not inside "Unitree SDK"; the comma rides with its name so no line starts with it. */}
         <dd class="stk">
           {p.stack.map((s, i) => (
             <>
               {i > 0 && ' '}
-              <span>
-                {s}
-                {i < p.stack.length - 1 && '\u00a0·'}
-              </span>
+              <span>{i < p.stack.length - 1 ? `${s},` : s}</span>
             </>
           ))}
         </dd>
@@ -293,7 +290,7 @@ const layerNo = new Map(arch?.layers.map((l, n) => [l.id, n]));
                                     <span class="num">{pad(k + 1)}</span>{' '}
                                     {arch.layers[k].label[lang]}
                                   </span>
-                                  {f.label && [' ', <em>· {f.label[lang]}</em>]}
+                                  {f.label && [' ', <em>({f.label[lang]})</em>]}
                                 </span>
                               );
                             })}

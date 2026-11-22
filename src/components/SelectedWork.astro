@@ -50,10 +50,7 @@ const featured = projects
                       <span>{p.org[lang]}</span>
                     ))}
                   {client && (
-                    <span>
-                      {p.org ? '· ' : ''}
-                      {client}
-                    </span>
+                    <span class:list={{ cl: p.org }}>{p.org ? `, ${client}` : client}</span>
                   )}
                 </span>
               )}
@@ -143,6 +140,11 @@ const featured = projects
     min-width: 0;
     font-weight: var(--fw-medium);
     color: var(--text-2);
+  }
+
+  /* Organisation, client: the comma leads the client span, pulled back by the gap so it sits on the logo (5.18). */
+  .org > .cl {
+    margin-left: calc(-1 * var(--sp-2));
   }
 
   h3 {

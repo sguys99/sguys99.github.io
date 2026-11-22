@@ -44,7 +44,7 @@ const last = profile.trajectory.length - 1;
           <span class="y num">{fmtYears(lang, e.period)}</span>
           <p>
             <b>{e.school[lang]}</b> {e.degree[lang]}
-            {e.focus && ` · ${e.focus[lang]}`}
+            {e.focus && ` (${e.focus[lang]})`}
           </p>
           {e.gpa && <span class="g num">GPA {e.gpa}</span>}
         </li>
@@ -218,7 +218,7 @@ const last = profile.trajectory.length - 1;
     }
   }
 
-  /* Education (11.9 C): small eyebrow + year | school·degree | GPA ledger. */
+  /* Education (11.9 C): small eyebrow + year | school, degree (focus) | GPA ledger. */
   .edu {
     margin-top: var(--sp-6);
   }

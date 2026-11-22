@@ -20,7 +20,7 @@ const site = new URL(homePath(lang), Astro.site);
 const siteText = site.host + (lang === 'en' ? '' : site.pathname); // sguys99.github.io, sguys99.github.io/ko/
 const host = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
 // Footer in the @page margin box: margin boxes cannot read custom properties, so write the string per route (10장).
-const foot = `${name} · ${t(lang, 'cvTitle')} · ${new URL(Astro.site!).host}`;
+const foot = `${name} | ${t(lang, 'cvTitle')} | ${new URL(Astro.site!).host}`;
 const pageCss = `@page { @bottom-left { content: ${JSON.stringify(foot)}; } }`;
 
 // Sort orders match the home sections: the data loader does not keep YAML order (11.8).
@@ -44,7 +44,7 @@ type Row = {
   title: string;
   href?: string;
   badge?: string;
-  role?: string; // " — role" after the title
+  role?: string; // job title on its own line under the organisation (11.18)
   sub?: string;
   venue?: string;
   meta?: string;
@@ -65,8 +65,7 @@ type Sec = {
 const projects = await getCollection('projects');
 const who = (p: (typeof projects)[number]['data']) => {
   const client = p.client && (p.client.public ? p.client.name[lang] : p.client.label[lang]);
-  // NBSP keeps the dot off the start of a line.
-  return [p.org?.[lang], client].filter(Boolean).join('\u00a0· ');
+  return [p.org?.[lang], client].filter(Boolean).join(', ');
 };
 const projRow = ({ data: p }: (typeof projects)[number]): Row => ({
   when: fmtYears(lang, p.period),
@@ -158,7 +157,8 @@ const sections: Sec[] = [
     rows: (await getCollection('software'))
       .sort(byDate((x) => x.data.date ?? ''))
       .map(({ data: s }) => ({
-        when: s.date?.slice(0, 4) ?? '—',
+        // Undated (pending) rows leave the date blank; the status on the line says why (11.18).
+        when: s.date?.slice(0, 4) ?? '',
         title: s.title[lang],
         meta: t(lang, s.status as UiKey),
       })),
@@ -214,12 +214,12 @@ const sections: Sec[] = [
 const thin = (s: string) => s.replace(/\s*–\s*/g, ' – ');
 ---
 
-<Base lang={lang} title={`${name} · ${t(lang, 'cvTitle')}`}>
+<Base lang={lang} title={`${name} | ${t(lang, 'cvTitle')}`}>
   <Fragment slot="head">
     <Head
       lang={lang}
-      title={`${name} · ${t(lang, 'cvTitle')}`}
-      description={`${name} · ${P.headline[lang]} · ${P.currentRole[lang]}`}
+      title={`${name} | ${t(lang, 'cvTitle')}`}
+      description={`${name}, ${P.headline[lang]} (${P.currentRole[lang]})`}
     />
     <style is:inline set:html={pageCss} />
   </Fragment>
@@ -241,7 +241,7 @@ const thin = (s: string) => s.replace(/\s*–\s*/g, ' – ');
       <div>
         <h1>{name}</h1>
         <p class="role">
-          {P.headline[lang]} · {P.currentRole[lang]}
+          {P.headline[lang]} ({P.currentRole[lang]})
         </p>
       </div>
       <p class="contact">
@@ -282,7 +282,7 @@ const thin = (s: string) => s.replace(/\s*–\s*/g, ' – ');
                     <h3>
                       {r.href ? <a href={r.href}>{r.title}</a> : r.title}
                       {r.badge && <span class="st">{r.badge}</span>}
-                      {r.role && <span class="sub"> — {r.role}</span>}
+                      {r.role && [' ', <span class="sub">{r.role}</span>]}
                     </h3>
                     {r.sub && (
                       <p class="sub">
@@ -304,8 +304,8 @@ const thin = (s: string) => s.replace(/\s*–\s*/g, ' – ');
                       <p class="stack">
                         {r.stack.map((s, i) => (
                           <>
-                            {i > 0 && '\u00a0· '}
-                            <span>{s}</span>
+                            {i > 0 && ' '}
+                            <span>{i < r.stack!.length - 1 ? `${s},` : s}</span>
                           </>
                         ))}
                       </p>
@@ -524,6 +524,11 @@ const thin = (s: string) => s.replace(/\s*–\s*/g, ' – ');
     color: var(--text-2);
     font-weight: var(--fw-regular);
   }
+  /* Job title on its own line under the organisation, with no mark between them, on every width and on
+     paper (11.18). No dash left to split into its own text run (that once shifted PDF glyphs, 3.4). */
+  .row h3 > .sub {
+    display: block;
+  }
   .meta,
   .stack,
   .note {
@@ -648,11 +653,6 @@ const thin = (s: string) => s.replace(/\s*–\s*/g, ' – ');
     .when {
       float: right;
       margin-left: var(--sp-3);
-    }
-    /* The role takes its own line, so only the organisation shares the line with the date
-       (the "—" stays in one text run with the role: splitting it shifted the PDF glyphs by sub-pixels). */
-    .row h3 > .sub {
-      display: block;
     }
   }
 

@@ -71,8 +71,8 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
           <p class="stk">
             {p.stack.map((s, i) => (
               <>
-                {i > 0 && '\u00a0/ '}
-                <span>{s}</span>
+                {i > 0 && ' '}
+                <span>{i < p.stack.length - 1 ? `${s},` : s}</span>
               </>
             ))}
           </p>

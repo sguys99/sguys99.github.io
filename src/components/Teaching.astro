@@ -1,5 +1,5 @@
 ---
-// Teaching · Books · Advisory (DESIGN.md 5.22, 3.2.6 A): period-ledger rows grouped by kind (book → teaching → advisory).
+// Teaching, Books & Advisory (DESIGN.md 5.22, 3.2.6 A): period-ledger rows grouped by kind (book → teaching → advisory).
 import Card from './Card.astro';
 import SectionHead from './SectionHead.astro';
 import LedgerGroup from './LedgerGroup.astro';
@@ -37,7 +37,7 @@ const groups = (
 
 <Card id="teaching" labelledby="h-teaching">
   <SectionHead id="teaching" title={t(lang, 'teaching')}>
-    {groups.map((g) => `${g.label} ${g.rows.length}`).join(' · ')}
+    {groups.map((g) => `${g.label} ${g.rows.length}`).join(', ')}
   </SectionHead>
 
   {groups.map((g) => (

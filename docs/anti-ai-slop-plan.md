@@ -443,9 +443,9 @@ B 조합으로 확정 (2.3, 시안 `docs/design-drafts/g17/`). B를 기본으로
 ### 단계 3. UI 문구와 구분자
 
 - [x] 3.1 `src/i18n/ui.ts`: 섹션 제목, 건수 줄, 분야와 역량 이름, 연동 표시(`{a}·{b} 연동`), 스크린 리더 라벨
-- [ ] 3.2 컴포넌트 구분자를 시안 결과로 교체: `ProjectLedger`(CSS `content` 포함), `CaseStudy`(스택 줄, 페이지 제목, 그림 라벨), `Cv`(머리, 바닥글, 역할 구분, 빈 날짜), `Home`, `Head`(OG 대체 텍스트), `About`, `Teaching`, `SelectedWork`, `Comparison`, `Screens`, `pages/404`
+- [x] 3.2 컴포넌트 구분자를 시안 결과로 교체: `ProjectLedger`(CSS `content` 포함), `CaseStudy`(스택 줄, 페이지 제목, 그림 라벨), `Cv`(머리, 바닥글, 역할 구분, 빈 날짜), `Home`, `Head`(OG 대체 텍스트), `About`, `Teaching`, `SelectedWork`, `Comparison`, `Screens`, `pages/404`
   - 시안 조사에서 더한 것: `PersonalProjects` 스택 줄(`/`를 쉼표로), `StandardSet` 그림 글자 `LLM · STT · TTS`, 원장 역량 태그 `nowrap`과 분야 `<b>` 끝 쉼표(현재 결함 2건: 360px 영문 `& Optimization` 줄 머리, 복사 텍스트 `RoboticsPhysical AI`). 규칙은 5.3과 DESIGN.md 11.18
-- [ ] 3.3 `StandardSet.astro` 대체 텍스트의 em dash
+- [x] 3.3 `StandardSet.astro` 대체 텍스트의 em dash
 - [ ] 3.4 CV 역할 구분을 바꾼 뒤 PDF 글자 위치 확인 (`Cv.astro` 주석: 이 구분자를 다른 글자 묶음으로 나누면 PDF 글자가 밀렸던 이력)
 - [ ] 3.5 빌드, 홈과 `/cv/` 영문/국문 확인, 커밋
 
@@ -558,4 +558,5 @@ B 조합으로 확정 (2.3, 시안 `docs/design-drafts/g17/`). B를 기본으로
 | 2026-11-22 | 2.5 | 용어집: 4.1 표의 6건, 분야와 역량 국문 이름 `/`, 9.5 개정과 9.6 "구두점과 기호" 신설, 굳은 말과 B-2 대응어 통일(`온프레미스`, `깊이 카메라`, `조작`, `납품`), 소제목 10개의 중간점. 단계 4~5에서 바꿀 콘텐츠 목록은 작업자 보고에 따라 해당 단계에서 다시 뽑는다 (`check-text.mjs --report --detail`) | `ce789e8` |
 | 2026-11-22 | 2.6 | 5장 확정본 (5.1 em dash 8곳 표, 5.2 본문 기본 표와 굳은 말과 예외, 5.3 B 조합 규칙과 자리별 요약 21행, 5.5 종결 대상 27곳, 5.6과 5.7 점검표, 5.8). 7.1 예외 목록과 `yaml` 직접 의존성, 8.2 목표 범위. 사용 한도로 한 번 끊겼다가 이어서 끝냄. 남은 미정 5곳은 사용자 답과 작업자 판단으로 정함 (2장) | |
 | 2026-11-22 | 3.1 | `src/i18n/ui.ts`: `teaching`, `ip`, `tab_ip`, `regFiled`, `regPending`, `dgWith`, `cv_teaching`, `TAG_KO` 5개. 빌드 통과, 4조합(en 1280 라이트, en 360 다크, ko 1280 다크, ko 360 라이트)에서 가로 넘침 0, 원장 필터 동작 확인. `check-text` UI 줄 40 → 27 (ui.ts 0). 3.2 전까지 국문 원장에 `/`와 `·`가 섞여 보이는 과도기 | `e999eac` |
-| 2026-11-22 | 문서 정리 | 사용자 승인: `.gitignore`에 `/docs/project-references/` (추적 중인 pptx 3건은 그대로), CLAUDE.md 건수를 대표 8건, 케이스 스터디 8건으로. `basic-plan.md`와 용어집 7.3은 7.5로 미룸 | |
+| 2026-11-22 | 문서 정리 | 사용자 승인: `.gitignore`에 `/docs/project-references/` (추적 중인 pptx 3건은 그대로), CLAUDE.md 건수를 대표 8건, 케이스 스터디 8건으로. `basic-plan.md`와 용어집 7.3은 7.5로 미룸 | `b17131f` |
+| 2026-11-22 | 3.2, 3.3 | 컴포넌트 15개: 원장(소속과 고객 쉼표, 태그 `nowrap`, 분야 `<b>` 끝 쉼표 `.pl-sep`), 케이스 스터디(제목 ` \| `, 스택 줄 쉼표, 흐름 라벨 괄호), CV(머리 괄호, 역할 다음 줄, 빈 날짜 빈칸, 바닥글과 제목 ` \| `, description 쉼표와 괄호), Home, Head, About, Teaching, SelectedWork, Comparison, Screens, PersonalProjects, StandardSet(`LLM, STT, TTS`, 스크린 리더 문장은 새 `ui.ts` 키 `ssLink`), 404. `check-text` UI 줄 27 → 0. 화면 28조합: 360px 넘침 0, 줄 머리 구분자 0 (1,455줄), 현재 결함 2건 해소. 영문 CV PDF는 5쪽 (작업자 확인으로는 이번 변경 전에도 5쪽, 3.4에서 기준 커밋과 대조) | |

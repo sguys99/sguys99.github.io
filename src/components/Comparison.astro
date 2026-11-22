@@ -20,7 +20,7 @@ const { options, pick, rows, verdict, credit } = data;
 const name = options.map((o) => (typeof o.name === 'string' ? o.name : o.name[lang]));
 const imgs = options.every((o) => o.image && o.alt);
 // On narrow columns the table stacks, so each value carries its option name (and the pick) as a label.
-const tag = (i: number) => (i === pick ? `${name[i]} · ${t(lang, 'cmpPick')}` : name[i]);
+const tag = (i: number) => (i === pick ? `${name[i]} (${t(lang, 'cmpPick')})` : name[i]);
 ---
 
 <div class="cmp">

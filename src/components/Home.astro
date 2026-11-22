@@ -19,7 +19,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const profile = (await getEntry('profile', 'profile'))!.data;
-const title = `${profile.name[lang]} · ${profile.headline[lang]}`;
+const title = `${profile.name[lang]} | ${profile.headline[lang]}`;
 ---
 
 <Page lang={lang} title={title}>

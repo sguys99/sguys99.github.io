@@ -79,14 +79,23 @@ const SX = 296;
       </text>
       <rect class="ext" x="556" y="64" width="156" height="88" rx="6" />
       <text class="nt" x="634" y="104" text-anchor="middle">
-        LLM · STT · TTS
+        LLM, STT, TTS
       </text>
     </svg>
   </div>
   <p class="hint">{t(lang, 'dgScroll')}</p>
   <p class="sr-only">
-    {alt[lang]}. {robot.name[lang]} — {links.robotServer.join(', ')} — {server.name[lang]} —{' '}
-    {links.serverExternal[lang]} — {external.name[lang]}
+    {alt[lang]}.{' '}
+    {t(lang, 'ssLink', {
+      a: robot.name[lang],
+      b: server.name[lang],
+      c: links.robotServer.join(', '),
+    })}{' '}
+    {t(lang, 'ssLink', {
+      a: server.name[lang],
+      b: external.name[lang],
+      c: links.serverExternal[lang],
+    })}
   </p>
   <div class="units">
     {units.map((u) => (
