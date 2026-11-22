@@ -50,16 +50,14 @@ const GOATCOUNTER = 'sguys99';
     }
     <link rel="stylesheet" href="/fonts/pretendard/pretendardvariable-dynamic-subset.css" />
     <slot name="head" />
-    {
-      GOATCOUNTER && (
-        <script
-          is:inline
-          data-goatcounter={`https://${GOATCOUNTER}.goatcounter.com/count`}
-          async
-          src="https://gc.zgo.at/count.js"
-        />
-      )
-    }
+    {GOATCOUNTER && (
+      <script
+        is:inline
+        data-goatcounter={`https://${GOATCOUNTER}.goatcounter.com/count`}
+        async
+        src="https://gc.zgo.at/count.js"
+      />
+    )}
   </head>
   <body>
     <slot />
