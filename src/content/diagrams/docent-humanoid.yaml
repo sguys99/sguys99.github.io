@@ -6,9 +6,9 @@
 
 legend:
   - kind: acc-line
-    label: { en: 'Safety channel, separate path', ko: 안전 채널 (별도 경로) }
+    label: { en: 'Safety channel, separate path', ko: 안전 채널(별도 경로) }
   - kind: input
-    label: { en: People and on-site devices, ko: 사람·현장 단말 }
+    label: { en: People and on-site devices, ko: 사람/현장 단말 }
   - kind: plain
     label: { en: Software module, ko: 소프트웨어 모듈 }
 journey:
@@ -16,14 +16,14 @@ journey:
   height: 364
   legend:
     - kind: mark
-      label: { en: 'Stop, numbered as the steps below', ko: 정차 지점 (아래 단계 번호) }
+      label: { en: 'Stop, numbered as the steps below', ko: 정차 지점(아래 단계 번호) }
     - kind: logic
       label: { en: Fixed fixture, ko: 고정 설비 }
     - kind: input
       label: { en: Visitors, ko: 관람객 }
   zones:
     - id: lobby
-      label: { en: 'Lobby, illustrative', ko: 로비 (개념도) }
+      label: { en: 'Lobby, illustrative', ko: 로비(개념도) }
       x: 0
       y: 0
       w: 720
@@ -52,18 +52,18 @@ journey:
       h: 40
     - id: door
       kind: input
-      label: { en: Visitor entrance, ko: 입구·관람객 집결 }
+      label: { en: Visitor entrance, ko: 입구/관람객 집결 }
       x: 560
       y: 248
       w: 144
       h: 40
   marks:
     - id: s2
-      n: 1 · 2
+      n: 1–2
       x: 280
       y: 120
-      label: { en: 'Welcome, name check', ko: 환영 인사·성함 확인 }
-      sub: { en: 'stops, faces, greets by name', ko: 정지·시선 정렬·이름 호칭 }
+      label: { en: 'Welcome, name check', ko: 환영 인사/성함 확인 }
+      sub: { en: 'stops, faces, greets by name', ko: 정지/시선 정렬/이름 호칭 }
       lx: 280
       ly: 84
       anchor: middle
@@ -72,7 +72,7 @@ journey:
       x: 372
       y: 200
       label: { en: Souvenir handout, ko: 기념품 전달 }
-      sub: { en: 'slow walk, visitors take one', ko: 저속 보행·관람객 자율 수령 }
+      sub: { en: 'slow walk, visitors take one', ko: 저속 보행/관람객 자율 수령 }
       lx: 460
       ly: 176
       anchor: middle
@@ -81,7 +81,7 @@ journey:
       x: 620
       y: 120
       label: { en: Photo time, ko: 포토타임 }
-      sub: { en: 'pose, countdown', ko: 포즈·카운트다운 }
+      sub: { en: 'pose, countdown', ko: 포즈/카운트다운 }
       lx: 600
       ly: 116
       anchor: end
@@ -107,9 +107,9 @@ arch:
   height: 552
   legend:
     - kind: acc-line
-      label: { en: 'Safety channel, separate path', ko: 안전 채널 (별도 경로) }
+      label: { en: 'Safety channel, separate path', ko: 안전 채널(별도 경로) }
     - kind: input
-      label: { en: People and on-site devices, ko: 사람·현장 단말 }
+      label: { en: People and on-site devices, ko: 사람/현장 단말 }
     - kind: plain
       label: { en: Software module, ko: 소프트웨어 모듈 }
   zones:
@@ -132,19 +132,19 @@ arch:
       w: 400
       h: 56
     - id: robot
-      label: { en: 'Robot, onboard', ko: 로봇 (온보드) }
+      label: { en: 'Robot, onboard', ko: 로봇(온보드) }
       x: 320
       y: 76
       w: 400
       h: 380
     - id: s2
-      label: { en: System 2 · understand and plan, ko: System 2 · 이해와 계획 }
+      label: { en: System 2 (understand and plan), ko: System 2(이해와 계획) }
       x: 332
       y: 108
       w: 376
       h: 96
     - id: s1
-      label: { en: System 1 · real-time control, ko: System 1 · 실시간 제어 }
+      label: { en: System 1 (real-time control), ko: System 1(실시간 제어) }
       x: 332
       y: 276
       w: 376
@@ -186,15 +186,15 @@ arch:
     - id: dash
       kind: plain
       label: { en: Control dashboard, ko: 관제 대시보드 }
-      sub: { en: alarms · E-Stop, ko: 상태·알람·E-Stop }
+      sub: { en: 'alarms, E-Stop', ko: 상태/알람/E-Stop }
       x: 152
       y: 244
       w: 136
       h: 48
     - id: lists
       kind: plain
-      label: { en: Lists and scripts, ko: 명단·멘트 관리 }
-      sub: { en: 'per tour, 4 languages', ko: 회차별·4개국어 }
+      label: { en: Lists and scripts, ko: 명단/멘트 관리 }
+      sub: { en: 'per tour, 4 languages', ko: 회차별 4개국어 }
       x: 152
       y: 316
       w: 136
@@ -218,7 +218,7 @@ arch:
     - id: voice
       kind: plain
       label: { en: Voice, ko: 음성 대화 }
-      sub: { en: STT · TTS, ko: STT·TTS }
+      sub: { en: STT/TTS, ko: STT/TTS }
       x: 596
       y: 136
       w: 100
@@ -234,14 +234,14 @@ arch:
     - id: planner
       kind: plain
       label: { en: Planner, ko: 플래너 }
-      sub: { en: plan · replan, ko: 계획·재계획 }
+      sub: { en: 'plan, replan', ko: 계획/재계획 }
       x: 344
       y: 136
       w: 104
       h: 56
     - id: bus
       kind: logic
-      label: { en: Runtime bus · commands and status, ko: 런타임 버스 · 명령과 상태 }
+      label: { en: Runtime bus (commands and status), ko: 런타임 버스(명령과 상태) }
       x: 332
       y: 224
       w: 376
@@ -249,7 +249,7 @@ arch:
     - id: percep
       kind: plain
       label: { en: Perception, ko: 인식 }
-      sub: { en: people · distance, ko: 사람·거리 }
+      sub: { en: 'people, distance', ko: 사람/거리 }
       x: 344
       y: 304
       w: 104
@@ -257,7 +257,7 @@ arch:
     - id: nav
       kind: plain
       label: { en: Navigation, ko: 자율주행 }
-      sub: { en: SLAM · avoidance, ko: SLAM·회피 }
+      sub: { en: 'SLAM, avoidance', ko: SLAM/회피 }
       x: 460
       y: 304
       w: 124
@@ -267,16 +267,15 @@ arch:
       label: { en: Whole-body
 
             control, ko: 전신 제어 }
-      sub: { en: balance · stop, ko: 균형·정지 }
+      sub: { en: 'balance, stop', ko: 균형/정지 }
       x: 596
       y: 304
       w: 100
       h: 56
     - id: hw
       kind: logic
-      label: { en: Hardware and SDK, ko: 하드웨어·SDK }
-      sub:
-        { en: LiDAR · RGB-D · mics · face display · joints, ko: LiDAR·RGB-D·마이크·얼굴 화면·관절 }
+      label: { en: Hardware and SDK, ko: 하드웨어/SDK }
+      sub: { en: 'LiDAR, RGB-D, mics, face display, joints', ko: LiDAR/RGB-D/마이크/얼굴 화면/관절 }
       x: 332
       y: 392
       w: 376
@@ -309,7 +308,7 @@ arch:
       d: M56,444 L56,468 Q56,476 64,476 L706,476 Q714,476 714,468 L714,340 Q714,332 706,332 L696,332
       style: acc
       label:
-        text: { en: SAFETY CHANNEL · SKIPS PLANNING, ko: 안전 채널 · 판단 계층 우회 }
+        text: { en: SAFETY CHANNEL (SKIPS PLANNING), ko: 안전 채널(판단 계층 우회) }
         x: 520
         y: 467
 safety:
@@ -355,15 +354,15 @@ safety:
     - id: t3
       kind: input
       label: { en: Dashboard button, ko: 대시보드 버튼 }
-      sub: { en: stops standing · logged, ko: 선 채로 멈춤·기록 }
+      sub: { en: 'stops upright, logged', ko: 선 채로 멈춤/기록 }
       x: 352
       y: 184
       w: 148
       h: 52
     - id: llm
       kind: ghost
-      label: { en: 'Planning, dialogue', ko: 판단·대화 계층 }
-      sub: { en: LLM · bypassed, ko: LLM · 거치지 않음 }
+      label: { en: 'Planning, dialogue', ko: 판단/대화 계층 }
+      sub: { en: LLM (bypassed), ko: LLM(거치지 않음) }
       x: 536
       y: 36
       w: 172
@@ -390,12 +389,12 @@ safety:
     center: { en: robot, ko: 로봇 }
     items:
       - r: 108
-        label: { en: 1 m · slow down, ko: 1m 이내 · 감속 }
+        label: { en: 1 m (slow down), ko: 1m 이내 감속 }
       - r: 52
-        label: { en: 0.5 m · stop, ko: 0.5m 이내 · 정지 }
+        label: { en: 0.5 m (stop), ko: 0.5m 이내 정지 }
         accent: true
   texts:
-    - text: { en: LiDAR + depth camera, ko: LiDAR + Depth 카메라 이중 감지 }
+    - text: { en: LiDAR + depth camera, ko: LiDAR + 깊이 카메라 이중 감지 }
       x: 160
       y: 290
       anchor: middle
