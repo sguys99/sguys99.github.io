@@ -1,6 +1,6 @@
 genon:
   org: { en: 'GenON, R&D Group', ko: GenON R&D그룹 }
-  role: { en: Director / AI Product Engineer, ko: Director · AI Product Engineer }
+  role: { en: Director / AI Product Engineer, ko: Director / AI Product Engineer }
   period: { start: 2026-07, status: present }
   summary:
     en: >-
@@ -10,13 +10,13 @@ genon:
       and motion, and build the robot control panel.
       Propose and run new Physical AI and agent-system projects and hire talent.
     ko: >-
-      Physical AI 휴머노이드 제품 총괄(PO), 제품 정의, 기술트리, 상용화 로드맵 수립, 고객사 프로젝트 PM.
-      음성 대화, 시나리오 실행, VLA, VLN, 자율주행, 모션을 아우르는 통합 아키텍처 설계, 로봇 관제시스템 설계 및 개발.
-      Physical AI·에이전트 시스템 분야 신규 프로젝트 제안·운영, 인재 채용.
+      Physical AI 휴머노이드 제품 총괄(PO)로 제품 정의, 기술트리와 상용화 로드맵 수립, 고객사 프로젝트 PM 담당.
+      음성 대화, 시나리오 실행, VLA, VLN, 자율주행, 모션을 아우르는 통합 아키텍처 설계, 로봇 관제시스템 설계와 개발.
+      Physical AI와 에이전트 시스템 분야의 신규 프로젝트 제안과 운영, 인재 채용.
 
 pwc:
   org: { en: 'PwC Consulting, Digital & AI', ko: PwC 컨설팅 Digital & AI }
-  role: { en: Director / Senior ML Engineer, ko: Director · Senior ML Engineer }
+  role: { en: Director / Senior ML Engineer, ko: Director / Senior ML Engineer }
   period: { start: 2024-03, end: 2025-08 }
   summary:
     en: >-
@@ -24,12 +24,12 @@ pwc:
       price and demand forecasting, and control optimization.
       Proposed new projects, ran AI training for firm-wide and division staff, and hired talent.
     ko: >-
-      생성형 AI(RAG, 에이전트) 서비스, ML 기반 설비 진단, 가격·수요 예측, 제어 최적화 개발.
-      신규 프로젝트 제안, 전사·본부 직원 AI 교육, 인재 채용.
+      생성형 AI(RAG, 에이전트) 서비스, ML을 활용한 설비 진단, 가격과 수요 예측, 제어 최적화 개발.
+      신규 프로젝트 제안, 전사와 본부 직원 대상 AI 교육, 인재 채용.
 
 makinarocks:
   org: { en: 'MakinaRocks, AI Project Team', ko: 마키나락스 AI 프로젝트팀 }
-  role: { en: Part Leader / Senior ML Engineer / PO, ko: 파트 리더 · Senior ML Engineer · PO }
+  role: { en: Part Leader / Senior ML Engineer / PO, ko: 파트 리더 / Senior ML Engineer / PO }
   period: { start: 2023-04, end: 2024-04 }
   summary:
     en: >-
@@ -38,8 +38,8 @@ makinarocks:
       Planned new projects, improved the traceability and reproducibility of project deliverables,
       researched ML technology trends, and hired talent.
     ko: >-
-      이상탐지, 제어 최적화 및 가이던스 모델, RAG 기반 서비스 개발, LLMOps·MLOps 환경 구축 지원.
-      신규 프로젝트 기획, 프로젝트 산출물 추적성·재현성 개선, ML 기술 동향 조사, 인재 채용.
+      이상탐지, 제어 최적화, 가이던스 모델과 RAG 기반 서비스 개발, LLMOps/MLOps 환경 구축 지원.
+      신규 프로젝트 기획, 프로젝트 산출물의 추적성과 재현성 개선, ML 기술 동향 조사, 인재 채용.
 
 semco:
   org:
@@ -54,8 +54,8 @@ semco:
       Analyzed and visualized manufacturing equipment performance and logistics data,
       and taught data analysis to employees.
     ko: >-
-      데이터 기반 이상탐지·예지보전과 딥러닝 모델 구동을 위한 SW 플랫폼 구축.
-      제조 설비 운영실적·물류 데이터 분석 및 시각화, 사내 직원 데이터 분석 교육.
+      데이터 기반 이상탐지, 예지보전과 딥러닝 모델 구동용 SW 플랫폼 구축.
+      제조 설비 운영실적과 물류 데이터의 분석과 시각화, 사내 직원 데이터 분석 교육.
 
 kepco:
   org:
@@ -71,7 +71,7 @@ kepco:
       and planned research infrastructure and analytics environments.
     ko: >-
       이상탐지 알고리즘, 시계열 예측, 딥러닝(시퀀스 모델, 생성 모델 등) 연구.
-      AI·데이터 사이언스 분야 로드맵 수립, 신규 과제 발굴 및 기획, 연구 인프라·분석 환경 구축 계획 수립.
+      AI와 데이터 사이언스 분야 로드맵 수립, 신규 과제 발굴과 기획, 연구 인프라와 분석 환경 구축 계획.
 
 posco-enc:
   org: { en: 'POSCO E&C, Energy Business Division', ko: 포스코이앤씨 에너지사업본부 }
@@ -82,4 +82,4 @@ posco-enc:
       Designed electrical and automation systems for power and energy plants, designed and built
       data acquisition infrastructure, developed control algorithms, and supported commissioning.
     ko: >-
-      전력 에너지 플랜트 전기·자동화 설계, 데이터 수집 인프라 설계 및 구축, 제어 알고리즘 개발, 시운전 지원.
+      전력 에너지 플랜트의 전기와 자동화 설계, 데이터 수집 인프라 설계와 구축, 제어 알고리즘 개발, 시운전 지원.

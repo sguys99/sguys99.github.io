@@ -1,7 +1,7 @@
 kaist:
   school: { en: KAIST, ko: KAIST (한국과학기술원) }
   degree: { en: M.S. in Electrical Engineering, ko: 전기 및 전자공학 공학석사 }
-  focus: { en: Control & network optimization, ko: '세부전공: 제어 최적화·네트워크 최적화' }
+  focus: { en: Control & network optimization, ko: '세부전공: 제어 최적화와 네트워크 최적화' }
   gpa: 3.83 / 4.3
   period: { start: 2006-03, end: 2008-02 }
 

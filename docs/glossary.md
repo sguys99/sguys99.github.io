@@ -478,7 +478,7 @@ UI 문구의 원본은 `src/i18n/ui.ts`다. 이 표는 표기 기준이며, 문�
 | Best People Awards | Best People Awards | PwC Consulting. 원문 표기 유지 |
 | President's Award (Excellence Prize), Big Data & AI Competition | 빅데이터 AI 경진대회 사장표창(우수상) | Korea East-West Power |
 | Merit Award (R&D) | 공로상(연구개발) | KEPCO |
-| Honors graduate; academic excellence scholarship | 우등졸업 / 성적우수 장학생 | Pusan National University |
+| Honors graduate, academic excellence scholarship | 우등졸업, 성적우수 장학생 | Pusan National University |
 
 ## 9. 표기 규칙
 
