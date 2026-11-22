@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>g17 구분자 시안</title>
+<link rel="stylesheet" href="/public/fonts/pretendard/pretendardvariable-dynamic-subset.css">
+<style>
+/*
+ * Self-hosted webfonts (DESIGN.md 7장 웹폰트 로딩). Files and licenses: public/fonts/.
+ * Geist / Geist Mono: official `geist` 1.9.2 variable fonts, subset to Latin and cut to the weights used
+ * (fonttools varLib.instancer + subset). Pretendard: official dynamic subset CSS, linked in Base.astro.
+ */
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/public/fonts/geist/Geist-Latin-wght.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('/public/fonts/geist/GeistMono-Latin-wght.woff2') format('woff2');
+}
+
+/* Arial scaled to Geist's metrics so the swap does not shift layout (capsize formula, Geist xWidthAvg 467/1000). */
+@font-face {
+  font-family: 'Geist Fallback';
+  src: local('Arial');
+  size-adjust: 104.76%;
+  ascent-override: 95.94%;
+  descent-override: 28.16%;
+  line-gap-override: 0%;
+}
+
+/*
+ * Design tokens. Source of truth: DESIGN.md "3. Tokens" — change the doc first, then this file.
+ * Tokens only: no reset or component styles here.
+ * Breakpoints and per-breakpoint token values: see DESIGN.md 4장 (CSS variables cannot drive media queries).
+ * Asset hex colors (favicon, OG, CV @page) live in the assets themselves: see DESIGN.md 3장 Color.
+ * Dark values appear twice (OS preference / manual choice) and must stay identical (DESIGN.md 8장).
+ */
+
+:root {
+  /* Color */
+  color-scheme: light;
+  --bg: #f3f5f8;
+  --surface: #ffffff;
+  --line: #dfe3ea;
+  --line-strong: #c5ccd6;
+  --text: #141a22;
+  --text-2: #475260;
+  --text-3: #5f6a78;
+  --chip: #eef1f5;
+  --accent: #2b5a8a;
+  --accent-soft: #e6edf6;
+  --focus: var(--accent);
+  --row-tint: var(--accent-soft);
+  --header-bg: rgba(243, 245, 248, 0.9);
+  --scrim: rgba(22, 25, 29, 0.32);
+  --photo-ring: var(--line);
+  --photo-filter: none;
+  --logo-filter: brightness(0);
+  --logo-op: 0.62;
+  --logo-op-cur: 0.92;
+  --mask-solid: #000;
+
+  /* Typography */
+  --font:
+    'Geist', 'Geist Fallback', 'Pretendard Variable', system-ui, -apple-system, 'Segoe UI',
+    sans-serif;
+  --font-ko:
+    'Pretendard Variable', 'Pretendard', system-ui, -apple-system, 'Apple SD Gothic Neo', sans-serif;
+  --font-display: var(--font);
+  --font-meta: 'Geist Mono', 'Pretendard Variable', ui-monospace, 'SFMono-Regular', monospace;
+
+  --fs-2xs: 0.6875rem;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.8125rem;
+  --fs-md: 0.9375rem;
+  --fs-lg: 1.0625rem;
+  --fs-xl: 1.375rem;
+  --fs-2xl: 1.875rem;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-name: 600;
+  --fw-tagline: 500;
+  --fw-tagline-ko: 600;
+  --fw-title: 600;
+  --fw-strong: 600;
+  --fw-eyebrow: 500;
+
+  --lh-body: 1.6;
+  --lh-body-ko: 1.75;
+  --lh-tagline: 1.22;
+  --lh-tagline-ko: 1.4;
+  --lh-title: 1.35;
+  --lh-row: 1.45;
+
+  --ls-body: -0.005em;
+  --ls-body-ko: -0.01em;
+  --ls-name: -0.02em;
+  --ls-tagline: -0.03em;
+  --ls-tagline-ko: -0.035em;
+  --ls-title: -0.012em;
+  --ls-title-ko: -0.02em;
+  --ls-eyebrow: 0.06em;
+  --ls-eyebrow-ko: 0;
+  --ls-label: 0.1em;
+  --ls-label-ko: 0.02em;
+
+  /* Spacing */
+  --sp-0: 2px;
+  --sp-1: 4px;
+  --sp-1h: 6px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+
+  /* Radius */
+  --radius: 10px;
+  --radius-sm: 6px;
+  --radius-xs: 4px;
+  --radius-bar: 2px;
+  --radius-pill: 999px;
+
+  /* Layout sizes */
+  --sidebar: 320px;
+  --main: 960px;
+  --header-h: 56px;
+  --header-blur: saturate(1.2) blur(8px);
+  --sb-photo-w: 132px;
+  --sb-photo-w-sm: 64px;
+  --sb-key: 64px;
+  --sheet-w: 340px;
+  --row-when: 148px;
+  --col-idx: 48px;
+  --col-idx-sm: 28px;
+  --col-year: 56px;
+  --col-year-wide: 104px; /* fits `2026 – Present` (tasks 6.4, DESIGN.md 11.8) */
+  --measure: 68ch;
+  --measure-sm: 64ch;
+  --logo-h: 22px;
+  --logo-w: 124px;
+  --logo-h-sm: 14px;
+
+  /* Controls, icons, decoration */
+  --ctl-h-sm: 28px;
+  --ctl-h: 32px;
+  --ctl-h-lg: 36px;
+  --icon-xs: 12px;
+  --icon-sm: 14px;
+  --icon: 16px;
+  --icon-lg: 18px;
+  --icon-stroke: 1.5;
+  --icon-stroke-sm: 1.6;
+  --dot: 6px;
+  --dot-lg: 9px;
+  --halo: 3px;
+  --halo-lg: 4px;
+  --focus-w: 2px;
+  --focus-offset: 2px;
+  --underline-offset: 3px;
+
+  /* Motion */
+  --dur: 180ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --m-rise: 8px;
+  --m-rise-row: 6px;
+  --m-reveal: 480ms;
+  --m-row: 420ms;
+  --m-stagger: 60ms;
+  --m-draw-seg: 260ms;
+  --m-nav: 260ms;
+  --m-theme: 320ms;
+  --m-lang: 240ms;
+  --m-sheet: 300ms;
+
+  /* Z-index */
+  --z-header: 10;
+  --z-skip: 20;
+
+  /* Print (CV) */
+  --cv-paper-w: 210mm;
+  --cv-margin: 15mm 16mm 16mm;
+  --cv-pad: 15mm 16mm;
+  --cv-base: 13px;
+  --cv-fs-name: 2.1em;
+  --cv-fs-title: 1.08em;
+  --cv-fs-meta: 0.84em;
+  --cv-fs-label: 0.76em;
+  --cv-lh: 1.5;
+  --cv-lh-ko: 1.62;
+  --cv-gutter: 24mm;
+  --cv-date: 28mm; /* screen 13px: fits `2000, 2003 – 2006` (tasks 7.1); print 24mm below */
+  --cv-key: 31mm;
+  --cv-gap: 5mm;
+}
+
+/* Korean pages */
+html:lang(ko) {
+  --font-display: var(--font-ko);
+}
+
+/* Dark: OS preference, unless light was chosen manually */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --bg: #0d1117;
+    --surface: #151b23;
+    --line: #252d38;
+    --line-strong: #364150;
+    --text: #e6eaf0;
+    --text-2: #b1bac6;
+    --text-3: #8b95a3;
+    --chip: #1d2530;
+    --accent: #8db3e2;
+    --accent-soft: #1a283b;
+    --header-bg: rgba(13, 17, 23, 0.9);
+    --scrim: rgba(0, 0, 0, 0.6);
+    --photo-ring: var(--line-strong);
+    --photo-filter: brightness(0.86);
+    --logo-filter: brightness(0) invert(1);
+    --logo-op: 0.6;
+    --logo-op-cur: 0.9;
+  }
+}
+
+/* Dark: manual choice (same values as above) */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0d1117;
+  --surface: #151b23;
+  --line: #252d38;
+  --line-strong: #364150;
+  --text: #e6eaf0;
+  --text-2: #b1bac6;
+  --text-3: #8b95a3;
+  --chip: #1d2530;
+  --accent: #8db3e2;
+  --accent-soft: #1a283b;
+  --header-bg: rgba(13, 17, 23, 0.9);
+  --scrim: rgba(0, 0, 0, 0.6);
+  --photo-ring: var(--line-strong);
+  --photo-filter: brightness(0.86);
+  --logo-filter: brightness(0) invert(1);
+  --logo-op: 0.6;
+  --logo-op-cur: 0.9;
+}
+
+/* Print: light palette regardless of theme, white page (DESIGN.md 10장) */
+@media print {
+  /* Same specificity as the dark blocks above, so this later block wins in every theme state. */
+  :root,
+  :root[data-theme],
+  :root:not([data-theme='light']) {
+    color-scheme: light;
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --line: #dfe3ea;
+    --line-strong: #c5ccd6;
+    --text: #141a22;
+    --text-2: #475260;
+    --text-3: #5f6a78;
+    --chip: #eef1f5;
+    --accent: #2b5a8a;
+    --accent-soft: #e6edf6;
+    --header-bg: rgba(243, 245, 248, 0.9);
+    --scrim: rgba(22, 25, 29, 0.32);
+    --photo-ring: var(--line);
+    --photo-filter: none;
+    --logo-filter: brightness(0);
+    --logo-op: 0.62;
+    --logo-op-cur: 0.92;
+    --cv-base: 8.4pt;
+    --cv-date: 24mm;
+  }
+}
+
+* { box-sizing: border-box; margin: 0; }
+body { background: var(--bg); color: var(--text); font-family: var(--font-ko); font-size: var(--fs-md); line-height: 1.6; }
+.bar { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-4); align-items: center; padding: var(--sp-3) var(--sp-4); background: var(--surface); border-bottom: 1px solid var(--line); }
+.bar h1 { font-size: var(--fs-md); font-weight: 600; margin-right: auto; }
+.seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--line-strong); border-radius: 999px; overflow: hidden; }
+.seg button { font: inherit; font-size: var(--fs-xs); border: 0; background: none; color: var(--text-2); padding: var(--sp-1) var(--sp-3); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.bar nav { display: flex; flex-wrap: wrap; gap: var(--sp-1); width: 100%; }
+.bar nav a { font-size: var(--fs-xs); color: var(--text-2); text-decoration: none; padding: 0 var(--sp-1); }
+main { max-width: 1440px; margin: 0 auto; padding: var(--sp-5) var(--sp-4) var(--sp-8); }
+h2 { font-size: var(--fs-xl); font-weight: 600; margin: var(--sp-7) 0 var(--sp-3); }
+h3 { font-size: var(--fs-lg); font-weight: 600; margin: var(--sp-5) 0 var(--sp-2); }
+p { max-width: 80ch; }
+.intro { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: var(--sp-4) var(--sp-5); font-size: var(--fs-sm); color: var(--text-2); }
+.intro ul { padding-left: var(--sp-5); }
+.intro b, .intro code { color: var(--text); }
+code { font-family: var(--font-meta); font-size: 0.92em; background: var(--chip); padding: 0 var(--sp-1); border-radius: 4px; }
+.ws { color: var(--accent); font-size: var(--fs-2xs); }
+.vcs { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--sp-3); margin-top: var(--sp-3); }
+.vc { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: var(--sp-4); font-size: var(--fs-sm); }
+.vc h3 { margin: 0 0 var(--sp-2); display: flex; gap: var(--sp-2); align-items: baseline; }
+.key { font-family: var(--font-meta); color: var(--accent); }
+.vc dl { display: grid; gap: var(--sp-2); color: var(--text-2); }
+.vc dt { color: var(--text-3); font-weight: 600; }
+.tw { overflow-x: auto; }
+.t { border-collapse: collapse; font-size: var(--fs-sm); margin-top: var(--sp-2); min-width: 640px; }
+.t th, .t td { border-bottom: 1px solid var(--line); padding: var(--sp-2) var(--sp-3); text-align: left; vertical-align: top; }
+.t thead th { color: var(--text-3); font-weight: 600; }
+.t tbody th { font-weight: 600; white-space: nowrap; }
+.t tr.gap th, .t tr.gap td { border-top: 2px solid var(--line-strong); }
+.spot { border-top: 1px solid var(--line); padding-top: var(--sp-2); margin-top: var(--sp-5); }
+.spot h3 { margin-top: var(--sp-2); }
+.cat { font-family: var(--font-meta); font-size: var(--fs-xs); color: var(--accent); font-weight: 400; }
+.note { font-size: var(--fs-sm); color: var(--text-2); margin-bottom: var(--sp-2); }
+.cells { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--min, 300px), 1fr)); gap: var(--sp-3); }
+html[data-w="desk"] .cells:not(.pdf) { --min: 560px; }
+.cells.pdf { --min: 300px; }
+.cell { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: var(--sp-2); min-width: 0; }
+.cell figcaption { font-size: var(--fs-xs); font-weight: 600; color: var(--text-2); margin-bottom: var(--sp-1); }
+.cell.v-base figcaption { color: var(--text-3); }
+.cell img { display: block; max-width: 100%; height: auto; }
+.cell img.pg { border: 1px solid var(--line); margin-top: var(--sp-2); width: 100%; }
+.cell [data-c] { display: none; }
+html[data-c="en-light-desk"] .cell [data-c="en-light-desk"] { display: block; }
+html[data-c="ko-dark-desk"] .cell [data-c="ko-dark-desk"] { display: block; }
+html[data-c="ko-light-360"] .cell [data-c="ko-light-360"] { display: block; }
+html[data-c="en-dark-360"] .cell [data-c="en-dark-360"] { display: block; }
+.none { font-size: var(--fs-xs); color: var(--text-3); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <h1>g17 구분자 시안 (계획 단계 2.1)</h1>
+  <span class="seg" data-k="c"><button data-v="en-light-desk">영문 1280 라이트</button><button data-v="ko-dark-desk">국문 1280 다크</button><button data-v="ko-light-360">국문 360 라이트</button><button data-v="en-dark-360">영문 360 다크</button></span>
+  <nav><a href="#rules">규칙</a><a href="#shots">자리별 캡처</a><a href="#s-teach">Teaching 섹션 제목과 건수 줄</a><a href="#s-ip">IP 섹션 제목과 서랍 건수 줄</a><a href="#s-nav">상단 탭</a><a href="#s-menu">메뉴 시트</a><a href="#s-edu">About 학력</a><a href="#s-work">Selected Work 카드</a><a href="#s-ledger">전체 프로젝트 원장</a><a href="#s-filter">원장 필터 선택 상자</a><a href="#s-rec">케이스 스터디 머리</a><a href="#s-rec2">케이스 스터디 머리</a><a href="#s-cmp">기종 비교</a><a href="#s-scr">실서비스 화면 캡션</a><a href="#s-ss">표준 구성 그림의 SVG 라벨</a><a href="#s-cv-head">CV 머리</a><a href="#s-cv-exp">CV 경력</a><a href="#s-cv-proj">CV 대표 프로젝트</a><a href="#s-cv-other">CV 기타 프로젝트</a><a href="#s-cv-pat">CV 특허 건수</a><a href="#s-cv-sw">CV 프로그램 등록</a><a href="#s-cv-teach">CV 강의와 자문 제목</a><a href="#strings">문서 제목</a><a href="#tags">분야와 역량 이름</a><a href="#pdf">CV PDF</a></nav>
+</div>
+<main>
+<div class="intro">
+  <p>빌드된 실제 페이지에 안마다 글자와 CSS를 바꿔 넣고 찍었다(<code>shoot.mjs</code>). src/는 그대로다. 위 버튼으로 조합을 바꾸면 모든 자리가 그 조합으로 바뀐다. 각 칸의 첫째는 지금 화면이다.</p>
+  <ul>
+    <li><b>모든 안 공통</b>: CV 역할은 화면에서도 인쇄처럼 다음 줄로 내려 기호를 쓰지 않는다(소속에 쉼표, 영문 직함에 슬래시가 있어 어떤 기호도 겹침). og:image:alt는 스크린 리더가 읽으므로 쉼표. 원장 태그는 한 태그가 줄에서 갈라지지 않게 한다(지금은 360 영문에서 <code>& Optimization</code>이 줄 머리에 옴).</li>
+    <li>(1)과 (4)의 조합: A는 쉼표 + 붙임 슬래시(<code>LLM 에이전트/RAG, 예측</code>), B는 쉼표 + "와/과"(<code>LLM 에이전트와 RAG, 예측</code>), C는 세로선 + 붙임 슬래시.</li>
+  </ul>
+</div>
+<h2 id="rules">안별 규칙</h2>
+<div class="tw"><table class="t"><thead><tr><th>자리 성격</th><th>A 글자 구분</th><th>B 문장 부호와 말</th><th>C 여백과 선</th></tr></thead><tbody><tr><th>(1) 키워드 나열</th><td><b>EN</b> 쉼표 <code>, </code> (제목은 <code>Teaching, Books &amp; Advisory</code>)<br><b>KO</b> 쉼표 <code>, </code> (<code>강의, 저서, 자문</code>, <code>지식재산, 출판물</code>)</td><td><b>EN</b> 쉼표 <code>, </code> (제목은 <code>Teaching, Books &amp; Advisory</code>)<br><b>KO</b> 셋 이상 쉼표, 둘은 "와/과" (<code>강의, 저서, 자문</code>, <code>지식재산과 출판물</code>)</td><td><b>EN</b> 세로선 + 숨긴 쉼표<br><b>KO</b> 세로선 + 숨긴 쉼표</td></tr><tr><th>(2) 필드 구분</th><td><b>EN</b> <code>NBSP/ </code> (<code>GenON / Global F&amp;B company</code>)<br><b>KO</b> <code>NBSP/ </code> (<code>PwC 컨설팅 / 삼성전자</code>)</td><td><b>EN</b> 소속/고객은 쉼표, 덧붙는 값은 괄호 (<code>AI Engineer (Director, R&amp;D Group, GenON)</code>)<br><b>KO</b> 같음 (<code>PwC 컨설팅, 삼성전자</code>, <code>AgiBot X2 Ultra (선정)</code>)</td><td><b>EN</b> 세로선 + 숨긴 쉼표<br><b>KO</b> 세로선 + 숨긴 쉼표</td></tr><tr><th>(3) 문서 제목</th><td><b>EN</b> <code> | </code> (<code>Kwang Myung Yu | AI Engineer</code>)<br><b>KO</b> <code> | </code> (<code>유광명 | AI Engineer</code>)</td><td><b>EN</b> 쉼표 <code>, </code> (<code>Kwang Myung Yu, AI Engineer</code>), 이름 + CV는 띄어쓰기<br><b>KO</b> 쉼표 (<code>유광명, AI Engineer</code>), 이름 + 이력서는 띄어쓰기</td><td><b>EN</b> <code> | </code> (PDF 바닥글만 전각 공백)<br><b>KO</b> <code> | </code> (PDF 바닥글만 전각 공백)</td></tr><tr><th>(4) 라벨 안 병렬</th><td><b>EN</b> <code>&amp;</code> 유지<br><b>KO</b> <code>/</code> 붙여 씀 (<code>제어/최적화</code>)</td><td><b>EN</b> <code>&amp;</code> 유지<br><b>KO</b> "와/과" (<code>제어와 최적화</code>)</td><td><b>EN</b> <code>&amp;</code> 유지<br><b>KO</b> <code>/</code> 붙여 씀 (<code>제어/최적화</code>)</td></tr><tr><th>(5) 빈 날짜</th><td><b>EN</b> 빈칸<br><b>KO</b> 빈칸</td><td><b>EN</b> 빈칸<br><b>KO</b> 빈칸</td><td><b>EN</b> 짧은 가는 선(CSS)<br><b>KO</b> 짧은 가는 선(CSS)</td></tr></tbody></table></div>
+<div class="vcs"><article class="vc"><h3><span class="key">A</span>글자 구분</h3>
+      <dl><div><dt>의도</dt><dd>중간점 자리에 같은 일을 하는 글자를 하나씩 정해 넣는다. 나열은 쉼표, 필드는 슬래시, 문서 제목은 세로 막대. 화면 구조는 그대로.</dd></div><div><dt>장점</dt><dd>구현이 가장 단순(ui.ts와 join 문자열만 교체). 복사, 스크린 리더, PDF에서 보이는 그대로 읽힘.</dd></div><div><dt>단점</dt><dd>슬래시가 이미 다른 뜻으로 쓰임(<code>03 / 08</code>, <code>GPA 3.83 / 4.3</code>, 영문 직함 <code>Director / AI Product Engineer</code>, 개인 프로젝트 스택 줄). 같은 줄에 뜻이 다른 슬래시가 섞임.</dd></div></dl></article><article class="vc"><h3><span class="key">B</span>문장 부호와 말</h3>
+      <dl><div><dt>의도</dt><dd>이력서 본문처럼 읽히게 한다. 나열은 쉼표, 두 말은 "와/과", 덧붙는 정보는 괄호, 문서 제목은 쉼표. 기호를 늘리지 않는다.</dd></div><div><dt>장점</dt><dd>가장 자연스럽게 읽힘(<code>M.S. in Electrical Engineering (Control &amp; network optimization)</code>, <code>AgiBot X2 Ultra (Selected)</code>). 스크린 리더가 그대로 읽어도 매끄러움.</dd></div><div><dt>단점</dt><dd>자리마다 쉼표와 괄호 중 골라야 해 규칙이 둘. 쉼표가 든 값(<code>Director, R&amp;D Group, GenON</code>, 캡션의 날짜) 옆은 괄호로 피해야 함. 국문 문서 제목의 쉼표가 어색(<code>페이지를 찾을 수 없습니다, 유광명</code>). "와/과" 라벨이 길어짐.</dd></div></dl></article><article class="vc"><h3><span class="key">C</span>여백과 선</h3>
+      <dl><div><dt>의도</dt><dd>화면에서는 글자를 넣지 않고 가는 세로선(--line-strong)과 간격(--sp-2)으로 나눈다. 스크린 리더와 복사 텍스트에는 숨긴 쉼표가 남는다. 문서 제목은 세로 막대, PDF 바닥글은 전각 공백.</dd></div><div><dt>장점</dt><dd>구분 기호가 글자로 보이지 않아 표나 원장 같은 인상이 가장 조용함. 줄 머리 선은 잘려 보이지 않음(줄바꿈 걱정 없음). 라벨 안 <code>/</code>와 섞여도 모양이 달라 구분됨.</dd></div><div><dt>단점</dt><dd>ui.ts 문자열을 배열/마크업으로 바꾸고 컴포넌트마다 구조를 바꿔야 해 구현 범위가 가장 큼. CSS <code>content</code>와 <code>attr()</code> 자리(원장 모바일, 기종 비교 라벨)와 SVG는 별도 처리. PDF는 글자 묶음이 갈라져 글자 위치 확인이 필요.</dd></div></dl></article></div>
+<h2 id="shots">자리별 캡처</h2>
+<section class="spot" id="s-teach"><h3>Teaching 섹션 제목과 건수 줄 <span class="cat">(1)</span></h3><p class="note">홈 Teaching. 제목 <code>Teaching · Books · Advisory</code>, 오른쪽 건수</p><div class="cells"><figure class="cell v-base"><figcaption>현재</figcaption><img data-c="en-light-desk" src="shots/teach-base-en-light-desk.png" alt="현재 Teaching 섹션 제목과 건수 줄" loading="lazy"><img data-c="ko-dark-desk" src="shots/teach-base-ko-dark-desk.png" alt="현재 Teaching 섹션 제목과 건수 줄" loading="lazy"><img data-c="ko-light-360" src="shots/teach-base-ko-light-360.png" alt="현재 Teaching 섹션 제목과 건수 줄" loading="lazy"><img data-c="en-dark-360" src="shots/teach-base-en-dark-360.png" alt="현재 Teaching 섹션 제목과 건수 줄" loading="lazy"></figure><figure class="cell v-A"><figcaption>A 글자 구분</figcaption><img data-c="en-light-desk" src="shots/teach-A-en-light-desk.png" alt="A 글자 구분 Teaching 섹션 제목과 건수 줄" loading="lazy"><img data-c="ko-dark-desk" src="shots/teach-A-ko-dark-desk.png" alt="A 글자 구분 Teaching 섹션 제목과 건수 줄" loading="lazy"><img data-c="ko-light-360" src="shots/teach-A-ko-light-360.png" alt="A 글자 구분 Teaching 섹션 제목과 건수 줄" loading="lazy"><img data-c="en-dark-360" src="shots/teach-A-en-dark-360.png" alt="A 글자 구분 Teaching 섹션 제목과 건수 줄" loading="lazy"></figure><figure class="cell v-B"><figcaption>B 문장 부호와 말</figcaption><img data-c="en-light-desk" src="shots/teach-B-en-light-desk.png" alt="B 문장 부호와 말 Teaching 섹션 제목과 건수 줄" loading="lazy"><img data-c="ko-dark-desk" src="shots/teach-B-ko-dark-desk.png" alt="B 문장 부호와 말 Teaching 섹션 제목과 건수 줄" loading="lazy"><img data-c="ko-light-360" src="shots/teach-B-ko-light-360.png" alt="B 문장 부호와 말 Teaching 섹션 제목과 건수 줄" loading="lazy"><img data-c="en-dark-360" src="shots/teach-B-en-dark-360.png" alt="B 문장 부호와 말 Teaching 섹션 제목과 건수 줄" loading="lazy"></figure><figure class="cell v-C"><figcaption>C 여백과 선</figcaption><img data-c="en-light-desk" src="shots/teach-C-en-light-desk.png" alt="C 여백과 선 Teaching 섹션 제목과 건수 줄" loading="lazy"><img data-c="ko-dark-desk" src="shots/teach-C-ko-dark-desk.png" alt="C 여백과 선 Teaching 섹션 제목과 건수 줄" loading="lazy"><img data-c="ko-light-360" src="shots/teach-C-ko-light-360.png" alt="C 여백과 선 Teaching 섹션 제목과 건수 줄" loading="lazy"><img data-c="en-dark-360" src="shots/teach-C-en-dark-360.png" alt="C 여백과 선 Teaching 섹션 제목과 건수 줄" loading="lazy"></figure></div></section><section class="spot" id="s-ip"><h3>IP 섹션 제목과 서랍 건수 줄 <span class="cat">(1)</span></h3><p class="note"><code>지식재산 · 출판물</code>, <code>등록 7 · 출원 8</code>, <code>등록 8 · 등록 진행 중 2</code></p><div class="cells"><figure class="cell v-base"><figcaption>현재</figcaption><img data-c="en-light-desk" src="shots/ip-base-en-light-desk.png" alt="현재 IP 섹션 제목과 서랍 건수 줄" loading="lazy"><img data-c="ko-dark-desk" src="shots/ip-base-ko-dark-desk.png" alt="현재 IP 섹션 제목과 서랍 건수 줄" loading="lazy"><img data-c="ko-light-360" src="shots/ip-base-ko-light-360.png" alt="현재 IP 섹션 제목과 서랍 건수 줄" loading="lazy"><img data-c="en-dark-360" src="shots/ip-base-en-dark-360.png" alt="현재 IP 섹션 제목과 서랍 건수 줄" loading="lazy"></figure><figure class="cell v-A"><figcaption>A 글자 구분</figcaption><img data-c="en-light-desk" src="shots/ip-A-en-light-desk.png" alt="A 글자 구분 IP 섹션 제목과 서랍 건수 줄" loading="lazy"><img data-c="ko-dark-desk" src="shots/ip-A-ko-dark-desk.png" alt="A 글자 구분 IP 섹션 제목과 서랍 건수 줄" loading="lazy"><img data-c="ko-light-360" src="shots/ip-A-ko-light-360.png" alt="A 글자 구분 IP 섹션 제목과 서랍 건수 줄" loading="lazy"><img data-c="en-dark-360" src="shots/ip-A-en-dark-360.png" alt="A 글자 구분 IP 섹션 제목과 서랍 건수 줄" loading="lazy"></figure><figure class="cell v-B"><figcaption>B 문장 부호와 말</figcaption><img data-c="en-light-desk" src="shots/ip-B-en-light-desk.png" alt="B 문장 부호와 말 IP 섹션 제목과 서랍 건수 줄" loading="lazy"><img data-c="ko-dark-desk" src="shots/ip-B-ko-dark-desk.png" alt="B 문장 부호와 말 IP 섹션 제목과 서랍 건수 줄" loading="lazy"><img data-c="ko-light-360" src="shots/ip-B-ko-light-360.png" alt="B 문장 부호와 말 IP 섹션 제목과 서랍 건수 줄" loading="lazy"><img data-c="en-dark-360" src="shots/ip-B-en-dark-360.png" alt="B 문장 부호와 말 IP 섹션 제목과 서랍 건수 줄" loading="lazy"></figure><figure class="cell v-C"><figcaption>C 여백과 선</figcaption><img data-c="en-light-desk" src="shots/ip-C-en-light-desk.png" alt="C 여백과 선 IP 섹션 제목과 서랍 건수 줄" loading="lazy"><img data-c="ko-dark-desk" src="shots/ip-C-ko-dark-desk.png" alt="C 여백과 선 IP 섹션 제목과 서랍 건수 줄" loading="lazy"><img data-c="ko-light-360" src="shots/ip-C-ko-light-360.png" alt="C 여백과 선 IP 섹션 제목과 서랍 건수 줄" loading="lazy"><img data-c="en-dark-360" src="shots/ip-C-en-dark-360.png" alt="C 여백과 선 IP 섹션 제목과 서랍 건수 줄" loading="lazy"></figure></div></section><section class="spot" id="s-nav"><h3>상단 탭 <span class="cat">(1)</span></h3><p class="note">데스크톱만. 국문 탭 <code>지식재산 · 출판물</code>. C는 링크 안에 선을 넣지 않고 쉼표</p><div class="cells"><figure class="cell v-base"><figcaption>현재</figcaption><img data-c="en-light-desk" src="shots/nav-base-en-light-desk.png" alt="현재 상단 탭" loading="lazy"><img data-c="ko-dark-desk" src="shots/nav-base-ko-dark-desk.png" alt="현재 상단 탭" loading="lazy"><p data-c="ko-light-360" class="none">이 조합에는 없는 자리</p><p data-c="en-dark-360" class="none">이 조합에는 없는 자리</p></figure><figure class="cell v-A"><figcaption>A 글자 구분</figcaption><img data-c="en-light-desk" src="shots/nav-A-en-light-desk.png" alt="A 글자 구분 상단 탭" loading="lazy"><img data-c="ko-dark-desk" src="shots/nav-A-ko-dark-desk.png" alt="A 글자 구분 상단 탭" loading="lazy"><p data-c="ko-light-360" class="none">이 조합에는 없는 자리</p><p data-c="en-dark-360" class="none">이 조합에는 없는 자리</p></figure><figure class="cell v-B"><figcaption>B 문장 부호와 말</figcaption><img data-c="en-light-desk" src="shots/nav-B-en-light-desk.png" alt="B 문장 부호와 말 상단 탭" loading="lazy"><img data-c="ko-dark-desk" src="shots/nav-B-ko-dark-desk.png" alt="B 문장 부호와 말 상단 탭" loading="lazy"><p data-c="ko-light-360" class="none">이 조합에는 없는 자리</p><p data-c="en-dark-360" class="none">이 조합에는 없는 자리</p></figure><figure class="cell v-C"><figcaption>C 여백과 선</figcaption><img data-c="en-light-desk" src="shots/nav-C-en-light-desk.png" alt="C 여백과 선 상단 탭" loading="lazy"><img data-c="ko-dark-desk" src="shots/nav-C-ko-dark-desk.png" alt="C 여백과 선 상단 탭" loading="lazy"><p data-c="ko-light-360" class="none">이 조합에는 없는 자리</p><p data-c="en-dark-360" class="none">이 조합에는 없는 자리</p></figure></div></section><section class="spot" id="s-menu"><h3>메뉴 시트 <span class="cat">(1)</span></h3><p class="note">360만. 하위 링크 <code>강의 · 저서 · 자문</code>과 탭. C는 링크라 쉼표</p><div class="cells"><figure class="cell v-base"><figcaption>현재</figcaption><p data-c="en-light-desk" class="none">이 조합에는 없는 자리</p><p data-c="ko-dark-desk" class="none">이 조합에는 없는 자리</p><img data-c="ko-light-360" src="shots/menu-base-ko-light-360.png" alt="현재 메뉴 시트" loading="lazy"><img data-c="en-dark-360" src="shots/menu-base-en-dark-360.png" alt="현재 메뉴 시트" loading="lazy"></figure><figure class="cell v-A"><figcaption>A 글자 구분</figcaption><p data-c="en-light-desk" class="none">이 조합에는 없는 자리</p><p data-c="ko-dark-desk" class="none">이 조합에는 없는 자리</p><img data-c="ko-light-360" src="shots/menu-A-ko-light-360.png" alt="A 글자 구분 메뉴 시트" loading="lazy"><img data-c="en-dark-360" src="shots/menu-A-en-dark-360.png" alt="A 글자 구분 메뉴 시트" loading="lazy"></figure><figure class="cell v-B"><figcaption>B 문장 부호와 말</figcaption><p data-c="en-light-desk" class="none">이 조합에는 없는 자리</p><p data-c="ko-dark-desk" class="none">이 조합에는 없는 자리</p><img data-c="ko-light-360" src="shots/menu-B-ko-light-360.png" alt="B 문장 부호와 말 메뉴 시트" loading="lazy"><img data-c="en-dark-360" src="shots/menu-B-en-dark-360.png" alt="B 문장 부호와 말 메뉴 시트" loading="lazy"></figure><figure class="cell v-C"><figcaption>C 여백과 선</figcaption><p data-c="en-light-desk" class="none">이 조합에는 없는 자리</p><p data-c="ko-dark-desk" class="none">이 조합에는 없는 자리</p><img data-c="ko-light-360" src="shots/menu-C-ko-light-360.png" alt="C 여백과 선 메뉴 시트" loading="lazy"><img data-c="en-dark-360" src="shots/menu-C-en-dark-360.png" alt="C 여백과 선 메뉴 시트" loading="lazy"></figure></div></section><section class="spot" id="s-edu"><h3>About 학력: 학위와 세부전공 <span class="cat">(2)</span></h3><p class="note"><code>M.S. in Electrical Engineering · Control &amp; network optimization</code></p><div class="cells"><figure class="cell v-base"><figcaption>현재</figcaption><img data-c="en-light-desk" src="shots/edu-base-en-light-desk.png" alt="현재 About 학력: 학위와 세부전공" loading="lazy"><img data-c="ko-dark-desk" src="shots/edu-base-ko-dark-desk.png" alt="현재 About 학력: 학위와 세부전공" loading="lazy"><img data-c="ko-light-360" src="shots/edu-base-ko-light-360.png" alt="현재 About 학력: 학위와 세부전공" loading="lazy"><img data-c="en-dark-360" src="shots/edu-base-en-dark-360.png" alt="현재 About 학력: 학위와 세부전공" loading="lazy"></figure><figure class="cell v-A"><figcaption>A 글자 구분</figcaption><img data-c="en-light-desk" src="shots/edu-A-en-light-desk.png" alt="A 글자 구분 About 학력: 학위와 세부전공" loading="lazy"><img data-c="ko-dark-desk" src="shots/edu-A-ko-dark-desk.png" alt="A 글자 구분 About 학력: 학위와 세부전공" loading="lazy"><img data-c="ko-light-360" src="shots/edu-A-ko-light-360.png" alt="A 글자 구분 About 학력: 학위와 세부전공" loading="lazy"><img data-c="en-dark-360" src="shots/edu-A-en-dark-360.png" alt="A 글자 구분 About 학력: 학위와 세부전공" loading="lazy"></figure><figure class="cell v-B"><figcaption>B 문장 부호와 말</figcaption><img data-c="en-light-desk" src="shots/edu-B-en-light-desk.png" alt="B 문장 부호와 말 About 학력: 학위와 세부전공" loading="lazy"><img data-c="ko-dark-desk" src="shots/edu-B-ko-dark-desk.png" alt="B 문장 부호와 말 About 학력: 학위와 세부전공" loading="lazy"><img data-c="ko-light-360" src="shots/edu-B-ko-light-360.png" alt="B 문장 부호와 말 About 학력: 학위와 세부전공" loading="lazy"><img data-c="en-dark-360" src="shots/edu-B-en-dark-360.png" alt="B 문장 부호와 말 About 학력: 학위와 세부전공" loading="lazy"></figure><figure class="cell v-C"><figcaption>C 여백과 선</figcaption><img data-c="en-light-desk" src="shots/edu-C-en-light-desk.png" alt="C 여백과 선 About 학력: 학위와 세부전공" loading="lazy"><img data-c="ko-dark-desk" src="shots/edu-C-ko-dark-desk.png" alt="C 여백과 선 About 학력: 학위와 세부전공" loading="lazy"><img data-c="ko-light-360" src="shots/edu-C-ko-light-360.png" alt="C 여백과 선 About 학력: 학위와 세부전공" loading="lazy"><img data-c="en-dark-360" src="shots/edu-C-en-dark-360.png" alt="C 여백과 선 About 학력: 학위와 세부전공" loading="lazy"></figure></div></section><section class="spot" id="s-work"><h3>Selected Work 카드: 로고와 고객, 분야 칩 <span class="cat">(2)(4)</span></h3><p class="note">로고 뒤 <code>· 롯데정밀화학</code>, 칩의 국문 분야 이름</p><div class="cells"><figure class="cell v-base"><figcaption>현재</figcaption><img data-c="en-light-desk" src="shots/work-base-en-light-desk.png" alt="현재 Selected Work 카드: 로고와 고객, 분야 칩" loading="lazy"><img data-c="ko-dark-desk" src="shots/work-base-ko-dark-desk.png" alt="현재 Selected Work 카드: 로고와 고객, 분야 칩" loading="lazy"><img data-c="ko-light-360" src="shots/work-base-ko-light-360.png" alt="현재 Selected Work 카드: 로고와 고객, 분야 칩" loading="lazy"><img data-c="en-dark-360" src="shots/work-base-en-dark-360.png" alt="현재 Selected Work 카드: 로고와 고객, 분야 칩" loading="lazy"></figure><figure class="cell v-A"><figcaption>A 글자 구분</figcaption><img data-c="en-light-desk" src="shots/work-A-en-light-desk.png" alt="A 글자 구분 Selected Work 카드: 로고와 고객, 분야 칩" loading="lazy"><img data-c="ko-dark-desk" src="shots/work-A-ko-dark-desk.png" alt="A 글자 구분 Selected Work 카드: 로고와 고객, 분야 칩" loading="lazy"><img data-c="ko-light-360" src="shots/work-A-ko-light-360.png" alt="A 글자 구분 Selected Work 카드: 로고와 고객, 분야 칩" loading="lazy"><img data-c="en-dark-360" src="shots/work-A-en-dark-360.png" alt="A 글자 구분 Selected Work 카드: 로고와 고객, 분야 칩" loading="lazy"></figure><figure class="cell v-B"><figcaption>B 문장 부호와 말</figcaption><img data-c="en-light-desk" src="shots/work-B-en-light-desk.png" alt="B 문장 부호와 말 Selected Work 카드: 로고와 고객, 분야 칩" loading="lazy"><img data-c="ko-dark-desk" src="shots/work-B-ko-dark-desk.png" alt="B 문장 부호와 말 Selected Work 카드: 로고와 고객, 분야 칩" loading="lazy"><img data-c="ko-light-360" src="shots/work-B-ko-light-360.png" alt="B 문장 부호와 말 Selected Work 카드: 로고와 고객, 분야 칩" loading="lazy"><img data-c="en-dark-360" src="shots/work-B-en-dark-360.png" alt="B 문장 부호와 말 Selected Work 카드: 로고와 고객, 분야 칩" loading="lazy"></figure><figure class="cell v-C"><figcaption>C 여백과 선</figcaption><img data-c="en-light-desk" src="shots/work-C-en-light-desk.png" alt="C 여백과 선 Selected Work 카드: 로고와 고객, 분야 칩" loading="lazy"><img data-c="ko-dark-desk" src="shots/work-C-ko-dark-desk.png" alt="C 여백과 선 Selected Work 카드: 로고와 고객, 분야 칩" loading="lazy"><img data-c="ko-light-360" src="shots/work-C-ko-light-360.png" alt="C 여백과 선 Selected Work 카드: 로고와 고객, 분야 칩" loading="lazy"><img data-c="en-dark-360" src="shots/work-C-en-dark-360.png" alt="C 여백과 선 Selected Work 카드: 로고와 고객, 분야 칩" loading="lazy"></figure></div></section><section class="spot" id="s-ledger"><h3>전체 프로젝트 원장: 소속과 고객, 분야와 역량 <span class="cat">(1)(2)(4)</span></h3><p class="note">3~10행. 메타 줄 <code>PwC 컨설팅 · 롯데정밀화학</code>, 태그 줄</p><div class="cells"><figure class="cell v-base"><figcaption>현재</figcaption><img data-c="en-light-desk" src="shots/ledger-base-en-light-desk.png" alt="현재 전체 프로젝트 원장: 소속과 고객, 분야와 역량" loading="lazy"><img data-c="ko-dark-desk" src="shots/ledger-base-ko-dark-desk.png" alt="현재 전체 프로젝트 원장: 소속과 고객, 분야와 역량" loading="lazy"><img data-c="ko-light-360" src="shots/ledger-base-ko-light-360.png" alt="현재 전체 프로젝트 원장: 소속과 고객, 분야와 역량" loading="lazy"><img data-c="en-dark-360" src="shots/ledger-base-en-dark-360.png" alt="현재 전체 프로젝트 원장: 소속과 고객, 분야와 역량" loading="lazy"></figure><figure class="cell v-A"><figcaption>A 글자 구분</figcaption><img data-c="en-light-desk" src="shots/ledger-A-en-light-desk.png" alt="A 글자 구분 전체 프로젝트 원장: 소속과 고객, 분야와 역량" loading="lazy"><img data-c="ko-dark-desk" src="shots/ledger-A-ko-dark-desk.png" alt="A 글자 구분 전체 프로젝트 원장: 소속과 고객, 분야와 역량" loading="lazy"><img data-c="ko-light-360" src="shots/ledger-A-ko-light-360.png" alt="A 글자 구분 전체 프로젝트 원장: 소속과 고객, 분야와 역량" loading="lazy"><img data-c="en-dark-360" src="shots/ledger-A-en-dark-360.png" alt="A 글자 구분 전체 프로젝트 원장: 소속과 고객, 분야와 역량" loading="lazy"></figure><figure class="cell v-B"><figcaption>B 문장 부호와 말</figcaption><img data-c="en-light-desk" src="shots/ledger-B-en-light-desk.png" alt="B 문장 부호와 말 전체 프로젝트 원장: 소속과 고객, 분야와 역량" loading="lazy"><img data-c="ko-dark-desk" src="shots/ledger-B-ko-dark-desk.png" alt="B 문장 부호와 말 전체 프로젝트 원장: 소속과 고객, 분야와 역량" loading="lazy"><img data-c="ko-light-360" src="shots/ledger-B-ko-light-360.png" alt="B 문장 부호와 말 전체 프로젝트 원장: 소속과 고객, 분야와 역량" loading="lazy"><img data-c="en-dark-360" src="shots/ledger-B-en-dark-360.png" alt="B 문장 부호와 말 전체 프로젝트 원장: 소속과 고객, 분야와 역량" loading="lazy"></figure><figure class="cell v-C"><figcaption>C 여백과 선</figcaption><img data-c="en-light-desk" src="shots/ledger-C-en-light-desk.png" alt="C 여백과 선 전체 프로젝트 원장: 소속과 고객, 분야와 역량" loading="lazy"><img data-c="ko-dark-desk" src="shots/ledger-C-ko-dark-desk.png" alt="C 여백과 선 전체 프로젝트 원장: 소속과 고객, 분야와 역량" loading="lazy"><img data-c="ko-light-360" src="shots/ledger-C-ko-light-360.png" alt="C 여백과 선 전체 프로젝트 원장: 소속과 고객, 분야와 역량" loading="lazy"><img data-c="en-dark-360" src="shots/ledger-C-en-dark-360.png" alt="C 여백과 선 전체 프로젝트 원장: 소속과 고객, 분야와 역량" loading="lazy"></figure></div></section><section class="spot" id="s-filter"><h3>원장 필터 선택 상자 <span class="cat">(4)</span></h3><p class="note">분야 <code>석유화학·철강</code>, 역량 <code>제어·최적화</code>를 고른 상태</p><div class="cells"><figure class="cell v-base"><figcaption>현재</figcaption><img data-c="en-light-desk" src="shots/filter-base-en-light-desk.png" alt="현재 원장 필터 선택 상자" loading="lazy"><img data-c="ko-dark-desk" src="shots/filter-base-ko-dark-desk.png" alt="현재 원장 필터 선택 상자" loading="lazy"><img data-c="ko-light-360" src="shots/filter-base-ko-light-360.png" alt="현재 원장 필터 선택 상자" loading="lazy"><img data-c="en-dark-360" src="shots/filter-base-en-dark-360.png" alt="현재 원장 필터 선택 상자" loading="lazy"></figure><figure class="cell v-A"><figcaption>A 글자 구분</figcaption><img data-c="en-light-desk" src="shots/filter-A-en-light-desk.png" alt="A 글자 구분 원장 필터 선택 상자" loading="lazy"><img data-c="ko-dark-desk" src="shots/filter-A-ko-dark-desk.png" alt="A 글자 구분 원장 필터 선택 상자" loading="lazy"><img data-c="ko-light-360" src="shots/filter-A-ko-light-360.png" alt="A 글자 구분 원장 필터 선택 상자" loading="lazy"><img data-c="en-dark-360" src="shots/filter-A-en-dark-360.png" alt="A 글자 구분 원장 필터 선택 상자" loading="lazy"></figure><figure class="cell v-B"><figcaption>B 문장 부호와 말</figcaption><img data-c="en-light-desk" src="shots/filter-B-en-light-desk.png" alt="B 문장 부호와 말 원장 필터 선택 상자" loading="lazy"><img data-c="ko-dark-desk" src="shots/filter-B-ko-dark-desk.png" alt="B 문장 부호와 말 원장 필터 선택 상자" loading="lazy"><img data-c="ko-light-360" src="shots/filter-B-ko-light-360.png" alt="B 문장 부호와 말 원장 필터 선택 상자" loading="lazy"><img data-c="en-dark-360" src="shots/filter-B-en-dark-360.png" alt="B 문장 부호와 말 원장 필터 선택 상자" loading="lazy"></figure><figure class="cell v-C"><figcaption>C 여백과 선</figcaption><img data-c="en-light-desk" src="shots/filter-C-en-light-desk.png" alt="C 여백과 선 원장 필터 선택 상자" loading="lazy"><img data-c="ko-dark-desk" src="shots/filter-C-ko-dark-desk.png" alt="C 여백과 선 원장 필터 선택 상자" loading="lazy"><img data-c="ko-light-360" src="shots/filter-C-ko-light-360.png" alt="C 여백과 선 원장 필터 선택 상자" loading="lazy"><img data-c="en-dark-360" src="shots/filter-C-en-dark-360.png" alt="C 여백과 선 원장 필터 선택 상자" loading="lazy"></figure></div></section><section class="spot" id="s-rec"><h3>케이스 스터디 머리: 도슨트 <span class="cat">(1)</span></h3><p class="note">제목과 기록표. 스택 줄에 <code>External STT/TTS APIs</code>(항목 안 슬래시)</p><div class="cells"><figure class="cell v-base"><figcaption>현재</figcaption><img data-c="en-light-desk" src="shots/rec-base-en-light-desk.png" alt="현재 케이스 스터디 머리: 도슨트" loading="lazy"><img data-c="ko-dark-desk" src="shots/rec-base-ko-dark-desk.png" alt="현재 케이스 스터디 머리: 도슨트" loading="lazy"><img data-c="ko-light-360" src="shots/rec-base-ko-light-360.png" alt="현재 케이스 스터디 머리: 도슨트" loading="lazy"><img data-c="en-dark-360" src="shots/rec-base-en-dark-360.png" alt="현재 케이스 스터디 머리: 도슨트" loading="lazy"></figure><figure class="cell v-A"><figcaption>A 글자 구분</figcaption><img data-c="en-light-desk" src="shots/rec-A-en-light-desk.png" alt="A 글자 구분 케이스 스터디 머리: 도슨트" loading="lazy"><img data-c="ko-dark-desk" src="shots/rec-A-ko-dark-desk.png" alt="A 글자 구분 케이스 스터디 머리: 도슨트" loading="lazy"><img data-c="ko-light-360" src="shots/rec-A-ko-light-360.png" alt="A 글자 구분 케이스 스터디 머리: 도슨트" loading="lazy"><img data-c="en-dark-360" src="shots/rec-A-en-dark-360.png" alt="A 글자 구분 케이스 스터디 머리: 도슨트" loading="lazy"></figure><figure class="cell v-B"><figcaption>B 문장 부호와 말</figcaption><img data-c="en-light-desk" src="shots/rec-B-en-light-desk.png" alt="B 문장 부호와 말 케이스 스터디 머리: 도슨트" loading="lazy"><img data-c="ko-dark-desk" src="shots/rec-B-ko-dark-desk.png" alt="B 문장 부호와 말 케이스 스터디 머리: 도슨트" loading="lazy"><img data-c="ko-light-360" src="shots/rec-B-ko-light-360.png" alt="B 문장 부호와 말 케이스 스터디 머리: 도슨트" loading="lazy"><img data-c="en-dark-360" src="shots/rec-B-en-dark-360.png" alt="B 문장 부호와 말 케이스 스터디 머리: 도슨트" loading="lazy"></figure><figure class="cell v-C"><figcaption>C 여백과 선</figcaption><img data-c="en-light-desk" src="shots/rec-C-en-light-desk.png" alt="C 여백과 선 케이스 스터디 머리: 도슨트" loading="lazy"><img data-c="ko-dark-desk" src="shots/rec-C-ko-dark-desk.png" alt="C 여백과 선 케이스 스터디 머리: 도슨트" loading="lazy"><img data-c="ko-light-360" src="shots/rec-C-ko-light-360.png" alt="C 여백과 선 케이스 스터디 머리: 도슨트" loading="lazy"><img data-c="en-dark-360" src="shots/rec-C-en-dark-360.png" alt="C 여백과 선 케이스 스터디 머리: 도슨트" loading="lazy"></figure></div></section><section class="spot" id="s-rec2"><h3>케이스 스터디 머리: 법령 RAG <span class="cat">(1)</span></h3><p class="note">스택 줄 5개</p><div class="cells"><figure class="cell v-base"><figcaption>현재</figcaption><img data-c="en-light-desk" src="shots/rec2-base-en-light-desk.png" alt="현재 케이스 스터디 머리: 법령 RAG" loading="lazy"><img data-c="ko-dark-desk" src="shots/rec2-base-ko-dark-desk.png" alt="현재 케이스 스터디 머리: 법령 RAG" loading="lazy"><img data-c="ko-light-360" src="shots/rec2-base-ko-light-360.png" alt="현재 케이스 스터디 머리: 법령 RAG" loading="lazy"><img data-c="en-dark-360" src="shots/rec2-base-en-dark-360.png" alt="현재 케이스 스터디 머리: 법령 RAG" loading="lazy"></figure><figure class="cell v-A"><figcaption>A 글자 구분</figcaption><img data-c="en-light-desk" src="shots/rec2-A-en-light-desk.png" alt="A 글자 구분 케이스 스터디 머리: 법령 RAG" loading="lazy"><img data-c="ko-dark-desk" src="shots/rec2-A-ko-dark-desk.png" alt="A 글자 구분 케이스 스터디 머리: 법령 RAG" loading="lazy"><img data-c="ko-light-360" src="shots/rec2-A-ko-light-360.png" alt="A 글자 구분 케이스 스터디 머리: 법령 RAG" loading="lazy"><img data-c="en-dark-360" src="shots/rec2-A-en-dark-360.png" alt="A 글자 구분 케이스 스터디 머리: 법령 RAG" loading="lazy"></figure><figure class="cell v-B"><figcaption>B 문장 부호와 말</figcaption><img data-c="en-light-desk" src="shots/rec2-B-en-light-desk.png" alt="B 문장 부호와 말 케이스 스터디 머리: 법령 RAG" loading="lazy"><img data-c="ko-dark-desk" src="shots/rec2-B-ko-dark-desk.png" alt="B 문장 부호와 말 케이스 스터디 머리: 법령 RAG" loading="lazy"><img data-c="ko-light-360" src="shots/rec2-B-ko-light-360.png" alt="B 문장 부호와 말 케이스 스터디 머리: 법령 RAG" loading="lazy"><img data-c="en-dark-360" src="shots/rec2-B-en-dark-360.png" alt="B 문장 부호와 말 케이스 스터디 머리: 법령 RAG" loading="lazy"></figure><figure class="cell v-C"><figcaption>C 여백과 선</figcaption><img data-c="en-light-desk" src="shots/rec2-C-en-light-desk.png" alt="C 여백과 선 케이스 스터디 머리: 법령 RAG" loading="lazy"><img data-c="ko-dark-desk" src="shots/rec2-C-ko-dark-desk.png" alt="C 여백과 선 케이스 스터디 머리: 법령 RAG" loading="lazy"><img data-c="ko-light-360" src="shots/rec2-C-ko-light-360.png" alt="C 여백과 선 케이스 스터디 머리: 법령 RAG" loading="lazy"><img data-c="en-dark-360" src="shots/rec2-C-en-dark-360.png" alt="C 여백과 선 케이스 스터디 머리: 법령 RAG" loading="lazy"></figure></div></section><section class="spot" id="s-cmp"><h3>기종 비교: 좁은 칸 라벨 <span class="cat">(2)</span></h3><p class="note">360만. <code>AgiBot X2 Ultra · Selected</code></p><div class="cells"><figure class="cell v-base"><figcaption>현재</figcaption><p data-c="en-light-desk" class="none">이 조합에는 없는 자리</p><p data-c="ko-dark-desk" class="none">이 조합에는 없는 자리</p><img data-c="ko-light-360" src="shots/cmp-base-ko-light-360.png" alt="현재 기종 비교: 좁은 칸 라벨" loading="lazy"><img data-c="en-dark-360" src="shots/cmp-base-en-dark-360.png" alt="현재 기종 비교: 좁은 칸 라벨" loading="lazy"></figure><figure class="cell v-A"><figcaption>A 글자 구분</figcaption><p data-c="en-light-desk" class="none">이 조합에는 없는 자리</p><p data-c="ko-dark-desk" class="none">이 조합에는 없는 자리</p><img data-c="ko-light-360" src="shots/cmp-A-ko-light-360.png" alt="A 글자 구분 기종 비교: 좁은 칸 라벨" loading="lazy"><img data-c="en-dark-360" src="shots/cmp-A-en-dark-360.png" alt="A 글자 구분 기종 비교: 좁은 칸 라벨" loading="lazy"></figure><figure class="cell v-B"><figcaption>B 문장 부호와 말</figcaption><p data-c="en-light-desk" class="none">이 조합에는 없는 자리</p><p data-c="ko-dark-desk" class="none">이 조합에는 없는 자리</p><img data-c="ko-light-360" src="shots/cmp-B-ko-light-360.png" alt="B 문장 부호와 말 기종 비교: 좁은 칸 라벨" loading="lazy"><img data-c="en-dark-360" src="shots/cmp-B-en-dark-360.png" alt="B 문장 부호와 말 기종 비교: 좁은 칸 라벨" loading="lazy"></figure><figure class="cell v-C"><figcaption>C 여백과 선</figcaption><p data-c="en-light-desk" class="none">이 조합에는 없는 자리</p><p data-c="ko-dark-desk" class="none">이 조합에는 없는 자리</p><img data-c="ko-light-360" src="shots/cmp-C-ko-light-360.png" alt="C 여백과 선 기종 비교: 좁은 칸 라벨" loading="lazy"><img data-c="en-dark-360" src="shots/cmp-C-en-dark-360.png" alt="C 여백과 선 기종 비교: 좁은 칸 라벨" loading="lazy"></figure></div></section><section class="spot" id="s-scr"><h3>실서비스 화면 캡션 <span class="cat">(2)</span></h3><p class="note"><code>legalQ live service, captured Nov 21, 2026 · legalq.dnotitia.ai</code></p><div class="cells"><figure class="cell v-base"><figcaption>현재</figcaption><img data-c="en-light-desk" src="shots/scr-base-en-light-desk.png" alt="현재 실서비스 화면 캡션" loading="lazy"><img data-c="ko-dark-desk" src="shots/scr-base-ko-dark-desk.png" alt="현재 실서비스 화면 캡션" loading="lazy"><img data-c="ko-light-360" src="shots/scr-base-ko-light-360.png" alt="현재 실서비스 화면 캡션" loading="lazy"><img data-c="en-dark-360" src="shots/scr-base-en-dark-360.png" alt="현재 실서비스 화면 캡션" loading="lazy"></figure><figure class="cell v-A"><figcaption>A 글자 구분</figcaption><img data-c="en-light-desk" src="shots/scr-A-en-light-desk.png" alt="A 글자 구분 실서비스 화면 캡션" loading="lazy"><img data-c="ko-dark-desk" src="shots/scr-A-ko-dark-desk.png" alt="A 글자 구분 실서비스 화면 캡션" loading="lazy"><img data-c="ko-light-360" src="shots/scr-A-ko-light-360.png" alt="A 글자 구분 실서비스 화면 캡션" loading="lazy"><img data-c="en-dark-360" src="shots/scr-A-en-dark-360.png" alt="A 글자 구분 실서비스 화면 캡션" loading="lazy"></figure><figure class="cell v-B"><figcaption>B 문장 부호와 말</figcaption><img data-c="en-light-desk" src="shots/scr-B-en-light-desk.png" alt="B 문장 부호와 말 실서비스 화면 캡션" loading="lazy"><img data-c="ko-dark-desk" src="shots/scr-B-ko-dark-desk.png" alt="B 문장 부호와 말 실서비스 화면 캡션" loading="lazy"><img data-c="ko-light-360" src="shots/scr-B-ko-light-360.png" alt="B 문장 부호와 말 실서비스 화면 캡션" loading="lazy"><img data-c="en-dark-360" src="shots/scr-B-en-dark-360.png" alt="B 문장 부호와 말 실서비스 화면 캡션" loading="lazy"></figure><figure class="cell v-C"><figcaption>C 여백과 선</figcaption><img data-c="en-light-desk" src="shots/scr-C-en-light-desk.png" alt="C 여백과 선 실서비스 화면 캡션" loading="lazy"><img data-c="ko-dark-desk" src="shots/scr-C-ko-dark-desk.png" alt="C 여백과 선 실서비스 화면 캡션" loading="lazy"><img data-c="ko-light-360" src="shots/scr-C-ko-light-360.png" alt="C 여백과 선 실서비스 화면 캡션" loading="lazy"><img data-c="en-dark-360" src="shots/scr-C-en-dark-360.png" alt="C 여백과 선 실서비스 화면 캡션" loading="lazy"></figure></div></section><section class="spot" id="s-ss"><h3>표준 구성 그림의 SVG 라벨 <span class="cat">(1)</span></h3><p class="note"><code>LLM · STT · TTS</code> (360은 오른쪽 끝까지 밀어 찍음)</p><div class="cells"><figure class="cell v-base"><figcaption>현재</figcaption><img data-c="en-light-desk" src="shots/ss-base-en-light-desk.png" alt="현재 표준 구성 그림의 SVG 라벨" loading="lazy"><img data-c="ko-dark-desk" src="shots/ss-base-ko-dark-desk.png" alt="현재 표준 구성 그림의 SVG 라벨" loading="lazy"><img data-c="ko-light-360" src="shots/ss-base-ko-light-360.png" alt="현재 표준 구성 그림의 SVG 라벨" loading="lazy"><img data-c="en-dark-360" src="shots/ss-base-en-dark-360.png" alt="현재 표준 구성 그림의 SVG 라벨" loading="lazy"></figure><figure class="cell v-A"><figcaption>A 글자 구분</figcaption><img data-c="en-light-desk" src="shots/ss-A-en-light-desk.png" alt="A 글자 구분 표준 구성 그림의 SVG 라벨" loading="lazy"><img data-c="ko-dark-desk" src="shots/ss-A-ko-dark-desk.png" alt="A 글자 구분 표준 구성 그림의 SVG 라벨" loading="lazy"><img data-c="ko-light-360" src="shots/ss-A-ko-light-360.png" alt="A 글자 구분 표준 구성 그림의 SVG 라벨" loading="lazy"><img data-c="en-dark-360" src="shots/ss-A-en-dark-360.png" alt="A 글자 구분 표준 구성 그림의 SVG 라벨" loading="lazy"></figure><figure class="cell v-B"><figcaption>B 문장 부호와 말</figcaption><img data-c="en-light-desk" src="shots/ss-B-en-light-desk.png" alt="B 문장 부호와 말 표준 구성 그림의 SVG 라벨" loading="lazy"><img data-c="ko-dark-desk" src="shots/ss-B-ko-dark-desk.png" alt="B 문장 부호와 말 표준 구성 그림의 SVG 라벨" loading="lazy"><img data-c="ko-light-360" src="shots/ss-B-ko-light-360.png" alt="B 문장 부호와 말 표준 구성 그림의 SVG 라벨" loading="lazy"><img data-c="en-dark-360" src="shots/ss-B-en-dark-360.png" alt="B 문장 부호와 말 표준 구성 그림의 SVG 라벨" loading="lazy"></figure><figure class="cell v-C"><figcaption>C 여백과 선</figcaption><img data-c="en-light-desk" src="shots/ss-C-en-light-desk.png" alt="C 여백과 선 표준 구성 그림의 SVG 라벨" loading="lazy"><img data-c="ko-dark-desk" src="shots/ss-C-ko-dark-desk.png" alt="C 여백과 선 표준 구성 그림의 SVG 라벨" loading="lazy"><img data-c="ko-light-360" src="shots/ss-C-ko-light-360.png" alt="C 여백과 선 표준 구성 그림의 SVG 라벨" loading="lazy"><img data-c="en-dark-360" src="shots/ss-C-en-dark-360.png" alt="C 여백과 선 표준 구성 그림의 SVG 라벨" loading="lazy"></figure></div></section><section class="spot" id="s-cv-head"><h3>CV 머리: 직함과 현재 소속 <span class="cat">(2)</span></h3><p class="note"><code>AI Engineer · Director, R&amp;D Group, GenON</code></p><div class="cells"><figure class="cell v-base"><figcaption>현재</figcaption><img data-c="en-light-desk" src="shots/cv-head-base-en-light-desk.png" alt="현재 CV 머리: 직함과 현재 소속" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-head-base-ko-dark-desk.png" alt="현재 CV 머리: 직함과 현재 소속" loading="lazy"><img data-c="ko-light-360" src="shots/cv-head-base-ko-light-360.png" alt="현재 CV 머리: 직함과 현재 소속" loading="lazy"><img data-c="en-dark-360" src="shots/cv-head-base-en-dark-360.png" alt="현재 CV 머리: 직함과 현재 소속" loading="lazy"></figure><figure class="cell v-A"><figcaption>A 글자 구분</figcaption><img data-c="en-light-desk" src="shots/cv-head-A-en-light-desk.png" alt="A 글자 구분 CV 머리: 직함과 현재 소속" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-head-A-ko-dark-desk.png" alt="A 글자 구분 CV 머리: 직함과 현재 소속" loading="lazy"><img data-c="ko-light-360" src="shots/cv-head-A-ko-light-360.png" alt="A 글자 구분 CV 머리: 직함과 현재 소속" loading="lazy"><img data-c="en-dark-360" src="shots/cv-head-A-en-dark-360.png" alt="A 글자 구분 CV 머리: 직함과 현재 소속" loading="lazy"></figure><figure class="cell v-B"><figcaption>B 문장 부호와 말</figcaption><img data-c="en-light-desk" src="shots/cv-head-B-en-light-desk.png" alt="B 문장 부호와 말 CV 머리: 직함과 현재 소속" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-head-B-ko-dark-desk.png" alt="B 문장 부호와 말 CV 머리: 직함과 현재 소속" loading="lazy"><img data-c="ko-light-360" src="shots/cv-head-B-ko-light-360.png" alt="B 문장 부호와 말 CV 머리: 직함과 현재 소속" loading="lazy"><img data-c="en-dark-360" src="shots/cv-head-B-en-dark-360.png" alt="B 문장 부호와 말 CV 머리: 직함과 현재 소속" loading="lazy"></figure><figure class="cell v-C"><figcaption>C 여백과 선</figcaption><img data-c="en-light-desk" src="shots/cv-head-C-en-light-desk.png" alt="C 여백과 선 CV 머리: 직함과 현재 소속" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-head-C-ko-dark-desk.png" alt="C 여백과 선 CV 머리: 직함과 현재 소속" loading="lazy"><img data-c="ko-light-360" src="shots/cv-head-C-ko-light-360.png" alt="C 여백과 선 CV 머리: 직함과 현재 소속" loading="lazy"><img data-c="en-dark-360" src="shots/cv-head-C-en-dark-360.png" alt="C 여백과 선 CV 머리: 직함과 현재 소속" loading="lazy"></figure></div></section><section class="spot" id="s-cv-exp"><h3>CV 경력: 역할 <span class="cat">(2)</span></h3><p class="note"><code>GenON, R&amp;D Group — Director / AI Product Engineer</code>. 모든 안에서 역할을 다음 줄로(인쇄와 같게)</p><div class="cells"><figure class="cell v-base"><figcaption>현재</figcaption><img data-c="en-light-desk" src="shots/cv-exp-base-en-light-desk.png" alt="현재 CV 경력: 역할" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-exp-base-ko-dark-desk.png" alt="현재 CV 경력: 역할" loading="lazy"><img data-c="ko-light-360" src="shots/cv-exp-base-ko-light-360.png" alt="현재 CV 경력: 역할" loading="lazy"><img data-c="en-dark-360" src="shots/cv-exp-base-en-dark-360.png" alt="현재 CV 경력: 역할" loading="lazy"></figure><figure class="cell v-A"><figcaption>A 글자 구분</figcaption><img data-c="en-light-desk" src="shots/cv-exp-A-en-light-desk.png" alt="A 글자 구분 CV 경력: 역할" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-exp-A-ko-dark-desk.png" alt="A 글자 구분 CV 경력: 역할" loading="lazy"><img data-c="ko-light-360" src="shots/cv-exp-A-ko-light-360.png" alt="A 글자 구분 CV 경력: 역할" loading="lazy"><img data-c="en-dark-360" src="shots/cv-exp-A-en-dark-360.png" alt="A 글자 구분 CV 경력: 역할" loading="lazy"></figure><figure class="cell v-B"><figcaption>B 문장 부호와 말</figcaption><img data-c="en-light-desk" src="shots/cv-exp-B-en-light-desk.png" alt="B 문장 부호와 말 CV 경력: 역할" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-exp-B-ko-dark-desk.png" alt="B 문장 부호와 말 CV 경력: 역할" loading="lazy"><img data-c="ko-light-360" src="shots/cv-exp-B-ko-light-360.png" alt="B 문장 부호와 말 CV 경력: 역할" loading="lazy"><img data-c="en-dark-360" src="shots/cv-exp-B-en-dark-360.png" alt="B 문장 부호와 말 CV 경력: 역할" loading="lazy"></figure><figure class="cell v-C"><figcaption>C 여백과 선</figcaption><img data-c="en-light-desk" src="shots/cv-exp-C-en-light-desk.png" alt="C 여백과 선 CV 경력: 역할" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-exp-C-ko-dark-desk.png" alt="C 여백과 선 CV 경력: 역할" loading="lazy"><img data-c="ko-light-360" src="shots/cv-exp-C-ko-light-360.png" alt="C 여백과 선 CV 경력: 역할" loading="lazy"><img data-c="en-dark-360" src="shots/cv-exp-C-en-dark-360.png" alt="C 여백과 선 CV 경력: 역할" loading="lazy"></figure></div></section><section class="spot" id="s-cv-proj"><h3>CV 대표 프로젝트: 소속과 고객, 스택 줄 <span class="cat">(1)(2)</span></h3><div class="cells"><figure class="cell v-base"><figcaption>현재</figcaption><img data-c="en-light-desk" src="shots/cv-proj-base-en-light-desk.png" alt="현재 CV 대표 프로젝트: 소속과 고객, 스택 줄" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-proj-base-ko-dark-desk.png" alt="현재 CV 대표 프로젝트: 소속과 고객, 스택 줄" loading="lazy"><img data-c="ko-light-360" src="shots/cv-proj-base-ko-light-360.png" alt="현재 CV 대표 프로젝트: 소속과 고객, 스택 줄" loading="lazy"><img data-c="en-dark-360" src="shots/cv-proj-base-en-dark-360.png" alt="현재 CV 대표 프로젝트: 소속과 고객, 스택 줄" loading="lazy"></figure><figure class="cell v-A"><figcaption>A 글자 구분</figcaption><img data-c="en-light-desk" src="shots/cv-proj-A-en-light-desk.png" alt="A 글자 구분 CV 대표 프로젝트: 소속과 고객, 스택 줄" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-proj-A-ko-dark-desk.png" alt="A 글자 구분 CV 대표 프로젝트: 소속과 고객, 스택 줄" loading="lazy"><img data-c="ko-light-360" src="shots/cv-proj-A-ko-light-360.png" alt="A 글자 구분 CV 대표 프로젝트: 소속과 고객, 스택 줄" loading="lazy"><img data-c="en-dark-360" src="shots/cv-proj-A-en-dark-360.png" alt="A 글자 구분 CV 대표 프로젝트: 소속과 고객, 스택 줄" loading="lazy"></figure><figure class="cell v-B"><figcaption>B 문장 부호와 말</figcaption><img data-c="en-light-desk" src="shots/cv-proj-B-en-light-desk.png" alt="B 문장 부호와 말 CV 대표 프로젝트: 소속과 고객, 스택 줄" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-proj-B-ko-dark-desk.png" alt="B 문장 부호와 말 CV 대표 프로젝트: 소속과 고객, 스택 줄" loading="lazy"><img data-c="ko-light-360" src="shots/cv-proj-B-ko-light-360.png" alt="B 문장 부호와 말 CV 대표 프로젝트: 소속과 고객, 스택 줄" loading="lazy"><img data-c="en-dark-360" src="shots/cv-proj-B-en-dark-360.png" alt="B 문장 부호와 말 CV 대표 프로젝트: 소속과 고객, 스택 줄" loading="lazy"></figure><figure class="cell v-C"><figcaption>C 여백과 선</figcaption><img data-c="en-light-desk" src="shots/cv-proj-C-en-light-desk.png" alt="C 여백과 선 CV 대표 프로젝트: 소속과 고객, 스택 줄" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-proj-C-ko-dark-desk.png" alt="C 여백과 선 CV 대표 프로젝트: 소속과 고객, 스택 줄" loading="lazy"><img data-c="ko-light-360" src="shots/cv-proj-C-ko-light-360.png" alt="C 여백과 선 CV 대표 프로젝트: 소속과 고객, 스택 줄" loading="lazy"><img data-c="en-dark-360" src="shots/cv-proj-C-en-dark-360.png" alt="C 여백과 선 CV 대표 프로젝트: 소속과 고객, 스택 줄" loading="lazy"></figure></div></section><section class="spot" id="s-cv-other"><h3>CV 기타 프로젝트: 소속과 고객 <span class="cat">(2)</span></h3><div class="cells"><figure class="cell v-base"><figcaption>현재</figcaption><img data-c="en-light-desk" src="shots/cv-other-base-en-light-desk.png" alt="현재 CV 기타 프로젝트: 소속과 고객" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-other-base-ko-dark-desk.png" alt="현재 CV 기타 프로젝트: 소속과 고객" loading="lazy"><img data-c="ko-light-360" src="shots/cv-other-base-ko-light-360.png" alt="현재 CV 기타 프로젝트: 소속과 고객" loading="lazy"><img data-c="en-dark-360" src="shots/cv-other-base-en-dark-360.png" alt="현재 CV 기타 프로젝트: 소속과 고객" loading="lazy"></figure><figure class="cell v-A"><figcaption>A 글자 구분</figcaption><img data-c="en-light-desk" src="shots/cv-other-A-en-light-desk.png" alt="A 글자 구분 CV 기타 프로젝트: 소속과 고객" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-other-A-ko-dark-desk.png" alt="A 글자 구분 CV 기타 프로젝트: 소속과 고객" loading="lazy"><img data-c="ko-light-360" src="shots/cv-other-A-ko-light-360.png" alt="A 글자 구분 CV 기타 프로젝트: 소속과 고객" loading="lazy"><img data-c="en-dark-360" src="shots/cv-other-A-en-dark-360.png" alt="A 글자 구분 CV 기타 프로젝트: 소속과 고객" loading="lazy"></figure><figure class="cell v-B"><figcaption>B 문장 부호와 말</figcaption><img data-c="en-light-desk" src="shots/cv-other-B-en-light-desk.png" alt="B 문장 부호와 말 CV 기타 프로젝트: 소속과 고객" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-other-B-ko-dark-desk.png" alt="B 문장 부호와 말 CV 기타 프로젝트: 소속과 고객" loading="lazy"><img data-c="ko-light-360" src="shots/cv-other-B-ko-light-360.png" alt="B 문장 부호와 말 CV 기타 프로젝트: 소속과 고객" loading="lazy"><img data-c="en-dark-360" src="shots/cv-other-B-en-dark-360.png" alt="B 문장 부호와 말 CV 기타 프로젝트: 소속과 고객" loading="lazy"></figure><figure class="cell v-C"><figcaption>C 여백과 선</figcaption><img data-c="en-light-desk" src="shots/cv-other-C-en-light-desk.png" alt="C 여백과 선 CV 기타 프로젝트: 소속과 고객" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-other-C-ko-dark-desk.png" alt="C 여백과 선 CV 기타 프로젝트: 소속과 고객" loading="lazy"><img data-c="ko-light-360" src="shots/cv-other-C-ko-light-360.png" alt="C 여백과 선 CV 기타 프로젝트: 소속과 고객" loading="lazy"><img data-c="en-dark-360" src="shots/cv-other-C-en-dark-360.png" alt="C 여백과 선 CV 기타 프로젝트: 소속과 고객" loading="lazy"></figure></div></section><section class="spot" id="s-cv-pat"><h3>CV 특허 건수 <span class="cat">(1)</span></h3><p class="note"><code>7 registered · 8 filed</code></p><div class="cells"><figure class="cell v-base"><figcaption>현재</figcaption><img data-c="en-light-desk" src="shots/cv-pat-base-en-light-desk.png" alt="현재 CV 특허 건수" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-pat-base-ko-dark-desk.png" alt="현재 CV 특허 건수" loading="lazy"><img data-c="ko-light-360" src="shots/cv-pat-base-ko-light-360.png" alt="현재 CV 특허 건수" loading="lazy"><img data-c="en-dark-360" src="shots/cv-pat-base-en-dark-360.png" alt="현재 CV 특허 건수" loading="lazy"></figure><figure class="cell v-A"><figcaption>A 글자 구분</figcaption><img data-c="en-light-desk" src="shots/cv-pat-A-en-light-desk.png" alt="A 글자 구분 CV 특허 건수" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-pat-A-ko-dark-desk.png" alt="A 글자 구분 CV 특허 건수" loading="lazy"><img data-c="ko-light-360" src="shots/cv-pat-A-ko-light-360.png" alt="A 글자 구분 CV 특허 건수" loading="lazy"><img data-c="en-dark-360" src="shots/cv-pat-A-en-dark-360.png" alt="A 글자 구분 CV 특허 건수" loading="lazy"></figure><figure class="cell v-B"><figcaption>B 문장 부호와 말</figcaption><img data-c="en-light-desk" src="shots/cv-pat-B-en-light-desk.png" alt="B 문장 부호와 말 CV 특허 건수" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-pat-B-ko-dark-desk.png" alt="B 문장 부호와 말 CV 특허 건수" loading="lazy"><img data-c="ko-light-360" src="shots/cv-pat-B-ko-light-360.png" alt="B 문장 부호와 말 CV 특허 건수" loading="lazy"><img data-c="en-dark-360" src="shots/cv-pat-B-en-dark-360.png" alt="B 문장 부호와 말 CV 특허 건수" loading="lazy"></figure><figure class="cell v-C"><figcaption>C 여백과 선</figcaption><img data-c="en-light-desk" src="shots/cv-pat-C-en-light-desk.png" alt="C 여백과 선 CV 특허 건수" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-pat-C-ko-dark-desk.png" alt="C 여백과 선 CV 특허 건수" loading="lazy"><img data-c="ko-light-360" src="shots/cv-pat-C-ko-light-360.png" alt="C 여백과 선 CV 특허 건수" loading="lazy"><img data-c="en-dark-360" src="shots/cv-pat-C-en-dark-360.png" alt="C 여백과 선 CV 특허 건수" loading="lazy"></figure></div></section><section class="spot" id="s-cv-sw"><h3>CV 프로그램 등록: 빈 날짜 <span class="cat">(5)</span></h3><p class="note">날짜 없는 2건의 <code>—</code></p><div class="cells"><figure class="cell v-base"><figcaption>현재</figcaption><img data-c="en-light-desk" src="shots/cv-sw-base-en-light-desk.png" alt="현재 CV 프로그램 등록: 빈 날짜" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-sw-base-ko-dark-desk.png" alt="현재 CV 프로그램 등록: 빈 날짜" loading="lazy"><img data-c="ko-light-360" src="shots/cv-sw-base-ko-light-360.png" alt="현재 CV 프로그램 등록: 빈 날짜" loading="lazy"><img data-c="en-dark-360" src="shots/cv-sw-base-en-dark-360.png" alt="현재 CV 프로그램 등록: 빈 날짜" loading="lazy"></figure><figure class="cell v-A"><figcaption>A 글자 구분</figcaption><img data-c="en-light-desk" src="shots/cv-sw-A-en-light-desk.png" alt="A 글자 구분 CV 프로그램 등록: 빈 날짜" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-sw-A-ko-dark-desk.png" alt="A 글자 구분 CV 프로그램 등록: 빈 날짜" loading="lazy"><img data-c="ko-light-360" src="shots/cv-sw-A-ko-light-360.png" alt="A 글자 구분 CV 프로그램 등록: 빈 날짜" loading="lazy"><img data-c="en-dark-360" src="shots/cv-sw-A-en-dark-360.png" alt="A 글자 구분 CV 프로그램 등록: 빈 날짜" loading="lazy"></figure><figure class="cell v-B"><figcaption>B 문장 부호와 말</figcaption><img data-c="en-light-desk" src="shots/cv-sw-B-en-light-desk.png" alt="B 문장 부호와 말 CV 프로그램 등록: 빈 날짜" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-sw-B-ko-dark-desk.png" alt="B 문장 부호와 말 CV 프로그램 등록: 빈 날짜" loading="lazy"><img data-c="ko-light-360" src="shots/cv-sw-B-ko-light-360.png" alt="B 문장 부호와 말 CV 프로그램 등록: 빈 날짜" loading="lazy"><img data-c="en-dark-360" src="shots/cv-sw-B-en-dark-360.png" alt="B 문장 부호와 말 CV 프로그램 등록: 빈 날짜" loading="lazy"></figure><figure class="cell v-C"><figcaption>C 여백과 선</figcaption><img data-c="en-light-desk" src="shots/cv-sw-C-en-light-desk.png" alt="C 여백과 선 CV 프로그램 등록: 빈 날짜" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-sw-C-ko-dark-desk.png" alt="C 여백과 선 CV 프로그램 등록: 빈 날짜" loading="lazy"><img data-c="ko-light-360" src="shots/cv-sw-C-ko-light-360.png" alt="C 여백과 선 CV 프로그램 등록: 빈 날짜" loading="lazy"><img data-c="en-dark-360" src="shots/cv-sw-C-en-dark-360.png" alt="C 여백과 선 CV 프로그램 등록: 빈 날짜" loading="lazy"></figure></div></section><section class="spot" id="s-cv-teach"><h3>CV 강의와 자문 제목 <span class="cat">(1)</span></h3><p class="note">국문 <code>강의·자문</code></p><div class="cells"><figure class="cell v-base"><figcaption>현재</figcaption><img data-c="en-light-desk" src="shots/cv-teach-base-en-light-desk.png" alt="현재 CV 강의와 자문 제목" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-teach-base-ko-dark-desk.png" alt="현재 CV 강의와 자문 제목" loading="lazy"><img data-c="ko-light-360" src="shots/cv-teach-base-ko-light-360.png" alt="현재 CV 강의와 자문 제목" loading="lazy"><img data-c="en-dark-360" src="shots/cv-teach-base-en-dark-360.png" alt="현재 CV 강의와 자문 제목" loading="lazy"></figure><figure class="cell v-A"><figcaption>A 글자 구분</figcaption><img data-c="en-light-desk" src="shots/cv-teach-A-en-light-desk.png" alt="A 글자 구분 CV 강의와 자문 제목" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-teach-A-ko-dark-desk.png" alt="A 글자 구분 CV 강의와 자문 제목" loading="lazy"><img data-c="ko-light-360" src="shots/cv-teach-A-ko-light-360.png" alt="A 글자 구분 CV 강의와 자문 제목" loading="lazy"><img data-c="en-dark-360" src="shots/cv-teach-A-en-dark-360.png" alt="A 글자 구분 CV 강의와 자문 제목" loading="lazy"></figure><figure class="cell v-B"><figcaption>B 문장 부호와 말</figcaption><img data-c="en-light-desk" src="shots/cv-teach-B-en-light-desk.png" alt="B 문장 부호와 말 CV 강의와 자문 제목" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-teach-B-ko-dark-desk.png" alt="B 문장 부호와 말 CV 강의와 자문 제목" loading="lazy"><img data-c="ko-light-360" src="shots/cv-teach-B-ko-light-360.png" alt="B 문장 부호와 말 CV 강의와 자문 제목" loading="lazy"><img data-c="en-dark-360" src="shots/cv-teach-B-en-dark-360.png" alt="B 문장 부호와 말 CV 강의와 자문 제목" loading="lazy"></figure><figure class="cell v-C"><figcaption>C 여백과 선</figcaption><img data-c="en-light-desk" src="shots/cv-teach-C-en-light-desk.png" alt="C 여백과 선 CV 강의와 자문 제목" loading="lazy"><img data-c="ko-dark-desk" src="shots/cv-teach-C-ko-dark-desk.png" alt="C 여백과 선 CV 강의와 자문 제목" loading="lazy"><img data-c="ko-light-360" src="shots/cv-teach-C-ko-light-360.png" alt="C 여백과 선 CV 강의와 자문 제목" loading="lazy"><img data-c="en-dark-360" src="shots/cv-teach-C-en-dark-360.png" alt="C 여백과 선 CV 강의와 자문 제목" loading="lazy"></figure></div></section>
+<h2 id="strings">(3) 문서 제목과 화면에 안 보이는 문구</h2>
+<h3>영문</h3><div class="tw"><table class="t"><thead><tr><th>자리</th><th>현재</th><th>A 글자 구분</th><th>B 문장 부호와 말</th><th>C 여백과 선</th></tr></thead><tbody><tr><th>홈 <code>&lt;title&gt;</code>, og:title</th><td>Kwang Myung Yu · AI Engineer</td><td>Kwang Myung Yu | AI Engineer</td><td>Kwang Myung Yu, AI Engineer</td><td>Kwang Myung Yu | AI Engineer</td></tr><tr><th>케이스 스터디 <code>&lt;title&gt;</code> (도슨트)</th><td>Docent Humanoid Robot for a Brand Experience Center · Kwang Myung Yu</td><td>Docent Humanoid Robot for a Brand Experience Center | Kwang Myung Yu</td><td>Docent Humanoid Robot for a Brand Experience Center, Kwang Myung Yu</td><td>Docent Humanoid Robot for a Brand Experience Center | Kwang Myung Yu</td></tr><tr><th>CV <code>&lt;title&gt;</code></th><td>Kwang Myung Yu · CV</td><td>Kwang Myung Yu | CV</td><td>Kwang Myung Yu CV</td><td>Kwang Myung Yu | CV</td></tr><tr><th>404 <code>&lt;title&gt;</code> (계산)</th><td>Page not found · Kwang Myung Yu</td><td>Page not found | Kwang Myung Yu</td><td>Page not found, Kwang Myung Yu</td><td>Page not found | Kwang Myung Yu</td></tr><tr><th>og:image:alt (모든 쪽)</th><td>Kwang Myung Yu · AI Engineer</td><td>Kwang Myung Yu, AI Engineer</td><td>Kwang Myung Yu, AI Engineer</td><td>Kwang Myung Yu, AI Engineer</td></tr><tr><th>CV description</th><td>Kwang Myung Yu · AI Engineer · Director, R&amp;D Group, GenON</td><td>Kwang Myung Yu | AI Engineer | Director, R&amp;D Group, GenON</td><td>Kwang Myung Yu, AI Engineer (Director, R&amp;D Group, GenON)</td><td>Kwang Myung Yu | AI Engineer | Director, R&amp;D Group, GenON</td></tr><tr><th>CV PDF 바닥글 (@page)</th><td>Kwang Myung Yu · CV · sguys99.github.io</td><td>Kwang Myung Yu | CV | sguys99.github.io</td><td>Kwang Myung Yu CV, sguys99.github.io</td><td>Kwang Myung Yu<span class="ws">[전각 공백]</span>CV<span class="ws">[전각 공백]</span>sguys99.github.io</td></tr></tbody></table></div><h3>국문</h3><div class="tw"><table class="t"><thead><tr><th>자리</th><th>현재</th><th>A 글자 구분</th><th>B 문장 부호와 말</th><th>C 여백과 선</th></tr></thead><tbody><tr><th>홈 <code>&lt;title&gt;</code>, og:title</th><td>유광명 · AI Engineer</td><td>유광명 | AI Engineer</td><td>유광명, AI Engineer</td><td>유광명 | AI Engineer</td></tr><tr><th>케이스 스터디 <code>&lt;title&gt;</code> (도슨트)</th><td>브랜드 체험관 도슨트 휴머노이드 로봇 구축 · 유광명</td><td>브랜드 체험관 도슨트 휴머노이드 로봇 구축 | 유광명</td><td>브랜드 체험관 도슨트 휴머노이드 로봇 구축, 유광명</td><td>브랜드 체험관 도슨트 휴머노이드 로봇 구축 | 유광명</td></tr><tr><th>CV <code>&lt;title&gt;</code></th><td>유광명 · 이력서</td><td>유광명 | 이력서</td><td>유광명 이력서</td><td>유광명 | 이력서</td></tr><tr><th>404 <code>&lt;title&gt;</code> (계산)</th><td>페이지를 찾을 수 없습니다 · 유광명</td><td>페이지를 찾을 수 없습니다 | 유광명</td><td>페이지를 찾을 수 없습니다, 유광명</td><td>페이지를 찾을 수 없습니다 | 유광명</td></tr><tr><th>og:image:alt (모든 쪽)</th><td>유광명 · AI Engineer</td><td>유광명, AI Engineer</td><td>유광명, AI Engineer</td><td>유광명, AI Engineer</td></tr><tr><th>CV description</th><td>유광명 · AI Engineer · GenON R&amp;D그룹 Director</td><td>유광명 | AI Engineer | GenON R&amp;D그룹 Director</td><td>유광명, AI Engineer (GenON R&amp;D그룹 Director)</td><td>유광명 | AI Engineer | GenON R&amp;D그룹 Director</td></tr><tr><th>CV PDF 바닥글 (@page)</th><td>유광명 · 이력서 · sguys99.github.io</td><td>유광명 | 이력서 | sguys99.github.io</td><td>유광명 이력서, sguys99.github.io</td><td>유광명<span class="ws">[전각 공백]</span>이력서<span class="ws">[전각 공백]</span>sguys99.github.io</td></tr></tbody></table></div>
+<h2 id="tags">(4) 분야와 역량의 국문 이름</h2>
+<div class="tw"><table class="t"><thead><tr><th>영문 값 (모든 안 그대로)</th><th>현재</th><th>A 글자 구분</th><th>B 문장 부호와 말</th><th>C 여백과 선</th></tr></thead><tbody><tr><th>Energy &amp; Utilities</th><td>에너지·유틸리티</td><td>에너지/유틸리티</td><td>에너지와 유틸리티</td><td>에너지/유틸리티</td></tr><tr><th>Manufacturing</th><td>제조</td><td>제조</td><td>제조</td><td>제조</td></tr><tr><th>Petrochemical &amp; Steel</th><td>석유화학·철강</td><td>석유화학/철강</td><td>석유화학과 철강</td><td>석유화학/철강</td></tr><tr><th>Healthcare</th><td>헬스케어</td><td>헬스케어</td><td>헬스케어</td><td>헬스케어</td></tr><tr><th>Robotics</th><td>로보틱스</td><td>로보틱스</td><td>로보틱스</td><td>로보틱스</td></tr><tr><th>Public &amp; Legal</th><td>공공·법률</td><td>공공/법률</td><td>공공과 법률</td><td>공공/법률</td></tr><tr class="gap"><th>Physical AI</th><td>Physical AI</td><td>Physical AI</td><td>Physical AI</td><td>Physical AI</td></tr><tr><th>LLM Agents &amp; RAG</th><td>LLM 에이전트·RAG</td><td>LLM 에이전트/RAG</td><td>LLM 에이전트와 RAG</td><td>LLM 에이전트/RAG</td></tr><tr><th>Anomaly Detection</th><td>이상탐지</td><td>이상탐지</td><td>이상탐지</td><td>이상탐지</td></tr><tr><th>Forecasting</th><td>예측</td><td>예측</td><td>예측</td><td>예측</td></tr><tr><th>Control &amp; Optimization</th><td>제어·최적화</td><td>제어/최적화</td><td>제어와 최적화</td><td>제어/최적화</td></tr><tr><th>Computer Vision</th><td>컴퓨터 비전</td><td>컴퓨터 비전</td><td>컴퓨터 비전</td><td>컴퓨터 비전</td></tr><tr><th>MLOps</th><td>MLOps</td><td>MLOps</td><td>MLOps</td><td>MLOps</td></tr></tbody></table></div><p class="note">위 6개는 분야(DOMAINS), 아래 7개는 역량(CAPABILITIES). 바뀌는 것은 <code>5</code>개.</p>
+<h2 id="pdf">CV PDF (첫 쪽과 끝 쪽)</h2>
+<p class="note">빌드의 scripts/cv-pdf.mjs와 같은 옵션. 첫 쪽에 머리와 역할 줄, 끝 쪽에 바닥글.</p>
+<h3>영문 CV PDF</h3><div class="cells pdf"><figure class="cell"><figcaption>현재</figcaption>
+        <img src="shots/pdf-base-en.png" alt="현재 en CV PDF 첫 쪽" loading="lazy" class="pg">
+        <img src="shots/pdf-base-en-last.png" alt="현재 en CV PDF 끝 쪽" loading="lazy" class="pg"></figure><figure class="cell"><figcaption>A 글자 구분</figcaption>
+        <img src="shots/pdf-A-en.png" alt="A 글자 구분 en CV PDF 첫 쪽" loading="lazy" class="pg">
+        <img src="shots/pdf-A-en-last.png" alt="A 글자 구분 en CV PDF 끝 쪽" loading="lazy" class="pg"></figure><figure class="cell"><figcaption>B 문장 부호와 말</figcaption>
+        <img src="shots/pdf-B-en.png" alt="B 문장 부호와 말 en CV PDF 첫 쪽" loading="lazy" class="pg">
+        <img src="shots/pdf-B-en-last.png" alt="B 문장 부호와 말 en CV PDF 끝 쪽" loading="lazy" class="pg"></figure><figure class="cell"><figcaption>C 여백과 선</figcaption>
+        <img src="shots/pdf-C-en.png" alt="C 여백과 선 en CV PDF 첫 쪽" loading="lazy" class="pg">
+        <img src="shots/pdf-C-en-last.png" alt="C 여백과 선 en CV PDF 끝 쪽" loading="lazy" class="pg"></figure></div><h3>국문 CV PDF</h3><div class="cells pdf"><figure class="cell"><figcaption>현재</figcaption>
+        <img src="shots/pdf-base-ko.png" alt="현재 ko CV PDF 첫 쪽" loading="lazy" class="pg">
+        <img src="shots/pdf-base-ko-last.png" alt="현재 ko CV PDF 끝 쪽" loading="lazy" class="pg"></figure><figure class="cell"><figcaption>A 글자 구분</figcaption>
+        <img src="shots/pdf-A-ko.png" alt="A 글자 구분 ko CV PDF 첫 쪽" loading="lazy" class="pg">
+        <img src="shots/pdf-A-ko-last.png" alt="A 글자 구분 ko CV PDF 끝 쪽" loading="lazy" class="pg"></figure><figure class="cell"><figcaption>B 문장 부호와 말</figcaption>
+        <img src="shots/pdf-B-ko.png" alt="B 문장 부호와 말 ko CV PDF 첫 쪽" loading="lazy" class="pg">
+        <img src="shots/pdf-B-ko-last.png" alt="B 문장 부호와 말 ko CV PDF 끝 쪽" loading="lazy" class="pg"></figure><figure class="cell"><figcaption>C 여백과 선</figcaption>
+        <img src="shots/pdf-C-ko.png" alt="C 여백과 선 ko CV PDF 첫 쪽" loading="lazy" class="pg">
+        <img src="shots/pdf-C-ko-last.png" alt="C 여백과 선 ko CV PDF 끝 쪽" loading="lazy" class="pg"></figure></div>
+<h2>검사</h2>
+<p>페이지 80개(5쪽 × 4안 × 4조합): 가로 넘침 0, 줄 머리에 온 쉼표, 슬래시, 세로 막대 0.</p>
+<p>복사 텍스트 표본(360 국문): A <code>"AgiBot X2 Ultra, AgiBot SDK, SLAM, FastAPI, React, Next.js, External STT/TTS APIs"</code>, B <code>"AgiBot X2 Ultra, AgiBot SDK, SLAM, FastAPI, React, Next.js, External STT/TTS APIs"</code>, C <code>"AgiBot X2 Ultra,\nAgiBot SDK,\nSLAM,\nFastAPI,\nReact,\nNext.js,\nExternal STT/TTS APIs"</code></p>
+</main>
+<script>
+const st = { c: 'en-light-desk' };
+const q = new URLSearchParams(location.search);
+if (q.get('c')) st.c = q.get('c');
+function apply() {
+  const h = document.documentElement;
+  h.dataset.c = st.c;
+  h.dataset.w = st.c.endsWith('desk') ? 'desk' : 'mob';
+  h.dataset.theme = st.c.includes('dark') ? 'dark' : 'light';
+  document.querySelectorAll('.seg button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === st.c)));
+}
+document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => { st.c = b.dataset.v; apply(); }));
+// 2배율 캡처를 CSS 크기로
+document.querySelectorAll('.cell img:not(.pg)').forEach((i) => {
+  const fit = () => (i.style.width = i.naturalWidth / 2 + 'px');
+  i.complete ? fit() : i.addEventListener('load', fit);
+});
+apply();
+</script>
+</body>
+</html>

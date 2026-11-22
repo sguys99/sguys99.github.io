@@ -1,0 +1,3094 @@
+{
+ "pages": {
+  "home-base-en-light-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "who": "GenON · Global F&B company",
+    "cap": "Robotics\nPhysical AI"
+   },
+   "strings": {
+    "title": "Kwang Myung Yu · AI Engineer",
+    "ogTitle": "Kwang Myung Yu · AI Engineer",
+    "ogAlt": "Kwang Myung Yu · AI Engineer",
+    "description": "Building industrial AI, from control rooms to humanoid robots.",
+    "footer": null
+   }
+  },
+  "docent-base-en-light-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "AgiBot X2 Ultra · AgiBot SDK · SLAM · FastAPI · React · Next.js · External STT/TTS APIs"
+   },
+   "strings": {
+    "title": "Docent Humanoid Robot for a Brand Experience Center · Kwang Myung Yu",
+    "ogTitle": "Docent Humanoid Robot for a Brand Experience Center · Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu · AI Engineer",
+    "description": "Delivering a docent humanoid robot that guides visitors through a brand experience center with voice conversation and autonomous navigation.",
+    "footer": null
+   }
+  },
+  "legal-base-en-light-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "Claude Sonnet 4.6 · Qwen3-Embedding-8B · Seahorse · GitHub MCP · FastMCP"
+   },
+   "strings": {
+    "title": "Agentic RAG Search Service for National Legal Information · Kwang Myung Yu",
+    "ogTitle": "Agentic RAG Search Service for National Legal Information · Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu · AI Engineer",
+    "description": "Built an Agentic RAG service that searches national legal information through a hybrid-search knowledge base and MCP.",
+    "footer": null
+   }
+  },
+  "genp-base-en-light-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "Unitree G1 · GR00T N1.7 (VLA) · GEAR-SONIC (WBC) · Nav2 · FAST-LIO2 · FSR-VLN · ROS 2 · ZMQ · Whisper · FastAPI · Next.js"
+   },
+   "strings": {
+    "title": "GenP Physical AI Humanoid Product · Kwang Myung Yu",
+    "ogTitle": "GenP Physical AI Humanoid Product · Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu · AI Engineer",
+    "description": "Leading development of GenP, an end-to-end Physical AI humanoid product built on a common core with domain profiles for customer-specific deployments.",
+    "footer": null
+   }
+  },
+  "cv-base-en-light-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "role": "AI Engineer · Director, R&D Group, GenON"
+   },
+   "strings": {
+    "title": "Kwang Myung Yu · CV",
+    "ogTitle": "Kwang Myung Yu · CV",
+    "ogAlt": "Kwang Myung Yu · AI Engineer",
+    "description": "Kwang Myung Yu · AI Engineer · Director, R&D Group, GenON",
+    "footer": "Kwang Myung Yu · CV · sguys99.github.io"
+   }
+  },
+  "home-A-en-light-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "who": "GenON / Global F&B company",
+    "cap": "Robotics\nPhysical AI"
+   },
+   "strings": {
+    "title": "Kwang Myung Yu | AI Engineer",
+    "ogTitle": "Kwang Myung Yu | AI Engineer",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Building industrial AI, from control rooms to humanoid robots.",
+    "footer": null
+   }
+  },
+  "docent-A-en-light-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "AgiBot X2 Ultra, AgiBot SDK, SLAM, FastAPI, React, Next.js, External STT/TTS APIs"
+   },
+   "strings": {
+    "title": "Docent Humanoid Robot for a Brand Experience Center | Kwang Myung Yu",
+    "ogTitle": "Docent Humanoid Robot for a Brand Experience Center | Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Delivering a docent humanoid robot that guides visitors through a brand experience center with voice conversation and autonomous navigation.",
+    "footer": null
+   }
+  },
+  "legal-A-en-light-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "Claude Sonnet 4.6, Qwen3-Embedding-8B, Seahorse, GitHub MCP, FastMCP"
+   },
+   "strings": {
+    "title": "Agentic RAG Search Service for National Legal Information | Kwang Myung Yu",
+    "ogTitle": "Agentic RAG Search Service for National Legal Information | Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Built an Agentic RAG service that searches national legal information through a hybrid-search knowledge base and MCP.",
+    "footer": null
+   }
+  },
+  "genp-A-en-light-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "Unitree G1, GR00T N1.7 (VLA), GEAR-SONIC (WBC), Nav2, FAST-LIO2, FSR-VLN, ROS 2, ZMQ, Whisper, FastAPI, Next.js"
+   },
+   "strings": {
+    "title": "GenP Physical AI Humanoid Product | Kwang Myung Yu",
+    "ogTitle": "GenP Physical AI Humanoid Product | Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Leading development of GenP, an end-to-end Physical AI humanoid product built on a common core with domain profiles for customer-specific deployments.",
+    "footer": null
+   }
+  },
+  "cv-A-en-light-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "role": "AI Engineer / Director, R&D Group, GenON"
+   },
+   "strings": {
+    "title": "Kwang Myung Yu | CV",
+    "ogTitle": "Kwang Myung Yu | CV",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Kwang Myung Yu | AI Engineer | Director, R&D Group, GenON",
+    "footer": "Kwang Myung Yu | CV | sguys99.github.io"
+   }
+  },
+  "home-B-en-light-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "who": "GenON, Global F&B company",
+    "cap": "Robotics\nPhysical AI"
+   },
+   "strings": {
+    "title": "Kwang Myung Yu, AI Engineer",
+    "ogTitle": "Kwang Myung Yu, AI Engineer",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Building industrial AI, from control rooms to humanoid robots.",
+    "footer": null
+   }
+  },
+  "docent-B-en-light-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "AgiBot X2 Ultra, AgiBot SDK, SLAM, FastAPI, React, Next.js, External STT/TTS APIs"
+   },
+   "strings": {
+    "title": "Docent Humanoid Robot for a Brand Experience Center, Kwang Myung Yu",
+    "ogTitle": "Docent Humanoid Robot for a Brand Experience Center, Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Delivering a docent humanoid robot that guides visitors through a brand experience center with voice conversation and autonomous navigation.",
+    "footer": null
+   }
+  },
+  "legal-B-en-light-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "Claude Sonnet 4.6, Qwen3-Embedding-8B, Seahorse, GitHub MCP, FastMCP"
+   },
+   "strings": {
+    "title": "Agentic RAG Search Service for National Legal Information, Kwang Myung Yu",
+    "ogTitle": "Agentic RAG Search Service for National Legal Information, Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Built an Agentic RAG service that searches national legal information through a hybrid-search knowledge base and MCP.",
+    "footer": null
+   }
+  },
+  "genp-B-en-light-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "Unitree G1, GR00T N1.7 (VLA), GEAR-SONIC (WBC), Nav2, FAST-LIO2, FSR-VLN, ROS 2, ZMQ, Whisper, FastAPI, Next.js"
+   },
+   "strings": {
+    "title": "GenP Physical AI Humanoid Product, Kwang Myung Yu",
+    "ogTitle": "GenP Physical AI Humanoid Product, Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Leading development of GenP, an end-to-end Physical AI humanoid product built on a common core with domain profiles for customer-specific deployments.",
+    "footer": null
+   }
+  },
+  "cv-B-en-light-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "role": "AI Engineer (Director, R&D Group, GenON)"
+   },
+   "strings": {
+    "title": "Kwang Myung Yu CV",
+    "ogTitle": "Kwang Myung Yu CV",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Kwang Myung Yu, AI Engineer (Director, R&D Group, GenON)",
+    "footer": "Kwang Myung Yu CV, sguys99.github.io"
+   }
+  },
+  "home-C-en-light-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "who": "GenON,\nGlobal F&B company",
+    "cap": "Robotics,\nPhysical AI"
+   },
+   "strings": {
+    "title": "Kwang Myung Yu | AI Engineer",
+    "ogTitle": "Kwang Myung Yu | AI Engineer",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Building industrial AI, from control rooms to humanoid robots.",
+    "footer": null
+   }
+  },
+  "docent-C-en-light-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "AgiBot X2 Ultra,\nAgiBot SDK,\nSLAM,\nFastAPI,\nReact,\nNext.js,\nExternal STT/TTS APIs"
+   },
+   "strings": {
+    "title": "Docent Humanoid Robot for a Brand Experience Center | Kwang Myung Yu",
+    "ogTitle": "Docent Humanoid Robot for a Brand Experience Center | Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Delivering a docent humanoid robot that guides visitors through a brand experience center with voice conversation and autonomous navigation.",
+    "footer": null
+   }
+  },
+  "legal-C-en-light-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "Claude Sonnet 4.6,\nQwen3-Embedding-8B,\nSeahorse,\nGitHub MCP,\nFastMCP"
+   },
+   "strings": {
+    "title": "Agentic RAG Search Service for National Legal Information | Kwang Myung Yu",
+    "ogTitle": "Agentic RAG Search Service for National Legal Information | Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Built an Agentic RAG service that searches national legal information through a hybrid-search knowledge base and MCP.",
+    "footer": null
+   }
+  },
+  "genp-C-en-light-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "Unitree G1,\nGR00T N1.7 (VLA),\nGEAR-SONIC (WBC),\nNav2,\nFAST-LIO2,\nFSR-VLN,\nROS 2,\nZMQ,\nWhisper,\nFastAPI,\nNext.js"
+   },
+   "strings": {
+    "title": "GenP Physical AI Humanoid Product | Kwang Myung Yu",
+    "ogTitle": "GenP Physical AI Humanoid Product | Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Leading development of GenP, an end-to-end Physical AI humanoid product built on a common core with domain profiles for customer-specific deployments.",
+    "footer": null
+   }
+  },
+  "cv-C-en-light-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "role": "AI Engineer,\nDirector, R&D Group, GenON"
+   },
+   "strings": {
+    "title": "Kwang Myung Yu | CV",
+    "ogTitle": "Kwang Myung Yu | CV",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Kwang Myung Yu | AI Engineer | Director, R&D Group, GenON",
+    "footer": "Kwang Myung Yu CV sguys99.github.io"
+   }
+  },
+  "home-base-ko-dark-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "who": "GenON · 글로벌 식음료 기업",
+    "cap": "로보틱스\nPhysical AI"
+   },
+   "strings": {
+    "title": "유광명 · AI Engineer",
+    "ogTitle": "유광명 · AI Engineer",
+    "ogAlt": "유광명 · AI Engineer",
+    "description": "제어실에서 휴머노이드 로봇까지, 산업 현장의 AI 구현.",
+    "footer": null
+   }
+  },
+  "docent-base-ko-dark-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "AgiBot X2 Ultra · AgiBot SDK · SLAM · FastAPI · React · Next.js · External STT/TTS APIs"
+   },
+   "strings": {
+    "title": "브랜드 체험관 도슨트 휴머노이드 로봇 구축 · 유광명",
+    "ogTitle": "브랜드 체험관 도슨트 휴머노이드 로봇 구축 · 유광명",
+    "ogAlt": "유광명 · AI Engineer",
+    "description": "음성 대화와 자율주행으로 관람객에게 브랜드 체험관을 안내하는 도슨트 휴머노이드 로봇 구축",
+    "footer": null
+   }
+  },
+  "legal-base-ko-dark-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "Claude Sonnet 4.6 · Qwen3-Embedding-8B · Seahorse · GitHub MCP · FastMCP"
+   },
+   "strings": {
+    "title": "Agentic RAG를 활용한 국가 법령정보 검색 서비스 개발 · 유광명",
+    "ogTitle": "Agentic RAG를 활용한 국가 법령정보 검색 서비스 개발 · 유광명",
+    "ogAlt": "유광명 · AI Engineer",
+    "description": "하이브리드 검색 지식 베이스와 MCP로 국가 법령정보를 검색하는 Agentic RAG 서비스 개발",
+    "footer": null
+   }
+  },
+  "genp-base-ko-dark-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "Unitree G1 · GR00T N1.7 (VLA) · GEAR-SONIC (WBC) · Nav2 · FAST-LIO2 · FSR-VLN · ROS 2 · ZMQ · Whisper · FastAPI · Next.js"
+   },
+   "strings": {
+    "title": "Physical AI 휴머노이드 제품(GenP) 개발 · 유광명",
+    "ogTitle": "Physical AI 휴머노이드 제품(GenP) 개발 · 유광명",
+    "ogAlt": "유광명 · AI Engineer",
+    "description": "공통 코어 + 도메인 프로파일 구조로 고객 맞춤형 E2E 제품을 구성하는 Physical AI 휴머노이드 제품 GenP 개발 총괄",
+    "footer": null
+   }
+  },
+  "cv-base-ko-dark-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "role": "AI Engineer · GenON R&D그룹 Director"
+   },
+   "strings": {
+    "title": "유광명 · 이력서",
+    "ogTitle": "유광명 · 이력서",
+    "ogAlt": "유광명 · AI Engineer",
+    "description": "유광명 · AI Engineer · GenON R&D그룹 Director",
+    "footer": "유광명 · 이력서 · sguys99.github.io"
+   }
+  },
+  "home-A-ko-dark-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "who": "GenON / 글로벌 식음료 기업",
+    "cap": "로보틱스\nPhysical AI"
+   },
+   "strings": {
+    "title": "유광명 | AI Engineer",
+    "ogTitle": "유광명 | AI Engineer",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "제어실에서 휴머노이드 로봇까지, 산업 현장의 AI 구현.",
+    "footer": null
+   }
+  },
+  "docent-A-ko-dark-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "AgiBot X2 Ultra, AgiBot SDK, SLAM, FastAPI, React, Next.js, External STT/TTS APIs"
+   },
+   "strings": {
+    "title": "브랜드 체험관 도슨트 휴머노이드 로봇 구축 | 유광명",
+    "ogTitle": "브랜드 체험관 도슨트 휴머노이드 로봇 구축 | 유광명",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "음성 대화와 자율주행으로 관람객에게 브랜드 체험관을 안내하는 도슨트 휴머노이드 로봇 구축",
+    "footer": null
+   }
+  },
+  "legal-A-ko-dark-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "Claude Sonnet 4.6, Qwen3-Embedding-8B, Seahorse, GitHub MCP, FastMCP"
+   },
+   "strings": {
+    "title": "Agentic RAG를 활용한 국가 법령정보 검색 서비스 개발 | 유광명",
+    "ogTitle": "Agentic RAG를 활용한 국가 법령정보 검색 서비스 개발 | 유광명",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "하이브리드 검색 지식 베이스와 MCP로 국가 법령정보를 검색하는 Agentic RAG 서비스 개발",
+    "footer": null
+   }
+  },
+  "genp-A-ko-dark-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "Unitree G1, GR00T N1.7 (VLA), GEAR-SONIC (WBC), Nav2, FAST-LIO2, FSR-VLN, ROS 2, ZMQ, Whisper, FastAPI, Next.js"
+   },
+   "strings": {
+    "title": "Physical AI 휴머노이드 제품(GenP) 개발 | 유광명",
+    "ogTitle": "Physical AI 휴머노이드 제품(GenP) 개발 | 유광명",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "공통 코어 + 도메인 프로파일 구조로 고객 맞춤형 E2E 제품을 구성하는 Physical AI 휴머노이드 제품 GenP 개발 총괄",
+    "footer": null
+   }
+  },
+  "cv-A-ko-dark-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "role": "AI Engineer / GenON R&D그룹 Director"
+   },
+   "strings": {
+    "title": "유광명 | 이력서",
+    "ogTitle": "유광명 | 이력서",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "유광명 | AI Engineer | GenON R&D그룹 Director",
+    "footer": "유광명 | 이력서 | sguys99.github.io"
+   }
+  },
+  "home-B-ko-dark-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "who": "GenON, 글로벌 식음료 기업",
+    "cap": "로보틱스\nPhysical AI"
+   },
+   "strings": {
+    "title": "유광명, AI Engineer",
+    "ogTitle": "유광명, AI Engineer",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "제어실에서 휴머노이드 로봇까지, 산업 현장의 AI 구현.",
+    "footer": null
+   }
+  },
+  "docent-B-ko-dark-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "AgiBot X2 Ultra, AgiBot SDK, SLAM, FastAPI, React, Next.js, External STT/TTS APIs"
+   },
+   "strings": {
+    "title": "브랜드 체험관 도슨트 휴머노이드 로봇 구축, 유광명",
+    "ogTitle": "브랜드 체험관 도슨트 휴머노이드 로봇 구축, 유광명",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "음성 대화와 자율주행으로 관람객에게 브랜드 체험관을 안내하는 도슨트 휴머노이드 로봇 구축",
+    "footer": null
+   }
+  },
+  "legal-B-ko-dark-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "Claude Sonnet 4.6, Qwen3-Embedding-8B, Seahorse, GitHub MCP, FastMCP"
+   },
+   "strings": {
+    "title": "Agentic RAG를 활용한 국가 법령정보 검색 서비스 개발, 유광명",
+    "ogTitle": "Agentic RAG를 활용한 국가 법령정보 검색 서비스 개발, 유광명",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "하이브리드 검색 지식 베이스와 MCP로 국가 법령정보를 검색하는 Agentic RAG 서비스 개발",
+    "footer": null
+   }
+  },
+  "genp-B-ko-dark-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "Unitree G1, GR00T N1.7 (VLA), GEAR-SONIC (WBC), Nav2, FAST-LIO2, FSR-VLN, ROS 2, ZMQ, Whisper, FastAPI, Next.js"
+   },
+   "strings": {
+    "title": "Physical AI 휴머노이드 제품(GenP) 개발, 유광명",
+    "ogTitle": "Physical AI 휴머노이드 제품(GenP) 개발, 유광명",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "공통 코어 + 도메인 프로파일 구조로 고객 맞춤형 E2E 제품을 구성하는 Physical AI 휴머노이드 제품 GenP 개발 총괄",
+    "footer": null
+   }
+  },
+  "cv-B-ko-dark-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "role": "AI Engineer (GenON R&D그룹 Director)"
+   },
+   "strings": {
+    "title": "유광명 이력서",
+    "ogTitle": "유광명 이력서",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "유광명, AI Engineer (GenON R&D그룹 Director)",
+    "footer": "유광명 이력서, sguys99.github.io"
+   }
+  },
+  "home-C-ko-dark-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "who": "GenON,\n글로벌 식음료 기업",
+    "cap": "로보틱스,\nPhysical AI"
+   },
+   "strings": {
+    "title": "유광명 | AI Engineer",
+    "ogTitle": "유광명 | AI Engineer",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "제어실에서 휴머노이드 로봇까지, 산업 현장의 AI 구현.",
+    "footer": null
+   }
+  },
+  "docent-C-ko-dark-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "AgiBot X2 Ultra,\nAgiBot SDK,\nSLAM,\nFastAPI,\nReact,\nNext.js,\nExternal STT/TTS APIs"
+   },
+   "strings": {
+    "title": "브랜드 체험관 도슨트 휴머노이드 로봇 구축 | 유광명",
+    "ogTitle": "브랜드 체험관 도슨트 휴머노이드 로봇 구축 | 유광명",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "음성 대화와 자율주행으로 관람객에게 브랜드 체험관을 안내하는 도슨트 휴머노이드 로봇 구축",
+    "footer": null
+   }
+  },
+  "legal-C-ko-dark-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "Claude Sonnet 4.6,\nQwen3-Embedding-8B,\nSeahorse,\nGitHub MCP,\nFastMCP"
+   },
+   "strings": {
+    "title": "Agentic RAG를 활용한 국가 법령정보 검색 서비스 개발 | 유광명",
+    "ogTitle": "Agentic RAG를 활용한 국가 법령정보 검색 서비스 개발 | 유광명",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "하이브리드 검색 지식 베이스와 MCP로 국가 법령정보를 검색하는 Agentic RAG 서비스 개발",
+    "footer": null
+   }
+  },
+  "genp-C-ko-dark-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "stack": "Unitree G1,\nGR00T N1.7 (VLA),\nGEAR-SONIC (WBC),\nNav2,\nFAST-LIO2,\nFSR-VLN,\nROS 2,\nZMQ,\nWhisper,\nFastAPI,\nNext.js"
+   },
+   "strings": {
+    "title": "Physical AI 휴머노이드 제품(GenP) 개발 | 유광명",
+    "ogTitle": "Physical AI 휴머노이드 제품(GenP) 개발 | 유광명",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "공통 코어 + 도메인 프로파일 구조로 고객 맞춤형 E2E 제품을 구성하는 Physical AI 휴머노이드 제품 GenP 개발 총괄",
+    "footer": null
+   }
+  },
+  "cv-C-ko-dark-desk": {
+   "overflow": false,
+   "scrollWidth": 1280,
+   "lineStart": [],
+   "copy": {
+    "role": "AI Engineer,\nGenON R&D그룹 Director"
+   },
+   "strings": {
+    "title": "유광명 | 이력서",
+    "ogTitle": "유광명 | 이력서",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "유광명 | AI Engineer | GenON R&D그룹 Director",
+    "footer": "유광명 이력서 sguys99.github.io"
+   }
+  },
+  "home-base-ko-light-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "who": "GenON · 글로벌 식음료 기업",
+    "cap": "로보틱스Physical AI"
+   },
+   "strings": {
+    "title": "유광명 · AI Engineer",
+    "ogTitle": "유광명 · AI Engineer",
+    "ogAlt": "유광명 · AI Engineer",
+    "description": "제어실에서 휴머노이드 로봇까지, 산업 현장의 AI 구현.",
+    "footer": null
+   }
+  },
+  "docent-base-ko-light-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "AgiBot X2 Ultra · AgiBot SDK · SLAM · FastAPI · React · Next.js · External STT/TTS APIs"
+   },
+   "strings": {
+    "title": "브랜드 체험관 도슨트 휴머노이드 로봇 구축 · 유광명",
+    "ogTitle": "브랜드 체험관 도슨트 휴머노이드 로봇 구축 · 유광명",
+    "ogAlt": "유광명 · AI Engineer",
+    "description": "음성 대화와 자율주행으로 관람객에게 브랜드 체험관을 안내하는 도슨트 휴머노이드 로봇 구축",
+    "footer": null
+   }
+  },
+  "legal-base-ko-light-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "Claude Sonnet 4.6 · Qwen3-Embedding-8B · Seahorse · GitHub MCP · FastMCP"
+   },
+   "strings": {
+    "title": "Agentic RAG를 활용한 국가 법령정보 검색 서비스 개발 · 유광명",
+    "ogTitle": "Agentic RAG를 활용한 국가 법령정보 검색 서비스 개발 · 유광명",
+    "ogAlt": "유광명 · AI Engineer",
+    "description": "하이브리드 검색 지식 베이스와 MCP로 국가 법령정보를 검색하는 Agentic RAG 서비스 개발",
+    "footer": null
+   }
+  },
+  "genp-base-ko-light-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "Unitree G1 · GR00T N1.7 (VLA) · GEAR-SONIC (WBC) · Nav2 · FAST-LIO2 · FSR-VLN · ROS 2 · ZMQ · Whisper · FastAPI · Next.js"
+   },
+   "strings": {
+    "title": "Physical AI 휴머노이드 제품(GenP) 개발 · 유광명",
+    "ogTitle": "Physical AI 휴머노이드 제품(GenP) 개발 · 유광명",
+    "ogAlt": "유광명 · AI Engineer",
+    "description": "공통 코어 + 도메인 프로파일 구조로 고객 맞춤형 E2E 제품을 구성하는 Physical AI 휴머노이드 제품 GenP 개발 총괄",
+    "footer": null
+   }
+  },
+  "cv-base-ko-light-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "role": "AI Engineer · GenON R&D그룹 Director"
+   },
+   "strings": {
+    "title": "유광명 · 이력서",
+    "ogTitle": "유광명 · 이력서",
+    "ogAlt": "유광명 · AI Engineer",
+    "description": "유광명 · AI Engineer · GenON R&D그룹 Director",
+    "footer": "유광명 · 이력서 · sguys99.github.io"
+   }
+  },
+  "home-A-ko-light-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "who": "GenON / 글로벌 식음료 기업",
+    "cap": "로보틱스Physical AI"
+   },
+   "strings": {
+    "title": "유광명 | AI Engineer",
+    "ogTitle": "유광명 | AI Engineer",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "제어실에서 휴머노이드 로봇까지, 산업 현장의 AI 구현.",
+    "footer": null
+   }
+  },
+  "docent-A-ko-light-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "AgiBot X2 Ultra, AgiBot SDK, SLAM, FastAPI, React, Next.js, External STT/TTS APIs"
+   },
+   "strings": {
+    "title": "브랜드 체험관 도슨트 휴머노이드 로봇 구축 | 유광명",
+    "ogTitle": "브랜드 체험관 도슨트 휴머노이드 로봇 구축 | 유광명",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "음성 대화와 자율주행으로 관람객에게 브랜드 체험관을 안내하는 도슨트 휴머노이드 로봇 구축",
+    "footer": null
+   }
+  },
+  "legal-A-ko-light-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "Claude Sonnet 4.6, Qwen3-Embedding-8B, Seahorse, GitHub MCP, FastMCP"
+   },
+   "strings": {
+    "title": "Agentic RAG를 활용한 국가 법령정보 검색 서비스 개발 | 유광명",
+    "ogTitle": "Agentic RAG를 활용한 국가 법령정보 검색 서비스 개발 | 유광명",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "하이브리드 검색 지식 베이스와 MCP로 국가 법령정보를 검색하는 Agentic RAG 서비스 개발",
+    "footer": null
+   }
+  },
+  "genp-A-ko-light-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "Unitree G1, GR00T N1.7 (VLA), GEAR-SONIC (WBC), Nav2, FAST-LIO2, FSR-VLN, ROS 2, ZMQ, Whisper, FastAPI, Next.js"
+   },
+   "strings": {
+    "title": "Physical AI 휴머노이드 제품(GenP) 개발 | 유광명",
+    "ogTitle": "Physical AI 휴머노이드 제품(GenP) 개발 | 유광명",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "공통 코어 + 도메인 프로파일 구조로 고객 맞춤형 E2E 제품을 구성하는 Physical AI 휴머노이드 제품 GenP 개발 총괄",
+    "footer": null
+   }
+  },
+  "cv-A-ko-light-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "role": "AI Engineer / GenON R&D그룹 Director"
+   },
+   "strings": {
+    "title": "유광명 | 이력서",
+    "ogTitle": "유광명 | 이력서",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "유광명 | AI Engineer | GenON R&D그룹 Director",
+    "footer": "유광명 | 이력서 | sguys99.github.io"
+   }
+  },
+  "home-B-ko-light-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "who": "GenON, 글로벌 식음료 기업",
+    "cap": "로보틱스Physical AI"
+   },
+   "strings": {
+    "title": "유광명, AI Engineer",
+    "ogTitle": "유광명, AI Engineer",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "제어실에서 휴머노이드 로봇까지, 산업 현장의 AI 구현.",
+    "footer": null
+   }
+  },
+  "docent-B-ko-light-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "AgiBot X2 Ultra, AgiBot SDK, SLAM, FastAPI, React, Next.js, External STT/TTS APIs"
+   },
+   "strings": {
+    "title": "브랜드 체험관 도슨트 휴머노이드 로봇 구축, 유광명",
+    "ogTitle": "브랜드 체험관 도슨트 휴머노이드 로봇 구축, 유광명",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "음성 대화와 자율주행으로 관람객에게 브랜드 체험관을 안내하는 도슨트 휴머노이드 로봇 구축",
+    "footer": null
+   }
+  },
+  "legal-B-ko-light-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "Claude Sonnet 4.6, Qwen3-Embedding-8B, Seahorse, GitHub MCP, FastMCP"
+   },
+   "strings": {
+    "title": "Agentic RAG를 활용한 국가 법령정보 검색 서비스 개발, 유광명",
+    "ogTitle": "Agentic RAG를 활용한 국가 법령정보 검색 서비스 개발, 유광명",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "하이브리드 검색 지식 베이스와 MCP로 국가 법령정보를 검색하는 Agentic RAG 서비스 개발",
+    "footer": null
+   }
+  },
+  "genp-B-ko-light-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "Unitree G1, GR00T N1.7 (VLA), GEAR-SONIC (WBC), Nav2, FAST-LIO2, FSR-VLN, ROS 2, ZMQ, Whisper, FastAPI, Next.js"
+   },
+   "strings": {
+    "title": "Physical AI 휴머노이드 제품(GenP) 개발, 유광명",
+    "ogTitle": "Physical AI 휴머노이드 제품(GenP) 개발, 유광명",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "공통 코어 + 도메인 프로파일 구조로 고객 맞춤형 E2E 제품을 구성하는 Physical AI 휴머노이드 제품 GenP 개발 총괄",
+    "footer": null
+   }
+  },
+  "cv-B-ko-light-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "role": "AI Engineer (GenON R&D그룹 Director)"
+   },
+   "strings": {
+    "title": "유광명 이력서",
+    "ogTitle": "유광명 이력서",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "유광명, AI Engineer (GenON R&D그룹 Director)",
+    "footer": "유광명 이력서, sguys99.github.io"
+   }
+  },
+  "home-C-ko-light-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "who": "GenON,\n글로벌 식음료 기업",
+    "cap": "로보틱스,\nPhysical AI"
+   },
+   "strings": {
+    "title": "유광명 | AI Engineer",
+    "ogTitle": "유광명 | AI Engineer",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "제어실에서 휴머노이드 로봇까지, 산업 현장의 AI 구현.",
+    "footer": null
+   }
+  },
+  "docent-C-ko-light-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "AgiBot X2 Ultra,\nAgiBot SDK,\nSLAM,\nFastAPI,\nReact,\nNext.js,\nExternal STT/TTS APIs"
+   },
+   "strings": {
+    "title": "브랜드 체험관 도슨트 휴머노이드 로봇 구축 | 유광명",
+    "ogTitle": "브랜드 체험관 도슨트 휴머노이드 로봇 구축 | 유광명",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "음성 대화와 자율주행으로 관람객에게 브랜드 체험관을 안내하는 도슨트 휴머노이드 로봇 구축",
+    "footer": null
+   }
+  },
+  "legal-C-ko-light-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "Claude Sonnet 4.6,\nQwen3-Embedding-8B,\nSeahorse,\nGitHub MCP,\nFastMCP"
+   },
+   "strings": {
+    "title": "Agentic RAG를 활용한 국가 법령정보 검색 서비스 개발 | 유광명",
+    "ogTitle": "Agentic RAG를 활용한 국가 법령정보 검색 서비스 개발 | 유광명",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "하이브리드 검색 지식 베이스와 MCP로 국가 법령정보를 검색하는 Agentic RAG 서비스 개발",
+    "footer": null
+   }
+  },
+  "genp-C-ko-light-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "Unitree G1,\nGR00T N1.7 (VLA),\nGEAR-SONIC (WBC),\nNav2,\nFAST-LIO2,\nFSR-VLN,\nROS 2,\nZMQ,\nWhisper,\nFastAPI,\nNext.js"
+   },
+   "strings": {
+    "title": "Physical AI 휴머노이드 제품(GenP) 개발 | 유광명",
+    "ogTitle": "Physical AI 휴머노이드 제품(GenP) 개발 | 유광명",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "공통 코어 + 도메인 프로파일 구조로 고객 맞춤형 E2E 제품을 구성하는 Physical AI 휴머노이드 제품 GenP 개발 총괄",
+    "footer": null
+   }
+  },
+  "cv-C-ko-light-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "role": "AI Engineer,\nGenON R&D그룹 Director"
+   },
+   "strings": {
+    "title": "유광명 | 이력서",
+    "ogTitle": "유광명 | 이력서",
+    "ogAlt": "유광명, AI Engineer",
+    "description": "유광명 | AI Engineer | GenON R&D그룹 Director",
+    "footer": "유광명 이력서 sguys99.github.io"
+   }
+  },
+  "home-base-en-dark-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "who": "GenON · Global F&B company",
+    "cap": "RoboticsPhysical AI"
+   },
+   "strings": {
+    "title": "Kwang Myung Yu · AI Engineer",
+    "ogTitle": "Kwang Myung Yu · AI Engineer",
+    "ogAlt": "Kwang Myung Yu · AI Engineer",
+    "description": "Building industrial AI, from control rooms to humanoid robots.",
+    "footer": null
+   }
+  },
+  "docent-base-en-dark-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "AgiBot X2 Ultra · AgiBot SDK · SLAM · FastAPI · React · Next.js · External STT/TTS APIs"
+   },
+   "strings": {
+    "title": "Docent Humanoid Robot for a Brand Experience Center · Kwang Myung Yu",
+    "ogTitle": "Docent Humanoid Robot for a Brand Experience Center · Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu · AI Engineer",
+    "description": "Delivering a docent humanoid robot that guides visitors through a brand experience center with voice conversation and autonomous navigation.",
+    "footer": null
+   }
+  },
+  "legal-base-en-dark-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "Claude Sonnet 4.6 · Qwen3-Embedding-8B · Seahorse · GitHub MCP · FastMCP"
+   },
+   "strings": {
+    "title": "Agentic RAG Search Service for National Legal Information · Kwang Myung Yu",
+    "ogTitle": "Agentic RAG Search Service for National Legal Information · Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu · AI Engineer",
+    "description": "Built an Agentic RAG service that searches national legal information through a hybrid-search knowledge base and MCP.",
+    "footer": null
+   }
+  },
+  "genp-base-en-dark-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "Unitree G1 · GR00T N1.7 (VLA) · GEAR-SONIC (WBC) · Nav2 · FAST-LIO2 · FSR-VLN · ROS 2 · ZMQ · Whisper · FastAPI · Next.js"
+   },
+   "strings": {
+    "title": "GenP Physical AI Humanoid Product · Kwang Myung Yu",
+    "ogTitle": "GenP Physical AI Humanoid Product · Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu · AI Engineer",
+    "description": "Leading development of GenP, an end-to-end Physical AI humanoid product built on a common core with domain profiles for customer-specific deployments.",
+    "footer": null
+   }
+  },
+  "cv-base-en-dark-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "role": "AI Engineer · Director, R&D Group, GenON"
+   },
+   "strings": {
+    "title": "Kwang Myung Yu · CV",
+    "ogTitle": "Kwang Myung Yu · CV",
+    "ogAlt": "Kwang Myung Yu · AI Engineer",
+    "description": "Kwang Myung Yu · AI Engineer · Director, R&D Group, GenON",
+    "footer": "Kwang Myung Yu · CV · sguys99.github.io"
+   }
+  },
+  "home-A-en-dark-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "who": "GenON / Global F&B company",
+    "cap": "RoboticsPhysical AI"
+   },
+   "strings": {
+    "title": "Kwang Myung Yu | AI Engineer",
+    "ogTitle": "Kwang Myung Yu | AI Engineer",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Building industrial AI, from control rooms to humanoid robots.",
+    "footer": null
+   }
+  },
+  "docent-A-en-dark-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "AgiBot X2 Ultra, AgiBot SDK, SLAM, FastAPI, React, Next.js, External STT/TTS APIs"
+   },
+   "strings": {
+    "title": "Docent Humanoid Robot for a Brand Experience Center | Kwang Myung Yu",
+    "ogTitle": "Docent Humanoid Robot for a Brand Experience Center | Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Delivering a docent humanoid robot that guides visitors through a brand experience center with voice conversation and autonomous navigation.",
+    "footer": null
+   }
+  },
+  "legal-A-en-dark-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "Claude Sonnet 4.6, Qwen3-Embedding-8B, Seahorse, GitHub MCP, FastMCP"
+   },
+   "strings": {
+    "title": "Agentic RAG Search Service for National Legal Information | Kwang Myung Yu",
+    "ogTitle": "Agentic RAG Search Service for National Legal Information | Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Built an Agentic RAG service that searches national legal information through a hybrid-search knowledge base and MCP.",
+    "footer": null
+   }
+  },
+  "genp-A-en-dark-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "Unitree G1, GR00T N1.7 (VLA), GEAR-SONIC (WBC), Nav2, FAST-LIO2, FSR-VLN, ROS 2, ZMQ, Whisper, FastAPI, Next.js"
+   },
+   "strings": {
+    "title": "GenP Physical AI Humanoid Product | Kwang Myung Yu",
+    "ogTitle": "GenP Physical AI Humanoid Product | Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Leading development of GenP, an end-to-end Physical AI humanoid product built on a common core with domain profiles for customer-specific deployments.",
+    "footer": null
+   }
+  },
+  "cv-A-en-dark-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "role": "AI Engineer / Director, R&D Group, GenON"
+   },
+   "strings": {
+    "title": "Kwang Myung Yu | CV",
+    "ogTitle": "Kwang Myung Yu | CV",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Kwang Myung Yu | AI Engineer | Director, R&D Group, GenON",
+    "footer": "Kwang Myung Yu | CV | sguys99.github.io"
+   }
+  },
+  "home-B-en-dark-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "who": "GenON, Global F&B company",
+    "cap": "RoboticsPhysical AI"
+   },
+   "strings": {
+    "title": "Kwang Myung Yu, AI Engineer",
+    "ogTitle": "Kwang Myung Yu, AI Engineer",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Building industrial AI, from control rooms to humanoid robots.",
+    "footer": null
+   }
+  },
+  "docent-B-en-dark-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "AgiBot X2 Ultra, AgiBot SDK, SLAM, FastAPI, React, Next.js, External STT/TTS APIs"
+   },
+   "strings": {
+    "title": "Docent Humanoid Robot for a Brand Experience Center, Kwang Myung Yu",
+    "ogTitle": "Docent Humanoid Robot for a Brand Experience Center, Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Delivering a docent humanoid robot that guides visitors through a brand experience center with voice conversation and autonomous navigation.",
+    "footer": null
+   }
+  },
+  "legal-B-en-dark-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "Claude Sonnet 4.6, Qwen3-Embedding-8B, Seahorse, GitHub MCP, FastMCP"
+   },
+   "strings": {
+    "title": "Agentic RAG Search Service for National Legal Information, Kwang Myung Yu",
+    "ogTitle": "Agentic RAG Search Service for National Legal Information, Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Built an Agentic RAG service that searches national legal information through a hybrid-search knowledge base and MCP.",
+    "footer": null
+   }
+  },
+  "genp-B-en-dark-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "Unitree G1, GR00T N1.7 (VLA), GEAR-SONIC (WBC), Nav2, FAST-LIO2, FSR-VLN, ROS 2, ZMQ, Whisper, FastAPI, Next.js"
+   },
+   "strings": {
+    "title": "GenP Physical AI Humanoid Product, Kwang Myung Yu",
+    "ogTitle": "GenP Physical AI Humanoid Product, Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Leading development of GenP, an end-to-end Physical AI humanoid product built on a common core with domain profiles for customer-specific deployments.",
+    "footer": null
+   }
+  },
+  "cv-B-en-dark-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "role": "AI Engineer (Director, R&D Group, GenON)"
+   },
+   "strings": {
+    "title": "Kwang Myung Yu CV",
+    "ogTitle": "Kwang Myung Yu CV",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Kwang Myung Yu, AI Engineer (Director, R&D Group, GenON)",
+    "footer": "Kwang Myung Yu CV, sguys99.github.io"
+   }
+  },
+  "home-C-en-dark-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "who": "GenON,\nGlobal F&B company",
+    "cap": "Robotics,\nPhysical AI"
+   },
+   "strings": {
+    "title": "Kwang Myung Yu | AI Engineer",
+    "ogTitle": "Kwang Myung Yu | AI Engineer",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Building industrial AI, from control rooms to humanoid robots.",
+    "footer": null
+   }
+  },
+  "docent-C-en-dark-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "AgiBot X2 Ultra,\nAgiBot SDK,\nSLAM,\nFastAPI,\nReact,\nNext.js,\nExternal STT/TTS APIs"
+   },
+   "strings": {
+    "title": "Docent Humanoid Robot for a Brand Experience Center | Kwang Myung Yu",
+    "ogTitle": "Docent Humanoid Robot for a Brand Experience Center | Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Delivering a docent humanoid robot that guides visitors through a brand experience center with voice conversation and autonomous navigation.",
+    "footer": null
+   }
+  },
+  "legal-C-en-dark-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "Claude Sonnet 4.6,\nQwen3-Embedding-8B,\nSeahorse,\nGitHub MCP,\nFastMCP"
+   },
+   "strings": {
+    "title": "Agentic RAG Search Service for National Legal Information | Kwang Myung Yu",
+    "ogTitle": "Agentic RAG Search Service for National Legal Information | Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Built an Agentic RAG service that searches national legal information through a hybrid-search knowledge base and MCP.",
+    "footer": null
+   }
+  },
+  "genp-C-en-dark-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "stack": "Unitree G1,\nGR00T N1.7 (VLA),\nGEAR-SONIC (WBC),\nNav2,\nFAST-LIO2,\nFSR-VLN,\nROS 2,\nZMQ,\nWhisper,\nFastAPI,\nNext.js"
+   },
+   "strings": {
+    "title": "GenP Physical AI Humanoid Product | Kwang Myung Yu",
+    "ogTitle": "GenP Physical AI Humanoid Product | Kwang Myung Yu",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Leading development of GenP, an end-to-end Physical AI humanoid product built on a common core with domain profiles for customer-specific deployments.",
+    "footer": null
+   }
+  },
+  "cv-C-en-dark-360": {
+   "overflow": false,
+   "scrollWidth": 360,
+   "lineStart": [],
+   "copy": {
+    "role": "AI Engineer,\nDirector, R&D Group, GenON"
+   },
+   "strings": {
+    "title": "Kwang Myung Yu | CV",
+    "ogTitle": "Kwang Myung Yu | CV",
+    "ogAlt": "Kwang Myung Yu, AI Engineer",
+    "description": "Kwang Myung Yu | AI Engineer | Director, R&D Group, GenON",
+    "footer": "Kwang Myung Yu CV sguys99.github.io"
+   }
+  }
+ },
+ "shots": {
+  "teach-base-en-light-desk.png": {
+   "spot": "teach",
+   "v": "base",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "ip-base-en-light-desk.png": {
+   "spot": "ip",
+   "v": "base",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "edu-base-en-light-desk.png": {
+   "spot": "edu",
+   "v": "base",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "work-base-en-light-desk.png": {
+   "spot": "work",
+   "v": "base",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "ledger-base-en-light-desk.png": {
+   "spot": "ledger",
+   "v": "base",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "filter-base-en-light-desk.png": {
+   "spot": "filter",
+   "v": "base",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "nav-base-en-light-desk.png": {
+   "spot": "nav",
+   "v": "base",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "rec-base-en-light-desk.png": {
+   "spot": "rec",
+   "v": "base",
+   "combo": "en-light-desk",
+   "page": "docent"
+  },
+  "rec2-base-en-light-desk.png": {
+   "spot": "rec2",
+   "v": "base",
+   "combo": "en-light-desk",
+   "page": "legal"
+  },
+  "scr-base-en-light-desk.png": {
+   "spot": "scr",
+   "v": "base",
+   "combo": "en-light-desk",
+   "page": "legal"
+  },
+  "ss-base-en-light-desk.png": {
+   "spot": "ss",
+   "v": "base",
+   "combo": "en-light-desk",
+   "page": "genp"
+  },
+  "cv-head-base-en-light-desk.png": {
+   "spot": "cv-head",
+   "v": "base",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-exp-base-en-light-desk.png": {
+   "spot": "cv-exp",
+   "v": "base",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-proj-base-en-light-desk.png": {
+   "spot": "cv-proj",
+   "v": "base",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-other-base-en-light-desk.png": {
+   "spot": "cv-other",
+   "v": "base",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-pat-base-en-light-desk.png": {
+   "spot": "cv-pat",
+   "v": "base",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-sw-base-en-light-desk.png": {
+   "spot": "cv-sw",
+   "v": "base",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-teach-base-en-light-desk.png": {
+   "spot": "cv-teach",
+   "v": "base",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "teach-A-en-light-desk.png": {
+   "spot": "teach",
+   "v": "A",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "ip-A-en-light-desk.png": {
+   "spot": "ip",
+   "v": "A",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "edu-A-en-light-desk.png": {
+   "spot": "edu",
+   "v": "A",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "work-A-en-light-desk.png": {
+   "spot": "work",
+   "v": "A",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "ledger-A-en-light-desk.png": {
+   "spot": "ledger",
+   "v": "A",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "filter-A-en-light-desk.png": {
+   "spot": "filter",
+   "v": "A",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "nav-A-en-light-desk.png": {
+   "spot": "nav",
+   "v": "A",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "rec-A-en-light-desk.png": {
+   "spot": "rec",
+   "v": "A",
+   "combo": "en-light-desk",
+   "page": "docent"
+  },
+  "rec2-A-en-light-desk.png": {
+   "spot": "rec2",
+   "v": "A",
+   "combo": "en-light-desk",
+   "page": "legal"
+  },
+  "scr-A-en-light-desk.png": {
+   "spot": "scr",
+   "v": "A",
+   "combo": "en-light-desk",
+   "page": "legal"
+  },
+  "ss-A-en-light-desk.png": {
+   "spot": "ss",
+   "v": "A",
+   "combo": "en-light-desk",
+   "page": "genp"
+  },
+  "cv-head-A-en-light-desk.png": {
+   "spot": "cv-head",
+   "v": "A",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-exp-A-en-light-desk.png": {
+   "spot": "cv-exp",
+   "v": "A",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-proj-A-en-light-desk.png": {
+   "spot": "cv-proj",
+   "v": "A",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-other-A-en-light-desk.png": {
+   "spot": "cv-other",
+   "v": "A",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-pat-A-en-light-desk.png": {
+   "spot": "cv-pat",
+   "v": "A",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-sw-A-en-light-desk.png": {
+   "spot": "cv-sw",
+   "v": "A",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-teach-A-en-light-desk.png": {
+   "spot": "cv-teach",
+   "v": "A",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "teach-B-en-light-desk.png": {
+   "spot": "teach",
+   "v": "B",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "ip-B-en-light-desk.png": {
+   "spot": "ip",
+   "v": "B",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "edu-B-en-light-desk.png": {
+   "spot": "edu",
+   "v": "B",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "work-B-en-light-desk.png": {
+   "spot": "work",
+   "v": "B",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "ledger-B-en-light-desk.png": {
+   "spot": "ledger",
+   "v": "B",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "filter-B-en-light-desk.png": {
+   "spot": "filter",
+   "v": "B",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "nav-B-en-light-desk.png": {
+   "spot": "nav",
+   "v": "B",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "rec-B-en-light-desk.png": {
+   "spot": "rec",
+   "v": "B",
+   "combo": "en-light-desk",
+   "page": "docent"
+  },
+  "rec2-B-en-light-desk.png": {
+   "spot": "rec2",
+   "v": "B",
+   "combo": "en-light-desk",
+   "page": "legal"
+  },
+  "scr-B-en-light-desk.png": {
+   "spot": "scr",
+   "v": "B",
+   "combo": "en-light-desk",
+   "page": "legal"
+  },
+  "ss-B-en-light-desk.png": {
+   "spot": "ss",
+   "v": "B",
+   "combo": "en-light-desk",
+   "page": "genp"
+  },
+  "cv-head-B-en-light-desk.png": {
+   "spot": "cv-head",
+   "v": "B",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-exp-B-en-light-desk.png": {
+   "spot": "cv-exp",
+   "v": "B",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-proj-B-en-light-desk.png": {
+   "spot": "cv-proj",
+   "v": "B",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-other-B-en-light-desk.png": {
+   "spot": "cv-other",
+   "v": "B",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-pat-B-en-light-desk.png": {
+   "spot": "cv-pat",
+   "v": "B",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-sw-B-en-light-desk.png": {
+   "spot": "cv-sw",
+   "v": "B",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-teach-B-en-light-desk.png": {
+   "spot": "cv-teach",
+   "v": "B",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "teach-C-en-light-desk.png": {
+   "spot": "teach",
+   "v": "C",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "ip-C-en-light-desk.png": {
+   "spot": "ip",
+   "v": "C",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "edu-C-en-light-desk.png": {
+   "spot": "edu",
+   "v": "C",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "work-C-en-light-desk.png": {
+   "spot": "work",
+   "v": "C",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "ledger-C-en-light-desk.png": {
+   "spot": "ledger",
+   "v": "C",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "filter-C-en-light-desk.png": {
+   "spot": "filter",
+   "v": "C",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "nav-C-en-light-desk.png": {
+   "spot": "nav",
+   "v": "C",
+   "combo": "en-light-desk",
+   "page": "home"
+  },
+  "rec-C-en-light-desk.png": {
+   "spot": "rec",
+   "v": "C",
+   "combo": "en-light-desk",
+   "page": "docent"
+  },
+  "rec2-C-en-light-desk.png": {
+   "spot": "rec2",
+   "v": "C",
+   "combo": "en-light-desk",
+   "page": "legal"
+  },
+  "scr-C-en-light-desk.png": {
+   "spot": "scr",
+   "v": "C",
+   "combo": "en-light-desk",
+   "page": "legal"
+  },
+  "ss-C-en-light-desk.png": {
+   "spot": "ss",
+   "v": "C",
+   "combo": "en-light-desk",
+   "page": "genp"
+  },
+  "cv-head-C-en-light-desk.png": {
+   "spot": "cv-head",
+   "v": "C",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-exp-C-en-light-desk.png": {
+   "spot": "cv-exp",
+   "v": "C",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-proj-C-en-light-desk.png": {
+   "spot": "cv-proj",
+   "v": "C",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-other-C-en-light-desk.png": {
+   "spot": "cv-other",
+   "v": "C",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-pat-C-en-light-desk.png": {
+   "spot": "cv-pat",
+   "v": "C",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-sw-C-en-light-desk.png": {
+   "spot": "cv-sw",
+   "v": "C",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "cv-teach-C-en-light-desk.png": {
+   "spot": "cv-teach",
+   "v": "C",
+   "combo": "en-light-desk",
+   "page": "cv"
+  },
+  "teach-base-ko-dark-desk.png": {
+   "spot": "teach",
+   "v": "base",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "ip-base-ko-dark-desk.png": {
+   "spot": "ip",
+   "v": "base",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "edu-base-ko-dark-desk.png": {
+   "spot": "edu",
+   "v": "base",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "work-base-ko-dark-desk.png": {
+   "spot": "work",
+   "v": "base",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "ledger-base-ko-dark-desk.png": {
+   "spot": "ledger",
+   "v": "base",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "filter-base-ko-dark-desk.png": {
+   "spot": "filter",
+   "v": "base",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "nav-base-ko-dark-desk.png": {
+   "spot": "nav",
+   "v": "base",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "rec-base-ko-dark-desk.png": {
+   "spot": "rec",
+   "v": "base",
+   "combo": "ko-dark-desk",
+   "page": "docent"
+  },
+  "rec2-base-ko-dark-desk.png": {
+   "spot": "rec2",
+   "v": "base",
+   "combo": "ko-dark-desk",
+   "page": "legal"
+  },
+  "scr-base-ko-dark-desk.png": {
+   "spot": "scr",
+   "v": "base",
+   "combo": "ko-dark-desk",
+   "page": "legal"
+  },
+  "ss-base-ko-dark-desk.png": {
+   "spot": "ss",
+   "v": "base",
+   "combo": "ko-dark-desk",
+   "page": "genp"
+  },
+  "cv-head-base-ko-dark-desk.png": {
+   "spot": "cv-head",
+   "v": "base",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-exp-base-ko-dark-desk.png": {
+   "spot": "cv-exp",
+   "v": "base",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-proj-base-ko-dark-desk.png": {
+   "spot": "cv-proj",
+   "v": "base",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-other-base-ko-dark-desk.png": {
+   "spot": "cv-other",
+   "v": "base",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-pat-base-ko-dark-desk.png": {
+   "spot": "cv-pat",
+   "v": "base",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-sw-base-ko-dark-desk.png": {
+   "spot": "cv-sw",
+   "v": "base",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-teach-base-ko-dark-desk.png": {
+   "spot": "cv-teach",
+   "v": "base",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "teach-A-ko-dark-desk.png": {
+   "spot": "teach",
+   "v": "A",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "ip-A-ko-dark-desk.png": {
+   "spot": "ip",
+   "v": "A",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "edu-A-ko-dark-desk.png": {
+   "spot": "edu",
+   "v": "A",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "work-A-ko-dark-desk.png": {
+   "spot": "work",
+   "v": "A",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "ledger-A-ko-dark-desk.png": {
+   "spot": "ledger",
+   "v": "A",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "filter-A-ko-dark-desk.png": {
+   "spot": "filter",
+   "v": "A",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "nav-A-ko-dark-desk.png": {
+   "spot": "nav",
+   "v": "A",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "rec-A-ko-dark-desk.png": {
+   "spot": "rec",
+   "v": "A",
+   "combo": "ko-dark-desk",
+   "page": "docent"
+  },
+  "rec2-A-ko-dark-desk.png": {
+   "spot": "rec2",
+   "v": "A",
+   "combo": "ko-dark-desk",
+   "page": "legal"
+  },
+  "scr-A-ko-dark-desk.png": {
+   "spot": "scr",
+   "v": "A",
+   "combo": "ko-dark-desk",
+   "page": "legal"
+  },
+  "ss-A-ko-dark-desk.png": {
+   "spot": "ss",
+   "v": "A",
+   "combo": "ko-dark-desk",
+   "page": "genp"
+  },
+  "cv-head-A-ko-dark-desk.png": {
+   "spot": "cv-head",
+   "v": "A",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-exp-A-ko-dark-desk.png": {
+   "spot": "cv-exp",
+   "v": "A",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-proj-A-ko-dark-desk.png": {
+   "spot": "cv-proj",
+   "v": "A",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-other-A-ko-dark-desk.png": {
+   "spot": "cv-other",
+   "v": "A",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-pat-A-ko-dark-desk.png": {
+   "spot": "cv-pat",
+   "v": "A",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-sw-A-ko-dark-desk.png": {
+   "spot": "cv-sw",
+   "v": "A",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-teach-A-ko-dark-desk.png": {
+   "spot": "cv-teach",
+   "v": "A",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "teach-B-ko-dark-desk.png": {
+   "spot": "teach",
+   "v": "B",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "ip-B-ko-dark-desk.png": {
+   "spot": "ip",
+   "v": "B",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "edu-B-ko-dark-desk.png": {
+   "spot": "edu",
+   "v": "B",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "work-B-ko-dark-desk.png": {
+   "spot": "work",
+   "v": "B",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "ledger-B-ko-dark-desk.png": {
+   "spot": "ledger",
+   "v": "B",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "filter-B-ko-dark-desk.png": {
+   "spot": "filter",
+   "v": "B",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "nav-B-ko-dark-desk.png": {
+   "spot": "nav",
+   "v": "B",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "rec-B-ko-dark-desk.png": {
+   "spot": "rec",
+   "v": "B",
+   "combo": "ko-dark-desk",
+   "page": "docent"
+  },
+  "rec2-B-ko-dark-desk.png": {
+   "spot": "rec2",
+   "v": "B",
+   "combo": "ko-dark-desk",
+   "page": "legal"
+  },
+  "scr-B-ko-dark-desk.png": {
+   "spot": "scr",
+   "v": "B",
+   "combo": "ko-dark-desk",
+   "page": "legal"
+  },
+  "ss-B-ko-dark-desk.png": {
+   "spot": "ss",
+   "v": "B",
+   "combo": "ko-dark-desk",
+   "page": "genp"
+  },
+  "cv-head-B-ko-dark-desk.png": {
+   "spot": "cv-head",
+   "v": "B",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-exp-B-ko-dark-desk.png": {
+   "spot": "cv-exp",
+   "v": "B",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-proj-B-ko-dark-desk.png": {
+   "spot": "cv-proj",
+   "v": "B",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-other-B-ko-dark-desk.png": {
+   "spot": "cv-other",
+   "v": "B",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-pat-B-ko-dark-desk.png": {
+   "spot": "cv-pat",
+   "v": "B",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-sw-B-ko-dark-desk.png": {
+   "spot": "cv-sw",
+   "v": "B",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-teach-B-ko-dark-desk.png": {
+   "spot": "cv-teach",
+   "v": "B",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "teach-C-ko-dark-desk.png": {
+   "spot": "teach",
+   "v": "C",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "ip-C-ko-dark-desk.png": {
+   "spot": "ip",
+   "v": "C",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "edu-C-ko-dark-desk.png": {
+   "spot": "edu",
+   "v": "C",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "work-C-ko-dark-desk.png": {
+   "spot": "work",
+   "v": "C",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "ledger-C-ko-dark-desk.png": {
+   "spot": "ledger",
+   "v": "C",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "filter-C-ko-dark-desk.png": {
+   "spot": "filter",
+   "v": "C",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "nav-C-ko-dark-desk.png": {
+   "spot": "nav",
+   "v": "C",
+   "combo": "ko-dark-desk",
+   "page": "home"
+  },
+  "rec-C-ko-dark-desk.png": {
+   "spot": "rec",
+   "v": "C",
+   "combo": "ko-dark-desk",
+   "page": "docent"
+  },
+  "rec2-C-ko-dark-desk.png": {
+   "spot": "rec2",
+   "v": "C",
+   "combo": "ko-dark-desk",
+   "page": "legal"
+  },
+  "scr-C-ko-dark-desk.png": {
+   "spot": "scr",
+   "v": "C",
+   "combo": "ko-dark-desk",
+   "page": "legal"
+  },
+  "ss-C-ko-dark-desk.png": {
+   "spot": "ss",
+   "v": "C",
+   "combo": "ko-dark-desk",
+   "page": "genp"
+  },
+  "cv-head-C-ko-dark-desk.png": {
+   "spot": "cv-head",
+   "v": "C",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-exp-C-ko-dark-desk.png": {
+   "spot": "cv-exp",
+   "v": "C",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-proj-C-ko-dark-desk.png": {
+   "spot": "cv-proj",
+   "v": "C",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-other-C-ko-dark-desk.png": {
+   "spot": "cv-other",
+   "v": "C",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-pat-C-ko-dark-desk.png": {
+   "spot": "cv-pat",
+   "v": "C",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-sw-C-ko-dark-desk.png": {
+   "spot": "cv-sw",
+   "v": "C",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "cv-teach-C-ko-dark-desk.png": {
+   "spot": "cv-teach",
+   "v": "C",
+   "combo": "ko-dark-desk",
+   "page": "cv"
+  },
+  "teach-base-ko-light-360.png": {
+   "spot": "teach",
+   "v": "base",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "ip-base-ko-light-360.png": {
+   "spot": "ip",
+   "v": "base",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "edu-base-ko-light-360.png": {
+   "spot": "edu",
+   "v": "base",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "work-base-ko-light-360.png": {
+   "spot": "work",
+   "v": "base",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "ledger-base-ko-light-360.png": {
+   "spot": "ledger",
+   "v": "base",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "filter-base-ko-light-360.png": {
+   "spot": "filter",
+   "v": "base",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "menu-base-ko-light-360.png": {
+   "spot": "menu",
+   "v": "base",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "rec-base-ko-light-360.png": {
+   "spot": "rec",
+   "v": "base",
+   "combo": "ko-light-360",
+   "page": "docent"
+  },
+  "cmp-base-ko-light-360.png": {
+   "spot": "cmp",
+   "v": "base",
+   "combo": "ko-light-360",
+   "page": "docent"
+  },
+  "rec2-base-ko-light-360.png": {
+   "spot": "rec2",
+   "v": "base",
+   "combo": "ko-light-360",
+   "page": "legal"
+  },
+  "scr-base-ko-light-360.png": {
+   "spot": "scr",
+   "v": "base",
+   "combo": "ko-light-360",
+   "page": "legal"
+  },
+  "ss-base-ko-light-360.png": {
+   "spot": "ss",
+   "v": "base",
+   "combo": "ko-light-360",
+   "page": "genp"
+  },
+  "cv-head-base-ko-light-360.png": {
+   "spot": "cv-head",
+   "v": "base",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-exp-base-ko-light-360.png": {
+   "spot": "cv-exp",
+   "v": "base",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-proj-base-ko-light-360.png": {
+   "spot": "cv-proj",
+   "v": "base",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-other-base-ko-light-360.png": {
+   "spot": "cv-other",
+   "v": "base",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-pat-base-ko-light-360.png": {
+   "spot": "cv-pat",
+   "v": "base",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-sw-base-ko-light-360.png": {
+   "spot": "cv-sw",
+   "v": "base",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-teach-base-ko-light-360.png": {
+   "spot": "cv-teach",
+   "v": "base",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "teach-A-ko-light-360.png": {
+   "spot": "teach",
+   "v": "A",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "ip-A-ko-light-360.png": {
+   "spot": "ip",
+   "v": "A",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "edu-A-ko-light-360.png": {
+   "spot": "edu",
+   "v": "A",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "work-A-ko-light-360.png": {
+   "spot": "work",
+   "v": "A",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "ledger-A-ko-light-360.png": {
+   "spot": "ledger",
+   "v": "A",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "filter-A-ko-light-360.png": {
+   "spot": "filter",
+   "v": "A",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "menu-A-ko-light-360.png": {
+   "spot": "menu",
+   "v": "A",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "rec-A-ko-light-360.png": {
+   "spot": "rec",
+   "v": "A",
+   "combo": "ko-light-360",
+   "page": "docent"
+  },
+  "cmp-A-ko-light-360.png": {
+   "spot": "cmp",
+   "v": "A",
+   "combo": "ko-light-360",
+   "page": "docent"
+  },
+  "rec2-A-ko-light-360.png": {
+   "spot": "rec2",
+   "v": "A",
+   "combo": "ko-light-360",
+   "page": "legal"
+  },
+  "scr-A-ko-light-360.png": {
+   "spot": "scr",
+   "v": "A",
+   "combo": "ko-light-360",
+   "page": "legal"
+  },
+  "ss-A-ko-light-360.png": {
+   "spot": "ss",
+   "v": "A",
+   "combo": "ko-light-360",
+   "page": "genp"
+  },
+  "cv-head-A-ko-light-360.png": {
+   "spot": "cv-head",
+   "v": "A",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-exp-A-ko-light-360.png": {
+   "spot": "cv-exp",
+   "v": "A",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-proj-A-ko-light-360.png": {
+   "spot": "cv-proj",
+   "v": "A",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-other-A-ko-light-360.png": {
+   "spot": "cv-other",
+   "v": "A",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-pat-A-ko-light-360.png": {
+   "spot": "cv-pat",
+   "v": "A",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-sw-A-ko-light-360.png": {
+   "spot": "cv-sw",
+   "v": "A",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-teach-A-ko-light-360.png": {
+   "spot": "cv-teach",
+   "v": "A",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "teach-B-ko-light-360.png": {
+   "spot": "teach",
+   "v": "B",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "ip-B-ko-light-360.png": {
+   "spot": "ip",
+   "v": "B",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "edu-B-ko-light-360.png": {
+   "spot": "edu",
+   "v": "B",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "work-B-ko-light-360.png": {
+   "spot": "work",
+   "v": "B",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "ledger-B-ko-light-360.png": {
+   "spot": "ledger",
+   "v": "B",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "filter-B-ko-light-360.png": {
+   "spot": "filter",
+   "v": "B",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "menu-B-ko-light-360.png": {
+   "spot": "menu",
+   "v": "B",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "rec-B-ko-light-360.png": {
+   "spot": "rec",
+   "v": "B",
+   "combo": "ko-light-360",
+   "page": "docent"
+  },
+  "cmp-B-ko-light-360.png": {
+   "spot": "cmp",
+   "v": "B",
+   "combo": "ko-light-360",
+   "page": "docent"
+  },
+  "rec2-B-ko-light-360.png": {
+   "spot": "rec2",
+   "v": "B",
+   "combo": "ko-light-360",
+   "page": "legal"
+  },
+  "scr-B-ko-light-360.png": {
+   "spot": "scr",
+   "v": "B",
+   "combo": "ko-light-360",
+   "page": "legal"
+  },
+  "ss-B-ko-light-360.png": {
+   "spot": "ss",
+   "v": "B",
+   "combo": "ko-light-360",
+   "page": "genp"
+  },
+  "cv-head-B-ko-light-360.png": {
+   "spot": "cv-head",
+   "v": "B",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-exp-B-ko-light-360.png": {
+   "spot": "cv-exp",
+   "v": "B",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-proj-B-ko-light-360.png": {
+   "spot": "cv-proj",
+   "v": "B",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-other-B-ko-light-360.png": {
+   "spot": "cv-other",
+   "v": "B",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-pat-B-ko-light-360.png": {
+   "spot": "cv-pat",
+   "v": "B",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-sw-B-ko-light-360.png": {
+   "spot": "cv-sw",
+   "v": "B",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-teach-B-ko-light-360.png": {
+   "spot": "cv-teach",
+   "v": "B",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "teach-C-ko-light-360.png": {
+   "spot": "teach",
+   "v": "C",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "ip-C-ko-light-360.png": {
+   "spot": "ip",
+   "v": "C",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "edu-C-ko-light-360.png": {
+   "spot": "edu",
+   "v": "C",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "work-C-ko-light-360.png": {
+   "spot": "work",
+   "v": "C",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "ledger-C-ko-light-360.png": {
+   "spot": "ledger",
+   "v": "C",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "filter-C-ko-light-360.png": {
+   "spot": "filter",
+   "v": "C",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "menu-C-ko-light-360.png": {
+   "spot": "menu",
+   "v": "C",
+   "combo": "ko-light-360",
+   "page": "home"
+  },
+  "rec-C-ko-light-360.png": {
+   "spot": "rec",
+   "v": "C",
+   "combo": "ko-light-360",
+   "page": "docent"
+  },
+  "cmp-C-ko-light-360.png": {
+   "spot": "cmp",
+   "v": "C",
+   "combo": "ko-light-360",
+   "page": "docent"
+  },
+  "rec2-C-ko-light-360.png": {
+   "spot": "rec2",
+   "v": "C",
+   "combo": "ko-light-360",
+   "page": "legal"
+  },
+  "scr-C-ko-light-360.png": {
+   "spot": "scr",
+   "v": "C",
+   "combo": "ko-light-360",
+   "page": "legal"
+  },
+  "ss-C-ko-light-360.png": {
+   "spot": "ss",
+   "v": "C",
+   "combo": "ko-light-360",
+   "page": "genp"
+  },
+  "cv-head-C-ko-light-360.png": {
+   "spot": "cv-head",
+   "v": "C",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-exp-C-ko-light-360.png": {
+   "spot": "cv-exp",
+   "v": "C",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-proj-C-ko-light-360.png": {
+   "spot": "cv-proj",
+   "v": "C",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-other-C-ko-light-360.png": {
+   "spot": "cv-other",
+   "v": "C",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-pat-C-ko-light-360.png": {
+   "spot": "cv-pat",
+   "v": "C",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-sw-C-ko-light-360.png": {
+   "spot": "cv-sw",
+   "v": "C",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "cv-teach-C-ko-light-360.png": {
+   "spot": "cv-teach",
+   "v": "C",
+   "combo": "ko-light-360",
+   "page": "cv"
+  },
+  "teach-base-en-dark-360.png": {
+   "spot": "teach",
+   "v": "base",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "ip-base-en-dark-360.png": {
+   "spot": "ip",
+   "v": "base",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "edu-base-en-dark-360.png": {
+   "spot": "edu",
+   "v": "base",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "work-base-en-dark-360.png": {
+   "spot": "work",
+   "v": "base",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "ledger-base-en-dark-360.png": {
+   "spot": "ledger",
+   "v": "base",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "filter-base-en-dark-360.png": {
+   "spot": "filter",
+   "v": "base",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "menu-base-en-dark-360.png": {
+   "spot": "menu",
+   "v": "base",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "rec-base-en-dark-360.png": {
+   "spot": "rec",
+   "v": "base",
+   "combo": "en-dark-360",
+   "page": "docent"
+  },
+  "cmp-base-en-dark-360.png": {
+   "spot": "cmp",
+   "v": "base",
+   "combo": "en-dark-360",
+   "page": "docent"
+  },
+  "rec2-base-en-dark-360.png": {
+   "spot": "rec2",
+   "v": "base",
+   "combo": "en-dark-360",
+   "page": "legal"
+  },
+  "scr-base-en-dark-360.png": {
+   "spot": "scr",
+   "v": "base",
+   "combo": "en-dark-360",
+   "page": "legal"
+  },
+  "ss-base-en-dark-360.png": {
+   "spot": "ss",
+   "v": "base",
+   "combo": "en-dark-360",
+   "page": "genp"
+  },
+  "cv-head-base-en-dark-360.png": {
+   "spot": "cv-head",
+   "v": "base",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-exp-base-en-dark-360.png": {
+   "spot": "cv-exp",
+   "v": "base",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-proj-base-en-dark-360.png": {
+   "spot": "cv-proj",
+   "v": "base",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-other-base-en-dark-360.png": {
+   "spot": "cv-other",
+   "v": "base",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-pat-base-en-dark-360.png": {
+   "spot": "cv-pat",
+   "v": "base",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-sw-base-en-dark-360.png": {
+   "spot": "cv-sw",
+   "v": "base",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-teach-base-en-dark-360.png": {
+   "spot": "cv-teach",
+   "v": "base",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "teach-A-en-dark-360.png": {
+   "spot": "teach",
+   "v": "A",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "ip-A-en-dark-360.png": {
+   "spot": "ip",
+   "v": "A",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "edu-A-en-dark-360.png": {
+   "spot": "edu",
+   "v": "A",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "work-A-en-dark-360.png": {
+   "spot": "work",
+   "v": "A",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "ledger-A-en-dark-360.png": {
+   "spot": "ledger",
+   "v": "A",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "filter-A-en-dark-360.png": {
+   "spot": "filter",
+   "v": "A",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "menu-A-en-dark-360.png": {
+   "spot": "menu",
+   "v": "A",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "rec-A-en-dark-360.png": {
+   "spot": "rec",
+   "v": "A",
+   "combo": "en-dark-360",
+   "page": "docent"
+  },
+  "cmp-A-en-dark-360.png": {
+   "spot": "cmp",
+   "v": "A",
+   "combo": "en-dark-360",
+   "page": "docent"
+  },
+  "rec2-A-en-dark-360.png": {
+   "spot": "rec2",
+   "v": "A",
+   "combo": "en-dark-360",
+   "page": "legal"
+  },
+  "scr-A-en-dark-360.png": {
+   "spot": "scr",
+   "v": "A",
+   "combo": "en-dark-360",
+   "page": "legal"
+  },
+  "ss-A-en-dark-360.png": {
+   "spot": "ss",
+   "v": "A",
+   "combo": "en-dark-360",
+   "page": "genp"
+  },
+  "cv-head-A-en-dark-360.png": {
+   "spot": "cv-head",
+   "v": "A",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-exp-A-en-dark-360.png": {
+   "spot": "cv-exp",
+   "v": "A",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-proj-A-en-dark-360.png": {
+   "spot": "cv-proj",
+   "v": "A",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-other-A-en-dark-360.png": {
+   "spot": "cv-other",
+   "v": "A",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-pat-A-en-dark-360.png": {
+   "spot": "cv-pat",
+   "v": "A",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-sw-A-en-dark-360.png": {
+   "spot": "cv-sw",
+   "v": "A",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-teach-A-en-dark-360.png": {
+   "spot": "cv-teach",
+   "v": "A",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "teach-B-en-dark-360.png": {
+   "spot": "teach",
+   "v": "B",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "ip-B-en-dark-360.png": {
+   "spot": "ip",
+   "v": "B",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "edu-B-en-dark-360.png": {
+   "spot": "edu",
+   "v": "B",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "work-B-en-dark-360.png": {
+   "spot": "work",
+   "v": "B",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "ledger-B-en-dark-360.png": {
+   "spot": "ledger",
+   "v": "B",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "filter-B-en-dark-360.png": {
+   "spot": "filter",
+   "v": "B",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "menu-B-en-dark-360.png": {
+   "spot": "menu",
+   "v": "B",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "rec-B-en-dark-360.png": {
+   "spot": "rec",
+   "v": "B",
+   "combo": "en-dark-360",
+   "page": "docent"
+  },
+  "cmp-B-en-dark-360.png": {
+   "spot": "cmp",
+   "v": "B",
+   "combo": "en-dark-360",
+   "page": "docent"
+  },
+  "rec2-B-en-dark-360.png": {
+   "spot": "rec2",
+   "v": "B",
+   "combo": "en-dark-360",
+   "page": "legal"
+  },
+  "scr-B-en-dark-360.png": {
+   "spot": "scr",
+   "v": "B",
+   "combo": "en-dark-360",
+   "page": "legal"
+  },
+  "ss-B-en-dark-360.png": {
+   "spot": "ss",
+   "v": "B",
+   "combo": "en-dark-360",
+   "page": "genp"
+  },
+  "cv-head-B-en-dark-360.png": {
+   "spot": "cv-head",
+   "v": "B",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-exp-B-en-dark-360.png": {
+   "spot": "cv-exp",
+   "v": "B",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-proj-B-en-dark-360.png": {
+   "spot": "cv-proj",
+   "v": "B",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-other-B-en-dark-360.png": {
+   "spot": "cv-other",
+   "v": "B",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-pat-B-en-dark-360.png": {
+   "spot": "cv-pat",
+   "v": "B",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-sw-B-en-dark-360.png": {
+   "spot": "cv-sw",
+   "v": "B",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-teach-B-en-dark-360.png": {
+   "spot": "cv-teach",
+   "v": "B",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "teach-C-en-dark-360.png": {
+   "spot": "teach",
+   "v": "C",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "ip-C-en-dark-360.png": {
+   "spot": "ip",
+   "v": "C",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "edu-C-en-dark-360.png": {
+   "spot": "edu",
+   "v": "C",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "work-C-en-dark-360.png": {
+   "spot": "work",
+   "v": "C",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "ledger-C-en-dark-360.png": {
+   "spot": "ledger",
+   "v": "C",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "filter-C-en-dark-360.png": {
+   "spot": "filter",
+   "v": "C",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "menu-C-en-dark-360.png": {
+   "spot": "menu",
+   "v": "C",
+   "combo": "en-dark-360",
+   "page": "home"
+  },
+  "rec-C-en-dark-360.png": {
+   "spot": "rec",
+   "v": "C",
+   "combo": "en-dark-360",
+   "page": "docent"
+  },
+  "cmp-C-en-dark-360.png": {
+   "spot": "cmp",
+   "v": "C",
+   "combo": "en-dark-360",
+   "page": "docent"
+  },
+  "rec2-C-en-dark-360.png": {
+   "spot": "rec2",
+   "v": "C",
+   "combo": "en-dark-360",
+   "page": "legal"
+  },
+  "scr-C-en-dark-360.png": {
+   "spot": "scr",
+   "v": "C",
+   "combo": "en-dark-360",
+   "page": "legal"
+  },
+  "ss-C-en-dark-360.png": {
+   "spot": "ss",
+   "v": "C",
+   "combo": "en-dark-360",
+   "page": "genp"
+  },
+  "cv-head-C-en-dark-360.png": {
+   "spot": "cv-head",
+   "v": "C",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-exp-C-en-dark-360.png": {
+   "spot": "cv-exp",
+   "v": "C",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-proj-C-en-dark-360.png": {
+   "spot": "cv-proj",
+   "v": "C",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-other-C-en-dark-360.png": {
+   "spot": "cv-other",
+   "v": "C",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-pat-C-en-dark-360.png": {
+   "spot": "cv-pat",
+   "v": "C",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-sw-C-en-dark-360.png": {
+   "spot": "cv-sw",
+   "v": "C",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "cv-teach-C-en-dark-360.png": {
+   "spot": "cv-teach",
+   "v": "C",
+   "combo": "en-dark-360",
+   "page": "cv"
+  },
+  "pdf-base-en.png": {
+   "spot": "pdf",
+   "v": "base",
+   "combo": "en",
+   "page": "cv"
+  },
+  "pdf-base-en-last.png": {
+   "spot": "pdf-last",
+   "v": "base",
+   "combo": "en",
+   "page": "cv"
+  },
+  "pdf-base-ko.png": {
+   "spot": "pdf",
+   "v": "base",
+   "combo": "ko",
+   "page": "cv"
+  },
+  "pdf-base-ko-last.png": {
+   "spot": "pdf-last",
+   "v": "base",
+   "combo": "ko",
+   "page": "cv"
+  },
+  "pdf-A-en.png": {
+   "spot": "pdf",
+   "v": "A",
+   "combo": "en",
+   "page": "cv"
+  },
+  "pdf-A-en-last.png": {
+   "spot": "pdf-last",
+   "v": "A",
+   "combo": "en",
+   "page": "cv"
+  },
+  "pdf-A-ko.png": {
+   "spot": "pdf",
+   "v": "A",
+   "combo": "ko",
+   "page": "cv"
+  },
+  "pdf-A-ko-last.png": {
+   "spot": "pdf-last",
+   "v": "A",
+   "combo": "ko",
+   "page": "cv"
+  },
+  "pdf-B-en.png": {
+   "spot": "pdf",
+   "v": "B",
+   "combo": "en",
+   "page": "cv"
+  },
+  "pdf-B-en-last.png": {
+   "spot": "pdf-last",
+   "v": "B",
+   "combo": "en",
+   "page": "cv"
+  },
+  "pdf-B-ko.png": {
+   "spot": "pdf",
+   "v": "B",
+   "combo": "ko",
+   "page": "cv"
+  },
+  "pdf-B-ko-last.png": {
+   "spot": "pdf-last",
+   "v": "B",
+   "combo": "ko",
+   "page": "cv"
+  },
+  "pdf-C-en.png": {
+   "spot": "pdf",
+   "v": "C",
+   "combo": "en",
+   "page": "cv"
+  },
+  "pdf-C-en-last.png": {
+   "spot": "pdf-last",
+   "v": "C",
+   "combo": "en",
+   "page": "cv"
+  },
+  "pdf-C-ko.png": {
+   "spot": "pdf",
+   "v": "C",
+   "combo": "ko",
+   "page": "cv"
+  },
+  "pdf-C-ko-last.png": {
+   "spot": "pdf-last",
+   "v": "C",
+   "combo": "ko",
+   "page": "cv"
+  }
+ }
+}
