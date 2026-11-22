@@ -4,7 +4,7 @@ title:
   ko: 발전용 보일러 시스템의 최적제어기법 연구
 summary:
   en: Researched optimal control for power plant boilers, from convex optimization code to MPC running on a microcontroller.
-  ko: 볼록 최적화 프로그램부터 마이크로컨트롤러 구동 MPC까지, 발전용 보일러 최적제어 연구
+  ko: 발전용 보일러 최적제어 연구, 볼록 최적화 프로그램부터 마이크로컨트롤러 구동 MPC까지 구현
 highlights:
   - en: Implemented matrix computation and convex optimization programs (gradient descent, quadratic programming) for model training and optimal control.
     ko: 모델 학습과 최적제어를 위한 행렬 연산, 볼록 최적화 프로그램 구현 (경사하강법, 이차계획법)

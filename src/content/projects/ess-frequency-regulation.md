@@ -11,7 +11,7 @@ highlights:
   - en: Built simulation models in Simulink/Simscape to assess the grid impact of frequency regulation ESS.
     ko: 주파수 조정용 ESS의 계통 영향 평가를 위한 시뮬레이션 모델 구현 (Simulink, Simscape)
   - en: Analyzed and visualized data for ESS performance evaluation and lifetime diagnosis, and published reports covering four domestic substations.
-    ko: ESS 성능평가·수명진단 데이터 분석 및 시각화, 국내 변전소 4곳 대상 보고서 발간
+    ko: ESS 성능평가와 수명진단 데이터의 분석과 시각화, 국내 변전소 4곳 대상 보고서 발간
 period: { start: 2015-06, end: 2018-12 }
 org: { en: KEPCO, ko: 한국전력 }
 domain: Energy & Utilities

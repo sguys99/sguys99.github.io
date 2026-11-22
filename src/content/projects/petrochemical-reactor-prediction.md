@@ -7,11 +7,11 @@ summary:
   ko: 석유화학 공정 설비 수명 예측과 상태진단을 위한 화학반응기 거동 예측 머신러닝 모델 개발 총괄
 highlights:
   - en: Developed a model pipeline that predicts reactor reactivity and residual feedstock.
-    ko: 화학반응기 반응성 및 잔존 원료 예측 모델 파이프라인 개발
+    ko: 화학반응기 반응성과 잔존 원료를 예측하는 모델 파이프라인 개발
   - en: Built the environment and inference server to run the models on MLOps.
-    ko: 모델의 MLOps 탑재를 위한 환경 구축 및 추론 서버 개발
+    ko: 모델의 MLOps 탑재용 환경 구축과 추론 서버 개발
   - en: Set up an experiment environment and template code for model traceability and reproducibility.
-    ko: 모델 추적성·재현성 확보를 위한 실험 환경 구축 및 템플릿 코드 개발
+    ko: 모델을 추적하고 재현할 수 있는 실험 환경 구축과 템플릿 코드 개발
 period: { start: 2023-03, end: 2023-11 }
 org: { en: MakinaRocks, ko: 마키나락스 }
 client:
