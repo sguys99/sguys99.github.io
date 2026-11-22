@@ -6,8 +6,8 @@
 
 legend:
   - { kind: input, label: { en: 'User', ko: '이용자' } }
-  - { kind: llm, label: { en: 'Agent, LLM', ko: '에이전트·LLM' } }
-  - { kind: logic, label: { en: 'Tools and data', ko: '도구·데이터' } }
+  - { kind: llm, label: { en: 'Agent, LLM', ko: '에이전트/LLM' } }
+  - { kind: logic, label: { en: 'Tools and data', ko: '도구/데이터' } }
   - { kind: focus, label: { en: 'System prompt', ko: '시스템 프롬프트' } }
   - { kind: ghost, label: { en: 'Upstream source', ko: '외부 원천' } }
 problem:
@@ -15,14 +15,14 @@ problem:
   height: 404
   legend:
     - { kind: input, label: { en: 'Question', ko: '질문' } }
-    - { kind: logic, label: { en: 'Search, file, data', ko: '검색·파일·데이터' } }
+    - { kind: logic, label: { en: 'Search, file, data', ko: '검색/파일/데이터' } }
     - { kind: llm, label: { en: 'LLM call', ko: 'LLM 호출' } }
     - { kind: focus, label: { en: 'Agent loop', ko: '에이전트 반복' } }
     - { kind: mark, label: { en: 'Where it fell short', ko: '한계' } }
   zones:
     - {
         id: before,
-        label: { en: 'Before · one vector search', ko: '이전 · 벡터 DB 1회 조회' },
+        label: { en: 'Before (one vector search)', ko: '이전(벡터 DB 1회 조회)' },
         x: 0,
         y: 0,
         w: 720,
@@ -30,7 +30,7 @@ problem:
       }
     - {
         id: after,
-        label: { en: 'After · agent with two sources', ko: '이후 · 두 지식원을 쓰는 에이전트' },
+        label: { en: 'After (agent with two sources)', ko: '이후(두 지식원을 쓰는 에이전트)' },
         x: 0,
         y: 168,
         w: 720,
@@ -93,8 +93,8 @@ problem:
     - {
         id: t3,
         kind: logic,
-        label: { en: 'History, stats', ko: '이력·통계' },
-        sub: { en: 'commits · metadata', ko: '커밋·메타데이터' },
+        label: { en: 'History, stats', ko: '이력/통계' },
+        sub: { en: 'commits, metadata', ko: '커밋/메타데이터' },
         x: 392,
         y: 296,
         w: 136,
@@ -104,7 +104,7 @@ problem:
         id: a3,
         kind: llm,
         label: { en: 'Verbatim answer', ko: '원문 인용 답변' },
-        sub: { en: 'source · disclaimer', ko: '출처·면책' },
+        sub: { en: 'source, disclaimer', ko: '출처/면책' },
         x: 576,
         y: 236,
         w: 128,
@@ -136,7 +136,7 @@ problem:
     - {
         n: 3,
         on: b4,
-        text: { en: 'No revision history', ko: '개정 이력·과거 원문 없음' },
+        text: { en: 'No revision history', ko: '개정 이력/과거 원문 없음' },
         x: 544,
         y: 100,
         w: 160,
@@ -193,19 +193,19 @@ prompt:
       - { en: 'Appendix', ko: '별표 확인' }
       - { en: 'Classify', ko: '의도 분류' }
       - { en: 'Retrieve', ko: '조회' }
-      - { en: 'Verify', ko: '검증·폴백' }
+      - { en: 'Verify', ko: '검증/폴백' }
       - { en: 'Answer', ko: '출력' }
   zones:
     - {
         id: rules,
         label:
-          { en: '6 absolute rules · apply to every step', ko: '절대 규칙 6개 · 모든 단계에 적용' },
+          { en: '6 absolute rules (apply to every step)', ko: '절대 규칙 6개(모든 단계에 적용)' },
         note:
           {
             text:
               {
-                en: 'verbatim · no advice · cite · read-only',
-                ko: '원문 그대로 · 조언 금지 · 출처 · 읽기 전용',
+                en: 'verbatim, no advice, cite, read-only',
+                ko: '원문 그대로, 조언 금지, 출처, 읽기 전용',
               },
           },
         x: 0,
@@ -288,7 +288,7 @@ prompt:
         id: c5b,
         kind: plain,
         label: { en: "Fallback\n#1–#5", ko: "폴백\n#1–#5" },
-        sub: { en: 'no hits, errors', ko: '0건·어긋남·오류' },
+        sub: { en: 'no hits, errors', ko: '0건/어긋남/오류' },
         x: 524,
         y: 136,
         w: 96,
@@ -298,7 +298,7 @@ prompt:
         id: c6,
         kind: plain,
         label: { en: "Output\nformat", ko: "출력\n형식" },
-        sub: { en: 'quote · source', ko: '원문·출처·면책' },
+        sub: { en: 'quote, source', ko: '원문/출처/면책' },
         x: 628,
         y: 72,
         w: 96,
@@ -309,10 +309,10 @@ prompt:
         kind: focus,
         label:
           {
-            en: 'Knowledge: tool guide · repository layout and schema',
-            ko: '참고 지식: 도구 소개 · 저장소 구조·스키마',
+            en: 'Knowledge: tool guide, repository layout and schema',
+            ko: '참고 지식: 도구 소개, 저장소 구조/스키마',
           },
-        sub: { en: 'read by retrieval and verification', ko: '조회·검증 단계가 참고' },
+        sub: { en: 'read by retrieval and verification', ko: '조회/검증 단계가 참고' },
         x: 316,
         y: 216,
         w: 408,
@@ -321,8 +321,8 @@ prompt:
     - {
         id: ex,
         kind: logic,
-        label: { en: 'Exceptions · 12 cases', ko: '예외 처리 · 12가지' },
-        sub: { en: 'not found, ambiguous, API errors …', ko: '미발견·모호·API 오류 …' },
+        label: { en: 'Exceptions (12 cases)', ko: '예외 처리(12가지)' },
+        sub: { en: 'not found, ambiguous, API errors …', ko: '미발견/모호/API 오류 …' },
         x: 4,
         y: 216,
         w: 304,
@@ -343,7 +343,7 @@ prompt:
     - { from: kn, to: c5b, d: 'M572,216 L572,192', style: back }
 
 repomap:
-  repo: { en: 'Repository · legalize-kr', ko: '저장소 · legalize-kr' }
+  repo: { en: 'Repository (legalize-kr)', ko: '저장소(legalize-kr)' }
   tree:
     - { depth: 0, name: 'kr/' }
     - { depth: 1, name: '근로기준법/' }
@@ -353,10 +353,10 @@ repomap:
     - { depth: 1, name: '민법/' }
     - { depth: 2, name: '법률.md' }
     - { depth: 1, name: '도로교통법/' }
-    - { depth: 2, name: '법률.md · …' }
+    - { depth: 2, name: '법률.md …' }
   treeNote:
     - { en: 'about 3,046 statute folders', ko: '법령 폴더 약 3,046개' }
-    - { en: 'folder = act, decree, and rule set', ko: '폴더 = 법률·시행령·시행규칙 세트' }
+    - { en: 'folder = act, decree, and rule set', ko: '폴더 = 법률, 시행령, 시행규칙 세트' }
   open: { en: 'OPEN BY PATH', ko: '경로로 바로 열기' }
   file: { en: 'One statute file', ko: '법령 파일 하나' }
   path: 'kr/근로기준법/법률.md'
@@ -380,7 +380,7 @@ repomap:
         from: 1,
         to: 7,
         title: { en: 'Metadata', ko: '메타데이터' },
-        body: { en: 'header and stats', ko: '대상 법령 표시·통계' },
+        body: { en: 'header and stats', ko: '대상 법령 표시/통계' },
       }
     - {
         from: 10,
@@ -423,7 +423,7 @@ arch:
       }
     - {
         id: r3,
-        label: { en: 'MCP · read-only tools', ko: 'MCP · 읽기 전용 도구' },
+        label: { en: 'MCP (read-only tools)', ko: 'MCP(읽기 전용 도구)' },
         x: 0,
         y: 208,
         w: 720,
@@ -437,7 +437,7 @@ arch:
         id: chat,
         kind: input,
         label: { en: 'legalQ web chat', ko: '웹 챗 legalQ' },
-        sub: { en: 'desktop · mobile', ko: '데스크톱·모바일' },
+        sub: { en: 'desktop, mobile', ko: '데스크톱/모바일' },
         x: 176,
         y: 32,
         w: 176,
@@ -457,7 +457,7 @@ arch:
         id: guard,
         kind: logic,
         label: { en: 'Guardrails', ko: '가드레일' },
-        sub: { en: 'rate · concurrency · PII', ko: 'IP 제한·동시성·개인정보' },
+        sub: { en: 'rate, concurrency, PII', ko: 'IP 제한/동시성/개인정보' },
         x: 16,
         y: 132,
         w: 160,
@@ -467,7 +467,7 @@ arch:
         id: agent,
         kind: llm,
         label: { en: 'Agent', ko: '에이전트' },
-        sub: { en: 'tool loop, up to 8 turns', ko: '도구 호출 반복 · 최대 8턴' },
+        sub: { en: 'tool loop, up to 8 turns', ko: '도구 호출 반복(최대 8턴)' },
         x: 192,
         y: 132,
         w: 176,
@@ -486,7 +486,7 @@ arch:
         id: prompt,
         kind: focus,
         label: { en: 'System prompt', ko: '시스템 프롬프트' },
-        sub: { en: 'intents · routing · repo map', ko: '의도·라우팅·저장소 지도' },
+        sub: { en: 'intents, routing, repo map', ko: '의도/라우팅/저장소 지도' },
         x: 528,
         y: 132,
         w: 176,
@@ -534,10 +534,7 @@ arch:
         kind: logic,
         label: { en: 'Seahorse vector DB', ko: 'Seahorse 벡터 DB' },
         sub:
-          {
-            en: 'Dense·BM25 hybrid · article chunks',
-            ko: 'Dense·BM25 하이브리드 · 조·항 단위 청크',
-          },
+          { en: 'Dense/BM25 hybrid, article chunks', ko: 'Dense/BM25 하이브리드, 조·항 단위 청크' },
         x: 16,
         y: 376,
         w: 252,
@@ -549,8 +546,8 @@ arch:
         label: { en: 'legalize-kr repo', ko: 'legalize-kr 저장소' },
         sub:
           {
-            en: 'about 3,046 statutes as Markdown · Git history',
-            ko: '법령 약 3,046개 Markdown · Git 이력',
+            en: 'about 3,046 statutes as Markdown, Git history',
+            ko: '법령 약 3,046개 Markdown, Git 이력',
           },
         x: 296,
         y: 376,
@@ -606,7 +603,7 @@ flow:
   zones:
     - {
         id: vl,
-        label: { en: 'Vector DB · Seahorse MCP', ko: '벡터 DB · Seahorse MCP' },
+        label: { en: 'Vector DB (Seahorse MCP)', ko: '벡터 DB(Seahorse MCP)' },
         x: 160,
         y: 136,
         w: 268,
@@ -614,7 +611,7 @@ flow:
       }
     - {
         id: rl,
-        label: { en: 'Repository · GitHub MCP', ko: '법령 저장소 · GitHub MCP' },
+        label: { en: 'Repository (GitHub MCP)', ko: '법령 저장소(GitHub MCP)' },
         x: 440,
         y: 136,
         w: 280,
@@ -626,7 +623,7 @@ flow:
         id: pre,
         kind: logic,
         label: { en: 'Preprocess', ko: '전처리' },
-        sub: { en: 'normalize names', ko: '공백·가운뎃점 정규화' },
+        sub: { en: 'normalize names', ko: '공백/가운뎃점 정규화' },
         x: 120,
         y: 4,
         w: 136,
@@ -685,7 +682,7 @@ flow:
         id: r1b,
         kind: input,
         label: { en: 'search_code', ko: 'search_code' },
-        sub: { en: 'if empty or off-topic', ko: '0건·어긋나면' },
+        sub: { en: 'if empty or off-topic', ko: '0건/불일치' },
         x: 588,
         y: 216,
         w: 128,
@@ -766,7 +763,7 @@ flow:
         id: r6,
         kind: logic,
         label: { en: 'search_code', ko: 'search_code' },
-        sub: { en: 'frontmatter · approx.', ko: 'frontmatter · 근사치' },
+        sub: { en: 'frontmatter (approx.)', ko: 'frontmatter(근사치)' },
         x: 452,
         y: 476,
         w: 128,
@@ -775,7 +772,7 @@ flow:
     - {
         id: ans,
         kind: llm,
-        label: { en: 'Verbatim quote · source · disclaimer', ko: '원문 인용 · 출처 · 면책' },
+        label: { en: 'Verbatim quote, source, disclaimer', ko: '원문 인용, 출처, 면책' },
         sub: { en: 'article, paragraph, and item numbers as written', ko: '조·항·호 번호 그대로' },
         x: 160,
         y: 556,
