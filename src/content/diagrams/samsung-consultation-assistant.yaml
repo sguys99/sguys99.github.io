@@ -8,7 +8,7 @@ legend:
   - kind: llm
     label: { en: LLM call, ko: LLM 호출 }
   - kind: logic
-    label: { en: 'Logic, search, storage', ko: 로직·검색·저장소 }
+    label: { en: 'Logic, search, storage', ko: 로직/검색/저장소 }
   - kind: focus
     label: { en: Answered without the LLM, ko: LLM 없이 답변 }
 
@@ -31,10 +31,10 @@ problem:
     items:
       - { en: Discover, ko: 인지 }
       - { en: Research, ko: 탐색 }
-      - { en: Visit, ko: 방문·체험 }
+      - { en: Visit, ko: 방문/체험 }
       - { en: Purchase, ko: 구매 }
-      - { en: Delivery, ko: 배송·설치 }
-      - { en: Use, ko: 등록·사용 }
+      - { en: Delivery, ko: 배송/설치 }
+      - { en: Use, ko: 등록/사용 }
       - { en: Service, ko: 서비스 이용 }
       - { en: Repurchase, ko: 재구매 }
   zones:
@@ -46,14 +46,14 @@ problem:
     - {
         id: search,
         lane: out,
-        label: { en: Search & compare, ko: 정보 검색·제품 비교 },
+        label: { en: Search & compare, ko: 정보 검색/제품 비교 },
         x: 140,
         y: 152,
       }
     - { id: store, lane: own, label: { en: Store visit, ko: 매장 방문 }, x: 228, y: 228 }
     - { id: price, lane: out, label: { en: Price check, ko: 가격 비교 }, x: 300, y: 152 }
     - { id: buy, lane: own, label: { en: Purchase, ko: 구매 }, x: 340, y: 228 }
-    - { id: deliv, lane: own, label: { en: "Delivery\n& setup", ko: 배송·설치 }, x: 408, y: 228 }
+    - { id: deliv, lane: own, label: { en: "Delivery\n& setup", ko: 배송/설치 }, x: 408, y: 228 }
     - { id: reg, lane: own, label: { en: Register, ko: 제품 등록 }, x: 472, y: 228 }
     - { id: howto, lane: out, label: { en: How-to search, ko: 사용법 탐색 }, x: 516, y: 152 }
     - { id: svc, lane: own, label: { en: "Service\ninquiry", ko: 서비스 문의 }, x: 580, y: 228 }
@@ -63,7 +63,7 @@ problem:
       on: search
       text:
         {
-          en: "Too many lookalikes;\nreviews hard to trust",
+          en: "Too many lookalikes\nreviews hard to trust",
           ko: "유사 상품은 많고\n후기는 믿기 어렵다",
         }
       x: 48
@@ -89,8 +89,8 @@ problem:
       on: deliv
       text:
         {
-          en: "Can't track or change\ndelivery; no one answers",
-          ko: "배송 확인·변경이 어렵고\n전화 연결도 안 된다",
+          en: "Can't track or change delivery\nno one answers",
+          ko: "배송 확인과 변경이 어렵고\n전화 연결도 안 된다",
         }
       x: 316
       y: 304
@@ -122,13 +122,12 @@ approach:
     - kind: new
       label: { en: Added in this version, ko: 이 버전에서 추가 }
   zones:
-    - { id: v1, label: { en: Version 1 · MVP, ko: 1차 · MVP }, x: 0, y: 0, w: 720, h: 88 }
+    - { id: v1, label: { en: Version 1 (MVP), ko: 1차(MVP) }, x: 0, y: 0, w: 720, h: 88 }
     - id: v2
       label: { en: Version 2, ko: 2차 }
       note:
         {
-          text:
-            { en: '10 s avg response · LLM cost −50%', ko: '평균 응답 10초 · LLM 비용 50% 절감' },
+          text: { en: '10 s avg response, LLM cost −50%', ko: '평균 응답 10초, LLM 비용 50% 절감' },
         }
       x: 0
       y: 104
@@ -183,7 +182,7 @@ approach:
         id: a5,
         kind: plain,
         label: { en: Data lookup, ko: 데이터 조회 },
-        sub: { en: one combined path, ko: 정형·비정형 통합 },
+        sub: { en: one combined path, ko: 정형/비정형 통합 },
         x: 480,
         y: 36,
         w: 104,
@@ -219,8 +218,8 @@ approach:
       }
     - id: b3
       kind: new
-      label: { en: 'Predefined answers, guardrails', ko: Predefined 답변·가드레일 }
-      sub: { en: FAQ · attack check · re-asking, ko: FAQ·공격 탐지·재질문 }
+      label: { en: 'Predefined answers, guardrails', ko: Predefined 답변/가드레일 }
+      sub: { en: 'FAQ, attack check, re-asking', ko: FAQ/공격 탐지/재질문 }
       x: 248
       y: 136
       w: 336
@@ -269,7 +268,7 @@ approach:
     - {
         id: c1,
         kind: new,
-        label: { en: 'Rewrite, split', ko: 재작성·분해 },
+        label: { en: 'Rewrite, split', ko: 재작성/분해 },
         sub: { en: sub-queries, ko: 하위 질의 },
         x: 16,
         y: 396,
@@ -298,7 +297,7 @@ approach:
         id: c4,
         kind: plain,
         label: { en: Entities, ko: 엔티티 추출 },
-        sub: { en: triage · mapping, ko: 분류·매핑 },
+        sub: { en: 'triage, mapping', ko: 분류/매핑 },
         x: 248,
         y: 396,
         w: 104,
@@ -308,7 +307,7 @@ approach:
         id: c5,
         kind: plain,
         label: { en: Pseudo query, ko: Pseudo Query },
-        sub: { en: DB / API, ko: DB·API },
+        sub: { en: DB / API, ko: DB/API },
         x: 364,
         y: 396,
         w: 104,
@@ -337,7 +336,7 @@ approach:
         id: c8,
         kind: new,
         label: { en: Answer, ko: 답변 구성 },
-        sub: { en: simple / informative, ko: 단순·정보형 },
+        sub: { en: simple / informative, ko: 단순형/정보형 },
         x: 596,
         y: 396,
         w: 116,
@@ -380,7 +379,7 @@ arch:
     - { id: channels, label: { en: Channels, ko: 채널 }, x: 0, y: 0, w: 720, h: 72 }
     - {
         id: platform,
-        label: { en: Gen AI platform on Azure, ko: Gen AI 플랫폼 (Azure) },
+        label: { en: Gen AI platform on Azure, ko: Gen AI 플랫폼(Azure) },
         x: 0,
         y: 96,
         w: 720,
@@ -391,7 +390,7 @@ arch:
     - { id: ans, label: { en: Answer, ko: 답변 }, x: 496, y: 164, w: 208, h: 140 }
     - {
         id: storage,
-        label: { en: Models and storage, ko: 모델·저장소 },
+        label: { en: Models and storage, ko: 모델/저장소 },
         x: 0,
         y: 400,
         w: 720,
@@ -429,7 +428,7 @@ arch:
     - {
         id: gw,
         kind: plain,
-        label: { en: API gateway (channel-independent), ko: API 게이트웨이 (채널 독립) },
+        label: { en: API gateway (channel-independent), ko: API 게이트웨이(채널 독립) },
         x: 16,
         y: 124,
         w: 688,
@@ -465,7 +464,7 @@ arch:
     - {
         id: structured,
         kind: logic,
-        label: { en: Structured · pseudo query, ko: 정형 · Pseudo Query },
+        label: { en: Structured (pseudo query), ko: 정형(Pseudo Query) },
         x: 268,
         y: 192,
         w: 184,
@@ -483,7 +482,7 @@ arch:
     - {
         id: check,
         kind: logic,
-        label: { en: Spec · price check, ko: 스펙·가격·프로모션 확인 },
+        label: { en: 'Check specs, prices, promos', ko: 스펙/가격/프로모션 확인 },
         x: 268,
         y: 264,
         w: 184,
@@ -520,10 +519,7 @@ arch:
       kind: plain
       label: { en: Admin page, ko: 관리자 페이지 }
       sub:
-        {
-          en: logs · monitoring · permissions · personal data,
-          ko: 로그·모니터링·권한·개인정보 관리,
-        }
+        { en: 'logs, monitoring, permissions, personal data', ko: 로그/모니터링/권한/개인정보 관리 }
       x: 16
       y: 320
       w: 688
@@ -591,7 +587,7 @@ arch:
     - {
         id: orders,
         kind: plain,
-        label: { en: "Orders,\ndelivery", ko: "주문·결제·\n배송" },
+        label: { en: "Orders, payment,\ndelivery", ko: "주문, 결제,\n배송" },
         x: 28,
         y: 536,
         w: 104,
@@ -618,7 +614,7 @@ arch:
     - {
         id: stores,
         kind: plain,
-        label: { en: "Stores,\nonline mall", ko: "매장·\n온라인몰" },
+        label: { en: "Stores,\nonline mall", ko: "매장,\n온라인몰" },
         x: 364,
         y: 536,
         w: 104,
@@ -627,7 +623,7 @@ arch:
     - {
         id: cs,
         kind: plain,
-        label: { en: "Service\nand CS", ko: "AS·CS\n정보" },
+        label: { en: "Service\nand CS", ko: "AS/CS\n정보" },
         x: 476,
         y: 536,
         w: 104,
@@ -658,7 +654,7 @@ flow:
     - { id: orch, label: { en: Orchestrator, ko: 오케스트레이터 }, x: 136, y: 0, w: 584, h: 88 }
     - {
         id: st,
-        label: { en: Structured · sub-queries, ko: 정형 · 하위 질의 },
+        label: { en: Structured (sub-queries), ko: 정형(하위 질의) },
         center: true,
         x: 0,
         y: 132,
@@ -667,7 +663,7 @@ flow:
       }
     - {
         id: un,
-        label: { en: Unstructured · top query, ko: 비정형 · 원질의 },
+        label: { en: Unstructured (top query), ko: 비정형(원질의) },
         center: true,
         x: 248,
         y: 132,
@@ -676,7 +672,7 @@ flow:
       }
     - {
         id: pg,
-        label: { en: Predefined · guardrails, ko: Predefined · 가드레일 },
+        label: { en: 'Predefined, guardrails', ko: 'Predefined, 가드레일' },
         center: true,
         x: 496,
         y: 132,
@@ -706,8 +702,8 @@ flow:
     - {
         id: rw,
         kind: llm,
-        label: { en: 'Rewrite, split', ko: 재작성·분해 },
-        sub: { en: top + sub-queries, ko: 원질의·하위 질의 },
+        label: { en: 'Rewrite, split', ko: 재작성/분해 },
+        sub: { en: top + sub-queries, ko: 원질의/하위 질의 },
         x: 428,
         y: 36,
         w: 132,
@@ -753,7 +749,7 @@ flow:
     - {
         id: st5,
         kind: logic,
-        label: { en: DB / API query, ko: DB·API 조회 },
+        label: { en: DB / API query, ko: DB/API 조회 },
         x: 32,
         y: 364,
         w: 160,
@@ -781,7 +777,7 @@ flow:
         id: un3,
         kind: logic,
         label: { en: AI search, ko: AI 검색 },
-        sub: { en: + validity check, ko: + 제품 유효성 검증 },
+        sub: { en: + verify item, ko: + 제품 유효성 검증 },
         x: 264,
         y: 276,
         w: 92,
@@ -801,7 +797,7 @@ flow:
         id: pg1,
         kind: focus,
         label: { en: Predefined, ko: Predefined },
-        sub: { en: greetings · FAQ, ko: 인사·FAQ },
+        sub: { en: 'greetings, FAQ', ko: 인사/FAQ },
         x: 528,
         y: 172,
         w: 160,
@@ -811,7 +807,7 @@ flow:
         id: pg2,
         kind: logic,
         label: { en: Guardrails, ko: 가드레일 },
-        sub: { en: attacks · policy limits, ko: 공격 탐지·정책 제한 },
+        sub: { en: 'attacks, policy limits', ko: 공격 탐지/정책 제한 },
         x: 528,
         y: 228,
         w: 160,
@@ -830,7 +826,7 @@ flow:
         id: layout,
         kind: llm,
         label: { en: Response layout, ko: 답변 구성 },
-        sub: { en: simple · informative · re-ask, ko: 단순·정보형·재질문 },
+        sub: { en: 'simple, informative, re-ask', ko: '단순형, 정보형, 재질문' },
         x: 248,
         y: 496,
         w: 224,
