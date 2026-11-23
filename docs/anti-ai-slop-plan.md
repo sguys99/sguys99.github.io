@@ -489,7 +489,7 @@ B 조합으로 확정 (2.3, 시안 `docs/design-drafts/g17/`). B를 기본으로
   - [x] `docent-humanoid.yaml` (49)
   - [x] `samsung-consultation-assistant.yaml` (56)
   - [x] `lotte-price-forecasting.yaml` (38)
-  - [ ] `samsung-scm-agent.yaml` (17)
+  - [x] `samsung-scm-agent.yaml` (17)
   - [ ] `lotte-ai-masterplan.yaml` (4)
   - [ ] `lotte-inventory-blend-optimization.yaml` (40): 수정 전에도 라벨 1곳이 상자를 넘고 1곳이 꽉 참 (0.5). `and`보다 쉼표
 - [ ] 5.3 그림 전용 컴포넌트 문구 확인: `Comparison`, `StandardSet`, `LayerStack`, `EpisodeLoop`, `DomainTable`, `RepoMap`, `Screens`, `TaskSelection`, `Quadrant`, `RoadmapGantt`, `ResultsChart`, `RoleShift`
@@ -594,4 +594,5 @@ B 조합으로 확정 (2.3, 시안 `docs/design-drafts/g17/`). B를 기본으로
 | 2026-11-22 | 5.2 docent-humanoid | 나열 49개와 언어 공통 단계 번호 1개를 정리해 중간점 50→0. 방문 단계 1–2, STT/TTS, 깊이 카메라 표기를 대조하고 비상정지 3경로와 거리 기준을 보존. 사실 검사의 차이 1키는 Depth의 국문화. 빌드와 링크 통과, 기준 이미지 64쌍에서 넘침과 잘림 0. | `47b8a82` |
 | 2026-11-22 | 5.2 legal 재확인 | 5.7에서 쉼표로 정한 영문 프롬프트 범례 1곳 반영. 사실 차이 0이며 공통 바탕 폭 조정 후에도 기준 이미지 84쌍에서 넘침과 잘림 0. | `895e888` |
 | 2026-11-23 | 5.2 samsung-consultation-assistant | 나열용 중간점 56개 정리. 말풍선의 영문 세미콜론 2곳을 줄바꿈으로 바꾸고 고객 표현 보존. 정형/비정형, 단순형/정보형과 세 유형 나열을 구분하고 결제와 프로모션을 영문에 반영. 제품 검증 라벨을 줄여 모바일 여백 확보. 사실 차이 0. 빌드와 링크 통과, 기준 이미지 56쌍에서 넘침과 잘림 0. | `92517fa` |
-| 2026-11-23 | 5.2 lotte-price-forecasting | 중간점 38개 정리. 예측 구간(1–4주, 1–3개월)과 SHAP를 구분하고 MAPE 목표 10%, 기준 5.9%, 최종 1.3%와 비교 구성 7개를 대조. 사실 차이 1키는 Recursive의 국문화. 국문 결과 설명 light 통과. 빌드와 링크 통과, 기준 이미지 44쌍에서 넘침과 잘림 0. | 이 행을 추가한 커밋 |
+| 2026-11-23 | 5.2 lotte-price-forecasting | 중간점 38개 정리. 예측 구간(1–4주, 1–3개월)과 SHAP를 구분하고 MAPE 목표 10%, 기준 5.9%, 최종 1.3%와 비교 구성 7개를 대조. 사실 차이 1키는 Recursive의 국문화. 국문 결과 설명 light 통과. 빌드와 링크 통과, 기준 이미지 44쌍에서 넘침과 잘림 0. | `d75dbb4` |
+| 2026-11-23 | 5.2 samsung-scm-agent | 중간점 17개 정리. 모델 종류와 모델명을 괄호로 구분하고 흐름의 AI Advisor 표기를 아키텍처와 본문의 업무 지원 역할에 맞춤. 사실 차이 0. 빌드와 링크 통과, 기준 이미지 32쌍에서 넘침과 잘림 0. | 이 행을 추가한 커밋 |

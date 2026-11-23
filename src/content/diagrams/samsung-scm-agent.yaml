@@ -5,11 +5,11 @@
 
 legend:
   - kind: sllm
-    label: { en: Fine-tuned sLLM · Qwen 8B, ko: 파인튜닝 sLLM · Qwen 8B }
+    label: { en: Fine-tuned sLLM (Qwen 8B), ko: 파인튜닝 sLLM(Qwen 8B) }
   - kind: llm
-    label: { en: LLM · Llama 3.1 70B, ko: LLM · Llama 3.1 70B }
+    label: { en: LLM (Llama 3.1 70B), ko: LLM(Llama 3.1 70B) }
   - kind: logic
-    label: { en: 'Search, database, rules', ko: 검색·DB·규칙 }
+    label: { en: 'Search, database, rules', ko: 검색/DB/규칙 }
 
 arch:
   width: 720
@@ -36,7 +36,7 @@ arch:
     - {
         id: portal,
         kind: input,
-        label: { en: Web and mobile portal, ko: 웹·모바일 포털 },
+        label: { en: Web and mobile portal, ko: 웹/모바일 포털 },
         x: 0,
         y: 120,
         w: 152,
@@ -45,7 +45,7 @@ arch:
     - id: bi
       kind: plain
       label: { en: BI engine, ko: BI 엔진 }
-      sub: { en: query · compute · chart, ko: 조회·연산·시각화 }
+      sub: { en: 'query, compute, chart', ko: 조회/연산/시각화 }
       x: 0
       y: 244
       w: 152
@@ -113,7 +113,7 @@ arch:
     - {
         id: embed,
         kind: logic,
-        label: { en: Embedding · reranker, ko: 임베딩·재순위화 },
+        label: { en: 'Embedding, reranker', ko: 임베딩/재순위화 },
         x: 192,
         y: 316,
         w: 148,
@@ -156,7 +156,7 @@ arch:
     - id: infer
       kind: sllm
       label: { en: Inference server, ko: 추론 서버 }
-      sub: { en: entity · pseudo query, ko: 엔티티·Pseudo Query }
+      sub: { en: 'entity, pseudo query', ko: 엔티티/Pseudo Query }
       x: 576
       y: 196
       w: 136
@@ -219,7 +219,7 @@ flow:
         h: 264,
       }
     - id: advisor
-      label: { en: Work support (AI Advisor), ko: 업무 지원(AI Advisor) }
+      label: { en: AI Advisor (work support), ko: 업무 지원(AI Advisor) }
       center: true
       x: 364
       y: 136
@@ -238,7 +238,7 @@ flow:
     - {
         id: portal,
         kind: input,
-        label: { en: Web and mobile portal, ko: 웹·모바일 포털 },
+        label: { en: Web and mobile portal, ko: 웹/모바일 포털 },
         x: 0,
         y: 40,
         w: 156,
@@ -372,7 +372,7 @@ flow:
     - {
         id: chart,
         kind: logic,
-        label: { en: Compute and chart, ko: 연산·시각화 },
+        label: { en: Compute and chart, ko: 연산/시각화 },
         x: 8,
         y: 232,
         w: 140,
