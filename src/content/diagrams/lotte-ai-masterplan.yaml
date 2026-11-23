@@ -55,8 +55,8 @@ matrix:
       name: { en: Adopt a proven solution, ko: 검증된 솔루션 도입 }
       count: 8
       body:
-        en: "Easy to do, but lower impact.\nBring in a commercial tool for early wins."
-        ko: "수행은 쉽지만 영향이 작은 영역.\n상용 솔루션을 도입해 작은 성공부터."
+        en: "Easy to do, but lower impact.\nUse a commercial tool for small gains."
+        ko: "수행은 쉽지만 영향이 작은 영역.\n작은 성과부터 낼 상용 솔루션 도입."
       note: { en: 'e.g. smart CCTV, drawing recognition', ko: '예: 지능형 CCTV, 도면 인식' }
     - at: tr
       focus: true
@@ -64,7 +64,7 @@ matrix:
       count: 12
       body:
         en: "High impact, with proven use cases.\nTest the value before building the system."
-        ko: "영향이 크고 적용 사례가 있는 영역.\n시스템 구축 전에 효과를 먼저 검증."
+        ko: "영향이 크고 적용 사례가 있는 영역.\n시스템 구축 전에 효과를 검증."
       note:
         {
           en: 'e.g. mixing optimization, cotton-pulp price',
@@ -96,7 +96,7 @@ gantt:
   lanes:
     - { id: sol, label: { en: "Proven\nsolution", ko: "솔루션\n도입" } }
     - { id: poc, label: { en: PoC, ko: PoC 수행 } }
-    - { id: data, label: { en: "Data and\ngovernance", ko: "데이터·\n거버넌스" } }
+    - { id: data, label: { en: "Data and\ngovernance", ko: "데이터와\n거버넌스" } }
     - { id: dev, label: { en: "Development\nprep", ko: "개발\n준비" } }
   tasks:
     # 솔루션 도입 8건
@@ -236,7 +236,7 @@ gantt:
         kind: add,
         from: 4,
         to: 8,
-        name: { en: Data lake and platform, ko: 데이터 레이크·분석 플랫폼 },
+        name: { en: Data lake and analytics platform, ko: 데이터 레이크/분석 플랫폼 },
       }
     # 개발 준비 4건
     - {
@@ -265,15 +265,15 @@ gantt:
         kind: dev,
         from: 8,
         to: 10,
-        name: { en: "Competitor\nmonitoring", ko: "고객·기술\n동향 모니터링" },
+        name: { en: "Customer, rival\nand tech trends", ko: "고객사/경쟁사/기술\n동향 모니터링" },
       }
   notes:
     - lane: sol
       at: 8
       text:
         {
-          en: "Proven solutions go\nfirst for early wins",
-          ko: "검증된 솔루션을\n앞에 배치해 빠른 성과",
+          en: "Schedule proven tools\nearly in the roadmap",
+          ko: "검증된 상용 솔루션을\n로드맵 전반부에 배치",
         }
     - lane: data
       at: 8
@@ -284,8 +284,8 @@ gantt:
       anchor: end
       text:
         {
-          en: "Starts once data and\ninfrastructure are ready",
-          ko: "인프라·거버넌스를\n갖춘 뒤 착수",
+          en: "Start when data, infrastructure\nand governance are ready",
+          ko: "데이터, 인프라, 거버넌스를\n갖춘 뒤 착수",
         }
   legend:
     - { kind: own, label: { en: PoC our team ran, ko: 수행팀 PoC } }
