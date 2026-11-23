@@ -17,7 +17,7 @@ legend:
   - kind: logic
     label:
       en: Data and rules
-      ko: 데이터·규칙
+      ko: 데이터/규칙
   - kind: input
     label:
       en: Planner input
@@ -49,8 +49,8 @@ problem:
   zones:
     - id: before
       label:
-        en: Before · manual
-        ko: 현행 · 수작업
+        en: Before (manual)
+        ko: 현행(수작업)
       x: 0
       y: 0
       w: 720
@@ -61,8 +61,8 @@ problem:
           ko: 건당 약 20분
     - id: after
       label:
-        en: After · automated
-        ko: 개선 · 자동화
+        en: After (automated)
+        ko: 개선(자동화)
       x: 0
       y: 152
       w: 720
@@ -225,8 +225,8 @@ problem:
       style: back
       label:
         text:
-          en: off spec · retry
-          ko: 기준 미달 · 재시도
+          en: retry if off spec
+          ko: 기준 미달 시 재시도
         x: 444
         y: 120
     - from: a0
@@ -278,8 +278,8 @@ arch:
   zones:
     - id: train
       label:
-        en: Training program · offline
-        ko: 학습 프로그램 · 오프라인
+        en: Training program (offline)
+        ko: 학습 프로그램(오프라인)
       x: 0
       y: 64
       w: 232
@@ -311,8 +311,8 @@ arch:
         en: Planning screen
         ko: 계획 화면
       sub:
-        en: settings in · recommended mix out
-        ko: 설정 입력·추천 조합 출력
+        en: settings in, recommended mix out
+        ko: 설정 입력/추천 조합 출력
       x: 280
       y: 0
       w: 424
@@ -335,8 +335,8 @@ arch:
         en: Data pipeline
         ko: 데이터 파이프라인
       sub:
-        en: grade · outliers · gaps
-        ko: 등급·이상치·결측치
+        en: grade, outliers, gaps
+        ko: 등급/이상치/결측치
       x: 16
       y: 156
       w: 200
@@ -347,8 +347,8 @@ arch:
         en: Model pipeline
         ko: 모델 파이프라인
       sub:
-        en: select · scale · encode
-        ko: 선별·정규화·인코딩
+        en: select, scale, encode
+        ko: 선별/정규화/인코딩
       x: 16
       y: 216
       w: 200
@@ -359,8 +359,8 @@ arch:
         en: Viscosity model
         ko: 점도 예측 모델
       sub:
-        en: Random Forest · MAPE 3.4%
-        ko: Random Forest · MAPE 3.4%
+        en: Random Forest (MAPE 3.4%)
+        ko: Random Forest(MAPE 3.4%)
       x: 16
       y: 276
       w: 200
@@ -371,8 +371,8 @@ arch:
         en: Initialize
         ko: 초기화
       sub:
-        en: recipes · inventory
-        ko: 레시피·재고
+        en: recipes, inventory
+        ko: 레시피/재고
       x: 280
       y: 96
       w: 176
@@ -431,8 +431,8 @@ arch:
         en: Lab quality data
         ko: 품질 측정 데이터
       sub:
-        en: LIMS · viscosity
-        ko: LIMS·점도
+        en: LIMS (viscosity)
+        ko: LIMS(점도)
       x: 0
       y: 376
       w: 152
@@ -443,8 +443,8 @@ arch:
         en: Mixing-plan DB
         ko: 믹싱 계획 DB
       sub:
-        en: recipes · past plans
-        ko: 레시피·과거 실적
+        en: recipes, past plans
+        ko: 레시피/과거 실적
       x: 184
       y: 376
       w: 176
@@ -455,8 +455,8 @@ arch:
         en: Inventory DB
         ko: 재고 DB
       sub:
-        en: WMS · MES
-        ko: WMS·MES
+        en: WMS, MES
+        ko: WMS, MES
       x: 528
       y: 376
       w: 176
@@ -575,8 +575,8 @@ flow:
         en: Mix plan input
         ko: 믹싱 계획 입력
       sub:
-        en: grade · quantity · batch
-        ko: 등급·수량·차수
+        en: grade, quantity, batch
+        ko: 등급/수량/차수
       x: 24
       y: 56
       w: 136
@@ -594,11 +594,11 @@ flow:
       kind: decision
       label:
         en: |-
-          Optimal and
-          in spec?
+          Best mix found
+          and in spec?
         ko: |-
-          최적해·
-          기준 만족?
+          조합을 찾았고
+          기준도 충족?
       x: 552
       y: 44
       w: 136
@@ -609,8 +609,8 @@ flow:
         en: Preferences
         ko: 선호 설정
       sub:
-        en: stock age · re-feed ratio
-        ko: 장기재고·재투입 비율
+        en: stock age, refeed ratio
+        ko: 장기재고/재투입 비율
       x: 24
       y: 212
       w: 136
@@ -633,8 +633,8 @@ flow:
         en: Mixing-plan DB
         ko: 믹싱 계획 DB
       sub:
-        en: recipes · past plans
-        ko: 레시피·과거 실적
+        en: recipes, past plans
+        ko: 레시피/과거 실적
       x: 200
       y: 212
       w: 136
@@ -645,8 +645,8 @@ flow:
         en: Inventory DB
         ko: 재고 DB
       sub:
-        en: WMS · MES
-        ko: WMS·MES
+        en: WMS, MES
+        ko: WMS, MES
       x: 200
       y: 284
       w: 136
