@@ -42,7 +42,7 @@ arch:
         id: s1,
         kind: input,
         label: { en: Raw-material prices, ko: '원료 가격' },
-        sub: { en: 'cotton, linter, viscose', ko: '면화·린터·비스코스' },
+        sub: { en: 'cotton, linter, viscose', ko: '면화/린터/비스코스' },
         x: 8,
         y: 36,
         w: 136,
@@ -62,7 +62,7 @@ arch:
         id: s3,
         kind: input,
         label: { en: Macro indicators, ko: '거시 지표' },
-        sub: { en: 'FRED: FX, SCFI, CPI', ko: 'FRED: 환율·SCFI·물가' },
+        sub: { en: 'FRED: FX, SCFI, CPI', ko: 'FRED: 환율/SCFI/물가' },
         x: 8,
         y: 132,
         w: 136,
@@ -82,7 +82,7 @@ arch:
         id: build,
         kind: llm,
         label: { en: Build dataset, ko: '데이터셋 생성' },
-        sub: { en: merge · resample, ko: '병합·리샘플링' },
+        sub: { en: 'merge, resample', ko: '병합/리샘플링' },
         x: 188,
         y: 40,
         w: 112,
@@ -102,7 +102,7 @@ arch:
         id: prep,
         kind: llm,
         label: { en: Preprocess, ko: '전처리' },
-        sub: { en: interpolate · scale, ko: '보간·스케일링' },
+        sub: { en: 'interpolate, scale', ko: '보간/스케일링' },
         x: 460,
         y: 40,
         w: 112,
@@ -112,7 +112,7 @@ arch:
         id: model,
         kind: focus,
         label: { en: Forecast model, ko: '예측 모델' },
-        sub: { en: XGBoost · RF · LR, ko: XGBoost · RF · LR },
+        sub: { en: 'XGBoost, RF, LR', ko: 'XGBoost, RF, LR' },
         x: 596,
         y: 40,
         w: 112,
@@ -122,7 +122,7 @@ arch:
         id: eval,
         kind: logic,
         label: { en: Evaluate, ko: '성능 평가' },
-        sub: { en: MAE · RMSE · MAPE, ko: MAE · RMSE · MAPE },
+        sub: { en: 'MAE, RMSE, MAPE', ko: 'MAE, RMSE, MAPE' },
         x: 596,
         y: 120,
         w: 112,
@@ -162,7 +162,7 @@ arch:
         id: trn,
         kind: plain,
         label: { en: Training, ko: Training },
-        sub: { en: settings · retrain, ko: '설정·재학습' },
+        sub: { en: 'settings, retrain', ko: '설정/재학습' },
         x: 460,
         y: 248,
         w: 112,
@@ -172,7 +172,7 @@ arch:
         id: brd,
         kind: plain,
         label: { en: Dashboard, ko: Dashboard },
-        sub: { en: forecast · SHAP, ko: '예측·SHAP' },
+        sub: { en: 'forecast, SHAP', ko: '예측/SHAP' },
         x: 596,
         y: 248,
         w: 112,
@@ -190,13 +190,13 @@ arch:
         to: build,
         d: 'M460,142 L280,142 Q272,142 272,134 L272,84',
         style: back,
-        label: { text: { en: NO · RETRAIN, ko: '미달 · 재학습' }, x: 368, y: 132 },
+        label: { text: { en: 'NO (RETRAIN)', ko: '미달 시 재학습' }, x: 368, y: 132 },
       }
     - {
         from: gate,
         to: brd,
         d: 'M516,164 L516,192 Q516,200 524,200 L644,200 Q652,200 652,208 L652,248',
-        label: { text: { en: YES · DEPLOY, ko: '충족 · 배포' }, x: 584, y: 190 },
+        label: { text: { en: 'YES (DEPLOY)', ko: '충족 시 배포' }, x: 584, y: 190 },
       }
     - {
         from: up,
@@ -265,7 +265,7 @@ flow:
     - {
         id: c4,
         kind: plain,
-        label: { en: 'Adjust & confirm', ko: '견적 조정·확정' },
+        label: { en: 'Adjust & confirm', ko: '견적 조정/확정' },
         x: 444,
         y: 0,
         w: 128,
@@ -284,7 +284,7 @@ flow:
         id: i1,
         kind: input,
         label: { en: Raw-material prices, ko: '원료 가격' },
-        sub: { en: 'cotton, linter, viscose', ko: '면화·린터·비스코스' },
+        sub: { en: 'cotton, linter, viscose', ko: '면화/린터/비스코스' },
         x: 16,
         y: 112,
         w: 168,
@@ -293,8 +293,8 @@ flow:
     - {
         id: i2,
         kind: input,
-        label: { en: Market and macro, ko: '시장·거시 지표' },
-        sub: { en: USDA · FRED · SCFI, ko: USDA · FRED · SCFI },
+        label: { en: Market and macro, ko: '시장/거시 지표' },
+        sub: { en: 'USDA, FRED, SCFI', ko: 'USDA, FRED, SCFI' },
         x: 16,
         y: 160,
         w: 168,
@@ -314,7 +314,7 @@ flow:
         id: model,
         kind: focus,
         label: { en: Forecast model, ko: '예측 모델' },
-        sub: { en: 'XGBoost · Δ price', ko: 'XGBoost · 가격 변화량' },
+        sub: { en: 'XGBoost (Δ price)', ko: 'XGBoost(가격 변화량)' },
         x: 296,
         y: 160,
         w: 128,
@@ -324,7 +324,7 @@ flow:
         id: out,
         kind: logic,
         label: { en: Forecasts and drivers, ko: '예측값과 영향 요인' },
-        sub: { en: '1–4 wk · 1–3 mo · SHAP', ko: '1–4주·1–3개월·SHAP' },
+        sub: { en: '1–4 wk, 1–3 mo, SHAP', ko: '1–4주, 1–3개월, SHAP' },
         x: 468,
         y: 160,
         w: 176,
@@ -369,10 +369,7 @@ results:
         short: { en: 'Δ y', ko: '변화량' },
         name: { en: price-change target, ko: '가격 변화량 타깃' },
       }
-    - {
-        short: { en: recur., ko: '재귀' },
-        name: { en: recursive forecasting, ko: 'Recursive 예측' },
-      }
+    - { short: { en: recur., ko: '재귀' }, name: { en: recursive forecasting, ko: '재귀 예측' } }
     - { short: { en: retrain, ko: '재학습' }, name: { en: retraining, ko: '재학습' } }
     - { short: { en: interp., ko: '보간' }, name: { en: target interpolation, ko: '타깃 보간' } }
   rows:
@@ -403,5 +400,5 @@ results:
   note:
     {
       en: 'Final comparison on one test window. Δ: the model predicts the price change instead of the price.',
-      ko: '같은 시험 구간에서 비교한 최종 결과. 변화량: 가격 대신 가격 변화량을 예측',
+      ko: '같은 시험 구간에서 비교한 최종 결과. 변화량: 가격 대신 가격 변화량을 예측.',
     }
