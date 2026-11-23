@@ -12,18 +12,26 @@ import { t } from '../i18n/ui';
 const name = (await getEntry('profile', 'profile'))!.data.name;
 const title = `${t('en', 'nf_title')} | ${name.en}`;
 const titleKo = `${t('ko', 'nf_title')} | ${name.ko}`;
-const descKo = t('ko', 'nf_body');
 ---
 
 <Base lang="en" title={title}>
   <Fragment slot="head">
     <Head lang="en" title={title} description={t('en', 'nf_body')} canonical={false} />
+    <template id="nf-ko-head">
+      <Head lang="ko" title={titleKo} description={t('ko', 'nf_body')} canonical={false} />
+    </template>
     {/* Before first paint (next to the theme script): language and title from the path; the English shell stays hidden. */}
-    <script is:inline define:vars={{ titleKo, descKo }}>
+    <script is:inline define:vars={{ titleKo }}>
       if (/^\/ko(\/|$)/.test(location.pathname)) {
         document.documentElement.lang = 'ko';
         document.title = titleKo;
-        document.querySelector('meta[name="description"]')?.setAttribute('content', descKo);
+        const koreanHead = document.getElementById('nf-ko-head').content;
+        for (const meta of koreanHead.querySelectorAll(
+          'meta[name="description"], meta[property]',
+        )) {
+          const key = meta.hasAttribute('property') ? 'property' : 'name';
+          document.head.querySelector(`meta[${key}="${meta.getAttribute(key)}"]`).replaceWith(meta);
+        }
       }
     </script>
     <style is:inline>
