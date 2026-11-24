@@ -166,7 +166,7 @@
 > 결과: Domain 6개·Capability 7개는 아래 값 그대로 `src/content.config.ts`의 `DOMAINS`·`CAPABILITIES`로 고정, 원장 필터에 사용. Role은 고정 분류로 만들지 않음: 책임자 표시는 `lead` → "Lead" 배지(국문 "총괄"), 역할 설명은 케이스 스터디의 자유 문장.
 - **Domain**: Energy & Utilities / Manufacturing / Petrochemical & Steel / Healthcare / Robotics / Public & Legal
 - **Capability**: Physical AI / LLM Agents & RAG / Anomaly Detection / Forecasting / Control & Optimization / Computer Vision / MLOps
-- **Role**: PM·PO / Architect / ML Engineer (이력서의 `*` 책임자 표시를 "Lead" 배지로 변환)
+- **Role**: PM/PO / Architect / ML Engineer (이력서의 `*` 책임자 표시를 "Lead" 배지로 변환)
 
 ### 4.4 케이스 스터디 구성 (대표 프로젝트용)
 `Context → Problem → My role → Approach & Architecture → Stack → Outcome`
