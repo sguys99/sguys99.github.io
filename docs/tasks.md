@@ -53,8 +53,8 @@
 
 단계 1에서 넘어온 미완료 항목입니다. 번호는 `tasks-archive.md` 단계 1과 같습니다.
 
-- [ ] 1.2.11 **[확인]** 영문 전체 검토 — 검토본 전달 완료, 사용자가 나중에 검토하기로 함 (수정 시 국문까지 함께 반영)
-- [ ] 1.3.2 **[확인]** 국문 전체 검토
+- [ ] 1.2.11 **[확인]** 영문 전체 검토. 사용자가 나중에 검토하기로 한 영문 원본은 이번에 다듬은 문구로 검토한다. 수정 사항은 국문에도 반영한다.
+- [ ] 1.3.2 **[확인]** 국문 전체 검토. 이번에 다듬은 국문 문구를 영문 원본과 함께 검토한다.
 - [ ] 1.5.2 **[확인]** 대표 프로젝트별 질문 (배경, 문제, 본인 역할, 접근, 성과, 공개 가능 범위). 자료에 없는 수치는 만들지 않음
   - 답변(2026-11-09): SCM SQL 정확도 "95% 이상 달성" 표기 / SCM 모델은 경력기술서 기준(Text-to-SQL Qwen 8B 파인튜닝 + 생성 Llama 3.1 70B) / 공개 범위: 성과 수치와 개념 아키텍처는 싣고, 고객 내부 용어·인프라 사양·운영 정책은 일반화 / 그린소재 재고 조합 최적화는 자료 대기(자리만) / GenP·도슨트는 진행 중이라 성과 없이 작성
 - [ ] 1.5.3 케이스 스터디 영문·국문 작성 (Context → Problem → My role → Approach & Architecture → Stack → Outcome) — 6건 작성(`caseStudy` 필드). 그린소재 재고 조합 최적화는 2026-11-21 자료 받아 작성(11.14)
@@ -76,7 +76,7 @@
 - [x] AI 과제 추진 로드맵 케이스 스터디 + 다이어그램 (2026-11-22, DESIGN.md 11.17): 기존 항목 `lotte-ai-masterplan`을 대표 프로젝트 6번(원자재 가격 예측 위)으로 올리고 제목을 "AI Roadmap Consulting and PoC Delivery / AI 과제 추진 로드맵 수립 컨설팅 및 PoC 수행"으로 바꿈. 자료 3건(`docs/project-references/ai-roadmap/`)으로 본문 영문·국문 작성(역할 PM 총괄 + PoC 3건 리드, LLM 플랫폼은 한 줄). 시안 g16에서 과제 선별 B·분류 매트릭스 A·로드맵 C. 새 섹션 Roadmap, `TaskSelection`·`Quadrant`·`RoadmapGantt`
 - [x] 소개·기술 문구 수정 (2026-11-22): About 영문·국문에서 GenON·GenP 이름 제외, 프로그래밍에 C#(윈도우 프로그래밍) 추가. 용어집에 Windows programming
 - [x] 토큰 사용 줄이기 (2026-11-23): 지난 18개 세션을 분석한 결과 소비 원인은 스크린샷 438장(세션당 최대 81장)과 DESIGN.md 통째 조회였음. CLAUDE.md에 "문서 읽기"(`scripts/doc-section.mjs`로 절만 읽기)와 "화면 확인"(측정은 DOM, 직접 보는 이미지는 작업당 2장) 규칙을 추가하고 중복을 줄임. 무관한 스킬 18개는 자동 호출을 끔(`/이름`으로 호출 가능). superpowers 플러그인은 이 프로젝트에서 끔. 커밋 규칙은 "작업 단위로 커밋, push는 요청 시"로 통일하고 `.claude/memory/`를 삭제
-- [ ] **AI 흔적 제거** (2026-11-22 시작. 단계 0~7 완료. 영문과 국문 메타 정보 및 CV PDF 검수, 빌드 문구 검사와 작성 규칙 반영. 다음은 단계 8 최종 검수와 인계): 화면에 보이는 영문과 국문 문구에서 AI가 쓴 흔적(em dash, 나열용 중간점, 국문 종결 혼용, 대구 같은 문형)을 걷어냄. 계획과 단계별 체크리스트는 [`anti-ai-slop-plan.md`](anti-ai-slop-plan.md), 진단 보고서는 `anti-ai-slop-report.md`(단계 1에서 작성)
+- [ ] **AI 흔적 제거** (2026-11-22 시작). 단계 0~7과 8.1~8.5 완료. 빌드와 서식, 영문과 국문 문구, 화면 88개 조합을 검수했다. 8.6 사용자 최종 검토 대기. [단계별 체크리스트](anti-ai-slop-plan.md), [진단 보고서](anti-ai-slop-report.md)
 - [ ] legalQ 화면 캡처 갱신: 서비스 화면이 바뀌면 `docs/design-drafts/g15/capture.mjs`로 다시 찍어 `src/assets/legalq/` 교체 (실서비스 질문 1회 = 일일 제한 1회)
 - [ ] CV 섹션 제목 복사 텍스트 붙음 (2026-11-22 발견, 단계 3 이전부터): `/cv/` 360px에서 `h2` 안 `<small>` 건수가 inline이라 innerText와 복사가 `PATENTS7 registered, 8 filed`, `특허등록 7, 출원 8`로 붙음. 원인 `Cv.astro` 모바일 규칙 `.sec > h2 small { display: inline; margin-left }`. 원장의 같은 결함은 3.2에서 고침 (`docs/anti-ai-slop-plan.md` 3.5)
 - [ ] 라틴 글자 간격 불균일 (2026-11-22 발견, 원인 미확인): 국문 CV PDF와 국문 화면에서 `S enior Data S cientist`, `Gen ON`, `Tele op`처럼 벌어지고 일부는 붙음 (기준 커밋에도 같음, `docs/anti-ai-slop-plan.md` 3.4). Pretendard 동적 서브셋의 라틴 조판 문제로 추정. Linux Chromium 캡처의 영문 다이어그램 글자(`Persisten ce`)도 같은 원인인지 함께 확인
