@@ -504,7 +504,7 @@ B 조합으로 확정 (2.3, 시안 `docs/design-drafts/g17/`). B를 기본으로
 - [x] 7.1 `scripts/check-text.mjs` 기본 실행을 `npm run build` 끝에 추가: `src/content/` 값, `src/i18n/ui.ts`, 컴포넌트 출력 문구(빌드된 `dist/` HTML과 CSS `content`)에 `—`나 나열용 `·`가 있으면 실패. 예외는 5.2의 예외 목록 (`N·m`, `Kd·ω`, `조·항`, `조·항·호`, 강의 제목의 `학부·석사`)
   - `yaml`은 `devDependencies`에 직접 선언한다. 새로 설치하는 것이 아니라 astro 하위 의존성(지금 2.9.1)을 쓰던 것을 선언만 하는 것으로, astro가 하위 의존성을 바꿔도 검사가 깨지지 않게 한다 (보고서 7장 15번)
 - [x] 7.2 `CLAUDE.md` 규칙 2에 표기 규칙(em dash 금지, 중간점 대체, 국문 종결) 추가, "콘텐츠 갱신 절차" 확인 순서에 문구 검사 언급
-- [ ] 7.3 `.claude/commands/add-project.md`, `add-entry.md`의 작성 안내에 같은 규칙 추가
+- [x] 7.3 `.claude/commands/add-project.md`, `add-entry.md`의 작성 안내에 같은 규칙 추가
 - [ ] 7.4 `docs/glossary.md` 머리말에 표기 규칙 한 줄 추가
 - [ ] 7.5 낡은 표기 정리 (2026-11-22 사용자 요청): `docs/basic-plan.md`의 `PM·PO`, 용어집 7.3 `Download CV (PDF)` 메모를 `ui.ts` `cvPdfName`과 DESIGN.md 5.1(`Download PDF (CV)` / `PDF 다운로드 (CV)`)에 맞춤, 용어집 9.5 첫 줄 "영문 항목과 1:1"을 5.8과 맞춤
 
@@ -615,3 +615,5 @@ B 조합으로 확정 (2.3, 시안 `docs/design-drafts/g17/`). B를 기본으로
 **7.1** `npm run build` 마지막에 문구 검사를 연결했다. 콘텐츠 46개, UI 사전, HTML과 CSS 28개가 통과했다. 별도 사본의 원본 값, 미사용 UI 문구, HTML 본문과 속성, 템플릿, 인라인 CSS와 외부 CSS에 금지 기호를 하나씩 넣었다. 일곱 번 모두 검사가 실패했다. `yaml`과 `css-tree`를 직접 선언하고 HTML 엔티티 해석에는 `parse5`를 추가했다. `Unitree Robotics.` 뒤 국문 문장을 인식하도록 고쳤고 자체 검사와 `--facts HEAD`가 통과했다.
 
 **7.2** `CLAUDE.md` 규칙 2에 두 언어의 기호 사용법과 예외, 국문 종결과 마침표 기준을 추가했다. 콘텐츠 확인 순서와 빌드 명령 설명에 마지막 문구 검사를 명시했다.
+
+**7.3** `/add-project`와 `/add-entry`의 문구 작성 단계에 기호와 국문 마침표 기준을 넣었다. `/add-entry`에는 경력 요약과 발표된 제목의 예외도 적었다. 두 명령 모두 빌드 끝의 문구 검사 결과를 확인한다.
