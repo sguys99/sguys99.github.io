@@ -47,7 +47,7 @@ grep -n '검색어' docs/glossary.md                        # 용어집은 grep�
 
 ```bash
 npm run dev       # 개발 서버
-npm run build     # 스키마 검사 → 정적 빌드 → CV PDF(scripts/cv-pdf.mjs) → 내부 링크 검사(scripts/check-links.mjs)
+npm run build     # 스키마 검사 → 정적 빌드 → CV PDF 생성 → 내부 링크 검사 → 문구 검사(scripts/check-text.mjs)
                   # 처음 한 번: npx playwright install chromium
 npm run preview   # 빌드 결과 확인
 npm run format    # Prettier (format:check는 검사만)
@@ -61,7 +61,7 @@ src/content.config.ts   스키마, DOMAINS·CAPABILITIES·APPROVED_CLIENTS
 src/i18n/ui.ts          UI 문구 { en, ko } 사전
 src/styles/tokens.css   디자인 토큰
 src/cv-pdf.mjs          CV PDF 경로 상수 (사이드바 링크와 scripts/cv-pdf.mjs가 공유)
-scripts/                빌드 후처리(cv-pdf, check-links), doc-section(문서 절 읽기)
+scripts/                빌드 후처리(cv-pdf, check-links, check-text), doc-section(문서 절 읽기)
 .claude/commands/       add-project, add-entry (안내형 콘텐츠 추가)
 docs/design-drafts/     Gate별 시안 보관
 docs/private/           원본 자료: 이력서, 경력기술서, 사진 원본 (.gitignore, 커밋 금지)
@@ -87,6 +87,9 @@ docs/private/           원본 자료: 이력서, 경력기술서, 사진 원본
 - **영문이 원본**이다. 영문을 먼저 확정하고 국문을 맞춘다.
 - 영문은 직역하지 않고 영문 이력서 관례로 쓴다 (동사로 시작, 결과 중심, 1~2줄).
 - 표기는 `docs/glossary.md`를 따른다. 없는 용어는 추가한 뒤 사용한다.
+- 영문과 국문 모두 em dash(`—`)를 쓰지 않는다. 기간과 수치 범위의 en dash(`–`)는 유지한다.
+- 나열용 중간점(`·`)은 문맥에 맞게 풀어 쓴다. 국문 본문에서 두 항목은 ‘와/과’, 세 항목 이상은 쉼표로 잇고, 라벨 안의 병렬은 `/`로 적는다. 예외는 단위 `N·m`, 수식 `Kd·ω`, 법령 단위 `조·항`과 `조·항·호`, 기존 강의 제목의 `학부·석사`다. 구분자 용례는 용어집 9.6절을 따른다.
+- 국문 이력 문장은 ‘설계’, ‘호출 증가’처럼 사실을 담은 명사로 끝낸다. 한 문장이면 마침표를 생략하고 두 문장 이상이면 문장마다 찍는다. 한 줄 소개와 경력 요약은 한 문장이어도 마침표를 찍는다. UI 안내는 합니다체, 직접 인용은 원문을 유지한다. 표와 다이어그램의 짧은 상태 라벨은 `docs/anti-ai-slop-plan.md` 5.5절을 따른다.
 - **없는 사실을 만들지 않는다.** 성과 수치, 기간, 역할, 기술 스택은 사용자가 준 자료에 있는 것만 쓴다.
   비어 있는 정보는 추측으로 채우지 말고 질문한다. 아직 받지 못한 자료는 `docs/tasks.md` "대기 중"에 있다.
 - 실적 건수의 기준은 이력서(`docs/private/resume_ko_20261018.docx`)와 `docs/basic-plan.md`다.
@@ -140,7 +143,7 @@ docs/private/           원본 자료: 이력서, 경력기술서, 사진 원본
 - 건수(IP 서랍, 등록/출원, 카드 머리 `총 n건`)와 CV 집계는 컬렉션에서 자동 계산된다. `profile.yaml`에 건수를 쓰지 않는다.
 - 이미지는 `public/images/`(최적화가 필요하면 `src/assets/`)에 두고 대체 텍스트를 단다.
 
-확인 순서: 영문 원본 → 국문 → 익명·실명(규칙 3) → 새 용어는 glossary에 먼저 → `npm run build` → 화면 확인(`/`, `/ko/`, 해당 섹션, `/work/<slug>/`, `/cv/`) → 커밋.
+확인 순서: 영문 원본 → 국문 → 익명·실명(규칙 3) → 새 용어는 glossary에 먼저 → `npm run build`(원본과 빌드 결과의 문구 검사 포함) → 화면 확인(`/`, `/ko/`, 해당 섹션, `/work/<slug>/`, `/cv/`) → 커밋.
 
 ## 구현 기준
 
