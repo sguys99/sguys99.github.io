@@ -1,6 +1,7 @@
 // Copy checks for the AI-trace cleanup (docs/anti-ai-slop-plan.md, step 0.4). Reads the content sources directly:
 // src/content/*.yaml, diagrams/*.yaml, projects/ and personal/ frontmatter. YAML keys and comments are not text.
-// Usage: node scripts/check-text.mjs <mode>
+// Usage: node scripts/check-text.mjs [mode]
+//   (default)                     rejects em dashes and unapproved middle dots in content, UI and built HTML/CSS.
 //   --dump <en|ko> [--pairs]      every en (or ko) string as `file  key.path  text`; --pairs: en and ko together
 //   --report [--json] [--detail]  plan 4 counts per file and in total: dashes, middle dots, Korean endings ①–④,
 //                                 contrast ("아닌", ", not"), "from X to Y", colons, semicolons, buzzwords; then the
@@ -9,11 +10,11 @@
 //   --facts <commit>              compares numbers, dates, and Latin-script names per key path with <commit>
 //                                 (plan 5.8) and exits 1 on any difference. Run after each rewrite batch.
 //   --self-test                   runs the fixtures at the end of this file.
-// With no mode it prints this usage and exits 0; the build check is added in plan step 7.
 import { execFileSync } from 'node:child_process';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse } from 'yaml';
+import { distCopy } from './dist-copy.mjs';
 
 const ROOT = new URL('../', import.meta.url).pathname;
 const TAG = '[check-text]';
@@ -26,6 +27,7 @@ const GROUPS = [
   /^src\/content\/projects\/.+\.md$/,
   /^src\/content\/personal\/.+\.md$/,
   /^src\/content\/diagrams\/[^/]+\.yaml$/,
+  /^src\/content\/.+\.(?:ya?ml|md)$/,
 ];
 const order = (paths) =>
   paths
@@ -164,7 +166,9 @@ function sentenceKind(s) {
 // prd: breaks "one sentence: no period, two or more: a period each" (plan 2), at: end of the deciding sentence.
 function koEnding(text) {
   const t = text.trim();
-  const ends = [...t.matchAll(/(?<=[^a-z][.!?])\s+/g)].map((m) => [m.index, m.index + m[0].length]);
+  const ends = [...t.matchAll(/(?<=[.!?])\s+/g)]
+    .filter((m) => !/\b(?:vol|no|art|pp|vs|e\.g|i\.e)\.$/i.test(t.slice(0, m.index)))
+    .map((m) => [m.index, m.index + m[0].length]);
   const sents = [];
   let start = 0;
   for (const [a, b] of ends) (sents.push([start, a]), (start = b));
@@ -412,6 +416,67 @@ function uiFiles() {
     .sort()
     .map((f) => `src/styles/${f}`);
   return ['src/i18n/ui.ts', ...astro, ...css];
+}
+
+// --- Build check (plan 5.2, 7.1) ------------------------------------------------------------------
+
+const ALLOWED_DOTS = /(?<![\p{L}_])N·m|(?<![\p{L}\p{N}_])(?:Kd·ω|조·항(?:·호)?)/gu;
+// In Korean these tokens may be followed immediately by a particle, e.g. 조·항을 or N·m의.
+const TOKEN_END =
+  /^(?:(?:으로부터|으로써|으로서|으로|에서|에게|까지|부터|마다|보다|처럼|로|에|의|이|가|와|과|을|를|별)?(?:은|는|도|만)?)(?![\p{L}\p{N}_])/u;
+const LECTURE_TITLE = 'incheon-llm-agent-lectures.title.ko';
+
+function forbiddenMark(text, lectureTitle = false) {
+  if (!/[—·]/.test(text)) return;
+  const copy = text.replace(ALLOWED_DOTS, (term, start) =>
+    TOKEN_END.test(text.slice(start + term.length)) ? term.replaceAll('·', ' ') : term,
+  );
+  const rest = lectureTitle ? copy.replace('학부·석사', '학부 석사') : copy;
+  return /[—·]/.exec(rest);
+}
+
+function buildCheck() {
+  const sources = content(workPaths(), readWork);
+  const lectureTitle = sources
+    .find((s) => s.file === 'teaching.yaml')
+    ?.items.find((i) => i.path === LECTURE_TITLE)?.text;
+  let failures = 0;
+  function check(text, location, role) {
+    const lecture =
+      role === 'lecture-title' || (role === 'html-text' && text.trim() === lectureTitle);
+    const mark = forbiddenMark(text, lecture);
+    if (mark) {
+      console.error(`${TAG} ${location}: "${mark[0]}" in ${around(text, mark.index, 1)}`);
+      failures++;
+    }
+  }
+  for (const { file, items } of sources)
+    for (const item of items) {
+      const lecture = file === 'teaching.yaml' && item.path === LECTURE_TITLE;
+      check(item.text, `src/content/${file} ${item.path}`, lecture ? 'lecture-title' : undefined);
+    }
+  const ui = 'src/i18n/ui.ts';
+  stripComments(readWork(ui), 'js')
+    .split('\n')
+    .forEach((line, i) => {
+      const decoded = line.replace(
+        /\\(?:\\|u\{([\da-f]+)\}|u([\da-f]{4})|x([\da-f]{2}))/gi,
+        (escape, braced, unicode, hex) =>
+          escape === '\\\\' ? '\\' : String.fromCodePoint(parseInt(braced ?? unicode ?? hex, 16)),
+      );
+      check(decoded, `${ui}:${i + 1}`);
+    });
+  const files = readdirSync(join(ROOT, 'dist'), { recursive: true })
+    .filter((f) => /\.(?:css|html)$/.test(f))
+    .map((f) => 'dist/' + f);
+  if (!files.some((f) => f.endsWith('.html')))
+    throw new Error(`${TAG} no built HTML found in dist/`);
+  distCopy(files, readWork, check);
+  if (failures) process.exitCode = 1;
+  else
+    console.log(
+      `${TAG} ${sources.length} content files, UI strings, ${files.length} HTML/CSS files: punctuation ok`,
+    );
 }
 
 // --- Facts (plan 5.8) ---------------------------------------------------------------------------
@@ -727,6 +792,13 @@ function selfTest() {
     [true, true, false],
   );
 
+  expect(
+    'period after English manufacturer',
+    koEnding('제품 이미지: Unitree Robotics. 사양: G1 EDU 제조사 공개 사양.').prd,
+    false,
+  );
+  expect('bibliographic abbreviations', koEnding('Energies, vol. 19, no. 4, art. 874').prd, false);
+
   // Middle dots (N·m is a unit), en dash ranges vs joins, "from X to Y", contrast, colons, buzzwords.
   const dots = ['midEn', 'unitNm', 'alike'];
   expect('dots', count('knee up to 120 N·m · torque ㆍ arms', 'en', dots), {
@@ -837,6 +909,41 @@ function selfTest() {
     ],
   );
 
+  expect(
+    'build punctuation',
+    [
+      '120N·m의 토크, Kd·ω, 조·항을 대조, 조·항·호',
+      '사용처 — 목록',
+      '선택·이력',
+      '조·항목',
+      'RN·m',
+      'N·model',
+      '분야 학부·석사',
+    ].map((text) => forbiddenMark(text)?.[0] ?? ''),
+    ['', '—', '·', '·', '·', '·', '·'],
+  );
+  expect('lecture title exception', forbiddenMark('학부·석사 강의', true)?.[0] ?? '', '');
+  const outputs = {
+    'test.html': `<!-- — --><script>'—'</script><template><svg><text>one &middot; two</text></svg></template>
+      <img alt="alt &#x2014;"><meta name="description" content="desc &#183;">
+      <script type="application/ld+json">{"name":"JSON \\u2014"}</script><p data-l="label ·"
+      style="--sep:'\\0000b7'"></p><style>@media print{p::before{content:var(--sep)}} </style>`,
+    'test.css': `/* — */ a::after{content:attr(data-l) / "\\2014"} .x{font-family:"unused ·"}`,
+  };
+  const built = [];
+  distCopy(
+    Object.keys(outputs),
+    (file) => outputs[file],
+    (text) => {
+      if (forbiddenMark(text)) built.push(text);
+    },
+  );
+  expect(
+    'built HTML and CSS content',
+    built.sort(),
+    ['one · two', 'alt —', 'desc ·', 'JSON —', 'label ·', '·', '—'].sort(),
+  );
+
   if (fail.length) {
     console.error(`${TAG} self-test failed\n  ` + fail.join('\n  '));
     process.exit(1);
@@ -875,4 +982,4 @@ else if (flag('--facts')) {
 } else if (args.length) {
   console.error(`${TAG} unknown arguments: ${args.join(' ')}\n\n` + usage());
   process.exit(2);
-} else console.log(usage());
+} else buildCheck();
