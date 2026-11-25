@@ -132,7 +132,7 @@ docs/private/           원본 자료: 이력서, 경력기술서, 사진 원본
 | 프로젝트 | `src/content/projects/<slug>.md` (frontmatter) | `client` 기본 익명 (`public: false` + `label`). `domain`·`capability`는 config의 `DOMAINS`·`CAPABILITIES` 값만 |
 | 대표 프로젝트 | 위 파일의 `featured: true`, `order`, `caseStudy` | `featured` + `caseStudy`가 있어야 `/work/<slug>/` 생성. 지정은 사용자 승인 |
 | 케이스 스터디 다이어그램 | `src/content/diagrams/<slug>.yaml` (`legend`, `problem`, `approach`, `arch`, `flow`, `results`) | 배치와 형식은 DESIGN.md 5.24.4·5.24.6 (`doc-section.mjs`로 그 절만) |
-| 개인 프로젝트 | `src/content/personal/<slug>.md` | `repo` 필수, `status`는 `in-progress`·`active`·`archived` |
+| 개인 프로젝트 | `src/content/personal/<slug>.md` | 언어별 `name`, `order`, `site`나 `repo` 중 하나 이상 필수. `status`는 `in-progress`, `active`, `archived` 중 선택 |
 | 특허 | `src/content/patents.yaml` | `status` `filed`·`registered`. 파일 머리 주석의 건수 |
 | SW 등록 | `src/content/software.yaml` | 파일 머리 주석의 건수 |
 | 논문·보고서 | `src/content/publications.yaml` | `type: paper` / `report` |

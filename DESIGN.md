@@ -348,7 +348,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 토큰 | 값 | 용도 |
 |---|---|---|
 | `--ctl-h-sm` | 28px | 언어·테마 토글 버튼 |
-| `--ctl-h` | 32px | 선택 상자, 복사 버튼, 저장소·데모 칩 링크 |
+| `--ctl-h` | 32px | 선택 상자, 복사 버튼, 웹사이트와 저장소 칩 링크 |
 | `--ctl-h-lg` | 36px | 아이콘 버튼(테마·메뉴), 404 버튼 |
 | `--icon-xs` | 12px | 외부 링크 아이콘 |
 | `--icon-sm` | 14px | 복사·chev·버튼·칩 링크 아이콘 |
@@ -1048,7 +1048,7 @@ sguys99.github.io의 디자인 명세. 구현은 이 문서를 따르고, 여기
 | 종류 | 클래스 | 크기 | 토큰 | hover | 사용처 |
 |---|---|---|---|---|---|
 | 아이콘 버튼 | `.icon-btn` | `--ctl-h-lg` 정사각 (시안 34px → 36px 확정) | 테두리 1px `--line`, `--radius-pill`, 바탕 `--surface`, 아이콘 `--icon` `--icon-stroke`, `--text-2` | 아이콘 `--accent`, 테두리 `--line-strong` | 테마, 메뉴, 시트 닫기, 모바일 언어 |
-| 칩 링크 | `.chip-lnk` | 최소 높이 `--ctl-h` (시안 30px → 32px) | 패딩 0 `--sp-3`, 테두리 1px `--line`, `--radius-pill`, `--font-meta` `--fs-xs` `--text-2`, 아이콘 `--icon-sm`(시안 13px → 14px) `--icon-stroke-sm`, 간격 `--sp-1h` | 글자·테두리 `--accent` | 개인 프로젝트 저장소·데모 |
+| 칩 링크 | `.chip-lnk` | 최소 높이 `--ctl-h` (시안 30px → 32px) | 패딩 0 `--sp-3`, 테두리 1px `--line`, `--radius-pill`, `--font-meta` `--fs-xs` `--text-2`, 아이콘 `--icon-sm`(시안 13px → 14px) `--icon-stroke-sm`, 간격 `--sp-1h` | 글자·테두리 `--accent` | 개인 프로젝트 웹사이트와 저장소 |
 | 펼침 버튼 | `.toggle-all` | 패딩 6px 14px(컴포넌트 값) | `--fs-sm` `--fw-medium` `--text-2`, 바탕 없음, 테두리 1px `--line`, `--radius-pill`, 위 여백 `--sp-4` | 글자 `--accent`, 테두리 `--line-strong` | 전체 프로젝트·개인 프로젝트 "모두 보기" (5.9) |
 | 복사 버튼 | `.copy` | 5.8 | | | Contact |
 | 404 버튼 (보조) | `.btn` | 최소 높이 `--ctl-h-lg` | 패딩 0 `--sp-4`, 테두리 1px `--line`, `--radius-pill`, `--fs-sm` `--fw-medium` `--text-2`, 아이콘 `--icon-sm`, 간격 `--sp-1h` | 글자 `--accent`, 테두리 `--line-strong` | 404 "한국어 홈 / English home" |
@@ -1567,24 +1567,24 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 ### 5.20 Personal projects index
 
-개인 프로젝트 번호 목록 (3.2.4 B). 고정폭 번호 + 상태 필터 + 오른쪽 저장소·데모 버튼.
+개인 프로젝트 번호 목록 (3.2.4 B). 고정폭 번호 + 상태 필터 + 오른쪽 웹사이트와 저장소 버튼.
 
 ```html
 <section class="card" id="personal" aria-labelledby="h-personal">
   <div class="sec-head"><h2 …>Personal Projects</h2>
     <a class="pp-head-link" href="https://github.com/sguys99" rel="noopener">github.com/sguys99</a></div>
   <div class="filters seg" role="group" aria-label="Personal Projects">   <!-- JS 있을 때만 -->
-    <button type="button" aria-pressed="true">All <span class="num">10</span></button> …
+    <button type="button" aria-pressed="true">All <span class="num">12</span></button> …
   </div>
   <ol class="pidx">
     <li><span class="n num" aria-hidden="true">01</span>
       <div><div class="ttl"><h3>AI Wiki</h3><span class="st reg">Active</span></div>
         <p class="sum">…</p><p class="stk">Python, Claude Code, …</p></div>
-      <div class="acts"><a class="chip-lnk" href="…">[gh] Repository<span class="sr-only">: AI Wiki</span></a>
-        <a class="chip-lnk" href="…">[ext] Live demo<span class="sr-only">: AI Wiki</span></a></div>
+      <div class="acts"><a class="chip-lnk" href="…">[ext] Website<span class="sr-only">: AI Wiki</span></a>
+        <a class="chip-lnk" href="…">[gh] Repository<span class="sr-only">: AI Wiki</span></a></div>
     </li>
   </ol>
-  <button type="button" class="toggle-all" aria-controls="…" aria-expanded="false">Show all (10)</button>
+  <button type="button" class="toggle-all" aria-controls="…" aria-expanded="false">Show all (12)</button>
 </section>
 ```
 
@@ -1607,12 +1607,12 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 
 | 상태 | 규칙 |
 |---|---|
-| 정렬 | `active` → `in-progress` → `archived`, 같은 상태 안은 콘텐츠 순서 |
+| 정렬 | 콘텐츠의 `order` 오름차순. 상태 필터를 적용해도 이 순서를 유지 |
 | 필터 | `All` + 건수가 1 이상인 상태만 버튼으로. 버튼 글자에 건수 |
 | 필터 변경 | 접힘을 다시 닫고(처음 5행), 번호는 걸러진 목록 기준으로 01부터 다시 매긴다. 포커스는 누른 버튼에 남는다. 필터 바로 뒤 `.sr-only` `role="status"`에 결과 수(`ui.ts` `showing`, 5.19와 같은 문구). 로드 때는 비워 두어 알리지 않는다 (9장 상태 알림) |
 | 접힘 | 처음 5행. 넘치면 `Show all (n)` / `Show less`, `aria-expanded` |
 | JS 없음 | 필터·모두 보기 버튼 숨김, 전체 행 표시 |
-| 데모 없음 | 저장소 버튼만 |
+| 링크 | 웹사이트 우선. URL이 있는 버튼만 표시 |
 
 | 상태 값 | 영문 / 국문 (시안) |
 |---|---|
@@ -1620,11 +1620,10 @@ About 카드의 앞부분. 큰 한 줄 소개, About 문단, 그 아래 경력 �
 | `in-progress` | In progress / 진행 중 (시안 "개발 중"을 사이트 전체 "진행 중"으로 통일, 11.8) |
 | `archived` | Archived / 보관 |
 
-- 콘텐츠: `personal` 컬렉션 → `name`(h3, 언어 공통), `summary`(`.sum`), `stack[]`(`.stk`), `status`, `repo`, `demo?`. 머리 링크는 `profile.contact.github`.
+- 콘텐츠: `personal` 컬렉션 → `name`(언어별 h3), `order`. `summary`(`.sum`), `stack[]`(`.stk`), `status`는 값이 있을 때 표시한다. `site`와 `repo` 중 하나 이상이 필요하다. 머리 링크는 `profile.contact.github`.
 - 반응형: ≤560px `grid: --col-idx-sm minmax(0,1fr)`, `gap: --sp-1 --sp-3`. `.acts`는 2열째 아래로 내려와 가로 배치(`flex-wrap`), `min-width: 0`, `margin-top: --sp-2`.
 - 접근성: 버튼에 보이는 글자는 짧게 두고 `.sr-only`로 프로젝트 이름을 붙여 링크 이름을 구분한다 (`Repository: AI Wiki`). 필터는 `role="group"` + `aria-label`. 번호는 `aria-hidden`. 외부 링크는 `rel="noopener"`.
 - 모션: 대상 행 `.pidx > li`.
-- 남은 일: 상태 문구와 정렬 순서(콘텐츠에 순서 필드 없음) → 1.5.6. glob 로더의 "콘텐츠 순서"는 파일 이름순이므로, 순서를 정하려면 필드가 필요하다.
 
 ### 5.21 Index drawer
 
@@ -2203,7 +2202,7 @@ Context 목록 아래(위 `--sp-5`). `src/components/Screens.astro`, g15 시안 
 | 3 | Teaching, Books & Advisory / 강의, 저서, 자문 | `teaching` | Experience / 경력 | Card 5.14, Period ledger row 5.22 (Books, Teaching, Advisory 묶음) | `teaching` (`kind` 순서: book, teaching, advisory) |
 | 4 | Awards / 수상 | `awards` | Experience / 경력 | Card 5.14, Period ledger row 5.22 | `awards` |
 | 5 | Selected Work / 대표 프로젝트 | `work` | Work / 대표 프로젝트 | Card 5.14, Selected work list 5.18(번호 목록 01–06), Project ledger 5.19(전체 원장 + Domain·Capability 선택 상자 + 모두 보기) | `projects` (대표작: `featured`, `order` 순. 원장: 전체 20건) |
-| 6 | Personal Projects / 개인 프로젝트 | `personal` | Personal / 개인 프로젝트 | Card 5.14, Personal projects index 5.20(번호 목록 + 상태 필터 + 저장소·데모 링크) | `personal` |
+| 6 | Personal Projects / 개인 프로젝트 | `personal` | Personal / 개인 프로젝트 | Card 5.14, Personal projects index 5.20(번호 목록 + 상태 필터 + 웹사이트와 저장소 링크) | `personal` |
 | 7 | IP & Publications / 지식재산과 출판물 | `ip` | Publications / 지식재산과 출판물 | Card 5.14, Index drawer 5.21(유형별 서랍: 특허·프로그램·논문·보고서, 서랍 id `ip-<유형>`) | `patents`, `software`, `publications` |
 | 8 | Contact / 연락처 | `contact` | Contact / 연락처 | Card 5.14, Contact 5.23(의뢰 가능 분야 \| 이메일·복사·링크) | `profile` (availability, contact) |
 | — | 푸터 | — | — | Footer 5.5 (Colophon 한 줄: ©·최종 수정일·사이트 소스·맨 위로) | 최종 수정일은 빌드 시 `src/content` 마지막 커밋 날짜 |

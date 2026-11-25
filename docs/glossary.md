@@ -423,7 +423,7 @@ UI 문구의 원본은 `src/i18n/ui.ts`다. 이 표는 표기 기준이며, 문�
 | Present | 현재 | 기간 끝 (9.1) |
 | Active / In progress / Archived | 운영 중 / 진행 중 / 보관 | 개인 프로젝트 상태. `in-progress` 국문은 사이트 전체 "진행 중"으로 통일 (사용자 결정 2026-11-11, DESIGN.md 11.8) |
 | Outcome | 성과 | |
-| Repository / Live demo | 저장소 / 데모 | 개인 프로젝트 링크 |
+| Repository / Website | 저장소 / 웹사이트 | 개인 프로젝트 링크 |
 | Open to | 의뢰 가능 분야 | Contact |
 | Reach me | 연락 방법 | Contact |
 | Copy / Copied | 복사 / 복사됨 | 이메일 복사 버튼 |
@@ -566,3 +566,20 @@ UI 문구의 원본은 `src/i18n/ui.ts`다. 이 표는 표기 기준이며, 문�
 - 원래 표기를 지키는 이름: 논문, 보고서, 특허, 책, 강의의 제목(`학부·석사 연구원 대상 ...`), 회사 이름, 조직 이름, 직함
 
 굳은 말(`시행령·시행규칙`, `온·오프라인` 등)은 해당 용어 행과 `docs/anti-ai-slop-report.md` 5장의 처리안을 따른다.
+
+### 9.7 개인 프로젝트 이름
+
+| English | 한국어 |
+|---|---|
+| Jarangter | 자랑터 |
+| AI Wiki | AI Wiki |
+| AI Daybook | AI Daybook |
+| pyRoad | pyRoad |
+| Seoul founder | 서울 창업가 |
+| LunchMate | 런치메이트 |
+| Commute racer | 출근길 |
+| Euro digest | 유로 다이제스트 |
+| Oathkeeper | Oathkeeper |
+| LinkDigest | 링크 다이제스트 |
+| MCP Connectors | MCP Connectors |
+| The Startup CTO's Handbook | The Startup CTO's Handbook |

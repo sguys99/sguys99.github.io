@@ -787,14 +787,17 @@ const projects = defineCollection({
 
 const personal = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/personal' }),
-  schema: z.strictObject({
-    name: text,
-    summary: localized,
-    stack: z.array(text),
-    repo: z.url(),
-    demo: z.url().optional(),
-    status: z.enum(['in-progress', 'active', 'archived']),
-  }),
+  schema: z
+    .strictObject({
+      name: localized,
+      order: z.number().int().positive(),
+      summary: localized.optional(),
+      stack: z.array(text).optional(),
+      repo: z.url().optional(),
+      site: z.url().optional(),
+      status: z.enum(['in-progress', 'active', 'archived']).optional(),
+    })
+    .refine(({ repo, site }) => repo || site, 'Provide a repository or website URL'),
 });
 
 const patents = defineCollection({

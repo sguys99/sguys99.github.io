@@ -64,6 +64,8 @@
 
 ## Backlog (공개 이후 검토)
 
+- [x] 개인 프로젝트 12건 재배치 (2026-11-26). 요청 순서와 영문/국문 이름을 적용하고 웹사이트와 저장소 링크를 갱신
+
 - [x] Codex 작업 환경 연결 (2026-11-22). `AGENTS.md`에서 프로젝트 규칙·메모·명령을 안내하고, Claude Code와 스킬 원본 및 MCP 서버 구성을 맞춤
 - [x] SCM 케이스 스터디 다이어그램 (2026-11-21, DESIGN.md 11.10): 시안 3개(g9) 중 A 회로도 선택. Architecture에 서비스 구성도, 새 섹션 Service flow에 흐름도. 공통 컴포넌트 `Diagram.astro` + `src/content/diagrams/<slug>.yaml`
 - [x] 고객 상담 어시스턴트 케이스 스터디 다이어그램 (2026-11-21, DESIGN.md 11.11): 시안 g11에서 여정 B·진화 A·아키텍처 B·흐름 A 조합. 영문 제목 "AI Assistant for Customer Service". `Diagram.astro`에 `focus`·`new` 종류, 단계 띠·경로·접점·고충 말풍선·영역 메모, 자리 `problem`·`approach` 추가

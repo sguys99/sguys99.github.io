@@ -1,5 +1,8 @@
 ---
-name: OathKeeper
+name:
+  en: Oathkeeper
+  ko: Oathkeeper
+order: 9
 summary:
   en: Built a LangGraph agent that parses B2B AI development deals, scores them on seven criteria for a Go/No-Go verdict, estimates resources and risks, and retrieves similar past projects.
   ko: B2B AI 개발 딜 정보를 구조화하고 7개 기준으로 점수화해 Go/No-Go를 판정하며 투입 리소스와 리스크 추정, 유사 과거 프로젝트 검색도 제공하는 LangGraph 에이전트

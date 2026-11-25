@@ -104,7 +104,7 @@ const ui = {
   // Personal projects (5.20)
   all: { en: 'All', ko: '전체' },
   repository: { en: 'Repository', ko: '저장소' },
-  liveDemo: { en: 'Live demo', ko: '데모' },
+  website: { en: 'Website', ko: '웹사이트' },
 
   // Contact and copy button (5.8, 5.23)
   openTo: { en: 'Open to', ko: '의뢰 가능 분야' },

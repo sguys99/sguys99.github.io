@@ -1,5 +1,5 @@
 ---
-// Personal projects index (DESIGN.md 5.20, 3.2.4 B): numbered list, status filter, repository and demo links.
+// Personal projects index (DESIGN.md 5.20, 3.2.4 B).
 // The build HTML holds every row; without JS all rows show and the filter and toggle stay hidden. The script
 // marks filtered-out rows `data-out` and renumbers; ToggleAll folds whatever is left (same as 5.19).
 import Card from './Card.astro';
@@ -16,11 +16,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const STATUSES = ['active', 'in-progress', 'archived'] as const;
-// Status order, then content order (glob loader = file name; sorted by id so it does not depend on the loader).
-const items = (await getCollection('personal')).sort(
-  (a, b) =>
-    STATUSES.indexOf(a.data.status) - STATUSES.indexOf(b.data.status) || a.id.localeCompare(b.id),
-);
+const items = (await getCollection('personal')).sort((a, b) => a.data.order - b.data.order);
 const github = (await getEntry('profile', 'profile'))!.data.contact.github;
 const filters = [
   { key: 'all', label: t(lang, 'all'), n: items.length },
@@ -64,26 +60,30 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
         </span>
         <div>
           <div class="ttl">
-            <h3>{p.name}</h3>
-            <Status lang={lang} value={p.status} />
+            <h3>{p.name[lang]}</h3>
+            {p.status && <Status lang={lang} value={p.status} />}
           </div>
-          <p class="sum">{p.summary[lang]}</p>
-          <p class="stk">
-            {p.stack.map((s, i) => (
-              <>
-                {i > 0 && ' '}
-                <span>{i < p.stack.length - 1 ? `${s},` : s}</span>
-              </>
-            ))}
-          </p>
+          {p.summary && <p class="sum">{p.summary[lang]}</p>}
+          {p.stack && (
+            <p class="stk">
+              {p.stack.map((s, i, stack) => (
+                <>
+                  {i > 0 && ' '}
+                  <span>{i < stack.length - 1 ? `${s},` : s}</span>
+                </>
+              ))}
+            </p>
+          )}
         </div>
         <div class="acts">
-          <ChipLink href={p.repo} icon="gh" name={p.name}>
-            {t(lang, 'repository')}
-          </ChipLink>
-          {p.demo && (
-            <ChipLink href={p.demo} icon="ext" name={p.name}>
-              {t(lang, 'liveDemo')}
+          {p.site && (
+            <ChipLink href={p.site} icon="ext" name={p.name[lang]}>
+              {t(lang, 'website')}
+            </ChipLink>
+          )}
+          {p.repo && (
+            <ChipLink href={p.repo} icon="gh" name={p.name[lang]}>
+              {t(lang, 'repository')}
             </ChipLink>
           )}
         </div>

@@ -39,7 +39,7 @@ allowed-tools:
 5. **규칙 3 확인**:
    - 전화번호, 승인되지 않은 고객사 실명은 어디에도 쓰지 않는다.
    - `experience`는 사용자가 준 6곳만 싣는다. 새 소속이면 추가 전에 사용자에게 명시적으로 확인받는다.
-   - `personal`은 `repo`가 필수다. 공개 저장소 URL인지 사용자에게 확인한다.
+   - `personal`은 언어별 `name`, 목록의 `order`, 공개 웹사이트(`site`)나 저장소(`repo`) URL을 받는다. URL은 둘 중 하나 이상이 필요하다.
 6. **id/slug**: 기존 id 규칙(영문 소문자-하이픈)을 따라 제안하고 확인받는다. 겹치지 않게 한다.
 7. **위치**: 파일 안의 구획 주석(예: patents의 `# --- Filed ---`)이 있으면 알맞은 구획에, 없으면 기존 순서 규칙을 따라 넣는다.
 8. **건수 주석**: `patents.yaml`, `software.yaml`, `publications.yaml`, `teaching.yaml`의 머리·구획 주석에 건수가 있으면 함께 고친다. `profile.yaml`에는 건수를 쓰지 않는다 (자동 집계).
